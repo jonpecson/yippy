@@ -5,12 +5,8 @@ Vue.use(VueResource);
 import $ from 'jquery';
 import Slider from '../assets/js/zSlider.js';
 
-// import auth from './auth'
-
-var API = {
-	'endpoint': 'http://dev.fedvas.com/cms/api.dsuite/yipp',
-	'lang': 'en'
-}
+import auth from './auth'
+import config from './config'
 
 var loadingScreen = new Vue({
 	el: '#loadingScreen',
@@ -46,6 +42,7 @@ var loadingScreen = new Vue({
 		skip: function () {
 			this.visible = false;
 			signUp.visible = true;
+			signUp.load();
 			return false;
 		}
 	},
@@ -68,34 +65,62 @@ var signUp = new Vue({
 			child_bday_d: '',
 			child_bday_m: '',
 			child_bday_y: ''
+		},
+		login: {
+			email: '',
+			password: ''
 		}
 	},
 	methods: {
 		load: function() {
-
+			auth.checkAuth();
+			if (auth.user.authenticated) {
+				this.step = 9;
+			} else {
+				this.step = 1;
+			}
 		},
 		showSignupForm: function () {
-
+			console.log(localStorage.getItem('token'));
+			console.log(localStorage.getItem('user_id'));
+			this.step = 5;
 		},
 		showLoginForm: function () {
-			
+			this.step = 2;	
 		},
 		showResetForm: function () {
-			
+			this.step = 3;
 		},
 		back: function () {
-
+			this.step = 1;
 		},
 		register: function () {
+			this.signup.parent_gender = 'mother';
 
+			var credentials = {
+	          	name: this.signup.parent_name,
+	          	email: this.signup.parent_email,
+	          	parent_type: this.signup.parent_gender,
+	          	password: this.signup.parent_password,
+	          	service_id: 2
+	        }
+
+	        auth.signup(this, credentials)
+		},
+		login: function () {
+			var credentials = {
+	          	Email: this.login.email,
+	          	Password: this.login.password
+	        }
+
+	        auth.login(this, credentials)
+		},
+		logout: function () {
+			auth.logout();
 		}
 	}
 });
 
-loadingScreen.onLoad();
-
-// $( document ).ready(function() {
-//     
-// });
-
-
+// loadingScreen.onLoad();
+loadingScreen.skip();
+signUp.logout();

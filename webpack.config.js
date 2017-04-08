@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-  entry: ['./src/index.js', './src/auth/index.js'],
+  entry: ['./src/config.js', './src/index.js', './src/auth/index.js'],
   output: {
     path: path.join(__dirname, "assets/js"),
     publicPath: 'assets/',

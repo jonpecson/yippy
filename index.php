@@ -28,13 +28,13 @@
 	
 	<div id="login" class="panel" v-else-if="step == 2">
 		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back"></a> Log in</div>
-		<form action="" method="post" class="middle-area full">
+		<form action="" method="post" class="middle-area full" v-on:submit.prevent="login">
 			<div class="placer middle">
-				<input type="email" placeholder="E-mailadres" v-model="email">
-				<input type="password" placeholder="Wachtwoord" v-model="password">
+				<input type="email" placeholder="E-mailadres" v-model="login.email">
+				<input type="password" placeholder="Wachtwoord" v-model="login.password">
 			</div>
 			<div class="bottom-area">
-				<button class="form-button-medium">Login</button>
+				<input type="button" class="form-button-medium" value="Login">
 				<a href="javascript:void(0);" v-on:click="showSignupForm" >I don't have an account</a>
 				<br>
 				<a href="javascript:void(0);" v-on:click="showResetForm">Forgot password</a>
@@ -85,7 +85,7 @@
 
 		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back"></a> Sign up parent</div>
 		
-		<form action="" method="post" class="middle-area semi" v-on:submit="register">
+		<form action="" method="post" class="middle-area semi" v-on:submit.prevent="register">
 		
 			<div class="selection-group">
 				<input type="radio" id="father"  name="parents" v-model="signup.parent_gender">
