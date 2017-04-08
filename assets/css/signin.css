@@ -333,12 +333,13 @@ p {
   background-position: top center;
 }
 #slider1 .z-slide-item .content {
-  height: auto;
-  bottom: 75px;
-  margin: 0 auto;
-  padding: 0 20px;
-  display: block;
-  position: absolute;
+    height: auto;
+    bottom: 75px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: block;
+    position: absolute;
+    width: 100%;
 }
 #slider1 .z-slide-item .content h2 {
   padding: 0;
@@ -346,14 +347,14 @@ p {
   font-size: 38px;
 }
 #slider1 .z-slide-item .content .icon {
-  top: -8px;
-  right: 30px;
-  width: 55px;
-  height: 54px;
-  color: #d7494f;
-  display: block;
-  font-size: 55px;
-  position: absolute;
+    top: -8px;
+    right: 65px;
+    width: 55px;
+    height: 54px;
+    color: #d7494f ;
+    display: block;
+    font-size: 55px;
+    position: absolute;
 }
 #slider1 .z-slide-item .content .icon:after {
   content: '';
