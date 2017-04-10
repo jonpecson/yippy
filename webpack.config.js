@@ -10,12 +10,18 @@ module.exports = {
   },
   module: {
     loaders: [
-      // { test: /\.vue$/, loader: 'vue' },
+      { test: /\.vue$/, loader: 'vue' },
       { test: /\.js$/, loader: 'babel', exclude: /node_modules/ },
       {
         test: /\.css$/,
         loaders: [ 'style-loader', 'css-loader' ]
-      }
+      },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
+        loader: 'file-loader'
+      },
+      { test: /\.jpg$/, loader: "file-loader" },
+      { test: /\.png$/, loader: "url-loader?mimetype=image/png" }
     ]
   },
   babel: {
