@@ -46,7 +46,7 @@
 
 	__webpack_require__(1);
 	__webpack_require__(2);
-	module.exports = __webpack_require__(190);
+	module.exports = __webpack_require__(179);
 
 
 /***/ },
@@ -61,7 +61,8 @@
 	exports.default = {
 			api: {
 					'url': 'http://dev.fedvas.com/cms/api.dsuite/yipp',
-					'lang': 'en'
+					'lang': 'en',
+					'localhost': '/yipp/app/#'
 			}
 	};
 
@@ -79,15 +80,15 @@
 
 	var _Home2 = _interopRequireDefault(_Home);
 
-	var _Auth = __webpack_require__(188);
+	var _Auth = __webpack_require__(177);
 
 	var _Auth2 = _interopRequireDefault(_Auth);
 
-	var _vueResource = __webpack_require__(192);
+	var _vueResource = __webpack_require__(181);
 
 	var _vueResource2 = _interopRequireDefault(_vueResource);
 
-	var _vueRouter = __webpack_require__(194);
+	var _vueRouter = __webpack_require__(183);
 
 	var _vueRouter2 = _interopRequireDefault(_vueRouter);
 
@@ -105,7 +106,7 @@
 
 	_vue2.default.use(_vueRouter2.default);
 
-	var routes = [{ path: '/', component: _Home2.default }, { path: '/login', component: _Auth2.default }];
+	var routes = [{ path: '/', component: _Home2.default, name: 'home' }, { path: '/login', component: _Auth2.default, name: 'login' }];
 
 	var router = new _vueRouter2.default({
 	  routes: routes // short for routes: routes
@@ -114,6 +115,10 @@
 	var app = new _vue2.default({
 	  router: router
 	}).$mount('#app');
+
+	function url(path) {
+	  return config.localhost + path;
+	}
 
 /***/ },
 /* 3 */
@@ -9444,7 +9449,7 @@
 
 	var __vue_script__, __vue_template__
 	__vue_script__ = __webpack_require__(5)
-	__vue_template__ = __webpack_require__(187)
+	__vue_template__ = __webpack_require__(176)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -9470,6 +9475,8 @@
 	    value: true
 	});
 
+	var _index = __webpack_require__(2);
+
 	var _config = __webpack_require__(1);
 
 	var _config2 = _interopRequireDefault(_config);
@@ -9484,6 +9491,25 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	// <template>
+	// <div id="loadingScreen" v-if="visible">
+	//     <div class="z-slide-wrap top" id="slider1">
+	//         <ul class="z-slide-content">
+	//             <li v-for="item in explanations" class="z-slide-item" v-bind:style="item.background">
+	//                 <div class="content">
+	//                     <h2>{{ item.title }}</h2>
+	//                     <span v-bind:class="item.icon"></span>
+	//                     <p>{{ item.sub_title }}</p>
+	//                 </div>
+	//                 <router-link :to="{ name: 'login'}" v-if="item.rev_title == false" class="skip">Skip</router-link>
+	//                 <router-link :to="{ name: 'login'}" v-if="item.rev_title == true" class="start-button">Let' start</router-link>
+	//             </li>
+	//         </ul>
+	//     </div>
+	// </div>
+	// </template>
+	//
+	// <script>
 	exports.default = {
 	    data: function data() {
 	        return {
@@ -9506,44 +9532,21 @@
 
 	                // need this to add a little delay
 	                setTimeout(function () {
-	                    var slider = new _zSlider2.default('#slider1', '.z-slide-item');
+	                    var slider = new _zSlider2.default('#slider1', '.z-slide-item', {
+	                        interval: 6,
+	                        duration: 1
+	                    });
 	                }, 1);
 	            }
 	        }, function (response) {
 	            // console.log(response.body.result)
 	        });
 	    },
-	    methods: {
-	        skip: function skip() {
-	            this.visible = false;
-	            signUp.visible = true;
-	            signUp.load();
-	            return false;
-	        }
-	    }
+	    methods: {}
 	};
 	// </script>
 	//
 	//
-	// <template>
-	// <div id="loadingScreen" v-if="visible">
-	//     <div class="z-slide-wrap top" id="slider1">
-	//         <ul class="z-slide-content">
-	//             <li v-for="item in explanations" class="z-slide-item" v-bind:style="item.background">
-	//                 <div class="content">
-	//                     <h2>{{ item.title }}</h2>
-	//                     <span v-bind:class="item.icon"></span>
-	//                     <p>{{ item.sub_title }}</p>
-	//                 </div>
-	//                 <a href="#" v-if="item.rev_title == false" v-on:click.prevent="skip" class="skip">Skip</a>
-	//                 <a href="#" v-if="item.rev_title == true"  v-on:click.prevent="skip" class="start-button">Let' start</a>
-	//             </li>
-	//         </ul>
-	//     </div>
-	// </div>
-	// </template>
-	//
-	// <script>
 
 /***/ },
 /* 6 */
@@ -23010,29 +23013,18 @@
 	__webpack_require__(164)('observable');
 
 /***/ },
-/* 176 */,
-/* 177 */,
-/* 178 */,
-/* 179 */,
-/* 180 */,
-/* 181 */,
-/* 182 */,
-/* 183 */,
-/* 184 */,
-/* 185 */,
-/* 186 */,
-/* 187 */
+/* 176 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div id=\"loadingScreen\" v-if=\"visible\">\n    <div class=\"z-slide-wrap top\" id=\"slider1\">\n        <ul class=\"z-slide-content\">\n            <li v-for=\"item in explanations\" class=\"z-slide-item\" v-bind:style=\"item.background\">\n                <div class=\"content\">\n                    <h2>{{ item.title }}</h2>\n                    <span v-bind:class=\"item.icon\"></span>\n                    <p>{{ item.sub_title }}</p>\n                </div>\n                <a href=\"#\" v-if=\"item.rev_title == false\" v-on:click.prevent=\"skip\" class=\"skip\">Skip</a>\n                <a href=\"#\" v-if=\"item.rev_title == true\"  v-on:click.prevent=\"skip\" class=\"start-button\">Let' start</a>\n            </li>\n        </ul>\n    </div>\n</div>\n";
+	module.exports = "\n<div id=\"loadingScreen\" v-if=\"visible\">\n    <div class=\"z-slide-wrap top\" id=\"slider1\">\n        <ul class=\"z-slide-content\">\n            <li v-for=\"item in explanations\" class=\"z-slide-item\" v-bind:style=\"item.background\">\n                <div class=\"content\">\n                    <h2>{{ item.title }}</h2>\n                    <span v-bind:class=\"item.icon\"></span>\n                    <p>{{ item.sub_title }}</p>\n                </div>\n                <router-link :to=\"{ name: 'login'}\" v-if=\"item.rev_title == false\" class=\"skip\">Skip</router-link>\n                <router-link :to=\"{ name: 'login'}\" v-if=\"item.rev_title == true\" class=\"start-button\">Let' start</router-link>\n            </li>\n        </ul>\n    </div>\n</div>\n";
 
 /***/ },
-/* 188 */
+/* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(189)
-	__vue_template__ = __webpack_require__(191)
+	__vue_script__ = __webpack_require__(178)
+	__vue_template__ = __webpack_require__(180)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -23049,7 +23041,7 @@
 	})()}
 
 /***/ },
-/* 189 */
+/* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23062,7 +23054,7 @@
 
 	var _config2 = _interopRequireDefault(_config);
 
-	var _auth = __webpack_require__(190);
+	var _auth = __webpack_require__(179);
 
 	var _auth2 = _interopRequireDefault(_auth);
 
@@ -23075,8 +23067,9 @@
 	exports.default = {
 		data: function data() {
 			return {
-				visible: true,
 				step: 1,
+				error: false,
+				error_message: '',
 				signup: {
 					parent_name: '',
 					parent_gender: '',
@@ -23088,22 +23081,20 @@
 					child_bday_m: '',
 					child_bday_y: ''
 				},
-				login: {
-					email: '',
-					password: ''
-				}
+				login_email: '',
+				login_pw: ''
 			};
 		},
 
-		created: function created() {
-			this.step = 1;
-			//  auth.checkAuth();
-			// if (auth.user.authenticated) {
-			// 	this.step = 9;
-			// } else {
-			// 	this.step = 1;
-			// }
-		},
+		//   created: function() {
+		//   	// this.step = 1;
+		// //  auth.checkAuth();
+		// // if (auth.user.authenticated) {
+		// // 	this.step = 9;
+		// // } else {
+		// // 	this.step = 1;
+		// // }
+		//   },
 		methods: {
 			showSignupForm: function showSignupForm() {
 				console.log(localStorage.getItem('token'));
@@ -23120,6 +23111,8 @@
 				this.step = 1;
 			},
 			register: function register() {
+				console.log('hello');
+				return;
 				this.signup.parent_gender = 'mother';
 
 				var credentials = {
@@ -23132,13 +23125,15 @@
 
 				_auth2.default.signup(this, credentials);
 			},
-			login: function login() {
+			logMeIn: function logMeIn() {
 				var credentials = {
-					Email: this.login.email,
-					Password: this.login.password
+					Email: this.login_email,
+					Password: this.login_pw
 				};
 
-				_auth2.default.login(this, credentials);
+				_auth2.default.login(this, credentials, function () {
+					router.push({ name: 'home' });
+				});
 			},
 			logout: function logout() {
 				_auth2.default.logout();
@@ -23156,15 +23151,17 @@
 	// 		</div>
 	// 	</div>
 	//
-	// 	<div id="login" class="panel" v-else-if="step == 2">
+	// 	<div id="login1" class="panel" v-else-if="step == 2">
 	// 		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back"></a> Log in</div>
-	// 		<form action="" method="post" class="middle-area full" v-on:submit.prevent="login">
+	// 		<form action="" method="post" class="middle-area full" v-on:submit.prevent="logMeIn">
 	// 			<div class="placer middle">
-	// 				<input type="email" placeholder="E-mailadres" v-model="login.email">
-	// 				<input type="password" placeholder="Wachtwoord" v-model="login.password">
+	// 				<div class="error" v-if="error">{{ error_message }}</div>
+	// 				<input name="login_email" type="email" placeholder="E-mailadres" v-model="login_email">
+	// 				<input name="login_pw" type="password" placeholder="Wachtwoord" v-model="login_pw">
 	// 			</div>
+	//
 	// 			<div class="bottom-area">
-	// 				<input type="button" class="form-button-medium" value="Login">
+	// 				<button class="form-button-medium">Login</button>
 	// 				<a href="javascript:void(0);" v-on:click="showSignupForm" >I don't have an account</a>
 	// 				<br>
 	// 				<a href="javascript:void(0);" v-on:click="showResetForm">Forgot password</a>
@@ -23225,7 +23222,7 @@
 	// 			</div>
 	//
 	// 			<div class="placer bottom">
-	//
+	// 				<div class="error" v-if="error">{{ error_message }}</div>
 	// 				<label>Naam</label>
 	// 				<input type="text" placeholder="your name" v-model="signup.parent_name">
 	//
@@ -23336,13 +23333,13 @@
 	// <script>
 
 /***/ },
-/* 190 */
+/* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 
 	var _config = __webpack_require__(1);
@@ -23353,84 +23350,85 @@
 
 	exports.default = {
 
-	  // User object will let us check authentication status
-	  user: {
-	    authenticated: false
-	  },
+	    // User object will let us check authentication status
+	    user: {
+	        authenticated: false
+	    },
 
-	  // Send a request to the login URL and save the returned JWT
-	  login: function login(context, creds) {
-	    context.$http.post(_config2.default.api.url + '/Login', creds).then(function (response) {
-	      var result = response.body.result;
+	    // Send a request to the login URL and save the returned JWT
+	    login: function login(context, creds, success) {
+	        context.$http.post(_config2.default.api.url + '/Login', creds).then(function (response) {
+	            var result = response.body.result;
 
-	      if (response.body.status == 'OK') {
-	        localStorage.setItem('token', result.token);
-	        localStorage.setItem('user_id', result.user_id);
-	      } else {
-	        alert(result.message);
-	      }
-	    }, function (response) {
-	      // alert(response.result.message);
-	      console.log(response.body.result);
-	      $.each(response.body.result.error, function (name, msg) {
-	        console.log(name + ': ' + msg);
-	      });
-	    });
-	  },
-	  signup: function signup(context, creds) {
-	    context.$http.post(_config2.default.api.url + '/parentregister', creds).then(function (response) {
-	      var result = response.body.result;
+	            if (response.body.status == 'OK') {
+	                localStorage.setItem('token', result.token);
+	                localStorage.setItem('user_id', result.user_id);
 
-	      if (response.body.status == 'OK') {
-	        localStorage.setItem('token', result.token);
-	        localStorage.setItem('user_id', result.user_id);
-	      } else {
-	        alert(result.message);
-	      }
-	    }, function (response) {
-	      // alert(response.result.message);
-	      console.log(response.body.result);
-	      $.each(response.body.result.error, function (name, msg) {
-	        console.log(name + ': ' + msg);
-	      });
-	    });
-	  },
+	                success.call();
+	            } else {
+	                context.error = true;
+	                context.error_message = result.message;
+	            }
+	        }, function (response) {
+	            var msg = response.body.result.message;
+	            context.error = true;
+	            context.error_message = msg;
+	        });
+	    },
+	    signup: function signup(context, creds) {
+	        context.$http.post(_config2.default.api.url + '/parentregister', creds).then(function (response) {
+	            var result = response.body.result;
+
+	            if (response.body.status == 'OK') {
+	                localStorage.setItem('token', result.token);
+	                localStorage.setItem('user_id', result.user_id);
+	            } else {
+	                alert(result.message);
+	            }
+	        }, function (response) {
+	            // alert(response.result.message);
+	            console.log(response.body.result);
+	            $.each(response.body.result.error, function (name, msg) {
+	                console.log(name + ': ' + msg);
+	            });
+	        });
+	    },
 
 
-	  // To log out, we just need to remove the token
-	  logout: function logout() {
-	    localStorage.removeItem('token');
-	    localStorage.removeItem('user_id');
-	    this.user.authenticated = false;
-	  },
-	  checkAuth: function checkAuth() {
-	    var token = localStorage.getItem('token');
-	    var user = localStorage.getItem('user_id');
+	    // To log out, we just need to remove the token
+	    logout: function logout() {
+	        localStorage.removeItem('token');
+	        localStorage.removeItem('user_id');
+	        this.user.authenticated = false;
+	    },
+	    checkAuth: function checkAuth() {
+	        var token = localStorage.getItem('token');
+	        var user = localStorage.getItem('user_id');
 
-	    if (token) {
-	      this.user.authenticated = true;
-	    } else {
-	      this.user.authenticated = false;
+	        if (token) {
+	            this.user.authenticated = true;
+	        } else {
+	            this.user.authenticated = false;
+	        }
+	    },
+
+
+	    // The object to be passed as a header for authenticated requests
+	    getAuthHeader: function getAuthHeader() {
+	        return {
+	            'Authorization': 'Bearer ' + localStorage.getItem('token')
+	        };
 	    }
-	  },
-
-
-	  // The object to be passed as a header for authenticated requests
-	  getAuthHeader: function getAuthHeader() {
-	    return {
-	      'Authorization': 'Bearer ' + localStorage.getItem('token')
-	    };
-	  }
 	};
 
 /***/ },
-/* 191 */
+/* 180 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div id=\"signUp\">\n\t<div id=\"onBoarding\" class=\"panel\" v-if=\"step == 1\">\n\t\t<div id=\"companyLogo\"></div>\n\t\t<div class=\"bottom-area\">\n\t\t\t<a href=\"javascript:void(0);\" v-on:click.prevent=\"showSignupForm\" class=\"button-big\">Sign up</a>\n\t\t\t<a href=\"javascript:void(0);\" v-on:click.prevent=\"showLoginForm\">I already have an account</a>\n\t\t</div>\n\t</div>\n\t\n\t<div id=\"login\" class=\"panel\" v-else-if=\"step == 2\">\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Log in</div>\n\t\t<form action=\"\" method=\"post\" class=\"middle-area full\" v-on:submit.prevent=\"login\">\n\t\t\t<div class=\"placer middle\">\n\t\t\t\t<input type=\"email\" placeholder=\"E-mailadres\" v-model=\"login.email\">\n\t\t\t\t<input type=\"password\" placeholder=\"Wachtwoord\" v-model=\"login.password\">\n\t\t\t</div>\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<input type=\"button\" class=\"form-button-medium\" value=\"Login\">\n\t\t\t\t<a href=\"javascript:void(0);\" v-on:click=\"showSignupForm\" >I don't have an account</a>\n\t\t\t\t<br>\n\t\t\t\t<a href=\"javascript:void(0);\" v-on:click=\"showResetForm\">Forgot password</a>\n\t\t\t</div>\n\t\t</form>\n\t</div>\n\t\t\t\n\t<div id=\"reset\" class=\"panel\" v-else-if=\"step == 3\">\n\t\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Reset password</div>\n\n\t\t<form action=\"\" method=\"post\" class=\"middle-area full\">\n\n\t\t\t<div class=\"placer bottom\">\n\t\t\t\t<p>We will send you an email with a link so you can set up a new password</p>\n\n\t\t\t\t<input type=\"email\" placeholder=\"E-mailadres\">\n\t\t\t</div>\n\t\t\t\t\n\t\t\t\t<div class=\"bottom-area\">\n\t\t\t\t\t<button class=\"form-button-medium\">Reset</button>\n\t\t\t\t</div>\n\t\t\t\t\n\t\t</form>\n\t\n\t</div>\t\n\t\n\t<div id=\"renew\" class=\"panel\" v-else-if=\"step == 4\">\n\t\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Reset password</div>\n\n\t\t<form action=\"\" method=\"post\" class=\"middle-area full\">\n\t\t\n\t\t\t<div class=\"placer middle\">\n\t\t\t\t<input type=\"password\" placeholder=\"New password\">\n\t\t\t\t<input type=\"password\" placeholder=\"Repeat password\">\n\t\t\t</div>\n\t\t\t\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<button class=\"form-button-medium\">Confirm</button>\n\t\t\t</div>\n\t\t\t\n\t\t</form>\n\n\t</div>\t\n\t\n\t<div id=\"parent\" class=\"panel\" v-else-if=\"step == 5\">\n\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Sign up parent</div>\n\t\t\n\t\t<form action=\"\" method=\"post\" class=\"middle-area semi\" v-on:submit.prevent=\"register\">\n\t\t\n\t\t\t<div class=\"selection-group\">\n\t\t\t\t<input type=\"radio\" id=\"father\"  name=\"parents\" v-model=\"signup.parent_gender\">\n\t\t\t\t<label for=\"father\" class=\"rLeft\">Father</label>\n\t\t\t\t<input type=\"radio\" id=\"mother\"  name=\"parents\" v-model=\"signup.parent_gender\">\n\t\t\t\t<label for=\"mother\" class=\"rRight\">Mother</label>\n\t\t\t</div>\n\n\t\t\t<div class=\"placer bottom\">\n\t\t\n\t\t\t\t<label>Naam</label>\n\t\t\t\t<input type=\"text\" placeholder=\"your name\" v-model=\"signup.parent_name\">\n\n\t\t\t\t<label>E-mailadres</label>\n\t\t\t\t<input type=\"email\" placeholder=\"name@mail.nl\" v-model=\"signup.parent_email\">\n\n\t\t\t\t<label>Wachwoord</label>\n\t\t\t\t<input type=\"password\" placeholder=\"******\" v-model=\"signup.parent_password\">\n\t\t\t\n\t\t\t</div>\n\t\t\t\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<input type=\"submit\" class=\"form-button-medium\" value=\"Next\">\n\t\t\t</div>\n\t\t\t\n\t\t</form>\n\n\t</div>\n\n\t<div id=\"child\" class=\"panel\" v-else-if=\"step == 6\">\n\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Sign up child</div>\n\t\t\n\t\t<form action=\"\" method=\"post\" class=\"middle-area semi\">\n\t\t\n\t\t\t<div class=\"selection-group\">\n\t\t\t\t<input type=\"radio\" id=\"son\"  name=\"child\" v-model=\"signup.child_gender\">\n\t\t\t\t<label for=\"son\" class=\"rLeft\">Son</label>\n\t\t\t\t<input type=\"radio\" id=\"daughter\"  name=\"child\" v-model=\"signup.child_gender\">\n\t\t\t\t<label for=\"daughter\" class=\"rRight\">Daughter</label>\n\t\t\t</div>\n\n\t\t\t<div class=\"placer middle\">\n\t\t\t\n\t\t\t\t<label>Naam van jouw kind</label>\n\t\t\t\t<input type=\"text\" placeholder=\"your name\" v-model=\"signup.child_name\">\n\n\t\t\t\t<label>Wanneer is jouw kind geboren?</label>\n\t\t\t\t<ul id=\"date-group\">\n\t\t\t\t\t<li><input type=\"tel\" placeholder=\"DD\" class=\"date-group\" v-model=\"signup.child_bday_d\"></li>\n\t\t\t\t\t<li><input type=\"tel\" placeholder=\"MM\" class=\"date-group\" v-model=\"signup.child_bday_m\"></li> \n\t\t\t\t\t<li><input type=\"tel\" placeholder=\"YYYY\" class=\"date-group\" v-model=\"signup.child_bday_y\"></li>\n\t\t\t\t</ul>\n\t\t\t\n\t\t\t</div>\n\t\t\t\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<button class=\"form-button-medium\">Next</button>\n\t\t\t</div>\n\t\t\t\n\t\t</form>\n\n\n\t</div>\n\t\n\t<div id=\"photo\" class=\"panel\" v-else-if=\"step == 7\">\n\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Add photo</div>\n\n\t\t<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">\n\n\t\t\t<input type=\"file\" name=\"uploadedfile\" id=\"uploadPic\" accept=\"image/*\" capture>\n\t\t\t<label for=\"uploadPic\" class=\"uploadPic\">+</label>\n\n\t\t\t<h3>Choose a nice picture of <br> you and [name child]!</h3>\n\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<input type=\"submit\" value=\"next\" class=\"form-button-medium\">\n\t\t\t\t<a href=\"javascript:void(0);\">Continue without picture</a>\n\t\t\t</div>\n\t\t\t\n\t\t</form>\n\n\t</div>\n\t\t\t\t\t\t\n\t<div id=\"photoAdded\" class=\"panel\" v-else-if=\"step == 8\">\n\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Add photo</div>\n\n\t\t<div class=\"picHolder\"></div>\n\t\t\t\n\t\t<h3>What a nice picture! <br> Do you also like?</h3>\n\t\t<a href=\"javascript:void(0);\">Choose another picture</a>\n\n\t\t<div class=\"bottom-area\">\n\t\t\t<a href=\"javascript:void(0);\" class=\"button-medium\">next</a>\n\t\t</div>\n\t</div>\n\t\n\t<div id=\"starten\" class=\"panel\" v-else-if=\"step == 9\">\n\t\t\t\t\n\t\t\t<div class=\"placer middle\">\n\t\t\t\t\t\t\n\t\t\t\t<p>Become a Supermom for <span>Lisa</span> with <strong>Yipp app!</strong></p>\t\t\n\t\t\t\t\t\t\n\t\t\t</div> \t\t\t\t\t\t\t\n\t\t\t\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<a href=\"javascript:void(0);\" class=\"button-medium white\">Begin!</a>\n\t\t\t</div>\n\t\t\t\t\t\t\t\n\t</div>\n\t\t\t\t\t\t\t\t\n</div>\n";
+	module.exports = "\n<div id=\"signUp\">\n\t<div id=\"onBoarding\" class=\"panel\" v-if=\"step == 1\">\n\t\t<div id=\"companyLogo\"></div>\n\t\t<div class=\"bottom-area\">\n\t\t\t<a href=\"javascript:void(0);\" v-on:click.prevent=\"showSignupForm\" class=\"button-big\">Sign up</a>\n\t\t\t<a href=\"javascript:void(0);\" v-on:click.prevent=\"showLoginForm\">I already have an account</a>\n\t\t</div>\n\t</div>\n\t\n\t<div id=\"login1\" class=\"panel\" v-else-if=\"step == 2\">\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Log in</div>\n\t\t<form action=\"\" method=\"post\" class=\"middle-area full\" v-on:submit.prevent=\"logMeIn\">\n\t\t\t<div class=\"placer middle\">\n\t\t\t\t<div class=\"error\" v-if=\"error\">{{ error_message }}</div>\n\t\t\t\t<input name=\"login_email\" type=\"email\" placeholder=\"E-mailadres\" v-model=\"login_email\">\n\t\t\t\t<input name=\"login_pw\" type=\"password\" placeholder=\"Wachtwoord\" v-model=\"login_pw\">\n\t\t\t</div>\n\t\t\t\t\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<button class=\"form-button-medium\">Login</button>\n\t\t\t\t<a href=\"javascript:void(0);\" v-on:click=\"showSignupForm\" >I don't have an account</a>\n\t\t\t\t<br>\n\t\t\t\t<a href=\"javascript:void(0);\" v-on:click=\"showResetForm\">Forgot password</a>\n\t\t\t</div>\n\t\t</form>\n\t</div>\n\t\t\t\n\t<div id=\"reset\" class=\"panel\" v-else-if=\"step == 3\">\n\t\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Reset password</div>\n\n\t\t<form action=\"\" method=\"post\" class=\"middle-area full\">\n\n\t\t\t<div class=\"placer bottom\">\n\t\t\t\t<p>We will send you an email with a link so you can set up a new password</p>\n\n\t\t\t\t<input type=\"email\" placeholder=\"E-mailadres\">\n\t\t\t</div>\n\t\t\t\t\n\t\t\t\t<div class=\"bottom-area\">\n\t\t\t\t\t<button class=\"form-button-medium\">Reset</button>\n\t\t\t\t</div>\n\t\t\t\t\n\t\t</form>\n\t\n\t</div>\t\n\t\n\t<div id=\"renew\" class=\"panel\" v-else-if=\"step == 4\">\n\t\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Reset password</div>\n\n\t\t<form action=\"\" method=\"post\" class=\"middle-area full\">\n\t\t\n\t\t\t<div class=\"placer middle\">\n\t\t\t\t<input type=\"password\" placeholder=\"New password\">\n\t\t\t\t<input type=\"password\" placeholder=\"Repeat password\">\n\t\t\t</div>\n\t\t\t\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<button class=\"form-button-medium\">Confirm</button>\n\t\t\t</div>\n\t\t\t\n\t\t</form>\n\n\t</div>\t\n\t\n\t<div id=\"parent\" class=\"panel\" v-else-if=\"step == 5\">\n\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Sign up parent</div>\n\t\t\n\t\t<form action=\"\" method=\"post\" class=\"middle-area semi\" v-on:submit.prevent=\"register\">\n\t\t\n\t\t\t<div class=\"selection-group\">\n\t\t\t\t<input type=\"radio\" id=\"father\"  name=\"parents\" v-model=\"signup.parent_gender\">\n\t\t\t\t<label for=\"father\" class=\"rLeft\">Father</label>\n\t\t\t\t<input type=\"radio\" id=\"mother\"  name=\"parents\" v-model=\"signup.parent_gender\">\n\t\t\t\t<label for=\"mother\" class=\"rRight\">Mother</label>\n\t\t\t</div>\n\n\t\t\t<div class=\"placer bottom\">\n\t\t\t\t<div class=\"error\" v-if=\"error\">{{ error_message }}</div>\n\t\t\t\t<label>Naam</label>\n\t\t\t\t<input type=\"text\" placeholder=\"your name\" v-model=\"signup.parent_name\">\n\n\t\t\t\t<label>E-mailadres</label>\n\t\t\t\t<input type=\"email\" placeholder=\"name@mail.nl\" v-model=\"signup.parent_email\">\n\n\t\t\t\t<label>Wachwoord</label>\n\t\t\t\t<input type=\"password\" placeholder=\"******\" v-model=\"signup.parent_password\">\n\t\t\t\n\t\t\t</div>\n\t\t\t\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<input type=\"submit\" class=\"form-button-medium\" value=\"Next\">\n\t\t\t</div>\n\t\t\t\n\t\t</form>\n\n\t</div>\n\n\t<div id=\"child\" class=\"panel\" v-else-if=\"step == 6\">\n\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Sign up child</div>\n\t\t\n\t\t<form action=\"\" method=\"post\" class=\"middle-area semi\">\n\t\t\n\t\t\t<div class=\"selection-group\">\n\t\t\t\t<input type=\"radio\" id=\"son\"  name=\"child\" v-model=\"signup.child_gender\">\n\t\t\t\t<label for=\"son\" class=\"rLeft\">Son</label>\n\t\t\t\t<input type=\"radio\" id=\"daughter\"  name=\"child\" v-model=\"signup.child_gender\">\n\t\t\t\t<label for=\"daughter\" class=\"rRight\">Daughter</label>\n\t\t\t</div>\n\n\t\t\t<div class=\"placer middle\">\n\t\t\t\n\t\t\t\t<label>Naam van jouw kind</label>\n\t\t\t\t<input type=\"text\" placeholder=\"your name\" v-model=\"signup.child_name\">\n\n\t\t\t\t<label>Wanneer is jouw kind geboren?</label>\n\t\t\t\t<ul id=\"date-group\">\n\t\t\t\t\t<li><input type=\"tel\" placeholder=\"DD\" class=\"date-group\" v-model=\"signup.child_bday_d\"></li>\n\t\t\t\t\t<li><input type=\"tel\" placeholder=\"MM\" class=\"date-group\" v-model=\"signup.child_bday_m\"></li> \n\t\t\t\t\t<li><input type=\"tel\" placeholder=\"YYYY\" class=\"date-group\" v-model=\"signup.child_bday_y\"></li>\n\t\t\t\t</ul>\n\t\t\t\n\t\t\t</div>\n\t\t\t\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<button class=\"form-button-medium\">Next</button>\n\t\t\t</div>\n\t\t\t\n\t\t</form>\n\n\n\t</div>\n\t\n\t<div id=\"photo\" class=\"panel\" v-else-if=\"step == 7\">\n\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Add photo</div>\n\n\t\t<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">\n\n\t\t\t<input type=\"file\" name=\"uploadedfile\" id=\"uploadPic\" accept=\"image/*\" capture>\n\t\t\t<label for=\"uploadPic\" class=\"uploadPic\">+</label>\n\n\t\t\t<h3>Choose a nice picture of <br> you and [name child]!</h3>\n\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<input type=\"submit\" value=\"next\" class=\"form-button-medium\">\n\t\t\t\t<a href=\"javascript:void(0);\">Continue without picture</a>\n\t\t\t</div>\n\t\t\t\n\t\t</form>\n\n\t</div>\n\t\t\t\t\t\t\n\t<div id=\"photoAdded\" class=\"panel\" v-else-if=\"step == 8\">\n\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Add photo</div>\n\n\t\t<div class=\"picHolder\"></div>\n\t\t\t\n\t\t<h3>What a nice picture! <br> Do you also like?</h3>\n\t\t<a href=\"javascript:void(0);\">Choose another picture</a>\n\n\t\t<div class=\"bottom-area\">\n\t\t\t<a href=\"javascript:void(0);\" class=\"button-medium\">next</a>\n\t\t</div>\n\t</div>\n\t\n\t<div id=\"starten\" class=\"panel\" v-else-if=\"step == 9\">\n\t\t\t\t\n\t\t\t<div class=\"placer middle\">\n\t\t\t\t\t\t\n\t\t\t\t<p>Become a Supermom for <span>Lisa</span> with <strong>Yipp app!</strong></p>\t\t\n\t\t\t\t\t\t\n\t\t\t</div> \t\t\t\t\t\t\t\n\t\t\t\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<a href=\"javascript:void(0);\" class=\"button-medium white\">Begin!</a>\n\t\t\t</div>\n\t\t\t\t\t\t\t\n\t</div>\n\t\t\t\t\t\t\t\t\n</div>\n";
 
 /***/ },
-/* 192 */
+/* 181 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -24517,7 +24515,7 @@
 
 	var nodeClient = function (request) {
 
-	    var client = __webpack_require__(193);
+	    var client = __webpack_require__(182);
 
 	    return new PromiseObj(function (resolve) {
 
@@ -24980,13 +24978,13 @@
 
 
 /***/ },
-/* 193 */
+/* 182 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
-/* 194 */
+/* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -27394,10 +27392,10 @@
 
 	module.exports = VueRouter;
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(195)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(184)))
 
 /***/ },
-/* 195 */
+/* 184 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser

@@ -8,15 +8,17 @@
 		</div>
 	</div>
 	
-	<div id="login" class="panel" v-else-if="step == 2">
+	<div id="login1" class="panel" v-else-if="step == 2">
 		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back"></a> Log in</div>
-		<form action="" method="post" class="middle-area full" v-on:submit.prevent="login">
+		<form action="" method="post" class="middle-area full" v-on:submit.prevent="logMeIn">
 			<div class="placer middle">
-				<input type="email" placeholder="E-mailadres" v-model="login.email">
-				<input type="password" placeholder="Wachtwoord" v-model="login.password">
+				<div class="error" v-if="error">{{ error_message }}</div>
+				<input name="login_email" type="email" placeholder="E-mailadres" v-model="login_email">
+				<input name="login_pw" type="password" placeholder="Wachtwoord" v-model="login_pw">
 			</div>
+				
 			<div class="bottom-area">
-				<input type="button" class="form-button-medium" value="Login">
+				<button class="form-button-medium">Login</button>
 				<a href="javascript:void(0);" v-on:click="showSignupForm" >I don't have an account</a>
 				<br>
 				<a href="javascript:void(0);" v-on:click="showResetForm">Forgot password</a>
@@ -77,7 +79,7 @@
 			</div>
 
 			<div class="placer bottom">
-		
+				<div class="error" v-if="error">{{ error_message }}</div>
 				<label>Naam</label>
 				<input type="text" placeholder="your name" v-model="signup.parent_name">
 
@@ -193,8 +195,9 @@ import $ from 'jquery'
 export default {
     data() {
         return {
-            visible: true,
-			step: 1,
+            step: 1,
+            error: false,
+			error_message: '',
 			signup: {
 				parent_name: '',
 				parent_gender: '',
@@ -206,21 +209,19 @@ export default {
 				child_bday_m: '',
 				child_bday_y: ''
 			},
-			login: {
-				email: '',
-				password: ''
-			}
+			login_email: '',
+			login_pw: ''
         }
     },
-    created: function() {
-    	this.step = 1;
-		//  auth.checkAuth();
-		// if (auth.user.authenticated) {
-		// 	this.step = 9;
-		// } else {
-		// 	this.step = 1;
-		// }
-    },
+  //   created: function() {
+  //   	// this.step = 1;
+		// //  auth.checkAuth();
+		// // if (auth.user.authenticated) {
+		// // 	this.step = 9;
+		// // } else {
+		// // 	this.step = 1;
+		// // }
+  //   },
     methods: {
         showSignupForm: function () {
 			console.log(localStorage.getItem('token'));
@@ -237,6 +238,8 @@ export default {
 			this.step = 1;
 		},
 		register: function () {
+			console.log('hello')
+			return;
 			this.signup.parent_gender = 'mother';
 
 			var credentials = {
@@ -249,13 +252,15 @@ export default {
 
 	        auth.signup(this, credentials)
 		},
-		login: function () {
+		logMeIn: function () {
 			var credentials = {
-	          	Email: this.login.email,
-	          	Password: this.login.password
+	          	Email: this.login_email,
+	          	Password: this.login_pw
 	        }
 
-	        auth.login(this, credentials)
+	        auth.login(this, credentials, function() {
+	        	router.push({ name: 'home' })
+	        })
 		},
 		logout: function () {
 			auth.logout();

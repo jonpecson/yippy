@@ -11,8 +11,8 @@ import $ from 'jquery';
 import Slider from '../assets/js/zSlider.js';
 
 const routes = [
-  { path: '/', component: Home },
-  { path: '/login', component: Auth }
+  { path: '/', component: Home, name: 'home' },
+  { path: '/login', component: Auth, name: 'login' }
 ]
 
 const router = new VueRouter({
@@ -22,3 +22,7 @@ const router = new VueRouter({
 const app = new Vue({
   router
 }).$mount('#app')
+
+function url(path) {
+	return config.localhost + path;
+}

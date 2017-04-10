@@ -8,8 +8,8 @@
                     <span v-bind:class="item.icon"></span>
                     <p>{{ item.sub_title }}</p>
                 </div>
-                <a href="#" v-if="item.rev_title == false" v-on:click.prevent="skip" class="skip">Skip</a>
-                <a href="#" v-if="item.rev_title == true"  v-on:click.prevent="skip" class="start-button">Let' start</a>
+                <router-link :to="{ name: 'login'}" v-if="item.rev_title == false" class="skip">Skip</router-link>
+                <router-link :to="{ name: 'login'}" v-if="item.rev_title == true" class="start-button">Let' start</router-link>
             </li>
         </ul>
     </div>
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import {router} from '../index'
 import config from '../config'
 import $ from 'jquery'
 import Slider from '../../assets/js/zSlider.js'
@@ -42,7 +43,10 @@ export default {
 
                 // need this to add a little delay
                 setTimeout(function(){
-                    var slider = new Slider('#slider1', '.z-slide-item');
+                    var slider = new Slider('#slider1', '.z-slide-item', {
+                        interval: 6,
+                        duration: 1
+                    });
                 }, 1);
             }
 
@@ -52,12 +56,7 @@ export default {
 
     },
     methods: {
-        skip() {
-            this.visible = false;
-            signUp.visible = true;
-            signUp.load();
-            return false;
-        }
+        
     }
 }
 </script>
