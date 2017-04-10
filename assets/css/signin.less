@@ -111,15 +111,22 @@ p{
 	border-bottom: 1px solid #D1D1D1;
 	
 	.back{
-		top:14px;
+		top:20px;
 		left:12px;
 		width:16px;
 		height:26px;
 		cursor: pointer;
 		position: absolute;
 		display:inline-block;
-		background-size: 100% auto;
-		background-image: url(../img/header-arrow.svg);
+		text-decoration: none;
+		
+		&:after{
+			content:"\e805";
+			display: block;
+			color:#DB4747;
+			font-size: 24px;
+			font-family: yipp;			
+		}
 	}
 	
 }

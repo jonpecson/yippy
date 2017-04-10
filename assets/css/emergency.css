@@ -68,14 +68,14 @@ ul#list-image li {
   background-repeat: no-repeat;
 }
 ul#list-image li:after {
-  content: '\3a';
+  content: '\e829';
   top: 50px;
   color: #fff;
   right: 10px;
   display: block;
   font-size: 20px;
   position: absolute;
-  font-family: "opvoed";
+  font-family: "yipp";
 }
 ul#list-image li h3 {
   margin: 0;
@@ -96,7 +96,7 @@ ul#list-image li h3 {
   background-repeat: no-repeat;
 }
 #headerImage:after {
-  content: '\21';
+  content: '\e827';
   top: 20px;
   left: 10px;
   color: #fff;
@@ -104,7 +104,7 @@ ul#list-image li h3 {
   display: block;
   font-size: 20px;
   position: absolute;
-  font-family: "opvoed";
+  font-family: "yipp";
 }
 #content {
   margin: 30px 10px;

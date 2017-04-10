@@ -118,6 +118,9 @@ header .user-area ul.months-level li span {
   font-size: 16px;
   text-align: center;
 }
+header .user-area ul.months-level li a {
+  color: #fff;
+}
 header .user-area .photo {
   top: -20px;
   right: 10px;
@@ -151,13 +154,13 @@ ul#list-icons li a {
   text-decoration: none;
 }
 ul#list-icons li a:after {
-  content: '\3a';
+  content: '\e829';
   top: 12px;
   right: 10px;
   display: block;
   font-size: 20px;
   position: absolute;
-  font-family: "opvoed";
+  font-family: "yipp";
 }
 ul#list-icons li a span.icon {
   display: inline-block;
@@ -215,26 +218,26 @@ ul#list-text li a {
   text-decoration: none;
 }
 ul#list-text li a:after {
-  content: '\61';
+  content: '\e821';
   top: 12px;
   right: 10px;
   color: #999;
   display: block;
   font-size: 20px;
   position: absolute;
-  font-family: "opvoed";
+  font-family: "yipp";
 }
 ul#list-text li a.active {
   color: #000;
 }
 ul#list-text li a.active:after {
-  content: '\3a';
+  content: '\e829';
   top: 12px;
   right: 10px;
   display: block;
   font-size: 20px;
   position: absolute;
-  font-family: "opvoed";
+  font-family: "yipp";
 }
 ul#list-text li a .months {
   padding-left: 30px;
