@@ -1,0 +1,20 @@
+
+.error {
+  color: red;
+}
+
+.success {
+  color: green;
+}
+
+.selection-group input[type=radio] {
+  -webkit-appearance: radio;
+  display: inline;
+}
+
+.loading {
+  background-image: url('../img/ellipsis.svg');
+  width: 20px; height: 15px;
+  display: inline-block;
+  margin-left: 5px;
+}

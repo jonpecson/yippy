@@ -2,21 +2,16 @@
 <div id="timeline-container">
     <header>
         <div class="title-area">
-
-            <i class="icon-yipp_profile_line"></i>
-
+            <router-link :to="{ name: 'emergency'}"><i class="icon-yipp_profile_line"></i></router-link>
             <span>Trainingen</span>
-
-            <i class="icon-yipp_notification_line2"></i>
-
+            <router-link :to="{ name: 'emergency'}"><i class="icon-yipp_notification_line2"></i></router-link>
         </div>
 
         <div class="user-area">
-
             <div class="child-name">{{ child.get('name') }}</div>
             <ul class="months-level">
                 <li>
-                    <span>8</span>  
+                    <span>{{ child.get('age') }}</span>  
                     <span>Maanden</span>
                 </li>
                 <li>
@@ -24,106 +19,28 @@
                     <span>Level</span>
                 </li>
                 <li>
-
+                    <a href="#" v-on:click.prevent="toggle" v-if="page == 'lessons'"><i class="icon-yipp_down"></i></a>
+                    <a href="#" v-on:click.prevent="toggle" v-if="page == 'levels'"><i class="icon-yipp_up"></i></a>
                 </li>
             </ul>
 
             <div class="photo"></div>
             
         </div>
-
     </header>
         
-        <section class="traingen">
-
+        <section class="traingen" v-if="page == 'lessons'">
             <ul id="list-icons">
-                <li>
-                    <a href="">
-                    <span class="icon icon-yipp_check_full big active"></span> 1.Nutrition fruit &amp; vegetable
-                    </a>
-                </li>
-
-                <li>
-                    <a href="">
-                    <span class="icon icon-yipp_water_full big active"></span> 
-                    2.Drinking from a cup
-                    </a>
-                </li>
-
-                <li>
-                    <a href="">
-                    <span class="icon icon-yipp_check_line small active"></span> 
-                    if the plan
-                    </a>
-                </li>
-
-                <li>
-                    <a href="">
-                        <span class="icon icon-yipp_sleep_line big normal"></span> 
-                        3.Importance of sleep
-                    </a>
-                </li>
-
-                <li>
-                    <a href="">
-                        <span class="icon icon-yipp_apple_line big normal"></span> 
-                        4.Practice Food
-                    </a>
-                </li>
-
-                <li>
-                    <a href="">
-                    <span class="icon  icon-yipp_camera_line small active"></span> 
-                    Offering 10 times
-                    </a>
-                </li>
-
-                <li>
-                    <a href="">
-                    <span class="icon icon-yipp_check_full big active"></span> 5.Nutrition fruit &amp; vegetable
-                    </a>
-                </li>
-
-                <li>
-                    <a href="">
-                    <span class="icon icon-yipp_water_full big active"></span> 
-                    6.Drinking from a cup
-                    </a>
-                </li>
-
-                <li>
-                    <a href="">
-                    <span class="icon icon-yipp_check_line small active"></span> 
-                    if the plan
-                    </a>
-                </li>
-
-                <li>
-                    <a href="">
-                        <span class="icon icon-yipp_sleep_line big normal"></span> 
-                        7.Importance of sleep
-                    </a>
-                </li>
-
-                <li>
-                    <a href="">
-                        <span class="icon icon-yipp_apple_line big normal"></span> 
-                        8.Practice Food
-                    </a>
-                </li>
-
-                <li>
-                    <a href="">
-                    <span class="icon icon-yipp_camera_line small active"></span> 
-                    Offering 10 times
+                <li v-for="lesson in lessons">
+                    <a href="#" v-bind:data-id="lesson.id" v-on:click.prevent="goTodo">
+                        <span class="icon big active" v-bind:class="lesson.icon"></span> {{ lesson.counter }}. {{ lesson.description }}
                     </a>
                 </li>
             </ul>
-        
         </section>
         
             
-        <section class="traingen2">
+        <section class="traingen2" v-if="page == 'levels'">
                     
             <ul id="list-text">
         
@@ -134,44 +51,8 @@
             <li>
                 <a href=""><span class="level">Level 2</span> <span class="months">12 - 12 months</span></a>
             </li>
-            
-            <li>
-                <a href=""><span class="level">Level 2</span> <span class="months">15 - 18 months</span></a>
-            </li>
-
-            <li>
-                <a href=""><span class="level">Level 3</span> <span class="months">18 - 21 months</span></a>
-            </li>
-
-            <li>
-                <a href=""><span class="level">Level 4</span> <span class="months">21 - 24 months</span></a>
-            </li>
-
-            <li>
-                <a href=""><span class="level">Level 5</span> <span class="months">24 - 27 months</span></a>
-            </li>
-
-            <li>
-                <a href=""><span class="level">Level 6</span> <span class="months">12 - 12 months</span></a>
-            </li>
-
-            <li>
-                <a href=""><span class="level">Level 7</span> <span class="months">12 - 12 months</span></a>
-            </li>
-
-            <li>
-                <a href=""><span class="level">Level 8</span> <span class="months">12 - 12 months</span></a>
-            </li>
-
-            <li>
-                <a href=""><span class="level">Level 9</span> <span class="months">12 - 12 months</span></a>
-            </li>
-
-            <li>
-                <a href=""><span class="level">Level 10</span> <span class="months">12 - 12 months</span></a>
-            </li>
         
-        </ul>
+            </ul>
         
         </section>
         
@@ -194,7 +75,8 @@ import timeline from '../api/timeline'
 export default {
     data() {
         return {
-            child: {}
+            child: {},
+            page: 'lessons'
         }
     },
     created: function() {
@@ -203,16 +85,38 @@ export default {
             this.redirectGuest();
         }
 
-        this.child = auth.user.get('child');
+        console.log(auth.user.data)
+
+        this.child = auth.user.data.child;
         this.getTimeline();
     },
     methods: {
+        toggle: function() {
+            if (this.page == 'lessons') {
+                this.page = 'levels';    
+            } else {
+                this.page = 'lessons';
+            }
+        },
         getTimeline: function() {
-            timeline.lessons(this, 1, function (response) {
-                console.log(response)
-            }, function (msg, response) {
+            this.lessons = [
+                {
+                    id: 1,
+                    counter: 1,
+                    description: 'Nutrition fruit & vegetable',
+                    icon: 'icon-yipp_check_full'
+                }
+            ];
 
-            });
+            // timeline.lessons(this, 1, function (response) {
+            //     console.log(response)
+            // }, function (msg, response) {
+
+            // });
+        },
+        goTodo: function (e) {
+            var id = e.target.getAttribute('data-id');
+            console.log('goto todo/' + id);
         },
         redirectGuest: function()
         {

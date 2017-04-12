@@ -94,23 +94,3 @@
 .icon-yipp_down:before { content: '\e828'; } /* '' */
 .icon-yipp_forward:before { content: '\e829'; } /* '' */
 .icon-yipp_up:before { content: '\e82a'; } /* '' */
-
-.error {
-  color: red;
-}
-
-.success {
-  color: green;
-}
-
-.selection-group input[type=radio] {
-  -webkit-appearance: radio;
-  display: inline;
-}
-
-.loading {
-  background-image: url('../img/ellipsis.svg');
-  width: 20px; height: 15px;
-  display: inline-block;
-  margin-left: 5px;
-}

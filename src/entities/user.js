@@ -13,6 +13,8 @@ export default {
     },
 
     save(result) {
+        console.log(result)
+        
         this.data.id = result.user_id;
         this.data.name = result.name;
         this.data.status = result.activation;
@@ -47,6 +49,12 @@ export default {
 
     loadFromCache (item) {
         this.data = item.data;
+        
+        if (this.data.child && this.data.child.data.name) {
+            // overwrite value with object
+            child.loadFromCache(this.data.child);
+            this.data.child = child;
+        }
     },
 
     get(key) {

@@ -4,6 +4,7 @@ import Auth from './components/Auth.vue'
 import Logout from './components/Logout.vue'
 import Register from './components/Register.vue'
 import Timeline from './components/Timeline.vue'
+import Emergency from './components/Emergency.vue'
 import VueResource from 'vue-resource'
 Vue.use(VueResource)
 
@@ -18,7 +19,8 @@ const routes = [
   { path: '/login', component: Auth, name: 'login' },
   { path: '/logout', component: Logout, name: 'logout' },
   { path: '/register', component: Register, name: 'register' },
-  { path: '/timeline', component: Timeline, name: 'timeline' }
+  { path: '/timeline', component: Timeline, name: 'timeline' },
+  { path: '/emergency', component: Emergency, name: 'emergency' }
 ]
 
 const router = new VueRouter({

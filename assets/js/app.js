@@ -93,12 +93,16 @@
 			this.data.name = result.child_name;
 			this.data.type = result.child_type;
 			this.data.parent_id = result.user_id;
-			this.data.age = result.child_birthday;
+			this.data.birthday = result.child_birthday;
+			this.data.age = 8; // sample value
 		},
 		get: function get(key) {
 			if (this.data[key]) {
 				return this.data[key];
 			}
+		},
+		loadFromCache: function loadFromCache(item) {
+			this.data = item.data;
 		}
 	};
 
@@ -131,6 +135,8 @@
 	    },
 
 	    save: function save(result) {
+	        console.log(result);
+
 	        this.data.id = result.user_id;
 	        this.data.name = result.name;
 	        this.data.status = result.activation;
@@ -163,6 +169,12 @@
 	    },
 	    loadFromCache: function loadFromCache(item) {
 	        this.data = item.data;
+
+	        if (this.data.child && this.data.child.data.name) {
+	            // overwrite value with object
+	            _child2.default.loadFromCache(this.data.child);
+	            this.data.child = _child2.default;
+	        }
 	    },
 	    get: function get(key) {
 	        if (this.data[key]) {
@@ -208,6 +220,10 @@
 
 	var _Timeline2 = _interopRequireDefault(_Timeline);
 
+	var _Emergency = __webpack_require__(200);
+
+	var _Emergency2 = _interopRequireDefault(_Emergency);
+
 	var _vueResource = __webpack_require__(196);
 
 	var _vueResource2 = _interopRequireDefault(_vueResource);
@@ -230,7 +246,7 @@
 
 	_vue2.default.use(_vueRouter2.default);
 
-	var routes = [{ path: '/', component: _Home2.default, name: 'home' }, { path: '/login', component: _Auth2.default, name: 'login' }, { path: '/logout', component: _Logout2.default, name: 'logout' }, { path: '/register', component: _Register2.default, name: 'register' }, { path: '/timeline', component: _Timeline2.default, name: 'timeline' }];
+	var routes = [{ path: '/', component: _Home2.default, name: 'home' }, { path: '/login', component: _Auth2.default, name: 'login' }, { path: '/logout', component: _Logout2.default, name: 'logout' }, { path: '/register', component: _Register2.default, name: 'register' }, { path: '/timeline', component: _Timeline2.default, name: 'timeline' }, { path: '/emergency', component: _Emergency2.default, name: 'emergency' }];
 
 	var router = new _vueRouter2.default({
 	  routes: routes
@@ -23989,7 +24005,8 @@
 	exports.default = {
 	    data: function data() {
 	        return {
-	            child: {}
+	            child: {},
+	            page: 'lessons'
 	        };
 	    },
 
@@ -23999,14 +24016,36 @@
 	            this.redirectGuest();
 	        }
 
-	        this.child = _auth2.default.user.get('child');
+	        console.log(_auth2.default.user.data);
+
+	        this.child = _auth2.default.user.data.child;
 	        this.getTimeline();
 	    },
 	    methods: {
+	        toggle: function toggle() {
+	            if (this.page == 'lessons') {
+	                this.page = 'levels';
+	            } else {
+	                this.page = 'lessons';
+	            }
+	        },
 	        getTimeline: function getTimeline() {
-	            _timeline2.default.lessons(this, 1, function (response) {
-	                console.log(response);
-	            }, function (msg, response) {});
+	            this.lessons = [{
+	                id: 1,
+	                counter: 1,
+	                description: 'Nutrition fruit & vegetable',
+	                icon: 'icon-yipp_check_full'
+	            }];
+
+	            // timeline.lessons(this, 1, function (response) {
+	            //     console.log(response)
+	            // }, function (msg, response) {
+
+	            // });
+	        },
+	        goTodo: function goTodo(e) {
+	            var id = e.target.getAttribute('data-id');
+	            console.log('goto todo/' + id);
 	        },
 	        redirectGuest: function redirectGuest() {
 	            this.$router.push('login');
@@ -24020,21 +24059,16 @@
 	// <div id="timeline-container">
 	//     <header>
 	//         <div class="title-area">
-	//
-	//             <i class="icon-yipp_profile_line"></i>
-	//
+	//             <router-link :to="{ name: 'emergency'}"><i class="icon-yipp_profile_line"></i></router-link>
 	//             <span>Trainingen</span>
-	//
-	//             <i class="icon-yipp_notification_line2"></i>
-	//
+	//             <router-link :to="{ name: 'emergency'}"><i class="icon-yipp_notification_line2"></i></router-link>
 	//         </div>
 	//
 	//         <div class="user-area">
-	//
 	//             <div class="child-name">{{ child.get('name') }}</div>
 	//             <ul class="months-level">
 	//                 <li>
-	//                     <span>8</span>  
+	//                     <span>{{ child.get('age') }}</span>  
 	//                     <span>Maanden</span>
 	//                 </li>
 	//                 <li>
@@ -24042,106 +24076,28 @@
 	//                     <span>Level</span>
 	//                 </li>
 	//                 <li>
-	//
+	//                     <a href="#" v-on:click.prevent="toggle" v-if="page == 'lessons'"><i class="icon-yipp_down"></i></a>
+	//                     <a href="#" v-on:click.prevent="toggle" v-if="page == 'levels'"><i class="icon-yipp_up"></i></a>
 	//                 </li>
 	//             </ul>
 	//
 	//             <div class="photo"></div>
 	//
 	//         </div>
-	//
 	//     </header>
 	//
-	//         <section class="traingen">
-	//
+	//         <section class="traingen" v-if="page == 'lessons'">
 	//             <ul id="list-icons">
-	//                 <li>
-	//                     <a href="">
-	//                     <span class="icon icon-yipp_check_full big active"></span> 1.Nutrition fruit &amp; vegetable
-	//                     </a>
-	//                 </li>
-	//
-	//                 <li>
-	//                     <a href="">
-	//                     <span class="icon icon-yipp_water_full big active"></span> 
-	//                     2.Drinking from a cup
-	//                     </a>
-	//                 </li>
-	//
-	//                 <li>
-	//                     <a href="">
-	//                     <span class="icon icon-yipp_check_line small active"></span> 
-	//                     if the plan
-	//                     </a>
-	//                 </li>
-	//
-	//                 <li>
-	//                     <a href="">
-	//                         <span class="icon icon-yipp_sleep_line big normal"></span> 
-	//                         3.Importance of sleep
-	//                     </a>
-	//                 </li>
-	//
-	//                 <li>
-	//                     <a href="">
-	//                         <span class="icon icon-yipp_apple_line big normal"></span> 
-	//                         4.Practice Food
-	//                     </a>
-	//                 </li>
-	//
-	//                 <li>
-	//                     <a href="">
-	//                     <span class="icon  icon-yipp_camera_line small active"></span> 
-	//                     Offering 10 times
-	//                     </a>
-	//                 </li>
-	//
-	//                 <li>
-	//                     <a href="">
-	//                     <span class="icon icon-yipp_check_full big active"></span> 5.Nutrition fruit &amp; vegetable
-	//                     </a>
-	//                 </li>
-	//
-	//                 <li>
-	//                     <a href="">
-	//                     <span class="icon icon-yipp_water_full big active"></span> 
-	//                     6.Drinking from a cup
-	//                     </a>
-	//                 </li>
-	//
-	//                 <li>
-	//                     <a href="">
-	//                     <span class="icon icon-yipp_check_line small active"></span> 
-	//                     if the plan
-	//                     </a>
-	//                 </li>
-	//
-	//                 <li>
-	//                     <a href="">
-	//                         <span class="icon icon-yipp_sleep_line big normal"></span> 
-	//                         7.Importance of sleep
-	//                     </a>
-	//                 </li>
-	//
-	//                 <li>
-	//                     <a href="">
-	//                         <span class="icon icon-yipp_apple_line big normal"></span> 
-	//                         8.Practice Food
-	//                     </a>
-	//                 </li>
-	//
-	//                 <li>
-	//                     <a href="">
-	//                     <span class="icon icon-yipp_camera_line small active"></span> 
-	//                     Offering 10 times
+	//                 <li v-for="lesson in lessons">
+	//                     <a href="#" v-bind:data-id="lesson.id" v-on:click.prevent="goTodo">
+	//                         <span class="icon big active" v-bind:class="lesson.icon"></span> {{ lesson.counter }}. {{ lesson.description }}
 	//                     </a>
 	//                 </li>
 	//             </ul>
-	//
 	//         </section>
 	//
 	//
-	//         <section class="traingen2">
+	//         <section class="traingen2" v-if="page == 'levels'">
 	//
 	//             <ul id="list-text">
 	//
@@ -24153,43 +24109,7 @@
 	//                 <a href=""><span class="level">Level 2</span> <span class="months">12 - 12 months</span></a>
 	//             </li>
 	//
-	//             <li>
-	//                 <a href=""><span class="level">Level 2</span> <span class="months">15 - 18 months</span></a>
-	//             </li>
-	//
-	//             <li>
-	//                 <a href=""><span class="level">Level 3</span> <span class="months">18 - 21 months</span></a>
-	//             </li>
-	//
-	//             <li>
-	//                 <a href=""><span class="level">Level 4</span> <span class="months">21 - 24 months</span></a>
-	//             </li>
-	//
-	//             <li>
-	//                 <a href=""><span class="level">Level 5</span> <span class="months">24 - 27 months</span></a>
-	//             </li>
-	//
-	//             <li>
-	//                 <a href=""><span class="level">Level 6</span> <span class="months">12 - 12 months</span></a>
-	//             </li>
-	//
-	//             <li>
-	//                 <a href=""><span class="level">Level 7</span> <span class="months">12 - 12 months</span></a>
-	//             </li>
-	//
-	//             <li>
-	//                 <a href=""><span class="level">Level 8</span> <span class="months">12 - 12 months</span></a>
-	//             </li>
-	//
-	//             <li>
-	//                 <a href=""><span class="level">Level 9</span> <span class="months">12 - 12 months</span></a>
-	//             </li>
-	//
-	//             <li>
-	//                 <a href=""><span class="level">Level 10</span> <span class="months">12 - 12 months</span></a>
-	//             </li>
-	//
-	//         </ul>
+	//             </ul>
 	//
 	//         </section>
 	//
@@ -24278,7 +24198,7 @@
 /* 195 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div id=\"timeline-container\">\n    <header>\n        <div class=\"title-area\">\n\n            <i class=\"icon-yipp_profile_line\"></i>\n\n            <span>Trainingen</span>\n\n            <i class=\"icon-yipp_notification_line2\"></i>\n\n        </div>\n\n        <div class=\"user-area\">\n\n            <div class=\"child-name\">{{ child.get('name') }}</div>\n            <ul class=\"months-level\">\n                <li>\n                    <span>8</span>  \n                    <span>Maanden</span>\n                </li>\n                <li>\n                    <span>1</span>\n                    <span>Level</span>\n                </li>\n                <li>\n\n                </li>\n            </ul>\n\n            <div class=\"photo\"></div>\n            \n        </div>\n\n    </header>\n        \n        <section class=\"traingen\">\n\n            <ul id=\"list-icons\">\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_check_full big active\"></span> 1.Nutrition fruit &amp; vegetable\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_water_full big active\"></span> \n                    2.Drinking from a cup\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_check_line small active\"></span> \n                    if the plan\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                        <span class=\"icon icon-yipp_sleep_line big normal\"></span> \n                        3.Importance of sleep\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                        <span class=\"icon icon-yipp_apple_line big normal\"></span> \n                        4.Practice Food\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon  icon-yipp_camera_line small active\"></span> \n                    Offering 10 times\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_check_full big active\"></span> 5.Nutrition fruit &amp; vegetable\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_water_full big active\"></span> \n                    6.Drinking from a cup\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_check_line small active\"></span> \n                    if the plan\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                        <span class=\"icon icon-yipp_sleep_line big normal\"></span> \n                        7.Importance of sleep\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                        <span class=\"icon icon-yipp_apple_line big normal\"></span> \n                        8.Practice Food\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_camera_line small active\"></span> \n                    Offering 10 times\n                    </a>\n                </li>\n            </ul>\n        \n        </section>\n        \n            \n        <section class=\"traingen2\">\n                    \n            <ul id=\"list-text\">\n        \n            <li>\n                <a href=\"\" class=\"active\"><span class=\"level\">Level 1</span> <span class=\"months\">7 - 12 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 2</span> <span class=\"months\">12 - 12 months</span></a>\n            </li>\n            \n            <li>\n                <a href=\"\"><span class=\"level\">Level 2</span> <span class=\"months\">15 - 18 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 3</span> <span class=\"months\">18 - 21 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 4</span> <span class=\"months\">21 - 24 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 5</span> <span class=\"months\">24 - 27 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 6</span> <span class=\"months\">12 - 12 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 7</span> <span class=\"months\">12 - 12 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 8</span> <span class=\"months\">12 - 12 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 9</span> <span class=\"months\">12 - 12 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 10</span> <span class=\"months\">12 - 12 months</span></a>\n            </li>\n        \n        </ul>\n        \n        </section>\n        \n        <footer>\n            <ul>\n                <li><a href=\"\" class=\"active\"><span class=\"icon-yipp_home_full-\"></span>Training</a></li>\n                <li><a href=\"\"><span class=\"icon-yipp_challenge_line\"></span>Challenge</a></li>\n            </ul>\n        </footer>\n</div>\n";
+	module.exports = "\n<div id=\"timeline-container\">\n    <header>\n        <div class=\"title-area\">\n            <router-link :to=\"{ name: 'emergency'}\"><i class=\"icon-yipp_profile_line\"></i></router-link>\n            <span>Trainingen</span>\n            <router-link :to=\"{ name: 'emergency'}\"><i class=\"icon-yipp_notification_line2\"></i></router-link>\n        </div>\n\n        <div class=\"user-area\">\n            <div class=\"child-name\">{{ child.get('name') }}</div>\n            <ul class=\"months-level\">\n                <li>\n                    <span>{{ child.get('age') }}</span>  \n                    <span>Maanden</span>\n                </li>\n                <li>\n                    <span>1</span>\n                    <span>Level</span>\n                </li>\n                <li>\n                    <a href=\"#\" v-on:click.prevent=\"toggle\" v-if=\"page == 'lessons'\"><i class=\"icon-yipp_down\"></i></a>\n                    <a href=\"#\" v-on:click.prevent=\"toggle\" v-if=\"page == 'levels'\"><i class=\"icon-yipp_up\"></i></a>\n                </li>\n            </ul>\n\n            <div class=\"photo\"></div>\n            \n        </div>\n    </header>\n        \n        <section class=\"traingen\" v-if=\"page == 'lessons'\">\n            <ul id=\"list-icons\">\n                <li v-for=\"lesson in lessons\">\n                    <a href=\"#\" v-bind:data-id=\"lesson.id\" v-on:click.prevent=\"goTodo\">\n                        <span class=\"icon big active\" v-bind:class=\"lesson.icon\"></span> {{ lesson.counter }}. {{ lesson.description }}\n                    </a>\n                </li>\n            </ul>\n        </section>\n        \n            \n        <section class=\"traingen2\" v-if=\"page == 'levels'\">\n                    \n            <ul id=\"list-text\">\n        \n            <li>\n                <a href=\"\" class=\"active\"><span class=\"level\">Level 1</span> <span class=\"months\">7 - 12 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 2</span> <span class=\"months\">12 - 12 months</span></a>\n            </li>\n        \n            </ul>\n        \n        </section>\n        \n        <footer>\n            <ul>\n                <li><a href=\"\" class=\"active\"><span class=\"icon-yipp_home_full-\"></span>Training</a></li>\n                <li><a href=\"\"><span class=\"icon-yipp_challenge_line\"></span>Challenge</a></li>\n            </ul>\n        </footer>\n</div>\n";
 
 /***/ },
 /* 196 */
@@ -28432,6 +28352,33 @@
 	};
 	process.umask = function() { return 0; };
 
+
+/***/ },
+/* 200 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__vue_template__ = __webpack_require__(201)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "/Users/racheljaro/webroot/yipp/app/src/components/Emergency.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 201 */
+/***/ function(module, exports) {
+
+	module.exports = "\n\t<div id=\"container\">\n\t\n\t\t<section class=\"emergency\">\n\t\t\n\t\t\t<header class=\"normal-header\">\n\n\t\t\t\t<router-link :to=\"{ name: 'timeline'}\"><span class=\"icon-close\" style=\"font-weight: normal\">X</span></router-link>\n\t\t\t\t<h2>Emergency</h2>\n\n\t\t\t</header>\n\n\t\t\t<ul id=\"list-image\">\n\n\t\t\t\t<li style=\"background-image: url(assets/img/slider-1.jpg);\"><h3>{title here}</h3></li>\n\t\t\t\t<li style=\"background-image: url(assets/img/slider-2.jpg);\"><h3>{title here}</h3></li>\n\t\t\t\t<li style=\"background-image: url(assets/img/slider-3.jpg);\"><h3>{title here}</h3></li>\n\t\t\t\t<li style=\"background-image: url(assets/img/slider-4.jpg);\"><h3>{title here}</h3></li>\n\n\t\t\t</ul>\n\t\t\n\t\t</section>\n\t\t\n\t\t<section class=\"imageContent\">\n\t\t\t\n\t\t<div id=\"headerImage\" style=\"background-image: url(assets/img/slider-1.jpg);\">\n\t\t\n\t\t</div>\n\n\t\t<div id=\"content\">\n\t\t\n\t\t\t<h3>{Title Text}</h3>\n\t\t\n\t\t\t\t<ol>\n\t\t\t\t\t<li class=\"item\">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis, fugiat.</li>\n\t\t\t\t\t<li class=\"item\">Rerum quis voluptatem eligendi consequatur, ipsum, ducimus reiciendis hic amet.</li>\n\t\t\t\t\t<li class=\"item\">Unde doloribus ipsam cum. Fuga quod illum voluptates voluptatum nulla.</li>\n\t\t\t\t\t<li class=\"item\">Fugit ipsam, aliquam laudantium reiciendis repellendus illo! Eaque doloremque, veritatis!</li>\n\t\t\t\t</ol>\n\t\t\n\t\t</div>\n\n\t\t</section>\n\t\n\t</div>\n";
 
 /***/ }
 /******/ ]);
