@@ -8,8 +8,8 @@
                     <span v-bind:class="item.icon"></span>
                     <p>{{ item.sub_title }}</p>
                 </div>
-                <router-link :to="{ name: 'login'}" v-if="item.rev_title == false" class="skip">Skip</router-link>
-                <router-link :to="{ name: 'login'}" v-if="item.rev_title == true" class="start-button">Let' start</router-link>
+                <a href="javascript:void(0);" v-if="item.rev_title == false" class="skip" v-on:click.prevent="skip">Skip</a>
+                <a href="javascript:void(0);" v-if="item.rev_title == true" class="start-button" v-on:click.prevent="skip">Let' start</a>
             </li>
         </ul>
     </div>
@@ -30,6 +30,13 @@ export default {
         }
     },
     created: function() {
+        var skip = localStorage.getItem('skip');
+        
+        if (skip) {
+            this.skip();
+            return;
+        }
+
         var that = this;
         this.$http.get(config.api.url + '/explanation/en').then(response => {
             var result = response.body.result;
@@ -37,7 +44,6 @@ export default {
                 $.each(result.data, function(x, y) {
                     y.icon = 'icon ' + y.icon;
                     y.background = 'background-image: url("'+y.image+'")';
-                    // y.background = 'background-image: url("img/slider-1.jpg")';
                     that.explanations.push(y);  
                 });
 
@@ -56,7 +62,10 @@ export default {
 
     },
     methods: {
-        
+        skip: function () {
+            localStorage.setItem('skip', 1);
+            this.$router.push('login');
+        }
     }
 }
 </script>

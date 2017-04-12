@@ -9606,8 +9606,8 @@
 	//                     <span v-bind:class="item.icon"></span>
 	//                     <p>{{ item.sub_title }}</p>
 	//                 </div>
-	//                 <router-link :to="{ name: 'login'}" v-if="item.rev_title == false" class="skip">Skip</router-link>
-	//                 <router-link :to="{ name: 'login'}" v-if="item.rev_title == true" class="start-button">Let' start</router-link>
+	//                 <a href="javascript:void(0);" v-if="item.rev_title == false" class="skip" v-on:click.prevent="skip">Skip</a>
+	//                 <a href="javascript:void(0);" v-if="item.rev_title == true" class="start-button" v-on:click.prevent="skip">Let' start</a>
 	//             </li>
 	//         </ul>
 	//     </div>
@@ -9624,6 +9624,13 @@
 	    },
 
 	    created: function created() {
+	        var skip = localStorage.getItem('skip');
+
+	        if (skip) {
+	            this.skip();
+	            return;
+	        }
+
 	        var that = this;
 	        this.$http.get(_config2.default.api.url + '/explanation/en').then(function (response) {
 	            var result = response.body.result;
@@ -9631,7 +9638,6 @@
 	                _jquery2.default.each(result.data, function (x, y) {
 	                    y.icon = 'icon ' + y.icon;
 	                    y.background = 'background-image: url("' + y.image + '")';
-	                    // y.background = 'background-image: url("img/slider-1.jpg")';
 	                    that.explanations.push(y);
 	                });
 
@@ -9647,7 +9653,12 @@
 	            // console.log(response.body.result)
 	        });
 	    },
-	    methods: {}
+	    methods: {
+	        skip: function skip() {
+	            localStorage.setItem('skip', 1);
+	            this.$router.push('login');
+	        }
+	    }
 	};
 	// </script>
 	//
@@ -23121,7 +23132,7 @@
 /* 178 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div id=\"loadingScreen\" v-if=\"visible\">\n    <div class=\"z-slide-wrap top\" id=\"slider1\">\n        <ul class=\"z-slide-content\">\n            <li v-for=\"item in explanations\" class=\"z-slide-item\" v-bind:style=\"item.background\">\n                <div class=\"content\">\n                    <h2>{{ item.title }}</h2>\n                    <span v-bind:class=\"item.icon\"></span>\n                    <p>{{ item.sub_title }}</p>\n                </div>\n                <router-link :to=\"{ name: 'login'}\" v-if=\"item.rev_title == false\" class=\"skip\">Skip</router-link>\n                <router-link :to=\"{ name: 'login'}\" v-if=\"item.rev_title == true\" class=\"start-button\">Let' start</router-link>\n            </li>\n        </ul>\n    </div>\n</div>\n";
+	module.exports = "\n<div id=\"loadingScreen\" v-if=\"visible\">\n    <div class=\"z-slide-wrap top\" id=\"slider1\">\n        <ul class=\"z-slide-content\">\n            <li v-for=\"item in explanations\" class=\"z-slide-item\" v-bind:style=\"item.background\">\n                <div class=\"content\">\n                    <h2>{{ item.title }}</h2>\n                    <span v-bind:class=\"item.icon\"></span>\n                    <p>{{ item.sub_title }}</p>\n                </div>\n                <a href=\"javascript:void(0);\" v-if=\"item.rev_title == false\" class=\"skip\" v-on:click.prevent=\"skip\">Skip</a>\n                <a href=\"javascript:void(0);\" v-if=\"item.rev_title == true\" class=\"start-button\" v-on:click.prevent=\"skip\">Let' start</a>\n            </li>\n        </ul>\n    </div>\n</div>\n";
 
 /***/ },
 /* 179 */
