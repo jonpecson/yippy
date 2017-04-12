@@ -117,7 +117,7 @@
 	        name: '',
 	        email: '',
 	        type: '',
-	        child: [],
+	        child: null,
 	        password: '',
 	        status: ''
 	    },
@@ -23271,7 +23271,7 @@
 				});
 			},
 			redirectAuth: function redirectAuth() {
-				if (_auth2.default.user.data.child) {
+				if (_auth2.default.user.data.child && _auth2.default.user.data.child.data.name) {
 					this.$router.push('timeline');
 				} else {
 					this.$router.push('register');
@@ -24163,10 +24163,10 @@
 	    },
 
 	    created: function created() {
-	        _auth2.default.checkAuth();
-	        if (!_auth2.default.user.authenticated) {
-	            this.redirectGuest();
-	        }
+	        // auth.checkAuth();
+	        // if (!auth.user.authenticated) {
+	        //     this.redirectGuest();
+	        // }
 	    },
 	    methods: {
 	        redirectGuest: function redirectGuest() {

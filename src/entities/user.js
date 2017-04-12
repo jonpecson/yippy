@@ -7,7 +7,7 @@ export default {
         name: '',
         email: '',
         type: '',
-        child: [],
+        child: null,
         password: '',
         status: '',
     },

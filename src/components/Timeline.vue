@@ -197,10 +197,10 @@ export default {
         }
     },
     created: function() {
-        auth.checkAuth();
-        if (!auth.user.authenticated) {
-            this.redirectGuest();
-        }
+        // auth.checkAuth();
+        // if (!auth.user.authenticated) {
+        //     this.redirectGuest();
+        // }
     },
     methods: {
         redirectGuest: function()
