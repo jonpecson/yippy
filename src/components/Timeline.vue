@@ -13,7 +13,7 @@
 
         <div class="user-area">
 
-            <div class="child-name">{{ child.data.name }}</div>
+            <div class="child-name">{{ child.get('name') }}</div>
             <ul class="months-level">
                 <li>
                     <span>8</span>  
@@ -203,7 +203,7 @@ export default {
             this.redirectGuest();
         }
 
-        this.child = auth.user.data.child;
+        this.child = auth.user.get('child');
         this.getTimeline();
     },
     methods: {

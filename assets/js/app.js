@@ -85,13 +85,20 @@
 			name: '',
 			birthday: '',
 			type: '',
-			parent_id: 0
+			parent_id: 0,
+			age: 0
 		},
 
 		save: function save(result) {
 			this.data.name = result.child_name;
 			this.data.type = result.child_type;
 			this.data.parent_id = result.user_id;
+			this.data.age = result.child_birthday;
+		},
+		get: function get(key) {
+			if (this.data[key]) {
+				return this.data[key];
+			}
 		}
 	};
 
@@ -156,6 +163,18 @@
 	    },
 	    loadFromCache: function loadFromCache(item) {
 	        this.data = item.data;
+	    },
+	    get: function get(key) {
+	        if (this.data[key]) {
+	            return this.data[key];
+	        }
+	    },
+	    hasChild: function hasChild() {
+	        if (this.data.child && this.data.child.get('name')) {
+	            return true;
+	        }
+
+	        return false;
 	    }
 	};
 
@@ -23287,7 +23306,7 @@
 				});
 			},
 			redirectAuth: function redirectAuth() {
-				if (_auth2.default.user.data.child && _auth2.default.user.data.child.data.name) {
+				if (_auth2.default.user.hasChild()) {
 					this.$router.push('timeline');
 				} else {
 					this.$router.push('register');
@@ -23564,8 +23583,9 @@
 
 		created: function created() {
 			_auth2.default.check();
+
 			if (_auth2.default.user) {
-				if (_auth2.default.user.child) {
+				if (_auth2.default.user.hasChild()) {
 					this.showAddChildPhoto();
 				} else {
 					this.showAddChild();
@@ -23583,7 +23603,7 @@
 					return;
 				}
 
-				if (_auth2.default.user.data.child) {
+				if (_auth2.default.user.hasChild()) {
 					this.showAddChildPhoto();
 					return;
 				}
@@ -23592,7 +23612,7 @@
 				this.step = 2;
 			},
 			showAddChildPhoto: function showAddChildPhoto() {
-				if (!_auth2.default.user.data.child) {
+				if (!_auth2.default.user.hasChild()) {
 					this.showAddChild();
 					return;
 				}
@@ -23606,7 +23626,7 @@
 					return;
 				}
 
-				if (!_auth2.default.user.data.child) {
+				if (!_auth2.default.user.hasChild()) {
 					this.showAddChild();
 					return;
 				}
@@ -23640,7 +23660,7 @@
 					child_name: this.child_name,
 					child_birthday: this.child_bday_y + '-' + this.child_bday_m + '-' + this.child_bday_d,
 					child_type: this.child_gender,
-					user_id: _auth2.default.user.data.id
+					user_id: _auth2.default.user.get('id')
 				};
 
 				var that = this;
@@ -23979,7 +23999,7 @@
 	            this.redirectGuest();
 	        }
 
-	        this.child = _auth2.default.user.data.child;
+	        this.child = _auth2.default.user.get('child');
 	        this.getTimeline();
 	    },
 	    methods: {
@@ -24011,7 +24031,7 @@
 	//
 	//         <div class="user-area">
 	//
-	//             <div class="child-name">{{ child.data.name }}</div>
+	//             <div class="child-name">{{ child.get('name') }}</div>
 	//             <ul class="months-level">
 	//                 <li>
 	//                     <span>8</span>  
@@ -24258,7 +24278,7 @@
 /* 195 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div id=\"timeline-container\">\n    <header>\n        <div class=\"title-area\">\n\n            <i class=\"icon-yipp_profile_line\"></i>\n\n            <span>Trainingen</span>\n\n            <i class=\"icon-yipp_notification_line2\"></i>\n\n        </div>\n\n        <div class=\"user-area\">\n\n            <div class=\"child-name\">{{ child.data.name }}</div>\n            <ul class=\"months-level\">\n                <li>\n                    <span>8</span>  \n                    <span>Maanden</span>\n                </li>\n                <li>\n                    <span>1</span>\n                    <span>Level</span>\n                </li>\n                <li>\n\n                </li>\n            </ul>\n\n            <div class=\"photo\"></div>\n            \n        </div>\n\n    </header>\n        \n        <section class=\"traingen\">\n\n            <ul id=\"list-icons\">\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_check_full big active\"></span> 1.Nutrition fruit &amp; vegetable\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_water_full big active\"></span> \n                    2.Drinking from a cup\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_check_line small active\"></span> \n                    if the plan\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                        <span class=\"icon icon-yipp_sleep_line big normal\"></span> \n                        3.Importance of sleep\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                        <span class=\"icon icon-yipp_apple_line big normal\"></span> \n                        4.Practice Food\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon  icon-yipp_camera_line small active\"></span> \n                    Offering 10 times\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_check_full big active\"></span> 5.Nutrition fruit &amp; vegetable\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_water_full big active\"></span> \n                    6.Drinking from a cup\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_check_line small active\"></span> \n                    if the plan\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                        <span class=\"icon icon-yipp_sleep_line big normal\"></span> \n                        7.Importance of sleep\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                        <span class=\"icon icon-yipp_apple_line big normal\"></span> \n                        8.Practice Food\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_camera_line small active\"></span> \n                    Offering 10 times\n                    </a>\n                </li>\n            </ul>\n        \n        </section>\n        \n            \n        <section class=\"traingen2\">\n                    \n            <ul id=\"list-text\">\n        \n            <li>\n                <a href=\"\" class=\"active\"><span class=\"level\">Level 1</span> <span class=\"months\">7 - 12 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 2</span> <span class=\"months\">12 - 12 months</span></a>\n            </li>\n            \n            <li>\n                <a href=\"\"><span class=\"level\">Level 2</span> <span class=\"months\">15 - 18 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 3</span> <span class=\"months\">18 - 21 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 4</span> <span class=\"months\">21 - 24 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 5</span> <span class=\"months\">24 - 27 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 6</span> <span class=\"months\">12 - 12 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 7</span> <span class=\"months\">12 - 12 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 8</span> <span class=\"months\">12 - 12 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 9</span> <span class=\"months\">12 - 12 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 10</span> <span class=\"months\">12 - 12 months</span></a>\n            </li>\n        \n        </ul>\n        \n        </section>\n        \n        <footer>\n            <ul>\n                <li><a href=\"\" class=\"active\"><span class=\"icon-yipp_home_full-\"></span>Training</a></li>\n                <li><a href=\"\"><span class=\"icon-yipp_challenge_line\"></span>Challenge</a></li>\n            </ul>\n        </footer>\n</div>\n";
+	module.exports = "\n<div id=\"timeline-container\">\n    <header>\n        <div class=\"title-area\">\n\n            <i class=\"icon-yipp_profile_line\"></i>\n\n            <span>Trainingen</span>\n\n            <i class=\"icon-yipp_notification_line2\"></i>\n\n        </div>\n\n        <div class=\"user-area\">\n\n            <div class=\"child-name\">{{ child.get('name') }}</div>\n            <ul class=\"months-level\">\n                <li>\n                    <span>8</span>  \n                    <span>Maanden</span>\n                </li>\n                <li>\n                    <span>1</span>\n                    <span>Level</span>\n                </li>\n                <li>\n\n                </li>\n            </ul>\n\n            <div class=\"photo\"></div>\n            \n        </div>\n\n    </header>\n        \n        <section class=\"traingen\">\n\n            <ul id=\"list-icons\">\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_check_full big active\"></span> 1.Nutrition fruit &amp; vegetable\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_water_full big active\"></span> \n                    2.Drinking from a cup\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_check_line small active\"></span> \n                    if the plan\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                        <span class=\"icon icon-yipp_sleep_line big normal\"></span> \n                        3.Importance of sleep\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                        <span class=\"icon icon-yipp_apple_line big normal\"></span> \n                        4.Practice Food\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon  icon-yipp_camera_line small active\"></span> \n                    Offering 10 times\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_check_full big active\"></span> 5.Nutrition fruit &amp; vegetable\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_water_full big active\"></span> \n                    6.Drinking from a cup\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_check_line small active\"></span> \n                    if the plan\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                        <span class=\"icon icon-yipp_sleep_line big normal\"></span> \n                        7.Importance of sleep\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                        <span class=\"icon icon-yipp_apple_line big normal\"></span> \n                        8.Practice Food\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_camera_line small active\"></span> \n                    Offering 10 times\n                    </a>\n                </li>\n            </ul>\n        \n        </section>\n        \n            \n        <section class=\"traingen2\">\n                    \n            <ul id=\"list-text\">\n        \n            <li>\n                <a href=\"\" class=\"active\"><span class=\"level\">Level 1</span> <span class=\"months\">7 - 12 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 2</span> <span class=\"months\">12 - 12 months</span></a>\n            </li>\n            \n            <li>\n                <a href=\"\"><span class=\"level\">Level 2</span> <span class=\"months\">15 - 18 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 3</span> <span class=\"months\">18 - 21 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 4</span> <span class=\"months\">21 - 24 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 5</span> <span class=\"months\">24 - 27 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 6</span> <span class=\"months\">12 - 12 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 7</span> <span class=\"months\">12 - 12 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 8</span> <span class=\"months\">12 - 12 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 9</span> <span class=\"months\">12 - 12 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 10</span> <span class=\"months\">12 - 12 months</span></a>\n            </li>\n        \n        </ul>\n        \n        </section>\n        \n        <footer>\n            <ul>\n                <li><a href=\"\" class=\"active\"><span class=\"icon-yipp_home_full-\"></span>Training</a></li>\n                <li><a href=\"\"><span class=\"icon-yipp_challenge_line\"></span>Challenge</a></li>\n            </ul>\n        </footer>\n</div>\n";
 
 /***/ },
 /* 196 */

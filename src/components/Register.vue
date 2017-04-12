@@ -150,8 +150,9 @@ export default {
     },
     created: function() {
     	auth.check();
+
     	if (auth.user) {
-			if (auth.user.child) {
+			if (auth.user.hasChild()) {
 				this.showAddChildPhoto();
 			} else {
 				this.showAddChild();
@@ -169,7 +170,7 @@ export default {
         		return;
         	}
 
-        	if (auth.user.data.child) {
+        	if (auth.user.hasChild()) {
         		this.showAddChildPhoto();
         		return;
         	}
@@ -178,7 +179,7 @@ export default {
 			this.step = 2;
     	},
     	showAddChildPhoto: function () {
-    		if (!auth.user.data.child) {
+    		if (!auth.user.hasChild()) {
         		this.showAddChild();
         		return;
         	}
@@ -192,7 +193,7 @@ export default {
         		return;
         	}
 
-        	if (!auth.user.data.child) {
+        	if (!auth.user.hasChild()) {
         		this.showAddChild();
         		return;
         	}
@@ -226,7 +227,7 @@ export default {
 	          	child_name: this.child_name,
 	          	child_birthday: this.child_bday_y + '-' + this.child_bday_m + '-' + this.child_bday_d,
 	          	child_type: this.child_gender,
-	          	user_id: auth.user.data.id
+	          	user_id: auth.user.get('id')
 	        }
 
 	        var that = this;

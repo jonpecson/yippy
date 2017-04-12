@@ -47,5 +47,19 @@ export default {
 
     loadFromCache (item) {
         this.data = item.data;
+    },
+
+    get(key) {
+        if (this.data[key]) {
+            return this.data[key]
+        }
+    },
+
+    hasChild() {
+        if (this.data.child && this.data.child.get('name')) {
+            return true;
+        }
+
+        return false;
     }
 }

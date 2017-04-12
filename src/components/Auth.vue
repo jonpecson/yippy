@@ -108,7 +108,7 @@ export default {
 		},
 		redirectAuth: function()
 		{
-			if (auth.user.data.child && auth.user.data.child.data.name) {
+			if (auth.user.hasChild()) {
     			this.$router.push('timeline');
     		} else {
     			this.$router.push('register');	
