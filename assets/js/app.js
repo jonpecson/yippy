@@ -49,7 +49,8 @@
 	__webpack_require__(3);
 	__webpack_require__(4);
 	__webpack_require__(181);
-	module.exports = __webpack_require__(190);
+	__webpack_require__(190);
+	module.exports = __webpack_require__(194);
 
 
 /***/ },
@@ -188,11 +189,11 @@
 
 	var _Timeline2 = _interopRequireDefault(_Timeline);
 
-	var _vueResource = __webpack_require__(195);
+	var _vueResource = __webpack_require__(196);
 
 	var _vueResource2 = _interopRequireDefault(_vueResource);
 
-	var _vueRouter = __webpack_require__(197);
+	var _vueRouter = __webpack_require__(198);
 
 	var _vueRouter2 = _interopRequireDefault(_vueRouter);
 
@@ -23356,9 +23357,9 @@
 	    },
 	    saveUser: function saveUser(user) {
 	        var userStr = (0, _stringify2.default)(user);
-	        console.log('auth.saveUser debug');
-	        console.log(user);
-	        console.log(userStr);
+	        // console.log('auth.saveUser debug');
+	        // console.log(user)
+	        // console.log(userStr);
 
 	        localStorage.setItem('user', userStr);
 	        this.authenticated = true;
@@ -23374,9 +23375,9 @@
 	            _user2.default.loadFromCache(JSON.parse(user_local));
 	            this.user = _user2.default;
 
-	            console.log('auth.check debug');
-	            console.log(user_local);
-	            console.log(_user2.default);
+	            // console.log('auth.check debug')
+	            // console.log(user_local)
+	            // console.log(user)
 	        } else {
 	            this.authenticated = false;
 	        }
@@ -23837,14 +23838,6 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = {
-
-	    // User object will let us check authentication status
-	    user: {
-	        authenticated: false,
-	        next_step: 0,
-	        user_id: 0
-	    },
-
 	    signup: function signup(context, creds, successCallback, errorCallback) {
 	        var _this = this;
 
@@ -23928,7 +23921,7 @@
 
 	var __vue_script__, __vue_template__
 	__vue_script__ = __webpack_require__(193)
-	__vue_template__ = __webpack_require__(194)
+	__vue_template__ = __webpack_require__(195)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -23968,8 +23961,42 @@
 
 	var _auth2 = _interopRequireDefault(_auth);
 
+	var _timeline = __webpack_require__(194);
+
+	var _timeline2 = _interopRequireDefault(_timeline);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	exports.default = {
+	    data: function data() {
+	        return {
+	            child: {}
+	        };
+	    },
+
+	    created: function created() {
+	        _auth2.default.check();
+	        if (!_auth2.default.authenticated) {
+	            this.redirectGuest();
+	        }
+
+	        this.child = _auth2.default.user.data.child;
+	        this.getTimeline();
+	    },
+	    methods: {
+	        getTimeline: function getTimeline() {
+	            _timeline2.default.lessons(this, 1, function (response) {
+	                console.log(response);
+	            }, function (msg, response) {});
+	        },
+	        redirectGuest: function redirectGuest() {
+	            this.$router.push('login');
+	        }
+	    }
+	};
+	// </script>
+	//
+	//
 	// <template>
 	// <div id="timeline-container">
 	//     <header>
@@ -23985,7 +24012,7 @@
 	//
 	//         <div class="user-area">
 	//
-	//             <div class="child-name">[Name child]</div>
+	//             <div class="child-name">{{ child.data.name }}</div>
 	//             <ul class="months-level">
 	//                 <li>
 	//                     <span>8</span>  
@@ -24157,35 +24184,85 @@
 	// </template>
 	//
 	// <script>
-	exports.default = {
-	    data: function data() {
-	        return {};
-	    },
-
-	    created: function created() {
-	        // auth.checkAuth();
-	        // if (!auth.user.authenticated) {
-	        //     this.redirectGuest();
-	        // }
-	    },
-	    methods: {
-	        redirectGuest: function redirectGuest() {
-	            this.$router.push('login');
-	        }
-	    }
-	};
-	// </script>
-	//
-	//
 
 /***/ },
 /* 194 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "\n<div id=\"timeline-container\">\n    <header>\n        <div class=\"title-area\">\n\n            <i class=\"icon-yipp_profile_line\"></i>\n\n            <span>Trainingen</span>\n\n            <i class=\"icon-yipp_notification_line2\"></i>\n\n        </div>\n\n        <div class=\"user-area\">\n\n            <div class=\"child-name\">[Name child]</div>\n            <ul class=\"months-level\">\n                <li>\n                    <span>8</span>  \n                    <span>Maanden</span>\n                </li>\n                <li>\n                    <span>1</span>\n                    <span>Level</span>\n                </li>\n                <li>\n\n                </li>\n            </ul>\n\n            <div class=\"photo\"></div>\n            \n        </div>\n\n    </header>\n        \n        <section class=\"traingen\">\n\n            <ul id=\"list-icons\">\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_check_full big active\"></span> 1.Nutrition fruit &amp; vegetable\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_water_full big active\"></span> \n                    2.Drinking from a cup\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_check_line small active\"></span> \n                    if the plan\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                        <span class=\"icon icon-yipp_sleep_line big normal\"></span> \n                        3.Importance of sleep\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                        <span class=\"icon icon-yipp_apple_line big normal\"></span> \n                        4.Practice Food\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon  icon-yipp_camera_line small active\"></span> \n                    Offering 10 times\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_check_full big active\"></span> 5.Nutrition fruit &amp; vegetable\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_water_full big active\"></span> \n                    6.Drinking from a cup\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_check_line small active\"></span> \n                    if the plan\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                        <span class=\"icon icon-yipp_sleep_line big normal\"></span> \n                        7.Importance of sleep\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                        <span class=\"icon icon-yipp_apple_line big normal\"></span> \n                        8.Practice Food\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_camera_line small active\"></span> \n                    Offering 10 times\n                    </a>\n                </li>\n            </ul>\n        \n        </section>\n        \n            \n        <section class=\"traingen2\">\n                    \n            <ul id=\"list-text\">\n        \n            <li>\n                <a href=\"\" class=\"active\"><span class=\"level\">Level 1</span> <span class=\"months\">7 - 12 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 2</span> <span class=\"months\">12 - 12 months</span></a>\n            </li>\n            \n            <li>\n                <a href=\"\"><span class=\"level\">Level 2</span> <span class=\"months\">15 - 18 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 3</span> <span class=\"months\">18 - 21 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 4</span> <span class=\"months\">21 - 24 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 5</span> <span class=\"months\">24 - 27 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 6</span> <span class=\"months\">12 - 12 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 7</span> <span class=\"months\">12 - 12 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 8</span> <span class=\"months\">12 - 12 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 9</span> <span class=\"months\">12 - 12 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 10</span> <span class=\"months\">12 - 12 months</span></a>\n            </li>\n        \n        </ul>\n        \n        </section>\n        \n        <footer>\n            <ul>\n                <li><a href=\"\" class=\"active\"><span class=\"icon-yipp_home_full-\"></span>Training</a></li>\n                <li><a href=\"\"><span class=\"icon-yipp_challenge_line\"></span>Challenge</a></li>\n            </ul>\n        </footer>\n</div>\n";
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _config = __webpack_require__(1);
+
+	var _config2 = _interopRequireDefault(_config);
+
+	var _auth = __webpack_require__(181);
+
+	var _auth2 = _interopRequireDefault(_auth);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	    getAll: function getAll(context, successCallback, errorCallback) {
+	        this.levels(context, successCallback, errorCallback);
+	    },
+	    levels: function levels(context, successCallback, errorCallback) {
+	        var _this = this;
+
+	        var that = this;
+
+	        context.$http.get(_config2.default.api.url + '/levels').then(function (response) {
+	            var result = response.body.result;
+
+	            if (response.body.status == 'OK') {
+	                that.lessons(context, 2, successCallback, errorCallback);
+	            } else if (errorCallback) {
+	                console.log('error in api.timeline');
+	                errorCallback.call(_this, result.message, response);
+	            }
+	        }, function (response) {
+
+	            if (errorCallback) {
+	                errorCallback.call(_this, response.body.result.error, response);
+	            }
+	        });
+	    },
+	    lessons: function lessons(context, level, successCallback, errorCallback) {
+	        var _this2 = this;
+
+	        var that = this;
+
+	        context.$http.get(_config2.default.api.url + '/lessons/2').then(function (response) {
+	            var result = response.body.result;
+
+	            if (response.body.status == 'OK') {
+
+	                console.log(result);
+	                successCallback.call(_this2, response);
+	            } else if (errorCallback) {
+	                console.log('error in api.timeline');
+	                errorCallback.call(_this2, result.message, response);
+	            }
+	        }, function (response) {
+
+	            if (errorCallback) {
+	                errorCallback.call(_this2, response.body.result.error, response);
+	            }
+	        });
+	    }
+	};
 
 /***/ },
 /* 195 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div id=\"timeline-container\">\n    <header>\n        <div class=\"title-area\">\n\n            <i class=\"icon-yipp_profile_line\"></i>\n\n            <span>Trainingen</span>\n\n            <i class=\"icon-yipp_notification_line2\"></i>\n\n        </div>\n\n        <div class=\"user-area\">\n\n            <div class=\"child-name\">{{ child.data.name }}</div>\n            <ul class=\"months-level\">\n                <li>\n                    <span>8</span>  \n                    <span>Maanden</span>\n                </li>\n                <li>\n                    <span>1</span>\n                    <span>Level</span>\n                </li>\n                <li>\n\n                </li>\n            </ul>\n\n            <div class=\"photo\"></div>\n            \n        </div>\n\n    </header>\n        \n        <section class=\"traingen\">\n\n            <ul id=\"list-icons\">\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_check_full big active\"></span> 1.Nutrition fruit &amp; vegetable\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_water_full big active\"></span> \n                    2.Drinking from a cup\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_check_line small active\"></span> \n                    if the plan\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                        <span class=\"icon icon-yipp_sleep_line big normal\"></span> \n                        3.Importance of sleep\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                        <span class=\"icon icon-yipp_apple_line big normal\"></span> \n                        4.Practice Food\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon  icon-yipp_camera_line small active\"></span> \n                    Offering 10 times\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_check_full big active\"></span> 5.Nutrition fruit &amp; vegetable\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_water_full big active\"></span> \n                    6.Drinking from a cup\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_check_line small active\"></span> \n                    if the plan\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                        <span class=\"icon icon-yipp_sleep_line big normal\"></span> \n                        7.Importance of sleep\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                        <span class=\"icon icon-yipp_apple_line big normal\"></span> \n                        8.Practice Food\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_camera_line small active\"></span> \n                    Offering 10 times\n                    </a>\n                </li>\n            </ul>\n        \n        </section>\n        \n            \n        <section class=\"traingen2\">\n                    \n            <ul id=\"list-text\">\n        \n            <li>\n                <a href=\"\" class=\"active\"><span class=\"level\">Level 1</span> <span class=\"months\">7 - 12 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 2</span> <span class=\"months\">12 - 12 months</span></a>\n            </li>\n            \n            <li>\n                <a href=\"\"><span class=\"level\">Level 2</span> <span class=\"months\">15 - 18 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 3</span> <span class=\"months\">18 - 21 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 4</span> <span class=\"months\">21 - 24 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 5</span> <span class=\"months\">24 - 27 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 6</span> <span class=\"months\">12 - 12 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 7</span> <span class=\"months\">12 - 12 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 8</span> <span class=\"months\">12 - 12 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 9</span> <span class=\"months\">12 - 12 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 10</span> <span class=\"months\">12 - 12 months</span></a>\n            </li>\n        \n        </ul>\n        \n        </section>\n        \n        <footer>\n            <ul>\n                <li><a href=\"\" class=\"active\"><span class=\"icon-yipp_home_full-\"></span>Training</a></li>\n                <li><a href=\"\"><span class=\"icon-yipp_challenge_line\"></span>Challenge</a></li>\n            </ul>\n        </footer>\n</div>\n";
+
+/***/ },
+/* 196 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -25272,7 +25349,7 @@
 
 	var nodeClient = function (request) {
 
-	    var client = __webpack_require__(196);
+	    var client = __webpack_require__(197);
 
 	    return new PromiseObj(function (resolve) {
 
@@ -25735,13 +25812,13 @@
 
 
 /***/ },
-/* 196 */
+/* 197 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
-/* 197 */
+/* 198 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -28149,10 +28226,10 @@
 
 	module.exports = VueRouter;
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(198)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(199)))
 
 /***/ },
-/* 198 */
+/* 199 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser

@@ -13,7 +13,7 @@
 
         <div class="user-area">
 
-            <div class="child-name">[Name child]</div>
+            <div class="child-name">{{ child.data.name }}</div>
             <ul class="months-level">
                 <li>
                     <span>8</span>  
@@ -189,20 +189,31 @@ import {router} from '../index'
 import config from '../config'
 import $ from 'jquery'
 import auth from '../api/auth'
+import timeline from '../api/timeline'
 
 export default {
     data() {
         return {
-            
+            child: {}
         }
     },
     created: function() {
-        // auth.checkAuth();
-        // if (!auth.user.authenticated) {
-        //     this.redirectGuest();
-        // }
+        auth.check();
+        if (!auth.authenticated) {
+            this.redirectGuest();
+        }
+
+        this.child = auth.user.data.child;
+        this.getTimeline();
     },
     methods: {
+        getTimeline: function() {
+            timeline.lessons(this, 1, function (response) {
+                console.log(response)
+            }, function (msg, response) {
+
+            });
+        },
         redirectGuest: function()
         {
             this.$router.push('login');

@@ -50,9 +50,9 @@ export default {
 
     saveUser(user) {
         var userStr = JSON.stringify(user);
-        console.log('auth.saveUser debug');
-        console.log(user)
-        console.log(userStr);
+        // console.log('auth.saveUser debug');
+        // console.log(user)
+        // console.log(userStr);
         
         localStorage.setItem('user', userStr);
         this.authenticated = true;
@@ -69,9 +69,9 @@ export default {
             user.loadFromCache(JSON.parse(user_local))
             this.user = user;
 
-            console.log('auth.check debug')
-            console.log(user_local)
-            console.log(user)
+            // console.log('auth.check debug')
+            // console.log(user_local)
+            // console.log(user)
         }
         else {
             this.authenticated = false            

@@ -9,6 +9,7 @@ module.exports = {
     './src/index.js', 
     './src/api/auth.js',
     './src/api/register.js',
+    './src/api/timeline.js',
   ],
   output: {
     path: path.join(__dirname, "assets/js"),

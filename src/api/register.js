@@ -4,13 +4,6 @@ import auth from '../api/auth';
 
 export default {
 
-    // User object will let us check authentication status
-    user: {
-        authenticated: false,
-        next_step: 0,
-        user_id: 0
-    },
-
     signup(context, creds, successCallback, errorCallback) {
         var that = this;
 
