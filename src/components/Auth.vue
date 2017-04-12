@@ -18,7 +18,7 @@
 			</div>
 				
 			<div class="bottom-area">
-				<button class="form-button-medium">Login</button>
+				<button class="form-button-medium">Login<span v-if="loading" class="loading"></span></button>
 				<router-link :to="{ name: 'register'}">I don't have an account</router-link>
 				<br>
 				<a href="javascript:void(0);" v-on:click="showResetForm">Forgot password</a>
@@ -67,7 +67,8 @@ export default {
             step: 1,
             error_message: '',
 			login_email: '',
-			login_pw: ''
+			login_pw: '',
+			loading: false
         }
     },
     created: function() {
@@ -90,6 +91,7 @@ export default {
 			this.step = 1;
 		},
 		logMeIn: function () {
+			this.loading = true;
 			var credentials = {
 	          	email: this.login_email,
 	          	password: this.login_pw
@@ -97,8 +99,10 @@ export default {
 
 	        var that = this;
 	        auth.login(this, credentials, function() {
+	        	that.loading = false;
 	        	that.redirectAuth();
 	        }, function (msg, response) {
+	        	that.loading = false;
 	        	that.logError(msg)
 	        })
 		},

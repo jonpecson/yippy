@@ -23202,7 +23202,7 @@
 	// 			</div>
 	//
 	// 			<div class="bottom-area">
-	// 				<button class="form-button-medium">Login</button>
+	// 				<button class="form-button-medium">Login<span v-if="loading" class="loading"></span></button>
 	// 				<router-link :to="{ name: 'register'}">I don't have an account</router-link>
 	// 				<br>
 	// 				<a href="javascript:void(0);" v-on:click="showResetForm">Forgot password</a>
@@ -23246,7 +23246,8 @@
 				step: 1,
 				error_message: '',
 				login_email: '',
-				login_pw: ''
+				login_pw: '',
+				loading: false
 			};
 		},
 
@@ -23270,6 +23271,7 @@
 				this.step = 1;
 			},
 			logMeIn: function logMeIn() {
+				this.loading = true;
 				var credentials = {
 					email: this.login_email,
 					password: this.login_pw
@@ -23277,8 +23279,10 @@
 
 				var that = this;
 				_auth2.default.login(this, credentials, function () {
+					that.loading = false;
 					that.redirectAuth();
 				}, function (msg, response) {
+					that.loading = false;
 					that.logError(msg);
 				});
 			},
@@ -23415,7 +23419,7 @@
 /* 184 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div id=\"signUp\">\n\t<div id=\"onBoarding\" class=\"panel\" v-if=\"step == 1\">\n\t\t<div id=\"companyLogo\"></div>\n\t\t<div class=\"bottom-area\">\n\t\t\t<router-link :to=\"{ name: 'register'}\" class=\"button-big\">Sign up</router-link>\n\t\t\t<a href=\"javascript:void(0);\" v-on:click.prevent=\"showLoginForm\">I already have an account</a>\n\t\t</div>\n\t</div>\n\t\n\t<div id=\"login1\" class=\"panel\" v-else-if=\"step == 2\">\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Log in</div>\n\t\t<form action=\"\" method=\"post\" class=\"middle-area full\" v-on:submit.prevent=\"logMeIn\">\n\t\t\t<div class=\"placer middle\">\n\t\t\t\t<div class=\"error\" v-if=\"error_message\">{{ error_message }}</div>\n\t\t\t\t<input name=\"login_email\" type=\"email\" placeholder=\"E-mailadres\" v-model=\"login_email\">\n\t\t\t\t<input name=\"login_pw\" type=\"password\" placeholder=\"Wachtwoord\" v-model=\"login_pw\">\n\t\t\t</div>\n\t\t\t\t\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<button class=\"form-button-medium\">Login</button>\n\t\t\t\t<router-link :to=\"{ name: 'register'}\">I don't have an account</router-link>\n\t\t\t\t<br>\n\t\t\t\t<a href=\"javascript:void(0);\" v-on:click=\"showResetForm\">Forgot password</a>\n\t\t\t</div>\n\t\t</form>\n\t</div>\n\t\t\t\n\t<div id=\"reset\" class=\"panel\" v-else-if=\"step == 3\">\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Reset password</div>\n\t\t<form action=\"\" method=\"post\" class=\"middle-area full\">\n\t\t\t<div class=\"placer bottom\">\n\t\t\t\t<p>We will send you an email with a link so you can set up a new password</p>\n\t\t\t\t<input type=\"email\" placeholder=\"E-mailadres\">\n\t\t\t</div>\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<button class=\"form-button-medium\">Reset</button>\n\t\t\t</div>\n\t\t</form>\n\t</div>\t\n\t\n\t<div id=\"renew\" class=\"panel\" v-else-if=\"step == 4\">\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Reset password</div>\n\t\t<form action=\"\" method=\"post\" class=\"middle-area full\">\n\t\t\t<div class=\"placer middle\">\n\t\t\t\t<input type=\"password\" placeholder=\"New password\">\n\t\t\t\t<input type=\"password\" placeholder=\"Repeat password\">\n\t\t\t</div>\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<button class=\"form-button-medium\">Confirm</button>\n\t\t\t</div>\n\t\t</form>\n\t</div>\t\n</div>\n";
+	module.exports = "\n<div id=\"signUp\">\n\t<div id=\"onBoarding\" class=\"panel\" v-if=\"step == 1\">\n\t\t<div id=\"companyLogo\"></div>\n\t\t<div class=\"bottom-area\">\n\t\t\t<router-link :to=\"{ name: 'register'}\" class=\"button-big\">Sign up</router-link>\n\t\t\t<a href=\"javascript:void(0);\" v-on:click.prevent=\"showLoginForm\">I already have an account</a>\n\t\t</div>\n\t</div>\n\t\n\t<div id=\"login1\" class=\"panel\" v-else-if=\"step == 2\">\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Log in</div>\n\t\t<form action=\"\" method=\"post\" class=\"middle-area full\" v-on:submit.prevent=\"logMeIn\">\n\t\t\t<div class=\"placer middle\">\n\t\t\t\t<div class=\"error\" v-if=\"error_message\">{{ error_message }}</div>\n\t\t\t\t<input name=\"login_email\" type=\"email\" placeholder=\"E-mailadres\" v-model=\"login_email\">\n\t\t\t\t<input name=\"login_pw\" type=\"password\" placeholder=\"Wachtwoord\" v-model=\"login_pw\">\n\t\t\t</div>\n\t\t\t\t\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<button class=\"form-button-medium\">Login<span v-if=\"loading\" class=\"loading\"></span></button>\n\t\t\t\t<router-link :to=\"{ name: 'register'}\">I don't have an account</router-link>\n\t\t\t\t<br>\n\t\t\t\t<a href=\"javascript:void(0);\" v-on:click=\"showResetForm\">Forgot password</a>\n\t\t\t</div>\n\t\t</form>\n\t</div>\n\t\t\t\n\t<div id=\"reset\" class=\"panel\" v-else-if=\"step == 3\">\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Reset password</div>\n\t\t<form action=\"\" method=\"post\" class=\"middle-area full\">\n\t\t\t<div class=\"placer bottom\">\n\t\t\t\t<p>We will send you an email with a link so you can set up a new password</p>\n\t\t\t\t<input type=\"email\" placeholder=\"E-mailadres\">\n\t\t\t</div>\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<button class=\"form-button-medium\">Reset</button>\n\t\t\t</div>\n\t\t</form>\n\t</div>\t\n\t\n\t<div id=\"renew\" class=\"panel\" v-else-if=\"step == 4\">\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Reset password</div>\n\t\t<form action=\"\" method=\"post\" class=\"middle-area full\">\n\t\t\t<div class=\"placer middle\">\n\t\t\t\t<input type=\"password\" placeholder=\"New password\">\n\t\t\t\t<input type=\"password\" placeholder=\"Repeat password\">\n\t\t\t</div>\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<button class=\"form-button-medium\">Confirm</button>\n\t\t\t</div>\n\t\t</form>\n\t</div>\t\n</div>\n";
 
 /***/ },
 /* 185 */
@@ -23553,7 +23557,8 @@
 				child_gender: '',
 				child_bday_d: '',
 				child_bday_m: '',
-				child_bday_y: ''
+				child_bday_y: '',
+				loading: false
 			};
 		},
 
@@ -23630,6 +23635,7 @@
 				});
 			},
 			addChild: function addChild() {
+				this.loading = true;
 				var credentials = {
 					child_name: this.child_name,
 					child_birthday: this.child_bday_y + '-' + this.child_bday_m + '-' + this.child_bday_d,
@@ -23647,6 +23653,7 @@
 				});
 			},
 			addPhoto: function addPhoto() {
+				this.loading = true;
 				var credentials = {
 					image: this.child_name,
 					image_id: this.child_bday_y + '-' + this.child_bday_m + '-' + this.child_bday_d,
@@ -23654,35 +23661,16 @@
 				};
 
 				var that = this;
-				_auth2.default.addChild(this, credentials, function () {
-					this.resetError();
-					that.saveNextStep(7);
-					that.step = 7;
-					localStorage.setItem('child_name', credentials.child_name);
-					localStorage.setItem('child_type', credentials.child_type);
-				});
-			},
-			logMeIn: function logMeIn() {
-				var credentials = {
-					Email: this.login_email,
-					Password: this.login_pw
-				};
-
-				var that = this;
-				_auth2.default.login(this, credentials, function () {
-					that.redirectAuth();
-				});
-			},
-			redirectGuest: function redirectGuest() {
-				this.$router.push('login');
-			},
-			saveNextStep: function saveNextStep(step) {
-				localStorage.setItem('next_step', step);
+				// auth.addChild(this, credentials, function() {
+				// 	this.resetError();
+				// })
 			},
 			resetError: function resetError() {
+				this.loading = false;
 				this.error_message = '';
 			},
 			logError: function logError(msg) {
+				this.loading = false;
 				var msgStr = '';
 				if (typeof msg == 'string') {
 					msgStr = msg;
@@ -23726,7 +23714,7 @@
 	// 			</div>
 	//
 	// 			<div class="bottom-area">
-	// 				<button class="form-button-medium">Next</button>
+	// 				<button class="form-button-medium">Next<span v-if="loading" class="loading"></span></button>
 	// 			</div>
 	//
 	// 		</form>
@@ -23762,7 +23750,7 @@
 	// 			</div>
 	//
 	// 			<div class="bottom-area">
-	// 				<button class="form-button-medium">Next</button>
+	// 				<button class="form-button-medium">Next<span v-if="loading" class="loading"></span></button>
 	// 			</div>
 	//
 	// 		</form>
@@ -23924,7 +23912,7 @@
 /* 191 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div id=\"signUp\">\n\t<div id=\"parent\" class=\"panel\" v-if=\"step == 1\">\n\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Sign up parent</div>\n\t\t\n\t\t<form action=\"\" method=\"post\" class=\"middle-area semi\" v-on:submit.prevent=\"register\">\n\t\t\n\t\t\t<div class=\"selection-group\">\n\t\t\t\t<input type=\"radio\" id=\"father\"  name=\"parents\" value=\"father\" v-model=\"parent_gender\">\n\t\t\t\t<label for=\"father\" class=\"rLeft\">Father</label>\n\t\t\t\t<input type=\"radio\" id=\"mother\"  name=\"parents\" value=\"mother\" v-model=\"parent_gender\">\n\t\t\t\t<label for=\"mother\" class=\"rRight\">Mother</label>\n\t\t\t</div>\n\n\t\t\t<div class=\"placer bottom\">\n\t\t\t\t<div class=\"error\" v-if=\"error_message\">{{ error_message }}</div>\n\t\t\t\t<label>Naam</label>\n\t\t\t\t<input type=\"text\" placeholder=\"your name\" v-model=\"parent_name\">\n\n\t\t\t\t<label>E-mailadres</label>\n\t\t\t\t<input type=\"email\" placeholder=\"name@mail.nl\" v-model=\"parent_email\">\n\n\t\t\t\t<label>Wachwoord</label>\n\t\t\t\t<input type=\"password\" placeholder=\"******\" v-model=\"parent_password\">\n\t\t\t\n\t\t\t</div>\n\t\t\t\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<button class=\"form-button-medium\">Next</button>\n\t\t\t</div>\n\t\t\t\n\t\t</form>\n\n\t</div>\n\n\t<div id=\"child\" class=\"panel\" v-else-if=\"step == 2\">\n\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Sign up child</div>\n\t\t\n\t\t<form action=\"\" method=\"post\" class=\"middle-area semi\" v-on:submit.prevent=\"addChild\">\n\t\t\n\t\t\t<div class=\"selection-group\">\n\t\t\t\t<input type=\"radio\" id=\"son\"  name=\"child\" value=\"son\" v-model=\"child_gender\">\n\t\t\t\t<label for=\"son\" class=\"rLeft\">Son</label>\n\t\t\t\t<input type=\"radio\" id=\"daughter\"  name=\"child\" value=\"daughter\" v-model=\"child_gender\">\n\t\t\t\t<label for=\"daughter\" class=\"rRight\">Daughter</label>\n\t\t\t</div>\n\n\t\t\t<div class=\"placer middle\">\n\t\t\t\t\n\t\t\t\t\t<div class=\"error\" v-if=\"error_message\">{{ error_message }}</div>\n\t\t\t\t<label>Naam van jouw kind</label>\n\t\t\t\t<input type=\"text\" placeholder=\"your name\" v-model=\"child_name\">\n\n\t\t\t\t<label>Wanneer is jouw kind geboren?</label>\n\t\t\t\t<ul id=\"date-group\">\n\t\t\t\t\t<li><input type=\"tel\" placeholder=\"DD\" class=\"date-group\" v-model=\"child_bday_d\"></li>\n\t\t\t\t\t<li><input type=\"tel\" placeholder=\"MM\" class=\"date-group\" v-model=\"child_bday_m\"></li> \n\t\t\t\t\t<li><input type=\"tel\" placeholder=\"YYYY\" class=\"date-group\" v-model=\"child_bday_y\"></li>\n\t\t\t\t</ul>\n\t\t\t\n\t\t\t</div>\n\t\t\t\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<button class=\"form-button-medium\">Next</button>\n\t\t\t</div>\n\t\t\t\n\t\t</form>\n\n\n\t</div>\n\t\n\t<div id=\"photo\" class=\"panel\" v-else-if=\"step == 3\">\n\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Add photo</div>\n\n\t\t<form action=\"\" method=\"post\" enctype=\"multipart/form-data\" v-on:submit.prevent=\"addPicture\">\n\t\t\t<div class=\"error\" v-if=\"error_message\">{{ error_message }}</div>\n\t\t\t<input type=\"file\" name=\"uploadedfile\" id=\"uploadPic\" accept=\"image/*\" capture>\n\t\t\t<label for=\"uploadPic\" class=\"uploadPic\">+</label>\n\n\t\t\t<h3>Choose a nice picture of <br> you and {{ child_name }}!</h3>\n\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<input type=\"submit\" value=\"next\" class=\"form-button-medium\">\n\t\t\t\t<a href=\"javascript:void(0);\" v-on:click=\"showLastStep\" >Continue without picture</a>\n\t\t\t</div>\n\t\t\t\n\t\t</form>\n\n\t</div>\n\t\t\t\t\t\t\n\t<div id=\"photoAdded\" class=\"panel\" v-else-if=\"step == 4\">\n\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Add photo</div>\n\n\t\t<div class=\"picHolder\"></div>\n\t\t\t\n\t\t<h3>What a nice picture! <br> Do you also like?</h3>\n\t\t<a href=\"javascript:void(0);\">Choose another picture</a>\n\n\t\t<div class=\"bottom-area\">\n\t\t\t<a href=\"javascript:void(0);\" class=\"button-medium\">next</a>\n\t\t</div>\n\t</div>\n\t\n\t<div id=\"starten\" class=\"panel\" v-else-if=\"step == 5\">\n\t\t\t\t\n\t\t\t<div class=\"placer middle\">\n\t\t\t\t\t\t\n\t\t\t\t<p>Become a Supermom for <span>Lisa</span> with <strong>Yipp app!</strong></p>\t\t\n\t\t\t\t\t\t\n\t\t\t</div> \t\t\t\t\t\t\t\n\t\t\t\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"button-medium white\"\">Begin!</router-link>\n\t\t\t</div>\n\t\t\t\t\t\t\t\n\t</div>\n\t\t\t\t\t\t\t\t\n</div>\n";
+	module.exports = "\n<div id=\"signUp\">\n\t<div id=\"parent\" class=\"panel\" v-if=\"step == 1\">\n\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Sign up parent</div>\n\t\t\n\t\t<form action=\"\" method=\"post\" class=\"middle-area semi\" v-on:submit.prevent=\"register\">\n\t\t\n\t\t\t<div class=\"selection-group\">\n\t\t\t\t<input type=\"radio\" id=\"father\"  name=\"parents\" value=\"father\" v-model=\"parent_gender\">\n\t\t\t\t<label for=\"father\" class=\"rLeft\">Father</label>\n\t\t\t\t<input type=\"radio\" id=\"mother\"  name=\"parents\" value=\"mother\" v-model=\"parent_gender\">\n\t\t\t\t<label for=\"mother\" class=\"rRight\">Mother</label>\n\t\t\t</div>\n\n\t\t\t<div class=\"placer bottom\">\n\t\t\t\t<div class=\"error\" v-if=\"error_message\">{{ error_message }}</div>\n\t\t\t\t<label>Naam</label>\n\t\t\t\t<input type=\"text\" placeholder=\"your name\" v-model=\"parent_name\">\n\n\t\t\t\t<label>E-mailadres</label>\n\t\t\t\t<input type=\"email\" placeholder=\"name@mail.nl\" v-model=\"parent_email\">\n\n\t\t\t\t<label>Wachwoord</label>\n\t\t\t\t<input type=\"password\" placeholder=\"******\" v-model=\"parent_password\">\n\t\t\t\n\t\t\t</div>\n\t\t\t\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<button class=\"form-button-medium\">Next<span v-if=\"loading\" class=\"loading\"></span></button>\n\t\t\t</div>\n\t\t\t\n\t\t</form>\n\n\t</div>\n\n\t<div id=\"child\" class=\"panel\" v-else-if=\"step == 2\">\n\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Sign up child</div>\n\t\t\n\t\t<form action=\"\" method=\"post\" class=\"middle-area semi\" v-on:submit.prevent=\"addChild\">\n\t\t\n\t\t\t<div class=\"selection-group\">\n\t\t\t\t<input type=\"radio\" id=\"son\"  name=\"child\" value=\"son\" v-model=\"child_gender\">\n\t\t\t\t<label for=\"son\" class=\"rLeft\">Son</label>\n\t\t\t\t<input type=\"radio\" id=\"daughter\"  name=\"child\" value=\"daughter\" v-model=\"child_gender\">\n\t\t\t\t<label for=\"daughter\" class=\"rRight\">Daughter</label>\n\t\t\t</div>\n\n\t\t\t<div class=\"placer middle\">\n\t\t\t\t\n\t\t\t\t\t<div class=\"error\" v-if=\"error_message\">{{ error_message }}</div>\n\t\t\t\t<label>Naam van jouw kind</label>\n\t\t\t\t<input type=\"text\" placeholder=\"your name\" v-model=\"child_name\">\n\n\t\t\t\t<label>Wanneer is jouw kind geboren?</label>\n\t\t\t\t<ul id=\"date-group\">\n\t\t\t\t\t<li><input type=\"tel\" placeholder=\"DD\" class=\"date-group\" v-model=\"child_bday_d\"></li>\n\t\t\t\t\t<li><input type=\"tel\" placeholder=\"MM\" class=\"date-group\" v-model=\"child_bday_m\"></li> \n\t\t\t\t\t<li><input type=\"tel\" placeholder=\"YYYY\" class=\"date-group\" v-model=\"child_bday_y\"></li>\n\t\t\t\t</ul>\n\t\t\t\n\t\t\t</div>\n\t\t\t\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<button class=\"form-button-medium\">Next<span v-if=\"loading\" class=\"loading\"></span></button>\n\t\t\t</div>\n\t\t\t\n\t\t</form>\n\n\n\t</div>\n\t\n\t<div id=\"photo\" class=\"panel\" v-else-if=\"step == 3\">\n\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Add photo</div>\n\n\t\t<form action=\"\" method=\"post\" enctype=\"multipart/form-data\" v-on:submit.prevent=\"addPicture\">\n\t\t\t<div class=\"error\" v-if=\"error_message\">{{ error_message }}</div>\n\t\t\t<input type=\"file\" name=\"uploadedfile\" id=\"uploadPic\" accept=\"image/*\" capture>\n\t\t\t<label for=\"uploadPic\" class=\"uploadPic\">+</label>\n\n\t\t\t<h3>Choose a nice picture of <br> you and {{ child_name }}!</h3>\n\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<input type=\"submit\" value=\"next\" class=\"form-button-medium\">\n\t\t\t\t<a href=\"javascript:void(0);\" v-on:click=\"showLastStep\" >Continue without picture</a>\n\t\t\t</div>\n\t\t\t\n\t\t</form>\n\n\t</div>\n\t\t\t\t\t\t\n\t<div id=\"photoAdded\" class=\"panel\" v-else-if=\"step == 4\">\n\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Add photo</div>\n\n\t\t<div class=\"picHolder\"></div>\n\t\t\t\n\t\t<h3>What a nice picture! <br> Do you also like?</h3>\n\t\t<a href=\"javascript:void(0);\">Choose another picture</a>\n\n\t\t<div class=\"bottom-area\">\n\t\t\t<a href=\"javascript:void(0);\" class=\"button-medium\">next</a>\n\t\t</div>\n\t</div>\n\t\n\t<div id=\"starten\" class=\"panel\" v-else-if=\"step == 5\">\n\t\t\t\t\n\t\t\t<div class=\"placer middle\">\n\t\t\t\t\t\t\n\t\t\t\t<p>Become a Supermom for <span>Lisa</span> with <strong>Yipp app!</strong></p>\t\t\n\t\t\t\t\t\t\n\t\t\t</div> \t\t\t\t\t\t\t\n\t\t\t\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"button-medium white\"\">Begin!</router-link>\n\t\t\t</div>\n\t\t\t\t\t\t\t\n\t</div>\n\t\t\t\t\t\t\t\t\n</div>\n";
 
 /***/ },
 /* 192 */

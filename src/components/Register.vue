@@ -27,7 +27,7 @@
 			</div>
 			
 			<div class="bottom-area">
-				<button class="form-button-medium">Next</button>
+				<button class="form-button-medium">Next<span v-if="loading" class="loading"></span></button>
 			</div>
 			
 		</form>
@@ -63,7 +63,7 @@
 			</div>
 			
 			<div class="bottom-area">
-				<button class="form-button-medium">Next</button>
+				<button class="form-button-medium">Next<span v-if="loading" class="loading"></span></button>
 			</div>
 			
 		</form>
@@ -144,7 +144,8 @@ export default {
 			child_gender: '',
 			child_bday_d: '',
 			child_bday_m: '',
-			child_bday_y: ''
+			child_bday_y: '',
+			loading: false
         }
     },
     created: function() {
@@ -220,6 +221,7 @@ export default {
 	        })
 		},
 		addChild: function () {
+			this.loading = true;
 			var credentials = {
 	          	child_name: this.child_name,
 	          	child_birthday: this.child_bday_y + '-' + this.child_bday_m + '-' + this.child_bday_d,
@@ -237,6 +239,7 @@ export default {
 	        })
 		},
 		addPhoto: function () {
+			this.loading = true;
 			var credentials = {
 	          	image: this.child_name,
 	          	image_id: this.child_bday_y + '-' + this.child_bday_m + '-' + this.child_bday_d,
@@ -244,36 +247,16 @@ export default {
 	        }
 
 	        var that = this;
-	        auth.addChild(this, credentials, function() {
-	        	this.resetError();
-	        	that.saveNextStep(7);
-	        	that.step = 7;
-	        	localStorage.setItem('child_name', credentials.child_name);
-	        	localStorage.setItem('child_type', credentials.child_type);
-	        })
-		},
-		logMeIn: function () {
-			var credentials = {
-	          	Email: this.login_email,
-	          	Password: this.login_pw
-	        }
-
-	        var that = this;
-	        auth.login(this, credentials, function() {
-	        	that.redirectAuth();
-	        })
-		},
-		redirectGuest: function()
-        {
-            this.$router.push('login');
-        },
-		saveNextStep: function (step) {
-			localStorage.setItem('next_step', step);
+	        // auth.addChild(this, credentials, function() {
+	        // 	this.resetError();
+	        // })
 		},
 		resetError: function () {
+			this.loading = false;
 			this.error_message = '';
 		},
 		logError(msg) {
+			this.loading = false;
 			var msgStr = '';
 			if (typeof msg == 'string') {
 				msgStr = msg;
