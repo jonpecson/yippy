@@ -5,9 +5,10 @@
 	
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="assets/css/yipp.css" rel="stylesheet">
 	<link href="assets/css/zSlider.css" rel="stylesheet">
 	<link href="assets/css/signin.css" rel="stylesheet">
+	<link href="assets/css/timeline.css" rel="stylesheet">
+	<link href="assets/css/yipp.css" rel="stylesheet">
 	<style type="text/css">
 		[v-cloak] { display:none; }
 		.screen {display: none;}

@@ -102,3 +102,8 @@
 .success {
   color: green;
 }
+
+.selection-group input[type=radio] {
+  -webkit-appearance: radio;
+  display: inline;
+}
