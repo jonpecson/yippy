@@ -2,7 +2,7 @@
 <div id="timeline-container">
     <header>
         <div class="title-area">
-            <router-link :to="{ name: 'emergency'}"><i class="icon-yipp_profile_line"></i></router-link>
+            <a href="javascript:void(0);"><i class="icon-yipp_profile_line"></i></a>
             <span>Trainingen</span>
             <router-link :to="{ name: 'emergency'}"><i class="icon-yipp_notification_line2"></i></router-link>
         </div>
@@ -58,8 +58,8 @@
         
         <footer>
             <ul>
-                <li><a href="" class="active"><span class="icon-yipp_home_full-"></span>Training</a></li>
-                <li><a href=""><span class="icon-yipp_challenge_line"></span>Challenge</a></li>
+                <li><a href="javascript:void(0);" class="active"><span class="icon-yipp_home_full-"></span>Training</a></li>
+                <li><router-link :to="{ name: 'challenge'}"><span class="icon-yipp_challenge_line"></span>Challenge</router-link></li>
             </ul>
         </footer>
 </div>

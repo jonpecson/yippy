@@ -224,6 +224,10 @@
 
 	var _Emergency2 = _interopRequireDefault(_Emergency);
 
+	var _Challenge = __webpack_require__(202);
+
+	var _Challenge2 = _interopRequireDefault(_Challenge);
+
 	var _vueResource = __webpack_require__(196);
 
 	var _vueResource2 = _interopRequireDefault(_vueResource);
@@ -246,7 +250,7 @@
 
 	_vue2.default.use(_vueRouter2.default);
 
-	var routes = [{ path: '/', component: _Home2.default, name: 'home' }, { path: '/login', component: _Auth2.default, name: 'login' }, { path: '/logout', component: _Logout2.default, name: 'logout' }, { path: '/register', component: _Register2.default, name: 'register' }, { path: '/timeline', component: _Timeline2.default, name: 'timeline' }, { path: '/emergency', component: _Emergency2.default, name: 'emergency' }];
+	var routes = [{ path: '/', component: _Home2.default, name: 'home' }, { path: '/login', component: _Auth2.default, name: 'login' }, { path: '/logout', component: _Logout2.default, name: 'logout' }, { path: '/register', component: _Register2.default, name: 'register' }, { path: '/timeline', component: _Timeline2.default, name: 'timeline' }, { path: '/emergency', component: _Emergency2.default, name: 'emergency' }, { path: '/challenge', component: _Challenge2.default, name: 'challenge' }];
 
 	var router = new _vueRouter2.default({
 	  routes: routes
@@ -24059,7 +24063,7 @@
 	// <div id="timeline-container">
 	//     <header>
 	//         <div class="title-area">
-	//             <router-link :to="{ name: 'emergency'}"><i class="icon-yipp_profile_line"></i></router-link>
+	//             <a href="javascript:void(0);"><i class="icon-yipp_profile_line"></i></a>
 	//             <span>Trainingen</span>
 	//             <router-link :to="{ name: 'emergency'}"><i class="icon-yipp_notification_line2"></i></router-link>
 	//         </div>
@@ -24115,8 +24119,8 @@
 	//
 	//         <footer>
 	//             <ul>
-	//                 <li><a href="" class="active"><span class="icon-yipp_home_full-"></span>Training</a></li>
-	//                 <li><a href=""><span class="icon-yipp_challenge_line"></span>Challenge</a></li>
+	//                 <li><a href="javascript:void(0);" class="active"><span class="icon-yipp_home_full-"></span>Training</a></li>
+	//                 <li><router-link :to="{ name: 'challenge'}"><span class="icon-yipp_challenge_line"></span>Challenge</router-link></li>
 	//             </ul>
 	//         </footer>
 	// </div>
@@ -24198,7 +24202,7 @@
 /* 195 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div id=\"timeline-container\">\n    <header>\n        <div class=\"title-area\">\n            <router-link :to=\"{ name: 'emergency'}\"><i class=\"icon-yipp_profile_line\"></i></router-link>\n            <span>Trainingen</span>\n            <router-link :to=\"{ name: 'emergency'}\"><i class=\"icon-yipp_notification_line2\"></i></router-link>\n        </div>\n\n        <div class=\"user-area\">\n            <div class=\"child-name\">{{ child.get('name') }}</div>\n            <ul class=\"months-level\">\n                <li>\n                    <span>{{ child.get('age') }}</span>  \n                    <span>Maanden</span>\n                </li>\n                <li>\n                    <span>1</span>\n                    <span>Level</span>\n                </li>\n                <li>\n                    <a href=\"#\" v-on:click.prevent=\"toggle\" v-if=\"page == 'lessons'\"><i class=\"icon-yipp_down\"></i></a>\n                    <a href=\"#\" v-on:click.prevent=\"toggle\" v-if=\"page == 'levels'\"><i class=\"icon-yipp_up\"></i></a>\n                </li>\n            </ul>\n\n            <div class=\"photo\"></div>\n            \n        </div>\n    </header>\n        \n        <section class=\"traingen\" v-if=\"page == 'lessons'\">\n            <ul id=\"list-icons\">\n                <li v-for=\"lesson in lessons\">\n                    <a href=\"#\" v-bind:data-id=\"lesson.id\" v-on:click.prevent=\"goTodo\">\n                        <span class=\"icon big active\" v-bind:class=\"lesson.icon\"></span> {{ lesson.counter }}. {{ lesson.description }}\n                    </a>\n                </li>\n            </ul>\n        </section>\n        \n            \n        <section class=\"traingen2\" v-if=\"page == 'levels'\">\n                    \n            <ul id=\"list-text\">\n        \n            <li>\n                <a href=\"\" class=\"active\"><span class=\"level\">Level 1</span> <span class=\"months\">7 - 12 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 2</span> <span class=\"months\">12 - 12 months</span></a>\n            </li>\n        \n            </ul>\n        \n        </section>\n        \n        <footer>\n            <ul>\n                <li><a href=\"\" class=\"active\"><span class=\"icon-yipp_home_full-\"></span>Training</a></li>\n                <li><a href=\"\"><span class=\"icon-yipp_challenge_line\"></span>Challenge</a></li>\n            </ul>\n        </footer>\n</div>\n";
+	module.exports = "\n<div id=\"timeline-container\">\n    <header>\n        <div class=\"title-area\">\n            <a href=\"javascript:void(0);\"><i class=\"icon-yipp_profile_line\"></i></a>\n            <span>Trainingen</span>\n            <router-link :to=\"{ name: 'emergency'}\"><i class=\"icon-yipp_notification_line2\"></i></router-link>\n        </div>\n\n        <div class=\"user-area\">\n            <div class=\"child-name\">{{ child.get('name') }}</div>\n            <ul class=\"months-level\">\n                <li>\n                    <span>{{ child.get('age') }}</span>  \n                    <span>Maanden</span>\n                </li>\n                <li>\n                    <span>1</span>\n                    <span>Level</span>\n                </li>\n                <li>\n                    <a href=\"#\" v-on:click.prevent=\"toggle\" v-if=\"page == 'lessons'\"><i class=\"icon-yipp_down\"></i></a>\n                    <a href=\"#\" v-on:click.prevent=\"toggle\" v-if=\"page == 'levels'\"><i class=\"icon-yipp_up\"></i></a>\n                </li>\n            </ul>\n\n            <div class=\"photo\"></div>\n            \n        </div>\n    </header>\n        \n        <section class=\"traingen\" v-if=\"page == 'lessons'\">\n            <ul id=\"list-icons\">\n                <li v-for=\"lesson in lessons\">\n                    <a href=\"#\" v-bind:data-id=\"lesson.id\" v-on:click.prevent=\"goTodo\">\n                        <span class=\"icon big active\" v-bind:class=\"lesson.icon\"></span> {{ lesson.counter }}. {{ lesson.description }}\n                    </a>\n                </li>\n            </ul>\n        </section>\n        \n            \n        <section class=\"traingen2\" v-if=\"page == 'levels'\">\n                    \n            <ul id=\"list-text\">\n        \n            <li>\n                <a href=\"\" class=\"active\"><span class=\"level\">Level 1</span> <span class=\"months\">7 - 12 months</span></a>\n            </li>\n\n            <li>\n                <a href=\"\"><span class=\"level\">Level 2</span> <span class=\"months\">12 - 12 months</span></a>\n            </li>\n        \n            </ul>\n        \n        </section>\n        \n        <footer>\n            <ul>\n                <li><a href=\"javascript:void(0);\" class=\"active\"><span class=\"icon-yipp_home_full-\"></span>Training</a></li>\n                <li><router-link :to=\"{ name: 'challenge'}\"><span class=\"icon-yipp_challenge_line\"></span>Challenge</router-link></li>\n            </ul>\n        </footer>\n</div>\n";
 
 /***/ },
 /* 196 */
@@ -28379,6 +28383,33 @@
 /***/ function(module, exports) {
 
 	module.exports = "\n\t<div id=\"container\">\n\t\n\t\t<section class=\"emergency\">\n\t\t\n\t\t\t<header class=\"normal-header\">\n\n\t\t\t\t<router-link :to=\"{ name: 'timeline'}\"><span class=\"icon-close\" style=\"font-weight: normal\">X</span></router-link>\n\t\t\t\t<h2>Emergency</h2>\n\n\t\t\t</header>\n\n\t\t\t<ul id=\"list-image\">\n\n\t\t\t\t<li style=\"background-image: url(assets/img/slider-1.jpg);\"><h3>{title here}</h3></li>\n\t\t\t\t<li style=\"background-image: url(assets/img/slider-2.jpg);\"><h3>{title here}</h3></li>\n\t\t\t\t<li style=\"background-image: url(assets/img/slider-3.jpg);\"><h3>{title here}</h3></li>\n\t\t\t\t<li style=\"background-image: url(assets/img/slider-4.jpg);\"><h3>{title here}</h3></li>\n\n\t\t\t</ul>\n\t\t\n\t\t</section>\n\t\t\n\t\t<section class=\"imageContent\">\n\t\t\t\n\t\t<div id=\"headerImage\" style=\"background-image: url(assets/img/slider-1.jpg);\">\n\t\t\n\t\t</div>\n\n\t\t<div id=\"content\">\n\t\t\n\t\t\t<h3>{Title Text}</h3>\n\t\t\n\t\t\t\t<ol>\n\t\t\t\t\t<li class=\"item\">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis, fugiat.</li>\n\t\t\t\t\t<li class=\"item\">Rerum quis voluptatem eligendi consequatur, ipsum, ducimus reiciendis hic amet.</li>\n\t\t\t\t\t<li class=\"item\">Unde doloribus ipsam cum. Fuga quod illum voluptates voluptatum nulla.</li>\n\t\t\t\t\t<li class=\"item\">Fugit ipsam, aliquam laudantium reiciendis repellendus illo! Eaque doloremque, veritatis!</li>\n\t\t\t\t</ol>\n\t\t\n\t\t</div>\n\n\t\t</section>\n\t\n\t</div>\n";
+
+/***/ },
+/* 202 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__vue_template__ = __webpack_require__(203)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "/Users/racheljaro/webroot/yipp/app/src/components/Challenge.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 203 */
+/***/ function(module, exports) {
+
+	module.exports = "\n\t<div id=\"container\">\n\t\n\t\t<div class=\"header\">\n\n\t\t\t<a href=\"\" class=\"icon\">\n\t\t\t\t<i class=\"icon-yipp_profile_line\"></i>\n\t\t\t</a>\n\n\t\t\t<div class=\"title\">Challenge</div>\n\n\t\t</div>\n\n\t\t\n\t\t<div class=\"content\">\n\t\t\n\t\t\t<div class=\"panel\">\n\t\t\tLorem Ipsum is simply dummy text of the printing and typesetting industry.\n\t\t\t</div>\n\t\t\t\n\t\t\t<a href=\"\" class=\"btn\">Explore training</a>\n\t\t\n\t\t</div>\n\n\t\t\t<ul class=\"blockList\">\n\t\t\t\t<li>\n\t\t\t\t\t<span class=\"set\">\n\t\t\t\t\t<i class=\"icon-yipp_notification_line\"></i>\n\t\t\t\t\t14:00\n\t\t\t\t\t| <i class=\"icon-yipp_repeat_line\"></i>\n\t\t\t\t\tEvery day\n\t\t\t\t\t</span>\n\t\t\t\t\t<p>Lorem Ipsum</p>\n\t\t\t\t\t\n\t\t\t\t\t<i class=\"arrow icon-yipp_forward\"></i>\n\t\t\t\t\t\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t<span class=\"set\">\n\t\t\t\t\t<i class=\"icon-yipp_notification_line\"></i>\n\t\t\t\t\t14:00\n\t\t\t\t\t| <i class=\"icon-yipp_repeat_line\"></i>\n\t\t\t\t\tEvery day\n\t\t\t\t\t</span>\n\t\t\t\t\t<p>Lorem Ipsum</p>\n\t\t\t\t\t\n\t\t\t\t\t\t<i class=\"arrow icon-yipp_forward\"></i>\n\t\t\t\t</li>\n\t\t\t</ul>\t\t\n\n\t\t<a href=\"\" class=\"link\">Show finished challenges</a>\n\n\t\t\t<ul class=\"blockList2\">\n\t\t\t\t<li>\n\t\t\t\t\t<p>Lorem Ipsum</p>\n\t\t\t\t\t\n\t\t\t\t\t<i class=\"arrow icon-yipp_forward\"></i>\n\t\t\t\t\t\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<p>Lorem Ipsum</p>\n\t\t\t\t\t\n\t\t\t\t\t\t<i class=\"arrow icon-yipp_forward\"></i>\n\t\t\t\t</li>\n\t\t\t</ul>\n\n\t\t<footer>\n\t\t\t<ul>\n\t\t\t\t<li>\n\t\t\t\t\t<router-link :to=\"{ name: 'timeline'}\"><span class=\"icon-yipp_home_full-\"></span>Training</router-link>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a href=\"javascript:void(0);\" class=\"active\"><span class=\"icon-yipp_challenge_line\"></span>Challenge</a>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t</footer>\n\t\t\n\t</div>\t\n";
 
 /***/ }
 /******/ ]);
