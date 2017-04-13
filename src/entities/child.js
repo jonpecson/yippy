@@ -14,7 +14,7 @@ export default {
 		this.data.type = result.child_type;
 		this.data.parent_id = result.user_id;
 		this.data.birthday = result.child_birthday;
-		this.data.age = 8; // sample value
+		this.data.age = result.child_month; // sample value
 		this.data.image = result.child_avatar;
 	},
 

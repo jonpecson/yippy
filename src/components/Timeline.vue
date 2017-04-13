@@ -15,7 +15,7 @@
                     <span>Maanden</span>
                 </li>
                 <li>
-                    <span>1</span>
+                    <span>{{ currentLevel }}</span>
                     <span>Level</span>
                 </li>
                 <li>
@@ -33,7 +33,8 @@
             <ul id="list-icons">
                 <li v-for="lesson in lessons">
                     <a href="#" v-bind:data-id="lesson.id" v-on:click.prevent="goTodo">
-                        <span class="icon big active" v-bind:class="lesson.icon"></span> {{ lesson.counter }}. {{ lesson.description }}
+                        <span class="icon big active" v-bind:class="lesson.icon"></span> 
+                        {{ lesson.counter }}. {{ lesson.description }}
                     </a>
                 </li>
             </ul>
@@ -43,15 +44,24 @@
         <section class="traingen2" v-if="page == 'levels'">
                     
             <ul id="list-text">
-        
-            <li>
-                <a href="" class="active"><span class="level">Level 1</span> <span class="months">7 - 12 months</span></a>
-            </li>
+                <li v-for="level in levels">
+                    <a href="#" v-if="level.active == 'active'" 
+                        v-bind:data-id="level.id" 
+                        v-on:click.prevent="setCurrentLevel"
+                        v-bind:class="level.active">
+                        <span v-bind:data-id="level.id" class="level">Level {{ level.counter }}</span> 
+                        <span v-bind:data-id="level.id" class="months">{{ level.description }} months</span>
+                    </a>
 
-            <li>
-                <a href=""><span class="level">Level 2</span> <span class="months">12 - 12 months</span></a>
-            </li>
-        
+                    <a href="#" v-if="level.active == ''" 
+                        v-bind:data-id="level.id" 
+                        v-on:click.prevent=""
+                        @click="showModal = true"
+                        v-bind:class="level.active">
+                        <span v-bind:data-id="level.id" class="level">Level {{ level.counter }}</span> 
+                        <span v-bind:data-id="level.id" class="months">{{ level.description }} months</span>
+                    </a>
+                </li>
             </ul>
         
         </section>
@@ -62,6 +72,11 @@
                 <li><router-link :to="{ name: 'challenge'}"><span class="icon-yipp_challenge_line"></span>Challenge</router-link></li>
             </ul>
         </footer>
+
+        <modal v-if="showModal" @close="showModal = false">
+            <h3 slot="header">Ooops...</h3>
+            <p slot="body">This is not yet available</p>
+        </modal>
 </div>
 </template>
 
@@ -72,11 +87,17 @@ import $ from 'jquery'
 import auth from '../api/auth'
 import timeline from '../api/timeline'
 
+import Modal from '../components/Modal.vue'
+
 export default {
     data() {
         return {
             child: {},
-            page: 'lessons'
+            page: 'lessons',
+            levels: [],
+            lessons: [],
+            showModal: false,
+            currentLevel: 1
         }
     },
     created: function() {
@@ -85,20 +106,18 @@ export default {
             this.redirectGuest();
         }
 
-        console.log(auth.user.data)
-
         this.child = auth.user.data.child;
-        this.getTimeline();
+        this.showTimeline();
     },
     methods: {
         toggle: function() {
             if (this.page == 'lessons') {
-                this.page = 'levels';    
+                this.showLevels();
             } else {
-                this.page = 'lessons';
+                this.showTimeline();
             }
         },
-        getTimeline: function() {
+        showTimeline: function() {
             this.lessons = [
                 {
                     id: 1,
@@ -108,21 +127,51 @@ export default {
                 }
             ];
 
+            this.page = 'lessons';
+            
             // timeline.lessons(this, 1, function (response) {
             //     console.log(response)
             // }, function (msg, response) {
 
             // });
         },
+        showLevels: function() {
+            this.levels = [
+                {
+                    id: 3,
+                    counter: 1,
+                    description: '7 - 12',
+                    active: 'active'
+                },
+                {
+                    id: 2,
+                    counter: 2,
+                    description: '8',
+                    active: ''
+                }
+            ];
+
+            this.page = 'levels';
+        },
+        setCurrentLevel: function (e) {
+            var id = e.target.getAttribute('data-id');
+            this.currentLevel = id;
+            this.toggle();
+        },
         goTodo: function (e) {
             var id = e.target.getAttribute('data-id');
             console.log('goto todo/' + id);
+            this.$router.push('challenge/content');   
         },
         redirectGuest: function()
         {
             this.$router.push('login');
         }
-    }
+    },
+
+    components: { 
+        Modal 
+    },
 }
 </script>
 

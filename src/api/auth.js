@@ -13,7 +13,8 @@ export default {
 
         context.$http.post(config.api.url + '/login', creds).then(response => {
             var result = response.body.result;
-
+            console.log('api', result);
+            
             if (response.body.status == 'OK') {
                 user.save(result);
 

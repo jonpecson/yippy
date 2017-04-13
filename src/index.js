@@ -6,14 +6,12 @@ import Register from './components/Register.vue'
 import Timeline from './components/Timeline.vue'
 import Emergency from './components/Emergency.vue'
 import Challenge from './components/Challenge.vue'
+import ChallengeContent from './components/ChallengeContent.vue'
 import VueResource from 'vue-resource'
 Vue.use(VueResource)
 
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
-
-import $ from 'jquery';
-import Slider from '../assets/js/zSlider.js';
 
 const routes = [
   { path: '/', component: Home, name: 'home' },
@@ -22,7 +20,8 @@ const routes = [
   { path: '/register', component: Register, name: 'register' },
   { path: '/timeline', component: Timeline, name: 'timeline' },
   { path: '/emergency', component: Emergency, name: 'emergency' },
-  { path: '/challenge', component: Challenge, name: 'challenge' }
+  { path: '/challenge', component: Challenge, name: 'challenge' },
+  { path: '/challenge/content', component: ChallengeContent, name: 'challenge_content' }
 ]
 
 const router = new VueRouter({
@@ -32,7 +31,3 @@ const router = new VueRouter({
 const app = new Vue({
   router
 }).$mount('#app')
-
-function url(path) {
-	return config.localhost + path;
-}
