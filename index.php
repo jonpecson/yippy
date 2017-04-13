@@ -18,7 +18,7 @@
 	</style>
 
 	<script>
-	  UPLOADCARE_PUBLIC_KEY = '85b915135beefa3ef62e';
+	  UPLOADCARE_PUBLIC_KEY = "558c1237ded055827e22";
 	</script>
 </head>
 
