@@ -16,6 +16,10 @@
 		[v-cloak] { display:none; }
 		.screen {display: none;}
 	</style>
+
+	<script>
+	  UPLOADCARE_PUBLIC_KEY = '85b915135beefa3ef62e';
+	</script>
 </head>
 
 <body>
@@ -24,6 +28,10 @@
 		<router-view></router-view>
 	</div>      
 	<script src="assets/js/app.js"></script>
+	<script type="text/javascript">
+		window.input = $('#uploadPic');
+
+	</script>
 </div>
 </body>
 </html>

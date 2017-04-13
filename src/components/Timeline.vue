@@ -24,7 +24,7 @@
                 </li>
             </ul>
 
-            <div class="photo"></div>
+            <div class="photo"><img class="avatar" v-bind:src="child.get('image')"></div>
             
         </div>
     </header>

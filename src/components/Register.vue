@@ -25,6 +25,8 @@
 				<input type="password" placeholder="******" v-model="parent_password">
 			
 			</div>
+
+
 			
 			<div class="bottom-area">
 				<button class="form-button-medium">Next<span v-if="loading" class="loading"></span></button>
@@ -49,7 +51,7 @@
 
 			<div class="placer middle">
 				
-					<div class="error" v-if="error_message">{{ error_message }}</div>
+				<div class="error" v-if="error_message">{{ error_message }}</div>
 				<label>Naam van jouw kind</label>
 				<input type="text" placeholder="your name" v-model="child_name">
 
@@ -77,13 +79,14 @@
 
 		<form action="" method="post" enctype="multipart/form-data" v-on:submit.prevent="addPicture">
 			<div class="error" v-if="error_message">{{ error_message }}</div>
-			<input type="file" name="uploadedfile" id="uploadPic" accept="image/*" capture>
+			<input type="hidden" role="uploadcare-uploader" name="uploadedfile" id="uploadPic" />
+			<!-- <input type="file" name="uploadedfile"  accept="image/*" id="uploadPic" capture> -->
 			<label for="uploadPic" class="uploadPic">+</label>
 
 			<h3>Choose a nice picture of <br> you and {{ child_name }}!</h3>
 
 			<div class="bottom-area">
-				<input type="submit" value="next" class="form-button-medium">
+				<input type="submit" value="next" class="form-button-medium"><span v-if="loading" class="loading"></span>
 				<a href="javascript:void(0);" v-on:click="showLastStep" >Continue without picture</a>
 			</div>
 			
@@ -93,15 +96,15 @@
 						
 	<div id="photoAdded" class="panel" v-else-if="step == 4">
 
-		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back"></a> Add photo</div>
+		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back"></a> Add photo2</div>
 
-		<div class="picHolder"></div>
+		<div class="picHolder"><img class="avatar" v-bind:src="child_image"></div>
 			
 		<h3>What a nice picture! <br> Do you also like?</h3>
-		<a href="javascript:void(0);">Choose another picture</a>
+		<a href="javascript:void(0);" v-on:click="showLastStep">Choose another picture</a>
 
 		<div class="bottom-area">
-			<a href="javascript:void(0);" class="button-medium">next</a>
+			<a href="javascript:void(0);" v-on:click="showLastStep" class="button-medium">Next</a>
 		</div>
 	</div>
 	
@@ -129,6 +132,7 @@ import config from '../config'
 import auth from '../api/auth'
 import register from '../api/register'
 import $ from 'jquery'
+import uploadcare from 'uploadcare-widget';
 
 export default {
     data() {
@@ -145,10 +149,15 @@ export default {
 			child_bday_d: '',
 			child_bday_m: '',
 			child_bday_y: '',
+			child_image: '',
 			loading: false
         }
     },
     created: function() {
+    	
+    },
+
+    mounted: function () {
     	auth.check();
 
     	if (auth.user) {
@@ -159,6 +168,7 @@ export default {
 			}
 		}
     },
+
     methods: {
     	showParentForm: function () {
     		this.resetError();
@@ -184,8 +194,43 @@ export default {
         		return;
         	}
 
-    		this.resetError();
+        	this.resetError();
 			this.step = 3;
+
+			var that = this;
+
+			setTimeout(function(){
+                var input = $('[role=uploadcare-uploader]');
+                var widget = uploadcare.Widget(input);
+                
+                widget.onChange(function(file) {
+					if (file) {
+						file.done(function(info) {
+							this.loading = true;
+							var credentials = {
+					          	image: info.originalUrl,
+					          	image_id: info.uuid,
+					          	user_id: auth.user.get('id')
+					        }
+
+					        that.child_image = info.cdnUrl;
+
+					        register.addPhoto(that, credentials, function(msg, response) {
+					        	auth.user.get('child').setImage(info.cdnUrl)
+					        	auth.saveUser(auth.user);
+					        	that.showAddChildPhotoAgain();
+					        }, function(msg, response) {
+					        	that.logError(msg);
+					        })
+						});
+					};
+				});
+
+            }, 1);
+    	},
+    	showAddChildPhotoAgain: function() {
+    		this.resetError();
+			this.step = 4;
     	},
         showLastStep: function () {
         	if (!auth.user) {
@@ -240,12 +285,7 @@ export default {
 	        })
 		},
 		addPhoto: function () {
-			this.loading = true;
-			var credentials = {
-	          	image: this.child_name,
-	          	image_id: this.child_bday_y + '-' + this.child_bday_m + '-' + this.child_bday_d,
-	          	user_id: auth.user.user_id
-	        }
+			
 
 	        var that = this;
 	        // auth.addChild(this, credentials, function() {

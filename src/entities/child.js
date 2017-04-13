@@ -5,7 +5,8 @@ export default {
 	    birthday: '',
 	    type: '',
 	    parent_id: 0,
-	    age: 0
+	    age: 0,
+	    image: ''
 	},
 
 	save(result) {
@@ -14,6 +15,7 @@ export default {
 		this.data.parent_id = result.user_id;
 		this.data.birthday = result.child_birthday;
 		this.data.age = 8; // sample value
+		this.data.image = result.child_avatar;
 	},
 
 	get(key) {
@@ -25,5 +27,10 @@ export default {
 	loadFromCache(item)
 	{
 		this.data = item.data;
+	},
+
+	setImage(url) {
+		this.data.image = url;
 	}
+
 }

@@ -54,23 +54,25 @@ export default {
         });
     },
 
-    addPhoto(context, creds, successCallback) {
+    addPhoto(context, creds, successCallback, errorCallback) {
         var that = this;
 
         context.$http.post(config.api.url + '/uploadavatar', creds).then(response => {
+            console.log('addPhoto api', response);
             var result = response.body.result;
 
             if (response.body.status == 'OK') {
-                that.saveToken(result);
-                successCallback.call();
-            } else {
-                that.logError(context, result.message);
+                successCallback.call(this, result);
+            } else if (errorCallback) {
+                console.log('error in line 42');
+                errorCallback.call(this, result.message, response);
             }
         }, response => {
-            console.log('registration error')
-            console.log(response.body);
-            var msg = response.body.result.message;
-            that.logError(context, msg);
+
+            if (errorCallback) {
+                errorCallback.call(this, response.body.result.error, response);
+            }
+
         });
     },
 
