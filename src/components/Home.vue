@@ -24,9 +24,6 @@ import Slider from '../../assets/js/zSlider.js'
 
 import Storage from '../storage'
 
-import '../../assets/css/signin.css';
-import '../../assets/css/app.css';
-
 export default {
     data() {
         return {

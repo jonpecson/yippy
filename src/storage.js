@@ -6,7 +6,8 @@ import Cookie from 'tiny-cookie'
 
 export default {
 
-	save(key, value, days) {
+	save(key, value, min) {
+		var days = min * 24;
 		Cookie.set(key, value, { expires: days });
 	},
 

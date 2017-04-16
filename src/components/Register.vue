@@ -134,9 +134,6 @@ import register from '../api/register'
 import $ from 'jquery'
 import uploadcare from 'uploadcare-widget';
 
-import '../../assets/css/signin.css';
-import '../../assets/css/app.css';
-
 export default {
     data() {
         return {

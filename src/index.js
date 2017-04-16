@@ -5,7 +5,9 @@ import Logout from './components/Logout.vue'
 import Register from './components/Register.vue'
 import Timeline from './components/Timeline.vue'
 import Emergency from './components/Emergency.vue'
+import Lesson from './components/Lesson.vue'
 import Challenge from './components/Challenge.vue'
+import ChallengeNew from './components/ChallengeNew.vue'
 import ChallengeContent from './components/ChallengeContent.vue'
 import VueResource from 'vue-resource'
 Vue.use(VueResource)
@@ -23,8 +25,10 @@ const routes = [
   { path: '/register', component: Register, name: 'register' },
   { path: '/timeline', component: Timeline, name: 'timeline' },
   { path: '/emergency', component: Emergency, name: 'emergency' },
+  { path: '/lesson-:id', component: Lesson, name: 'lesson' },
   { path: '/challenge', component: Challenge, name: 'challenge' },
-  { path: '/challenge/content', component: ChallengeContent, name: 'challenge_content' }
+  { path: '/challenge-new', component: ChallengeNew, name: 'challenge_new' },
+  { path: '/challenge-:id', component: ChallengeContent, name: 'challenge_content' }
 ]
 
 const router = new VueRouter({

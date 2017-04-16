@@ -33,9 +33,6 @@
 </template>
 
 <script>
-import '../../assets/css/emergency.css';
-import '../../assets/css/app.css';
-
 import {router} from '../index'
 import config from '../config'
 import auth from '../api/auth'

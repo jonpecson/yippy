@@ -69,7 +69,7 @@
         <footer>
             <ul>
                 <li><a href="javascript:void(0);" class="active"><span class="icon-yipp_home_full-"></span>Training</a></li>
-                <li><router-link :to="{ name: 'challenge'}"><span class="icon-yipp_challenge_line"></span>Challenge</router-link></li>
+                <li><router-link :to="{ path: 'challenge'}"><span class="icon-yipp_challenge_line"></span>Challenge</router-link></li>
             </ul>
         </footer>
 
@@ -88,9 +88,6 @@ import timeline from '../api/timeline'
 import $ from 'jquery'
 
 import Modal from '../components/Modal.vue'
-
-import '../../assets/css/timeline.css';
-import '../../assets/css/app.css';
 
 // http://dev.fedvas.com/cms/api.dsuite/yipp/todos/37/en
 
