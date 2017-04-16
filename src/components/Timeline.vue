@@ -83,11 +83,16 @@
 <script>
 import {router} from '../index'
 import config from '../config'
-import $ from 'jquery'
 import auth from '../api/auth'
 import timeline from '../api/timeline'
+import $ from 'jquery'
 
 import Modal from '../components/Modal.vue'
+
+import '../../assets/css/timeline.css';
+import '../../assets/css/app.css';
+
+// http://dev.fedvas.com/cms/api.dsuite/yipp/todos/37/en
 
 export default {
     data() {

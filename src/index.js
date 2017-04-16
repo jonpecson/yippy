@@ -13,6 +13,9 @@ Vue.use(VueResource)
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
+import VueCookie from 'vue-cookie'
+Vue.use(VueCookie);
+
 const routes = [
   { path: '/', component: Home, name: 'home' },
   { path: '/login', component: Auth, name: 'login' },

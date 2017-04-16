@@ -61,6 +61,9 @@ import config from '../config'
 import auth from '../api/auth'
 import $ from 'jquery'
 
+import '../../assets/css/signin.css';
+import '../../assets/css/app.css';
+
 export default {
     data() {
         return {

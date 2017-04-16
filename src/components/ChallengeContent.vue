@@ -3,9 +3,9 @@
 	
 		<div class="header">
 		
-				<a href="" class="icon">
+				<router-link :to="{ name: 'timeline'}" class="icon">
 				<i class=" icon-yipp_back"></i>
-				</a>
+				</router-link>
 
 				<div class="title">Challenge Details</div>
 		
@@ -179,3 +179,9 @@
 	
 	</div>	
 </template>
+
+<script>
+import '../../assets/css/challengeDetails.css';
+import '../../assets/css/app.css';
+
+</script>

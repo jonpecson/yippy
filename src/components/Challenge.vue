@@ -3,11 +3,11 @@
 	
 		<div class="header">
 
-			<a href="" class="icon">
+			<router-link :to="{ name: 'timeline'}" class="icon">
 				<i class="icon-yipp_profile_line"></i>
-			</a>
+			</router-link>
 
-			<div class="title">Challenge</div>
+			<div class="title">xChallenge</div>
 
 		</div>
 
@@ -77,3 +77,104 @@
 		
 	</div>	
 </template>
+
+<script>
+import '../../assets/css/challenge.css';
+import '../../assets/css/app.css';
+
+import {router} from '../index'
+import config from '../config'
+import auth from '../api/auth'
+import timeline from '../api/timeline'
+import $ from 'jquery'
+
+import Modal from '../components/Modal.vue'
+
+// http://dev.fedvas.com/cms/api.dsuite/yipp/todos/37/en
+
+export default {
+    data() {
+        return {
+            child: {},
+            page: 'lessons',
+            levels: [],
+            lessons: [],
+            showModal: false,
+            currentLevel: 1
+        }
+    },
+    created: function() {
+        auth.check();
+        if (!auth.authenticated) {
+            this.redirectGuest();
+        }
+
+        this.child = auth.user.data.child;
+        this.showTimeline();
+    },
+    methods: {
+        toggle: function() {
+            if (this.page == 'lessons') {
+                this.showLevels();
+            } else {
+                this.showTimeline();
+            }
+        },
+        showTimeline: function() {
+            this.lessons = [
+                {
+                    id: 1,
+                    counter: 1,
+                    description: 'Nutrition fruit & vegetable',
+                    icon: 'icon-yipp_check_full'
+                }
+            ];
+
+            this.page = 'lessons';
+            
+            // timeline.lessons(this, 1, function (response) {
+            //     console.log(response)
+            // }, function (msg, response) {
+
+            // });
+        },
+        showLevels: function() {
+            this.levels = [
+                {
+                    id: 3,
+                    counter: 1,
+                    description: '7 - 12',
+                    active: 'active'
+                },
+                {
+                    id: 2,
+                    counter: 2,
+                    description: '8',
+                    active: ''
+                }
+            ];
+
+            this.page = 'levels';
+        },
+        setCurrentLevel: function (e) {
+            var id = e.target.getAttribute('data-id');
+            this.currentLevel = id;
+            this.toggle();
+        },
+        goTodo: function (e) {
+            var id = e.target.getAttribute('data-id');
+            console.log('goto todo/' + id);
+            this.$router.push('challenge/content');   
+        },
+        redirectGuest: function()
+        {
+            this.$router.push('login');
+        }
+    },
+
+    components: { 
+        Modal 
+    },
+}
+
+</script>

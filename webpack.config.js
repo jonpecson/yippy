@@ -4,6 +4,7 @@ const webpack = require('webpack');
 module.exports = {
   entry: [
     './src/config.js', 
+    './src/storage.js', 
     './src/entities/child.js',
     './src/entities/user.js',
     './src/index.js', 

@@ -22,6 +22,11 @@ import config from '../config'
 import $ from 'jquery'
 import Slider from '../../assets/js/zSlider.js'
 
+import Storage from '../storage'
+
+import '../../assets/css/signin.css';
+import '../../assets/css/app.css';
+
 export default {
     data() {
         return {
@@ -30,7 +35,7 @@ export default {
         }
     },
     created: function() {
-        var skip = localStorage.getItem('skip');
+        var skip = Storage.get('skip');
         
         if (skip) {
             this.skip();
@@ -63,7 +68,7 @@ export default {
     },
     methods: {
         skip: function () {
-            localStorage.setItem('skip', 1);
+            Storage.save('skip', 1, 1)
             this.$router.push('login');
         }
     }

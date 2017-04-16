@@ -14,3 +14,8 @@
     <router-view></router-view>
   </div>
 </template>
+
+<script>
+import '../../assets/css/signin.css';
+import '../../assets/css/app.css';
+</script>

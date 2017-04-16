@@ -1,5 +1,6 @@
 import config from '../config';
 import user from '../entities/user';
+import Storage from '../storage'
 
 export default {
 
@@ -37,7 +38,7 @@ export default {
     },
 
     logout() {
-        localStorage.removeItem('token');
+        Storage.delete('token');
         localStorage.removeItem('user');
         this.authenticated = false
         this.user = null;
@@ -45,7 +46,7 @@ export default {
     },
 
     saveToken(token) {
-        localStorage.setItem('token', token);
+        Storage.save('token', token, 1);
         this.token = token;
     },
 
@@ -61,7 +62,8 @@ export default {
     },
 
     check() {
-        var token = localStorage.getItem('token');
+        // var token = localStorage.getItem('token');
+        var token = Storage.get('token');
         var user_local = localStorage.getItem('user');
 
         if (token && user_local) {
