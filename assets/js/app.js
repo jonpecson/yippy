@@ -9837,7 +9837,7 @@
 
 	_vue2.default.use(_vueCookie2.default);
 
-	var VueTouch = __webpack_require__(300);
+	var VueTouch = __webpack_require__(301);
 	_vue2.default.use(VueTouch, { name: 'v-touch' });
 
 	var routes = [{ path: '/', component: _Home2.default, name: 'home' }, { path: '/login', component: _Auth2.default, name: 'login' }, { path: '/logout', component: _Logout2.default, name: 'logout' }, { path: '/register', component: _Register2.default, name: 'register' }, { path: '/timeline', component: _Timeline2.default, name: 'timeline' }, { path: '/emergency', component: _Emergency2.default, name: 'emergency' }, { path: '/lesson-:id', component: _Lesson2.default, name: 'lesson' }, { path: '/challenge', component: _Challenge2.default, name: 'challenge' }, { path: '/challenge-new', component: _ChallengeNew2.default, name: 'challenge_new' }, { path: '/challenge-:id', component: _ChallengeContent2.default, name: 'challenge_content' }];
@@ -35708,7 +35708,7 @@
 
 	var _Modal2 = _interopRequireDefault(_Modal);
 
-	__webpack_require__(301);
+	__webpack_require__(300);
 
 	var _vue = __webpack_require__(3);
 
@@ -35845,7 +35845,7 @@
 	// </template>
 	//
 	// <script>
-	var VueTouch = __webpack_require__(300);
+	var VueTouch = __webpack_require__(301);
 
 	// http://dev.fedvas.com/cms/api.dsuite/yipp/todos/37/en
 
@@ -35937,277 +35937,6 @@
 
 /***/ },
 /* 300 */
-/***/ function(module, exports, __webpack_require__) {
-
-	(function (global, factory) {
-	   true ? factory(__webpack_require__(301)) :
-	  typeof define === 'function' && define.amd ? define(['hammerjs'], factory) :
-	  (factory(global.Hammer));
-	}(this, (function (Hammer) { 'use strict';
-
-	Hammer = 'default' in Hammer ? Hammer['default'] : Hammer;
-
-	function assign(target) {
-	  var sources = [], len = arguments.length - 1;
-	  while ( len-- > 0 ) sources[ len ] = arguments[ len + 1 ];
-	  for (var i = 0; i < sources.length; i++) {
-	    var source = sources[i];
-	    var keys = Object.keys(source);
-	    for (var i$1 = 0; i$1 < keys.length; i$1++) {
-	      var key = keys[i$1];
-	      target[key] = source[key];
-	    }
-	  }
-	  return target
-	}
-	function createProp() {
-	  return {
-	    type: Object,
-	    default: function() { return {} }
-	  }
-	}
-	function capitalize (str) {
-	  return str.charAt(0).toUpperCase() + str.slice(1)
-	}
-	var directions = ['up', 'down', 'left', 'right', 'horizontal', 'vertical', 'all'];
-	function guardDirections (options) {
-	  var dir = options.direction;
-	  if (typeof dir === 'string') {
-	    var hammerDirection = 'DIRECTION_' + dir.toUpperCase();
-	    if (directions.indexOf(dir) > -1 && Hammer.hasOwnProperty(hammerDirection)) {
-	      options.direction = Hammer[hammerDirection];
-	    } else {
-	      console.warn('[vue-touch] invalid direction: ' + dir);
-	    }
-	  }
-	  return options
-	}
-	var config = {
-	};
-	var customEvents = {
-	};
-	var gestures = [
-	  'pan','panstart','panmove','panend','pancancel','panleft','panright','panup','pandown',
-	  'pinch','pinchstart','pinchmove','pinchend','pinchcancel','pinchin','pinchout',
-	  'press','pressup',
-	  'rotate','rotatestart','rotatemove','rotateend','rotatecancel',
-	  'swipe','swipeleft','swiperight','swipeup','swipedown',
-	  'tap'
-	];
-	var gestureMap = {
-	  pan: 'pan',
-	  panstart: 'pan',
-	  panmove: 'pan',
-	  panend: 'pan',
-	  pancancel: 'pan',
-	  panleft: 'pan',
-	  panright: 'pan',
-	  panup: 'pan',
-	  pandown: 'pan',
-	  pinch: 'pinch',
-	  pinchstart: 'pinch',
-	  pinchmove: 'pinch',
-	  pinchend: 'pinch',
-	  pinchcancel: 'pinch',
-	  pinchin: 'pinch',
-	  pinchout: 'pinch',
-	  press: 'press',
-	  pressup: 'press',
-	  rotate: 'rotate',
-	  rotatestart: 'rotate',
-	  rotatemove: 'rotate',
-	  rotateend: 'rotate',
-	  rotatecancel: 'rotate',
-	  swipe: 'swipe',
-	  swipeleft: 'swipe',
-	  swiperight: 'swipe',
-	  swipeup: 'swipe',
-	  swipedown: 'swipe',
-	  tap: 'tap'
-	};
-
-	var Component = {
-	  props: {
-	    options: createProp(),
-	    tapOptions: createProp(),
-	    panOptions: createProp(),
-	    pinchOptions: createProp(),
-	    pressOptions: createProp(),
-	    rotateOptions: createProp(),
-	    swipeOptions: createProp(),
-	    tag: { type: String, default: 'div' },
-	    enabled: {
-	      default: true,
-	      type: [Boolean, Object],
-	    }
-	  },
-	  mounted: function mounted() {
-	    if (!this.$isServer) {
-	      this.hammer = new Hammer.Manager(this.$el, this.options);
-	      this.recognizers = {};
-	      this.setupBuiltinRecognizers();
-	      this.setupCustomRecognizers();
-	      this.updateEnabled(this.enabled);
-	    }
-	  },
-	  destroyed: function destroyed() {
-	    if (!this.$isServer) {
-	      this.hammer.destroy();
-	    }
-	  },
-	  watch: {
-	    enabled: {
-	      deep: true,
-	      handler: function handler() {
-	        var args = [], len = arguments.length;
-	        while ( len-- ) args[ len ] = arguments[ len ];
-	        (ref = this).updateEnabled.apply(ref, args);
-	        var ref;
-	      }
-	    }
-	  },
-	  methods: {
-	    setupBuiltinRecognizers: function setupBuiltinRecognizers()  {
-	      var this$1 = this;
-	      for (var i = 0; i < gestures.length; i++) {
-	        var gesture = gestures[i];
-	        if (this$1._events[gesture]) {
-	          var mainGesture = gestureMap[gesture];
-	          var options = assign({}, (config[mainGesture] || {}), this$1[(mainGesture + "Options")]);
-	          this$1.addRecognizer(mainGesture, options);
-	          this$1.addEvent(gesture);
-	        }
-	      }
-	    },
-	    setupCustomRecognizers: function setupCustomRecognizers() {
-	      var this$1 = this;
-	      var gestures$$1 = Object.keys(customEvents);
-	      for (var i = 0; i < gestures$$1.length; i++) {
-	        var gesture = gestures$$1[i];
-	        if (this$1._events[gesture]) {
-	          var opts = customEvents[gesture];
-	          var localCustomOpts = this$1[(gesture + "Options")] || {};
-	          var options = assign({}, opts, localCustomOpts);
-	          this$1.addRecognizer(gesture, options, {mainGesture: options.type});
-	          this$1.addEvent(gesture);
-	        }
-	      }
-	    },
-	    addRecognizer: function addRecognizer(gesture, options, ref) {
-	      if ( ref === void 0 ) ref = {};
-	      var mainGesture = ref.mainGesture;
-	      if (!this.recognizers[gesture]) {
-	        var recognizer = new Hammer[capitalize(mainGesture || gesture)](guardDirections(options));
-	        this.recognizers[gesture] = recognizer;
-	        this.hammer.add(recognizer);
-	        recognizer.recognizeWith(this.hammer.recognizers);
-	      }
-	    },
-	    addEvent: function addEvent(gesture) {
-	      var this$1 = this;
-	      this.hammer.on(gesture, function (e) { return this$1.$emit(gesture, e); });
-	    },
-	    updateEnabled: function updateEnabled(newVal, oldVal) {
-	      var this$1 = this;
-	      if (newVal === true) {
-	        this.enableAll();
-	      } else if (newVal === false) {
-	        this.disableAll();
-	      } else if (typeof newVal === 'object') {
-	        var keys = Object.keys(newVal);
-	        for (var i = 0; i < keys.length; i++) {
-	          var event = keys[i];
-	          if (this$1.recognizers[event]) {
-	            newVal[event]
-	              ? this$1.enable(event)
-	              : this$1.disable(event);
-	          }
-	        }
-	      }
-	    },
-	    enable: function enable(r) {
-	      var recognizer = this.recognizers[r];
-	      if (!recognizer.options.enable) {
-	        recognizer.set({ enable: true });
-	      }
-	    },
-	    disable: function disable(r) {
-	      var recognizer = this.recognizers[r];
-	      if (recognizer.options.enable) {
-	        recognizer.set({ enable: false });
-	      }
-	    },
-	    toggle: function toggle(r) {
-	      var recognizer = this.recognizers[r];
-	      if (recognizer) {
-	        recognizer.options.enable
-	          ? this.disable(r)
-	          : this.enable(r);
-	      }
-	    },
-	    enableAll: function enableAll(r) {
-	      this.toggleAll({ enable: true });
-	    },
-	    disableAll: function disableAll(r) {
-	      this.toggleAll({ enable: false });
-	    },
-	    toggleAll: function toggleAll(ref) {
-	      var this$1 = this;
-	      var enable = ref.enable;
-	      var keys = Object.keys(this.recognizers);
-	      for (var i = 0; i < keys.length; i++) {
-	        var r = this$1.recognizers[keys[i]];
-	        if (r.options.enable !== enable) {
-	          r.set({ enable: enable });
-	        }
-	      }
-	    },
-	    isEnabled: function isEnabled(r) {
-	      return this.recognizers[r] && this.recognizers[r].options.enable
-	    }
-	  },
-	  render: function render(h) {
-	    return h(this.tag, {}, this.$slots.default)
-	  }
-	};
-
-	var installed = false;
-	var vueTouch = { config: config, customEvents: customEvents };
-	vueTouch.install = function install(Vue, opts) {
-	  if ( opts === void 0 ) opts = {};
-	  var name = opts.name || 'v-touch';
-	  Vue.component(name, assign(Component, { name: name }));
-	  installed = true;
-	}.bind(vueTouch);
-	vueTouch.registerCustomEvent = function registerCustomEvent(event, options) {
-	  if ( options === void 0 ) options = {};
-	  if (installed) {
-	    console.warn(("\n      [vue-touch]: Custom Event '" + event + "' couldn't be added to vue-touch.\n      Custom Events have to be registered before installing the plugin.\n      "));
-	    return
-	  }
-	  options.event = event;
-	  customEvents[event] = options;
-	  Component.props[(event + "Options")] = {
-	    type: Object,
-	    default: function default$1() { return {} }
-	  };
-	}.bind(vueTouch);
-	vueTouch.component = Component;
-	if (true) {
-	  module.exports = vueTouch;
-	} else if (typeof define == "function" && define.amd) {
-	  define([], function(){ return vueTouch });
-	} else if (typeof window !== 'undefined' && window.Vue) {
-	  window.VueTouch = vueTouch;
-	  Vue.use(vueTouch);
-	}
-
-	})));
-	//# sourceMappingURL=vue-touch.js.map
-
-
-/***/ },
-/* 301 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*! Hammer.JS - v2.0.7 - 2016-04-22
@@ -38856,6 +38585,277 @@
 
 
 /***/ },
+/* 301 */
+/***/ function(module, exports, __webpack_require__) {
+
+	(function (global, factory) {
+	   true ? factory(__webpack_require__(300)) :
+	  typeof define === 'function' && define.amd ? define(['hammerjs'], factory) :
+	  (factory(global.Hammer));
+	}(this, (function (Hammer) { 'use strict';
+
+	Hammer = 'default' in Hammer ? Hammer['default'] : Hammer;
+
+	function assign(target) {
+	  var sources = [], len = arguments.length - 1;
+	  while ( len-- > 0 ) sources[ len ] = arguments[ len + 1 ];
+	  for (var i = 0; i < sources.length; i++) {
+	    var source = sources[i];
+	    var keys = Object.keys(source);
+	    for (var i$1 = 0; i$1 < keys.length; i$1++) {
+	      var key = keys[i$1];
+	      target[key] = source[key];
+	    }
+	  }
+	  return target
+	}
+	function createProp() {
+	  return {
+	    type: Object,
+	    default: function() { return {} }
+	  }
+	}
+	function capitalize (str) {
+	  return str.charAt(0).toUpperCase() + str.slice(1)
+	}
+	var directions = ['up', 'down', 'left', 'right', 'horizontal', 'vertical', 'all'];
+	function guardDirections (options) {
+	  var dir = options.direction;
+	  if (typeof dir === 'string') {
+	    var hammerDirection = 'DIRECTION_' + dir.toUpperCase();
+	    if (directions.indexOf(dir) > -1 && Hammer.hasOwnProperty(hammerDirection)) {
+	      options.direction = Hammer[hammerDirection];
+	    } else {
+	      console.warn('[vue-touch] invalid direction: ' + dir);
+	    }
+	  }
+	  return options
+	}
+	var config = {
+	};
+	var customEvents = {
+	};
+	var gestures = [
+	  'pan','panstart','panmove','panend','pancancel','panleft','panright','panup','pandown',
+	  'pinch','pinchstart','pinchmove','pinchend','pinchcancel','pinchin','pinchout',
+	  'press','pressup',
+	  'rotate','rotatestart','rotatemove','rotateend','rotatecancel',
+	  'swipe','swipeleft','swiperight','swipeup','swipedown',
+	  'tap'
+	];
+	var gestureMap = {
+	  pan: 'pan',
+	  panstart: 'pan',
+	  panmove: 'pan',
+	  panend: 'pan',
+	  pancancel: 'pan',
+	  panleft: 'pan',
+	  panright: 'pan',
+	  panup: 'pan',
+	  pandown: 'pan',
+	  pinch: 'pinch',
+	  pinchstart: 'pinch',
+	  pinchmove: 'pinch',
+	  pinchend: 'pinch',
+	  pinchcancel: 'pinch',
+	  pinchin: 'pinch',
+	  pinchout: 'pinch',
+	  press: 'press',
+	  pressup: 'press',
+	  rotate: 'rotate',
+	  rotatestart: 'rotate',
+	  rotatemove: 'rotate',
+	  rotateend: 'rotate',
+	  rotatecancel: 'rotate',
+	  swipe: 'swipe',
+	  swipeleft: 'swipe',
+	  swiperight: 'swipe',
+	  swipeup: 'swipe',
+	  swipedown: 'swipe',
+	  tap: 'tap'
+	};
+
+	var Component = {
+	  props: {
+	    options: createProp(),
+	    tapOptions: createProp(),
+	    panOptions: createProp(),
+	    pinchOptions: createProp(),
+	    pressOptions: createProp(),
+	    rotateOptions: createProp(),
+	    swipeOptions: createProp(),
+	    tag: { type: String, default: 'div' },
+	    enabled: {
+	      default: true,
+	      type: [Boolean, Object],
+	    }
+	  },
+	  mounted: function mounted() {
+	    if (!this.$isServer) {
+	      this.hammer = new Hammer.Manager(this.$el, this.options);
+	      this.recognizers = {};
+	      this.setupBuiltinRecognizers();
+	      this.setupCustomRecognizers();
+	      this.updateEnabled(this.enabled);
+	    }
+	  },
+	  destroyed: function destroyed() {
+	    if (!this.$isServer) {
+	      this.hammer.destroy();
+	    }
+	  },
+	  watch: {
+	    enabled: {
+	      deep: true,
+	      handler: function handler() {
+	        var args = [], len = arguments.length;
+	        while ( len-- ) args[ len ] = arguments[ len ];
+	        (ref = this).updateEnabled.apply(ref, args);
+	        var ref;
+	      }
+	    }
+	  },
+	  methods: {
+	    setupBuiltinRecognizers: function setupBuiltinRecognizers()  {
+	      var this$1 = this;
+	      for (var i = 0; i < gestures.length; i++) {
+	        var gesture = gestures[i];
+	        if (this$1._events[gesture]) {
+	          var mainGesture = gestureMap[gesture];
+	          var options = assign({}, (config[mainGesture] || {}), this$1[(mainGesture + "Options")]);
+	          this$1.addRecognizer(mainGesture, options);
+	          this$1.addEvent(gesture);
+	        }
+	      }
+	    },
+	    setupCustomRecognizers: function setupCustomRecognizers() {
+	      var this$1 = this;
+	      var gestures$$1 = Object.keys(customEvents);
+	      for (var i = 0; i < gestures$$1.length; i++) {
+	        var gesture = gestures$$1[i];
+	        if (this$1._events[gesture]) {
+	          var opts = customEvents[gesture];
+	          var localCustomOpts = this$1[(gesture + "Options")] || {};
+	          var options = assign({}, opts, localCustomOpts);
+	          this$1.addRecognizer(gesture, options, {mainGesture: options.type});
+	          this$1.addEvent(gesture);
+	        }
+	      }
+	    },
+	    addRecognizer: function addRecognizer(gesture, options, ref) {
+	      if ( ref === void 0 ) ref = {};
+	      var mainGesture = ref.mainGesture;
+	      if (!this.recognizers[gesture]) {
+	        var recognizer = new Hammer[capitalize(mainGesture || gesture)](guardDirections(options));
+	        this.recognizers[gesture] = recognizer;
+	        this.hammer.add(recognizer);
+	        recognizer.recognizeWith(this.hammer.recognizers);
+	      }
+	    },
+	    addEvent: function addEvent(gesture) {
+	      var this$1 = this;
+	      this.hammer.on(gesture, function (e) { return this$1.$emit(gesture, e); });
+	    },
+	    updateEnabled: function updateEnabled(newVal, oldVal) {
+	      var this$1 = this;
+	      if (newVal === true) {
+	        this.enableAll();
+	      } else if (newVal === false) {
+	        this.disableAll();
+	      } else if (typeof newVal === 'object') {
+	        var keys = Object.keys(newVal);
+	        for (var i = 0; i < keys.length; i++) {
+	          var event = keys[i];
+	          if (this$1.recognizers[event]) {
+	            newVal[event]
+	              ? this$1.enable(event)
+	              : this$1.disable(event);
+	          }
+	        }
+	      }
+	    },
+	    enable: function enable(r) {
+	      var recognizer = this.recognizers[r];
+	      if (!recognizer.options.enable) {
+	        recognizer.set({ enable: true });
+	      }
+	    },
+	    disable: function disable(r) {
+	      var recognizer = this.recognizers[r];
+	      if (recognizer.options.enable) {
+	        recognizer.set({ enable: false });
+	      }
+	    },
+	    toggle: function toggle(r) {
+	      var recognizer = this.recognizers[r];
+	      if (recognizer) {
+	        recognizer.options.enable
+	          ? this.disable(r)
+	          : this.enable(r);
+	      }
+	    },
+	    enableAll: function enableAll(r) {
+	      this.toggleAll({ enable: true });
+	    },
+	    disableAll: function disableAll(r) {
+	      this.toggleAll({ enable: false });
+	    },
+	    toggleAll: function toggleAll(ref) {
+	      var this$1 = this;
+	      var enable = ref.enable;
+	      var keys = Object.keys(this.recognizers);
+	      for (var i = 0; i < keys.length; i++) {
+	        var r = this$1.recognizers[keys[i]];
+	        if (r.options.enable !== enable) {
+	          r.set({ enable: enable });
+	        }
+	      }
+	    },
+	    isEnabled: function isEnabled(r) {
+	      return this.recognizers[r] && this.recognizers[r].options.enable
+	    }
+	  },
+	  render: function render(h) {
+	    return h(this.tag, {}, this.$slots.default)
+	  }
+	};
+
+	var installed = false;
+	var vueTouch = { config: config, customEvents: customEvents };
+	vueTouch.install = function install(Vue, opts) {
+	  if ( opts === void 0 ) opts = {};
+	  var name = opts.name || 'v-touch';
+	  Vue.component(name, assign(Component, { name: name }));
+	  installed = true;
+	}.bind(vueTouch);
+	vueTouch.registerCustomEvent = function registerCustomEvent(event, options) {
+	  if ( options === void 0 ) options = {};
+	  if (installed) {
+	    console.warn(("\n      [vue-touch]: Custom Event '" + event + "' couldn't be added to vue-touch.\n      Custom Events have to be registered before installing the plugin.\n      "));
+	    return
+	  }
+	  options.event = event;
+	  customEvents[event] = options;
+	  Component.props[(event + "Options")] = {
+	    type: Object,
+	    default: function default$1() { return {} }
+	  };
+	}.bind(vueTouch);
+	vueTouch.component = Component;
+	if (true) {
+	  module.exports = vueTouch;
+	} else if (typeof define == "function" && define.amd) {
+	  define([], function(){ return vueTouch });
+	} else if (typeof window !== 'undefined' && window.Vue) {
+	  window.VueTouch = vueTouch;
+	  Vue.use(vueTouch);
+	}
+
+	})));
+	//# sourceMappingURL=vue-touch.js.map
+
+
+/***/ },
 /* 302 */
 /***/ function(module, exports) {
 
@@ -39307,7 +39307,7 @@
 /* 310 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\t<div >\n\t\n\t\t<div class=\"header\">\n\t\t\n\t\t\t<router-link :to=\"{ name: 'challenge'}\" class=\"icon\">\n\t\t\t\t<i class=\" icon-yipp_back\"></i>\n\t\t\t</router-link>\n\n\t\t\t<div class=\"title\">Challenge Details</div>\n\t\t\n\t\t</div>\n\t\t\n\t\t<div class=\"wrap\">\n\t\t\n\t\t\t<div class=\"details\">\n\t\t\t\n\t\t\t<span class=\"set\">\n\t\t\t\t\t<i class=\"icon-yipp_notification_line\"></i>\n\t\t\t\t\t14:00\n\t\t\t\t\t| <i class=\"icon-yipp_repeat_line\"></i>\n\t\t\t\t\tEvery day\n\t\t\t\t\t</span>\n\t\t\t\t\n\t\t\t\t<table width=\"100%\" border=\"0\">\n\t\t\t\t\t<tbody>\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t<p>Eating more vegetable</p>\n\t\t\t\t\t\t\t\t<p>1. Broco</p>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t<a href=\"\" class=\"edit\"><i class=\"icon-yipp_pencil_line\"></i></a>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t</tbody>\n\t\t\t\t</table>\n\t\t\t\t\n\t\t\t</div>\n\t\t\n\t\t</div>\n\t\n\t\t<div class=\"steps\">\n\t\n\t\t\t\t<ul>\n\t\t\t\t\t<li>1</li>\n\t\t\t\t\t<li>2</li>\n\t\t\t\t\t<li>3</li>\n\t\t\t\t\t<li>4</li>\n\t\t\t\t\t<li>5</li>\n\t\t\t\t</ul>\n\n\t\t\t<hr>\n\t\t\n\t\t</div>\n\t\t\n\t\t<div class=\"pic\" style=\"background-image: url(assets/img/slider-1.jpg);\">\n\t\t\n\t\t</div>\n\t\n\t\t<h4>Evaluation</h4>\n\t\t\n\t\t<textarea></textarea>\n\t\t\n\t\t<ul class=\"selection\">\n\t\t\t<li><a href=\"\"><i class=\"icon-yipp_emoticon_sad\"></i></a></li>\n\t\t\t<li><a href=\"\" class=\"active\"><i class=\"icon-yipp_emoticon_neutral\"></i></a></li>\n\t\t\t<li><a href=\"\"><i class=\"icon-yipp_emoticon_happy-\"></i></a></li>\n\t\t</ul>\n\t\t\n\t\t<h4>Notes</h4>\n\t\t\n\t\t<textarea></textarea>\n\t\t\n\t\t<a href=\"\" class=\"btn\">Done</a>\n\t\n\t</div>\n\t\n\t<section class=\"resultCard\">\n\t\t\n\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t\n\t\t<h3>You can do it!</h3>\n\t\t<p>We made a beautiful photo collage of this week check it out!</p>\n\t\t\n\t\t<div class=\"bottom\">\n\t\t<a href=\"javascript:void(0);\" class=\"btn mid\">See result</a>\n\n\t\t<a href=\"javascript:void(0);\" class=\"btn big\">Restart challenge</a>\n\t\t\n\t\t</div>\n\t\n\t\t<div id=\"modal\">\n\n\t\t\t<div id=\"msg\">\n\n\t\t\t\t<h3>Are you sure?</h3>\n\n\t\t\t\t<p>Do you want to restart challenge?</p>\n\n\t\t\t\t<a href=\"javascript:void(0);\">Restart challenge</a>\n\n\t\t\t</div>\n\n\t\t</div>\n\n\t</section>\n\t\n\t<section id=\"collage\">\n\t\n\t\t<div class=\"header\">\n\t\t\t<a href=\"\">X</a> Photo Collage\n\t\t\t<h3>Fruit and Vegetables</h3>\n\t\t</div>\n\t\n\t\t<ul>\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.40662873997470530.08745612050958695xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 1</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_sad\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.6438731489979730.5064285892766949xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 2</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_happy-\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li>\n\t\t\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 3</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_neutral\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.70313509395563580.9073443357052431xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 4</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_happy-\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t</ul>\n\t\n\t</section>\n\t\n\t<div class=\"restart\">\n\t\n\t<a href=\"\" >Restart challenge</a>\n\t\n\t</div>\t\n";
+	module.exports = "\n\t<div >\n\t\n\t\t<div class=\"header\">\n\t\t\n\t\t\t<router-link :to=\"{ name: 'challenge'}\" class=\"icon\">\n\t\t\t\t<i class=\" icon-yipp_back\"></i>\n\t\t\t</router-link>\n\n\t\t\t<div class=\"title\">Challenge Details</div>\n\t\t\n\t\t</div>\n\t\t\n\t\t<div class=\"wrap\">\n\t\t\n\t\t\t<div class=\"details\">\n\t\t\t\n\t\t\t<span class=\"set\">\n\t\t\t\t\t<i class=\"icon-yipp_notification_line\"></i>\n\t\t\t\t\t14:00\n\t\t\t\t\t| <i class=\"icon-yipp_repeat_line\"></i>\n\t\t\t\t\tEvery day\n\t\t\t\t\t</span>\n\t\t\t\t\n\t\t\t\t<table width=\"100%\" border=\"0\">\n\t\t\t\t\t<tbody>\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t<p>Eating more vegetable</p>\n\t\t\t\t\t\t\t\t<p>1. Broco</p>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t<a href=\"\" class=\"edit\"><i class=\"icon-yipp_pencil_line\"></i></a>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t</tbody>\n\t\t\t\t</table>\n\t\t\t\t\n\t\t\t</div>\n\t\t\n\t\t</div>\n\t\n\t\t<div class=\"steps\">\n\t\n\t\t\t\t<ul>\n\t\t\t\t\t<li>1</li>\n\t\t\t\t\t<li>2</li>\n\t\t\t\t\t<li>3</li>\n\t\t\t\t\t<li>4</li>\n\t\t\t\t\t<li>5</li>\n\t\t\t\t</ul>\n\n\t\t\t<hr>\n\t\t\n\t\t</div>\n\t\t\n\t\t<div class=\"pic\" style=\"background-image: url(assets/img/slider-1.jpg);\">\n\t\t\n\t\t</div>\n\t\n\t\t<h4>Evaluation</h4>\n\t\t\n\t\t<textarea></textarea>\n\t\t\n\t\t<ul class=\"selection\">\n\t\t\t<li><a href=\"\"><i class=\"icon-yipp_emoticon_sad\"></i></a></li>\n\t\t\t<li><a href=\"\" class=\"active\"><i class=\"icon-yipp_emoticon_neutral\"></i></a></li>\n\t\t\t<li><a href=\"\"><i class=\"icon-yipp_emoticon_happy-\"></i></a></li>\n\t\t</ul>\n\t\t\n\t\t<h4>Notes</h4>\n\t\t\n\t\t<textarea></textarea>\n\t\t\n\t\t<a href=\"\" class=\"btn\">Done</a>\n\t\n\t</div>\n\t\n\t<section class=\"resultCard\">\n\t\t\n\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t\n\t\t<h3>You can do it!</h3>\n\t\t<p>We made a beautiful photo collage of this week check it out!</p>\n\t\t\n\t\t<div class=\"bottom\">\n\t\t<a href=\"javascript:void(0);\" class=\"btn mid\">See result</a>\n\n\t\t<a href=\"javascript:void(0);\" class=\"btn big\">Restart challenge</a>\n\t\t\n\t\t</div>\n\t\n\t\t<div id=\"modal\">\n\n\t\t\t<div id=\"msg\">\n\n\t\t\t\t<h3>Are you sure?</h3>\n\n\t\t\t\t<p>Do you want to restart challenge?</p>\n\n\t\t\t\t<a href=\"javascript:void(0);\">Restart challenge</a>\n\n\t\t\t</div>\n\n\t\t</div>\n\n\t</section>\n\t\n\t<section id=\"collage\">\n\t\n\t\t<div class=\"header\">\n\t\t\t<a href=\"\">X</a> Photo Collage\n\t\t\t<h3>Fruit and Vegetables</h3>\n\t\t</div>\n\t\n\t\t<ul>\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.9514191785439010.10556958665593874xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 1</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_sad\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.371852892149445950.48682635050489353xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 2</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_happy-\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li>\n\t\t\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 3</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_neutral\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.224296931985178860.6366350930741334xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 4</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_happy-\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t</ul>\n\t\n\t</section>\n\t\n\t<div class=\"restart\">\n\t\n\t<a href=\"\" >Restart challenge</a>\n\t\n\t</div>\t\n";
 
 /***/ },
 /* 311 */
