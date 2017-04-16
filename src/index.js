@@ -18,6 +18,9 @@ Vue.use(VueRouter)
 import VueCookie from 'vue-cookie'
 Vue.use(VueCookie);
 
+var VueTouch = require('vue-touch')
+Vue.use(VueTouch, {name: 'v-touch'})
+
 const routes = [
   { path: '/', component: Home, name: 'home' },
   { path: '/login', component: Auth, name: 'login' },

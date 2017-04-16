@@ -50,8 +50,8 @@
 	__webpack_require__(7);
 	__webpack_require__(8);
 	__webpack_require__(184);
-	__webpack_require__(205);
-	module.exports = __webpack_require__(302);
+	__webpack_require__(193);
+	module.exports = __webpack_require__(290);
 
 
 /***/ },
@@ -9785,43 +9785,43 @@
 
 	var _Auth2 = _interopRequireDefault(_Auth);
 
-	var _Logout = __webpack_require__(200);
+	var _Logout = __webpack_require__(188);
 
 	var _Logout2 = _interopRequireDefault(_Logout);
 
-	var _Register = __webpack_require__(203);
+	var _Register = __webpack_require__(191);
 
 	var _Register2 = _interopRequireDefault(_Register);
 
-	var _Timeline = __webpack_require__(300);
+	var _Timeline = __webpack_require__(288);
 
 	var _Timeline2 = _interopRequireDefault(_Timeline);
 
-	var _Emergency = __webpack_require__(307);
+	var _Emergency = __webpack_require__(295);
 
 	var _Emergency2 = _interopRequireDefault(_Emergency);
 
-	var _Lesson = __webpack_require__(328);
+	var _Lesson = __webpack_require__(298);
 
 	var _Lesson2 = _interopRequireDefault(_Lesson);
 
-	var _Challenge = __webpack_require__(309);
+	var _Challenge = __webpack_require__(302);
 
 	var _Challenge2 = _interopRequireDefault(_Challenge);
 
-	var _ChallengeNew = __webpack_require__(333);
+	var _ChallengeNew = __webpack_require__(305);
 
 	var _ChallengeNew2 = _interopRequireDefault(_ChallengeNew);
 
-	var _ChallengeContent = __webpack_require__(311);
+	var _ChallengeContent = __webpack_require__(307);
 
 	var _ChallengeContent2 = _interopRequireDefault(_ChallengeContent);
 
-	var _vueResource = __webpack_require__(313);
+	var _vueResource = __webpack_require__(310);
 
 	var _vueResource2 = _interopRequireDefault(_vueResource);
 
-	var _vueRouter = __webpack_require__(315);
+	var _vueRouter = __webpack_require__(312);
 
 	var _vueRouter2 = _interopRequireDefault(_vueRouter);
 
@@ -9836,6 +9836,9 @@
 	_vue2.default.use(_vueRouter2.default);
 
 	_vue2.default.use(_vueCookie2.default);
+
+	var VueTouch = __webpack_require__(314);
+	_vue2.default.use(VueTouch, { name: 'v-touch' });
 
 	var routes = [{ path: '/', component: _Home2.default, name: 'home' }, { path: '/login', component: _Auth2.default, name: 'login' }, { path: '/logout', component: _Logout2.default, name: 'logout' }, { path: '/register', component: _Register2.default, name: 'register' }, { path: '/timeline', component: _Timeline2.default, name: 'timeline' }, { path: '/emergency', component: _Emergency2.default, name: 'emergency' }, { path: '/lesson-:id', component: _Lesson2.default, name: 'lesson' }, { path: '/challenge', component: _Challenge2.default, name: 'challenge' }, { path: '/challenge-new', component: _ChallengeNew2.default, name: 'challenge_new' }, { path: '/challenge-:id', component: _ChallengeContent2.default, name: 'challenge_content' }];
 
@@ -23443,7 +23446,7 @@
 
 	var __vue_script__, __vue_template__
 	__vue_script__ = __webpack_require__(183)
-	__vue_template__ = __webpack_require__(199)
+	__vue_template__ = __webpack_require__(187)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -23725,30 +23728,18 @@
 	};
 
 /***/ },
-/* 187 */,
-/* 188 */,
-/* 189 */,
-/* 190 */,
-/* 191 */,
-/* 192 */,
-/* 193 */,
-/* 194 */,
-/* 195 */,
-/* 196 */,
-/* 197 */,
-/* 198 */,
-/* 199 */
+/* 187 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div id=\"signUp\">\n\t<div id=\"onBoarding\" class=\"panel\" v-if=\"step == 1\">\n\t\t<div id=\"companyLogo\"></div>\n\t\t<div class=\"bottom-area\">\n\t\t\t<router-link :to=\"{ name: 'register'}\" class=\"button-big\">Sign up</router-link>\n\t\t\t<a href=\"javascript:void(0);\" v-on:click.prevent=\"showLoginForm\">I already have an account</a>\n\t\t</div>\n\t</div>\n\t\n\t<div id=\"login1\" class=\"panel\" v-else-if=\"step == 2\">\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Log in</div>\n\t\t<form action=\"\" method=\"post\" class=\"middle-area full\" v-on:submit.prevent=\"logMeIn\">\n\t\t\t<div class=\"placer middle\">\n\t\t\t\t<div class=\"error\" v-if=\"error_message\">{{ error_message }}</div>\n\t\t\t\t<input name=\"login_email\" type=\"email\" placeholder=\"E-mailadres\" v-model=\"login_email\">\n\t\t\t\t<input name=\"login_pw\" type=\"password\" placeholder=\"Wachtwoord\" v-model=\"login_pw\">\n\t\t\t</div>\n\t\t\t\t\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<button class=\"form-button-medium\">Login<span v-if=\"loading\" class=\"loading\"></span></button>\n\t\t\t\t<router-link :to=\"{ name: 'register'}\">I don't have an account</router-link>\n\t\t\t\t<br>\n\t\t\t\t<a href=\"javascript:void(0);\" v-on:click=\"showResetForm\">Forgot password</a>\n\t\t\t</div>\n\t\t</form>\n\t</div>\n\t\t\t\n\t<div id=\"reset\" class=\"panel\" v-else-if=\"step == 3\">\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Reset password</div>\n\t\t<form action=\"\" method=\"post\" class=\"middle-area full\">\n\t\t\t<div class=\"placer bottom\">\n\t\t\t\t<p>We will send you an email with a link so you can set up a new password</p>\n\t\t\t\t<input type=\"email\" placeholder=\"E-mailadres\">\n\t\t\t</div>\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<button class=\"form-button-medium\">Reset</button>\n\t\t\t</div>\n\t\t</form>\n\t</div>\t\n\t\n\t<div id=\"renew\" class=\"panel\" v-else-if=\"step == 4\">\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Reset password</div>\n\t\t<form action=\"\" method=\"post\" class=\"middle-area full\">\n\t\t\t<div class=\"placer middle\">\n\t\t\t\t<input type=\"password\" placeholder=\"New password\">\n\t\t\t\t<input type=\"password\" placeholder=\"Repeat password\">\n\t\t\t</div>\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<button class=\"form-button-medium\">Confirm</button>\n\t\t\t</div>\n\t\t</form>\n\t</div>\t\n</div>\n";
 
 /***/ },
-/* 200 */
+/* 188 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(201)
-	__vue_template__ = __webpack_require__(202)
+	__vue_script__ = __webpack_require__(189)
+	__vue_template__ = __webpack_require__(190)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -23765,7 +23756,7 @@
 	})()}
 
 /***/ },
-/* 201 */
+/* 189 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23807,18 +23798,18 @@
 	// </script>
 
 /***/ },
-/* 202 */
+/* 190 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div id=\"container\">Logging out...</div>\n";
 
 /***/ },
-/* 203 */
+/* 191 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(204)
-	__vue_template__ = __webpack_require__(299)
+	__vue_script__ = __webpack_require__(192)
+	__vue_template__ = __webpack_require__(287)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -23835,7 +23826,7 @@
 	})()}
 
 /***/ },
-/* 204 */
+/* 192 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23854,7 +23845,7 @@
 
 	var _auth2 = _interopRequireDefault(_auth);
 
-	var _register2 = __webpack_require__(205);
+	var _register2 = __webpack_require__(193);
 
 	var _register3 = _interopRequireDefault(_register2);
 
@@ -23862,7 +23853,7 @@
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
-	var _uploadcareWidget = __webpack_require__(206);
+	var _uploadcareWidget = __webpack_require__(194);
 
 	var _uploadcareWidget2 = _interopRequireDefault(_uploadcareWidget);
 
@@ -24174,7 +24165,7 @@
 	// </script>
 
 /***/ },
-/* 205 */
+/* 193 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24273,7 +24264,7 @@
 	};
 
 /***/ },
-/* 206 */
+/* 194 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -24281,7 +24272,7 @@
 	 * Date: 2017-01-16 15:48:16 +0000
 	 * Rev: 75cd9d2537
 	 */
-	!function(e,t){e.document&&("object"==typeof module&&module.exports?module.exports=t(e,__webpack_require__(207)):e.uploadcare=t(e))}("undefined"!=typeof window?window:this,function(e,a){var r,n=e.document;return function(){r={__exports:{}},r.namespace=function(e,t){var i,a,n,o,l;if(a=r,e)for(l=e.split("."),n=0,o=l.length;o>n;n++)i=l[n],a[i]||(a[i]={}),a=a[i];return t(a)},r.expose=function(e,t){var i,a,n,o,l,s,c;for(n=e.split("."),i=n.pop(),l=r.__exports,o=r,s=0,c=n.length;c>s;s++)a=n[s],l[a]||(l[a]={}),l=l[a],o=null!=o?o[a]:void 0;return l[i]=t||o[i]}}.call(this),function(){var t;if(r.version="2.10.3",r.jQuery=a||e.jQuery,"undefined"==typeof r.jQuery)throw new ReferenceError("jQuery is not defined");t=r.expose,t("version"),t("jQuery"),t("plugin",function(e){return e(r)})}.call(this),e.XDomainRequest&&r.jQuery.ajaxTransport(function(e){if(e.crossDomain&&e.async){e.timeout&&(e.xdrTimeout=e.timeout,delete e.timeout);var t;return{send:function(i,a){function r(e,i,r,n){t.onload=t.onerror=t.ontimeout=function(){},t=void 0,a(e,i,r,n)}t=new XDomainRequest,t.onload=function(){r(200,"OK",{text:t.responseText},"Content-Type: "+t.contentType)},t.onerror=function(){r(404,"Not Found")},t.onprogress=function(){},t.ontimeout=function(){r(0,"timeout")},t.timeout=e.xdrTimeout||Number.MAX_VALUE,t.open(e.type,e.url.replace(/^https?:/,"")),t.send(e.hasContent&&e.data||null)},abort:function(){t&&(t.onerror=function(){},t.abort())}}}}),function(){r.namespace("utils.abilities",function(t){var i,a,r,o;t.fileAPI=!!(e.File&&e.FileList&&e.FileReader),t.sendFileAPI=!(!e.FormData||!t.fileAPI),t.dragAndDrop=function(){var e;return e=n.createElement("div"),"draggable"in e||"ondragstart"in e&&"ondrop"in e}(),t.canvas=function(){var e;return e=n.createElement("canvas"),!(!e.getContext||!e.getContext("2d"))}(),t.fileDragAndDrop=t.fileAPI&&t.dragAndDrop,t.iOSVersion=null,(i=/^[^(]+\(iP(?:hone|od|ad);\s*(.+?)\)/.exec(navigator.userAgent))&&(r=/OS (\d)_(\d)/.exec(i[1]))&&(t.iOSVersion=+r[1]+r[2]/10),t.Blob=!1;try{new e.Blob&&(t.Blob=e.Blob)}catch(l){}return a=e.URL||e.webkitURL||!1,t.URL=a&&a.createObjectURL&&a,t.FileReader=(null!=(o=e.FileReader)?o.prototype.readAsArrayBuffer:void 0)&&e.FileReader})}.call(this),function(){var e,t={}.hasOwnProperty,i=function(e,i){for(var a in i)t.call(i,a)&&(e[a]=i[a]);function r(){this.constructor=e}return r.prototype=i.prototype,e.prototype=new r,e.__super__=i.prototype,e},a=[].indexOf||function(e){for(var t=0,i=this.length;i>t;t++)if(t in this&&this[t]===e)return t;return-1},n=function(e,t){return function(){return e.apply(t,arguments)}},o=[].slice;e=r.jQuery,r.namespace("utils",function(t){var r;return t.Collection=function(){function t(t){var i,a,r;for(null==t&&(t=[]),this.onAdd=e.Callbacks(),this.onRemove=e.Callbacks(),this.onSort=e.Callbacks(),this.onReplace=e.Callbacks(),this.__items=[],a=0,r=t.length;r>a;a++)i=t[a],this.add(i)}return t.prototype.add=function(e){return this.__add(e,this.__items.length)},t.prototype.__add=function(e,t){return this.__items.splice(t,0,e),this.onAdd.fire(e,t)},t.prototype.remove=function(t){var i;return i=e.inArray(t,this.__items),-1!==i?this.__remove(t,i):void 0},t.prototype.__remove=function(e,t){return this.__items.splice(t,1),this.onRemove.fire(e,t)},t.prototype.clear=function(){var e,t,i,a,r,n;for(i=this.get(),this.__items.length=0,n=[],e=a=0,r=i.length;r>a;e=++a)t=i[e],n.push(this.onRemove.fire(t,e));return n},t.prototype.replace=function(t,i){var a;return t!==i&&(a=e.inArray(t,this.__items),-1!==a)?this.__replace(t,i,a):void 0},t.prototype.__replace=function(e,t,i){return this.__items[i]=t,this.onReplace.fire(e,t,i)},t.prototype.sort=function(e){return this.__items.sort(e),this.onSort.fire()},t.prototype.get=function(e){return null!=e?this.__items[e]:this.__items.slice(0)},t.prototype.length=function(){return this.__items.length},t}(),t.UniqCollection=function(e){i(t,e);function t(){return r=t.__super__.constructor.apply(this,arguments)}return t.prototype.add=function(e){return a.call(this.__items,e)>=0?void 0:t.__super__.add.apply(this,arguments)},t.prototype.__replace=function(e,i,r){return a.call(this.__items,i)>=0?this.remove(e):t.__super__.__replace.apply(this,arguments)},t}(t.Collection),t.CollectionOfPromises=function(t){i(r,t);function r(){this.onAnyProgress=n(this.onAnyProgress,this),this.onAnyFail=n(this.onAnyFail,this),this.onAnyDone=n(this.onAnyDone,this),this.anyDoneList=e.Callbacks(),this.anyFailList=e.Callbacks(),this.anyProgressList=e.Callbacks(),this.anyProgressList.add(function(t,i){return e(t).data("lastProgress",i)}),r.__super__.constructor.apply(this,arguments)}return r.prototype.onAnyDone=function(e){var t,i,a,r,n;for(this.anyDoneList.add(e),r=this.__items,n=[],i=0,a=r.length;a>i;i++)t=r[i],"resolved"===t.state()?n.push(t.done(function(){return e.apply(null,[t].concat(o.call(arguments)))})):n.push(void 0);return n},r.prototype.onAnyFail=function(e){var t,i,a,r,n;for(this.anyFailList.add(e),r=this.__items,n=[],i=0,a=r.length;a>i;i++)t=r[i],"rejected"===t.state()?n.push(t.fail(function(){return e.apply(null,[t].concat(o.call(arguments)))})):n.push(void 0);return n},r.prototype.onAnyProgress=function(t){var i,a,r,n,o;for(this.anyProgressList.add(t),n=this.__items,o=[],a=0,r=n.length;r>a;a++)i=n[a],o.push(t(i,e(i).data("lastProgress")));return o},r.prototype.lastProgresses=function(){var t,i,a,r,n;for(r=this.__items,n=[],i=0,a=r.length;a>i;i++)t=r[i],n.push(e(t).data("lastProgress"));return n},r.prototype.add=function(e){return e&&e.then?(r.__super__.add.apply(this,arguments),this.__watchItem(e)):void 0},r.prototype.__replace=function(e,t,i){return t&&t.then?(r.__super__.__replace.apply(this,arguments),this.__watchItem(t)):this.remove(e)},r.prototype.__watchItem=function(e){var t,i=this;return t=function(t){return function(){return a.call(i.__items,e)>=0?t.fire.apply(t,[e].concat(o.call(arguments))):void 0}},e.then(t(this.anyDoneList),t(this.anyFailList),t(this.anyProgressList))},r}(t.UniqCollection)})}.call(this),function(){var e;e=r.jQuery,r.namespace("utils",function(t){var i;return i=function(t,i){var a,r=this;return a=e.Deferred(),i&&(t.src=i),t.complete?a.resolve(t):(e(t).one("load",function(){return a.resolve(t)}),e(t).one("error",function(){return a.reject(t)})),a.promise()},t.imageLoader=function(a){return e.isArray(a)?e.when.apply(null,e.map(a,t.imageLoader)):a.src?i(a):i(new Image,a)},t.videoLoader=function(t){var i;return i=e.Deferred(),e("<video/>").on("loadeddata",i.resolve).on("error",i.reject).attr("src",t).load(),i.promise()}})}.call(this),function(){var t=[].slice;r.namespace("utils",function(i){var a,r;return i.log=function(){var t;try{return null!=(t=e.console)&&"function"==typeof t.log?t.log.apply(t,arguments):void 0}catch(i){}},i.debug=function(){var a,r;if(null!=(a=e.console)?!a.debug:!0)return i.log.apply(i,["Debug:"].concat(t.call(arguments)));try{return(r=e.console).debug.apply(r,arguments)}catch(n){}},i.warn=function(){var a,r;if(null!=(a=e.console)?!a.warn:!0)return i.log.apply(i,["Warning:"].concat(t.call(arguments)));try{return(r=e.console).warn.apply(r,arguments)}catch(n){}},r={},i.warnOnce=function(e){return null==r[e]?(r[e]=!0,i.warn(e)):void 0},a={publicKey:"Global public key not set. Uploads may not work!\nAdd this to the <head> tag to set your key:\n\n<script>\nUPLOADCARE_PUBLIC_KEY = 'your_public_key';\n</script>"},i.commonWarning=function(e){return null!=a[e]?i.warnOnce(a[e]):void 0}})}.call(this),function(){var t;t=r.jQuery,r.namespace("utils",function(i){var a,r=this;return a={},t(e).on("message",function(e){var t,i,r,n,o,l,s;t=e.originalEvent;try{r=JSON.parse(t.data)}catch(c){return}if(r.type in a){for(l=a[r.type],s=[],n=0,o=l.length;o>n;n++)i=l[n],t.source===i[0]?s.push(i[1](r)):s.push(void 0);return s}}),i.registerMessage=function(e,t,i){return e in a||(a[e]=[]),a[e].push([t,i])},i.unregisterMessage=function(e,i){return e in a?a[e]=t.grep(a[e],function(e){return e[0]!==i}):void 0}})}.call(this),function(){var e,t=[].indexOf||function(e){for(var t=0,i=this.length;i>t;t++)if(t in this&&this[t]===e)return t;return-1},i=[].slice;e=r.jQuery,r.namespace("utils",function(a){var r;return a.unique=function(e){var i,a,r,n;for(a=[],r=0,n=e.length;n>r;r++)i=e[r],
+	!function(e,t){e.document&&("object"==typeof module&&module.exports?module.exports=t(e,__webpack_require__(195)):e.uploadcare=t(e))}("undefined"!=typeof window?window:this,function(e,a){var r,n=e.document;return function(){r={__exports:{}},r.namespace=function(e,t){var i,a,n,o,l;if(a=r,e)for(l=e.split("."),n=0,o=l.length;o>n;n++)i=l[n],a[i]||(a[i]={}),a=a[i];return t(a)},r.expose=function(e,t){var i,a,n,o,l,s,c;for(n=e.split("."),i=n.pop(),l=r.__exports,o=r,s=0,c=n.length;c>s;s++)a=n[s],l[a]||(l[a]={}),l=l[a],o=null!=o?o[a]:void 0;return l[i]=t||o[i]}}.call(this),function(){var t;if(r.version="2.10.3",r.jQuery=a||e.jQuery,"undefined"==typeof r.jQuery)throw new ReferenceError("jQuery is not defined");t=r.expose,t("version"),t("jQuery"),t("plugin",function(e){return e(r)})}.call(this),e.XDomainRequest&&r.jQuery.ajaxTransport(function(e){if(e.crossDomain&&e.async){e.timeout&&(e.xdrTimeout=e.timeout,delete e.timeout);var t;return{send:function(i,a){function r(e,i,r,n){t.onload=t.onerror=t.ontimeout=function(){},t=void 0,a(e,i,r,n)}t=new XDomainRequest,t.onload=function(){r(200,"OK",{text:t.responseText},"Content-Type: "+t.contentType)},t.onerror=function(){r(404,"Not Found")},t.onprogress=function(){},t.ontimeout=function(){r(0,"timeout")},t.timeout=e.xdrTimeout||Number.MAX_VALUE,t.open(e.type,e.url.replace(/^https?:/,"")),t.send(e.hasContent&&e.data||null)},abort:function(){t&&(t.onerror=function(){},t.abort())}}}}),function(){r.namespace("utils.abilities",function(t){var i,a,r,o;t.fileAPI=!!(e.File&&e.FileList&&e.FileReader),t.sendFileAPI=!(!e.FormData||!t.fileAPI),t.dragAndDrop=function(){var e;return e=n.createElement("div"),"draggable"in e||"ondragstart"in e&&"ondrop"in e}(),t.canvas=function(){var e;return e=n.createElement("canvas"),!(!e.getContext||!e.getContext("2d"))}(),t.fileDragAndDrop=t.fileAPI&&t.dragAndDrop,t.iOSVersion=null,(i=/^[^(]+\(iP(?:hone|od|ad);\s*(.+?)\)/.exec(navigator.userAgent))&&(r=/OS (\d)_(\d)/.exec(i[1]))&&(t.iOSVersion=+r[1]+r[2]/10),t.Blob=!1;try{new e.Blob&&(t.Blob=e.Blob)}catch(l){}return a=e.URL||e.webkitURL||!1,t.URL=a&&a.createObjectURL&&a,t.FileReader=(null!=(o=e.FileReader)?o.prototype.readAsArrayBuffer:void 0)&&e.FileReader})}.call(this),function(){var e,t={}.hasOwnProperty,i=function(e,i){for(var a in i)t.call(i,a)&&(e[a]=i[a]);function r(){this.constructor=e}return r.prototype=i.prototype,e.prototype=new r,e.__super__=i.prototype,e},a=[].indexOf||function(e){for(var t=0,i=this.length;i>t;t++)if(t in this&&this[t]===e)return t;return-1},n=function(e,t){return function(){return e.apply(t,arguments)}},o=[].slice;e=r.jQuery,r.namespace("utils",function(t){var r;return t.Collection=function(){function t(t){var i,a,r;for(null==t&&(t=[]),this.onAdd=e.Callbacks(),this.onRemove=e.Callbacks(),this.onSort=e.Callbacks(),this.onReplace=e.Callbacks(),this.__items=[],a=0,r=t.length;r>a;a++)i=t[a],this.add(i)}return t.prototype.add=function(e){return this.__add(e,this.__items.length)},t.prototype.__add=function(e,t){return this.__items.splice(t,0,e),this.onAdd.fire(e,t)},t.prototype.remove=function(t){var i;return i=e.inArray(t,this.__items),-1!==i?this.__remove(t,i):void 0},t.prototype.__remove=function(e,t){return this.__items.splice(t,1),this.onRemove.fire(e,t)},t.prototype.clear=function(){var e,t,i,a,r,n;for(i=this.get(),this.__items.length=0,n=[],e=a=0,r=i.length;r>a;e=++a)t=i[e],n.push(this.onRemove.fire(t,e));return n},t.prototype.replace=function(t,i){var a;return t!==i&&(a=e.inArray(t,this.__items),-1!==a)?this.__replace(t,i,a):void 0},t.prototype.__replace=function(e,t,i){return this.__items[i]=t,this.onReplace.fire(e,t,i)},t.prototype.sort=function(e){return this.__items.sort(e),this.onSort.fire()},t.prototype.get=function(e){return null!=e?this.__items[e]:this.__items.slice(0)},t.prototype.length=function(){return this.__items.length},t}(),t.UniqCollection=function(e){i(t,e);function t(){return r=t.__super__.constructor.apply(this,arguments)}return t.prototype.add=function(e){return a.call(this.__items,e)>=0?void 0:t.__super__.add.apply(this,arguments)},t.prototype.__replace=function(e,i,r){return a.call(this.__items,i)>=0?this.remove(e):t.__super__.__replace.apply(this,arguments)},t}(t.Collection),t.CollectionOfPromises=function(t){i(r,t);function r(){this.onAnyProgress=n(this.onAnyProgress,this),this.onAnyFail=n(this.onAnyFail,this),this.onAnyDone=n(this.onAnyDone,this),this.anyDoneList=e.Callbacks(),this.anyFailList=e.Callbacks(),this.anyProgressList=e.Callbacks(),this.anyProgressList.add(function(t,i){return e(t).data("lastProgress",i)}),r.__super__.constructor.apply(this,arguments)}return r.prototype.onAnyDone=function(e){var t,i,a,r,n;for(this.anyDoneList.add(e),r=this.__items,n=[],i=0,a=r.length;a>i;i++)t=r[i],"resolved"===t.state()?n.push(t.done(function(){return e.apply(null,[t].concat(o.call(arguments)))})):n.push(void 0);return n},r.prototype.onAnyFail=function(e){var t,i,a,r,n;for(this.anyFailList.add(e),r=this.__items,n=[],i=0,a=r.length;a>i;i++)t=r[i],"rejected"===t.state()?n.push(t.fail(function(){return e.apply(null,[t].concat(o.call(arguments)))})):n.push(void 0);return n},r.prototype.onAnyProgress=function(t){var i,a,r,n,o;for(this.anyProgressList.add(t),n=this.__items,o=[],a=0,r=n.length;r>a;a++)i=n[a],o.push(t(i,e(i).data("lastProgress")));return o},r.prototype.lastProgresses=function(){var t,i,a,r,n;for(r=this.__items,n=[],i=0,a=r.length;a>i;i++)t=r[i],n.push(e(t).data("lastProgress"));return n},r.prototype.add=function(e){return e&&e.then?(r.__super__.add.apply(this,arguments),this.__watchItem(e)):void 0},r.prototype.__replace=function(e,t,i){return t&&t.then?(r.__super__.__replace.apply(this,arguments),this.__watchItem(t)):this.remove(e)},r.prototype.__watchItem=function(e){var t,i=this;return t=function(t){return function(){return a.call(i.__items,e)>=0?t.fire.apply(t,[e].concat(o.call(arguments))):void 0}},e.then(t(this.anyDoneList),t(this.anyFailList),t(this.anyProgressList))},r}(t.UniqCollection)})}.call(this),function(){var e;e=r.jQuery,r.namespace("utils",function(t){var i;return i=function(t,i){var a,r=this;return a=e.Deferred(),i&&(t.src=i),t.complete?a.resolve(t):(e(t).one("load",function(){return a.resolve(t)}),e(t).one("error",function(){return a.reject(t)})),a.promise()},t.imageLoader=function(a){return e.isArray(a)?e.when.apply(null,e.map(a,t.imageLoader)):a.src?i(a):i(new Image,a)},t.videoLoader=function(t){var i;return i=e.Deferred(),e("<video/>").on("loadeddata",i.resolve).on("error",i.reject).attr("src",t).load(),i.promise()}})}.call(this),function(){var t=[].slice;r.namespace("utils",function(i){var a,r;return i.log=function(){var t;try{return null!=(t=e.console)&&"function"==typeof t.log?t.log.apply(t,arguments):void 0}catch(i){}},i.debug=function(){var a,r;if(null!=(a=e.console)?!a.debug:!0)return i.log.apply(i,["Debug:"].concat(t.call(arguments)));try{return(r=e.console).debug.apply(r,arguments)}catch(n){}},i.warn=function(){var a,r;if(null!=(a=e.console)?!a.warn:!0)return i.log.apply(i,["Warning:"].concat(t.call(arguments)));try{return(r=e.console).warn.apply(r,arguments)}catch(n){}},r={},i.warnOnce=function(e){return null==r[e]?(r[e]=!0,i.warn(e)):void 0},a={publicKey:"Global public key not set. Uploads may not work!\nAdd this to the <head> tag to set your key:\n\n<script>\nUPLOADCARE_PUBLIC_KEY = 'your_public_key';\n</script>"},i.commonWarning=function(e){return null!=a[e]?i.warnOnce(a[e]):void 0}})}.call(this),function(){var t;t=r.jQuery,r.namespace("utils",function(i){var a,r=this;return a={},t(e).on("message",function(e){var t,i,r,n,o,l,s;t=e.originalEvent;try{r=JSON.parse(t.data)}catch(c){return}if(r.type in a){for(l=a[r.type],s=[],n=0,o=l.length;o>n;n++)i=l[n],t.source===i[0]?s.push(i[1](r)):s.push(void 0);return s}}),i.registerMessage=function(e,t,i){return e in a||(a[e]=[]),a[e].push([t,i])},i.unregisterMessage=function(e,i){return e in a?a[e]=t.grep(a[e],function(e){return e[0]!==i}):void 0}})}.call(this),function(){var e,t=[].indexOf||function(e){for(var t=0,i=this.length;i>t;t++)if(t in this&&this[t]===e)return t;return-1},i=[].slice;e=r.jQuery,r.namespace("utils",function(a){var r;return a.unique=function(e){var i,a,r,n;for(a=[],r=0,n=e.length;n>r;r++)i=e[r],
 	t.call(a,i)<0&&a.push(i);return a},a.defer=function(e){return setTimeout(e,0)},a.gcd=function(e,t){var i;while(t)i=e%t,e=t,t=i;return e},a.once=function(e){var t,i;return t=!1,i=null,function(){return t||(i=e.apply(this,arguments),t=!0),i}},a.wrapToPromise=function(t){return e.Deferred().resolve(t).promise()},a.then=function(t,i,a,r){var n,o;return o=e.Deferred(),n=function(e,t){return e&&t?function(){return t.call(this,e.apply(this,arguments))}:e||t},t.then(n(i,o.resolve),n(a,o.reject),n(r,o.notify)),o.promise()},a.bindAll=function(t,i){var a;return a={},e.each(i,function(i,r){var n;return n=t[r],e.isFunction(n)?a[r]=function(){var e;return e=n.apply(t,arguments),e===t?a:e}:a[r]=n}),a},a.upperCase=function(e){return e.replace(/([A-Z])/g,"_$1").toUpperCase()},a.publicCallbacks=function(e){var t;return t=e.add,t.add=e.add,t.remove=e.remove,t},a.uuid=function(){return"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,function(e){var t,i;return t=16*Math.random()|0,i="x"===e?t:3&t|8,i.toString(16)})},a.splitUrlRegex=/^(?:([^:\/?#]+):)?(?:\/\/([^\/?\#]*))?([^?\#]*)\??([^\#]*)\#?(.*)$/,a.uuidRegex=/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/i,a.groupIdRegex=new RegExp(""+a.uuidRegex.source+"~[0-9]+","i"),a.cdnUrlRegex=new RegExp("^/?("+a.uuidRegex.source+")(?:/(-/(?:[^/]+/)+)?([^/]*))?$","i"),a.splitCdnUrl=function(e){return a.cdnUrlRegex.exec(a.splitUrlRegex.exec(e)[3])},a.escapeRegExp=function(e){return e.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g,"\\$&")},a.globRegexp=function(t,i){var r;return null==i&&(i="i"),r=e.map(t.split("*"),a.escapeRegExp),new RegExp("^"+r.join(".+")+"$",i)},a.normalizeUrl=function(e){var t;return t=n.location.protocol,"http:"!==t&&(t="https:"),e.replace(/^\/\//,t+"//").replace(/\/+$/,"")},a.fitText=function(e,t){var i,a;return e.length>t?(i=Math.ceil((t-3)/2),a=Math.floor((t-3)/2),e.slice(0,i)+"..."+e.slice(-a)):e},a.fitSizeInCdnLimit=function(e){return a.fitSize(e,[2048,2048])},a.fitSize=function(e,t,i){var a,r;return e[0]>t[0]||e[1]>t[1]||i?(r=t[0]/e[0],a=t[1]/e[1],!t[0]||t[1]&&r>a?[Math.round(a*e[0]),t[1]]:[t[0],Math.round(r*e[1])]):e.slice()},a.applyCropSelectionToFile=function(e,t,i,a){var r,n,o,l,s,c,u,p=this;return c=a.width,n=a.height,l=t.preferedSize,o="",u=c===i[0]&&n===i[1],u||(o+="-/crop/"+c+"x"+n+"/"+a.left+","+a.top+"/"),r=t.downscale&&(c>l[0]||n>l[1]),s=t.upscale&&(c<l[0]||n<l[1]),r||s?(a.sw=l[0],a.sh=l[1],o+="-/resize/"+l.join("x")+"/"):u||(o+="-/preview/"),e.then(function(e){return e.cdnUrlModifiers=o,e.cdnUrl=""+e.originalUrl+(o||""),e.crop=a,e})},a.fileInput=function(t,i,a){var r,n,o;return n=null,r=i.inputAcceptTypes,""===r&&(r=i.imagesOnly?"image/*":null),(o=function(){return n=e(i.multiple?'<input type="file" multiple>':'<input type="file">').attr("accept",r).css({position:"absolute",top:0,opacity:0,margin:0,padding:0,width:"auto",height:"auto",cursor:t.css("cursor")}).on("change",function(){return a(this),e(this).hide(),o()}),t.append(n)})(),t.css({position:"relative",overflow:"hidden"}).mousemove(function(t){var i,a,r,o;return o=e(this).offset(),i=o.left,a=o.top,r=n.width(),n.css({left:t.pageX-i-r+10,top:t.pageY-a-10})})},a.fileSelectDialog=function(t,i,a){var r;return r=i.inputAcceptTypes,""===r&&(r=i.imagesOnly?"image/*":null),e(i.multiple?'<input type="file" multiple>':'<input type="file">').attr("accept",r).css({position:"fixed",bottom:0,opacity:0}).on("change",function(){return a(this),e(this).remove()}).appendTo(t).focus().click().hide()},a.fileSizeLabels="B KB MB GB TB PB EB ZB YB".split(" "),a.readableFileSize=function(e,t,i,r){var n,o,l,s;if(null==t&&(t=""),null==i&&(i=""),null==r&&(r=""),e=parseInt(e,10),isNaN(e))return t;n=2,l=0,s=1e3-5*Math.pow(10,2-Math.max(n,3));while(e>s&&l<a.fileSizeLabels.length-1)l++,e/=1024;return e+=1e-15,o=Math.max(0,n-Math.floor(e).toFixed(0).length),e=Number(e.toFixed(o)),""+i+e+" "+a.fileSizeLabels[l]+r},a.ajaxDefaults={dataType:"json",crossDomain:!0,cache:!1},a.jsonp=function(t,i,r){return e.isPlainObject(i)&&(r=i,i="GET"),e.ajax(e.extend({url:t,type:i,data:r},a.ajaxDefaults)).then(function(t){var i;return t.error?(i=t.error.content||t.error,e.Deferred().reject(i)):t},function(e,i,r){var n;return n=""+i+" ("+r+")",a.warn("JSONP unexpected error: "+n+" while loading "+t),n})},a.canvasToBlob=function(e,t,i,a){var r,n,o,l,s,c;if(HTMLCanvasElement.prototype.toBlob)return e.toBlob(a,t,i);for(o=e.toDataURL(t,i),o=o.split(","),n=atob(o[1]),r=new Uint8Array(n.length),l=s=0,c=n.length;c>s;l=s+=1)r[l]=n.charCodeAt(l);return a(new Blob([r],{type:/:(.+\/.+);/.exec(o[0])[1]}))},a.taskRunner=function(e){var t,i,r,n;return n=0,t=[],i=function(){var e;return t.length?(e=t.shift(),a.defer(function(){return e(i)})):n-=1},r=function(r){return!e||e>n?(n+=1,a.defer(function(){return r(i)})):t.push(r)}},r=[["notify","progress",2],["resolve","done",0],["reject","fail",1]],a.fixedPipe=function(){var t,a;return a=arguments[0],t=2<=arguments.length?i.call(arguments,1):[],e.Deferred(function(i){return e.each(r,function(r,n){var o;return o=e.isFunction(t[n[2]])&&t[n[2]],a[n[1]](function(){var t;return t=o&&o.apply(this,arguments),t&&e.isFunction(t.promise)?t.promise().progress(i.notify).done(i.resolve).fail(i.reject):i[n[0]+"With"](this===a?i.promise():this,o?[t]:arguments)})})}).promise()}})}.call(this),function(){var t,i,a,n=[].indexOf||function(e){for(var t=0,i=this.length;i>t;t++)if(t in this&&this[t]===e)return t;return-1};i=r.expose,a=r.utils,t=r.jQuery,r.namespace("settings",function(o){var l,s,c,u,p,d,g,h,f,m;return s={live:!0,manualStart:!1,locale:null,localePluralize:null,localeTranslations:null,systemDialog:!1,crop:!1,previewStep:!1,imagesOnly:!1,clearable:!1,multiple:!1,multipleMax:0,multipleMin:1,multipleMaxStrict:!1,imageShrink:!1,pathValue:!0,tabs:"file camera url facebook gdrive gphotos dropbox instagram evernote flickr skydrive",preferredTypes:"",inputAcceptTypes:"",doNotStore:!1,publicKey:null,secureSignature:"",secureExpire:"",pusherKey:"79ae88bd931ea68464d9",cdnBase:"https://ucarecdn.com",urlBase:"https://upload.uploadcare.com",socialBase:"https://social.uploadcare.com",imagePreviewMaxSize:26214400,multipartMinSize:26214400,multipartPartSize:5242880,multipartMinLastPartSize:1048576,multipartConcurrency:4,multipartMaxAttempts:3,parallelDirectUploads:10,passWindowOpen:!1,scriptBase:"//ucarecdn.com/widget/"+r.version+"/uploadcare/",debugUploads:!1},h={tabs:{all:"file camera url facebook gdrive gphotos dropbox instagram evernote flickr skydrive box vk huddle","default":s.tabs}},f=function(e){return t.isArray(e)||(e=t.trim(e),e=e?e.split(" "):[]),e},l=function(e,t){var i,r,n,o,l,s,c,u;for(l=0,c=t.length;c>l;l++){if(r=t[l],o=n=f(e[r]),h.hasOwnProperty(r))for(o=[],s=0,u=n.length;u>s;s++)i=n[s],h[r].hasOwnProperty(i)?o=o.concat(f(h[r][i])):o.push(i);e[r]=a.unique(o)}return e},m=function(e,t){var i,r,n;for(r=0,n=t.length;n>r;r++)i=t[r],null!=e[i]&&(e[i]=a.normalizeUrl(e[i]));return e},c=function(e,i){var a,r,n,o;for(n=0,o=i.length;o>n;n++)a=i[n],null!=e[a]&&(r=e[a],"string"===t.type(r)?(r=t.trim(r).toLowerCase(),e[a]=!("false"===r||"disabled"===r)):e[a]=!!r);return e},u=function(e,t){var i,a,r;for(a=0,r=t.length;r>a;a++)i=t[a],null!=e[i]&&(e[i]=parseInt(e[i]));return e},d=function(e){var i,a;return a=/^([0-9]+)([x:])([0-9]+)\s*(|upscale|minimum)$/i,i=a.exec(t.trim(e.toLowerCase()))||[],{downscale:"x"===i[2],upscale:!!i[4],notLess:"minimum"===i[4],preferedSize:i.length?[+i[1],+i[3]]:void 0}},g=function(e){var i,r,n;return i=/^([0-9]+)x([0-9]+)(?:\s+(\d{1,2}|100)%)?$/i,r=i.exec(t.trim(e.toLowerCase()))||[],r.length?(n=r[1]*r[2],n>5e6?(a.warnOnce("Shrinked size can not be larger than 5MP. "+("You have set "+r[1]+"x"+r[2]+" (")+(""+Math.ceil(n/1e3/100)/10+"MP).")),!1):{quality:r[3]?r[3]/100:void 0,size:n}):!1},p=function(e){return l(e,["tabs","preferredTypes"]),m(e,["cdnBase","socialBase","urlBase","scriptBase"]),c(e,["doNotStore","imagesOnly","multiple","clearable","pathValue","previewStep","systemDialog","debugUploads","multipleMaxStrict"]),u(e,["multipleMax","multipleMin","multipartMinSize","multipartPartSize","multipartMinLastPartSize","multipartConcurrency","multipartMaxAttempts","parallelDirectUploads"]),e.crop===!1||t.isArray(e.crop)||(/^(disabled?|false|null)$/i.test(e.crop)?e.crop=!1:t.isPlainObject(e.crop)?e.crop=[e.crop]:e.crop=t.map((""+e.crop).split(","),d)),
 	e.imageShrink&&!t.isPlainObject(e.imageShrink)&&(e.imageShrink=g(e.imageShrink)),(e.crop||e.multiple)&&(e.previewStep=!0),a.abilities.sendFileAPI||(e.systemDialog=!1),e.validators&&(e.validators=e.validators.slice()),e},i("defaults",t.extend({allTabs:h.tabs.all},s)),o.globals=function(){var t,i,r;r={};for(t in s)i=e["UPLOADCARE_"+a.upperCase(t)],void 0!==i&&(r[t]=i);return r},o.common=a.once(function(e,i){var r;return i||(s=t.extend(s,o.globals())),r=p(t.extend(s,e||{})),r.publicKey||a.commonWarning("publicKey"),o.waitForSettings.fire(r),r}),o.build=function(e){var i;return i=t.extend({},o.common()),t.isEmptyObject(e)||(i=p(t.extend(i,e))),i},o.waitForSettings=t.Callbacks("once memory"),o.CssCollector=function(){function e(){this.urls=[],this.styles=[]}return e.prototype.addUrl=function(e){if(!/^https?:\/\//i.test(e))throw new Error("Embedded urls should be absolute. "+e);return n.call(this.urls,e)>=0?void 0:this.urls.push(e)},e.prototype.addStyle=function(e){return this.styles.push(e)},e}(),r.tabsCss=new o.CssCollector,s._emptyKeyText='<div class="uploadcare-dialog-message-center">\n<div class="uploadcare-dialog-big-title">Hello!</div>\n<div class="uploadcare-dialog-large-text">\n  <div>Your <a class="uploadcare-link" href="https://uploadcare.com/dashboard/">public key</a> is not set.</div>\n  <div>Add this to the &lt;head&gt; tag to start uploading files:</div>\n  <div class="uploadcare-pre">&lt;script&gt;\nUPLOADCARE_PUBLIC_KEY = \'your_public_key\';\n&lt;/script&gt;</div>\n</div>\n</div>'})}.call(this),function(){r.namespace("locale.translations",function(e){return e.en={uploading:"Uploading... Please wait.",loadingInfo:"Loading info...",errors:{"default":"Error",baddata:"Incorrect value",size:"File too big",upload:"Can’t upload",user:"Upload canceled",info:"Can’t load info",image:"Only images allowed",createGroup:"Can’t create file group",deleted:"File was deleted"},draghere:"Drop a file here",file:{one:"%1 file",other:"%1 files"},buttons:{cancel:"Cancel",remove:"Remove",choose:{files:{one:"Choose a file",other:"Choose files"},images:{one:"Choose an image",other:"Choose images"}}},dialog:{done:"Done",showFiles:"Show files",tabs:{names:{"empty-pubkey":"Welcome",preview:"Preview",file:"Local Files",url:"Arbitrary Links",camera:"Camera",facebook:"Facebook",dropbox:"Dropbox",gdrive:"Google Drive",gphotos:"Google Photos",instagram:"Instagram",vk:"VK",evernote:"Evernote",box:"Box",skydrive:"OneDrive",flickr:"Flickr",huddle:"Huddle"},file:{drag:"Drop a file here",nodrop:"Upload files from your computer",cloudsTip:"Cloud storages<br>and social networks",or:"or",button:"Choose a local file",also:"You can also choose it from"},url:{title:"Files from the Web",line1:"Grab any file off the web.",line2:"Just provide the link.",input:"Paste your link here...",button:"Upload"},camera:{capture:"Take a photo",mirror:"Mirror",startRecord:"Record a video",stopRecord:"Stop",cancelRecord:"Cancel",retry:"Request permissions again",pleaseAllow:{title:"Please allow access to your camera",text:"You have been prompted to allow camera access from this site. In order to take pictures with your camera you must approve this request."},notFound:{title:"No camera detected",text:"Looks like you have no camera connected to this device."}},preview:{unknownName:"unknown",change:"Cancel",back:"Back",done:"Add",unknown:{title:"Uploading... Please wait for a preview.",done:"Skip preview and accept"},regular:{title:"Add this file?",line1:"You are about to add the file above.",line2:"Please confirm."},image:{title:"Add this image?",change:"Cancel"},crop:{title:"Crop and add this image",done:"Done",free:"free"},video:{title:"Add this video?",change:"Cancel"},error:{"default":{title:"Oops!",text:"Something went wrong during the upload.",back:"Please try again"},image:{title:"Only image files are accepted.",text:"Please try again with another file.",back:"Choose image"},size:{title:"The file you selected exceeds the limit.",text:"Please try again with another file."},loadImage:{title:"Error",text:"Can’t load image"}},multiple:{title:"You’ve chosen %files%",question:"Do you want to add all of these files?",tooManyFiles:"You’ve chosen too many files. %max% is maximum.",tooFewFiles:"You’ve chosen %files%. At least %min% required.",clear:"Remove all",done:"Done"}}},footer:{text:"powered by",link:"uploadcare"}}}}),r.namespace("locale.pluralize",function(e){return e.en=function(e){return 1===e?"one":"other"}})}.call(this),function(){var e,t,i;i=r.utils,t=r.settings,e=r.jQuery,r.namespace("locale",function(a){var r,n,o,l,s;return n="en",o={lang:n,translations:a.translations[n],pluralize:a.pluralize[n]},s=function(t){var i,r,n;return i=t.locale||o.lang,n=e.extend(!0,{},a.translations[i],t.localeTranslations),r=e.isFunction(t.localePluralize)?t.localePluralize:a.pluralize[i],{lang:i,translations:n,pluralize:r}},r=i.once(function(){return s(t.build())}),a.rebuild=function(e){var i;return i=s(t.build(e)),r=function(){return i}},l=function(e,t){var i,a,r,n;for(i=e.split("."),r=0,n=i.length;n>r;r++){if(a=i[r],null==t)return null;t=t[a]}return t},a.t=function(e,t){var i,a,n;return i=r(),a=l(e,i.translations),null==a&&i.lang!==o.lang&&(i=o,a=l(e,i.translations)),null!=t&&(a=null!=i.pluralize?(null!=(n=a[i.pluralize(t)])?n.replace("%1",t):void 0)||t:""),a||""}})}.call(this),function(){var e,t,i;t=r.locale,i=r.utils,e=r.jQuery,r.namespace("templates",function(a){return a.JST={},a.tpl=function(n,o){var l;return null==o&&(o={}),l=a.JST[n],null!=l?l(e.extend({t:t.t,utils:i,uploadcare:r},o)):""}})}.call(this),r.templates.JST["circle-text"]=function(e){var __p=[],t=function(){__p.push.apply(__p,arguments)};with(e||{})__p.push('<div class="uploadcare-widget-circle-back">\r\n  <div class="uploadcare-widget-circle-text"></div>\r\n</div>\r\n');return __p.join("")},r.templates.JST.dialog=function(e){var __p=[],t=function(){__p.push.apply(__p,arguments)};with(e||{})__p.push('<div class="uploadcare-dialog uploadcare-responsive-panel"><!--\r\n--><div class="uploadcare-dialog-inner-wrap">\r\n    <div class="uploadcare-dialog-close">×</div>\r\n    <div class="uploadcare-dialog-placeholder"></div>\r\n  </div>\r\n</div>\r\n');return __p.join("")},r.templates.JST.panel=function(e){var __p=[],i=function(){__p.push.apply(__p,arguments)};with(e||{})__p.push('<div class="uploadcare-dialog-panel">\r\n  <div class="uploadcare-dialog-tabs"></div>\r\n\r\n  <div class="uploadcare-panel-footer uploadcare-panel-footer__summary">\r\n    <div class="uploadcare-dialog-button uploadcare-dialog-source-base-show-files"\r\n         tabindex="0" role="button">\r\n      ',(""+t("dialog.showFiles")).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#x27;").replace(/\//g,"&#x2F;"),'\r\n      <div class="uploadcare-panel-footer-counter"></div>\r\n    </div>\r\n    <div class="uploadcare-dialog-button-success uploadcare-dialog-source-base-done"\r\n         tabindex="0" role="button">',(""+t("dialog.done")).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#x27;").replace(/\//g,"&#x2F;"),'</div>\r\n    <div class="uploadcare-panel-footer-text"></div>\r\n  </div>\r\n</div>\r\n<div class="uploadcare-dialog-footer">\r\n  ',(""+t("dialog.footer.text")).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#x27;").replace(/\//g,"&#x2F;"),'\r\n  <svg width="13" height="13" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><title>Uploadcare Logo</title><g fill="none" fill-rule="evenodd"><path d="M-1-1h32v32H-1z"/><path d="M15 29.452c7.98 0 14.452-6.47 14.452-14.452C29.452 7.02 22.982.548 15 .548 7.02.548.548 7.018.548 15c0 7.98 6.47 14.452 14.452 14.452zm0-12.846c.887 0 1.606-.72 1.606-1.606 0-.887-.72-1.606-1.606-1.606-.887 0-1.606.72-1.606 1.606 0 .887.72 1.606 1.606 1.606z" fill="#FFD800"/></g></svg>\r\n  <a href="https://uploadcare.com/?utm_campaign=widget&utm_source=copyright&utm_medium=desktop&utm_content=',(""+r.version).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#x27;").replace(/\//g,"&#x2F;"),'"\r\n     target="_blank">',(""+t("dialog.footer.link")).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#x27;").replace(/\//g,"&#x2F;"),"</a>\r\n</div>\r\n");
 	return __p.join("")},r.templates.JST.styles=function(e){var __p=[],t=function(){__p.push.apply(__p,arguments)};with(e||{})__p.push('\n\n\n\n\n\n\n\n.uploadcare-dialog-disabled-tab:hover:before,.uploadcare-dialog-tab:before,.uploadcare-dialog-tab:hover:before{background-image:url("',settings.scriptBase,'/images/tab-icons.png");background-size:50px}.uploadcare-dialog-tab_current:before,.uploadcare-dialog-tab_current:hover:before{background-image:url("',settings.scriptBase,'/images/tab-icons-active.png");background-size:50px}.uploadcare-dialog-file-sources:before{background-image:url("',settings.scriptBase,'/images/arrow.png")}.uploadcare-remove{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAQAAAAngNWGAAABM0lEQVQoz5VTvW7CMBC2kHivQsjrZGRjaB6lXWCJbWScIT8PYN0GQ7s6FUUKL8CA2suR2C4FlfqkyL77cuf7/B1jbp3GdmIW1VIVKq9ezMI+ncbs92omNeeQgYQ1msQdh5o30x+g82ibCAysr4yDgG1yHjngLhkyXVuXeZcMRSNJMI4mAwinGl2siaiFWncOAW/QgO4vwCGHD/QI2tca27LxEDrAF7QE5fg94ungfrMxM89ZXyqnYAsbtG53RM/lKhmYlJUr6XrUPbQlmHY8SChXTBUhHRsCXfKGdKmCKe2PApQDKmokAJavD5b2zei+hTvNDPQI+HR5PD3C0+MJf4c95vCE79ETEI5POPvzCWf/EwXJbH5XZvNAZqSh6U3hRjc0jqMQmxRHoVRltTSpjcNR+AZwwvykEau0BgAAAABJRU5ErkJggg==)}.uploadcare-file-item__error:before{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABIklEQVR42q3Vv2rCUBTHcaEQH825TdLl9hl0FsFdV7s5uXSpb+DoEziV6JCgATdR02D9E09/R64KF3NPbQx84BJOvgRyuSktK5VbHHiFDwhhCwl86Xu+nimZbsWeYQIkmMCLLfgELaA7tfSzRlCISVEz6AEV5J2DDszyBtNGg7L5/CSt123BGBwOKqA8WRzT+cqmU+kt3zj4aQ0myTW4WEjBPgcj29B+NLoE98OhFIw4+GMb2vR6l+Cm25WCWw6ubUPftRrR8XiSVKt/CgZADxKJH2XlurQbDBivxY8ibpu02SR98VrcNuLGXitFh/GYDkHAa2ljlznIfKCCfPNwaBeItfOOr84/Yu/m8WVy7zhgPfHE1hxQ0IcQdlqo76m8X8Avwkyxg4iIuCEAAAAASUVORK5CYII=)}.uploadcare-file-icon{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAQAAAAngNWGAAABD0lEQVQoFQXBPa5OARQF0LXPvfKS9wo/hegMQUzEJESiUIpOoxOlRKJDIgqVUZiNqPGdba0AAPLj48Mn/8ApgEcPOAGArx/uPVvrEFVRA04A+PTu+vk1BlSwLuAE4Pubvy+vHGAFxABOgC+v/ryO24oYUVUDGODzi+PtjfuuXBBUxG8XASd8e3rz/o5rY60YwVjXKAj8/HXrblDFIAKCehxOOHcxCggWUTHghJYqIqIigoqCEyCKEcXFgAjghCAWi1EDIlgwABWxoIhYaxUMsIo4BEHBRR1ggMMogoqq4jCAgVo1VhGMgFjACQUjCKIqIigYqKiLILiogFULBkbUWhSDqKpYMFAFwaJGUVUH+A8ToG9OM8KqQQAAAABJRU5ErkJggg==)}.uploadcare-zoomable-icon:after{background-image:url("',settings.scriptBase,'/images/zoom@2x.png")}.uploadcare-dialog-error-tab-illustration{background-image:url("',settings.scriptBase,'/images/error-default.png")}.uploadcare-dialog-camera-holder .uploadcare-dialog-error-tab-illustration,.uploadcare-dialog-error-tab-image .uploadcare-dialog-error-tab-illustration{background-image:url("',settings.scriptBase,'/images/error-image.png")}.uploadcare-dialog{background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQIHWMw/AQAAVcBJCiBozgAAAAASUVORK5CYII=);background:rgba(48,48,48,.7)}@media (-webkit-min-device-pixel-ratio:1.5),(min-resolution:144dpi){.uploadcare-dialog-disabled-tab:hover:before,.uploadcare-dialog-tab:before,.uploadcare-dialog-tab:hover:before{background-image:url("',settings.scriptBase,'/images/tab-icons@2x.png")}.uploadcare-dialog-tab_current:before,.uploadcare-dialog-tab_current:hover:before{background-image:url("',settings.scriptBase,"/images/tab-icons-active@2x.png\")}}html.uploadcare-dialog-opened{overflow:hidden}.uploadcare-dialog{font-family:\"Helvetica Neue\",Helvetica,Arial,\"Lucida Grande\",sans-serif;position:fixed;top:0;left:0;width:100%;height:100%;z-index:10000;overflow:auto;white-space:nowrap;text-align:center}.uploadcare-dialog:before{display:inline-block;vertical-align:middle;content:'';height:100%;position:static;width:0}.uploadcare-dialog *{margin:0;padding:0}.uploadcare-dialog .uploadcare-dialog-panel{border-radius:8px;box-shadow:0 1px 2px rgba(0,0,0,.35)}.uploadcare-dialog{-webkit-transition:opacity .33s cubic-bezier(.05,.7,.25,1);transition:opacity .33s cubic-bezier(.05,.7,.25,1);opacity:0}.uploadcare-dialog .uploadcare-dialog-inner-wrap{-webkit-transition:-webkit-transform .33s cubic-bezier(.05,.7,.25,1);transition:transform .33s cubic-bezier(.05,.7,.25,1);transition:transform .33s cubic-bezier(.05,.7,.25,1),-webkit-transform .33s cubic-bezier(.05,.7,.25,1);-webkit-transform:scale(.8);-ms-transform:scale(.8);transform:scale(.8);-webkit-transform-origin:50% 100%;-ms-transform-origin:50% 100%;transform-origin:50% 100%}.uploadcare-dialog.uploadcare-active{opacity:1}.uploadcare-dialog.uploadcare-active .uploadcare-dialog-inner-wrap{-webkit-transform:none;-ms-transform:none;transform:none}.uploadcare-dialog-inner-wrap{display:inline-block;vertical-align:middle;white-space:normal;text-align:left;box-sizing:border-box;position:relative;width:100%;min-width:760px;max-width:944px;padding:0 33px 0 11px}.uploadcare-dialog-close{width:33px;height:33px;line-height:33px;font-size:29.7px;font-weight:700;color:#fff;cursor:pointer;position:absolute;text-align:center;right:0}.uploadcare-dialog-panel{overflow:hidden;position:relative;background:#efefef;font-weight:400;padding-left:75px;box-sizing:border-box}.uploadcare-dialog-panel :focus{outline:2px dotted #0094c0}.uploadcare-dialog-panel .uploadcare-mouse-focused:focus,.uploadcare-dialog-panel :active{outline:none}.uploadcare-dialog-panel.uploadcare-panel-hide-tabs{padding-left:0}.uploadcare-dialog-tabs{box-sizing:border-box;width:75px;height:616px;margin-left:-75px;float:left;background:#dee0e1;overflow:hidden}.uploadcare-panel-hide-tabs .uploadcare-dialog-tabs{display:none}.uploadcare-dialog-tab{box-sizing:border-box;height:56px;position:relative;border:1px solid #c5cace;border-width:0 1px 1px 0;cursor:pointer}.uploadcare-dialog-tab .uploadcare-dialog-icon,.uploadcare-dialog-tab:before{box-sizing:border-box;position:absolute;top:50%;left:50%;display:inline-block;width:50px;height:50px;margin:-25px;opacity:.66}.uploadcare-dialog-tab:before{content:''}.uploadcare-dialog-tab:hover{background-color:#e5e7e8}.uploadcare-dialog-tab:hover .uploadcare-dialog-icon{opacity:1}.uploadcare-dialog-tab:hover:before{opacity:1}.uploadcare-dialog-tab_current{border-right:1px solid #efefef;background-color:#efefef}.uploadcare-dialog-tab_current:hover{background-color:#efefef}.uploadcare-dialog-tab_current .uploadcare-dialog-icon{opacity:1}.uploadcare-dialog-tab_current:before{opacity:1}.uploadcare-dialog-tab_hidden{display:none!important}.uploadcare-dialog-disabled-tab{cursor:default}.uploadcare-dialog-disabled-tab:hover{background-color:#dee0e1}.uploadcare-dialog-tab-preview .uploadcare-widget-circle{padding:10px}.uploadcare-dialog-tab-preview .uploadcare-widget-circle--canvas{color:#828689;border-color:#bfbfbf}.uploadcare-dialog-tab-preview.uploadcare-dialog-tab_current .uploadcare-widget-circle--canvas{color:#d0bf26;border-color:#e1e5e7}.uploadcare-dialog-tab-preview:before{display:none}.uploadcare-dialog-tab-file:before{background-position:0 -50px}.uploadcare-dialog-tab-url:before{background-position:0 -100px}.uploadcare-dialog-tab-facebook:before{background-position:0 -150px}.uploadcare-dialog-tab-dropbox:before{background-position:0 -200px}.uploadcare-dialog-tab-gdrive:before{background-position:0 -250px}.uploadcare-dialog-tab-instagram:before{background-position:0 -300px}.uploadcare-dialog-tab-vk:before{background-position:0 -350px}.uploadcare-dialog-tab-evernote:before{background-position:0 -400px}.uploadcare-dialog-tab-box:before{background-position:0 -450px}.uploadcare-dialog-tab-skydrive:before{background-position:0 -500px}.uploadcare-dialog-tab-flickr:before{background-position:0 -550px}.uploadcare-dialog-tab-camera:before{background-position:0 -600px}.uploadcare-dialog-tab-huddle:before{background-position:0 -650px}.uploadcare-dialog-tab-gphotos:before{background-position:0 -700px}.uploadcare-dialog-tabs-panel{position:relative;display:none;box-sizing:border-box;height:616px;line-height:22px;font-size:16px;color:#000}.uploadcare-dialog-multiple .uploadcare-dialog-tabs-panel{height:550px}.uploadcare-dialog-tabs-panel .uploadcare-dialog-input{box-sizing:border-box;width:100%;height:44px;margin-bottom:22px;padding:11px 12.5px;font-family:inherit;font-size:16px;border:1px solid #c5cace;background:#fff;color:#000}.uploadcare-dialog-tabs-panel_current{display:block}.uploadcare-pre{white-space:pre;font-family:monospace;margin:22px auto;padding:22px 25px;background-color:#fff;border:1px solid #c5cace;border-radius:3px;text-align:left;font-size:15px;line-height:22px}.uploadcare-dialog-footer{font-size:13px;line-height:1.4em;text-align:center;color:#fff;margin:15px}.uploadcare-dialog .uploadcare-dialog-footer svg{vertical-align:middle;padding:0 2px}.uploadcare-dialog .uploadcare-dialog-footer a{color:#fff;text-decoration:none}.uploadcare-dialog .uploadcare-dialog-footer a:hover{text-decoration:underline}.uploadcare-dialog-title{font-size:22px;line-height:1;margin-bottom:22px}.uploadcare-dialog-title.uploadcare-error{color:red}.uploadcare-dialog-title2{font-size:20px;line-height:1;padding-bottom:11px}.uploadcare-dialog-big-title{font-size:40px;font-weight:700;line-height:1em;margin-bottom:50px}.uploadcare-dialog-label{font-size:15px;line-height:25px;margin-bottom:12.5px;word-wrap:break-word}.uploadcare-dialog-large-text{font-size:20px;font-weight:400;line-height:1.5em}.uploadcare-dialog-large-text .uploadcare-pre{display:inline-block;font-size:18px}.uploadcare-dialog-section{margin-bottom:22px}.uploadcare-dialog-normal-text{font-size:13px;color:#545454}.uploadcare-dialog-button,.uploadcare-dialog-button-success{display:inline-block;font-size:13px;line-height:30px;padding:0 12.5px;margin-right:.5em;border:solid 1px;border-radius:3px;cursor:pointer}.uploadcare-dialog-button{color:#444}.uploadcare-dialog-button,.uploadcare-dialog-button.uploadcare-disabled-el:active,.uploadcare-dialog-button.uploadcare-disabled-el:hover,.uploadcare-dialog-button[disabled]:active,.uploadcare-dialog-button[disabled]:hover{background:#f3f3f3;background:-webkit-linear-gradient(#f5f5f5,#f1f1f1);background:linear-gradient(#f5f5f5,#f1f1f1);box-shadow:none;border-color:#dcdcdc}.uploadcare-dialog-button:hover{background:#f9f9f9;background:-webkit-linear-gradient(#fbfbfb,#f6f6f6);background:linear-gradient(#fbfbfb,#f6f6f6);box-shadow:inset 0 -1px 3px rgba(0,0,0,.05)}.uploadcare-dialog-button:active{background:#f3f3f3;background:-webkit-linear-gradient(#f5f5f5,#f1f1f1);background:linear-gradient(#f5f5f5,#f1f1f1);box-shadow:inset 0 2px 2px rgba(0,0,0,.05)}.uploadcare-dialog-button.uploadcare-disabled-el,.uploadcare-dialog-button[disabled]{cursor:default;opacity:.6}.uploadcare-dialog-button:active,.uploadcare-dialog-button:hover{border-color:#cbcbcb}.uploadcare-dialog-button-success{color:#fff}.uploadcare-dialog-button-success,.uploadcare-dialog-button-success.uploadcare-disabled-el:active,.uploadcare-dialog-button-success.uploadcare-disabled-el:hover,.uploadcare-dialog-button-success[disabled]:active,.uploadcare-dialog-button-success[disabled]:hover{background:#3886eb;background:-webkit-linear-gradient(#3b8df7,#347fdf);background:linear-gradient(#3b8df7,#347fdf);box-shadow:none;border-color:#266fcb}.uploadcare-dialog-button-success:hover{background:#337ad6;background:-webkit-linear-gradient(#3986ea,#2c6dc2);background:linear-gradient(#3986ea,#2c6dc2)}.uploadcare-dialog-button-success:active{background:#3178d3;background:-webkit-linear-gradient(#3680e1,#2c6fc5);background:linear-gradient(#3680e1,#2c6fc5)}.uploadcare-dialog-button-success.uploadcare-disabled-el,.uploadcare-dialog-button-success[disabled]{cursor:default;opacity:.6}.uploadcare-dialog-button-success:active,.uploadcare-dialog-button-success:hover{border-color:#266eca #1f62b7 #1753a1}.uploadcare-dialog-button-success:hover{box-shadow:inset 0 -1px 3px rgba(22,82,160,.5)}.uploadcare-dialog-button-success:active{box-shadow:inset 0 1px 3px rgba(22,82,160,.4)}.uploadcare-dialog-big-button{border-radius:100px;font-size:20px;font-weight:400;letter-spacing:1px;color:#fff;line-height:33px;border:solid 1px #276fcb;text-shadow:0 -1px #2a7ce5;display:inline-block;padding:16.5px 2em;cursor:pointer;box-shadow:inset 0 -2px #1f66c1;background:#458eee;background:-webkit-linear-gradient(#4892f6,#4289e6);background:linear-gradient(#4892f6,#4289e6)}.uploadcare-dialog-big-button:hover{box-shadow:inset 0 -2px #1652a0;background:#337ad7;background:-webkit-linear-gradient(#3986eb,#2c6dc2);background:linear-gradient(#3986eb,#2c6dc2)}.uploadcare-dialog-big-button:active{box-shadow:inset 0 2px #2561b9;background:#2c6ec3;background:-webkit-linear-gradient(#2c6ec3,#2c6ec3);background:linear-gradient(#2c6ec3,#2c6ec3)}.uploadcare-dialog-preview-image-wrap,.uploadcare-dialog-preview-video-wrap{white-space:nowrap;text-align:center;width:100%;height:462px}.uploadcare-dialog-preview-image-wrap:before,.uploadcare-dialog-preview-video-wrap:before{display:inline-block;vertical-align:middle;content:'';height:100%;position:static;width:0}.uploadcare-dialog-preview--with-sizes .uploadcare-dialog-preview-image-wrap,.uploadcare-dialog-preview--with-sizes .uploadcare-dialog-preview-video-wrap{position:relative;top:-40px;height:422px}.uploadcare-dialog-preview-image,.uploadcare-dialog-preview-video{display:inline-block;vertical-align:middle;white-space:normal;max-width:100%;max-height:100%}.uploadcare-dialog-tabs-panel-preview.uploadcare-dialog-tabs-panel_current~.uploadcare-panel-footer{display:none}.uploadcare-panel-footer{box-sizing:border-box;background:#fff3be;border-top:1px solid #efe2a9;height:66px;padding:17px 25px 0}.uploadcare-panel-footer .uploadcare-dialog-button-success{float:right}.uploadcare-panel-footer .uploadcare-dialog-button{float:left}.uploadcare-panel-footer .uploadcare-dialog-button,.uploadcare-panel-footer .uploadcare-dialog-button-success{min-width:100px;text-align:center;margin-right:0}.uploadcare-panel-footer .uploadcare-error{color:red}.uploadcare-panel-footer-text{text-align:center;color:#85732c;font-size:15px;line-height:32px}.uploadcare-dialog-message-center{text-align:center;padding-top:110px}.uploadcare-dialog-preview-center{text-align:center;padding-top:176px}.uploadcare-dialog-preview-circle{width:66px;height:66px;display:inline-block;margin-bottom:22px}.uploadcare-dialog-error-tab-wrap{height:100%;text-align:center;white-space:nowrap}.uploadcare-dialog-error-tab-wrap:before{display:inline-block;vertical-align:middle;content:'';height:100%;position:static;width:0}.uploadcare-dialog-error-tab-wrap .uploadcare-dialog-title{margin-bottom:12px}.uploadcare-dialog-error-tab-wrap .uploadcare-dialog-normal-text{margin-bottom:38px}.uploadcare-dialog-error-tab-wrap .uploadcare-dialog-button-success{margin:0}.uploadcare-dialog-error-tab-wrap2{display:inline-block;vertical-align:middle;white-space:normal;margin-top:-22px}.uploadcare-dialog-error-tab-illustration{display:inline-block;width:170px;height:120px;background-position:center;background-repeat:no-repeat;margin-bottom:38px}.uploadcare-draganddrop .uploadcare-if-no-draganddrop,.uploadcare-if-draganddrop{display:none}.uploadcare-draganddrop .uploadcare-if-draganddrop{display:block}.uploadcare-draganddrop .uploadcare-dialog-file-drop-area{border:dashed 3px #c5cacd;background:rgba(255,255,255,.64)}.uploadcare-draganddrop .uploadcare-dialog-file-title{color:#dee0e1;text-shadow:0 1px #fff;margin-top:0}.uploadcare-dialog-file-drop-area{width:100%;height:100%;box-sizing:border-box;border:none;text-align:center;border-radius:3px;padding-top:70px}.uploadcare-dialog-file-drop-area .uploadcare-dialog-big-button{margin-top:11px;margin-bottom:55px}.uploadcare-dialog-file-title{font-size:40px;line-height:1;color:#000;font-weight:700;margin:66px 0}.uploadcare-dialog-file-or{font-size:13px;color:#8f9498;margin-bottom:33px}.uploadcare-dialog-file-sources{position:relative;display:inline-block;padding:0 80px 0 100px;line-height:2em}.uploadcare-dialog-file-sources:before{background-repeat:no-repeat;content:'';display:block;position:absolute;width:67px;height:44px;padding:0;top:-30px;left:10px}.uploadcare-dialog-file-source{display:inline;font-size:15px;margin-right:.2em;cursor:pointer;font-weight:300;white-space:nowrap}.uploadcare-dialog-file-source:after{content:'\\00B7';color:#b7babc;margin-left:.5em}.uploadcare-dialog-file-source:last-child:after{display:none}.uploadcare-dragging .uploadcare-dialog-file-drop-area .uploadcare-dialog-big-button,.uploadcare-dragging .uploadcare-dialog-file-or,.uploadcare-dragging .uploadcare-dialog-file-sources{display:none}.uploadcare-dragging .uploadcare-dialog-file-drop-area{background-color:#f0f0f0;border-color:#b3b5b6;padding-top:264px}.uploadcare-dragging .uploadcare-dialog-file-title{color:#707478}.uploadcare-dragging.uploadcare-dialog-file-drop-area{background-color:#f2f7fe;border-color:#438ae7}.uploadcare-dragging.uploadcare-dialog-file-drop-area .uploadcare-dialog-file-title{color:#438ae7}.uploadcare-dialog-camera-holder{white-space:nowrap;text-align:center;height:528px}.uploadcare-dialog-camera-holder:before{display:inline-block;vertical-align:middle;content:'';height:100%;position:static;width:0}.uploadcare-dialog-camera-holder .uploadcare-dialog-normal-text{margin-bottom:38px}.uploadcare-dialog-multiple .uploadcare-dialog-camera-holder{height:462px}.uploadcare-dialog-camera-video{vertical-align:middle;white-space:normal;display:none;max-width:100%;max-height:528px;-webkit-transition:-webkit-transform .8s cubic-bezier(.23,1,.32,1);transition:transform .8s cubic-bezier(.23,1,.32,1);transition:transform .8s cubic-bezier(.23,1,.32,1),-webkit-transform .8s cubic-bezier(.23,1,.32,1)}.uploadcare-dialog-multiple .uploadcare-dialog-camera-video{max-height:462px}.uploadcare-dialog-camera--mirrored{-webkit-transform:scale(-1,1);-ms-transform:scale(-1,1);transform:scale(-1,1)}.uploadcare-dialog-camera-message{vertical-align:middle;white-space:normal;display:none;max-width:450px}.uploadcare-dialog-camera-controls{margin-top:17px;text-align:center}.uploadcare-dialog-camera-mirror{position:absolute;margin-right:0;right:25px}.uploadcare-dialog-camera-cancel-record,.uploadcare-dialog-camera-capture,.uploadcare-dialog-camera-mirror,.uploadcare-dialog-camera-not-found,.uploadcare-dialog-camera-retry,.uploadcare-dialog-camera-start-record,.uploadcare-dialog-camera-stop-record{display:none}.uploadcare-dialog-camera-requested .uploadcare-dialog-camera-message{display:inline-block}.uploadcare-dialog-camera-not-founded .uploadcare-dialog-camera-please-allow{display:none}.uploadcare-dialog-camera-not-founded .uploadcare-dialog-camera-not-found{display:block}.uploadcare-dialog-camera-denied .uploadcare-dialog-camera-message,.uploadcare-dialog-camera-denied .uploadcare-dialog-camera-retry,.uploadcare-dialog-camera-ready .uploadcare-dialog-camera-capture,.uploadcare-dialog-camera-ready .uploadcare-dialog-camera-mirror,.uploadcare-dialog-camera-ready .uploadcare-dialog-camera-start-record,.uploadcare-dialog-camera-ready .uploadcare-dialog-camera-video,.uploadcare-dialog-camera-recording .uploadcare-dialog-camera-cancel-record,.uploadcare-dialog-camera-recording .uploadcare-dialog-camera-stop-record,.uploadcare-dialog-camera-recording .uploadcare-dialog-camera-video{display:inline-block}.uploadcare-file-list{height:550px;overflow:auto;position:relative;margin:0 -25px -22px 0}.uploadcare-dialog-multiple .uploadcare-file-list{height:484px}.uploadcare-file-list_table .uploadcare-file-item{border-top:1px solid #e3e3e3;border-bottom:1px solid #e3e3e3;margin-bottom:-1px;display:table;table-layout:fixed;width:100%;padding:10px 0;min-height:20px}.uploadcare-file-list_table .uploadcare-file-item>*{box-sizing:content-box;display:table-cell;vertical-align:middle;padding-right:20px}.uploadcare-file-list_table .uploadcare-file-item:last-child{margin-bottom:0}.uploadcare-file-list_table .uploadcare-file-item:hover{background:#ececec}.uploadcare-file-list_table .uploadcare-file-item__preview{width:55px;padding-right:10px}.uploadcare-file-list_table .uploadcare-file-item__preview>img{height:55px}.uploadcare-file-list_table .uploadcare-file-item__size{width:3.5em}.uploadcare-file-list_table .uploadcare-file-item__progressbar{width:80px}.uploadcare-file-list_table .uploadcare-zoomable-icon:after{width:55px}.uploadcare-file-list_tiles .uploadcare-file-item{text-align:left;position:relative;display:inline-block;vertical-align:top;width:170px;min-height:170px;padding:0 20px 10px 0}.uploadcare-file-list_tiles .uploadcare-file-item>*{padding-bottom:10px}.uploadcare-file-list_tiles .uploadcare-file-item__name{padding-top:10px}.uploadcare-file-list_tiles .uploadcare-file-item__remove{position:absolute;top:0;right:10px}.uploadcare-file-list_tiles .uploadcare-file-item__preview{white-space:nowrap;width:170px;height:170px;padding-bottom:0}.uploadcare-file-list_tiles .uploadcare-file-item__preview:before{display:inline-block;vertical-align:middle;content:'';height:100%;position:static;width:0}.uploadcare-file-list_tiles .uploadcare-file-item__preview img{display:inline-block;vertical-align:middle;white-space:normal}.uploadcare-file-list_tiles .uploadcare-file-item_error .uploadcare-file-item__preview,.uploadcare-file-list_tiles .uploadcare-file-item_uploaded .uploadcare-file-item__name,.uploadcare-file-list_tiles .uploadcare-file-item_uploaded .uploadcare-file-item__size,.uploadcare-file-list_tiles .uploadcare-file-item_uploading .uploadcare-file-item__preview{display:none}.uploadcare-file-icon,.uploadcare-file-item__error:before{content:'';display:inline-block;width:20px;height:20px;margin:-3.5px .7em -3.5px 0}.uploadcare-file-item{font-size:13px;line-height:1.2}.uploadcare-file-item:hover .uploadcare-file-item__remove{visibility:visible}.uploadcare-file-item:hover .uploadcare-zoomable-icon:after{display:block}.uploadcare-file-item_error .uploadcare-file-item__progressbar,.uploadcare-file-item_error .uploadcare-file-item__size,.uploadcare-file-item_uploaded .uploadcare-file-item__error,.uploadcare-file-item_uploaded .uploadcare-file-item__progressbar,.uploadcare-file-item_uploading .uploadcare-file-item__error{display:none}.uploadcare-file-item__preview{text-align:center;line-height:0}.uploadcare-file-item__preview>img{display:inline-block;width:auto;height:auto;max-width:100%;max-height:100%}.uploadcare-file-item__name{width:100%;word-wrap:break-word}.uploadcare-file-item__error{width:200px;color:#f5444b}.uploadcare-file-item__remove{visibility:hidden;width:20px;text-align:right;line-height:0}.uploadcare-remove{width:20px;height:20px;cursor:pointer}.uploadcare-zoomable-icon{position:relative;cursor:pointer}.uploadcare-zoomable-icon:after{content:'';position:absolute;top:0;left:0;display:none;width:100%;height:100%;background-size:45px 45px;background-repeat:no-repeat;background-position:center}.uploadcare-progressbar{width:100%;height:8px;background:#e0e0e0;border-radius:100px}.uploadcare-progressbar__value{height:100%;background:#d6b849;border-radius:100px}.uploadcare-file-icon{margin:0}.uploadcare-dialog-padding{padding:22px 25px}.uploadcare-dialog-remote-iframe-wrap{overflow:auto;-webkit-overflow-scrolling:touch}.uploadcare-dialog-remote-iframe{display:block;width:100%;height:100%;border:0;opacity:0}.uploadcare-hidden,.uploadcare-if-mobile,.uploadcare-panel-footer-counter,.uploadcare-panel-footer__summary{display:none}.uploadcare-dialog-multiple .uploadcare-panel-footer__summary{display:block}@media screen and (max-width:760px){.uploadcare-dialog-opened{overflow:visible!important;position:static!important;width:auto!important;height:auto!important;min-width:0!important;background:#efefef!important}body.uploadcare-dialog-opened>.uploadcare-inactive,body.uploadcare-dialog-opened>:not(.uploadcare-dialog){display:none!important}.uploadcare-if-mobile{display:block}.uploadcare-if-no-mobile{display:none}.uploadcare-dialog{position:absolute;overflow:visible;-webkit-text-size-adjust:100%}.uploadcare-dialog:before{display:none}.uploadcare-dialog-inner-wrap{padding:0;min-width:310px;height:100%}.uploadcare-dialog-close{position:fixed;z-index:2;color:#000;width:50px;height:50px;line-height:45px}.uploadcare-dialog-footer{display:none}.uploadcare-responsive-panel .uploadcare-dialog-panel{overflow:visible;height:100%;padding:50px 0 0;border-radius:0;box-shadow:none}.uploadcare-responsive-panel .uploadcare-dialog-panel.uploadcare-panel-hide-tabs{padding-top:0}.uploadcare-responsive-panel .uploadcare-dialog-tabs-panel{height:auto}.uploadcare-responsive-panel .uploadcare-dialog-remote-iframe-wrap{overflow:visible;height:100%}.uploadcare-responsive-panel .uploadcare-dialog-padding{padding:22px 15px}.uploadcare-responsive-panel .uploadcare-dialog-preview-image-wrap,.uploadcare-responsive-panel .uploadcare-dialog-preview-video-wrap{top:auto;height:auto;padding-bottom:50px}.uploadcare-responsive-panel .uploadcare-dialog-preview-image,.uploadcare-responsive-panel .uploadcare-dialog-preview-video{max-height:450px}.uploadcare-responsive-panel .uploadcare-file-list{height:auto;margin:0 -15px 0 0}.uploadcare-responsive-panel .uploadcare-file-list_table .uploadcare-file-item>*{padding-right:10px}.uploadcare-responsive-panel .uploadcare-file-list_table .uploadcare-file-item__progressbar{width:40px}.uploadcare-responsive-panel .uploadcare-file-list_tiles .uploadcare-file-item{width:140px;min-height:140px;padding-right:10px}.uploadcare-responsive-panel .uploadcare-file-list_tiles .uploadcare-file-item__preview{width:140px;height:140px}.uploadcare-responsive-panel .uploadcare-file-list_tiles .uploadcare-file-item__remove{right:10px}.uploadcare-responsive-panel .uploadcare-file-item__remove{visibility:visible}.uploadcare-responsive-panel .uploadcare-dialog-file-or,.uploadcare-responsive-panel .uploadcare-dialog-file-sources,.uploadcare-responsive-panel .uploadcare-dialog-file-title{display:none}.uploadcare-responsive-panel .uploadcare-dialog-file-drop-area{padding-top:0;border:0;background:0 0}.uploadcare-responsive-panel .uploadcare-dialog-big-button{margin:110px 0 0}.uploadcare-responsive-panel .uploadcare-clouds-tip{color:#909498;font-size:.75em;line-height:1.4;text-align:left;padding:10px 0 0 50px}.uploadcare-responsive-panel .uploadcare-clouds-tip:before{background-image:url(\"",settings.scriptBase,"/images/arrow.png\");background-repeat:no-repeat;background-size:51px 33px;content:'';position:absolute;margin:-20px -36px;display:block;width:28px;height:30px}.uploadcare-responsive-panel .uploadcare-dialog-opened-tabs .uploadcare-dialog-tab.uploadcare-dialog-tab-camera{display:none}.uploadcare-responsive-panel .uploadcare-dialog-camera-holder{height:auto}.uploadcare-responsive-panel .uploadcare-dialog-camera-mirror{right:15px}.uploadcare-responsive-panel .uploadcare-panel-footer{position:fixed;left:0;bottom:0;width:100%;min-width:310px;height:50px;padding:9px 15px 0;background:rgba(255,243,190,.95)}.uploadcare-responsive-panel .uploadcare-panel-footer-text{display:none}.uploadcare-responsive-panel .uploadcare-panel-footer-counter{display:inline}.uploadcare-responsive-panel .uploadcare-dialog-multiple.uploadcare-dialog-panel{padding-bottom:50px}.uploadcare-responsive-panel .uploadcare-dialog-multiple .uploadcare-dialog-remote-iframe-wrap:after{content:'';display:block;height:50px}.uploadcare-responsive-panel .uploadcare-dialog-multiple .uploadcare-dialog-padding{padding-bottom:72px}.uploadcare-responsive-panel .uploadcare-dialog-tabs{position:fixed;top:0;left:0;width:100%;min-width:310px;height:auto;float:none;margin:0;z-index:1;background:0 0}.uploadcare-responsive-panel .uploadcare-dialog-tab{display:none;height:50px;white-space:nowrap;background:#dee0e1}.uploadcare-responsive-panel .uploadcare-dialog-tab .uploadcare-dialog-icon,.uploadcare-responsive-panel .uploadcare-dialog-tab:before{position:static;margin:0 6px;vertical-align:middle;opacity:1}.uploadcare-responsive-panel .uploadcare-dialog-tab_current{display:block;background:rgba(239,239,239,.95)}.uploadcare-responsive-panel .uploadcare-dialog-tab:after{content:attr(title);font-size:20px;vertical-align:middle}.uploadcare-responsive-panel .uploadcare-dialog-opened-tabs .uploadcare-dialog-tabs-panel_current,.uploadcare-responsive-panel .uploadcare-dialog-opened-tabs .uploadcare-panel-footer{display:none}.uploadcare-responsive-panel .uploadcare-dialog-opened-tabs .uploadcare-dialog-tabs{position:absolute;z-index:3}.uploadcare-responsive-panel .uploadcare-dialog-opened-tabs .uploadcare-dialog-tab{display:block}.uploadcare-responsive-panel .uploadcare-dialog-opened-tabs .uploadcare-dialog-tab_current{background:#efefef}.uploadcare-responsive-panel .uploadcare-dialog-panel:not(.uploadcare-dialog-opened-tabs) .uploadcare-dialog-tab_current{text-align:center}.uploadcare-responsive-panel .uploadcare-dialog-panel:not(.uploadcare-dialog-opened-tabs) .uploadcare-dialog-tab_current:after{content:'';position:absolute;top:16px;left:14px;display:block;width:22px;height:18px;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAOCAQAAAD+6Ta3AAAARklEQVR4Ae3SsRFEIQhAwW1IR2s3s6zTGUN+AxdK5tucAIBmOuKSY2pQbHHZVhgiweAnEixW1uC0VdSU41Xo19+te73+9AGOg1FzTMH13gAAAABJRU5ErkJggg==);background-size:22px}.uploadcare-responsive-panel .uploadcare-crop-sizes{top:auto;margin-bottom:15px}.uploadcare-responsive-panel .uploadcare-crop-size{margin:0 10px}}.uploadcare-crop-widget.jcrop-holder{direction:ltr;text-align:left;z-index:0}.uploadcare-crop-widget .jcrop-hline,.uploadcare-crop-widget .jcrop-vline{z-index:320}.uploadcare-crop-widget .jcrop-handle,.uploadcare-crop-widget .jcrop-hline,.uploadcare-crop-widget .jcrop-vline{position:absolute;font-size:0;background-color:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.2)}.uploadcare-crop-widget .jcrop-vline{height:100%;width:1px!important}.uploadcare-crop-widget .jcrop-hline{height:1px!important;width:100%}.uploadcare-crop-widget .jcrop-vline.right{right:0}.uploadcare-crop-widget .jcrop-hline.bottom{bottom:0}.uploadcare-crop-widget .jcrop-tracker{height:100%;width:100%;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.uploadcare-crop-widget .jcrop-handle{border-radius:50%;width:13px;height:13px;z-index:330}.uploadcare-crop-widget .jcrop-handle:after,.uploadcare-crop-widget .jcrop-handle:before{content:\"\";position:absolute;display:block;width:1px;height:1px;background:#fff}.uploadcare-crop-widget .jcrop-handle:before{width:3px;top:6px}.uploadcare-crop-widget .jcrop-handle:after{height:3px;left:6px}.uploadcare-crop-widget .jcrop-handle.ord-nw:before,.uploadcare-crop-widget .jcrop-handle.ord-sw:before{left:12px}.uploadcare-crop-widget .jcrop-handle.ord-ne:before,.uploadcare-crop-widget .jcrop-handle.ord-se:before{left:-2px}.uploadcare-crop-widget .jcrop-handle.ord-ne:after,.uploadcare-crop-widget .jcrop-handle.ord-nw:after{top:12px}.uploadcare-crop-widget .jcrop-handle.ord-se:after,.uploadcare-crop-widget .jcrop-handle.ord-sw:after{top:-2px}.uploadcare-crop-widget .jcrop-handle.ord-nw{left:0;margin-left:-6px;margin-top:-6px;top:0}.uploadcare-crop-widget .jcrop-handle.ord-ne{margin-right:-6px;margin-top:-6px;right:0;top:0}.uploadcare-crop-widget .jcrop-handle.ord-se{bottom:0;margin-bottom:-6px;margin-right:-6px;right:0}.uploadcare-crop-widget .jcrop-handle.ord-sw{bottom:0;left:0;margin-bottom:-6px;margin-left:-6px}.uploadcare-crop-widget img.jcrop-preview,.uploadcare-crop-widget.jcrop-holder img{max-width:none}.uploadcare-crop-widget{display:inline-block;vertical-align:middle;white-space:normal}.uploadcare-crop-widget .jcrop-handle>div{width:35px;height:35px;margin:-11px;background-color:transparent}.uploadcare-crop-widget>div:first-child{-webkit-transform:translateZ(0);transform:translateZ(0)}.uploadcare-crop-widget>img{-webkit-filter:grayscale(50%);filter:grayscale(50%)}.uploadcare-crop-sizes{display:none;visibility:hidden;position:relative;top:433px;text-align:center}.uploadcare-dialog-preview--with-sizes .uploadcare-crop-sizes{display:block}.uploadcare-dialog-preview--loaded .uploadcare-crop-sizes{visibility:visible}.uploadcare-crop-size{position:relative;display:inline-block;width:40px;height:40px;line-height:40px;margin:0 20px;font-size:.55em;cursor:pointer;color:#444}.uploadcare-crop-size div{box-sizing:border-box;width:40px;height:30px;display:inline-block;vertical-align:middle;border:1px solid #ccc}.uploadcare-crop-size:after{content:attr(data-caption);position:absolute;top:1px;left:0;width:100%;text-align:center;margin:0}.uploadcare-crop-size--current div{background:#fff}.uploadcare-widget{position:relative;display:inline-block;vertical-align:baseline;line-height:2}.uploadcare-widget :focus{outline:2px dotted #0094c0}.uploadcare-widget .uploadcare-mouse-focused:focus,.uploadcare-widget :active{outline:none}.uploadcare-widget-status-error .uploadcare-widget-button-open,.uploadcare-widget-status-error .uploadcare-widget-text,.uploadcare-widget-status-loaded .uploadcare-widget-text,.uploadcare-widget-status-ready .uploadcare-widget-button-open,.uploadcare-widget-status-started .uploadcare-widget-button-cancel,.uploadcare-widget-status-started .uploadcare-widget-status,.uploadcare-widget-status-started .uploadcare-widget-text{display:inline-block!important}.uploadcare-widget-option-clearable.uploadcare-widget-status-error .uploadcare-widget-button-open{display:none!important}.uploadcare-widget-option-clearable.uploadcare-widget-status-error .uploadcare-widget-button-remove,.uploadcare-widget-option-clearable.uploadcare-widget-status-loaded .uploadcare-widget-button-remove{display:inline-block!important}.uploadcare-widget-status{display:none!important;width:1.8em;height:1.8em;margin:-1em 1ex -1em 0;line-height:0;vertical-align:middle}.uploadcare-widget-circle--text .uploadcare-widget-circle-back{width:100%;height:100%;display:table;white-space:normal}.uploadcare-widget-circle--text .uploadcare-widget-circle-text{display:table-cell;vertical-align:middle;text-align:center;font-size:60%;line-height:1}.uploadcare-widget-circle--canvas{color:#d0bf26;border-color:#e1e5e7}.uploadcare-widget-circle--canvas canvas{width:100%;height:100%}.uploadcare-widget-text{display:none!important;margin-right:1ex;white-space:nowrap}.uploadcare-widget-file-name,.uploadcare-widget-file-size{display:inline}.uploadcare-link,.uploadcare-link:link,.uploadcare-link:visited{cursor:pointer;color:#1a85ad;text-decoration:none;border-bottom:1px dotted #1a85ad;border-color:initial}.uploadcare-link:hover{color:#176e8f}.uploadcare-widget-button{display:none!important;color:#fff;padding:.4em .6em;line-height:1;margin:-1em .5ex -1em 0;border-radius:.25em;background:#c3c3c3;cursor:default;white-space:nowrap}.uploadcare-widget-button:hover{background:#b3b3b3}.uploadcare-widget-button-open{padding:.5em .8em;background:#18a5d0}.uploadcare-widget-button-open:hover{background:#0094c0}.uploadcare-widget-dragndrop-area{box-sizing:content-box;display:none;position:absolute;white-space:nowrap;top:50%;margin-top:-1.3em;left:-1em;padding:0 1em;line-height:2.6;min-width:100%;text-align:center;background-color:#f0f0f0;color:#707478;border:1px dashed #b3b5b6;border-radius:100px}.uploadcare-widget.uploadcare-dragging .uploadcare-widget-dragndrop-area{background-color:#f2f7fe;border-color:#438ae7;color:#438ae7}.uploadcare-dragging .uploadcare-widget-dragndrop-area{display:block}.uploadcare-dialog-opened .uploadcare-widget-dragndrop-area{display:none}\r\n");
@@ -24309,41 +24300,41 @@
 	title:"Oops!",text:"Någonting gick fel under uppladdningen.",back:"Vänligen försök igen"},image:{title:"Endast bildfiler accepteras.",text:"Vänligen försök igen med en annan fil.",back:"Välj bild"},size:{title:"Filen du har valt är för stor.",text:"Vänligen försök igen med en annan fil."},loadImage:{title:"Error",text:"Kan inte ladda bild"}},multiple:{title:"Du har valt %files%",question:"Vill du lägga till alla dessa filer?",tooManyFiles:"Du har valt för många filer. %max% är max.",tooFewFiles:"Du har valt %files%. Minst %min% krävs.",clear:"Ta bort alla",done:"Klar"}}}}}}),r.namespace("locale.pluralize",function(e){return e.sv=function(e){return 1===e?"one":"other"}})}.call(this),function(){r.namespace("locale.translations",function(e){return e.tr={uploading:"Yükleniyor... Lütfen bekleyin.",loadingInfo:"Bilgiler yükleniyor...",errors:{"default":"Hata",baddata:"Geçersiz değer",size:"Dosya çok büyük",upload:"Yüklenemedi",user:"Yükleme iptal edildi",info:"Bilgiler getirilemedi",image:"Sadece resim dosyası yüklenebilir",createGroup:"Dosya grubu yaratılamıyor",deleted:"Dosya silinmiş"},draghere:"Buraya bir dosya bırakın",file:{other:"%1 dosya"},buttons:{cancel:"İptal",remove:"Kaldır",choose:{files:{one:"Dosya Seçin",other:"Dosya Seçin"},images:{one:"Resim Dosyası Seçin",other:"Resim Dosyası Seçin"}}},dialog:{done:"Bitti",showFiles:"Dosyaları Göster",tabs:{names:{"empty-pubkey":"Hoş geldiniz",preview:"Önizleme",file:"Bilgisayar",url:"Dış Bağlantılar",camera:"Kamera"},file:{drag:"Buraya bir dosya bırakın",nodrop:"Bilgisayarınızdan dosya yükleyin",or:"ya da",button:"Bilgisayardan bir dosya seç",also:"Diğer yükleme seçenekleri",cloudsTip:"Bulut depolamalar<br>ve sosyal hizmetler"},url:{title:"Webden dosyalar",line1:"Webden herhangi bir dosya seçin.",line2:"Dosya bağlantısını sağlayın.",input:"Bağlantınızı buraya yapıştırın...",button:"Yükle"},camera:{capture:"Fotoğraf çek",mirror:"Ayna",retry:"Tekrar izin iste",pleaseAllow:{title:"Lütfen kameranıza erişilmesine izin verin",text:"Bu siteden kamera erişimine izin vermeniz talep ediliyor. Kameranızla fotoğraf çekmek için bu isteği onaylamanız gerekmektedir."},notFound:{title:"Kamera algılanamadı",text:"Bu cihaza kamera bağlantısının olmadığı görünüyor."}},preview:{unknownName:"bilinmeyen",change:"İptal",back:"Geri",done:"Ekle",unknown:{title:"Yükleniyor... Önizleme için lütfen bekleyin.",done:"Önizlemeyi geç ve kabul et"},regular:{title:"Bu dosya eklensin mi?",line1:"Yukarıdaki dosyayı eklemek üzeresiniz.",line2:"Lütfen onaylayın."},image:{title:"Bu görsel eklensin mi?",change:"İptal"},crop:{title:"Bu görseli kes ve ekle",done:"Bitti"},error:{"default":{title:"Aman!",text:"Yükleme sırasında bir hata oluştu.",back:"Lütfen tekrar deneyin."},image:{title:"Sadece resim dosyaları kabul edilmektedir.",text:"Lütfen başka bir dosya ile tekrar deneyin.",back:"Resim dosyası seç"},size:{title:"Seçtiğiniz dosya limitleri aşıyor.",text:"Lütfen başka bir dosya ile tekrar deneyin."},loadImage:{title:"Hata",text:"Resim dosyası yüklenemedi"}},multiple:{title:"%files% dosya seçtiniz",question:"Bu dosyaların hepsini eklemek istiyor musunuz?",tooManyFiles:"Fazla sayıda dosya seçtiniz, en fazla %max% dosya olabilir.",tooFewFiles:"%files% dosya seçtiniz, en az %min% dosya olmalıdır.",clear:"Hepsini kaldır",done:"Bitti"}}}}}}),r.namespace("locale.pluralize",function(e){return e.tr=function(e){return"other"}})}.call(this),function(){r.namespace("locale.translations",function(e){return e.zhTW={uploading:"上傳中...請等待",loadingInfo:"正在讀取資訊...",errors:{"default":"錯誤",baddata:"錯誤資料",size:"檔案太大",upload:"無法上傳",user:"上傳被取消",info:"無法讀取資訊",image:"只允許圖片檔案",createGroup:"無法建立檔案群組",deleted:"檔案已被刪除"},draghere:"拖放檔案到這裡",file:{other:"%1 個檔案"},buttons:{cancel:"取消",remove:"刪除",choose:{files:{one:"選擇檔案",other:"選擇檔案"},images:{one:"選擇圖片",other:"選擇圖片"}}},dialog:{done:"完成",showFiles:"顯示檔案",tabs:{names:{"empty-pubkey":"歡迎",preview:"預覽",file:"從本機上傳",url:"任意圖片連結",camera:"相機"},file:{drag:"拖放檔案到這裡",nodrop:"從你的本機中上傳",cloudsTip:"雲端硬碟<br>與社群網站",or:"或者",button:"從本機中選取檔案",also:"你也可以選自"},url:{title:"來自網際網路的檔案",line1:"從網際網路選取檔案",line2:"只需提供連結",input:"將連結複製至此...",button:"上傳"},camera:{capture:"拍照",mirror:"鏡像",retry:"重新取得相機權限",pleaseAllow:{title:"請允許使存取您的相機",text:"你一直在提示允許來自這個網站的訪問攝像頭。為了拍照用你的相機，你必須批准這一請求。"},notFound:{title:"沒有找到相機",text:"看起來你有沒有將連接相機。"}},preview:{unknownName:"未知",change:"取消",back:"返回",done:"加入",unknown:{title:"上傳中...請等待預覽",done:"跳過預覽，直接接受"},regular:{title:"加入這個檔案？",line1:"你將加入上面的檔案。",line2:"請確認。"},image:{title:"加入這個圖片？",change:"取消"},crop:{title:"裁切並加入這個圖片",done:"完成",free:"自由裁切"},error:{"default":{title:"錯誤！",text:"上傳過程中出錯。",back:"請重試"},image:{title:"只允許上傳圖片檔案。",text:"請選擇其他檔案重新上傳。",back:"選擇圖片"},size:{title:"你選取的檔案超過了100MB的上限",text:"請用另一個檔案再試一次。"},loadImage:{title:"錯誤",text:"無法讀取圖片"}},multiple:{title:"你已經選擇 %files%",question:"你要加入所有檔案嗎？",tooManyFiles:"你選了太多的檔案. 最多可選擇%max%. 請刪除一些。",tooFewFiles:"你所選擇的檔案 %files%. 至少要 %min% .",clear:"清空",done:"完成"}}}}}}),r.namespace("locale.pluralize",function(e){return e.zhTW=function(e){return"other"}})}.call(this),function(){r.namespace("locale.translations",function(e){return e.zh={uploading:"上传中...请等待",loadingInfo:"正在读取信息...",errors:{"default":"错误",baddata:"错误数据",size:"文件太大",upload:"无法上传",user:"上传被取消",info:"无法读取信息",image:"只允许图形文件",createGroup:"无法建立文件组",deleted:"文件已被删除"},draghere:"拖放文件到这里",file:{other:"%1 个文件"},buttons:{cancel:"取消",remove:"删除"},dialog:{done:"完成",showFiles:"显示文件",tabs:{names:{url:"任意图片链接"},file:{drag:"拖放文件到这里",nodrop:"从你的电脑中上传",or:"或者",button:"从电脑中选取文件",also:"你也可以选自"},url:{title:"来自互联网的文件",line1:"从互联网选取文件",line2:"只需提供链接",input:"将链接拷贝至此...",button:"上传"},preview:{unknownName:"未知",change:"取消",back:"返回",done:"添加",unknown:{title:"上传中...请等待预览",done:"跳过预览，直接接受"},regular:{title:"添加这个文件?",line1:"你将添加上面的文件。",line2:"请确认。"},image:{title:"添加这个图片?",change:"取消"},crop:{title:"剪裁并添加这个图片",done:"完成"},error:{"default":{title:"错误!",text:"上传过程中出错。",back:"请重试"},image:{title:"只允许上传图片文件。",text:"请选择其他文件重新上传。",back:"选择图片"},size:{title:"你选取的文件超过了100MB的上限",text:"请用另一个文件再试一次。"},loadImage:{title:"错误",text:"无法读取图片"}},multiple:{title:"你已经选择 %files%",question:"你要添加所有文件吗？",tooManyFiles:"你选了太多的文件. 最多可选择%max%. 请删除一些。",clear:"清空",done:"完成"}}}}}}),r.namespace("locale.pluralize",function(e){return e.zh=function(){return"other"}})}.call(this),function(){var e;r.expose("locales",function(){var t;t=[];for(e in r.locale.translations)t.push(e);return t}())}.call(this),r.__exports});
 
 /***/ },
-/* 207 */
+/* 195 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(228),
-		__webpack_require__(255),
+		__webpack_require__(198),
+		__webpack_require__(216),
+		__webpack_require__(243),
+		__webpack_require__(250),
+		__webpack_require__(249),
+		__webpack_require__(248),
+		__webpack_require__(251),
+		__webpack_require__(252),
+		__webpack_require__(253),
+		__webpack_require__(256),
+		__webpack_require__(246),
 		__webpack_require__(262),
-		__webpack_require__(261),
-		__webpack_require__(260),
-		__webpack_require__(263),
 		__webpack_require__(264),
-		__webpack_require__(265),
-		__webpack_require__(268),
-		__webpack_require__(258),
-		__webpack_require__(274),
-		__webpack_require__(276),
-		__webpack_require__(237),
-		__webpack_require__(278),
-		__webpack_require__(285),
-		__webpack_require__(208),
-		__webpack_require__(286),
-		__webpack_require__(287),
-		__webpack_require__(279),
-		__webpack_require__(288),
-		__webpack_require__(289),
-		__webpack_require__(290),
-		__webpack_require__(291),
-		__webpack_require__(293),
+		__webpack_require__(225),
 		__webpack_require__(266),
-		__webpack_require__(294),
-		__webpack_require__(295),
-		__webpack_require__(296),
-		__webpack_require__(297),
-		__webpack_require__(298)
+		__webpack_require__(273),
+		__webpack_require__(196),
+		__webpack_require__(274),
+		__webpack_require__(275),
+		__webpack_require__(267),
+		__webpack_require__(276),
+		__webpack_require__(277),
+		__webpack_require__(278),
+		__webpack_require__(279),
+		__webpack_require__(281),
+		__webpack_require__(254),
+		__webpack_require__(282),
+		__webpack_require__(283),
+		__webpack_require__(284),
+		__webpack_require__(285),
+		__webpack_require__(286)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery ) {
 
 	return ( window.jQuery = window.$ = jQuery );
@@ -24352,31 +24343,31 @@
 
 
 /***/ },
-/* 208 */
+/* 196 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(224),
-		__webpack_require__(221),
-		__webpack_require__(222),
-		__webpack_require__(216),
-		__webpack_require__(223),
-		__webpack_require__(225),
-		__webpack_require__(226),
-		__webpack_require__(227),
-		__webpack_require__(231),
+		__webpack_require__(198),
+		__webpack_require__(212),
 		__webpack_require__(209),
+		__webpack_require__(210),
+		__webpack_require__(204),
+		__webpack_require__(211),
+		__webpack_require__(213),
+		__webpack_require__(214),
+		__webpack_require__(215),
+		__webpack_require__(219),
+		__webpack_require__(197),
+		__webpack_require__(220),
+		__webpack_require__(223),
+		__webpack_require__(224),
+		__webpack_require__(247),
+		__webpack_require__(221),
 		__webpack_require__(232),
-		__webpack_require__(235),
-		__webpack_require__(236),
-		__webpack_require__(259),
-		__webpack_require__(233),
-		__webpack_require__(244),
 
-		__webpack_require__(251),
-		__webpack_require__(260),
-		__webpack_require__(228) // contains
+		__webpack_require__(239),
+		__webpack_require__(248),
+		__webpack_require__(216) // contains
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery, pnum, access, rmargin, document, rcssNum, rnumnonpx, cssExpand, isHidden,
 		getStyles, swap, curCSS, adjustCSS, defaultDisplay, addGetHookIf, support, dataPriv ) {
 
@@ -24860,7 +24851,7 @@
 
 
 /***/ },
-/* 209 */
+/* 197 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
@@ -24890,20 +24881,20 @@
 
 
 /***/ },
-/* 210 */
+/* 198 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(212),
-		__webpack_require__(216),
-		__webpack_require__(213),
-		__webpack_require__(214),
-		__webpack_require__(215),
-		__webpack_require__(211),
-		__webpack_require__(217),
-		__webpack_require__(218),
-		__webpack_require__(219),
-		__webpack_require__(220)
+		__webpack_require__(200),
+		__webpack_require__(204),
+		__webpack_require__(201),
+		__webpack_require__(202),
+		__webpack_require__(203),
+		__webpack_require__(199),
+		__webpack_require__(205),
+		__webpack_require__(206),
+		__webpack_require__(207),
+		__webpack_require__(208)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( arr, document, slice, concat, push, indexOf, class2type, toString, hasOwn, support ) {
 
 	var
@@ -25390,18 +25381,18 @@
 
 
 /***/ },
-/* 211 */
+/* 199 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(212)
+		__webpack_require__(200)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( arr ) {
 		return arr.indexOf;
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 
 /***/ },
-/* 212 */
+/* 200 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
@@ -25410,40 +25401,40 @@
 
 
 /***/ },
-/* 213 */
+/* 201 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(212)
+		__webpack_require__(200)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( arr ) {
 		return arr.slice;
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 
 /***/ },
-/* 214 */
+/* 202 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(212)
+		__webpack_require__(200)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( arr ) {
 		return arr.concat;
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 
 /***/ },
-/* 215 */
+/* 203 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(212)
+		__webpack_require__(200)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( arr ) {
 		return arr.push;
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 
 /***/ },
-/* 216 */
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
@@ -25452,7 +25443,7 @@
 
 
 /***/ },
-/* 217 */
+/* 205 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
@@ -25463,29 +25454,29 @@
 
 
 /***/ },
-/* 218 */
+/* 206 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(217)
+		__webpack_require__(205)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( class2type ) {
 		return class2type.toString;
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 
 /***/ },
-/* 219 */
+/* 207 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(217)
+		__webpack_require__(205)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( class2type ) {
 		return class2type.hasOwnProperty;
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 
 /***/ },
-/* 220 */
+/* 208 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
@@ -25496,11 +25487,11 @@
 
 
 /***/ },
-/* 221 */
+/* 209 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210)
+		__webpack_require__(198)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery ) {
 
 	// Multifunctional method to get and set values of a collection
@@ -25567,7 +25558,7 @@
 
 
 /***/ },
-/* 222 */
+/* 210 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
@@ -25576,11 +25567,11 @@
 
 
 /***/ },
-/* 223 */
+/* 211 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(224)
+		__webpack_require__(212)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( pnum ) {
 
 	return new RegExp( "^(?:([+-])=|)(" + pnum + ")([a-z%]*)$", "i" );
@@ -25589,7 +25580,7 @@
 
 
 /***/ },
-/* 224 */
+/* 212 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
@@ -25598,18 +25589,18 @@
 
 
 /***/ },
-/* 225 */
+/* 213 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(224)
+		__webpack_require__(212)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( pnum ) {
 		return new RegExp( "^(" + pnum + ")(?!px)[a-z%]+$", "i" );
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 
 /***/ },
-/* 226 */
+/* 214 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
@@ -25618,12 +25609,12 @@
 
 
 /***/ },
-/* 227 */
+/* 215 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(228)
+		__webpack_require__(198),
+		__webpack_require__(216)
 
 		// css is assumed
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery ) {
@@ -25640,19 +25631,19 @@
 
 
 /***/ },
-/* 228 */
+/* 216 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(229) ], __WEBPACK_AMD_DEFINE_RESULT__ = function() {}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(217) ], __WEBPACK_AMD_DEFINE_RESULT__ = function() {}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 
 /***/ },
-/* 229 */
+/* 217 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(230)
+		__webpack_require__(198),
+		__webpack_require__(218)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery, Sizzle ) {
 
 	jQuery.find = Sizzle;
@@ -25667,7 +25658,7 @@
 
 
 /***/ },
-/* 230 */
+/* 218 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -27816,7 +27807,7 @@
 
 
 /***/ },
-/* 231 */
+/* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
@@ -27837,16 +27828,16 @@
 
 
 /***/ },
-/* 232 */
+/* 220 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
+		__webpack_require__(198),
+		__webpack_require__(213),
 		__webpack_require__(210),
-		__webpack_require__(225),
-		__webpack_require__(222),
-		__webpack_require__(231),
-		__webpack_require__(233),
-		__webpack_require__(228) // Get jQuery.contains
+		__webpack_require__(219),
+		__webpack_require__(221),
+		__webpack_require__(216) // Get jQuery.contains
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery, rnumnonpx, rmargin, getStyles, support ) {
 
 	function curCSS( elem, name, computed ) {
@@ -27903,14 +27894,14 @@
 
 
 /***/ },
-/* 233 */
+/* 221 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(216),
-		__webpack_require__(234),
-		__webpack_require__(220)
+		__webpack_require__(198),
+		__webpack_require__(204),
+		__webpack_require__(222),
+		__webpack_require__(208)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery, document, documentElement, support ) {
 
 	( function() {
@@ -28030,23 +28021,23 @@
 
 
 /***/ },
-/* 234 */
+/* 222 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(216)
+		__webpack_require__(204)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( document ) {
 		return document.documentElement;
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 
 /***/ },
-/* 235 */
+/* 223 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(223)
+		__webpack_require__(198),
+		__webpack_require__(211)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery, rcssNum ) {
 
 	function adjustCSS( elem, prop, valueParts, tween ) {
@@ -28112,13 +28103,13 @@
 
 
 /***/ },
-/* 236 */
+/* 224 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(216),
-		__webpack_require__(237) // appendTo
+		__webpack_require__(198),
+		__webpack_require__(204),
+		__webpack_require__(225) // appendTo
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery, document ) {
 
 	var iframe,
@@ -28190,31 +28181,31 @@
 
 
 /***/ },
-/* 237 */
+/* 225 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(214),
-		__webpack_require__(215),
-		__webpack_require__(221),
-		__webpack_require__(248),
-		__webpack_require__(239),
-		__webpack_require__(240),
-		__webpack_require__(241),
-		__webpack_require__(242),
-		__webpack_require__(243),
-		__webpack_require__(238),
-		__webpack_require__(249),
-
-		__webpack_require__(244),
-		__webpack_require__(250),
-		__webpack_require__(247),
-
-		__webpack_require__(251),
-		__webpack_require__(255),
+		__webpack_require__(198),
+		__webpack_require__(202),
+		__webpack_require__(203),
+		__webpack_require__(209),
+		__webpack_require__(236),
+		__webpack_require__(227),
 		__webpack_require__(228),
-		__webpack_require__(258)
+		__webpack_require__(229),
+		__webpack_require__(230),
+		__webpack_require__(231),
+		__webpack_require__(226),
+		__webpack_require__(237),
+
+		__webpack_require__(232),
+		__webpack_require__(238),
+		__webpack_require__(235),
+
+		__webpack_require__(239),
+		__webpack_require__(243),
+		__webpack_require__(216),
+		__webpack_require__(246)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery, concat, push, access,
 		rcheckableType, rtagName, rscriptType,
 		wrapMap, getAll, setGlobalEval, buildFragment, support,
@@ -28677,16 +28668,16 @@
 
 
 /***/ },
-/* 238 */
+/* 226 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(239),
-		__webpack_require__(240),
-		__webpack_require__(241),
-		__webpack_require__(242),
-		__webpack_require__(243)
+		__webpack_require__(198),
+		__webpack_require__(227),
+		__webpack_require__(228),
+		__webpack_require__(229),
+		__webpack_require__(230),
+		__webpack_require__(231)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery, rtagName, rscriptType, wrapMap, getAll, setGlobalEval ) {
 
 	var rhtml = /<|&#?\w+;/;
@@ -28785,7 +28776,7 @@
 
 
 /***/ },
-/* 239 */
+/* 227 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
@@ -28794,7 +28785,7 @@
 
 
 /***/ },
-/* 240 */
+/* 228 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
@@ -28803,7 +28794,7 @@
 
 
 /***/ },
-/* 241 */
+/* 229 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
@@ -28836,11 +28827,11 @@
 
 
 /***/ },
-/* 242 */
+/* 230 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210)
+		__webpack_require__(198)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery ) {
 
 	function getAll( context, tag ) {
@@ -28863,11 +28854,11 @@
 
 
 /***/ },
-/* 243 */
+/* 231 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(244)
+		__webpack_require__(232)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( dataPriv ) {
 
 	// Mark scripts as having already been evaluated
@@ -28889,24 +28880,24 @@
 
 
 /***/ },
-/* 244 */
+/* 232 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(245)
+		__webpack_require__(233)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( Data ) {
 		return new Data();
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 
 /***/ },
-/* 245 */
+/* 233 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(246),
-		__webpack_require__(247)
+		__webpack_require__(198),
+		__webpack_require__(234),
+		__webpack_require__(235)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery, rnotwhite, acceptData ) {
 
 	function Data() {
@@ -29106,7 +29097,7 @@
 
 
 /***/ },
-/* 246 */
+/* 234 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
@@ -29115,7 +29106,7 @@
 
 
 /***/ },
-/* 247 */
+/* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
@@ -29139,7 +29130,7 @@
 
 
 /***/ },
-/* 248 */
+/* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
@@ -29148,12 +29139,12 @@
 
 
 /***/ },
-/* 249 */
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(216),
-		__webpack_require__(220)
+		__webpack_require__(204),
+		__webpack_require__(208)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( document, support ) {
 
 	( function() {
@@ -29187,26 +29178,26 @@
 
 
 /***/ },
-/* 250 */
+/* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(245)
+		__webpack_require__(233)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( Data ) {
 		return new Data();
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 
 /***/ },
-/* 251 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// Initialize a jQuery object
 	!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(216),
-		__webpack_require__(252),
-		__webpack_require__(253)
+		__webpack_require__(198),
+		__webpack_require__(204),
+		__webpack_require__(240),
+		__webpack_require__(241)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery, document, rsingleTag ) {
 
 	// A central reference to the root jQuery(document)
@@ -29338,7 +29329,7 @@
 
 
 /***/ },
-/* 252 */
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
@@ -29349,14 +29340,14 @@
 
 
 /***/ },
-/* 253 */
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(211),
-		__webpack_require__(254),
-		__webpack_require__(228)
+		__webpack_require__(198),
+		__webpack_require__(199),
+		__webpack_require__(242),
+		__webpack_require__(216)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery, indexOf, rneedsContext ) {
 
 	var risSimple = /^.[^:#\[\.,]*$/;
@@ -29455,30 +29446,30 @@
 
 
 /***/ },
-/* 254 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(228)
+		__webpack_require__(198),
+		__webpack_require__(216)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery ) {
 		return jQuery.expr.match.needsContext;
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 
 /***/ },
-/* 255 */
+/* 243 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(211),
-		__webpack_require__(256),
-		__webpack_require__(257),
-		__webpack_require__(254),
-		__webpack_require__(251),
-		__webpack_require__(253),
-		__webpack_require__(228)
+		__webpack_require__(198),
+		__webpack_require__(199),
+		__webpack_require__(244),
+		__webpack_require__(245),
+		__webpack_require__(242),
+		__webpack_require__(239),
+		__webpack_require__(241),
+		__webpack_require__(216)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery, indexOf, dir, siblings, rneedsContext ) {
 
 	var rparentsprev = /^(?:parents|prev(?:Until|All))/,
@@ -29648,11 +29639,11 @@
 
 
 /***/ },
-/* 256 */
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210)
+		__webpack_require__(198)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery ) {
 
 	return function( elem, dir, until ) {
@@ -29674,7 +29665,7 @@
 
 
 /***/ },
-/* 257 */
+/* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
@@ -29695,18 +29686,18 @@
 
 
 /***/ },
-/* 258 */
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(216),
-		__webpack_require__(246),
-		__webpack_require__(213),
-		__webpack_require__(244),
+		__webpack_require__(198),
+		__webpack_require__(204),
+		__webpack_require__(234),
+		__webpack_require__(201),
+		__webpack_require__(232),
 
-		__webpack_require__(251),
-		__webpack_require__(228)
+		__webpack_require__(239),
+		__webpack_require__(216)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery, document, rnotwhite, slice, dataPriv ) {
 
 	var
@@ -30412,7 +30403,7 @@
 
 
 /***/ },
-/* 259 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
@@ -30442,14 +30433,14 @@
 
 
 /***/ },
-/* 260 */
+/* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(216),
-		__webpack_require__(251),
-		__webpack_require__(261)
+		__webpack_require__(198),
+		__webpack_require__(204),
+		__webpack_require__(239),
+		__webpack_require__(249)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery, document ) {
 
 	// The deferred used on DOM ready
@@ -30551,13 +30542,13 @@
 
 
 /***/ },
-/* 261 */
+/* 249 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(213),
-		__webpack_require__(262)
+		__webpack_require__(198),
+		__webpack_require__(201),
+		__webpack_require__(250)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery, slice ) {
 
 	jQuery.extend( {
@@ -30715,12 +30706,12 @@
 
 
 /***/ },
-/* 262 */
+/* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(246)
+		__webpack_require__(198),
+		__webpack_require__(234)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery, rnotwhite ) {
 
 	// Convert String-formatted options into Object-formatted ones
@@ -30953,14 +30944,14 @@
 
 
 /***/ },
-/* 263 */
+/* 251 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(221),
-		__webpack_require__(244),
-		__webpack_require__(250)
+		__webpack_require__(198),
+		__webpack_require__(209),
+		__webpack_require__(232),
+		__webpack_require__(238)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery, access, dataPriv, dataUser ) {
 
 	//	Implementation Summary
@@ -31146,14 +31137,14 @@
 
 
 /***/ },
-/* 264 */
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(244),
-		__webpack_require__(261),
-		__webpack_require__(262)
+		__webpack_require__(198),
+		__webpack_require__(232),
+		__webpack_require__(249),
+		__webpack_require__(250)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery, dataPriv ) {
 
 	jQuery.extend( {
@@ -31295,13 +31286,13 @@
 
 
 /***/ },
-/* 265 */
+/* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(264),
-		__webpack_require__(266) // Delay is optional because of this dependency
+		__webpack_require__(198),
+		__webpack_require__(252),
+		__webpack_require__(254) // Delay is optional because of this dependency
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery ) {
 
 	// Based off of the plugin by Clint Helfers, with permission.
@@ -31323,26 +31314,26 @@
 
 
 /***/ },
-/* 266 */
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(216),
+		__webpack_require__(198),
+		__webpack_require__(204),
+		__webpack_require__(211),
+		__webpack_require__(214),
+		__webpack_require__(234),
+		__webpack_require__(215),
 		__webpack_require__(223),
-		__webpack_require__(226),
-		__webpack_require__(246),
-		__webpack_require__(227),
-		__webpack_require__(235),
-		__webpack_require__(236),
-		__webpack_require__(244),
+		__webpack_require__(224),
+		__webpack_require__(232),
 
-		__webpack_require__(251),
-		__webpack_require__(267),
-		__webpack_require__(264),
-		__webpack_require__(208),
-		__webpack_require__(261),
-		__webpack_require__(255)
+		__webpack_require__(239),
+		__webpack_require__(255),
+		__webpack_require__(252),
+		__webpack_require__(196),
+		__webpack_require__(249),
+		__webpack_require__(243)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery, document, rcssNum, cssExpand, rnotwhite,
 		isHidden, adjustCSS, defaultDisplay, dataPriv ) {
 
@@ -31958,12 +31949,12 @@
 
 
 /***/ },
-/* 267 */
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(208)
+		__webpack_require__(198),
+		__webpack_require__(196)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery ) {
 
 	function Tween( elem, options, prop, end, easing ) {
@@ -32085,15 +32076,15 @@
 
 
 /***/ },
-/* 268 */
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(269),
-		__webpack_require__(271),
-		__webpack_require__(272),
-		__webpack_require__(273)
+		__webpack_require__(198),
+		__webpack_require__(257),
+		__webpack_require__(259),
+		__webpack_require__(260),
+		__webpack_require__(261)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery ) {
 
 	// Return jQuery for attributes-only inclusion
@@ -32102,15 +32093,15 @@
 
 
 /***/ },
-/* 269 */
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(221),
-		__webpack_require__(270),
-		__webpack_require__(246),
-		__webpack_require__(228)
+		__webpack_require__(198),
+		__webpack_require__(209),
+		__webpack_require__(258),
+		__webpack_require__(234),
+		__webpack_require__(216)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery, access, support, rnotwhite ) {
 
 	var boolHook,
@@ -32250,12 +32241,12 @@
 
 
 /***/ },
-/* 270 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(216),
-		__webpack_require__(220)
+		__webpack_require__(204),
+		__webpack_require__(208)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( document, support ) {
 
 	( function() {
@@ -32292,14 +32283,14 @@
 
 
 /***/ },
-/* 271 */
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(221),
-		__webpack_require__(270),
-		__webpack_require__(228)
+		__webpack_require__(198),
+		__webpack_require__(209),
+		__webpack_require__(258),
+		__webpack_require__(216)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery, access, support ) {
 
 	var rfocusable = /^(?:input|select|textarea|button)$/i,
@@ -32423,14 +32414,14 @@
 
 
 /***/ },
-/* 272 */
+/* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(246),
-		__webpack_require__(244),
-		__webpack_require__(251)
+		__webpack_require__(198),
+		__webpack_require__(234),
+		__webpack_require__(232),
+		__webpack_require__(239)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery, rnotwhite, dataPriv ) {
 
 	var rclass = /[\t\r\n\f]/g;
@@ -32606,13 +32597,13 @@
 
 
 /***/ },
-/* 273 */
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(270),
-		__webpack_require__(251)
+		__webpack_require__(198),
+		__webpack_require__(258),
+		__webpack_require__(239)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery, support ) {
 
 	var rreturn = /\r/g,
@@ -32789,14 +32780,14 @@
 
 
 /***/ },
-/* 274 */
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
+		__webpack_require__(198),
 
-		__webpack_require__(258),
-		__webpack_require__(275)
+		__webpack_require__(246),
+		__webpack_require__(263)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery ) {
 
 	jQuery.each( ( "blur focus focusin focusout load resize scroll unload click dblclick " +
@@ -32822,17 +32813,17 @@
 
 
 /***/ },
-/* 275 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(216),
-		__webpack_require__(244),
-		__webpack_require__(247),
-		__webpack_require__(219),
+		__webpack_require__(198),
+		__webpack_require__(204),
+		__webpack_require__(232),
+		__webpack_require__(235),
+		__webpack_require__(207),
 
-		__webpack_require__(258)
+		__webpack_require__(246)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery, document, dataPriv, acceptData, hasOwn ) {
 
 	var rfocusMorph = /^(?:focusinfocus|focusoutblur)$/;
@@ -33011,16 +33002,16 @@
 
 
 /***/ },
-/* 276 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(244),
-		__webpack_require__(277),
+		__webpack_require__(198),
+		__webpack_require__(232),
+		__webpack_require__(265),
 
-		__webpack_require__(258),
-		__webpack_require__(275)
+		__webpack_require__(246),
+		__webpack_require__(263)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery, dataPriv, support ) {
 
 	// Support: Firefox
@@ -33070,11 +33061,11 @@
 
 
 /***/ },
-/* 277 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(220)
+		__webpack_require__(208)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( support ) {
 
 	support.focusin = "onfocusin" in window;
@@ -33085,11 +33076,11 @@
 
 
 /***/ },
-/* 278 */
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(279)
+		__webpack_require__(267)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery ) {
 
 	jQuery._evalUrl = function( url ) {
@@ -33111,22 +33102,22 @@
 
 
 /***/ },
-/* 279 */
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(216),
-		__webpack_require__(246),
-		__webpack_require__(280),
-		__webpack_require__(281),
-		__webpack_require__(282),
+		__webpack_require__(198),
+		__webpack_require__(204),
+		__webpack_require__(234),
+		__webpack_require__(268),
+		__webpack_require__(269),
+		__webpack_require__(270),
 
-		__webpack_require__(251),
-		__webpack_require__(283),
-		__webpack_require__(284),
-		__webpack_require__(275),
-		__webpack_require__(261)
+		__webpack_require__(239),
+		__webpack_require__(271),
+		__webpack_require__(272),
+		__webpack_require__(263),
+		__webpack_require__(249)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery, document, rnotwhite, location, nonce, rquery ) {
 
 	var
@@ -33962,7 +33953,7 @@
 
 
 /***/ },
-/* 280 */
+/* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
@@ -33971,18 +33962,18 @@
 
 
 /***/ },
-/* 281 */
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210)
+		__webpack_require__(198)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery ) {
 		return jQuery.now();
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 
 /***/ },
-/* 282 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
@@ -33991,11 +33982,11 @@
 
 
 /***/ },
-/* 283 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210)
+		__webpack_require__(198)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery ) {
 
 	// Support: Android 2.3
@@ -34010,11 +34001,11 @@
 
 
 /***/ },
-/* 284 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210)
+		__webpack_require__(198)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery ) {
 
 	// Cross-browser xml parsing
@@ -34043,14 +34034,14 @@
 
 
 /***/ },
-/* 285 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(251),
-		__webpack_require__(237), // clone
-		__webpack_require__(255) // parent, contents
+		__webpack_require__(198),
+		__webpack_require__(239),
+		__webpack_require__(225), // clone
+		__webpack_require__(243) // parent, contents
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery ) {
 
 	jQuery.fn.extend( {
@@ -34128,12 +34119,12 @@
 
 
 /***/ },
-/* 286 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(228)
+		__webpack_require__(198),
+		__webpack_require__(216)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery ) {
 
 	jQuery.expr.filters.hidden = function( elem ) {
@@ -34152,15 +34143,15 @@
 
 
 /***/ },
-/* 287 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(248),
-		__webpack_require__(251),
-		__webpack_require__(255), // filter
-		__webpack_require__(271)
+		__webpack_require__(198),
+		__webpack_require__(236),
+		__webpack_require__(239),
+		__webpack_require__(243), // filter
+		__webpack_require__(259)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery, rcheckableType ) {
 
 	var r20 = /%20/g,
@@ -34283,13 +34274,13 @@
 
 
 /***/ },
-/* 288 */
+/* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(220),
-		__webpack_require__(279)
+		__webpack_require__(198),
+		__webpack_require__(208),
+		__webpack_require__(267)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery, support ) {
 
 	jQuery.ajaxSettings.xhr = function() {
@@ -34456,13 +34447,13 @@
 
 
 /***/ },
-/* 289 */
+/* 277 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(216),
-		__webpack_require__(279)
+		__webpack_require__(198),
+		__webpack_require__(204),
+		__webpack_require__(267)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery, document ) {
 
 	// Install script dataType
@@ -34530,14 +34521,14 @@
 
 
 /***/ },
-/* 290 */
+/* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(281),
-		__webpack_require__(282),
-		__webpack_require__(279)
+		__webpack_require__(198),
+		__webpack_require__(269),
+		__webpack_require__(270),
+		__webpack_require__(267)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery, nonce, rquery ) {
 
 	var oldCallbacks = [],
@@ -34636,19 +34627,19 @@
 
 
 /***/ },
-/* 291 */
+/* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(292),
-		__webpack_require__(279),
-		__webpack_require__(255),
-		__webpack_require__(237),
-		__webpack_require__(228),
+		__webpack_require__(198),
+		__webpack_require__(280),
+		__webpack_require__(267),
+		__webpack_require__(243),
+		__webpack_require__(225),
+		__webpack_require__(216),
 
 		// Optional event/alias dependency
-		__webpack_require__(274)
+		__webpack_require__(262)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery ) {
 
 	// Keep a copy of the old load method
@@ -34725,14 +34716,14 @@
 
 
 /***/ },
-/* 292 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(216),
-		__webpack_require__(252),
-		__webpack_require__(238)
+		__webpack_require__(198),
+		__webpack_require__(204),
+		__webpack_require__(240),
+		__webpack_require__(226)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery, document, rsingleTag, buildFragment ) {
 
 	// Argument "data" should be string of html
@@ -34772,12 +34763,12 @@
 
 
 /***/ },
-/* 293 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(258)
+		__webpack_require__(198),
+		__webpack_require__(246)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery ) {
 
 	// Attach a bunch of functions for handling common AJAX events
@@ -34798,13 +34789,13 @@
 
 
 /***/ },
-/* 294 */
+/* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(228),
-		__webpack_require__(266)
+		__webpack_require__(198),
+		__webpack_require__(216),
+		__webpack_require__(254)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery ) {
 
 	jQuery.expr.filters.animated = function( elem ) {
@@ -34817,22 +34808,22 @@
 
 
 /***/ },
-/* 295 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
+		__webpack_require__(198),
+		__webpack_require__(209),
+		__webpack_require__(204),
+		__webpack_require__(222),
+		__webpack_require__(213),
+		__webpack_require__(220),
+		__webpack_require__(247),
 		__webpack_require__(221),
-		__webpack_require__(216),
-		__webpack_require__(234),
-		__webpack_require__(225),
-		__webpack_require__(232),
-		__webpack_require__(259),
-		__webpack_require__(233),
 
-		__webpack_require__(251),
-		__webpack_require__(208),
-		__webpack_require__(228) // contains
+		__webpack_require__(239),
+		__webpack_require__(196),
+		__webpack_require__(216) // contains
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery, access, document, documentElement, rnumnonpx, curCSS, addGetHookIf, support ) {
 
 	/**
@@ -35041,13 +35032,13 @@
 
 
 /***/ },
-/* 296 */
+/* 284 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210),
-		__webpack_require__(221),
-		__webpack_require__(208)
+		__webpack_require__(198),
+		__webpack_require__(209),
+		__webpack_require__(196)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery, access ) {
 
 	// Create innerHeight, innerWidth, height, width, outerHeight and outerWidth methods
@@ -35101,11 +35092,11 @@
 
 
 /***/ },
-/* 297 */
+/* 285 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210)
+		__webpack_require__(198)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery ) {
 
 	jQuery.fn.extend( {
@@ -35139,11 +35130,11 @@
 
 
 /***/ },
-/* 298 */
+/* 286 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-		__webpack_require__(210)
+		__webpack_require__(198)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery ) {
 
 	// Register as a named AMD module, since jQuery can be concatenated with other
@@ -35169,18 +35160,18 @@
 
 
 /***/ },
-/* 299 */
+/* 287 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div id=\"signUp\">\n\t<div id=\"parent\" class=\"panel\" v-if=\"step == 1\">\n\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Sign up parent</div>\n\t\t\n\t\t<form action=\"\" method=\"post\" class=\"middle-area semi\" v-on:submit.prevent=\"register\">\n\t\t\n\t\t\t<div class=\"selection-group\">\n\t\t\t\t<input type=\"radio\" id=\"father\"  name=\"parents\" value=\"father\" v-model=\"parent_gender\">\n\t\t\t\t<label for=\"father\" class=\"rLeft\">Father</label>\n\t\t\t\t<input type=\"radio\" id=\"mother\"  name=\"parents\" value=\"mother\" v-model=\"parent_gender\">\n\t\t\t\t<label for=\"mother\" class=\"rRight\">Mother</label>\n\t\t\t</div>\n\n\t\t\t<div class=\"placer bottom\">\n\t\t\t\t<div class=\"error\" v-if=\"error_message\">{{ error_message }}</div>\n\t\t\t\t<label>Naam</label>\n\t\t\t\t<input type=\"text\" placeholder=\"your name\" v-model=\"parent_name\">\n\n\t\t\t\t<label>E-mailadres</label>\n\t\t\t\t<input type=\"email\" placeholder=\"name@mail.nl\" v-model=\"parent_email\">\n\n\t\t\t\t<label>Wachwoord</label>\n\t\t\t\t<input type=\"password\" placeholder=\"******\" v-model=\"parent_password\">\n\t\t\t\n\t\t\t</div>\n\n\n\t\t\t\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<button class=\"form-button-medium\">Next<span v-if=\"loading\" class=\"loading\"></span></button>\n\t\t\t</div>\n\t\t\t\n\t\t</form>\n\n\t</div>\n\n\t<div id=\"child\" class=\"panel\" v-else-if=\"step == 2\">\n\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Sign up child</div>\n\t\t\n\t\t<form action=\"\" method=\"post\" class=\"middle-area semi\" v-on:submit.prevent=\"addChild\">\n\t\t\n\t\t\t<div class=\"selection-group\">\n\t\t\t\t<input type=\"radio\" id=\"son\"  name=\"child\" value=\"son\" v-model=\"child_gender\">\n\t\t\t\t<label for=\"son\" class=\"rLeft\">Son</label>\n\t\t\t\t<input type=\"radio\" id=\"daughter\"  name=\"child\" value=\"daughter\" v-model=\"child_gender\">\n\t\t\t\t<label for=\"daughter\" class=\"rRight\">Daughter</label>\n\t\t\t</div>\n\n\t\t\t<div class=\"placer middle\">\n\t\t\t\t\n\t\t\t\t<div class=\"error\" v-if=\"error_message\">{{ error_message }}</div>\n\t\t\t\t<label>Naam van jouw kind</label>\n\t\t\t\t<input type=\"text\" placeholder=\"your name\" v-model=\"child_name\">\n\n\t\t\t\t<label>Wanneer is jouw kind geboren?</label>\n\t\t\t\t<ul id=\"date-group\">\n\t\t\t\t\t<li><input type=\"tel\" placeholder=\"DD\" class=\"date-group\" v-model=\"child_bday_d\"></li>\n\t\t\t\t\t<li><input type=\"tel\" placeholder=\"MM\" class=\"date-group\" v-model=\"child_bday_m\"></li> \n\t\t\t\t\t<li><input type=\"tel\" placeholder=\"YYYY\" class=\"date-group\" v-model=\"child_bday_y\"></li>\n\t\t\t\t</ul>\n\t\t\t\n\t\t\t</div>\n\t\t\t\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<button class=\"form-button-medium\">Next<span v-if=\"loading\" class=\"loading\"></span></button>\n\t\t\t</div>\n\t\t\t\n\t\t</form>\n\n\n\t</div>\n\t\n\t<div id=\"photo\" class=\"panel\" v-else-if=\"step == 3\">\n\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Add photo</div>\n\n\t\t<form action=\"\" method=\"post\" enctype=\"multipart/form-data\" v-on:submit.prevent=\"addPicture\">\n\t\t\t<div class=\"error\" v-if=\"error_message\">{{ error_message }}</div>\n\t\t\t<input type=\"hidden\" role=\"uploadcare-uploader\" name=\"uploadedfile\" id=\"uploadPic\" />\n\t\t\t<!-- <input type=\"file\" name=\"uploadedfile\"  accept=\"image/*\" id=\"uploadPic\" capture> -->\n\t\t\t<label for=\"uploadPic\" class=\"uploadPic\">+</label>\n\n\t\t\t<h3>Choose a nice picture of <br> you and {{ child_name }}!</h3>\n\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<input type=\"submit\" value=\"next\" class=\"form-button-medium\"><span v-if=\"loading\" class=\"loading\"></span>\n\t\t\t\t<a href=\"javascript:void(0);\" v-on:click=\"showLastStep\" >Continue without picture</a>\n\t\t\t</div>\n\t\t\t\n\t\t</form>\n\n\t</div>\n\t\t\t\t\t\t\n\t<div id=\"photoAdded\" class=\"panel\" v-else-if=\"step == 4\">\n\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Add photo2</div>\n\n\t\t<div class=\"picHolder\"><img class=\"avatar\" v-bind:src=\"child_image\"></div>\n\t\t\t\n\t\t<h3>What a nice picture! <br> Do you also like?</h3>\n\t\t<a href=\"javascript:void(0);\" v-on:click=\"showLastStep\">Choose another picture</a>\n\n\t\t<div class=\"bottom-area\">\n\t\t\t<a href=\"javascript:void(0);\" v-on:click=\"showLastStep\" class=\"button-medium\">Next</a>\n\t\t</div>\n\t</div>\n\t\n\t<div id=\"starten\" class=\"panel\" v-else-if=\"step == 5\">\n\t\t\t\t\n\t\t\t<div class=\"placer middle\">\n\t\t\t\t\t\t\n\t\t\t\t<p>Become a Supermom for <span>Lisa</span> with <strong>Yipp app!</strong></p>\t\t\n\t\t\t\t\t\t\n\t\t\t</div> \t\t\t\t\t\t\t\n\t\t\t\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"button-medium white\"\">Begin!</router-link>\n\t\t\t</div>\n\t\t\t\t\t\t\t\n\t</div>\n\t\t\t\t\t\t\t\t\n</div>\n";
 
 /***/ },
-/* 300 */
+/* 288 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(301)
-	__vue_template__ = __webpack_require__(306)
+	__vue_script__ = __webpack_require__(289)
+	__vue_template__ = __webpack_require__(294)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -35197,7 +35188,7 @@
 	})()}
 
 /***/ },
-/* 301 */
+/* 289 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35216,7 +35207,7 @@
 
 	var _auth2 = _interopRequireDefault(_auth);
 
-	var _timeline = __webpack_require__(302);
+	var _timeline = __webpack_require__(290);
 
 	var _timeline2 = _interopRequireDefault(_timeline);
 
@@ -35224,7 +35215,7 @@
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
-	var _Modal = __webpack_require__(303);
+	var _Modal = __webpack_require__(291);
 
 	var _Modal2 = _interopRequireDefault(_Modal);
 
@@ -35399,7 +35390,7 @@
 	//
 
 /***/ },
-/* 302 */
+/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35469,12 +35460,12 @@
 	};
 
 /***/ },
-/* 303 */
+/* 291 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(304)
-	__vue_template__ = __webpack_require__(305)
+	__vue_script__ = __webpack_require__(292)
+	__vue_template__ = __webpack_require__(293)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -35491,7 +35482,7 @@
 	})()}
 
 /***/ },
-/* 304 */
+/* 292 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -35539,24 +35530,24 @@
 	//
 
 /***/ },
-/* 305 */
+/* 293 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<transition name=\"modal\">\n    <div class=\"modal-mask\">\n      <div class=\"modal-wrapper\">\n        <div class=\"modal-container\">\n\n          <div class=\"modal-header\">\n            <slot name=\"header\">\n              default header\n            </slot>\n          </div>\n\n          <div class=\"modal-body\">\n            <slot name=\"body\">\n              default message\n            </slot>\n          </div>\n\n          <div class=\"modal-footer\">\n            <slot name=\"footer\">\n              <button class=\"form-button-small\" @click=\"$emit('close')\">\n                Got it!\n              </button>\n            </slot>\n          </div>\n        </div>\n      </div>\n    </div>\n</transition>\n";
 
 /***/ },
-/* 306 */
+/* 294 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div id=\"timeline-container\">\n    <header>\n        <div class=\"title-area\">\n            <a href=\"javascript:void(0);\"><i class=\"icon-yipp_profile_line\"></i></a>\n            <span>Trainingen</span>\n            <router-link :to=\"{ name: 'emergency'}\"><i class=\"icon-yipp_notification_line2\"></i></router-link>\n        </div>\n\n        <div class=\"user-area\">\n            <div class=\"child-name\">{{ child.get('name') }}</div>\n            <ul class=\"months-level\">\n                <li>\n                    <span>{{ child.get('age') }}</span>  \n                    <span>Maanden</span>\n                </li>\n                <li>\n                    <span>{{ currentLevel }}</span>\n                    <span>Level</span>\n                </li>\n                <li>\n                    <a href=\"#\" v-on:click.prevent=\"toggle\" v-if=\"page == 'lessons'\"><i class=\"icon-yipp_down\"></i></a>\n                    <a href=\"#\" v-on:click.prevent=\"toggle\" v-if=\"page == 'levels'\"><i class=\"icon-yipp_up\"></i></a>\n                </li>\n            </ul>\n\n            <div class=\"photo\"><img class=\"avatar\" v-bind:src=\"child.get('image')\"></div>\n            \n        </div>\n    </header>\n        \n        <section class=\"traingen\" v-if=\"page == 'lessons'\">\n            <ul id=\"list-icons\">\n                <li v-for=\"lesson in lessons\">\n                    <a href=\"#\" v-bind:data-id=\"lesson.id\" v-on:click.prevent=\"goTodo\">\n                        <span class=\"icon big active\" v-bind:class=\"lesson.icon\"></span> \n                        {{ lesson.counter }}. {{ lesson.description }}\n                    </a>\n                </li>\n            </ul>\n        </section>\n        \n            \n        <section class=\"traingen2\" v-if=\"page == 'levels'\">\n                    \n            <ul id=\"list-text\">\n                <li v-for=\"level in levels\">\n                    <a href=\"#\" v-if=\"level.active == 'active'\" \n                        v-bind:data-id=\"level.id\" \n                        v-on:click.prevent=\"setCurrentLevel\"\n                        v-bind:class=\"level.active\">\n                        <span v-bind:data-id=\"level.id\" class=\"level\">Level {{ level.counter }}</span> \n                        <span v-bind:data-id=\"level.id\" class=\"months\">{{ level.description }} months</span>\n                    </a>\n\n                    <a href=\"#\" v-if=\"level.active == ''\" \n                        v-bind:data-id=\"level.id\" \n                        v-on:click.prevent=\"\"\n                        @click=\"showModal = true\"\n                        v-bind:class=\"level.active\">\n                        <span v-bind:data-id=\"level.id\" class=\"level\">Level {{ level.counter }}</span> \n                        <span v-bind:data-id=\"level.id\" class=\"months\">{{ level.description }} months</span>\n                    </a>\n                </li>\n            </ul>\n        \n        </section>\n        \n        <footer>\n            <ul>\n                <li><a href=\"javascript:void(0);\" class=\"active\"><span class=\"icon-yipp_home_full-\"></span>Training</a></li>\n                <li><router-link :to=\"{ path: 'challenge'}\"><span class=\"icon-yipp_challenge_line\"></span>Challenge</router-link></li>\n            </ul>\n        </footer>\n\n        <modal v-if=\"showModal\" @close=\"showModal = false\">\n            <h3 slot=\"header\">Ooops...</h3>\n            <p slot=\"body\">This is not yet available</p>\n        </modal>\n</div>\n";
 
 /***/ },
-/* 307 */
+/* 295 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(319)
-	__vue_template__ = __webpack_require__(308)
+	__vue_script__ = __webpack_require__(296)
+	__vue_template__ = __webpack_require__(297)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -35573,18 +35564,348 @@
 	})()}
 
 /***/ },
-/* 308 */
+/* 296 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _index = __webpack_require__(8);
+
+	var _config = __webpack_require__(1);
+
+	var _config2 = _interopRequireDefault(_config);
+
+	var _auth = __webpack_require__(184);
+
+	var _auth2 = _interopRequireDefault(_auth);
+
+	var _timeline = __webpack_require__(290);
+
+	var _timeline2 = _interopRequireDefault(_timeline);
+
+	var _jquery = __webpack_require__(11);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	    data: function data() {
+	        return {
+	            page: '1'
+	        };
+	    },
+
+	    created: function created() {},
+	    methods: {
+	        view: function view() {
+	            this.page = 2;
+	        },
+	        back: function back() {
+	            this.page = 1;
+	        }
+	    }
+	};
+
+	// </script>
+	// <template>
+	// 	<div id="page-emergency">
+	// 		<section class="emergency" v-if="page == 1">
+	// 			<header class="normal-header">
+	// 				<router-link :to="{ name: 'timeline'}"><span class="icon-close" style="font-weight: normal">X</span></router-link>
+	// 				<h2>Emergency</h2>
+	// 			</header>
+	//
+	// 			<ul id="list-image">
+	// 				<li v-on:click.prevent="view" style="background-image: url(assets/img/slider-1.jpg);"><h3>{title here}</h3></li>
+	// 				<li v-on:click.prevent="view" style="background-image: url(assets/img/slider-2.jpg);"><h3>{title here}</h3></li>
+	// 				<li v-on:click.prevent="view" style="background-image: url(assets/img/slider-3.jpg);"><h3>{title here}</h3></li>
+	// 				<li v-on:click.prevent="view" style="background-image: url(assets/img/slider-4.jpg);"><h3>{title here}</h3></li>
+	// 			</ul>
+	// 		</section>
+	//
+	// 		<section class="imageContent" v-if="page == 2">
+	// 			<div id="headerImage" v-on:click.prevent="back" style="background-image: url(assets/img/slider-1.jpg);">
+	// 			</div>
+	//
+	// 			<div id="content">
+	// 				<h3>{Title Text}</h3>
+	// 					<ol>
+	// 						<li class="item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis, fugiat.</li>
+	// 						<li class="item">Rerum quis voluptatem eligendi consequatur, ipsum, ducimus reiciendis hic amet.</li>
+	// 						<li class="item">Unde doloribus ipsam cum. Fuga quod illum voluptates voluptatum nulla.</li>
+	// 						<li class="item">Fugit ipsam, aliquam laudantium reiciendis repellendus illo! Eaque doloremque, veritatis!</li>
+	// 					</ol>
+	// 			</div>
+	// 		</section>
+	//
+	// 	</div>
+	// </template>
+	//
+	// <script>
+
+/***/ },
+/* 297 */
 /***/ function(module, exports) {
 
 	module.exports = "\n\t<div id=\"page-emergency\">\n\t\t<section class=\"emergency\" v-if=\"page == 1\">\n\t\t\t<header class=\"normal-header\">\n\t\t\t\t<router-link :to=\"{ name: 'timeline'}\"><span class=\"icon-close\" style=\"font-weight: normal\">X</span></router-link>\n\t\t\t\t<h2>Emergency</h2>\n\t\t\t</header>\n\n\t\t\t<ul id=\"list-image\">\n\t\t\t\t<li v-on:click.prevent=\"view\" style=\"background-image: url(assets/img/slider-1.jpg);\"><h3>{title here}</h3></li>\n\t\t\t\t<li v-on:click.prevent=\"view\" style=\"background-image: url(assets/img/slider-2.jpg);\"><h3>{title here}</h3></li>\n\t\t\t\t<li v-on:click.prevent=\"view\" style=\"background-image: url(assets/img/slider-3.jpg);\"><h3>{title here}</h3></li>\n\t\t\t\t<li v-on:click.prevent=\"view\" style=\"background-image: url(assets/img/slider-4.jpg);\"><h3>{title here}</h3></li>\n\t\t\t</ul>\n\t\t</section>\n\t\t\n\t\t<section class=\"imageContent\" v-if=\"page == 2\">\n\t\t\t<div id=\"headerImage\" v-on:click.prevent=\"back\" style=\"background-image: url(assets/img/slider-1.jpg);\">\n\t\t\t</div>\n\n\t\t\t<div id=\"content\">\n\t\t\t\t<h3>{Title Text}</h3>\n\t\t\t\t\t<ol>\n\t\t\t\t\t\t<li class=\"item\">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis, fugiat.</li>\n\t\t\t\t\t\t<li class=\"item\">Rerum quis voluptatem eligendi consequatur, ipsum, ducimus reiciendis hic amet.</li>\n\t\t\t\t\t\t<li class=\"item\">Unde doloribus ipsam cum. Fuga quod illum voluptates voluptatum nulla.</li>\n\t\t\t\t\t\t<li class=\"item\">Fugit ipsam, aliquam laudantium reiciendis repellendus illo! Eaque doloremque, veritatis!</li>\n\t\t\t\t\t</ol>\n\t\t\t</div>\n\t\t</section>\n\t\n\t</div>\n";
 
 /***/ },
-/* 309 */
+/* 298 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(322)
-	__vue_template__ = __webpack_require__(310)
+	__vue_script__ = __webpack_require__(299)
+	__vue_template__ = __webpack_require__(301)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "/Users/racheljaro/webroot/yipp/app/src/components/Lesson.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 299 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _index = __webpack_require__(8);
+
+	var _config = __webpack_require__(1);
+
+	var _config2 = _interopRequireDefault(_config);
+
+	var _auth = __webpack_require__(184);
+
+	var _auth2 = _interopRequireDefault(_auth);
+
+	var _timeline = __webpack_require__(290);
+
+	var _timeline2 = _interopRequireDefault(_timeline);
+
+	var _jquery = __webpack_require__(11);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	var _Modal = __webpack_require__(291);
+
+	var _Modal2 = _interopRequireDefault(_Modal);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// http://dev.fedvas.com/cms/api.dsuite/yipp/todos/37/en
+
+	// <template>
+	// <div id="page-lesson">
+	//
+	// 	<div  class="panel" id="start" v-if="page == 'start'">
+	// 		<router-link :to="{ name: 'timeline'}" class="back">
+	// 			<i class="icon-back"></i>
+	// 		</router-link>
+	//
+	// 		<!-- <div id="popUp">
+	// 			<i class="big icon-yipp_apple_full"></i>
+	//
+	// 			<h3>Lesson 2: Screentime</h3>
+	//
+	// 			<p>In this lesson, we will help to start the first practice appetizers</p>
+	//
+	// 			<hr>
+	//
+	// 			<span><i class="icon-yipp_check_full"></i> 5min</span>
+	//
+	// 		</div>	 -->
+	//
+	// 		<v-touch v-on:swipeleft="onSwipeLeft" id="popUp">
+	// 			<i class="big icon-yipp_apple_full"></i>
+	//
+	// 			<h3>Lesson 2: Screentime</h3>
+	//
+	// 			<p>In this lesson, we will help to start the first practice appetizers</p>
+	//
+	// 			<hr>
+	//
+	// 			<span><i class="icon-yipp_check_full"></i> 5min</span>
+	//
+	// 		</v-touch>
+	//
+	// 		<a href="#" v-on:click.prevent="startLesson" class="btn bottom white">Start</a>
+	// 	</div>
+	//
+	// 	<div class="panel" id="cards" v-if="page == 'cards'">
+	// 		<a v-on:click.prevent="back('start')" class="back">
+	// 			<i class="icon-yipp_check_full"></i>
+	// 		</a>
+	// 		<div class="bar">
+	// 			<span class="bar-inner"></span>
+	// 		</div>
+	// 		<router-link :to="{ name: 'timeline'}" class="home">
+	// 			<i class="icon-yipp_home_full-"></i>
+	// 		</router-link>
+	//
+	// 		<div id="paper" v-on:click.prevent="next('stack')">
+	//
+	// 			<h3>Why?</h3>
+	//
+	// 			<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>
+	//
+	// 			<i class="heart icon-yipp_check_full"></i>
+	//
+	// 			<div id="paper_foo1">
+	// 				<div id="paper_foo2"></div>
+	// 			</div>
+	// 		</div>
+	// 	</div>
+	//
+	// 	<div class="panel" id="stack" v-if="page == 'stack'">
+	// 		<a v-on:click.prevent="back('cards')" class="back">
+	// 			<i class="icon-yipp_check_full"></i>
+	// 		</a>
+	// 		<div class="bar">
+	// 			<span class="bar-inner"></span>
+	// 		</div>
+	// 		<router-link :to="{ name: 'timeline'}" class="home">
+	// 			<i class="icon-yipp_home_full-"></i>
+	// 		</router-link>
+	//
+	// 		<div class="content" v-on:click.prevent="next('complete')">
+	//
+	// 			<p class="text-center">Te weinig slapen vergroot de kans op overgewicht bij kinderen, omdat:</p>
+	//
+	// 			<ul>
+	//
+	// 				<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
+	// 				<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
+	// 				<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
+	// 				<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
+	//
+	// 			</ul>
+	//
+	// 		</div>
+	//
+	// 	</div>
+	//
+	// 	<div class="panel" id="complete" v-if="page == 'complete'">
+	// 		<a v-on:click.prevent="back('stack')" class="back">
+	// 			<i class="icon-yipp_check_full"></i>
+	// 		</a>
+	// 		<div class="bar">
+	// 			<span class="bar-inner"></span>
+	// 		</div>
+	// 		<router-link :to="{ name: 'timeline'}" class="home">
+	// 			<i class="icon-yipp_home_full-"></i>
+	// 		</router-link>
+	//
+	// 		<div class="content">
+	//
+	// 			<h1>Les compleet!</h1>
+	//
+	// 			<i class="biggest icon-yipp_check_full"></i>
+	//
+	// 			<p class="text-center">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
+	//
+	//
+	// 			<div class="bottom">
+	// 				<router-link :to="{ name: 'challenge'}" class="btn white">
+	// 				Start Challenge
+	// 				</router-link>
+	//
+	// 				<br>
+	// 				<a href="" v-on:click.prevent="back('start')" class="btn white">Reset Lesson</a>
+	// 			</div>
+	//
+	// 		</div>
+	//
+	// 	</div>
+	//
+	// 	<modal v-if="showModal" @close="showModal = false">
+	//         <h3 slot="header">Lorem Ipsum</h3>
+	//         <p slot="body">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+	//     </modal>
+	//
+	// </div>
+	//
+	// </template>
+	//
+	// <script>
+	exports.default = {
+	    data: function data() {
+	        return {
+	            child: {},
+	            page: 'start',
+	            levels: [],
+	            lessons: [],
+	            showModal: false,
+	            currentLevel: 1
+	        };
+	    },
+
+	    created: function created() {
+	        _auth2.default.check();
+	        if (!_auth2.default.authenticated) {
+	            this.redirectGuest();
+	        }
+	    },
+	    methods: {
+	        startLesson: function startLesson() {
+	            this.page = 'cards';
+	        },
+	        back: function back(page) {
+	            this.page = page;
+	        },
+	        next: function next(page) {
+	            this.page = page;
+	        },
+	        redirectGuest: function redirectGuest() {
+	            this.$router.push('login');
+	        }
+	    },
+
+	    watch: {
+	        '$route': function $route(to, from) {
+	            console.log(to);
+	            this.currentLesson = to;
+	        }
+	    },
+
+	    components: {
+	        Modal: _Modal2.default
+	    }
+	};
+
+	// </script>
+
+/***/ },
+/* 300 */,
+/* 301 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div id=\"page-lesson\">\n\n\t<div  class=\"panel\" id=\"start\" v-if=\"page == 'start'\">\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"back\">\n\t\t\t<i class=\"icon-back\"></i>\n\t\t</router-link>\n\n\t\t<!-- <div id=\"popUp\">\n\t\t\t<i class=\"big icon-yipp_apple_full\"></i>\n\t\t\t\n\t\t\t<h3>Lesson 2: Screentime</h3>\n\t\t\t\n\t\t\t<p>In this lesson, we will help to start the first practice appetizers</p>\n\t\t\t\n\t\t\t<hr>\n\n\t\t\t<span><i class=\"icon-yipp_check_full\"></i> 5min</span>\n\t\t\t\n\t\t</div>\t -->\n\n\t\t<v-touch v-on:swipeleft=\"onSwipeLeft\" id=\"popUp\">\n\t\t\t<i class=\"big icon-yipp_apple_full\"></i>\n\t\t\t\n\t\t\t<h3>Lesson 2: Screentime</h3>\n\t\t\t\n\t\t\t<p>In this lesson, we will help to start the first practice appetizers</p>\n\t\t\t\n\t\t\t<hr>\n\n\t\t\t<span><i class=\"icon-yipp_check_full\"></i> 5min</span>\n\t\t\t\n\t\t</v-touch>\n\t\t\t\n\t\t<a href=\"#\" v-on:click.prevent=\"startLesson\" class=\"btn bottom white\">Start</a>\n\t</div>\n\n\t<div class=\"panel\" id=\"cards\" v-if=\"page == 'cards'\">\n\t\t<a v-on:click.prevent=\"back('start')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<span class=\"bar-inner\"></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div id=\"paper\" v-on:click.prevent=\"next('stack')\">\n\n\t\t\t<h3>Why?</h3>\n\n\t\t\t<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>\n\n\t\t\t<i class=\"heart icon-yipp_check_full\"></i>\n\n\t\t\t<div id=\"paper_foo1\">\n\t\t\t\t<div id=\"paper_foo2\"></div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n\t\t\n\t<div class=\"panel\" id=\"stack\" v-if=\"page == 'stack'\">\n\t\t<a v-on:click.prevent=\"back('cards')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<span class=\"bar-inner\"></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"content\" v-on:click.prevent=\"next('complete')\">\n\t\t\t\n\t\t\t<p class=\"text-center\">Te weinig slapen vergroot de kans op overgewicht bij kinderen, omdat:</p>\n\t\t\t\n\t\t\t<ul>\n\t\t\t\t\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t\n\t\t\t</ul>\n\n\t\t</div>\n\n\t</div>\n\t\t\t\n\t<div class=\"panel\" id=\"complete\" v-if=\"page == 'complete'\">\n\t\t<a v-on:click.prevent=\"back('stack')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<span class=\"bar-inner\"></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"content\">\n\t\t\n\t\t\t<h1>Les compleet!</h1>\n\t\t\t\n\t\t\t<i class=\"biggest icon-yipp_check_full\"></i>\n\t\t\t\n\t\t\t<p class=\"text-center\">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>\n\t\t\t\n\t\t\t\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<router-link :to=\"{ name: 'challenge'}\" class=\"btn white\">\n\t\t\t\tStart Challenge\n\t\t\t\t</router-link>\n\n\t\t\t\t<br>\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"back('start')\" class=\"btn white\">Reset Lesson</a>\n\t\t\t</div>\n\t\t\n\t\t</div>\n\n\t</div>\n\n\t<modal v-if=\"showModal\" @close=\"showModal = false\">\n        <h3 slot=\"header\">Lorem Ipsum</h3>\n        <p slot=\"body\">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>\n    </modal>\n\n</div>\n\t\n";
+
+/***/ },
+/* 302 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__vue_script__ = __webpack_require__(303)
+	__vue_template__ = __webpack_require__(304)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -35601,18 +35922,219 @@
 	})()}
 
 /***/ },
-/* 310 */
+/* 303 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _index = __webpack_require__(8);
+
+	var _config = __webpack_require__(1);
+
+	var _config2 = _interopRequireDefault(_config);
+
+	var _auth = __webpack_require__(184);
+
+	var _auth2 = _interopRequireDefault(_auth);
+
+	var _timeline = __webpack_require__(290);
+
+	var _timeline2 = _interopRequireDefault(_timeline);
+
+	var _jquery = __webpack_require__(11);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	var _Modal = __webpack_require__(291);
+
+	var _Modal2 = _interopRequireDefault(_Modal);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// http://dev.fedvas.com/cms/api.dsuite/yipp/todos/37/en
+
+	// <template>
+	// 	<div id="container">
+	//
+	// 		<div class="header">
+	//
+	// 			<router-link :to="{ name: 'timeline'}" class="icon">
+	// 				<i class="icon-yipp_profile_line"></i>
+	// 			</router-link>
+	//
+	// 			<div class="title">Challenge</div>
+	//
+	// 		</div>
+	//
+	//
+	// 		<div class="content" v-if="empty">
+	//
+	// 			<div class="panel">
+	// 			Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+	// 			</div>
+	//
+	// 			<a href="" class="btn">Explore training</a>
+	//
+	// 		</div>
+	//
+	// 		<div class="content" v-if="empty == false">
+	//
+	// 			<ul class="blockList">
+	// 				<li>
+	// 					<span class="set">
+	// 					<i class="icon-yipp_notification_line"></i>
+	// 					14:00
+	// 					| <i class="icon-yipp_repeat_line"></i>
+	// 					Every day
+	// 					</span>
+	// 					<p>Lorem Ipsum</p>
+	//
+	// 					<router-link :to="{ path: 'challenge-1'}">
+	// 					<i class="arrow icon-yipp_forward"></i>
+	// 					</router-link>
+	//
+	// 				</li>
+	// 				<li>
+	// 				<span class="set">
+	// 					<i class="icon-yipp_notification_line"></i>
+	// 					14:00
+	// 					| <i class="icon-yipp_repeat_line"></i>
+	// 					Every day
+	// 					</span>
+	// 					<p>Lorem Ipsum</p>
+	//
+	// 					<router-link :to="{ path: 'challenge-2'}">
+	// 						<i class="arrow icon-yipp_forward"></i>
+	// 					</router-link>
+	// 				</li>
+	// 			</ul>		
+	//
+	// 			<a href="" v-if="isShowDoneChallenges == false" v-on:click.prevent="toggleDoneChallenges" class="link">Show finished challenges</a>
+	// 			<a href="" v-if="isShowDoneChallenges" v-on:click.prevent="toggleDoneChallenges" class="link">Hide finished challenges</a>
+	//
+	// 			<ul class="blockList2" v-if="isShowDoneChallenges">
+	// 				<li>
+	// 					<p>Lorem Ipsum</p>
+	//
+	// 					<i class="arrow icon-yipp_forward"></i>
+	//
+	// 				</li>
+	// 				<li>
+	// 					<p>Lorem Ipsum</p>
+	//
+	// 						<i class="arrow icon-yipp_forward"></i>
+	// 				</li>
+	// 			</ul>
+	// 		</div>
+	//
+	// 		<footer>
+	// 			<ul>
+	// 				<li>
+	// 					<router-link :to="{ name: 'timeline'}"><span class="icon-yipp_home_full-"></span>Training</router-link>
+	// 				</li>
+	// 				<li>
+	// 					<a href="javascript:void(0);" class="active"><span class="icon-yipp_challenge_line"></span>Challenge</a>
+	// 				</li>
+	// 			</ul>
+	// 		</footer>
+	//
+	// 	</div>	
+	// </template>
+	//
+	// <script>
+	exports.default = {
+	    data: function data() {
+	        return {
+	            empty: false,
+	            isShowDoneChallenges: false,
+	            page: 'start',
+	            levels: [],
+	            lessons: [],
+	            showModal: false,
+	            currentLevel: 1
+	        };
+	    },
+
+	    created: function created() {
+	        _auth2.default.check();
+	        if (!_auth2.default.authenticated) {
+	            this.redirectGuest();
+	        }
+	    },
+	    methods: {
+	        startLesson: function startLesson() {
+	            this.page = 'cards';
+	        },
+	        toggleDoneChallenges: function toggleDoneChallenges() {
+	            if (this.isShowDoneChallenges) {
+	                this.isShowDoneChallenges = false;
+	            } else {
+	                this.isShowDoneChallenges = true;
+	            }
+	        },
+	        redirectGuest: function redirectGuest() {
+	            this.$router.push('login');
+	        }
+	    },
+
+	    watch: {
+	        '$route': function $route(to, from) {
+	            console.log(to, from);
+	            this.currentLesson = to;
+	        }
+	    },
+
+	    components: {
+	        Modal: _Modal2.default
+	    }
+	};
+
+	// </script>
+
+/***/ },
+/* 304 */
 /***/ function(module, exports) {
 
 	module.exports = "\n\t<div id=\"container\">\n\t\n\t\t<div class=\"header\">\n\n\t\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"icon\">\n\t\t\t\t<i class=\"icon-yipp_profile_line\"></i>\n\t\t\t</router-link>\n\n\t\t\t<div class=\"title\">Challenge</div>\n\n\t\t</div>\n\n\t\t\n\t\t<div class=\"content\" v-if=\"empty\">\n\t\t\n\t\t\t<div class=\"panel\">\n\t\t\tLorem Ipsum is simply dummy text of the printing and typesetting industry.\n\t\t\t</div>\n\t\t\t\n\t\t\t<a href=\"\" class=\"btn\">Explore training</a>\n\t\t\n\t\t</div>\n\n\t\t<div class=\"content\" v-if=\"empty == false\">\n\n\t\t\t<ul class=\"blockList\">\n\t\t\t\t<li>\n\t\t\t\t\t<span class=\"set\">\n\t\t\t\t\t<i class=\"icon-yipp_notification_line\"></i>\n\t\t\t\t\t14:00\n\t\t\t\t\t| <i class=\"icon-yipp_repeat_line\"></i>\n\t\t\t\t\tEvery day\n\t\t\t\t\t</span>\n\t\t\t\t\t<p>Lorem Ipsum</p>\n\t\t\t\t\t\n\t\t\t\t\t<router-link :to=\"{ path: 'challenge-1'}\">\n\t\t\t\t\t<i class=\"arrow icon-yipp_forward\"></i>\n\t\t\t\t\t</router-link>\n\t\t\t\t\t\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t<span class=\"set\">\n\t\t\t\t\t<i class=\"icon-yipp_notification_line\"></i>\n\t\t\t\t\t14:00\n\t\t\t\t\t| <i class=\"icon-yipp_repeat_line\"></i>\n\t\t\t\t\tEvery day\n\t\t\t\t\t</span>\n\t\t\t\t\t<p>Lorem Ipsum</p>\n\t\t\t\t\t\n\t\t\t\t\t<router-link :to=\"{ path: 'challenge-2'}\">\n\t\t\t\t\t\t<i class=\"arrow icon-yipp_forward\"></i>\n\t\t\t\t\t</router-link>\n\t\t\t\t</li>\n\t\t\t</ul>\t\t\n\n\t\t\t<a href=\"\" v-if=\"isShowDoneChallenges == false\" v-on:click.prevent=\"toggleDoneChallenges\" class=\"link\">Show finished challenges</a>\n\t\t\t<a href=\"\" v-if=\"isShowDoneChallenges\" v-on:click.prevent=\"toggleDoneChallenges\" class=\"link\">Hide finished challenges</a>\n\n\t\t\t<ul class=\"blockList2\" v-if=\"isShowDoneChallenges\">\n\t\t\t\t<li>\n\t\t\t\t\t<p>Lorem Ipsum</p>\n\t\t\t\t\t\n\t\t\t\t\t<i class=\"arrow icon-yipp_forward\"></i>\n\t\t\t\t\t\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<p>Lorem Ipsum</p>\n\t\t\t\t\t\n\t\t\t\t\t\t<i class=\"arrow icon-yipp_forward\"></i>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t</div>\n\n\t\t<footer>\n\t\t\t<ul>\n\t\t\t\t<li>\n\t\t\t\t\t<router-link :to=\"{ name: 'timeline'}\"><span class=\"icon-yipp_home_full-\"></span>Training</router-link>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a href=\"javascript:void(0);\" class=\"active\"><span class=\"icon-yipp_challenge_line\"></span>Challenge</a>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t</footer>\n\t\t\n\t</div>\t\n";
 
 /***/ },
-/* 311 */
+/* 305 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(325)
-	__vue_template__ = __webpack_require__(312)
+	__vue_template__ = __webpack_require__(306)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "/Users/racheljaro/webroot/yipp/app/src/components/ChallengeNew.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 306 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div id=\"\">\nto follow\n</div>\n";
+
+/***/ },
+/* 307 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__vue_script__ = __webpack_require__(308)
+	__vue_template__ = __webpack_require__(309)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -35629,13 +36151,204 @@
 	})()}
 
 /***/ },
-/* 312 */
+/* 308 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\t<div >\n\t\n\t\t<div class=\"header\">\n\t\t\n\t\t\t<router-link :to=\"{ name: 'challenge'}\" class=\"icon\">\n\t\t\t\t<i class=\" icon-yipp_back\"></i>\n\t\t\t</router-link>\n\n\t\t\t<div class=\"title\">Challenge Details</div>\n\t\t\n\t\t</div>\n\t\t\n\t\t<div class=\"wrap\">\n\t\t\n\t\t\t<div class=\"details\">\n\t\t\t\n\t\t\t<span class=\"set\">\n\t\t\t\t\t<i class=\"icon-yipp_notification_line\"></i>\n\t\t\t\t\t14:00\n\t\t\t\t\t| <i class=\"icon-yipp_repeat_line\"></i>\n\t\t\t\t\tEvery day\n\t\t\t\t\t</span>\n\t\t\t\t\n\t\t\t\t<table width=\"100%\" border=\"0\">\n\t\t\t\t\t<tbody>\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t<p>Eating more vegetable</p>\n\t\t\t\t\t\t\t\t<p>1. Broco</p>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t<a href=\"\" class=\"edit\"><i class=\"icon-yipp_pencil_line\"></i></a>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t</tbody>\n\t\t\t\t</table>\n\t\t\t\t\n\t\t\t</div>\n\t\t\n\t\t</div>\n\t\n\t\t<div class=\"steps\">\n\t\n\t\t\t\t<ul>\n\t\t\t\t\t<li>1</li>\n\t\t\t\t\t<li>2</li>\n\t\t\t\t\t<li>3</li>\n\t\t\t\t\t<li>4</li>\n\t\t\t\t\t<li>5</li>\n\t\t\t\t</ul>\n\n\t\t\t<hr>\n\t\t\n\t\t</div>\n\t\t\n\t\t<div class=\"pic\" style=\"background-image: url(assets/img/slider-1.jpg);\">\n\t\t\n\t\t</div>\n\t\n\t\t<h4>Evaluation</h4>\n\t\t\n\t\t<textarea></textarea>\n\t\t\n\t\t<ul class=\"selection\">\n\t\t\t<li><a href=\"\"><i class=\"icon-yipp_emoticon_sad\"></i></a></li>\n\t\t\t<li><a href=\"\" class=\"active\"><i class=\"icon-yipp_emoticon_neutral\"></i></a></li>\n\t\t\t<li><a href=\"\"><i class=\"icon-yipp_emoticon_happy-\"></i></a></li>\n\t\t</ul>\n\t\t\n\t\t<h4>Notes</h4>\n\t\t\n\t\t<textarea></textarea>\n\t\t\n\t\t<a href=\"\" class=\"btn\">Done</a>\n\t\n\t</div>\n\t\n\t<section class=\"resultCard\">\n\t\t\n\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t\n\t\t<h3>You can do it!</h3>\n\t\t<p>We made a beautiful photo collage of this week check it out!</p>\n\t\t\n\t\t<div class=\"bottom\">\n\t\t<a href=\"javascript:void(0);\" class=\"btn mid\">See result</a>\n\n\t\t<a href=\"javascript:void(0);\" class=\"btn big\">Restart challenge</a>\n\t\t\n\t\t</div>\n\t\n\t\t<div id=\"modal\">\n\n\t\t\t<div id=\"msg\">\n\n\t\t\t\t<h3>Are you sure?</h3>\n\n\t\t\t\t<p>Do you want to restart challenge?</p>\n\n\t\t\t\t<a href=\"javascript:void(0);\">Restart challenge</a>\n\n\t\t\t</div>\n\n\t\t</div>\n\n\t</section>\n\t\n\t<section id=\"collage\">\n\t\n\t\t<div class=\"header\">\n\t\t\t<a href=\"\">X</a> Photo Collage\n\t\t\t<h3>Fruit and Vegetables</h3>\n\t\t</div>\n\t\n\t\t<ul>\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.249433563155607720.8831731339490072xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 1</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_sad\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.295004208875615740.8355499571179614xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 2</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_happy-\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li>\n\t\t\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 3</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_neutral\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.83296738785488070.9722791300289735xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 4</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_happy-\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t</ul>\n\t\n\t</section>\n\t\n\t<div class=\"restart\">\n\t\n\t<a href=\"\" >Restart challenge</a>\n\t\n\t</div>\t\n";
+	// <template>
+	// 	<div >
+	//
+	// 		<div class="header">
+	//
+	// 			<router-link :to="{ name: 'challenge'}" class="icon">
+	// 				<i class=" icon-yipp_back"></i>
+	// 			</router-link>
+	//
+	// 			<div class="title">Challenge Details</div>
+	//
+	// 		</div>
+	//
+	// 		<div class="wrap">
+	//
+	// 			<div class="details">
+	//
+	// 			<span class="set">
+	// 					<i class="icon-yipp_notification_line"></i>
+	// 					14:00
+	// 					| <i class="icon-yipp_repeat_line"></i>
+	// 					Every day
+	// 					</span>
+	//
+	// 				<table width="100%" border="0">
+	// 					<tbody>
+	// 						<tr>
+	// 							<td>
+	// 								<p>Eating more vegetable</p>
+	// 								<p>1. Broco</p>
+	// 							</td>
+	// 							<td>
+	// 							<a href="" class="edit"><i class="icon-yipp_pencil_line"></i></a>
+	// 							</td>
+	// 						</tr>
+	// 					</tbody>
+	// 				</table>
+	//
+	// 			</div>
+	//
+	// 		</div>
+	//
+	// 		<div class="steps">
+	//
+	// 				<ul>
+	// 					<li>1</li>
+	// 					<li>2</li>
+	// 					<li>3</li>
+	// 					<li>4</li>
+	// 					<li>5</li>
+	// 				</ul>
+	//
+	// 			<hr>
+	//
+	// 		</div>
+	//
+	// 		<div class="pic" style="background-image: url(assets/img/slider-1.jpg);">
+	//
+	// 		</div>
+	//
+	// 		<h4>Evaluation</h4>
+	//
+	// 		<textarea></textarea>
+	//
+	// 		<ul class="selection">
+	// 			<li><a href=""><i class="icon-yipp_emoticon_sad"></i></a></li>
+	// 			<li><a href="" class="active"><i class="icon-yipp_emoticon_neutral"></i></a></li>
+	// 			<li><a href=""><i class="icon-yipp_emoticon_happy-"></i></a></li>
+	// 		</ul>
+	//
+	// 		<h4>Notes</h4>
+	//
+	// 		<textarea></textarea>
+	//
+	// 		<a href="" class="btn">Done</a>
+	//
+	// 	</div>
+	//
+	// 	<section class="resultCard">
+	//
+	// 		<i class="icon-yipp_check_full"></i>
+	//
+	// 		<h3>You can do it!</h3>
+	// 		<p>We made a beautiful photo collage of this week check it out!</p>
+	//
+	// 		<div class="bottom">
+	// 		<a href="javascript:void(0);" class="btn mid">See result</a>
+	//
+	// 		<a href="javascript:void(0);" class="btn big">Restart challenge</a>
+	//
+	// 		</div>
+	//
+	// 		<div id="modal">
+	//
+	// 			<div id="msg">
+	//
+	// 				<h3>Are you sure?</h3>
+	//
+	// 				<p>Do you want to restart challenge?</p>
+	//
+	// 				<a href="javascript:void(0);">Restart challenge</a>
+	//
+	// 			</div>
+	//
+	// 		</div>
+	//
+	// 	</section>
+	//
+	// 	<section id="collage">
+	//
+	// 		<div class="header">
+	// 			<a href="">X</a> Photo Collage
+	// 			<h3>Fruit and Vegetables</h3>
+	// 		</div>
+	//
+	// 		<ul>
+	// 			<li class="active">
+	// 				<img src="" alt="">
+	//
+	// 				<div class="elements">
+	// 					<div class="day">Day 1</div>
+	// 					<i class="icon icon-yipp_emoticon_sad"></i>
+	// 				</div>
+	//
+	// 				<div class="data">
+	// 					<p>"It went great this day"</p>
+	// 				</div>	
+	//
+	// 			</li>
+	//
+	// 			<li class="active">
+	// 				<img src="" alt="">
+	//
+	// 				<div class="elements">
+	// 					<div class="day">Day 2</div>
+	// 					<i class="icon icon-yipp_emoticon_happy-"></i>
+	// 				</div>
+	//
+	// 				<div class="data">
+	// 					<p>"It went great this day"</p>
+	// 				</div>	
+	//
+	// 			</li>
+	//
+	// 			<li>
+	//
+	//
+	// 				<div class="elements">
+	// 					<div class="day">Day 3</div>
+	// 					<i class="icon icon-yipp_emoticon_neutral"></i>
+	// 				</div>
+	//
+	// 				<div class="data">
+	// 					<p>"It went great this day"</p>
+	// 				</div>	
+	//
+	// 			</li>
+	//
+	// 			<li class="active">
+	// 				<img src="" alt="">
+	//
+	// 				<div class="elements">
+	// 					<div class="day">Day 4</div>
+	// 					<i class="icon icon-yipp_emoticon_happy-"></i>
+	// 				</div>
+	//
+	// 				<div class="data">
+	// 					<p>"It went great this day"</p>
+	// 				</div>	
+	//
+	// 			</li>
+	// 		</ul>
+	//
+	// 	</section>
+	//
+	// 	<div class="restart">
+	//
+	// 	<a href="" >Restart challenge</a>
+	//
+	// 	</div>	
+	// </template>
+	//
+	// <script>
+
+	// </script>
+	"use strict";
 
 /***/ },
-/* 313 */
+/* 309 */
+/***/ function(module, exports) {
+
+	module.exports = "\n\t<div >\n\t\n\t\t<div class=\"header\">\n\t\t\n\t\t\t<router-link :to=\"{ name: 'challenge'}\" class=\"icon\">\n\t\t\t\t<i class=\" icon-yipp_back\"></i>\n\t\t\t</router-link>\n\n\t\t\t<div class=\"title\">Challenge Details</div>\n\t\t\n\t\t</div>\n\t\t\n\t\t<div class=\"wrap\">\n\t\t\n\t\t\t<div class=\"details\">\n\t\t\t\n\t\t\t<span class=\"set\">\n\t\t\t\t\t<i class=\"icon-yipp_notification_line\"></i>\n\t\t\t\t\t14:00\n\t\t\t\t\t| <i class=\"icon-yipp_repeat_line\"></i>\n\t\t\t\t\tEvery day\n\t\t\t\t\t</span>\n\t\t\t\t\n\t\t\t\t<table width=\"100%\" border=\"0\">\n\t\t\t\t\t<tbody>\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t<p>Eating more vegetable</p>\n\t\t\t\t\t\t\t\t<p>1. Broco</p>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t<a href=\"\" class=\"edit\"><i class=\"icon-yipp_pencil_line\"></i></a>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t</tbody>\n\t\t\t\t</table>\n\t\t\t\t\n\t\t\t</div>\n\t\t\n\t\t</div>\n\t\n\t\t<div class=\"steps\">\n\t\n\t\t\t\t<ul>\n\t\t\t\t\t<li>1</li>\n\t\t\t\t\t<li>2</li>\n\t\t\t\t\t<li>3</li>\n\t\t\t\t\t<li>4</li>\n\t\t\t\t\t<li>5</li>\n\t\t\t\t</ul>\n\n\t\t\t<hr>\n\t\t\n\t\t</div>\n\t\t\n\t\t<div class=\"pic\" style=\"background-image: url(assets/img/slider-1.jpg);\">\n\t\t\n\t\t</div>\n\t\n\t\t<h4>Evaluation</h4>\n\t\t\n\t\t<textarea></textarea>\n\t\t\n\t\t<ul class=\"selection\">\n\t\t\t<li><a href=\"\"><i class=\"icon-yipp_emoticon_sad\"></i></a></li>\n\t\t\t<li><a href=\"\" class=\"active\"><i class=\"icon-yipp_emoticon_neutral\"></i></a></li>\n\t\t\t<li><a href=\"\"><i class=\"icon-yipp_emoticon_happy-\"></i></a></li>\n\t\t</ul>\n\t\t\n\t\t<h4>Notes</h4>\n\t\t\n\t\t<textarea></textarea>\n\t\t\n\t\t<a href=\"\" class=\"btn\">Done</a>\n\t\n\t</div>\n\t\n\t<section class=\"resultCard\">\n\t\t\n\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t\n\t\t<h3>You can do it!</h3>\n\t\t<p>We made a beautiful photo collage of this week check it out!</p>\n\t\t\n\t\t<div class=\"bottom\">\n\t\t<a href=\"javascript:void(0);\" class=\"btn mid\">See result</a>\n\n\t\t<a href=\"javascript:void(0);\" class=\"btn big\">Restart challenge</a>\n\t\t\n\t\t</div>\n\t\n\t\t<div id=\"modal\">\n\n\t\t\t<div id=\"msg\">\n\n\t\t\t\t<h3>Are you sure?</h3>\n\n\t\t\t\t<p>Do you want to restart challenge?</p>\n\n\t\t\t\t<a href=\"javascript:void(0);\">Restart challenge</a>\n\n\t\t\t</div>\n\n\t\t</div>\n\n\t</section>\n\t\n\t<section id=\"collage\">\n\t\n\t\t<div class=\"header\">\n\t\t\t<a href=\"\">X</a> Photo Collage\n\t\t\t<h3>Fruit and Vegetables</h3>\n\t\t</div>\n\t\n\t\t<ul>\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.89793042725852850.27861994588865424xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 1</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_sad\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.57763837748303340.45923320687375146xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 2</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_happy-\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li>\n\t\t\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 3</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_neutral\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.2332799530032370.8814606981434974xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 4</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_happy-\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t</ul>\n\t\n\t</section>\n\t\n\t<div class=\"restart\">\n\t\n\t<a href=\"\" >Restart challenge</a>\n\t\n\t</div>\t\n";
+
+/***/ },
+/* 310 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -36722,7 +37435,7 @@
 
 	var nodeClient = function (request) {
 
-	    var client = __webpack_require__(314);
+	    var client = __webpack_require__(311);
 
 	    return new PromiseObj(function (resolve) {
 
@@ -37185,13 +37898,13 @@
 
 
 /***/ },
-/* 314 */
+/* 311 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
-/* 315 */
+/* 312 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -39599,10 +40312,10 @@
 
 	module.exports = VueRouter;
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(316)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(313)))
 
 /***/ },
-/* 316 */
+/* 313 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -39788,722 +40501,2924 @@
 
 
 /***/ },
-/* 317 */,
-/* 318 */,
-/* 319 */
+/* 314 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	(function (global, factory) {
+	   true ? factory(__webpack_require__(315)) :
+	  typeof define === 'function' && define.amd ? define(['hammerjs'], factory) :
+	  (factory(global.Hammer));
+	}(this, (function (Hammer) { 'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
+	Hammer = 'default' in Hammer ? Hammer['default'] : Hammer;
 
-	var _index = __webpack_require__(8);
-
-	var _config = __webpack_require__(1);
-
-	var _config2 = _interopRequireDefault(_config);
-
-	var _auth = __webpack_require__(184);
-
-	var _auth2 = _interopRequireDefault(_auth);
-
-	var _timeline = __webpack_require__(302);
-
-	var _timeline2 = _interopRequireDefault(_timeline);
-
-	var _jquery = __webpack_require__(11);
-
-	var _jquery2 = _interopRequireDefault(_jquery);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = {
-	    data: function data() {
-	        return {
-	            page: '1'
-	        };
-	    },
-
-	    created: function created() {},
-	    methods: {
-	        view: function view() {
-	            this.page = 2;
-	        },
-	        back: function back() {
-	            this.page = 1;
-	        }
+	function assign(target) {
+	  var sources = [], len = arguments.length - 1;
+	  while ( len-- > 0 ) sources[ len ] = arguments[ len + 1 ];
+	  for (var i = 0; i < sources.length; i++) {
+	    var source = sources[i];
+	    var keys = Object.keys(source);
+	    for (var i$1 = 0; i$1 < keys.length; i$1++) {
+	      var key = keys[i$1];
+	      target[key] = source[key];
 	    }
+	  }
+	  return target
+	}
+	function createProp() {
+	  return {
+	    type: Object,
+	    default: function() { return {} }
+	  }
+	}
+	function capitalize (str) {
+	  return str.charAt(0).toUpperCase() + str.slice(1)
+	}
+	var directions = ['up', 'down', 'left', 'right', 'horizontal', 'vertical', 'all'];
+	function guardDirections (options) {
+	  var dir = options.direction;
+	  if (typeof dir === 'string') {
+	    var hammerDirection = 'DIRECTION_' + dir.toUpperCase();
+	    if (directions.indexOf(dir) > -1 && Hammer.hasOwnProperty(hammerDirection)) {
+	      options.direction = Hammer[hammerDirection];
+	    } else {
+	      console.warn('[vue-touch] invalid direction: ' + dir);
+	    }
+	  }
+	  return options
+	}
+	var config = {
+	};
+	var customEvents = {
+	};
+	var gestures = [
+	  'pan','panstart','panmove','panend','pancancel','panleft','panright','panup','pandown',
+	  'pinch','pinchstart','pinchmove','pinchend','pinchcancel','pinchin','pinchout',
+	  'press','pressup',
+	  'rotate','rotatestart','rotatemove','rotateend','rotatecancel',
+	  'swipe','swipeleft','swiperight','swipeup','swipedown',
+	  'tap'
+	];
+	var gestureMap = {
+	  pan: 'pan',
+	  panstart: 'pan',
+	  panmove: 'pan',
+	  panend: 'pan',
+	  pancancel: 'pan',
+	  panleft: 'pan',
+	  panright: 'pan',
+	  panup: 'pan',
+	  pandown: 'pan',
+	  pinch: 'pinch',
+	  pinchstart: 'pinch',
+	  pinchmove: 'pinch',
+	  pinchend: 'pinch',
+	  pinchcancel: 'pinch',
+	  pinchin: 'pinch',
+	  pinchout: 'pinch',
+	  press: 'press',
+	  pressup: 'press',
+	  rotate: 'rotate',
+	  rotatestart: 'rotate',
+	  rotatemove: 'rotate',
+	  rotateend: 'rotate',
+	  rotatecancel: 'rotate',
+	  swipe: 'swipe',
+	  swipeleft: 'swipe',
+	  swiperight: 'swipe',
+	  swipeup: 'swipe',
+	  swipedown: 'swipe',
+	  tap: 'tap'
 	};
 
-	// </script>
-	// <template>
-	// 	<div id="page-emergency">
-	// 		<section class="emergency" v-if="page == 1">
-	// 			<header class="normal-header">
-	// 				<router-link :to="{ name: 'timeline'}"><span class="icon-close" style="font-weight: normal">X</span></router-link>
-	// 				<h2>Emergency</h2>
-	// 			</header>
-	//
-	// 			<ul id="list-image">
-	// 				<li v-on:click.prevent="view" style="background-image: url(assets/img/slider-1.jpg);"><h3>{title here}</h3></li>
-	// 				<li v-on:click.prevent="view" style="background-image: url(assets/img/slider-2.jpg);"><h3>{title here}</h3></li>
-	// 				<li v-on:click.prevent="view" style="background-image: url(assets/img/slider-3.jpg);"><h3>{title here}</h3></li>
-	// 				<li v-on:click.prevent="view" style="background-image: url(assets/img/slider-4.jpg);"><h3>{title here}</h3></li>
-	// 			</ul>
-	// 		</section>
-	//
-	// 		<section class="imageContent" v-if="page == 2">
-	// 			<div id="headerImage" v-on:click.prevent="back" style="background-image: url(assets/img/slider-1.jpg);">
-	// 			</div>
-	//
-	// 			<div id="content">
-	// 				<h3>{Title Text}</h3>
-	// 					<ol>
-	// 						<li class="item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis, fugiat.</li>
-	// 						<li class="item">Rerum quis voluptatem eligendi consequatur, ipsum, ducimus reiciendis hic amet.</li>
-	// 						<li class="item">Unde doloribus ipsam cum. Fuga quod illum voluptates voluptatum nulla.</li>
-	// 						<li class="item">Fugit ipsam, aliquam laudantium reiciendis repellendus illo! Eaque doloremque, veritatis!</li>
-	// 					</ol>
-	// 			</div>
-	// 		</section>
-	//
-	// 	</div>
-	// </template>
-	//
-	// <script>
+	var Component = {
+	  props: {
+	    options: createProp(),
+	    tapOptions: createProp(),
+	    panOptions: createProp(),
+	    pinchOptions: createProp(),
+	    pressOptions: createProp(),
+	    rotateOptions: createProp(),
+	    swipeOptions: createProp(),
+	    tag: { type: String, default: 'div' },
+	    enabled: {
+	      default: true,
+	      type: [Boolean, Object],
+	    }
+	  },
+	  mounted: function mounted() {
+	    if (!this.$isServer) {
+	      this.hammer = new Hammer.Manager(this.$el, this.options);
+	      this.recognizers = {};
+	      this.setupBuiltinRecognizers();
+	      this.setupCustomRecognizers();
+	      this.updateEnabled(this.enabled);
+	    }
+	  },
+	  destroyed: function destroyed() {
+	    if (!this.$isServer) {
+	      this.hammer.destroy();
+	    }
+	  },
+	  watch: {
+	    enabled: {
+	      deep: true,
+	      handler: function handler() {
+	        var args = [], len = arguments.length;
+	        while ( len-- ) args[ len ] = arguments[ len ];
+	        (ref = this).updateEnabled.apply(ref, args);
+	        var ref;
+	      }
+	    }
+	  },
+	  methods: {
+	    setupBuiltinRecognizers: function setupBuiltinRecognizers()  {
+	      var this$1 = this;
+	      for (var i = 0; i < gestures.length; i++) {
+	        var gesture = gestures[i];
+	        if (this$1._events[gesture]) {
+	          var mainGesture = gestureMap[gesture];
+	          var options = assign({}, (config[mainGesture] || {}), this$1[(mainGesture + "Options")]);
+	          this$1.addRecognizer(mainGesture, options);
+	          this$1.addEvent(gesture);
+	        }
+	      }
+	    },
+	    setupCustomRecognizers: function setupCustomRecognizers() {
+	      var this$1 = this;
+	      var gestures$$1 = Object.keys(customEvents);
+	      for (var i = 0; i < gestures$$1.length; i++) {
+	        var gesture = gestures$$1[i];
+	        if (this$1._events[gesture]) {
+	          var opts = customEvents[gesture];
+	          var localCustomOpts = this$1[(gesture + "Options")] || {};
+	          var options = assign({}, opts, localCustomOpts);
+	          this$1.addRecognizer(gesture, options, {mainGesture: options.type});
+	          this$1.addEvent(gesture);
+	        }
+	      }
+	    },
+	    addRecognizer: function addRecognizer(gesture, options, ref) {
+	      if ( ref === void 0 ) ref = {};
+	      var mainGesture = ref.mainGesture;
+	      if (!this.recognizers[gesture]) {
+	        var recognizer = new Hammer[capitalize(mainGesture || gesture)](guardDirections(options));
+	        this.recognizers[gesture] = recognizer;
+	        this.hammer.add(recognizer);
+	        recognizer.recognizeWith(this.hammer.recognizers);
+	      }
+	    },
+	    addEvent: function addEvent(gesture) {
+	      var this$1 = this;
+	      this.hammer.on(gesture, function (e) { return this$1.$emit(gesture, e); });
+	    },
+	    updateEnabled: function updateEnabled(newVal, oldVal) {
+	      var this$1 = this;
+	      if (newVal === true) {
+	        this.enableAll();
+	      } else if (newVal === false) {
+	        this.disableAll();
+	      } else if (typeof newVal === 'object') {
+	        var keys = Object.keys(newVal);
+	        for (var i = 0; i < keys.length; i++) {
+	          var event = keys[i];
+	          if (this$1.recognizers[event]) {
+	            newVal[event]
+	              ? this$1.enable(event)
+	              : this$1.disable(event);
+	          }
+	        }
+	      }
+	    },
+	    enable: function enable(r) {
+	      var recognizer = this.recognizers[r];
+	      if (!recognizer.options.enable) {
+	        recognizer.set({ enable: true });
+	      }
+	    },
+	    disable: function disable(r) {
+	      var recognizer = this.recognizers[r];
+	      if (recognizer.options.enable) {
+	        recognizer.set({ enable: false });
+	      }
+	    },
+	    toggle: function toggle(r) {
+	      var recognizer = this.recognizers[r];
+	      if (recognizer) {
+	        recognizer.options.enable
+	          ? this.disable(r)
+	          : this.enable(r);
+	      }
+	    },
+	    enableAll: function enableAll(r) {
+	      this.toggleAll({ enable: true });
+	    },
+	    disableAll: function disableAll(r) {
+	      this.toggleAll({ enable: false });
+	    },
+	    toggleAll: function toggleAll(ref) {
+	      var this$1 = this;
+	      var enable = ref.enable;
+	      var keys = Object.keys(this.recognizers);
+	      for (var i = 0; i < keys.length; i++) {
+	        var r = this$1.recognizers[keys[i]];
+	        if (r.options.enable !== enable) {
+	          r.set({ enable: enable });
+	        }
+	      }
+	    },
+	    isEnabled: function isEnabled(r) {
+	      return this.recognizers[r] && this.recognizers[r].options.enable
+	    }
+	  },
+	  render: function render(h) {
+	    return h(this.tag, {}, this.$slots.default)
+	  }
+	};
+
+	var installed = false;
+	var vueTouch = { config: config, customEvents: customEvents };
+	vueTouch.install = function install(Vue, opts) {
+	  if ( opts === void 0 ) opts = {};
+	  var name = opts.name || 'v-touch';
+	  Vue.component(name, assign(Component, { name: name }));
+	  installed = true;
+	}.bind(vueTouch);
+	vueTouch.registerCustomEvent = function registerCustomEvent(event, options) {
+	  if ( options === void 0 ) options = {};
+	  if (installed) {
+	    console.warn(("\n      [vue-touch]: Custom Event '" + event + "' couldn't be added to vue-touch.\n      Custom Events have to be registered before installing the plugin.\n      "));
+	    return
+	  }
+	  options.event = event;
+	  customEvents[event] = options;
+	  Component.props[(event + "Options")] = {
+	    type: Object,
+	    default: function default$1() { return {} }
+	  };
+	}.bind(vueTouch);
+	vueTouch.component = Component;
+	if (true) {
+	  module.exports = vueTouch;
+	} else if (typeof define == "function" && define.amd) {
+	  define([], function(){ return vueTouch });
+	} else if (typeof window !== 'undefined' && window.Vue) {
+	  window.VueTouch = vueTouch;
+	  Vue.use(vueTouch);
+	}
+
+	})));
+	//# sourceMappingURL=vue-touch.js.map
+
 
 /***/ },
-/* 320 */,
-/* 321 */,
-/* 322 */
+/* 315 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	var __WEBPACK_AMD_DEFINE_RESULT__;/*! Hammer.JS - v2.0.7 - 2016-04-22
+	 * http://hammerjs.github.io/
+	 *
+	 * Copyright (c) 2016 Jorik Tangelder;
+	 * Licensed under the MIT license */
+	(function(window, document, exportName, undefined) {
+	  'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
+	var VENDOR_PREFIXES = ['', 'webkit', 'Moz', 'MS', 'ms', 'o'];
+	var TEST_ELEMENT = document.createElement('div');
 
-	var _index = __webpack_require__(8);
+	var TYPE_FUNCTION = 'function';
 
-	var _config = __webpack_require__(1);
+	var round = Math.round;
+	var abs = Math.abs;
+	var now = Date.now;
 
-	var _config2 = _interopRequireDefault(_config);
+	/**
+	 * set a timeout with a given scope
+	 * @param {Function} fn
+	 * @param {Number} timeout
+	 * @param {Object} context
+	 * @returns {number}
+	 */
+	function setTimeoutContext(fn, timeout, context) {
+	    return setTimeout(bindFn(fn, context), timeout);
+	}
 
-	var _auth = __webpack_require__(184);
+	/**
+	 * if the argument is an array, we want to execute the fn on each entry
+	 * if it aint an array we don't want to do a thing.
+	 * this is used by all the methods that accept a single and array argument.
+	 * @param {*|Array} arg
+	 * @param {String} fn
+	 * @param {Object} [context]
+	 * @returns {Boolean}
+	 */
+	function invokeArrayArg(arg, fn, context) {
+	    if (Array.isArray(arg)) {
+	        each(arg, context[fn], context);
+	        return true;
+	    }
+	    return false;
+	}
 
-	var _auth2 = _interopRequireDefault(_auth);
+	/**
+	 * walk objects and arrays
+	 * @param {Object} obj
+	 * @param {Function} iterator
+	 * @param {Object} context
+	 */
+	function each(obj, iterator, context) {
+	    var i;
 
-	var _timeline = __webpack_require__(302);
+	    if (!obj) {
+	        return;
+	    }
 
-	var _timeline2 = _interopRequireDefault(_timeline);
-
-	var _jquery = __webpack_require__(11);
-
-	var _jquery2 = _interopRequireDefault(_jquery);
-
-	var _Modal = __webpack_require__(303);
-
-	var _Modal2 = _interopRequireDefault(_Modal);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	// http://dev.fedvas.com/cms/api.dsuite/yipp/todos/37/en
-
-	// <template>
-	// 	<div id="container">
-	//
-	// 		<div class="header">
-	//
-	// 			<router-link :to="{ name: 'timeline'}" class="icon">
-	// 				<i class="icon-yipp_profile_line"></i>
-	// 			</router-link>
-	//
-	// 			<div class="title">Challenge</div>
-	//
-	// 		</div>
-	//
-	//
-	// 		<div class="content" v-if="empty">
-	//
-	// 			<div class="panel">
-	// 			Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-	// 			</div>
-	//
-	// 			<a href="" class="btn">Explore training</a>
-	//
-	// 		</div>
-	//
-	// 		<div class="content" v-if="empty == false">
-	//
-	// 			<ul class="blockList">
-	// 				<li>
-	// 					<span class="set">
-	// 					<i class="icon-yipp_notification_line"></i>
-	// 					14:00
-	// 					| <i class="icon-yipp_repeat_line"></i>
-	// 					Every day
-	// 					</span>
-	// 					<p>Lorem Ipsum</p>
-	//
-	// 					<router-link :to="{ path: 'challenge-1'}">
-	// 					<i class="arrow icon-yipp_forward"></i>
-	// 					</router-link>
-	//
-	// 				</li>
-	// 				<li>
-	// 				<span class="set">
-	// 					<i class="icon-yipp_notification_line"></i>
-	// 					14:00
-	// 					| <i class="icon-yipp_repeat_line"></i>
-	// 					Every day
-	// 					</span>
-	// 					<p>Lorem Ipsum</p>
-	//
-	// 					<router-link :to="{ path: 'challenge-2'}">
-	// 						<i class="arrow icon-yipp_forward"></i>
-	// 					</router-link>
-	// 				</li>
-	// 			</ul>		
-	//
-	// 			<a href="" v-if="isShowDoneChallenges == false" v-on:click.prevent="toggleDoneChallenges" class="link">Show finished challenges</a>
-	// 			<a href="" v-if="isShowDoneChallenges" v-on:click.prevent="toggleDoneChallenges" class="link">Hide finished challenges</a>
-	//
-	// 			<ul class="blockList2" v-if="isShowDoneChallenges">
-	// 				<li>
-	// 					<p>Lorem Ipsum</p>
-	//
-	// 					<i class="arrow icon-yipp_forward"></i>
-	//
-	// 				</li>
-	// 				<li>
-	// 					<p>Lorem Ipsum</p>
-	//
-	// 						<i class="arrow icon-yipp_forward"></i>
-	// 				</li>
-	// 			</ul>
-	// 		</div>
-	//
-	// 		<footer>
-	// 			<ul>
-	// 				<li>
-	// 					<router-link :to="{ name: 'timeline'}"><span class="icon-yipp_home_full-"></span>Training</router-link>
-	// 				</li>
-	// 				<li>
-	// 					<a href="javascript:void(0);" class="active"><span class="icon-yipp_challenge_line"></span>Challenge</a>
-	// 				</li>
-	// 			</ul>
-	// 		</footer>
-	//
-	// 	</div>	
-	// </template>
-	//
-	// <script>
-	exports.default = {
-	    data: function data() {
-	        return {
-	            empty: false,
-	            isShowDoneChallenges: false,
-	            page: 'start',
-	            levels: [],
-	            lessons: [],
-	            showModal: false,
-	            currentLevel: 1
-	        };
-	    },
-
-	    created: function created() {
-	        _auth2.default.check();
-	        if (!_auth2.default.authenticated) {
-	            this.redirectGuest();
+	    if (obj.forEach) {
+	        obj.forEach(iterator, context);
+	    } else if (obj.length !== undefined) {
+	        i = 0;
+	        while (i < obj.length) {
+	            iterator.call(context, obj[i], i, obj);
+	            i++;
 	        }
-	    },
-	    methods: {
-	        startLesson: function startLesson() {
-	            this.page = 'cards';
-	        },
-	        toggleDoneChallenges: function toggleDoneChallenges() {
-	            if (this.isShowDoneChallenges) {
-	                this.isShowDoneChallenges = false;
-	            } else {
-	                this.isShowDoneChallenges = true;
+	    } else {
+	        for (i in obj) {
+	            obj.hasOwnProperty(i) && iterator.call(context, obj[i], i, obj);
+	        }
+	    }
+	}
+
+	/**
+	 * wrap a method with a deprecation warning and stack trace
+	 * @param {Function} method
+	 * @param {String} name
+	 * @param {String} message
+	 * @returns {Function} A new function wrapping the supplied method.
+	 */
+	function deprecate(method, name, message) {
+	    var deprecationMessage = 'DEPRECATED METHOD: ' + name + '\n' + message + ' AT \n';
+	    return function() {
+	        var e = new Error('get-stack-trace');
+	        var stack = e && e.stack ? e.stack.replace(/^[^\(]+?[\n$]/gm, '')
+	            .replace(/^\s+at\s+/gm, '')
+	            .replace(/^Object.<anonymous>\s*\(/gm, '{anonymous}()@') : 'Unknown Stack Trace';
+
+	        var log = window.console && (window.console.warn || window.console.log);
+	        if (log) {
+	            log.call(window.console, deprecationMessage, stack);
+	        }
+	        return method.apply(this, arguments);
+	    };
+	}
+
+	/**
+	 * extend object.
+	 * means that properties in dest will be overwritten by the ones in src.
+	 * @param {Object} target
+	 * @param {...Object} objects_to_assign
+	 * @returns {Object} target
+	 */
+	var assign;
+	if (typeof Object.assign !== 'function') {
+	    assign = function assign(target) {
+	        if (target === undefined || target === null) {
+	            throw new TypeError('Cannot convert undefined or null to object');
+	        }
+
+	        var output = Object(target);
+	        for (var index = 1; index < arguments.length; index++) {
+	            var source = arguments[index];
+	            if (source !== undefined && source !== null) {
+	                for (var nextKey in source) {
+	                    if (source.hasOwnProperty(nextKey)) {
+	                        output[nextKey] = source[nextKey];
+	                    }
+	                }
 	            }
-	        },
-	        redirectGuest: function redirectGuest() {
-	            this.$router.push('login');
 	        }
+	        return output;
+	    };
+	} else {
+	    assign = Object.assign;
+	}
+
+	/**
+	 * extend object.
+	 * means that properties in dest will be overwritten by the ones in src.
+	 * @param {Object} dest
+	 * @param {Object} src
+	 * @param {Boolean} [merge=false]
+	 * @returns {Object} dest
+	 */
+	var extend = deprecate(function extend(dest, src, merge) {
+	    var keys = Object.keys(src);
+	    var i = 0;
+	    while (i < keys.length) {
+	        if (!merge || (merge && dest[keys[i]] === undefined)) {
+	            dest[keys[i]] = src[keys[i]];
+	        }
+	        i++;
+	    }
+	    return dest;
+	}, 'extend', 'Use `assign`.');
+
+	/**
+	 * merge the values from src in the dest.
+	 * means that properties that exist in dest will not be overwritten by src
+	 * @param {Object} dest
+	 * @param {Object} src
+	 * @returns {Object} dest
+	 */
+	var merge = deprecate(function merge(dest, src) {
+	    return extend(dest, src, true);
+	}, 'merge', 'Use `assign`.');
+
+	/**
+	 * simple class inheritance
+	 * @param {Function} child
+	 * @param {Function} base
+	 * @param {Object} [properties]
+	 */
+	function inherit(child, base, properties) {
+	    var baseP = base.prototype,
+	        childP;
+
+	    childP = child.prototype = Object.create(baseP);
+	    childP.constructor = child;
+	    childP._super = baseP;
+
+	    if (properties) {
+	        assign(childP, properties);
+	    }
+	}
+
+	/**
+	 * simple function bind
+	 * @param {Function} fn
+	 * @param {Object} context
+	 * @returns {Function}
+	 */
+	function bindFn(fn, context) {
+	    return function boundFn() {
+	        return fn.apply(context, arguments);
+	    };
+	}
+
+	/**
+	 * let a boolean value also be a function that must return a boolean
+	 * this first item in args will be used as the context
+	 * @param {Boolean|Function} val
+	 * @param {Array} [args]
+	 * @returns {Boolean}
+	 */
+	function boolOrFn(val, args) {
+	    if (typeof val == TYPE_FUNCTION) {
+	        return val.apply(args ? args[0] || undefined : undefined, args);
+	    }
+	    return val;
+	}
+
+	/**
+	 * use the val2 when val1 is undefined
+	 * @param {*} val1
+	 * @param {*} val2
+	 * @returns {*}
+	 */
+	function ifUndefined(val1, val2) {
+	    return (val1 === undefined) ? val2 : val1;
+	}
+
+	/**
+	 * addEventListener with multiple events at once
+	 * @param {EventTarget} target
+	 * @param {String} types
+	 * @param {Function} handler
+	 */
+	function addEventListeners(target, types, handler) {
+	    each(splitStr(types), function(type) {
+	        target.addEventListener(type, handler, false);
+	    });
+	}
+
+	/**
+	 * removeEventListener with multiple events at once
+	 * @param {EventTarget} target
+	 * @param {String} types
+	 * @param {Function} handler
+	 */
+	function removeEventListeners(target, types, handler) {
+	    each(splitStr(types), function(type) {
+	        target.removeEventListener(type, handler, false);
+	    });
+	}
+
+	/**
+	 * find if a node is in the given parent
+	 * @method hasParent
+	 * @param {HTMLElement} node
+	 * @param {HTMLElement} parent
+	 * @return {Boolean} found
+	 */
+	function hasParent(node, parent) {
+	    while (node) {
+	        if (node == parent) {
+	            return true;
+	        }
+	        node = node.parentNode;
+	    }
+	    return false;
+	}
+
+	/**
+	 * small indexOf wrapper
+	 * @param {String} str
+	 * @param {String} find
+	 * @returns {Boolean} found
+	 */
+	function inStr(str, find) {
+	    return str.indexOf(find) > -1;
+	}
+
+	/**
+	 * split string on whitespace
+	 * @param {String} str
+	 * @returns {Array} words
+	 */
+	function splitStr(str) {
+	    return str.trim().split(/\s+/g);
+	}
+
+	/**
+	 * find if a array contains the object using indexOf or a simple polyFill
+	 * @param {Array} src
+	 * @param {String} find
+	 * @param {String} [findByKey]
+	 * @return {Boolean|Number} false when not found, or the index
+	 */
+	function inArray(src, find, findByKey) {
+	    if (src.indexOf && !findByKey) {
+	        return src.indexOf(find);
+	    } else {
+	        var i = 0;
+	        while (i < src.length) {
+	            if ((findByKey && src[i][findByKey] == find) || (!findByKey && src[i] === find)) {
+	                return i;
+	            }
+	            i++;
+	        }
+	        return -1;
+	    }
+	}
+
+	/**
+	 * convert array-like objects to real arrays
+	 * @param {Object} obj
+	 * @returns {Array}
+	 */
+	function toArray(obj) {
+	    return Array.prototype.slice.call(obj, 0);
+	}
+
+	/**
+	 * unique array with objects based on a key (like 'id') or just by the array's value
+	 * @param {Array} src [{id:1},{id:2},{id:1}]
+	 * @param {String} [key]
+	 * @param {Boolean} [sort=False]
+	 * @returns {Array} [{id:1},{id:2}]
+	 */
+	function uniqueArray(src, key, sort) {
+	    var results = [];
+	    var values = [];
+	    var i = 0;
+
+	    while (i < src.length) {
+	        var val = key ? src[i][key] : src[i];
+	        if (inArray(values, val) < 0) {
+	            results.push(src[i]);
+	        }
+	        values[i] = val;
+	        i++;
+	    }
+
+	    if (sort) {
+	        if (!key) {
+	            results = results.sort();
+	        } else {
+	            results = results.sort(function sortUniqueArray(a, b) {
+	                return a[key] > b[key];
+	            });
+	        }
+	    }
+
+	    return results;
+	}
+
+	/**
+	 * get the prefixed property
+	 * @param {Object} obj
+	 * @param {String} property
+	 * @returns {String|Undefined} prefixed
+	 */
+	function prefixed(obj, property) {
+	    var prefix, prop;
+	    var camelProp = property[0].toUpperCase() + property.slice(1);
+
+	    var i = 0;
+	    while (i < VENDOR_PREFIXES.length) {
+	        prefix = VENDOR_PREFIXES[i];
+	        prop = (prefix) ? prefix + camelProp : property;
+
+	        if (prop in obj) {
+	            return prop;
+	        }
+	        i++;
+	    }
+	    return undefined;
+	}
+
+	/**
+	 * get a unique id
+	 * @returns {number} uniqueId
+	 */
+	var _uniqueId = 1;
+	function uniqueId() {
+	    return _uniqueId++;
+	}
+
+	/**
+	 * get the window object of an element
+	 * @param {HTMLElement} element
+	 * @returns {DocumentView|Window}
+	 */
+	function getWindowForElement(element) {
+	    var doc = element.ownerDocument || element;
+	    return (doc.defaultView || doc.parentWindow || window);
+	}
+
+	var MOBILE_REGEX = /mobile|tablet|ip(ad|hone|od)|android/i;
+
+	var SUPPORT_TOUCH = ('ontouchstart' in window);
+	var SUPPORT_POINTER_EVENTS = prefixed(window, 'PointerEvent') !== undefined;
+	var SUPPORT_ONLY_TOUCH = SUPPORT_TOUCH && MOBILE_REGEX.test(navigator.userAgent);
+
+	var INPUT_TYPE_TOUCH = 'touch';
+	var INPUT_TYPE_PEN = 'pen';
+	var INPUT_TYPE_MOUSE = 'mouse';
+	var INPUT_TYPE_KINECT = 'kinect';
+
+	var COMPUTE_INTERVAL = 25;
+
+	var INPUT_START = 1;
+	var INPUT_MOVE = 2;
+	var INPUT_END = 4;
+	var INPUT_CANCEL = 8;
+
+	var DIRECTION_NONE = 1;
+	var DIRECTION_LEFT = 2;
+	var DIRECTION_RIGHT = 4;
+	var DIRECTION_UP = 8;
+	var DIRECTION_DOWN = 16;
+
+	var DIRECTION_HORIZONTAL = DIRECTION_LEFT | DIRECTION_RIGHT;
+	var DIRECTION_VERTICAL = DIRECTION_UP | DIRECTION_DOWN;
+	var DIRECTION_ALL = DIRECTION_HORIZONTAL | DIRECTION_VERTICAL;
+
+	var PROPS_XY = ['x', 'y'];
+	var PROPS_CLIENT_XY = ['clientX', 'clientY'];
+
+	/**
+	 * create new input type manager
+	 * @param {Manager} manager
+	 * @param {Function} callback
+	 * @returns {Input}
+	 * @constructor
+	 */
+	function Input(manager, callback) {
+	    var self = this;
+	    this.manager = manager;
+	    this.callback = callback;
+	    this.element = manager.element;
+	    this.target = manager.options.inputTarget;
+
+	    // smaller wrapper around the handler, for the scope and the enabled state of the manager,
+	    // so when disabled the input events are completely bypassed.
+	    this.domHandler = function(ev) {
+	        if (boolOrFn(manager.options.enable, [manager])) {
+	            self.handler(ev);
+	        }
+	    };
+
+	    this.init();
+
+	}
+
+	Input.prototype = {
+	    /**
+	     * should handle the inputEvent data and trigger the callback
+	     * @virtual
+	     */
+	    handler: function() { },
+
+	    /**
+	     * bind the events
+	     */
+	    init: function() {
+	        this.evEl && addEventListeners(this.element, this.evEl, this.domHandler);
+	        this.evTarget && addEventListeners(this.target, this.evTarget, this.domHandler);
+	        this.evWin && addEventListeners(getWindowForElement(this.element), this.evWin, this.domHandler);
 	    },
 
-	    watch: {
-	        '$route': function $route(to, from) {
-	            console.log(to, from);
-	            this.currentLesson = to;
-	        }
-	    },
-
-	    components: {
-	        Modal: _Modal2.default
+	    /**
+	     * unbind the events
+	     */
+	    destroy: function() {
+	        this.evEl && removeEventListeners(this.element, this.evEl, this.domHandler);
+	        this.evTarget && removeEventListeners(this.target, this.evTarget, this.domHandler);
+	        this.evWin && removeEventListeners(getWindowForElement(this.element), this.evWin, this.domHandler);
 	    }
 	};
 
-	// </script>
+	/**
+	 * create new input type manager
+	 * called by the Manager constructor
+	 * @param {Hammer} manager
+	 * @returns {Input}
+	 */
+	function createInputInstance(manager) {
+	    var Type;
+	    var inputClass = manager.options.inputClass;
 
-/***/ },
-/* 323 */,
-/* 324 */,
-/* 325 */
-/***/ function(module, exports) {
+	    if (inputClass) {
+	        Type = inputClass;
+	    } else if (SUPPORT_POINTER_EVENTS) {
+	        Type = PointerEventInput;
+	    } else if (SUPPORT_ONLY_TOUCH) {
+	        Type = TouchInput;
+	    } else if (!SUPPORT_TOUCH) {
+	        Type = MouseInput;
+	    } else {
+	        Type = TouchMouseInput;
+	    }
+	    return new (Type)(manager, inputHandler);
+	}
 
-	// <template>
-	// 	<div >
-	//
-	// 		<div class="header">
-	//
-	// 			<router-link :to="{ name: 'challenge'}" class="icon">
-	// 				<i class=" icon-yipp_back"></i>
-	// 			</router-link>
-	//
-	// 			<div class="title">Challenge Details</div>
-	//
-	// 		</div>
-	//
-	// 		<div class="wrap">
-	//
-	// 			<div class="details">
-	//
-	// 			<span class="set">
-	// 					<i class="icon-yipp_notification_line"></i>
-	// 					14:00
-	// 					| <i class="icon-yipp_repeat_line"></i>
-	// 					Every day
-	// 					</span>
-	//
-	// 				<table width="100%" border="0">
-	// 					<tbody>
-	// 						<tr>
-	// 							<td>
-	// 								<p>Eating more vegetable</p>
-	// 								<p>1. Broco</p>
-	// 							</td>
-	// 							<td>
-	// 							<a href="" class="edit"><i class="icon-yipp_pencil_line"></i></a>
-	// 							</td>
-	// 						</tr>
-	// 					</tbody>
-	// 				</table>
-	//
-	// 			</div>
-	//
-	// 		</div>
-	//
-	// 		<div class="steps">
-	//
-	// 				<ul>
-	// 					<li>1</li>
-	// 					<li>2</li>
-	// 					<li>3</li>
-	// 					<li>4</li>
-	// 					<li>5</li>
-	// 				</ul>
-	//
-	// 			<hr>
-	//
-	// 		</div>
-	//
-	// 		<div class="pic" style="background-image: url(assets/img/slider-1.jpg);">
-	//
-	// 		</div>
-	//
-	// 		<h4>Evaluation</h4>
-	//
-	// 		<textarea></textarea>
-	//
-	// 		<ul class="selection">
-	// 			<li><a href=""><i class="icon-yipp_emoticon_sad"></i></a></li>
-	// 			<li><a href="" class="active"><i class="icon-yipp_emoticon_neutral"></i></a></li>
-	// 			<li><a href=""><i class="icon-yipp_emoticon_happy-"></i></a></li>
-	// 		</ul>
-	//
-	// 		<h4>Notes</h4>
-	//
-	// 		<textarea></textarea>
-	//
-	// 		<a href="" class="btn">Done</a>
-	//
-	// 	</div>
-	//
-	// 	<section class="resultCard">
-	//
-	// 		<i class="icon-yipp_check_full"></i>
-	//
-	// 		<h3>You can do it!</h3>
-	// 		<p>We made a beautiful photo collage of this week check it out!</p>
-	//
-	// 		<div class="bottom">
-	// 		<a href="javascript:void(0);" class="btn mid">See result</a>
-	//
-	// 		<a href="javascript:void(0);" class="btn big">Restart challenge</a>
-	//
-	// 		</div>
-	//
-	// 		<div id="modal">
-	//
-	// 			<div id="msg">
-	//
-	// 				<h3>Are you sure?</h3>
-	//
-	// 				<p>Do you want to restart challenge?</p>
-	//
-	// 				<a href="javascript:void(0);">Restart challenge</a>
-	//
-	// 			</div>
-	//
-	// 		</div>
-	//
-	// 	</section>
-	//
-	// 	<section id="collage">
-	//
-	// 		<div class="header">
-	// 			<a href="">X</a> Photo Collage
-	// 			<h3>Fruit and Vegetables</h3>
-	// 		</div>
-	//
-	// 		<ul>
-	// 			<li class="active">
-	// 				<img src="" alt="">
-	//
-	// 				<div class="elements">
-	// 					<div class="day">Day 1</div>
-	// 					<i class="icon icon-yipp_emoticon_sad"></i>
-	// 				</div>
-	//
-	// 				<div class="data">
-	// 					<p>"It went great this day"</p>
-	// 				</div>	
-	//
-	// 			</li>
-	//
-	// 			<li class="active">
-	// 				<img src="" alt="">
-	//
-	// 				<div class="elements">
-	// 					<div class="day">Day 2</div>
-	// 					<i class="icon icon-yipp_emoticon_happy-"></i>
-	// 				</div>
-	//
-	// 				<div class="data">
-	// 					<p>"It went great this day"</p>
-	// 				</div>	
-	//
-	// 			</li>
-	//
-	// 			<li>
-	//
-	//
-	// 				<div class="elements">
-	// 					<div class="day">Day 3</div>
-	// 					<i class="icon icon-yipp_emoticon_neutral"></i>
-	// 				</div>
-	//
-	// 				<div class="data">
-	// 					<p>"It went great this day"</p>
-	// 				</div>	
-	//
-	// 			</li>
-	//
-	// 			<li class="active">
-	// 				<img src="" alt="">
-	//
-	// 				<div class="elements">
-	// 					<div class="day">Day 4</div>
-	// 					<i class="icon icon-yipp_emoticon_happy-"></i>
-	// 				</div>
-	//
-	// 				<div class="data">
-	// 					<p>"It went great this day"</p>
-	// 				</div>	
-	//
-	// 			</li>
-	// 		</ul>
-	//
-	// 	</section>
-	//
-	// 	<div class="restart">
-	//
-	// 	<a href="" >Restart challenge</a>
-	//
-	// 	</div>	
-	// </template>
-	//
-	// <script>
+	/**
+	 * handle input events
+	 * @param {Manager} manager
+	 * @param {String} eventType
+	 * @param {Object} input
+	 */
+	function inputHandler(manager, eventType, input) {
+	    var pointersLen = input.pointers.length;
+	    var changedPointersLen = input.changedPointers.length;
+	    var isFirst = (eventType & INPUT_START && (pointersLen - changedPointersLen === 0));
+	    var isFinal = (eventType & (INPUT_END | INPUT_CANCEL) && (pointersLen - changedPointersLen === 0));
 
-	// </script>
-	"use strict";
+	    input.isFirst = !!isFirst;
+	    input.isFinal = !!isFinal;
 
-/***/ },
-/* 326 */,
-/* 327 */,
-/* 328 */
-/***/ function(module, exports, __webpack_require__) {
+	    if (isFirst) {
+	        manager.session = {};
+	    }
 
-	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(329)
-	__vue_template__ = __webpack_require__(330)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), true)
-	  if (!hotAPI.compatible) return
-	  var id = "/Users/racheljaro/webroot/yipp/app/src/components/Lesson.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
+	    // source event is the normalized value of the domEvents
+	    // like 'touchstart, mouseup, pointerdown'
+	    input.eventType = eventType;
 
-/***/ },
-/* 329 */
-/***/ function(module, exports, __webpack_require__) {
+	    // compute scale, rotation etc
+	    computeInputData(manager, input);
 
-	'use strict';
+	    // emit secret event
+	    manager.emit('hammer.input', input);
 
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	    manager.recognize(input);
+	    manager.session.prevInput = input;
+	}
+
+	/**
+	 * extend the data with some usable properties like scale, rotate, velocity etc
+	 * @param {Object} manager
+	 * @param {Object} input
+	 */
+	function computeInputData(manager, input) {
+	    var session = manager.session;
+	    var pointers = input.pointers;
+	    var pointersLength = pointers.length;
+
+	    // store the first input to calculate the distance and direction
+	    if (!session.firstInput) {
+	        session.firstInput = simpleCloneInputData(input);
+	    }
+
+	    // to compute scale and rotation we need to store the multiple touches
+	    if (pointersLength > 1 && !session.firstMultiple) {
+	        session.firstMultiple = simpleCloneInputData(input);
+	    } else if (pointersLength === 1) {
+	        session.firstMultiple = false;
+	    }
+
+	    var firstInput = session.firstInput;
+	    var firstMultiple = session.firstMultiple;
+	    var offsetCenter = firstMultiple ? firstMultiple.center : firstInput.center;
+
+	    var center = input.center = getCenter(pointers);
+	    input.timeStamp = now();
+	    input.deltaTime = input.timeStamp - firstInput.timeStamp;
+
+	    input.angle = getAngle(offsetCenter, center);
+	    input.distance = getDistance(offsetCenter, center);
+
+	    computeDeltaXY(session, input);
+	    input.offsetDirection = getDirection(input.deltaX, input.deltaY);
+
+	    var overallVelocity = getVelocity(input.deltaTime, input.deltaX, input.deltaY);
+	    input.overallVelocityX = overallVelocity.x;
+	    input.overallVelocityY = overallVelocity.y;
+	    input.overallVelocity = (abs(overallVelocity.x) > abs(overallVelocity.y)) ? overallVelocity.x : overallVelocity.y;
+
+	    input.scale = firstMultiple ? getScale(firstMultiple.pointers, pointers) : 1;
+	    input.rotation = firstMultiple ? getRotation(firstMultiple.pointers, pointers) : 0;
+
+	    input.maxPointers = !session.prevInput ? input.pointers.length : ((input.pointers.length >
+	        session.prevInput.maxPointers) ? input.pointers.length : session.prevInput.maxPointers);
+
+	    computeIntervalInputData(session, input);
+
+	    // find the correct target
+	    var target = manager.element;
+	    if (hasParent(input.srcEvent.target, target)) {
+	        target = input.srcEvent.target;
+	    }
+	    input.target = target;
+	}
+
+	function computeDeltaXY(session, input) {
+	    var center = input.center;
+	    var offset = session.offsetDelta || {};
+	    var prevDelta = session.prevDelta || {};
+	    var prevInput = session.prevInput || {};
+
+	    if (input.eventType === INPUT_START || prevInput.eventType === INPUT_END) {
+	        prevDelta = session.prevDelta = {
+	            x: prevInput.deltaX || 0,
+	            y: prevInput.deltaY || 0
+	        };
+
+	        offset = session.offsetDelta = {
+	            x: center.x,
+	            y: center.y
+	        };
+	    }
+
+	    input.deltaX = prevDelta.x + (center.x - offset.x);
+	    input.deltaY = prevDelta.y + (center.y - offset.y);
+	}
+
+	/**
+	 * velocity is calculated every x ms
+	 * @param {Object} session
+	 * @param {Object} input
+	 */
+	function computeIntervalInputData(session, input) {
+	    var last = session.lastInterval || input,
+	        deltaTime = input.timeStamp - last.timeStamp,
+	        velocity, velocityX, velocityY, direction;
+
+	    if (input.eventType != INPUT_CANCEL && (deltaTime > COMPUTE_INTERVAL || last.velocity === undefined)) {
+	        var deltaX = input.deltaX - last.deltaX;
+	        var deltaY = input.deltaY - last.deltaY;
+
+	        var v = getVelocity(deltaTime, deltaX, deltaY);
+	        velocityX = v.x;
+	        velocityY = v.y;
+	        velocity = (abs(v.x) > abs(v.y)) ? v.x : v.y;
+	        direction = getDirection(deltaX, deltaY);
+
+	        session.lastInterval = input;
+	    } else {
+	        // use latest velocity info if it doesn't overtake a minimum period
+	        velocity = last.velocity;
+	        velocityX = last.velocityX;
+	        velocityY = last.velocityY;
+	        direction = last.direction;
+	    }
+
+	    input.velocity = velocity;
+	    input.velocityX = velocityX;
+	    input.velocityY = velocityY;
+	    input.direction = direction;
+	}
+
+	/**
+	 * create a simple clone from the input used for storage of firstInput and firstMultiple
+	 * @param {Object} input
+	 * @returns {Object} clonedInputData
+	 */
+	function simpleCloneInputData(input) {
+	    // make a simple copy of the pointers because we will get a reference if we don't
+	    // we only need clientXY for the calculations
+	    var pointers = [];
+	    var i = 0;
+	    while (i < input.pointers.length) {
+	        pointers[i] = {
+	            clientX: round(input.pointers[i].clientX),
+	            clientY: round(input.pointers[i].clientY)
+	        };
+	        i++;
+	    }
+
+	    return {
+	        timeStamp: now(),
+	        pointers: pointers,
+	        center: getCenter(pointers),
+	        deltaX: input.deltaX,
+	        deltaY: input.deltaY
+	    };
+	}
+
+	/**
+	 * get the center of all the pointers
+	 * @param {Array} pointers
+	 * @return {Object} center contains `x` and `y` properties
+	 */
+	function getCenter(pointers) {
+	    var pointersLength = pointers.length;
+
+	    // no need to loop when only one touch
+	    if (pointersLength === 1) {
+	        return {
+	            x: round(pointers[0].clientX),
+	            y: round(pointers[0].clientY)
+	        };
+	    }
+
+	    var x = 0, y = 0, i = 0;
+	    while (i < pointersLength) {
+	        x += pointers[i].clientX;
+	        y += pointers[i].clientY;
+	        i++;
+	    }
+
+	    return {
+	        x: round(x / pointersLength),
+	        y: round(y / pointersLength)
+	    };
+	}
+
+	/**
+	 * calculate the velocity between two points. unit is in px per ms.
+	 * @param {Number} deltaTime
+	 * @param {Number} x
+	 * @param {Number} y
+	 * @return {Object} velocity `x` and `y`
+	 */
+	function getVelocity(deltaTime, x, y) {
+	    return {
+	        x: x / deltaTime || 0,
+	        y: y / deltaTime || 0
+	    };
+	}
+
+	/**
+	 * get the direction between two points
+	 * @param {Number} x
+	 * @param {Number} y
+	 * @return {Number} direction
+	 */
+	function getDirection(x, y) {
+	    if (x === y) {
+	        return DIRECTION_NONE;
+	    }
+
+	    if (abs(x) >= abs(y)) {
+	        return x < 0 ? DIRECTION_LEFT : DIRECTION_RIGHT;
+	    }
+	    return y < 0 ? DIRECTION_UP : DIRECTION_DOWN;
+	}
+
+	/**
+	 * calculate the absolute distance between two points
+	 * @param {Object} p1 {x, y}
+	 * @param {Object} p2 {x, y}
+	 * @param {Array} [props] containing x and y keys
+	 * @return {Number} distance
+	 */
+	function getDistance(p1, p2, props) {
+	    if (!props) {
+	        props = PROPS_XY;
+	    }
+	    var x = p2[props[0]] - p1[props[0]],
+	        y = p2[props[1]] - p1[props[1]];
+
+	    return Math.sqrt((x * x) + (y * y));
+	}
+
+	/**
+	 * calculate the angle between two coordinates
+	 * @param {Object} p1
+	 * @param {Object} p2
+	 * @param {Array} [props] containing x and y keys
+	 * @return {Number} angle
+	 */
+	function getAngle(p1, p2, props) {
+	    if (!props) {
+	        props = PROPS_XY;
+	    }
+	    var x = p2[props[0]] - p1[props[0]],
+	        y = p2[props[1]] - p1[props[1]];
+	    return Math.atan2(y, x) * 180 / Math.PI;
+	}
+
+	/**
+	 * calculate the rotation degrees between two pointersets
+	 * @param {Array} start array of pointers
+	 * @param {Array} end array of pointers
+	 * @return {Number} rotation
+	 */
+	function getRotation(start, end) {
+	    return getAngle(end[1], end[0], PROPS_CLIENT_XY) + getAngle(start[1], start[0], PROPS_CLIENT_XY);
+	}
+
+	/**
+	 * calculate the scale factor between two pointersets
+	 * no scale is 1, and goes down to 0 when pinched together, and bigger when pinched out
+	 * @param {Array} start array of pointers
+	 * @param {Array} end array of pointers
+	 * @return {Number} scale
+	 */
+	function getScale(start, end) {
+	    return getDistance(end[0], end[1], PROPS_CLIENT_XY) / getDistance(start[0], start[1], PROPS_CLIENT_XY);
+	}
+
+	var MOUSE_INPUT_MAP = {
+	    mousedown: INPUT_START,
+	    mousemove: INPUT_MOVE,
+	    mouseup: INPUT_END
+	};
+
+	var MOUSE_ELEMENT_EVENTS = 'mousedown';
+	var MOUSE_WINDOW_EVENTS = 'mousemove mouseup';
+
+	/**
+	 * Mouse events input
+	 * @constructor
+	 * @extends Input
+	 */
+	function MouseInput() {
+	    this.evEl = MOUSE_ELEMENT_EVENTS;
+	    this.evWin = MOUSE_WINDOW_EVENTS;
+
+	    this.pressed = false; // mousedown state
+
+	    Input.apply(this, arguments);
+	}
+
+	inherit(MouseInput, Input, {
+	    /**
+	     * handle mouse events
+	     * @param {Object} ev
+	     */
+	    handler: function MEhandler(ev) {
+	        var eventType = MOUSE_INPUT_MAP[ev.type];
+
+	        // on start we want to have the left mouse button down
+	        if (eventType & INPUT_START && ev.button === 0) {
+	            this.pressed = true;
+	        }
+
+	        if (eventType & INPUT_MOVE && ev.which !== 1) {
+	            eventType = INPUT_END;
+	        }
+
+	        // mouse must be down
+	        if (!this.pressed) {
+	            return;
+	        }
+
+	        if (eventType & INPUT_END) {
+	            this.pressed = false;
+	        }
+
+	        this.callback(this.manager, eventType, {
+	            pointers: [ev],
+	            changedPointers: [ev],
+	            pointerType: INPUT_TYPE_MOUSE,
+	            srcEvent: ev
+	        });
+	    }
 	});
 
-	var _index = __webpack_require__(8);
+	var POINTER_INPUT_MAP = {
+	    pointerdown: INPUT_START,
+	    pointermove: INPUT_MOVE,
+	    pointerup: INPUT_END,
+	    pointercancel: INPUT_CANCEL,
+	    pointerout: INPUT_CANCEL
+	};
 
-	var _config = __webpack_require__(1);
+	// in IE10 the pointer types is defined as an enum
+	var IE10_POINTER_TYPE_ENUM = {
+	    2: INPUT_TYPE_TOUCH,
+	    3: INPUT_TYPE_PEN,
+	    4: INPUT_TYPE_MOUSE,
+	    5: INPUT_TYPE_KINECT // see https://twitter.com/jacobrossi/status/480596438489890816
+	};
 
-	var _config2 = _interopRequireDefault(_config);
+	var POINTER_ELEMENT_EVENTS = 'pointerdown';
+	var POINTER_WINDOW_EVENTS = 'pointermove pointerup pointercancel';
 
-	var _auth = __webpack_require__(184);
+	// IE10 has prefixed support, and case-sensitive
+	if (window.MSPointerEvent && !window.PointerEvent) {
+	    POINTER_ELEMENT_EVENTS = 'MSPointerDown';
+	    POINTER_WINDOW_EVENTS = 'MSPointerMove MSPointerUp MSPointerCancel';
+	}
 
-	var _auth2 = _interopRequireDefault(_auth);
+	/**
+	 * Pointer events input
+	 * @constructor
+	 * @extends Input
+	 */
+	function PointerEventInput() {
+	    this.evEl = POINTER_ELEMENT_EVENTS;
+	    this.evWin = POINTER_WINDOW_EVENTS;
 
-	var _timeline = __webpack_require__(302);
+	    Input.apply(this, arguments);
 
-	var _timeline2 = _interopRequireDefault(_timeline);
+	    this.store = (this.manager.session.pointerEvents = []);
+	}
 
-	var _jquery = __webpack_require__(11);
+	inherit(PointerEventInput, Input, {
+	    /**
+	     * handle mouse events
+	     * @param {Object} ev
+	     */
+	    handler: function PEhandler(ev) {
+	        var store = this.store;
+	        var removePointer = false;
 
-	var _jquery2 = _interopRequireDefault(_jquery);
+	        var eventTypeNormalized = ev.type.toLowerCase().replace('ms', '');
+	        var eventType = POINTER_INPUT_MAP[eventTypeNormalized];
+	        var pointerType = IE10_POINTER_TYPE_ENUM[ev.pointerType] || ev.pointerType;
 
-	var _Modal = __webpack_require__(303);
+	        var isTouch = (pointerType == INPUT_TYPE_TOUCH);
 
-	var _Modal2 = _interopRequireDefault(_Modal);
+	        // get index of the event in the store
+	        var storeIndex = inArray(store, ev.pointerId, 'pointerId');
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	        // start and mouse must be down
+	        if (eventType & INPUT_START && (ev.button === 0 || isTouch)) {
+	            if (storeIndex < 0) {
+	                store.push(ev);
+	                storeIndex = store.length - 1;
+	            }
+	        } else if (eventType & (INPUT_END | INPUT_CANCEL)) {
+	            removePointer = true;
+	        }
 
-	// http://dev.fedvas.com/cms/api.dsuite/yipp/todos/37/en
+	        // it not found, so the pointer hasn't been down (so it's probably a hover)
+	        if (storeIndex < 0) {
+	            return;
+	        }
 
-	// <template>
-	// <div id="page-lesson">
-	//
-	// 	<div  class="panel" id="start" v-if="page == 'start'">
-	// 		<router-link :to="{ name: 'timeline'}" class="back">
-	// 			<i class="icon-back"></i>
-	// 		</router-link>
-	//
-	// 		<div id="popUp">
-	// 			<i class="big icon-yipp_apple_full"></i>
-	//
-	// 			<h3>Lesson 2: Screentime</h3>
-	//
-	// 			<p>In this lesson, we will help to start the first practice appetizers</p>
-	//
-	// 			<hr>
-	//
-	// 			<span><i class="icon-yipp_check_full"></i> 5min</span>
-	//
-	// 		</div>	
-	//
-	// 		<a href="#" v-on:click.prevent="startLesson" class="btn bottom white">Start</a>
-	// 	</div>
-	//
-	// 	<div class="panel" id="cards" v-if="page == 'cards'">
-	// 		<a v-on:click.prevent="back('start')" class="back">
-	// 			<i class="icon-yipp_check_full"></i>
-	// 		</a>
-	// 		<div class="bar">
-	// 			<span class="bar-inner"></span>
-	// 		</div>
-	// 		<router-link :to="{ name: 'timeline'}" class="home">
-	// 			<i class="icon-yipp_home_full-"></i>
-	// 		</router-link>
-	//
-	// 		<div id="paper" v-on:click.prevent="next('stack')">
-	//
-	// 			<h3>Why?</h3>
-	//
-	// 			<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>
-	//
-	// 			<i class="heart icon-yipp_check_full"></i>
-	//
-	// 			<div id="paper_foo1">
-	// 				<div id="paper_foo2"></div>
-	// 			</div>
-	// 		</div>
-	// 	</div>
-	//
-	// 	<div class="panel" id="stack" v-if="page == 'stack'">
-	// 		<a v-on:click.prevent="back('cards')" class="back">
-	// 			<i class="icon-yipp_check_full"></i>
-	// 		</a>
-	// 		<div class="bar">
-	// 			<span class="bar-inner"></span>
-	// 		</div>
-	// 		<router-link :to="{ name: 'timeline'}" class="home">
-	// 			<i class="icon-yipp_home_full-"></i>
-	// 		</router-link>
-	//
-	// 		<div class="content" v-on:click.prevent="next('complete')">
-	//
-	// 			<p class="text-center">Te weinig slapen vergroot de kans op overgewicht bij kinderen, omdat:</p>
-	//
-	// 			<ul>
-	//
-	// 				<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
-	// 				<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
-	// 				<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
-	// 				<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
-	//
-	// 			</ul>
-	//
-	// 		</div>
-	//
-	// 	</div>
-	//
-	// 	<div class="panel" id="complete" v-if="page == 'complete'">
-	// 		<a v-on:click.prevent="back('stack')" class="back">
-	// 			<i class="icon-yipp_check_full"></i>
-	// 		</a>
-	// 		<div class="bar">
-	// 			<span class="bar-inner"></span>
-	// 		</div>
-	// 		<router-link :to="{ name: 'timeline'}" class="home">
-	// 			<i class="icon-yipp_home_full-"></i>
-	// 		</router-link>
-	//
-	// 		<div class="content">
-	//
-	// 			<h1>Les compleet!</h1>
-	//
-	// 			<i class="biggest icon-yipp_check_full"></i>
-	//
-	// 			<p class="text-center">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
-	//
-	//
-	// 			<div class="bottom">
-	// 				<router-link :to="{ name: 'challenge'}" class="btn white">
-	// 				Start Challenge
-	// 				</router-link>
-	//
-	// 				<br>
-	// 				<a href="" v-on:click.prevent="back('start')" class="btn white">Reset Lesson</a>
-	// 			</div>
-	//
-	// 		</div>
-	//
-	// 	</div>
-	//
-	// 	<modal v-if="showModal" @close="showModal = false">
-	//         <h3 slot="header">Lorem Ipsum</h3>
-	//         <p slot="body">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-	//     </modal>
-	//
-	// </div>
-	//
-	// </template>
-	//
-	// <script>
-	exports.default = {
-	    data: function data() {
-	        return {
-	            child: {},
-	            page: 'start',
-	            levels: [],
-	            lessons: [],
-	            showModal: false,
-	            currentLevel: 1
+	        // update the event in the store
+	        store[storeIndex] = ev;
+
+	        this.callback(this.manager, eventType, {
+	            pointers: store,
+	            changedPointers: [ev],
+	            pointerType: pointerType,
+	            srcEvent: ev
+	        });
+
+	        if (removePointer) {
+	            // remove from the store
+	            store.splice(storeIndex, 1);
+	        }
+	    }
+	});
+
+	var SINGLE_TOUCH_INPUT_MAP = {
+	    touchstart: INPUT_START,
+	    touchmove: INPUT_MOVE,
+	    touchend: INPUT_END,
+	    touchcancel: INPUT_CANCEL
+	};
+
+	var SINGLE_TOUCH_TARGET_EVENTS = 'touchstart';
+	var SINGLE_TOUCH_WINDOW_EVENTS = 'touchstart touchmove touchend touchcancel';
+
+	/**
+	 * Touch events input
+	 * @constructor
+	 * @extends Input
+	 */
+	function SingleTouchInput() {
+	    this.evTarget = SINGLE_TOUCH_TARGET_EVENTS;
+	    this.evWin = SINGLE_TOUCH_WINDOW_EVENTS;
+	    this.started = false;
+
+	    Input.apply(this, arguments);
+	}
+
+	inherit(SingleTouchInput, Input, {
+	    handler: function TEhandler(ev) {
+	        var type = SINGLE_TOUCH_INPUT_MAP[ev.type];
+
+	        // should we handle the touch events?
+	        if (type === INPUT_START) {
+	            this.started = true;
+	        }
+
+	        if (!this.started) {
+	            return;
+	        }
+
+	        var touches = normalizeSingleTouches.call(this, ev, type);
+
+	        // when done, reset the started state
+	        if (type & (INPUT_END | INPUT_CANCEL) && touches[0].length - touches[1].length === 0) {
+	            this.started = false;
+	        }
+
+	        this.callback(this.manager, type, {
+	            pointers: touches[0],
+	            changedPointers: touches[1],
+	            pointerType: INPUT_TYPE_TOUCH,
+	            srcEvent: ev
+	        });
+	    }
+	});
+
+	/**
+	 * @this {TouchInput}
+	 * @param {Object} ev
+	 * @param {Number} type flag
+	 * @returns {undefined|Array} [all, changed]
+	 */
+	function normalizeSingleTouches(ev, type) {
+	    var all = toArray(ev.touches);
+	    var changed = toArray(ev.changedTouches);
+
+	    if (type & (INPUT_END | INPUT_CANCEL)) {
+	        all = uniqueArray(all.concat(changed), 'identifier', true);
+	    }
+
+	    return [all, changed];
+	}
+
+	var TOUCH_INPUT_MAP = {
+	    touchstart: INPUT_START,
+	    touchmove: INPUT_MOVE,
+	    touchend: INPUT_END,
+	    touchcancel: INPUT_CANCEL
+	};
+
+	var TOUCH_TARGET_EVENTS = 'touchstart touchmove touchend touchcancel';
+
+	/**
+	 * Multi-user touch events input
+	 * @constructor
+	 * @extends Input
+	 */
+	function TouchInput() {
+	    this.evTarget = TOUCH_TARGET_EVENTS;
+	    this.targetIds = {};
+
+	    Input.apply(this, arguments);
+	}
+
+	inherit(TouchInput, Input, {
+	    handler: function MTEhandler(ev) {
+	        var type = TOUCH_INPUT_MAP[ev.type];
+	        var touches = getTouches.call(this, ev, type);
+	        if (!touches) {
+	            return;
+	        }
+
+	        this.callback(this.manager, type, {
+	            pointers: touches[0],
+	            changedPointers: touches[1],
+	            pointerType: INPUT_TYPE_TOUCH,
+	            srcEvent: ev
+	        });
+	    }
+	});
+
+	/**
+	 * @this {TouchInput}
+	 * @param {Object} ev
+	 * @param {Number} type flag
+	 * @returns {undefined|Array} [all, changed]
+	 */
+	function getTouches(ev, type) {
+	    var allTouches = toArray(ev.touches);
+	    var targetIds = this.targetIds;
+
+	    // when there is only one touch, the process can be simplified
+	    if (type & (INPUT_START | INPUT_MOVE) && allTouches.length === 1) {
+	        targetIds[allTouches[0].identifier] = true;
+	        return [allTouches, allTouches];
+	    }
+
+	    var i,
+	        targetTouches,
+	        changedTouches = toArray(ev.changedTouches),
+	        changedTargetTouches = [],
+	        target = this.target;
+
+	    // get target touches from touches
+	    targetTouches = allTouches.filter(function(touch) {
+	        return hasParent(touch.target, target);
+	    });
+
+	    // collect touches
+	    if (type === INPUT_START) {
+	        i = 0;
+	        while (i < targetTouches.length) {
+	            targetIds[targetTouches[i].identifier] = true;
+	            i++;
+	        }
+	    }
+
+	    // filter changed touches to only contain touches that exist in the collected target ids
+	    i = 0;
+	    while (i < changedTouches.length) {
+	        if (targetIds[changedTouches[i].identifier]) {
+	            changedTargetTouches.push(changedTouches[i]);
+	        }
+
+	        // cleanup removed touches
+	        if (type & (INPUT_END | INPUT_CANCEL)) {
+	            delete targetIds[changedTouches[i].identifier];
+	        }
+	        i++;
+	    }
+
+	    if (!changedTargetTouches.length) {
+	        return;
+	    }
+
+	    return [
+	        // merge targetTouches with changedTargetTouches so it contains ALL touches, including 'end' and 'cancel'
+	        uniqueArray(targetTouches.concat(changedTargetTouches), 'identifier', true),
+	        changedTargetTouches
+	    ];
+	}
+
+	/**
+	 * Combined touch and mouse input
+	 *
+	 * Touch has a higher priority then mouse, and while touching no mouse events are allowed.
+	 * This because touch devices also emit mouse events while doing a touch.
+	 *
+	 * @constructor
+	 * @extends Input
+	 */
+
+	var DEDUP_TIMEOUT = 2500;
+	var DEDUP_DISTANCE = 25;
+
+	function TouchMouseInput() {
+	    Input.apply(this, arguments);
+
+	    var handler = bindFn(this.handler, this);
+	    this.touch = new TouchInput(this.manager, handler);
+	    this.mouse = new MouseInput(this.manager, handler);
+
+	    this.primaryTouch = null;
+	    this.lastTouches = [];
+	}
+
+	inherit(TouchMouseInput, Input, {
+	    /**
+	     * handle mouse and touch events
+	     * @param {Hammer} manager
+	     * @param {String} inputEvent
+	     * @param {Object} inputData
+	     */
+	    handler: function TMEhandler(manager, inputEvent, inputData) {
+	        var isTouch = (inputData.pointerType == INPUT_TYPE_TOUCH),
+	            isMouse = (inputData.pointerType == INPUT_TYPE_MOUSE);
+
+	        if (isMouse && inputData.sourceCapabilities && inputData.sourceCapabilities.firesTouchEvents) {
+	            return;
+	        }
+
+	        // when we're in a touch event, record touches to  de-dupe synthetic mouse event
+	        if (isTouch) {
+	            recordTouches.call(this, inputEvent, inputData);
+	        } else if (isMouse && isSyntheticEvent.call(this, inputData)) {
+	            return;
+	        }
+
+	        this.callback(manager, inputEvent, inputData);
+	    },
+
+	    /**
+	     * remove the event listeners
+	     */
+	    destroy: function destroy() {
+	        this.touch.destroy();
+	        this.mouse.destroy();
+	    }
+	});
+
+	function recordTouches(eventType, eventData) {
+	    if (eventType & INPUT_START) {
+	        this.primaryTouch = eventData.changedPointers[0].identifier;
+	        setLastTouch.call(this, eventData);
+	    } else if (eventType & (INPUT_END | INPUT_CANCEL)) {
+	        setLastTouch.call(this, eventData);
+	    }
+	}
+
+	function setLastTouch(eventData) {
+	    var touch = eventData.changedPointers[0];
+
+	    if (touch.identifier === this.primaryTouch) {
+	        var lastTouch = {x: touch.clientX, y: touch.clientY};
+	        this.lastTouches.push(lastTouch);
+	        var lts = this.lastTouches;
+	        var removeLastTouch = function() {
+	            var i = lts.indexOf(lastTouch);
+	            if (i > -1) {
+	                lts.splice(i, 1);
+	            }
 	        };
+	        setTimeout(removeLastTouch, DEDUP_TIMEOUT);
+	    }
+	}
+
+	function isSyntheticEvent(eventData) {
+	    var x = eventData.srcEvent.clientX, y = eventData.srcEvent.clientY;
+	    for (var i = 0; i < this.lastTouches.length; i++) {
+	        var t = this.lastTouches[i];
+	        var dx = Math.abs(x - t.x), dy = Math.abs(y - t.y);
+	        if (dx <= DEDUP_DISTANCE && dy <= DEDUP_DISTANCE) {
+	            return true;
+	        }
+	    }
+	    return false;
+	}
+
+	var PREFIXED_TOUCH_ACTION = prefixed(TEST_ELEMENT.style, 'touchAction');
+	var NATIVE_TOUCH_ACTION = PREFIXED_TOUCH_ACTION !== undefined;
+
+	// magical touchAction value
+	var TOUCH_ACTION_COMPUTE = 'compute';
+	var TOUCH_ACTION_AUTO = 'auto';
+	var TOUCH_ACTION_MANIPULATION = 'manipulation'; // not implemented
+	var TOUCH_ACTION_NONE = 'none';
+	var TOUCH_ACTION_PAN_X = 'pan-x';
+	var TOUCH_ACTION_PAN_Y = 'pan-y';
+	var TOUCH_ACTION_MAP = getTouchActionProps();
+
+	/**
+	 * Touch Action
+	 * sets the touchAction property or uses the js alternative
+	 * @param {Manager} manager
+	 * @param {String} value
+	 * @constructor
+	 */
+	function TouchAction(manager, value) {
+	    this.manager = manager;
+	    this.set(value);
+	}
+
+	TouchAction.prototype = {
+	    /**
+	     * set the touchAction value on the element or enable the polyfill
+	     * @param {String} value
+	     */
+	    set: function(value) {
+	        // find out the touch-action by the event handlers
+	        if (value == TOUCH_ACTION_COMPUTE) {
+	            value = this.compute();
+	        }
+
+	        if (NATIVE_TOUCH_ACTION && this.manager.element.style && TOUCH_ACTION_MAP[value]) {
+	            this.manager.element.style[PREFIXED_TOUCH_ACTION] = value;
+	        }
+	        this.actions = value.toLowerCase().trim();
 	    },
 
-	    created: function created() {
-	        _auth2.default.check();
-	        if (!_auth2.default.authenticated) {
-	            this.redirectGuest();
-	        }
+	    /**
+	     * just re-set the touchAction value
+	     */
+	    update: function() {
+	        this.set(this.manager.options.touchAction);
 	    },
-	    methods: {
-	        startLesson: function startLesson() {
-	            this.page = 'cards';
-	        },
-	        back: function back(page) {
-	            this.page = page;
-	        },
-	        next: function next(page) {
-	            this.page = page;
-	        },
-	        redirectGuest: function redirectGuest() {
-	            this.$router.push('login');
+
+	    /**
+	     * compute the value for the touchAction property based on the recognizer's settings
+	     * @returns {String} value
+	     */
+	    compute: function() {
+	        var actions = [];
+	        each(this.manager.recognizers, function(recognizer) {
+	            if (boolOrFn(recognizer.options.enable, [recognizer])) {
+	                actions = actions.concat(recognizer.getTouchAction());
+	            }
+	        });
+	        return cleanTouchActions(actions.join(' '));
+	    },
+
+	    /**
+	     * this method is called on each input cycle and provides the preventing of the browser behavior
+	     * @param {Object} input
+	     */
+	    preventDefaults: function(input) {
+	        var srcEvent = input.srcEvent;
+	        var direction = input.offsetDirection;
+
+	        // if the touch action did prevented once this session
+	        if (this.manager.session.prevented) {
+	            srcEvent.preventDefault();
+	            return;
+	        }
+
+	        var actions = this.actions;
+	        var hasNone = inStr(actions, TOUCH_ACTION_NONE) && !TOUCH_ACTION_MAP[TOUCH_ACTION_NONE];
+	        var hasPanY = inStr(actions, TOUCH_ACTION_PAN_Y) && !TOUCH_ACTION_MAP[TOUCH_ACTION_PAN_Y];
+	        var hasPanX = inStr(actions, TOUCH_ACTION_PAN_X) && !TOUCH_ACTION_MAP[TOUCH_ACTION_PAN_X];
+
+	        if (hasNone) {
+	            //do not prevent defaults if this is a tap gesture
+
+	            var isTapPointer = input.pointers.length === 1;
+	            var isTapMovement = input.distance < 2;
+	            var isTapTouchTime = input.deltaTime < 250;
+
+	            if (isTapPointer && isTapMovement && isTapTouchTime) {
+	                return;
+	            }
+	        }
+
+	        if (hasPanX && hasPanY) {
+	            // `pan-x pan-y` means browser handles all scrolling/panning, do not prevent
+	            return;
+	        }
+
+	        if (hasNone ||
+	            (hasPanY && direction & DIRECTION_HORIZONTAL) ||
+	            (hasPanX && direction & DIRECTION_VERTICAL)) {
+	            return this.preventSrc(srcEvent);
 	        }
 	    },
 
-	    watch: {
-	        '$route': function $route(to, from) {
-	            console.log(to);
-	            this.currentLesson = to;
-	        }
-	    },
-
-	    components: {
-	        Modal: _Modal2.default
+	    /**
+	     * call preventDefault to prevent the browser's default behavior (scrolling in most cases)
+	     * @param {Object} srcEvent
+	     */
+	    preventSrc: function(srcEvent) {
+	        this.manager.session.prevented = true;
+	        srcEvent.preventDefault();
 	    }
 	};
 
-	// </script>
+	/**
+	 * when the touchActions are collected they are not a valid value, so we need to clean things up. *
+	 * @param {String} actions
+	 * @returns {*}
+	 */
+	function cleanTouchActions(actions) {
+	    // none
+	    if (inStr(actions, TOUCH_ACTION_NONE)) {
+	        return TOUCH_ACTION_NONE;
+	    }
 
-/***/ },
-/* 330 */
-/***/ function(module, exports) {
+	    var hasPanX = inStr(actions, TOUCH_ACTION_PAN_X);
+	    var hasPanY = inStr(actions, TOUCH_ACTION_PAN_Y);
 
-	module.exports = "\n<div id=\"page-lesson\">\n\n\t<div  class=\"panel\" id=\"start\" v-if=\"page == 'start'\">\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"back\">\n\t\t\t<i class=\"icon-back\"></i>\n\t\t</router-link>\n\n\t\t<div id=\"popUp\">\n\t\t\t<i class=\"big icon-yipp_apple_full\"></i>\n\t\t\t\n\t\t\t<h3>Lesson 2: Screentime</h3>\n\t\t\t\n\t\t\t<p>In this lesson, we will help to start the first practice appetizers</p>\n\t\t\t\n\t\t\t<hr>\n\t\t\t\n\t\t\t<span><i class=\"icon-yipp_check_full\"></i> 5min</span>\n\t\t\t\n\t\t</div>\t\n\t\t\t\n\t\t<a href=\"#\" v-on:click.prevent=\"startLesson\" class=\"btn bottom white\">Start</a>\n\t</div>\n\n\t<div class=\"panel\" id=\"cards\" v-if=\"page == 'cards'\">\n\t\t<a v-on:click.prevent=\"back('start')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<span class=\"bar-inner\"></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div id=\"paper\" v-on:click.prevent=\"next('stack')\">\n\n\t\t\t<h3>Why?</h3>\n\n\t\t\t<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>\n\n\t\t\t<i class=\"heart icon-yipp_check_full\"></i>\n\n\t\t\t<div id=\"paper_foo1\">\n\t\t\t\t<div id=\"paper_foo2\"></div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n\t\t\n\t<div class=\"panel\" id=\"stack\" v-if=\"page == 'stack'\">\n\t\t<a v-on:click.prevent=\"back('cards')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<span class=\"bar-inner\"></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"content\" v-on:click.prevent=\"next('complete')\">\n\t\t\t\n\t\t\t<p class=\"text-center\">Te weinig slapen vergroot de kans op overgewicht bij kinderen, omdat:</p>\n\t\t\t\n\t\t\t<ul>\n\t\t\t\t\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t\n\t\t\t</ul>\n\n\t\t</div>\n\n\t</div>\n\t\t\t\n\t<div class=\"panel\" id=\"complete\" v-if=\"page == 'complete'\">\n\t\t<a v-on:click.prevent=\"back('stack')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<span class=\"bar-inner\"></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"content\">\n\t\t\n\t\t\t<h1>Les compleet!</h1>\n\t\t\t\n\t\t\t<i class=\"biggest icon-yipp_check_full\"></i>\n\t\t\t\n\t\t\t<p class=\"text-center\">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>\n\t\t\t\n\t\t\t\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<router-link :to=\"{ name: 'challenge'}\" class=\"btn white\">\n\t\t\t\tStart Challenge\n\t\t\t\t</router-link>\n\n\t\t\t\t<br>\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"back('start')\" class=\"btn white\">Reset Lesson</a>\n\t\t\t</div>\n\t\t\n\t\t</div>\n\n\t</div>\n\n\t<modal v-if=\"showModal\" @close=\"showModal = false\">\n        <h3 slot=\"header\">Lorem Ipsum</h3>\n        <p slot=\"body\">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>\n    </modal>\n\n</div>\n\t\n";
+	    // if both pan-x and pan-y are set (different recognizers
+	    // for different directions, e.g. horizontal pan but vertical swipe?)
+	    // we need none (as otherwise with pan-x pan-y combined none of these
+	    // recognizers will work, since the browser would handle all panning
+	    if (hasPanX && hasPanY) {
+	        return TOUCH_ACTION_NONE;
+	    }
 
-/***/ },
-/* 331 */,
-/* 332 */,
-/* 333 */
-/***/ function(module, exports, __webpack_require__) {
+	    // pan-x OR pan-y
+	    if (hasPanX || hasPanY) {
+	        return hasPanX ? TOUCH_ACTION_PAN_X : TOUCH_ACTION_PAN_Y;
+	    }
 
-	var __vue_script__, __vue_template__
-	__vue_template__ = __webpack_require__(334)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), true)
-	  if (!hotAPI.compatible) return
-	  var id = "/Users/racheljaro/webroot/yipp/app/src/components/ChallengeNew.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
+	    // manipulation
+	    if (inStr(actions, TOUCH_ACTION_MANIPULATION)) {
+	        return TOUCH_ACTION_MANIPULATION;
+	    }
 
-/***/ },
-/* 334 */
-/***/ function(module, exports) {
+	    return TOUCH_ACTION_AUTO;
+	}
 
-	module.exports = "\n<div id=\"\">\nto follow\n</div>\n";
+	function getTouchActionProps() {
+	    if (!NATIVE_TOUCH_ACTION) {
+	        return false;
+	    }
+	    var touchMap = {};
+	    var cssSupports = window.CSS && window.CSS.supports;
+	    ['auto', 'manipulation', 'pan-y', 'pan-x', 'pan-x pan-y', 'none'].forEach(function(val) {
+
+	        // If css.supports is not supported but there is native touch-action assume it supports
+	        // all values. This is the case for IE 10 and 11.
+	        touchMap[val] = cssSupports ? window.CSS.supports('touch-action', val) : true;
+	    });
+	    return touchMap;
+	}
+
+	/**
+	 * Recognizer flow explained; *
+	 * All recognizers have the initial state of POSSIBLE when a input session starts.
+	 * The definition of a input session is from the first input until the last input, with all it's movement in it. *
+	 * Example session for mouse-input: mousedown -> mousemove -> mouseup
+	 *
+	 * On each recognizing cycle (see Manager.recognize) the .recognize() method is executed
+	 * which determines with state it should be.
+	 *
+	 * If the recognizer has the state FAILED, CANCELLED or RECOGNIZED (equals ENDED), it is reset to
+	 * POSSIBLE to give it another change on the next cycle.
+	 *
+	 *               Possible
+	 *                  |
+	 *            +-----+---------------+
+	 *            |                     |
+	 *      +-----+-----+               |
+	 *      |           |               |
+	 *   Failed      Cancelled          |
+	 *                          +-------+------+
+	 *                          |              |
+	 *                      Recognized       Began
+	 *                                         |
+	 *                                      Changed
+	 *                                         |
+	 *                                  Ended/Recognized
+	 */
+	var STATE_POSSIBLE = 1;
+	var STATE_BEGAN = 2;
+	var STATE_CHANGED = 4;
+	var STATE_ENDED = 8;
+	var STATE_RECOGNIZED = STATE_ENDED;
+	var STATE_CANCELLED = 16;
+	var STATE_FAILED = 32;
+
+	/**
+	 * Recognizer
+	 * Every recognizer needs to extend from this class.
+	 * @constructor
+	 * @param {Object} options
+	 */
+	function Recognizer(options) {
+	    this.options = assign({}, this.defaults, options || {});
+
+	    this.id = uniqueId();
+
+	    this.manager = null;
+
+	    // default is enable true
+	    this.options.enable = ifUndefined(this.options.enable, true);
+
+	    this.state = STATE_POSSIBLE;
+
+	    this.simultaneous = {};
+	    this.requireFail = [];
+	}
+
+	Recognizer.prototype = {
+	    /**
+	     * @virtual
+	     * @type {Object}
+	     */
+	    defaults: {},
+
+	    /**
+	     * set options
+	     * @param {Object} options
+	     * @return {Recognizer}
+	     */
+	    set: function(options) {
+	        assign(this.options, options);
+
+	        // also update the touchAction, in case something changed about the directions/enabled state
+	        this.manager && this.manager.touchAction.update();
+	        return this;
+	    },
+
+	    /**
+	     * recognize simultaneous with an other recognizer.
+	     * @param {Recognizer} otherRecognizer
+	     * @returns {Recognizer} this
+	     */
+	    recognizeWith: function(otherRecognizer) {
+	        if (invokeArrayArg(otherRecognizer, 'recognizeWith', this)) {
+	            return this;
+	        }
+
+	        var simultaneous = this.simultaneous;
+	        otherRecognizer = getRecognizerByNameIfManager(otherRecognizer, this);
+	        if (!simultaneous[otherRecognizer.id]) {
+	            simultaneous[otherRecognizer.id] = otherRecognizer;
+	            otherRecognizer.recognizeWith(this);
+	        }
+	        return this;
+	    },
+
+	    /**
+	     * drop the simultaneous link. it doesnt remove the link on the other recognizer.
+	     * @param {Recognizer} otherRecognizer
+	     * @returns {Recognizer} this
+	     */
+	    dropRecognizeWith: function(otherRecognizer) {
+	        if (invokeArrayArg(otherRecognizer, 'dropRecognizeWith', this)) {
+	            return this;
+	        }
+
+	        otherRecognizer = getRecognizerByNameIfManager(otherRecognizer, this);
+	        delete this.simultaneous[otherRecognizer.id];
+	        return this;
+	    },
+
+	    /**
+	     * recognizer can only run when an other is failing
+	     * @param {Recognizer} otherRecognizer
+	     * @returns {Recognizer} this
+	     */
+	    requireFailure: function(otherRecognizer) {
+	        if (invokeArrayArg(otherRecognizer, 'requireFailure', this)) {
+	            return this;
+	        }
+
+	        var requireFail = this.requireFail;
+	        otherRecognizer = getRecognizerByNameIfManager(otherRecognizer, this);
+	        if (inArray(requireFail, otherRecognizer) === -1) {
+	            requireFail.push(otherRecognizer);
+	            otherRecognizer.requireFailure(this);
+	        }
+	        return this;
+	    },
+
+	    /**
+	     * drop the requireFailure link. it does not remove the link on the other recognizer.
+	     * @param {Recognizer} otherRecognizer
+	     * @returns {Recognizer} this
+	     */
+	    dropRequireFailure: function(otherRecognizer) {
+	        if (invokeArrayArg(otherRecognizer, 'dropRequireFailure', this)) {
+	            return this;
+	        }
+
+	        otherRecognizer = getRecognizerByNameIfManager(otherRecognizer, this);
+	        var index = inArray(this.requireFail, otherRecognizer);
+	        if (index > -1) {
+	            this.requireFail.splice(index, 1);
+	        }
+	        return this;
+	    },
+
+	    /**
+	     * has require failures boolean
+	     * @returns {boolean}
+	     */
+	    hasRequireFailures: function() {
+	        return this.requireFail.length > 0;
+	    },
+
+	    /**
+	     * if the recognizer can recognize simultaneous with an other recognizer
+	     * @param {Recognizer} otherRecognizer
+	     * @returns {Boolean}
+	     */
+	    canRecognizeWith: function(otherRecognizer) {
+	        return !!this.simultaneous[otherRecognizer.id];
+	    },
+
+	    /**
+	     * You should use `tryEmit` instead of `emit` directly to check
+	     * that all the needed recognizers has failed before emitting.
+	     * @param {Object} input
+	     */
+	    emit: function(input) {
+	        var self = this;
+	        var state = this.state;
+
+	        function emit(event) {
+	            self.manager.emit(event, input);
+	        }
+
+	        // 'panstart' and 'panmove'
+	        if (state < STATE_ENDED) {
+	            emit(self.options.event + stateStr(state));
+	        }
+
+	        emit(self.options.event); // simple 'eventName' events
+
+	        if (input.additionalEvent) { // additional event(panleft, panright, pinchin, pinchout...)
+	            emit(input.additionalEvent);
+	        }
+
+	        // panend and pancancel
+	        if (state >= STATE_ENDED) {
+	            emit(self.options.event + stateStr(state));
+	        }
+	    },
+
+	    /**
+	     * Check that all the require failure recognizers has failed,
+	     * if true, it emits a gesture event,
+	     * otherwise, setup the state to FAILED.
+	     * @param {Object} input
+	     */
+	    tryEmit: function(input) {
+	        if (this.canEmit()) {
+	            return this.emit(input);
+	        }
+	        // it's failing anyway
+	        this.state = STATE_FAILED;
+	    },
+
+	    /**
+	     * can we emit?
+	     * @returns {boolean}
+	     */
+	    canEmit: function() {
+	        var i = 0;
+	        while (i < this.requireFail.length) {
+	            if (!(this.requireFail[i].state & (STATE_FAILED | STATE_POSSIBLE))) {
+	                return false;
+	            }
+	            i++;
+	        }
+	        return true;
+	    },
+
+	    /**
+	     * update the recognizer
+	     * @param {Object} inputData
+	     */
+	    recognize: function(inputData) {
+	        // make a new copy of the inputData
+	        // so we can change the inputData without messing up the other recognizers
+	        var inputDataClone = assign({}, inputData);
+
+	        // is is enabled and allow recognizing?
+	        if (!boolOrFn(this.options.enable, [this, inputDataClone])) {
+	            this.reset();
+	            this.state = STATE_FAILED;
+	            return;
+	        }
+
+	        // reset when we've reached the end
+	        if (this.state & (STATE_RECOGNIZED | STATE_CANCELLED | STATE_FAILED)) {
+	            this.state = STATE_POSSIBLE;
+	        }
+
+	        this.state = this.process(inputDataClone);
+
+	        // the recognizer has recognized a gesture
+	        // so trigger an event
+	        if (this.state & (STATE_BEGAN | STATE_CHANGED | STATE_ENDED | STATE_CANCELLED)) {
+	            this.tryEmit(inputDataClone);
+	        }
+	    },
+
+	    /**
+	     * return the state of the recognizer
+	     * the actual recognizing happens in this method
+	     * @virtual
+	     * @param {Object} inputData
+	     * @returns {Const} STATE
+	     */
+	    process: function(inputData) { }, // jshint ignore:line
+
+	    /**
+	     * return the preferred touch-action
+	     * @virtual
+	     * @returns {Array}
+	     */
+	    getTouchAction: function() { },
+
+	    /**
+	     * called when the gesture isn't allowed to recognize
+	     * like when another is being recognized or it is disabled
+	     * @virtual
+	     */
+	    reset: function() { }
+	};
+
+	/**
+	 * get a usable string, used as event postfix
+	 * @param {Const} state
+	 * @returns {String} state
+	 */
+	function stateStr(state) {
+	    if (state & STATE_CANCELLED) {
+	        return 'cancel';
+	    } else if (state & STATE_ENDED) {
+	        return 'end';
+	    } else if (state & STATE_CHANGED) {
+	        return 'move';
+	    } else if (state & STATE_BEGAN) {
+	        return 'start';
+	    }
+	    return '';
+	}
+
+	/**
+	 * direction cons to string
+	 * @param {Const} direction
+	 * @returns {String}
+	 */
+	function directionStr(direction) {
+	    if (direction == DIRECTION_DOWN) {
+	        return 'down';
+	    } else if (direction == DIRECTION_UP) {
+	        return 'up';
+	    } else if (direction == DIRECTION_LEFT) {
+	        return 'left';
+	    } else if (direction == DIRECTION_RIGHT) {
+	        return 'right';
+	    }
+	    return '';
+	}
+
+	/**
+	 * get a recognizer by name if it is bound to a manager
+	 * @param {Recognizer|String} otherRecognizer
+	 * @param {Recognizer} recognizer
+	 * @returns {Recognizer}
+	 */
+	function getRecognizerByNameIfManager(otherRecognizer, recognizer) {
+	    var manager = recognizer.manager;
+	    if (manager) {
+	        return manager.get(otherRecognizer);
+	    }
+	    return otherRecognizer;
+	}
+
+	/**
+	 * This recognizer is just used as a base for the simple attribute recognizers.
+	 * @constructor
+	 * @extends Recognizer
+	 */
+	function AttrRecognizer() {
+	    Recognizer.apply(this, arguments);
+	}
+
+	inherit(AttrRecognizer, Recognizer, {
+	    /**
+	     * @namespace
+	     * @memberof AttrRecognizer
+	     */
+	    defaults: {
+	        /**
+	         * @type {Number}
+	         * @default 1
+	         */
+	        pointers: 1
+	    },
+
+	    /**
+	     * Used to check if it the recognizer receives valid input, like input.distance > 10.
+	     * @memberof AttrRecognizer
+	     * @param {Object} input
+	     * @returns {Boolean} recognized
+	     */
+	    attrTest: function(input) {
+	        var optionPointers = this.options.pointers;
+	        return optionPointers === 0 || input.pointers.length === optionPointers;
+	    },
+
+	    /**
+	     * Process the input and return the state for the recognizer
+	     * @memberof AttrRecognizer
+	     * @param {Object} input
+	     * @returns {*} State
+	     */
+	    process: function(input) {
+	        var state = this.state;
+	        var eventType = input.eventType;
+
+	        var isRecognized = state & (STATE_BEGAN | STATE_CHANGED);
+	        var isValid = this.attrTest(input);
+
+	        // on cancel input and we've recognized before, return STATE_CANCELLED
+	        if (isRecognized && (eventType & INPUT_CANCEL || !isValid)) {
+	            return state | STATE_CANCELLED;
+	        } else if (isRecognized || isValid) {
+	            if (eventType & INPUT_END) {
+	                return state | STATE_ENDED;
+	            } else if (!(state & STATE_BEGAN)) {
+	                return STATE_BEGAN;
+	            }
+	            return state | STATE_CHANGED;
+	        }
+	        return STATE_FAILED;
+	    }
+	});
+
+	/**
+	 * Pan
+	 * Recognized when the pointer is down and moved in the allowed direction.
+	 * @constructor
+	 * @extends AttrRecognizer
+	 */
+	function PanRecognizer() {
+	    AttrRecognizer.apply(this, arguments);
+
+	    this.pX = null;
+	    this.pY = null;
+	}
+
+	inherit(PanRecognizer, AttrRecognizer, {
+	    /**
+	     * @namespace
+	     * @memberof PanRecognizer
+	     */
+	    defaults: {
+	        event: 'pan',
+	        threshold: 10,
+	        pointers: 1,
+	        direction: DIRECTION_ALL
+	    },
+
+	    getTouchAction: function() {
+	        var direction = this.options.direction;
+	        var actions = [];
+	        if (direction & DIRECTION_HORIZONTAL) {
+	            actions.push(TOUCH_ACTION_PAN_Y);
+	        }
+	        if (direction & DIRECTION_VERTICAL) {
+	            actions.push(TOUCH_ACTION_PAN_X);
+	        }
+	        return actions;
+	    },
+
+	    directionTest: function(input) {
+	        var options = this.options;
+	        var hasMoved = true;
+	        var distance = input.distance;
+	        var direction = input.direction;
+	        var x = input.deltaX;
+	        var y = input.deltaY;
+
+	        // lock to axis?
+	        if (!(direction & options.direction)) {
+	            if (options.direction & DIRECTION_HORIZONTAL) {
+	                direction = (x === 0) ? DIRECTION_NONE : (x < 0) ? DIRECTION_LEFT : DIRECTION_RIGHT;
+	                hasMoved = x != this.pX;
+	                distance = Math.abs(input.deltaX);
+	            } else {
+	                direction = (y === 0) ? DIRECTION_NONE : (y < 0) ? DIRECTION_UP : DIRECTION_DOWN;
+	                hasMoved = y != this.pY;
+	                distance = Math.abs(input.deltaY);
+	            }
+	        }
+	        input.direction = direction;
+	        return hasMoved && distance > options.threshold && direction & options.direction;
+	    },
+
+	    attrTest: function(input) {
+	        return AttrRecognizer.prototype.attrTest.call(this, input) &&
+	            (this.state & STATE_BEGAN || (!(this.state & STATE_BEGAN) && this.directionTest(input)));
+	    },
+
+	    emit: function(input) {
+
+	        this.pX = input.deltaX;
+	        this.pY = input.deltaY;
+
+	        var direction = directionStr(input.direction);
+
+	        if (direction) {
+	            input.additionalEvent = this.options.event + direction;
+	        }
+	        this._super.emit.call(this, input);
+	    }
+	});
+
+	/**
+	 * Pinch
+	 * Recognized when two or more pointers are moving toward (zoom-in) or away from each other (zoom-out).
+	 * @constructor
+	 * @extends AttrRecognizer
+	 */
+	function PinchRecognizer() {
+	    AttrRecognizer.apply(this, arguments);
+	}
+
+	inherit(PinchRecognizer, AttrRecognizer, {
+	    /**
+	     * @namespace
+	     * @memberof PinchRecognizer
+	     */
+	    defaults: {
+	        event: 'pinch',
+	        threshold: 0,
+	        pointers: 2
+	    },
+
+	    getTouchAction: function() {
+	        return [TOUCH_ACTION_NONE];
+	    },
+
+	    attrTest: function(input) {
+	        return this._super.attrTest.call(this, input) &&
+	            (Math.abs(input.scale - 1) > this.options.threshold || this.state & STATE_BEGAN);
+	    },
+
+	    emit: function(input) {
+	        if (input.scale !== 1) {
+	            var inOut = input.scale < 1 ? 'in' : 'out';
+	            input.additionalEvent = this.options.event + inOut;
+	        }
+	        this._super.emit.call(this, input);
+	    }
+	});
+
+	/**
+	 * Press
+	 * Recognized when the pointer is down for x ms without any movement.
+	 * @constructor
+	 * @extends Recognizer
+	 */
+	function PressRecognizer() {
+	    Recognizer.apply(this, arguments);
+
+	    this._timer = null;
+	    this._input = null;
+	}
+
+	inherit(PressRecognizer, Recognizer, {
+	    /**
+	     * @namespace
+	     * @memberof PressRecognizer
+	     */
+	    defaults: {
+	        event: 'press',
+	        pointers: 1,
+	        time: 251, // minimal time of the pointer to be pressed
+	        threshold: 9 // a minimal movement is ok, but keep it low
+	    },
+
+	    getTouchAction: function() {
+	        return [TOUCH_ACTION_AUTO];
+	    },
+
+	    process: function(input) {
+	        var options = this.options;
+	        var validPointers = input.pointers.length === options.pointers;
+	        var validMovement = input.distance < options.threshold;
+	        var validTime = input.deltaTime > options.time;
+
+	        this._input = input;
+
+	        // we only allow little movement
+	        // and we've reached an end event, so a tap is possible
+	        if (!validMovement || !validPointers || (input.eventType & (INPUT_END | INPUT_CANCEL) && !validTime)) {
+	            this.reset();
+	        } else if (input.eventType & INPUT_START) {
+	            this.reset();
+	            this._timer = setTimeoutContext(function() {
+	                this.state = STATE_RECOGNIZED;
+	                this.tryEmit();
+	            }, options.time, this);
+	        } else if (input.eventType & INPUT_END) {
+	            return STATE_RECOGNIZED;
+	        }
+	        return STATE_FAILED;
+	    },
+
+	    reset: function() {
+	        clearTimeout(this._timer);
+	    },
+
+	    emit: function(input) {
+	        if (this.state !== STATE_RECOGNIZED) {
+	            return;
+	        }
+
+	        if (input && (input.eventType & INPUT_END)) {
+	            this.manager.emit(this.options.event + 'up', input);
+	        } else {
+	            this._input.timeStamp = now();
+	            this.manager.emit(this.options.event, this._input);
+	        }
+	    }
+	});
+
+	/**
+	 * Rotate
+	 * Recognized when two or more pointer are moving in a circular motion.
+	 * @constructor
+	 * @extends AttrRecognizer
+	 */
+	function RotateRecognizer() {
+	    AttrRecognizer.apply(this, arguments);
+	}
+
+	inherit(RotateRecognizer, AttrRecognizer, {
+	    /**
+	     * @namespace
+	     * @memberof RotateRecognizer
+	     */
+	    defaults: {
+	        event: 'rotate',
+	        threshold: 0,
+	        pointers: 2
+	    },
+
+	    getTouchAction: function() {
+	        return [TOUCH_ACTION_NONE];
+	    },
+
+	    attrTest: function(input) {
+	        return this._super.attrTest.call(this, input) &&
+	            (Math.abs(input.rotation) > this.options.threshold || this.state & STATE_BEGAN);
+	    }
+	});
+
+	/**
+	 * Swipe
+	 * Recognized when the pointer is moving fast (velocity), with enough distance in the allowed direction.
+	 * @constructor
+	 * @extends AttrRecognizer
+	 */
+	function SwipeRecognizer() {
+	    AttrRecognizer.apply(this, arguments);
+	}
+
+	inherit(SwipeRecognizer, AttrRecognizer, {
+	    /**
+	     * @namespace
+	     * @memberof SwipeRecognizer
+	     */
+	    defaults: {
+	        event: 'swipe',
+	        threshold: 10,
+	        velocity: 0.3,
+	        direction: DIRECTION_HORIZONTAL | DIRECTION_VERTICAL,
+	        pointers: 1
+	    },
+
+	    getTouchAction: function() {
+	        return PanRecognizer.prototype.getTouchAction.call(this);
+	    },
+
+	    attrTest: function(input) {
+	        var direction = this.options.direction;
+	        var velocity;
+
+	        if (direction & (DIRECTION_HORIZONTAL | DIRECTION_VERTICAL)) {
+	            velocity = input.overallVelocity;
+	        } else if (direction & DIRECTION_HORIZONTAL) {
+	            velocity = input.overallVelocityX;
+	        } else if (direction & DIRECTION_VERTICAL) {
+	            velocity = input.overallVelocityY;
+	        }
+
+	        return this._super.attrTest.call(this, input) &&
+	            direction & input.offsetDirection &&
+	            input.distance > this.options.threshold &&
+	            input.maxPointers == this.options.pointers &&
+	            abs(velocity) > this.options.velocity && input.eventType & INPUT_END;
+	    },
+
+	    emit: function(input) {
+	        var direction = directionStr(input.offsetDirection);
+	        if (direction) {
+	            this.manager.emit(this.options.event + direction, input);
+	        }
+
+	        this.manager.emit(this.options.event, input);
+	    }
+	});
+
+	/**
+	 * A tap is ecognized when the pointer is doing a small tap/click. Multiple taps are recognized if they occur
+	 * between the given interval and position. The delay option can be used to recognize multi-taps without firing
+	 * a single tap.
+	 *
+	 * The eventData from the emitted event contains the property `tapCount`, which contains the amount of
+	 * multi-taps being recognized.
+	 * @constructor
+	 * @extends Recognizer
+	 */
+	function TapRecognizer() {
+	    Recognizer.apply(this, arguments);
+
+	    // previous time and center,
+	    // used for tap counting
+	    this.pTime = false;
+	    this.pCenter = false;
+
+	    this._timer = null;
+	    this._input = null;
+	    this.count = 0;
+	}
+
+	inherit(TapRecognizer, Recognizer, {
+	    /**
+	     * @namespace
+	     * @memberof PinchRecognizer
+	     */
+	    defaults: {
+	        event: 'tap',
+	        pointers: 1,
+	        taps: 1,
+	        interval: 300, // max time between the multi-tap taps
+	        time: 250, // max time of the pointer to be down (like finger on the screen)
+	        threshold: 9, // a minimal movement is ok, but keep it low
+	        posThreshold: 10 // a multi-tap can be a bit off the initial position
+	    },
+
+	    getTouchAction: function() {
+	        return [TOUCH_ACTION_MANIPULATION];
+	    },
+
+	    process: function(input) {
+	        var options = this.options;
+
+	        var validPointers = input.pointers.length === options.pointers;
+	        var validMovement = input.distance < options.threshold;
+	        var validTouchTime = input.deltaTime < options.time;
+
+	        this.reset();
+
+	        if ((input.eventType & INPUT_START) && (this.count === 0)) {
+	            return this.failTimeout();
+	        }
+
+	        // we only allow little movement
+	        // and we've reached an end event, so a tap is possible
+	        if (validMovement && validTouchTime && validPointers) {
+	            if (input.eventType != INPUT_END) {
+	                return this.failTimeout();
+	            }
+
+	            var validInterval = this.pTime ? (input.timeStamp - this.pTime < options.interval) : true;
+	            var validMultiTap = !this.pCenter || getDistance(this.pCenter, input.center) < options.posThreshold;
+
+	            this.pTime = input.timeStamp;
+	            this.pCenter = input.center;
+
+	            if (!validMultiTap || !validInterval) {
+	                this.count = 1;
+	            } else {
+	                this.count += 1;
+	            }
+
+	            this._input = input;
+
+	            // if tap count matches we have recognized it,
+	            // else it has began recognizing...
+	            var tapCount = this.count % options.taps;
+	            if (tapCount === 0) {
+	                // no failing requirements, immediately trigger the tap event
+	                // or wait as long as the multitap interval to trigger
+	                if (!this.hasRequireFailures()) {
+	                    return STATE_RECOGNIZED;
+	                } else {
+	                    this._timer = setTimeoutContext(function() {
+	                        this.state = STATE_RECOGNIZED;
+	                        this.tryEmit();
+	                    }, options.interval, this);
+	                    return STATE_BEGAN;
+	                }
+	            }
+	        }
+	        return STATE_FAILED;
+	    },
+
+	    failTimeout: function() {
+	        this._timer = setTimeoutContext(function() {
+	            this.state = STATE_FAILED;
+	        }, this.options.interval, this);
+	        return STATE_FAILED;
+	    },
+
+	    reset: function() {
+	        clearTimeout(this._timer);
+	    },
+
+	    emit: function() {
+	        if (this.state == STATE_RECOGNIZED) {
+	            this._input.tapCount = this.count;
+	            this.manager.emit(this.options.event, this._input);
+	        }
+	    }
+	});
+
+	/**
+	 * Simple way to create a manager with a default set of recognizers.
+	 * @param {HTMLElement} element
+	 * @param {Object} [options]
+	 * @constructor
+	 */
+	function Hammer(element, options) {
+	    options = options || {};
+	    options.recognizers = ifUndefined(options.recognizers, Hammer.defaults.preset);
+	    return new Manager(element, options);
+	}
+
+	/**
+	 * @const {string}
+	 */
+	Hammer.VERSION = '2.0.7';
+
+	/**
+	 * default settings
+	 * @namespace
+	 */
+	Hammer.defaults = {
+	    /**
+	     * set if DOM events are being triggered.
+	     * But this is slower and unused by simple implementations, so disabled by default.
+	     * @type {Boolean}
+	     * @default false
+	     */
+	    domEvents: false,
+
+	    /**
+	     * The value for the touchAction property/fallback.
+	     * When set to `compute` it will magically set the correct value based on the added recognizers.
+	     * @type {String}
+	     * @default compute
+	     */
+	    touchAction: TOUCH_ACTION_COMPUTE,
+
+	    /**
+	     * @type {Boolean}
+	     * @default true
+	     */
+	    enable: true,
+
+	    /**
+	     * EXPERIMENTAL FEATURE -- can be removed/changed
+	     * Change the parent input target element.
+	     * If Null, then it is being set the to main element.
+	     * @type {Null|EventTarget}
+	     * @default null
+	     */
+	    inputTarget: null,
+
+	    /**
+	     * force an input class
+	     * @type {Null|Function}
+	     * @default null
+	     */
+	    inputClass: null,
+
+	    /**
+	     * Default recognizer setup when calling `Hammer()`
+	     * When creating a new Manager these will be skipped.
+	     * @type {Array}
+	     */
+	    preset: [
+	        // RecognizerClass, options, [recognizeWith, ...], [requireFailure, ...]
+	        [RotateRecognizer, {enable: false}],
+	        [PinchRecognizer, {enable: false}, ['rotate']],
+	        [SwipeRecognizer, {direction: DIRECTION_HORIZONTAL}],
+	        [PanRecognizer, {direction: DIRECTION_HORIZONTAL}, ['swipe']],
+	        [TapRecognizer],
+	        [TapRecognizer, {event: 'doubletap', taps: 2}, ['tap']],
+	        [PressRecognizer]
+	    ],
+
+	    /**
+	     * Some CSS properties can be used to improve the working of Hammer.
+	     * Add them to this method and they will be set when creating a new Manager.
+	     * @namespace
+	     */
+	    cssProps: {
+	        /**
+	         * Disables text selection to improve the dragging gesture. Mainly for desktop browsers.
+	         * @type {String}
+	         * @default 'none'
+	         */
+	        userSelect: 'none',
+
+	        /**
+	         * Disable the Windows Phone grippers when pressing an element.
+	         * @type {String}
+	         * @default 'none'
+	         */
+	        touchSelect: 'none',
+
+	        /**
+	         * Disables the default callout shown when you touch and hold a touch target.
+	         * On iOS, when you touch and hold a touch target such as a link, Safari displays
+	         * a callout containing information about the link. This property allows you to disable that callout.
+	         * @type {String}
+	         * @default 'none'
+	         */
+	        touchCallout: 'none',
+
+	        /**
+	         * Specifies whether zooming is enabled. Used by IE10>
+	         * @type {String}
+	         * @default 'none'
+	         */
+	        contentZooming: 'none',
+
+	        /**
+	         * Specifies that an entire element should be draggable instead of its contents. Mainly for desktop browsers.
+	         * @type {String}
+	         * @default 'none'
+	         */
+	        userDrag: 'none',
+
+	        /**
+	         * Overrides the highlight color shown when the user taps a link or a JavaScript
+	         * clickable element in iOS. This property obeys the alpha value, if specified.
+	         * @type {String}
+	         * @default 'rgba(0,0,0,0)'
+	         */
+	        tapHighlightColor: 'rgba(0,0,0,0)'
+	    }
+	};
+
+	var STOP = 1;
+	var FORCED_STOP = 2;
+
+	/**
+	 * Manager
+	 * @param {HTMLElement} element
+	 * @param {Object} [options]
+	 * @constructor
+	 */
+	function Manager(element, options) {
+	    this.options = assign({}, Hammer.defaults, options || {});
+
+	    this.options.inputTarget = this.options.inputTarget || element;
+
+	    this.handlers = {};
+	    this.session = {};
+	    this.recognizers = [];
+	    this.oldCssProps = {};
+
+	    this.element = element;
+	    this.input = createInputInstance(this);
+	    this.touchAction = new TouchAction(this, this.options.touchAction);
+
+	    toggleCssProps(this, true);
+
+	    each(this.options.recognizers, function(item) {
+	        var recognizer = this.add(new (item[0])(item[1]));
+	        item[2] && recognizer.recognizeWith(item[2]);
+	        item[3] && recognizer.requireFailure(item[3]);
+	    }, this);
+	}
+
+	Manager.prototype = {
+	    /**
+	     * set options
+	     * @param {Object} options
+	     * @returns {Manager}
+	     */
+	    set: function(options) {
+	        assign(this.options, options);
+
+	        // Options that need a little more setup
+	        if (options.touchAction) {
+	            this.touchAction.update();
+	        }
+	        if (options.inputTarget) {
+	            // Clean up existing event listeners and reinitialize
+	            this.input.destroy();
+	            this.input.target = options.inputTarget;
+	            this.input.init();
+	        }
+	        return this;
+	    },
+
+	    /**
+	     * stop recognizing for this session.
+	     * This session will be discarded, when a new [input]start event is fired.
+	     * When forced, the recognizer cycle is stopped immediately.
+	     * @param {Boolean} [force]
+	     */
+	    stop: function(force) {
+	        this.session.stopped = force ? FORCED_STOP : STOP;
+	    },
+
+	    /**
+	     * run the recognizers!
+	     * called by the inputHandler function on every movement of the pointers (touches)
+	     * it walks through all the recognizers and tries to detect the gesture that is being made
+	     * @param {Object} inputData
+	     */
+	    recognize: function(inputData) {
+	        var session = this.session;
+	        if (session.stopped) {
+	            return;
+	        }
+
+	        // run the touch-action polyfill
+	        this.touchAction.preventDefaults(inputData);
+
+	        var recognizer;
+	        var recognizers = this.recognizers;
+
+	        // this holds the recognizer that is being recognized.
+	        // so the recognizer's state needs to be BEGAN, CHANGED, ENDED or RECOGNIZED
+	        // if no recognizer is detecting a thing, it is set to `null`
+	        var curRecognizer = session.curRecognizer;
+
+	        // reset when the last recognizer is recognized
+	        // or when we're in a new session
+	        if (!curRecognizer || (curRecognizer && curRecognizer.state & STATE_RECOGNIZED)) {
+	            curRecognizer = session.curRecognizer = null;
+	        }
+
+	        var i = 0;
+	        while (i < recognizers.length) {
+	            recognizer = recognizers[i];
+
+	            // find out if we are allowed try to recognize the input for this one.
+	            // 1.   allow if the session is NOT forced stopped (see the .stop() method)
+	            // 2.   allow if we still haven't recognized a gesture in this session, or the this recognizer is the one
+	            //      that is being recognized.
+	            // 3.   allow if the recognizer is allowed to run simultaneous with the current recognized recognizer.
+	            //      this can be setup with the `recognizeWith()` method on the recognizer.
+	            if (session.stopped !== FORCED_STOP && ( // 1
+	                    !curRecognizer || recognizer == curRecognizer || // 2
+	                    recognizer.canRecognizeWith(curRecognizer))) { // 3
+	                recognizer.recognize(inputData);
+	            } else {
+	                recognizer.reset();
+	            }
+
+	            // if the recognizer has been recognizing the input as a valid gesture, we want to store this one as the
+	            // current active recognizer. but only if we don't already have an active recognizer
+	            if (!curRecognizer && recognizer.state & (STATE_BEGAN | STATE_CHANGED | STATE_ENDED)) {
+	                curRecognizer = session.curRecognizer = recognizer;
+	            }
+	            i++;
+	        }
+	    },
+
+	    /**
+	     * get a recognizer by its event name.
+	     * @param {Recognizer|String} recognizer
+	     * @returns {Recognizer|Null}
+	     */
+	    get: function(recognizer) {
+	        if (recognizer instanceof Recognizer) {
+	            return recognizer;
+	        }
+
+	        var recognizers = this.recognizers;
+	        for (var i = 0; i < recognizers.length; i++) {
+	            if (recognizers[i].options.event == recognizer) {
+	                return recognizers[i];
+	            }
+	        }
+	        return null;
+	    },
+
+	    /**
+	     * add a recognizer to the manager
+	     * existing recognizers with the same event name will be removed
+	     * @param {Recognizer} recognizer
+	     * @returns {Recognizer|Manager}
+	     */
+	    add: function(recognizer) {
+	        if (invokeArrayArg(recognizer, 'add', this)) {
+	            return this;
+	        }
+
+	        // remove existing
+	        var existing = this.get(recognizer.options.event);
+	        if (existing) {
+	            this.remove(existing);
+	        }
+
+	        this.recognizers.push(recognizer);
+	        recognizer.manager = this;
+
+	        this.touchAction.update();
+	        return recognizer;
+	    },
+
+	    /**
+	     * remove a recognizer by name or instance
+	     * @param {Recognizer|String} recognizer
+	     * @returns {Manager}
+	     */
+	    remove: function(recognizer) {
+	        if (invokeArrayArg(recognizer, 'remove', this)) {
+	            return this;
+	        }
+
+	        recognizer = this.get(recognizer);
+
+	        // let's make sure this recognizer exists
+	        if (recognizer) {
+	            var recognizers = this.recognizers;
+	            var index = inArray(recognizers, recognizer);
+
+	            if (index !== -1) {
+	                recognizers.splice(index, 1);
+	                this.touchAction.update();
+	            }
+	        }
+
+	        return this;
+	    },
+
+	    /**
+	     * bind event
+	     * @param {String} events
+	     * @param {Function} handler
+	     * @returns {EventEmitter} this
+	     */
+	    on: function(events, handler) {
+	        if (events === undefined) {
+	            return;
+	        }
+	        if (handler === undefined) {
+	            return;
+	        }
+
+	        var handlers = this.handlers;
+	        each(splitStr(events), function(event) {
+	            handlers[event] = handlers[event] || [];
+	            handlers[event].push(handler);
+	        });
+	        return this;
+	    },
+
+	    /**
+	     * unbind event, leave emit blank to remove all handlers
+	     * @param {String} events
+	     * @param {Function} [handler]
+	     * @returns {EventEmitter} this
+	     */
+	    off: function(events, handler) {
+	        if (events === undefined) {
+	            return;
+	        }
+
+	        var handlers = this.handlers;
+	        each(splitStr(events), function(event) {
+	            if (!handler) {
+	                delete handlers[event];
+	            } else {
+	                handlers[event] && handlers[event].splice(inArray(handlers[event], handler), 1);
+	            }
+	        });
+	        return this;
+	    },
+
+	    /**
+	     * emit event to the listeners
+	     * @param {String} event
+	     * @param {Object} data
+	     */
+	    emit: function(event, data) {
+	        // we also want to trigger dom events
+	        if (this.options.domEvents) {
+	            triggerDomEvent(event, data);
+	        }
+
+	        // no handlers, so skip it all
+	        var handlers = this.handlers[event] && this.handlers[event].slice();
+	        if (!handlers || !handlers.length) {
+	            return;
+	        }
+
+	        data.type = event;
+	        data.preventDefault = function() {
+	            data.srcEvent.preventDefault();
+	        };
+
+	        var i = 0;
+	        while (i < handlers.length) {
+	            handlers[i](data);
+	            i++;
+	        }
+	    },
+
+	    /**
+	     * destroy the manager and unbinds all events
+	     * it doesn't unbind dom events, that is the user own responsibility
+	     */
+	    destroy: function() {
+	        this.element && toggleCssProps(this, false);
+
+	        this.handlers = {};
+	        this.session = {};
+	        this.input.destroy();
+	        this.element = null;
+	    }
+	};
+
+	/**
+	 * add/remove the css properties as defined in manager.options.cssProps
+	 * @param {Manager} manager
+	 * @param {Boolean} add
+	 */
+	function toggleCssProps(manager, add) {
+	    var element = manager.element;
+	    if (!element.style) {
+	        return;
+	    }
+	    var prop;
+	    each(manager.options.cssProps, function(value, name) {
+	        prop = prefixed(element.style, name);
+	        if (add) {
+	            manager.oldCssProps[prop] = element.style[prop];
+	            element.style[prop] = value;
+	        } else {
+	            element.style[prop] = manager.oldCssProps[prop] || '';
+	        }
+	    });
+	    if (!add) {
+	        manager.oldCssProps = {};
+	    }
+	}
+
+	/**
+	 * trigger dom event
+	 * @param {String} event
+	 * @param {Object} data
+	 */
+	function triggerDomEvent(event, data) {
+	    var gestureEvent = document.createEvent('Event');
+	    gestureEvent.initEvent(event, true, true);
+	    gestureEvent.gesture = data;
+	    data.target.dispatchEvent(gestureEvent);
+	}
+
+	assign(Hammer, {
+	    INPUT_START: INPUT_START,
+	    INPUT_MOVE: INPUT_MOVE,
+	    INPUT_END: INPUT_END,
+	    INPUT_CANCEL: INPUT_CANCEL,
+
+	    STATE_POSSIBLE: STATE_POSSIBLE,
+	    STATE_BEGAN: STATE_BEGAN,
+	    STATE_CHANGED: STATE_CHANGED,
+	    STATE_ENDED: STATE_ENDED,
+	    STATE_RECOGNIZED: STATE_RECOGNIZED,
+	    STATE_CANCELLED: STATE_CANCELLED,
+	    STATE_FAILED: STATE_FAILED,
+
+	    DIRECTION_NONE: DIRECTION_NONE,
+	    DIRECTION_LEFT: DIRECTION_LEFT,
+	    DIRECTION_RIGHT: DIRECTION_RIGHT,
+	    DIRECTION_UP: DIRECTION_UP,
+	    DIRECTION_DOWN: DIRECTION_DOWN,
+	    DIRECTION_HORIZONTAL: DIRECTION_HORIZONTAL,
+	    DIRECTION_VERTICAL: DIRECTION_VERTICAL,
+	    DIRECTION_ALL: DIRECTION_ALL,
+
+	    Manager: Manager,
+	    Input: Input,
+	    TouchAction: TouchAction,
+
+	    TouchInput: TouchInput,
+	    MouseInput: MouseInput,
+	    PointerEventInput: PointerEventInput,
+	    TouchMouseInput: TouchMouseInput,
+	    SingleTouchInput: SingleTouchInput,
+
+	    Recognizer: Recognizer,
+	    AttrRecognizer: AttrRecognizer,
+	    Tap: TapRecognizer,
+	    Pan: PanRecognizer,
+	    Swipe: SwipeRecognizer,
+	    Pinch: PinchRecognizer,
+	    Rotate: RotateRecognizer,
+	    Press: PressRecognizer,
+
+	    on: addEventListeners,
+	    off: removeEventListeners,
+	    each: each,
+	    merge: merge,
+	    extend: extend,
+	    assign: assign,
+	    inherit: inherit,
+	    bindFn: bindFn,
+	    prefixed: prefixed
+	});
+
+	// this prevents errors when Hammer is loaded in the presence of an AMD
+	//  style loader but by script tag, not by the loader.
+	var freeGlobal = (typeof window !== 'undefined' ? window : (typeof self !== 'undefined' ? self : {})); // jshint ignore:line
+	freeGlobal.Hammer = Hammer;
+
+	if (true) {
+	    !(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
+	        return Hammer;
+	    }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	} else if (typeof module != 'undefined' && module.exports) {
+	    module.exports = Hammer;
+	} else {
+	    window[exportName] = Hammer;
+	}
+
+	})(window, document, 'Hammer');
+
 
 /***/ }
 /******/ ]);

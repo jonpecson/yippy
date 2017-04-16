@@ -6,7 +6,7 @@
 			<i class="icon-back"></i>
 		</router-link>
 
-		<div id="popUp">
+		<!-- <div id="popUp">
 			<i class="big icon-yipp_apple_full"></i>
 			
 			<h3>Lesson 2: Screentime</h3>
@@ -14,10 +14,23 @@
 			<p>In this lesson, we will help to start the first practice appetizers</p>
 			
 			<hr>
-			
+
 			<span><i class="icon-yipp_check_full"></i> 5min</span>
 			
-		</div>	
+		</div>	 -->
+
+		<v-touch v-on:swipeleft="onSwipeLeft" id="popUp">
+			<i class="big icon-yipp_apple_full"></i>
+			
+			<h3>Lesson 2: Screentime</h3>
+			
+			<p>In this lesson, we will help to start the first practice appetizers</p>
+			
+			<hr>
+
+			<span><i class="icon-yipp_check_full"></i> 5min</span>
+			
+		</v-touch>
 			
 		<a href="#" v-on:click.prevent="startLesson" class="btn bottom white">Start</a>
 	</div>
