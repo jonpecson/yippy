@@ -19,18 +19,22 @@
 			
 		</div>	 -->
 
-		<v-touch v-on:swipeleft="onSwipeLeft" id="popUp">
+		<v-touch tag="section" @swipe="onSwipeLeft"
+		  <p>Swipe me!</p>
+		</v-touch>
+
+		<div id="popUp">
 			<i class="big icon-yipp_apple_full"></i>
 			
 			<h3>Lesson 2: Screentime</h3>
 			
-			<p>In this lesson, we will help to start the first practice appetizers</p>
+			<p>TestIn this lesson, we will help to start the first practice appetizers</p>
 			
 			<hr>
 
 			<span><i class="icon-yipp_check_full"></i> 5min</span>
 			
-		</v-touch>
+		</div>
 			
 		<a href="#" v-on:click.prevent="startLesson" class="btn bottom white">Start</a>
 	</div>
@@ -140,6 +144,10 @@ import $ from 'jquery'
 import Modal from '../components/Modal.vue'
 
 // http://dev.fedvas.com/cms/api.dsuite/yipp/todos/37/en
+
+import Vue from 'vue'
+var VueTouch = require('vue-touch')
+Vue.use(VueTouch, {name: 'v-touch'})
 
 export default {
     data() {

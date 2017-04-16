@@ -35708,7 +35708,13 @@
 
 	var _Modal2 = _interopRequireDefault(_Modal);
 
+	var _vue = __webpack_require__(3);
+
+	var _vue2 = _interopRequireDefault(_vue);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var VueTouch = __webpack_require__(314);
 
 	// http://dev.fedvas.com/cms/api.dsuite/yipp/todos/37/en
 
@@ -35733,18 +35739,22 @@
 	//
 	// 		</div>	 -->
 	//
-	// 		<v-touch v-on:swipeleft="onSwipeLeft" id="popUp">
+	// 		<v-touch tag="section" @swipe="onSwipeLeft"
+	// 		  <p>Swipe me!</p>
+	// 		</v-touch>
+	//
+	// 		<div id="popUp">
 	// 			<i class="big icon-yipp_apple_full"></i>
 	//
 	// 			<h3>Lesson 2: Screentime</h3>
 	//
-	// 			<p>In this lesson, we will help to start the first practice appetizers</p>
+	// 			<p>TestIn this lesson, we will help to start the first practice appetizers</p>
 	//
 	// 			<hr>
 	//
 	// 			<span><i class="icon-yipp_check_full"></i> 5min</span>
 	//
-	// 		</v-touch>
+	// 		</div>
 	//
 	// 		<a href="#" v-on:click.prevent="startLesson" class="btn bottom white">Start</a>
 	// 	</div>
@@ -35845,6 +35855,9 @@
 	// </template>
 	//
 	// <script>
+
+	_vue2.default.use(VueTouch, { name: 'v-touch' });
+
 	exports.default = {
 	    data: function data() {
 	        return {
@@ -35897,7 +35910,7 @@
 /* 301 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div id=\"page-lesson\">\n\n\t<div  class=\"panel\" id=\"start\" v-if=\"page == 'start'\">\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"back\">\n\t\t\t<i class=\"icon-back\"></i>\n\t\t</router-link>\n\n\t\t<!-- <div id=\"popUp\">\n\t\t\t<i class=\"big icon-yipp_apple_full\"></i>\n\t\t\t\n\t\t\t<h3>Lesson 2: Screentime</h3>\n\t\t\t\n\t\t\t<p>In this lesson, we will help to start the first practice appetizers</p>\n\t\t\t\n\t\t\t<hr>\n\n\t\t\t<span><i class=\"icon-yipp_check_full\"></i> 5min</span>\n\t\t\t\n\t\t</div>\t -->\n\n\t\t<v-touch v-on:swipeleft=\"onSwipeLeft\" id=\"popUp\">\n\t\t\t<i class=\"big icon-yipp_apple_full\"></i>\n\t\t\t\n\t\t\t<h3>Lesson 2: Screentime</h3>\n\t\t\t\n\t\t\t<p>In this lesson, we will help to start the first practice appetizers</p>\n\t\t\t\n\t\t\t<hr>\n\n\t\t\t<span><i class=\"icon-yipp_check_full\"></i> 5min</span>\n\t\t\t\n\t\t</v-touch>\n\t\t\t\n\t\t<a href=\"#\" v-on:click.prevent=\"startLesson\" class=\"btn bottom white\">Start</a>\n\t</div>\n\n\t<div class=\"panel\" id=\"cards\" v-if=\"page == 'cards'\">\n\t\t<a v-on:click.prevent=\"back('start')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<span class=\"bar-inner\"></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div id=\"paper\" v-on:click.prevent=\"next('stack')\">\n\n\t\t\t<h3>Why?</h3>\n\n\t\t\t<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>\n\n\t\t\t<i class=\"heart icon-yipp_check_full\"></i>\n\n\t\t\t<div id=\"paper_foo1\">\n\t\t\t\t<div id=\"paper_foo2\"></div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n\t\t\n\t<div class=\"panel\" id=\"stack\" v-if=\"page == 'stack'\">\n\t\t<a v-on:click.prevent=\"back('cards')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<span class=\"bar-inner\"></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"content\" v-on:click.prevent=\"next('complete')\">\n\t\t\t\n\t\t\t<p class=\"text-center\">Te weinig slapen vergroot de kans op overgewicht bij kinderen, omdat:</p>\n\t\t\t\n\t\t\t<ul>\n\t\t\t\t\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t\n\t\t\t</ul>\n\n\t\t</div>\n\n\t</div>\n\t\t\t\n\t<div class=\"panel\" id=\"complete\" v-if=\"page == 'complete'\">\n\t\t<a v-on:click.prevent=\"back('stack')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<span class=\"bar-inner\"></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"content\">\n\t\t\n\t\t\t<h1>Les compleet!</h1>\n\t\t\t\n\t\t\t<i class=\"biggest icon-yipp_check_full\"></i>\n\t\t\t\n\t\t\t<p class=\"text-center\">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>\n\t\t\t\n\t\t\t\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<router-link :to=\"{ name: 'challenge'}\" class=\"btn white\">\n\t\t\t\tStart Challenge\n\t\t\t\t</router-link>\n\n\t\t\t\t<br>\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"back('start')\" class=\"btn white\">Reset Lesson</a>\n\t\t\t</div>\n\t\t\n\t\t</div>\n\n\t</div>\n\n\t<modal v-if=\"showModal\" @close=\"showModal = false\">\n        <h3 slot=\"header\">Lorem Ipsum</h3>\n        <p slot=\"body\">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>\n    </modal>\n\n</div>\n\t\n";
+	module.exports = "\n<div id=\"page-lesson\">\n\n\t<div  class=\"panel\" id=\"start\" v-if=\"page == 'start'\">\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"back\">\n\t\t\t<i class=\"icon-back\"></i>\n\t\t</router-link>\n\n\t\t<!-- <div id=\"popUp\">\n\t\t\t<i class=\"big icon-yipp_apple_full\"></i>\n\t\t\t\n\t\t\t<h3>Lesson 2: Screentime</h3>\n\t\t\t\n\t\t\t<p>In this lesson, we will help to start the first practice appetizers</p>\n\t\t\t\n\t\t\t<hr>\n\n\t\t\t<span><i class=\"icon-yipp_check_full\"></i> 5min</span>\n\t\t\t\n\t\t</div>\t -->\n\n\t\t<v-touch tag=\"section\" @swipe=\"onSwipeLeft\"\n\t\t  <p>Swipe me!</p>\n\t\t</v-touch>\n\n\t\t<div id=\"popUp\">\n\t\t\t<i class=\"big icon-yipp_apple_full\"></i>\n\t\t\t\n\t\t\t<h3>Lesson 2: Screentime</h3>\n\t\t\t\n\t\t\t<p>TestIn this lesson, we will help to start the first practice appetizers</p>\n\t\t\t\n\t\t\t<hr>\n\n\t\t\t<span><i class=\"icon-yipp_check_full\"></i> 5min</span>\n\t\t\t\n\t\t</div>\n\t\t\t\n\t\t<a href=\"#\" v-on:click.prevent=\"startLesson\" class=\"btn bottom white\">Start</a>\n\t</div>\n\n\t<div class=\"panel\" id=\"cards\" v-if=\"page == 'cards'\">\n\t\t<a v-on:click.prevent=\"back('start')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<span class=\"bar-inner\"></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div id=\"paper\" v-on:click.prevent=\"next('stack')\">\n\n\t\t\t<h3>Why?</h3>\n\n\t\t\t<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>\n\n\t\t\t<i class=\"heart icon-yipp_check_full\"></i>\n\n\t\t\t<div id=\"paper_foo1\">\n\t\t\t\t<div id=\"paper_foo2\"></div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n\t\t\n\t<div class=\"panel\" id=\"stack\" v-if=\"page == 'stack'\">\n\t\t<a v-on:click.prevent=\"back('cards')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<span class=\"bar-inner\"></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"content\" v-on:click.prevent=\"next('complete')\">\n\t\t\t\n\t\t\t<p class=\"text-center\">Te weinig slapen vergroot de kans op overgewicht bij kinderen, omdat:</p>\n\t\t\t\n\t\t\t<ul>\n\t\t\t\t\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t\n\t\t\t</ul>\n\n\t\t</div>\n\n\t</div>\n\t\t\t\n\t<div class=\"panel\" id=\"complete\" v-if=\"page == 'complete'\">\n\t\t<a v-on:click.prevent=\"back('stack')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<span class=\"bar-inner\"></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"content\">\n\t\t\n\t\t\t<h1>Les compleet!</h1>\n\t\t\t\n\t\t\t<i class=\"biggest icon-yipp_check_full\"></i>\n\t\t\t\n\t\t\t<p class=\"text-center\">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>\n\t\t\t\n\t\t\t\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<router-link :to=\"{ name: 'challenge'}\" class=\"btn white\">\n\t\t\t\tStart Challenge\n\t\t\t\t</router-link>\n\n\t\t\t\t<br>\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"back('start')\" class=\"btn white\">Reset Lesson</a>\n\t\t\t</div>\n\t\t\n\t\t</div>\n\n\t</div>\n\n\t<modal v-if=\"showModal\" @close=\"showModal = false\">\n        <h3 slot=\"header\">Lorem Ipsum</h3>\n        <p slot=\"body\">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>\n    </modal>\n\n</div>\n\t\n";
 
 /***/ },
 /* 302 */
