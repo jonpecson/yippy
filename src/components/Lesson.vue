@@ -6,34 +6,12 @@
 			<i class="icon-back"></i>
 		</router-link>
 
-		<!-- <div id="popUp">
-			<i class="big icon-yipp_apple_full"></i>
-			
-			<h3>Lesson 2: Screentime</h3>
-			
-			<p>In this lesson, we will help to start the first practice appetizers</p>
-			
-			<hr>
-
-			<span><i class="icon-yipp_check_full"></i> 5min</span>
-			
-		</div>	 -->
-
-		<v-touch tag="section" @swipe="onSwipeLeft"
-		  <p>Swipe me!</p>
-		</v-touch>
-
 		<div id="popUp">
 			<i class="big icon-yipp_apple_full"></i>
-			
 			<h3>Lesson 2: Screentime</h3>
-			
 			<p>TestIn this lesson, we will help to start the first practice appetizers</p>
-			
 			<hr>
-
 			<span><i class="icon-yipp_check_full"></i> 5min</span>
-			
 		</div>
 			
 		<a href="#" v-on:click.prevent="startLesson" class="btn bottom white">Start</a>
@@ -50,7 +28,7 @@
 			<i class="icon-yipp_home_full-"></i>
 		</router-link>
 
-		<div id="paper" v-on:click.prevent="next('stack')">
+		<div id="paper-1" class="paper">
 
 			<h3>Why?</h3>
 
@@ -62,6 +40,20 @@
 				<div id="paper_foo2"></div>
 			</div>
 		</div>
+
+		<div id="paper-2" class="paper">
+
+			<h3>Why?2</h3>
+
+			<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>
+
+			<i class="heart icon-yipp_check_full"></i>
+
+			<div id="paper_foo1">
+				<div id="paper_foo2"></div>
+			</div>
+		</div>
+
 	</div>
 		
 	<div class="panel" id="stack" v-if="page == 'stack'">
@@ -143,6 +135,8 @@ import $ from 'jquery'
 
 import Modal from '../components/Modal.vue'
 
+import 'hammerjs/hammer.js'
+
 // http://dev.fedvas.com/cms/api.dsuite/yipp/todos/37/en
 
 import Vue from 'vue'
@@ -165,10 +159,46 @@ export default {
         if (!auth.authenticated) {
             this.redirectGuest();
         }
+	        
     },
     methods: {
     	startLesson: function () {
     		this.page = 'cards';
+
+    		setTimeout(function(){
+	        	var stage = $('.paper').css('display', 'none');
+	        	$('#paper-1').css('display', 'block');
+
+	        	var mc = new Hammer.Manager(stage[0]);
+	        	console.log(mc)
+
+	        	mc.add( new Hammer.Swipe({ event: 'swipe' }) );
+
+	        	mc.on('swipe', function(event){
+				    event.preventDefault();
+				    if (event.direction == 4) { // swipe to the right
+				        stage.addClass('rotate-left').delay(700).fadeOut(1);
+						
+						if ( stage.is(':last-child') ) {
+							// $('.buddy:nth-child(1)').removeClass ('rotate-left rotate-right').fadeIn(300);
+						} else {
+							console.log('hi')
+							stage.next().removeClass('rotate-left rotate-right').fadeIn(400);
+						}
+				    }
+
+				    if (event.direction == 2) { // swipe to the left
+						stage.addClass('rotate-right').delay(700).fadeOut(1);
+						
+						if ( $(this).is(':last-child') ) {
+							$('.paper:nth-child(1)').removeClass ('rotate-left rotate-right').fadeIn(300);
+							alert('OUPS');
+						} else {
+							stage.next().removeClass('rotate-left rotate-right').fadeIn(400);
+						} 
+				    }
+				});
+	        }, 1);
     	},
     	back: function (page) {
     		this.page = page;

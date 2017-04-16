@@ -9805,23 +9805,23 @@
 
 	var _Lesson2 = _interopRequireDefault(_Lesson);
 
-	var _Challenge = __webpack_require__(302);
+	var _Challenge = __webpack_require__(303);
 
 	var _Challenge2 = _interopRequireDefault(_Challenge);
 
-	var _ChallengeNew = __webpack_require__(305);
+	var _ChallengeNew = __webpack_require__(306);
 
 	var _ChallengeNew2 = _interopRequireDefault(_ChallengeNew);
 
-	var _ChallengeContent = __webpack_require__(307);
+	var _ChallengeContent = __webpack_require__(308);
 
 	var _ChallengeContent2 = _interopRequireDefault(_ChallengeContent);
 
-	var _vueResource = __webpack_require__(310);
+	var _vueResource = __webpack_require__(311);
 
 	var _vueResource2 = _interopRequireDefault(_vueResource);
 
-	var _vueRouter = __webpack_require__(312);
+	var _vueRouter = __webpack_require__(313);
 
 	var _vueRouter2 = _interopRequireDefault(_vueRouter);
 
@@ -9837,7 +9837,7 @@
 
 	_vue2.default.use(_vueCookie2.default);
 
-	var VueTouch = __webpack_require__(314);
+	var VueTouch = __webpack_require__(300);
 	_vue2.default.use(VueTouch, { name: 'v-touch' });
 
 	var routes = [{ path: '/', component: _Home2.default, name: 'home' }, { path: '/login', component: _Auth2.default, name: 'login' }, { path: '/logout', component: _Logout2.default, name: 'logout' }, { path: '/register', component: _Register2.default, name: 'register' }, { path: '/timeline', component: _Timeline2.default, name: 'timeline' }, { path: '/emergency', component: _Emergency2.default, name: 'emergency' }, { path: '/lesson-:id', component: _Lesson2.default, name: 'lesson' }, { path: '/challenge', component: _Challenge2.default, name: 'challenge' }, { path: '/challenge-new', component: _ChallengeNew2.default, name: 'challenge_new' }, { path: '/challenge-:id', component: _ChallengeContent2.default, name: 'challenge_content' }];
@@ -35660,7 +35660,7 @@
 
 	var __vue_script__, __vue_template__
 	__vue_script__ = __webpack_require__(299)
-	__vue_template__ = __webpack_require__(301)
+	__vue_template__ = __webpack_require__(302)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -35708,15 +35708,13 @@
 
 	var _Modal2 = _interopRequireDefault(_Modal);
 
+	__webpack_require__(301);
+
 	var _vue = __webpack_require__(3);
 
 	var _vue2 = _interopRequireDefault(_vue);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var VueTouch = __webpack_require__(314);
-
-	// http://dev.fedvas.com/cms/api.dsuite/yipp/todos/37/en
 
 	// <template>
 	// <div id="page-lesson">
@@ -35726,34 +35724,12 @@
 	// 			<i class="icon-back"></i>
 	// 		</router-link>
 	//
-	// 		<!-- <div id="popUp">
-	// 			<i class="big icon-yipp_apple_full"></i>
-	//
-	// 			<h3>Lesson 2: Screentime</h3>
-	//
-	// 			<p>In this lesson, we will help to start the first practice appetizers</p>
-	//
-	// 			<hr>
-	//
-	// 			<span><i class="icon-yipp_check_full"></i> 5min</span>
-	//
-	// 		</div>	 -->
-	//
-	// 		<v-touch tag="section" @swipe="onSwipeLeft"
-	// 		  <p>Swipe me!</p>
-	// 		</v-touch>
-	//
 	// 		<div id="popUp">
 	// 			<i class="big icon-yipp_apple_full"></i>
-	//
 	// 			<h3>Lesson 2: Screentime</h3>
-	//
 	// 			<p>TestIn this lesson, we will help to start the first practice appetizers</p>
-	//
 	// 			<hr>
-	//
 	// 			<span><i class="icon-yipp_check_full"></i> 5min</span>
-	//
 	// 		</div>
 	//
 	// 		<a href="#" v-on:click.prevent="startLesson" class="btn bottom white">Start</a>
@@ -35770,7 +35746,7 @@
 	// 			<i class="icon-yipp_home_full-"></i>
 	// 		</router-link>
 	//
-	// 		<div id="paper" v-on:click.prevent="next('stack')">
+	// 		<div id="paper-1" class="paper">
 	//
 	// 			<h3>Why?</h3>
 	//
@@ -35782,6 +35758,20 @@
 	// 				<div id="paper_foo2"></div>
 	// 			</div>
 	// 		</div>
+	//
+	// 		<div id="paper-2" class="paper">
+	//
+	// 			<h3>Why?2</h3>
+	//
+	// 			<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>
+	//
+	// 			<i class="heart icon-yipp_check_full"></i>
+	//
+	// 			<div id="paper_foo1">
+	// 				<div id="paper_foo2"></div>
+	// 			</div>
+	// 		</div>
+	//
 	// 	</div>
 	//
 	// 	<div class="panel" id="stack" v-if="page == 'stack'">
@@ -35855,6 +35845,9 @@
 	// </template>
 	//
 	// <script>
+	var VueTouch = __webpack_require__(300);
+
+	// http://dev.fedvas.com/cms/api.dsuite/yipp/todos/37/en
 
 	_vue2.default.use(VueTouch, { name: 'v-touch' });
 
@@ -35879,6 +35872,43 @@
 	    methods: {
 	        startLesson: function startLesson() {
 	            this.page = 'cards';
+
+	            setTimeout(function () {
+	                var stage = (0, _jquery2.default)('.paper').css('display', 'none');
+	                (0, _jquery2.default)('#paper-1').css('display', 'block');
+
+	                var mc = new Hammer.Manager(stage[0]);
+	                console.log(mc);
+
+	                mc.add(new Hammer.Swipe({ event: 'swipe' }));
+
+	                mc.on('swipe', function (event) {
+	                    event.preventDefault();
+	                    if (event.direction == 4) {
+	                        // swipe to the right
+	                        stage.addClass('rotate-left').delay(700).fadeOut(1);
+
+	                        if (stage.is(':last-child')) {
+	                            // $('.buddy:nth-child(1)').removeClass ('rotate-left rotate-right').fadeIn(300);
+	                        } else {
+	                            console.log('hi');
+	                            stage.next().removeClass('rotate-left rotate-right').fadeIn(400);
+	                        }
+	                    }
+
+	                    if (event.direction == 2) {
+	                        // swipe to the left
+	                        stage.addClass('rotate-right').delay(700).fadeOut(1);
+
+	                        if ((0, _jquery2.default)(this).is(':last-child')) {
+	                            (0, _jquery2.default)('.paper:nth-child(1)').removeClass('rotate-left rotate-right').fadeIn(300);
+	                            alert('OUPS');
+	                        } else {
+	                            stage.next().removeClass('rotate-left rotate-right').fadeIn(400);
+	                        }
+	                    }
+	                });
+	            }, 1);
 	        },
 	        back: function back(page) {
 	            this.page = page;
@@ -35906,4619 +35936,11 @@
 	// </script>
 
 /***/ },
-/* 300 */,
-/* 301 */
-/***/ function(module, exports) {
-
-	module.exports = "\n<div id=\"page-lesson\">\n\n\t<div  class=\"panel\" id=\"start\" v-if=\"page == 'start'\">\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"back\">\n\t\t\t<i class=\"icon-back\"></i>\n\t\t</router-link>\n\n\t\t<!-- <div id=\"popUp\">\n\t\t\t<i class=\"big icon-yipp_apple_full\"></i>\n\t\t\t\n\t\t\t<h3>Lesson 2: Screentime</h3>\n\t\t\t\n\t\t\t<p>In this lesson, we will help to start the first practice appetizers</p>\n\t\t\t\n\t\t\t<hr>\n\n\t\t\t<span><i class=\"icon-yipp_check_full\"></i> 5min</span>\n\t\t\t\n\t\t</div>\t -->\n\n\t\t<v-touch tag=\"section\" @swipe=\"onSwipeLeft\"\n\t\t  <p>Swipe me!</p>\n\t\t</v-touch>\n\n\t\t<div id=\"popUp\">\n\t\t\t<i class=\"big icon-yipp_apple_full\"></i>\n\t\t\t\n\t\t\t<h3>Lesson 2: Screentime</h3>\n\t\t\t\n\t\t\t<p>TestIn this lesson, we will help to start the first practice appetizers</p>\n\t\t\t\n\t\t\t<hr>\n\n\t\t\t<span><i class=\"icon-yipp_check_full\"></i> 5min</span>\n\t\t\t\n\t\t</div>\n\t\t\t\n\t\t<a href=\"#\" v-on:click.prevent=\"startLesson\" class=\"btn bottom white\">Start</a>\n\t</div>\n\n\t<div class=\"panel\" id=\"cards\" v-if=\"page == 'cards'\">\n\t\t<a v-on:click.prevent=\"back('start')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<span class=\"bar-inner\"></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div id=\"paper\" v-on:click.prevent=\"next('stack')\">\n\n\t\t\t<h3>Why?</h3>\n\n\t\t\t<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>\n\n\t\t\t<i class=\"heart icon-yipp_check_full\"></i>\n\n\t\t\t<div id=\"paper_foo1\">\n\t\t\t\t<div id=\"paper_foo2\"></div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n\t\t\n\t<div class=\"panel\" id=\"stack\" v-if=\"page == 'stack'\">\n\t\t<a v-on:click.prevent=\"back('cards')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<span class=\"bar-inner\"></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"content\" v-on:click.prevent=\"next('complete')\">\n\t\t\t\n\t\t\t<p class=\"text-center\">Te weinig slapen vergroot de kans op overgewicht bij kinderen, omdat:</p>\n\t\t\t\n\t\t\t<ul>\n\t\t\t\t\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t\n\t\t\t</ul>\n\n\t\t</div>\n\n\t</div>\n\t\t\t\n\t<div class=\"panel\" id=\"complete\" v-if=\"page == 'complete'\">\n\t\t<a v-on:click.prevent=\"back('stack')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<span class=\"bar-inner\"></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"content\">\n\t\t\n\t\t\t<h1>Les compleet!</h1>\n\t\t\t\n\t\t\t<i class=\"biggest icon-yipp_check_full\"></i>\n\t\t\t\n\t\t\t<p class=\"text-center\">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>\n\t\t\t\n\t\t\t\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<router-link :to=\"{ name: 'challenge'}\" class=\"btn white\">\n\t\t\t\tStart Challenge\n\t\t\t\t</router-link>\n\n\t\t\t\t<br>\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"back('start')\" class=\"btn white\">Reset Lesson</a>\n\t\t\t</div>\n\t\t\n\t\t</div>\n\n\t</div>\n\n\t<modal v-if=\"showModal\" @close=\"showModal = false\">\n        <h3 slot=\"header\">Lorem Ipsum</h3>\n        <p slot=\"body\">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>\n    </modal>\n\n</div>\n\t\n";
-
-/***/ },
-/* 302 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(303)
-	__vue_template__ = __webpack_require__(304)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), true)
-	  if (!hotAPI.compatible) return
-	  var id = "/Users/racheljaro/webroot/yipp/app/src/components/Challenge.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 303 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _index = __webpack_require__(8);
-
-	var _config = __webpack_require__(1);
-
-	var _config2 = _interopRequireDefault(_config);
-
-	var _auth = __webpack_require__(184);
-
-	var _auth2 = _interopRequireDefault(_auth);
-
-	var _timeline = __webpack_require__(290);
-
-	var _timeline2 = _interopRequireDefault(_timeline);
-
-	var _jquery = __webpack_require__(11);
-
-	var _jquery2 = _interopRequireDefault(_jquery);
-
-	var _Modal = __webpack_require__(291);
-
-	var _Modal2 = _interopRequireDefault(_Modal);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	// http://dev.fedvas.com/cms/api.dsuite/yipp/todos/37/en
-
-	// <template>
-	// 	<div id="container">
-	//
-	// 		<div class="header">
-	//
-	// 			<router-link :to="{ name: 'timeline'}" class="icon">
-	// 				<i class="icon-yipp_profile_line"></i>
-	// 			</router-link>
-	//
-	// 			<div class="title">Challenge</div>
-	//
-	// 		</div>
-	//
-	//
-	// 		<div class="content" v-if="empty">
-	//
-	// 			<div class="panel">
-	// 			Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-	// 			</div>
-	//
-	// 			<a href="" class="btn">Explore training</a>
-	//
-	// 		</div>
-	//
-	// 		<div class="content" v-if="empty == false">
-	//
-	// 			<ul class="blockList">
-	// 				<li>
-	// 					<span class="set">
-	// 					<i class="icon-yipp_notification_line"></i>
-	// 					14:00
-	// 					| <i class="icon-yipp_repeat_line"></i>
-	// 					Every day
-	// 					</span>
-	// 					<p>Lorem Ipsum</p>
-	//
-	// 					<router-link :to="{ path: 'challenge-1'}">
-	// 					<i class="arrow icon-yipp_forward"></i>
-	// 					</router-link>
-	//
-	// 				</li>
-	// 				<li>
-	// 				<span class="set">
-	// 					<i class="icon-yipp_notification_line"></i>
-	// 					14:00
-	// 					| <i class="icon-yipp_repeat_line"></i>
-	// 					Every day
-	// 					</span>
-	// 					<p>Lorem Ipsum</p>
-	//
-	// 					<router-link :to="{ path: 'challenge-2'}">
-	// 						<i class="arrow icon-yipp_forward"></i>
-	// 					</router-link>
-	// 				</li>
-	// 			</ul>		
-	//
-	// 			<a href="" v-if="isShowDoneChallenges == false" v-on:click.prevent="toggleDoneChallenges" class="link">Show finished challenges</a>
-	// 			<a href="" v-if="isShowDoneChallenges" v-on:click.prevent="toggleDoneChallenges" class="link">Hide finished challenges</a>
-	//
-	// 			<ul class="blockList2" v-if="isShowDoneChallenges">
-	// 				<li>
-	// 					<p>Lorem Ipsum</p>
-	//
-	// 					<i class="arrow icon-yipp_forward"></i>
-	//
-	// 				</li>
-	// 				<li>
-	// 					<p>Lorem Ipsum</p>
-	//
-	// 						<i class="arrow icon-yipp_forward"></i>
-	// 				</li>
-	// 			</ul>
-	// 		</div>
-	//
-	// 		<footer>
-	// 			<ul>
-	// 				<li>
-	// 					<router-link :to="{ name: 'timeline'}"><span class="icon-yipp_home_full-"></span>Training</router-link>
-	// 				</li>
-	// 				<li>
-	// 					<a href="javascript:void(0);" class="active"><span class="icon-yipp_challenge_line"></span>Challenge</a>
-	// 				</li>
-	// 			</ul>
-	// 		</footer>
-	//
-	// 	</div>	
-	// </template>
-	//
-	// <script>
-	exports.default = {
-	    data: function data() {
-	        return {
-	            empty: false,
-	            isShowDoneChallenges: false,
-	            page: 'start',
-	            levels: [],
-	            lessons: [],
-	            showModal: false,
-	            currentLevel: 1
-	        };
-	    },
-
-	    created: function created() {
-	        _auth2.default.check();
-	        if (!_auth2.default.authenticated) {
-	            this.redirectGuest();
-	        }
-	    },
-	    methods: {
-	        startLesson: function startLesson() {
-	            this.page = 'cards';
-	        },
-	        toggleDoneChallenges: function toggleDoneChallenges() {
-	            if (this.isShowDoneChallenges) {
-	                this.isShowDoneChallenges = false;
-	            } else {
-	                this.isShowDoneChallenges = true;
-	            }
-	        },
-	        redirectGuest: function redirectGuest() {
-	            this.$router.push('login');
-	        }
-	    },
-
-	    watch: {
-	        '$route': function $route(to, from) {
-	            console.log(to, from);
-	            this.currentLesson = to;
-	        }
-	    },
-
-	    components: {
-	        Modal: _Modal2.default
-	    }
-	};
-
-	// </script>
-
-/***/ },
-/* 304 */
-/***/ function(module, exports) {
-
-	module.exports = "\n\t<div id=\"container\">\n\t\n\t\t<div class=\"header\">\n\n\t\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"icon\">\n\t\t\t\t<i class=\"icon-yipp_profile_line\"></i>\n\t\t\t</router-link>\n\n\t\t\t<div class=\"title\">Challenge</div>\n\n\t\t</div>\n\n\t\t\n\t\t<div class=\"content\" v-if=\"empty\">\n\t\t\n\t\t\t<div class=\"panel\">\n\t\t\tLorem Ipsum is simply dummy text of the printing and typesetting industry.\n\t\t\t</div>\n\t\t\t\n\t\t\t<a href=\"\" class=\"btn\">Explore training</a>\n\t\t\n\t\t</div>\n\n\t\t<div class=\"content\" v-if=\"empty == false\">\n\n\t\t\t<ul class=\"blockList\">\n\t\t\t\t<li>\n\t\t\t\t\t<span class=\"set\">\n\t\t\t\t\t<i class=\"icon-yipp_notification_line\"></i>\n\t\t\t\t\t14:00\n\t\t\t\t\t| <i class=\"icon-yipp_repeat_line\"></i>\n\t\t\t\t\tEvery day\n\t\t\t\t\t</span>\n\t\t\t\t\t<p>Lorem Ipsum</p>\n\t\t\t\t\t\n\t\t\t\t\t<router-link :to=\"{ path: 'challenge-1'}\">\n\t\t\t\t\t<i class=\"arrow icon-yipp_forward\"></i>\n\t\t\t\t\t</router-link>\n\t\t\t\t\t\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t<span class=\"set\">\n\t\t\t\t\t<i class=\"icon-yipp_notification_line\"></i>\n\t\t\t\t\t14:00\n\t\t\t\t\t| <i class=\"icon-yipp_repeat_line\"></i>\n\t\t\t\t\tEvery day\n\t\t\t\t\t</span>\n\t\t\t\t\t<p>Lorem Ipsum</p>\n\t\t\t\t\t\n\t\t\t\t\t<router-link :to=\"{ path: 'challenge-2'}\">\n\t\t\t\t\t\t<i class=\"arrow icon-yipp_forward\"></i>\n\t\t\t\t\t</router-link>\n\t\t\t\t</li>\n\t\t\t</ul>\t\t\n\n\t\t\t<a href=\"\" v-if=\"isShowDoneChallenges == false\" v-on:click.prevent=\"toggleDoneChallenges\" class=\"link\">Show finished challenges</a>\n\t\t\t<a href=\"\" v-if=\"isShowDoneChallenges\" v-on:click.prevent=\"toggleDoneChallenges\" class=\"link\">Hide finished challenges</a>\n\n\t\t\t<ul class=\"blockList2\" v-if=\"isShowDoneChallenges\">\n\t\t\t\t<li>\n\t\t\t\t\t<p>Lorem Ipsum</p>\n\t\t\t\t\t\n\t\t\t\t\t<i class=\"arrow icon-yipp_forward\"></i>\n\t\t\t\t\t\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<p>Lorem Ipsum</p>\n\t\t\t\t\t\n\t\t\t\t\t\t<i class=\"arrow icon-yipp_forward\"></i>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t</div>\n\n\t\t<footer>\n\t\t\t<ul>\n\t\t\t\t<li>\n\t\t\t\t\t<router-link :to=\"{ name: 'timeline'}\"><span class=\"icon-yipp_home_full-\"></span>Training</router-link>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a href=\"javascript:void(0);\" class=\"active\"><span class=\"icon-yipp_challenge_line\"></span>Challenge</a>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t</footer>\n\t\t\n\t</div>\t\n";
-
-/***/ },
-/* 305 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	__vue_template__ = __webpack_require__(306)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), true)
-	  if (!hotAPI.compatible) return
-	  var id = "/Users/racheljaro/webroot/yipp/app/src/components/ChallengeNew.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 306 */
-/***/ function(module, exports) {
-
-	module.exports = "\n<div id=\"\">\nto follow\n</div>\n";
-
-/***/ },
-/* 307 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(308)
-	__vue_template__ = __webpack_require__(309)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), true)
-	  if (!hotAPI.compatible) return
-	  var id = "/Users/racheljaro/webroot/yipp/app/src/components/ChallengeContent.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 308 */
-/***/ function(module, exports) {
-
-	// <template>
-	// 	<div >
-	//
-	// 		<div class="header">
-	//
-	// 			<router-link :to="{ name: 'challenge'}" class="icon">
-	// 				<i class=" icon-yipp_back"></i>
-	// 			</router-link>
-	//
-	// 			<div class="title">Challenge Details</div>
-	//
-	// 		</div>
-	//
-	// 		<div class="wrap">
-	//
-	// 			<div class="details">
-	//
-	// 			<span class="set">
-	// 					<i class="icon-yipp_notification_line"></i>
-	// 					14:00
-	// 					| <i class="icon-yipp_repeat_line"></i>
-	// 					Every day
-	// 					</span>
-	//
-	// 				<table width="100%" border="0">
-	// 					<tbody>
-	// 						<tr>
-	// 							<td>
-	// 								<p>Eating more vegetable</p>
-	// 								<p>1. Broco</p>
-	// 							</td>
-	// 							<td>
-	// 							<a href="" class="edit"><i class="icon-yipp_pencil_line"></i></a>
-	// 							</td>
-	// 						</tr>
-	// 					</tbody>
-	// 				</table>
-	//
-	// 			</div>
-	//
-	// 		</div>
-	//
-	// 		<div class="steps">
-	//
-	// 				<ul>
-	// 					<li>1</li>
-	// 					<li>2</li>
-	// 					<li>3</li>
-	// 					<li>4</li>
-	// 					<li>5</li>
-	// 				</ul>
-	//
-	// 			<hr>
-	//
-	// 		</div>
-	//
-	// 		<div class="pic" style="background-image: url(assets/img/slider-1.jpg);">
-	//
-	// 		</div>
-	//
-	// 		<h4>Evaluation</h4>
-	//
-	// 		<textarea></textarea>
-	//
-	// 		<ul class="selection">
-	// 			<li><a href=""><i class="icon-yipp_emoticon_sad"></i></a></li>
-	// 			<li><a href="" class="active"><i class="icon-yipp_emoticon_neutral"></i></a></li>
-	// 			<li><a href=""><i class="icon-yipp_emoticon_happy-"></i></a></li>
-	// 		</ul>
-	//
-	// 		<h4>Notes</h4>
-	//
-	// 		<textarea></textarea>
-	//
-	// 		<a href="" class="btn">Done</a>
-	//
-	// 	</div>
-	//
-	// 	<section class="resultCard">
-	//
-	// 		<i class="icon-yipp_check_full"></i>
-	//
-	// 		<h3>You can do it!</h3>
-	// 		<p>We made a beautiful photo collage of this week check it out!</p>
-	//
-	// 		<div class="bottom">
-	// 		<a href="javascript:void(0);" class="btn mid">See result</a>
-	//
-	// 		<a href="javascript:void(0);" class="btn big">Restart challenge</a>
-	//
-	// 		</div>
-	//
-	// 		<div id="modal">
-	//
-	// 			<div id="msg">
-	//
-	// 				<h3>Are you sure?</h3>
-	//
-	// 				<p>Do you want to restart challenge?</p>
-	//
-	// 				<a href="javascript:void(0);">Restart challenge</a>
-	//
-	// 			</div>
-	//
-	// 		</div>
-	//
-	// 	</section>
-	//
-	// 	<section id="collage">
-	//
-	// 		<div class="header">
-	// 			<a href="">X</a> Photo Collage
-	// 			<h3>Fruit and Vegetables</h3>
-	// 		</div>
-	//
-	// 		<ul>
-	// 			<li class="active">
-	// 				<img src="" alt="">
-	//
-	// 				<div class="elements">
-	// 					<div class="day">Day 1</div>
-	// 					<i class="icon icon-yipp_emoticon_sad"></i>
-	// 				</div>
-	//
-	// 				<div class="data">
-	// 					<p>"It went great this day"</p>
-	// 				</div>	
-	//
-	// 			</li>
-	//
-	// 			<li class="active">
-	// 				<img src="" alt="">
-	//
-	// 				<div class="elements">
-	// 					<div class="day">Day 2</div>
-	// 					<i class="icon icon-yipp_emoticon_happy-"></i>
-	// 				</div>
-	//
-	// 				<div class="data">
-	// 					<p>"It went great this day"</p>
-	// 				</div>	
-	//
-	// 			</li>
-	//
-	// 			<li>
-	//
-	//
-	// 				<div class="elements">
-	// 					<div class="day">Day 3</div>
-	// 					<i class="icon icon-yipp_emoticon_neutral"></i>
-	// 				</div>
-	//
-	// 				<div class="data">
-	// 					<p>"It went great this day"</p>
-	// 				</div>	
-	//
-	// 			</li>
-	//
-	// 			<li class="active">
-	// 				<img src="" alt="">
-	//
-	// 				<div class="elements">
-	// 					<div class="day">Day 4</div>
-	// 					<i class="icon icon-yipp_emoticon_happy-"></i>
-	// 				</div>
-	//
-	// 				<div class="data">
-	// 					<p>"It went great this day"</p>
-	// 				</div>	
-	//
-	// 			</li>
-	// 		</ul>
-	//
-	// 	</section>
-	//
-	// 	<div class="restart">
-	//
-	// 	<a href="" >Restart challenge</a>
-	//
-	// 	</div>	
-	// </template>
-	//
-	// <script>
-
-	// </script>
-	"use strict";
-
-/***/ },
-/* 309 */
-/***/ function(module, exports) {
-
-	module.exports = "\n\t<div >\n\t\n\t\t<div class=\"header\">\n\t\t\n\t\t\t<router-link :to=\"{ name: 'challenge'}\" class=\"icon\">\n\t\t\t\t<i class=\" icon-yipp_back\"></i>\n\t\t\t</router-link>\n\n\t\t\t<div class=\"title\">Challenge Details</div>\n\t\t\n\t\t</div>\n\t\t\n\t\t<div class=\"wrap\">\n\t\t\n\t\t\t<div class=\"details\">\n\t\t\t\n\t\t\t<span class=\"set\">\n\t\t\t\t\t<i class=\"icon-yipp_notification_line\"></i>\n\t\t\t\t\t14:00\n\t\t\t\t\t| <i class=\"icon-yipp_repeat_line\"></i>\n\t\t\t\t\tEvery day\n\t\t\t\t\t</span>\n\t\t\t\t\n\t\t\t\t<table width=\"100%\" border=\"0\">\n\t\t\t\t\t<tbody>\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t<p>Eating more vegetable</p>\n\t\t\t\t\t\t\t\t<p>1. Broco</p>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t<a href=\"\" class=\"edit\"><i class=\"icon-yipp_pencil_line\"></i></a>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t</tbody>\n\t\t\t\t</table>\n\t\t\t\t\n\t\t\t</div>\n\t\t\n\t\t</div>\n\t\n\t\t<div class=\"steps\">\n\t\n\t\t\t\t<ul>\n\t\t\t\t\t<li>1</li>\n\t\t\t\t\t<li>2</li>\n\t\t\t\t\t<li>3</li>\n\t\t\t\t\t<li>4</li>\n\t\t\t\t\t<li>5</li>\n\t\t\t\t</ul>\n\n\t\t\t<hr>\n\t\t\n\t\t</div>\n\t\t\n\t\t<div class=\"pic\" style=\"background-image: url(assets/img/slider-1.jpg);\">\n\t\t\n\t\t</div>\n\t\n\t\t<h4>Evaluation</h4>\n\t\t\n\t\t<textarea></textarea>\n\t\t\n\t\t<ul class=\"selection\">\n\t\t\t<li><a href=\"\"><i class=\"icon-yipp_emoticon_sad\"></i></a></li>\n\t\t\t<li><a href=\"\" class=\"active\"><i class=\"icon-yipp_emoticon_neutral\"></i></a></li>\n\t\t\t<li><a href=\"\"><i class=\"icon-yipp_emoticon_happy-\"></i></a></li>\n\t\t</ul>\n\t\t\n\t\t<h4>Notes</h4>\n\t\t\n\t\t<textarea></textarea>\n\t\t\n\t\t<a href=\"\" class=\"btn\">Done</a>\n\t\n\t</div>\n\t\n\t<section class=\"resultCard\">\n\t\t\n\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t\n\t\t<h3>You can do it!</h3>\n\t\t<p>We made a beautiful photo collage of this week check it out!</p>\n\t\t\n\t\t<div class=\"bottom\">\n\t\t<a href=\"javascript:void(0);\" class=\"btn mid\">See result</a>\n\n\t\t<a href=\"javascript:void(0);\" class=\"btn big\">Restart challenge</a>\n\t\t\n\t\t</div>\n\t\n\t\t<div id=\"modal\">\n\n\t\t\t<div id=\"msg\">\n\n\t\t\t\t<h3>Are you sure?</h3>\n\n\t\t\t\t<p>Do you want to restart challenge?</p>\n\n\t\t\t\t<a href=\"javascript:void(0);\">Restart challenge</a>\n\n\t\t\t</div>\n\n\t\t</div>\n\n\t</section>\n\t\n\t<section id=\"collage\">\n\t\n\t\t<div class=\"header\">\n\t\t\t<a href=\"\">X</a> Photo Collage\n\t\t\t<h3>Fruit and Vegetables</h3>\n\t\t</div>\n\t\n\t\t<ul>\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.89793042725852850.27861994588865424xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 1</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_sad\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.57763837748303340.45923320687375146xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 2</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_happy-\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li>\n\t\t\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 3</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_neutral\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.2332799530032370.8814606981434974xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 4</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_happy-\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t</ul>\n\t\n\t</section>\n\t\n\t<div class=\"restart\">\n\t\n\t<a href=\"\" >Restart challenge</a>\n\t\n\t</div>\t\n";
-
-/***/ },
-/* 310 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/*!
-	 * vue-resource v1.3.0
-	 * https://github.com/pagekit/vue-resource
-	 * Released under the MIT License.
-	 */
-
-	'use strict';
-
-	/**
-	 * Promises/A+ polyfill v1.1.4 (https://github.com/bramstein/promis)
-	 */
-
-	var RESOLVED = 0;
-	var REJECTED = 1;
-	var PENDING  = 2;
-
-	function Promise$1(executor) {
-
-	    this.state = PENDING;
-	    this.value = undefined;
-	    this.deferred = [];
-
-	    var promise = this;
-
-	    try {
-	        executor(function (x) {
-	            promise.resolve(x);
-	        }, function (r) {
-	            promise.reject(r);
-	        });
-	    } catch (e) {
-	        promise.reject(e);
-	    }
-	}
-
-	Promise$1.reject = function (r) {
-	    return new Promise$1(function (resolve, reject) {
-	        reject(r);
-	    });
-	};
-
-	Promise$1.resolve = function (x) {
-	    return new Promise$1(function (resolve, reject) {
-	        resolve(x);
-	    });
-	};
-
-	Promise$1.all = function all(iterable) {
-	    return new Promise$1(function (resolve, reject) {
-	        var count = 0, result = [];
-
-	        if (iterable.length === 0) {
-	            resolve(result);
-	        }
-
-	        function resolver(i) {
-	            return function (x) {
-	                result[i] = x;
-	                count += 1;
-
-	                if (count === iterable.length) {
-	                    resolve(result);
-	                }
-	            };
-	        }
-
-	        for (var i = 0; i < iterable.length; i += 1) {
-	            Promise$1.resolve(iterable[i]).then(resolver(i), reject);
-	        }
-	    });
-	};
-
-	Promise$1.race = function race(iterable) {
-	    return new Promise$1(function (resolve, reject) {
-	        for (var i = 0; i < iterable.length; i += 1) {
-	            Promise$1.resolve(iterable[i]).then(resolve, reject);
-	        }
-	    });
-	};
-
-	var p$1 = Promise$1.prototype;
-
-	p$1.resolve = function resolve(x) {
-	    var promise = this;
-
-	    if (promise.state === PENDING) {
-	        if (x === promise) {
-	            throw new TypeError('Promise settled with itself.');
-	        }
-
-	        var called = false;
-
-	        try {
-	            var then = x && x['then'];
-
-	            if (x !== null && typeof x === 'object' && typeof then === 'function') {
-	                then.call(x, function (x) {
-	                    if (!called) {
-	                        promise.resolve(x);
-	                    }
-	                    called = true;
-
-	                }, function (r) {
-	                    if (!called) {
-	                        promise.reject(r);
-	                    }
-	                    called = true;
-	                });
-	                return;
-	            }
-	        } catch (e) {
-	            if (!called) {
-	                promise.reject(e);
-	            }
-	            return;
-	        }
-
-	        promise.state = RESOLVED;
-	        promise.value = x;
-	        promise.notify();
-	    }
-	};
-
-	p$1.reject = function reject(reason) {
-	    var promise = this;
-
-	    if (promise.state === PENDING) {
-	        if (reason === promise) {
-	            throw new TypeError('Promise settled with itself.');
-	        }
-
-	        promise.state = REJECTED;
-	        promise.value = reason;
-	        promise.notify();
-	    }
-	};
-
-	p$1.notify = function notify() {
-	    var promise = this;
-
-	    nextTick(function () {
-	        if (promise.state !== PENDING) {
-	            while (promise.deferred.length) {
-	                var deferred = promise.deferred.shift(),
-	                    onResolved = deferred[0],
-	                    onRejected = deferred[1],
-	                    resolve = deferred[2],
-	                    reject = deferred[3];
-
-	                try {
-	                    if (promise.state === RESOLVED) {
-	                        if (typeof onResolved === 'function') {
-	                            resolve(onResolved.call(undefined, promise.value));
-	                        } else {
-	                            resolve(promise.value);
-	                        }
-	                    } else if (promise.state === REJECTED) {
-	                        if (typeof onRejected === 'function') {
-	                            resolve(onRejected.call(undefined, promise.value));
-	                        } else {
-	                            reject(promise.value);
-	                        }
-	                    }
-	                } catch (e) {
-	                    reject(e);
-	                }
-	            }
-	        }
-	    });
-	};
-
-	p$1.then = function then(onResolved, onRejected) {
-	    var promise = this;
-
-	    return new Promise$1(function (resolve, reject) {
-	        promise.deferred.push([onResolved, onRejected, resolve, reject]);
-	        promise.notify();
-	    });
-	};
-
-	p$1.catch = function (onRejected) {
-	    return this.then(undefined, onRejected);
-	};
-
-	/**
-	 * Promise adapter.
-	 */
-
-	if (typeof Promise === 'undefined') {
-	    window.Promise = Promise$1;
-	}
-
-	function PromiseObj(executor, context) {
-
-	    if (executor instanceof Promise) {
-	        this.promise = executor;
-	    } else {
-	        this.promise = new Promise(executor.bind(context));
-	    }
-
-	    this.context = context;
-	}
-
-	PromiseObj.all = function (iterable, context) {
-	    return new PromiseObj(Promise.all(iterable), context);
-	};
-
-	PromiseObj.resolve = function (value, context) {
-	    return new PromiseObj(Promise.resolve(value), context);
-	};
-
-	PromiseObj.reject = function (reason, context) {
-	    return new PromiseObj(Promise.reject(reason), context);
-	};
-
-	PromiseObj.race = function (iterable, context) {
-	    return new PromiseObj(Promise.race(iterable), context);
-	};
-
-	var p = PromiseObj.prototype;
-
-	p.bind = function (context) {
-	    this.context = context;
-	    return this;
-	};
-
-	p.then = function (fulfilled, rejected) {
-
-	    if (fulfilled && fulfilled.bind && this.context) {
-	        fulfilled = fulfilled.bind(this.context);
-	    }
-
-	    if (rejected && rejected.bind && this.context) {
-	        rejected = rejected.bind(this.context);
-	    }
-
-	    return new PromiseObj(this.promise.then(fulfilled, rejected), this.context);
-	};
-
-	p.catch = function (rejected) {
-
-	    if (rejected && rejected.bind && this.context) {
-	        rejected = rejected.bind(this.context);
-	    }
-
-	    return new PromiseObj(this.promise.catch(rejected), this.context);
-	};
-
-	p.finally = function (callback) {
-
-	    return this.then(function (value) {
-	            callback.call(this);
-	            return value;
-	        }, function (reason) {
-	            callback.call(this);
-	            return Promise.reject(reason);
-	        }
-	    );
-	};
-
-	/**
-	 * Utility functions.
-	 */
-
-	var ref = {};
-	var hasOwnProperty = ref.hasOwnProperty;
-
-	var ref$1 = [];
-	var slice = ref$1.slice;
-	var debug = false;
-	var ntick;
-
-	var inBrowser = typeof window !== 'undefined';
-
-	var Util = function (ref) {
-	    var config = ref.config;
-	    var nextTick = ref.nextTick;
-
-	    ntick = nextTick;
-	    debug = config.debug || !config.silent;
-	};
-
-	function warn(msg) {
-	    if (typeof console !== 'undefined' && debug) {
-	        console.warn('[VueResource warn]: ' + msg);
-	    }
-	}
-
-	function error(msg) {
-	    if (typeof console !== 'undefined') {
-	        console.error(msg);
-	    }
-	}
-
-	function nextTick(cb, ctx) {
-	    return ntick(cb, ctx);
-	}
-
-	function trim(str) {
-	    return str ? str.replace(/^\s*|\s*$/g, '') : '';
-	}
-
-	function toLower(str) {
-	    return str ? str.toLowerCase() : '';
-	}
-
-	function toUpper(str) {
-	    return str ? str.toUpperCase() : '';
-	}
-
-	var isArray = Array.isArray;
-
-	function isString(val) {
-	    return typeof val === 'string';
-	}
-
-
-
-	function isFunction(val) {
-	    return typeof val === 'function';
-	}
-
-	function isObject(obj) {
-	    return obj !== null && typeof obj === 'object';
-	}
-
-	function isPlainObject(obj) {
-	    return isObject(obj) && Object.getPrototypeOf(obj) == Object.prototype;
-	}
-
-	function isBlob(obj) {
-	    return typeof Blob !== 'undefined' && obj instanceof Blob;
-	}
-
-	function isFormData(obj) {
-	    return typeof FormData !== 'undefined' && obj instanceof FormData;
-	}
-
-	function when(value, fulfilled, rejected) {
-
-	    var promise = PromiseObj.resolve(value);
-
-	    if (arguments.length < 2) {
-	        return promise;
-	    }
-
-	    return promise.then(fulfilled, rejected);
-	}
-
-	function options(fn, obj, opts) {
-
-	    opts = opts || {};
-
-	    if (isFunction(opts)) {
-	        opts = opts.call(obj);
-	    }
-
-	    return merge(fn.bind({$vm: obj, $options: opts}), fn, {$options: opts});
-	}
-
-	function each(obj, iterator) {
-
-	    var i, key;
-
-	    if (isArray(obj)) {
-	        for (i = 0; i < obj.length; i++) {
-	            iterator.call(obj[i], obj[i], i);
-	        }
-	    } else if (isObject(obj)) {
-	        for (key in obj) {
-	            if (hasOwnProperty.call(obj, key)) {
-	                iterator.call(obj[key], obj[key], key);
-	            }
-	        }
-	    }
-
-	    return obj;
-	}
-
-	var assign = Object.assign || _assign;
-
-	function merge(target) {
-
-	    var args = slice.call(arguments, 1);
-
-	    args.forEach(function (source) {
-	        _merge(target, source, true);
-	    });
-
-	    return target;
-	}
-
-	function defaults(target) {
-
-	    var args = slice.call(arguments, 1);
-
-	    args.forEach(function (source) {
-
-	        for (var key in source) {
-	            if (target[key] === undefined) {
-	                target[key] = source[key];
-	            }
-	        }
-
-	    });
-
-	    return target;
-	}
-
-	function _assign(target) {
-
-	    var args = slice.call(arguments, 1);
-
-	    args.forEach(function (source) {
-	        _merge(target, source);
-	    });
-
-	    return target;
-	}
-
-	function _merge(target, source, deep) {
-	    for (var key in source) {
-	        if (deep && (isPlainObject(source[key]) || isArray(source[key]))) {
-	            if (isPlainObject(source[key]) && !isPlainObject(target[key])) {
-	                target[key] = {};
-	            }
-	            if (isArray(source[key]) && !isArray(target[key])) {
-	                target[key] = [];
-	            }
-	            _merge(target[key], source[key], deep);
-	        } else if (source[key] !== undefined) {
-	            target[key] = source[key];
-	        }
-	    }
-	}
-
-	/**
-	 * Root Prefix Transform.
-	 */
-
-	var root = function (options$$1, next) {
-
-	    var url = next(options$$1);
-
-	    if (isString(options$$1.root) && !url.match(/^(https?:)?\//)) {
-	        url = options$$1.root + '/' + url;
-	    }
-
-	    return url;
-	};
-
-	/**
-	 * Query Parameter Transform.
-	 */
-
-	var query = function (options$$1, next) {
-
-	    var urlParams = Object.keys(Url.options.params), query = {}, url = next(options$$1);
-
-	    each(options$$1.params, function (value, key) {
-	        if (urlParams.indexOf(key) === -1) {
-	            query[key] = value;
-	        }
-	    });
-
-	    query = Url.params(query);
-
-	    if (query) {
-	        url += (url.indexOf('?') == -1 ? '?' : '&') + query;
-	    }
-
-	    return url;
-	};
-
-	/**
-	 * URL Template v2.0.6 (https://github.com/bramstein/url-template)
-	 */
-
-	function expand(url, params, variables) {
-
-	    var tmpl = parse(url), expanded = tmpl.expand(params);
-
-	    if (variables) {
-	        variables.push.apply(variables, tmpl.vars);
-	    }
-
-	    return expanded;
-	}
-
-	function parse(template) {
-
-	    var operators = ['+', '#', '.', '/', ';', '?', '&'], variables = [];
-
-	    return {
-	        vars: variables,
-	        expand: function expand(context) {
-	            return template.replace(/\{([^\{\}]+)\}|([^\{\}]+)/g, function (_, expression, literal) {
-	                if (expression) {
-
-	                    var operator = null, values = [];
-
-	                    if (operators.indexOf(expression.charAt(0)) !== -1) {
-	                        operator = expression.charAt(0);
-	                        expression = expression.substr(1);
-	                    }
-
-	                    expression.split(/,/g).forEach(function (variable) {
-	                        var tmp = /([^:\*]*)(?::(\d+)|(\*))?/.exec(variable);
-	                        values.push.apply(values, getValues(context, operator, tmp[1], tmp[2] || tmp[3]));
-	                        variables.push(tmp[1]);
-	                    });
-
-	                    if (operator && operator !== '+') {
-
-	                        var separator = ',';
-
-	                        if (operator === '?') {
-	                            separator = '&';
-	                        } else if (operator !== '#') {
-	                            separator = operator;
-	                        }
-
-	                        return (values.length !== 0 ? operator : '') + values.join(separator);
-	                    } else {
-	                        return values.join(',');
-	                    }
-
-	                } else {
-	                    return encodeReserved(literal);
-	                }
-	            });
-	        }
-	    };
-	}
-
-	function getValues(context, operator, key, modifier) {
-
-	    var value = context[key], result = [];
-
-	    if (isDefined(value) && value !== '') {
-	        if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
-	            value = value.toString();
-
-	            if (modifier && modifier !== '*') {
-	                value = value.substring(0, parseInt(modifier, 10));
-	            }
-
-	            result.push(encodeValue(operator, value, isKeyOperator(operator) ? key : null));
-	        } else {
-	            if (modifier === '*') {
-	                if (Array.isArray(value)) {
-	                    value.filter(isDefined).forEach(function (value) {
-	                        result.push(encodeValue(operator, value, isKeyOperator(operator) ? key : null));
-	                    });
-	                } else {
-	                    Object.keys(value).forEach(function (k) {
-	                        if (isDefined(value[k])) {
-	                            result.push(encodeValue(operator, value[k], k));
-	                        }
-	                    });
-	                }
-	            } else {
-	                var tmp = [];
-
-	                if (Array.isArray(value)) {
-	                    value.filter(isDefined).forEach(function (value) {
-	                        tmp.push(encodeValue(operator, value));
-	                    });
-	                } else {
-	                    Object.keys(value).forEach(function (k) {
-	                        if (isDefined(value[k])) {
-	                            tmp.push(encodeURIComponent(k));
-	                            tmp.push(encodeValue(operator, value[k].toString()));
-	                        }
-	                    });
-	                }
-
-	                if (isKeyOperator(operator)) {
-	                    result.push(encodeURIComponent(key) + '=' + tmp.join(','));
-	                } else if (tmp.length !== 0) {
-	                    result.push(tmp.join(','));
-	                }
-	            }
-	        }
-	    } else {
-	        if (operator === ';') {
-	            result.push(encodeURIComponent(key));
-	        } else if (value === '' && (operator === '&' || operator === '?')) {
-	            result.push(encodeURIComponent(key) + '=');
-	        } else if (value === '') {
-	            result.push('');
-	        }
-	    }
-
-	    return result;
-	}
-
-	function isDefined(value) {
-	    return value !== undefined && value !== null;
-	}
-
-	function isKeyOperator(operator) {
-	    return operator === ';' || operator === '&' || operator === '?';
-	}
-
-	function encodeValue(operator, value, key) {
-
-	    value = (operator === '+' || operator === '#') ? encodeReserved(value) : encodeURIComponent(value);
-
-	    if (key) {
-	        return encodeURIComponent(key) + '=' + value;
-	    } else {
-	        return value;
-	    }
-	}
-
-	function encodeReserved(str) {
-	    return str.split(/(%[0-9A-Fa-f]{2})/g).map(function (part) {
-	        if (!/%[0-9A-Fa-f]/.test(part)) {
-	            part = encodeURI(part);
-	        }
-	        return part;
-	    }).join('');
-	}
-
-	/**
-	 * URL Template (RFC 6570) Transform.
-	 */
-
-	var template = function (options) {
-
-	    var variables = [], url = expand(options.url, options.params, variables);
-
-	    variables.forEach(function (key) {
-	        delete options.params[key];
-	    });
-
-	    return url;
-	};
-
-	/**
-	 * Service for URL templating.
-	 */
-
-	function Url(url, params) {
-
-	    var self = this || {}, options$$1 = url, transform;
-
-	    if (isString(url)) {
-	        options$$1 = {url: url, params: params};
-	    }
-
-	    options$$1 = merge({}, Url.options, self.$options, options$$1);
-
-	    Url.transforms.forEach(function (handler) {
-
-	        if (isString(handler)) {
-	            handler = Url.transform[handler];
-	        }
-
-	        if (isFunction(handler)) {
-	            transform = factory(handler, transform, self.$vm);
-	        }
-
-	    });
-
-	    return transform(options$$1);
-	}
-
-	/**
-	 * Url options.
-	 */
-
-	Url.options = {
-	    url: '',
-	    root: null,
-	    params: {}
-	};
-
-	/**
-	 * Url transforms.
-	 */
-
-	Url.transform = {template: template, query: query, root: root};
-	Url.transforms = ['template', 'query', 'root'];
-
-	/**
-	 * Encodes a Url parameter string.
-	 *
-	 * @param {Object} obj
-	 */
-
-	Url.params = function (obj) {
-
-	    var params = [], escape = encodeURIComponent;
-
-	    params.add = function (key, value) {
-
-	        if (isFunction(value)) {
-	            value = value();
-	        }
-
-	        if (value === null) {
-	            value = '';
-	        }
-
-	        this.push(escape(key) + '=' + escape(value));
-	    };
-
-	    serialize(params, obj);
-
-	    return params.join('&').replace(/%20/g, '+');
-	};
-
-	/**
-	 * Parse a URL and return its components.
-	 *
-	 * @param {String} url
-	 */
-
-	Url.parse = function (url) {
-
-	    var el = document.createElement('a');
-
-	    if (document.documentMode) {
-	        el.href = url;
-	        url = el.href;
-	    }
-
-	    el.href = url;
-
-	    return {
-	        href: el.href,
-	        protocol: el.protocol ? el.protocol.replace(/:$/, '') : '',
-	        port: el.port,
-	        host: el.host,
-	        hostname: el.hostname,
-	        pathname: el.pathname.charAt(0) === '/' ? el.pathname : '/' + el.pathname,
-	        search: el.search ? el.search.replace(/^\?/, '') : '',
-	        hash: el.hash ? el.hash.replace(/^#/, '') : ''
-	    };
-	};
-
-	function factory(handler, next, vm) {
-	    return function (options$$1) {
-	        return handler.call(vm, options$$1, next);
-	    };
-	}
-
-	function serialize(params, obj, scope) {
-
-	    var array = isArray(obj), plain = isPlainObject(obj), hash;
-
-	    each(obj, function (value, key) {
-
-	        hash = isObject(value) || isArray(value);
-
-	        if (scope) {
-	            key = scope + '[' + (plain || hash ? key : '') + ']';
-	        }
-
-	        if (!scope && array) {
-	            params.add(value.name, value.value);
-	        } else if (hash) {
-	            serialize(params, value, key);
-	        } else {
-	            params.add(key, value);
-	        }
-	    });
-	}
-
-	/**
-	 * XDomain client (Internet Explorer).
-	 */
-
-	var xdrClient = function (request) {
-	    return new PromiseObj(function (resolve) {
-
-	        var xdr = new XDomainRequest(), handler = function (ref) {
-	            var type = ref.type;
-
-
-	            var status = 0;
-
-	            if (type === 'load') {
-	                status = 200;
-	            } else if (type === 'error') {
-	                status = 500;
-	            }
-
-	            resolve(request.respondWith(xdr.responseText, {status: status}));
-	        };
-
-	        request.abort = function () { return xdr.abort(); };
-
-	        xdr.open(request.method, request.getUrl());
-
-	        if (request.timeout) {
-	            xdr.timeout = request.timeout;
-	        }
-
-	        xdr.onload = handler;
-	        xdr.onabort = handler;
-	        xdr.onerror = handler;
-	        xdr.ontimeout = handler;
-	        xdr.onprogress = function () {};
-	        xdr.send(request.getBody());
-	    });
-	};
-
-	/**
-	 * CORS Interceptor.
-	 */
-
-	var SUPPORTS_CORS = inBrowser && 'withCredentials' in new XMLHttpRequest();
-
-	var cors = function (request, next) {
-
-	    if (inBrowser) {
-
-	        var orgUrl = Url.parse(location.href);
-	        var reqUrl = Url.parse(request.getUrl());
-
-	        if (reqUrl.protocol !== orgUrl.protocol || reqUrl.host !== orgUrl.host) {
-
-	            request.crossOrigin = true;
-	            request.emulateHTTP = false;
-
-	            if (!SUPPORTS_CORS) {
-	                request.client = xdrClient;
-	            }
-	        }
-	    }
-
-	    next();
-	};
-
-	/**
-	 * Body Interceptor.
-	 */
-
-	var body = function (request, next) {
-
-	    if (isFormData(request.body)) {
-
-	        request.headers.delete('Content-Type');
-
-	    } else if (isObject(request.body) || isArray(request.body)) {
-
-	        if (request.emulateJSON) {
-	            request.body = Url.params(request.body);
-	            request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
-	        } else {
-	            request.body = JSON.stringify(request.body);
-	        }
-	    }
-
-	    next(function (response) {
-
-	        Object.defineProperty(response, 'data', {
-
-	            get: function get() {
-	                return this.body;
-	            },
-
-	            set: function set(body) {
-	                this.body = body;
-	            }
-
-	        });
-
-	        return response.bodyText ? when(response.text(), function (text) {
-
-	            var type = response.headers.get('Content-Type') || '';
-
-	            if (type.indexOf('application/json') === 0 || isJson(text)) {
-
-	                try {
-	                    response.body = JSON.parse(text);
-	                } catch (e) {
-	                    response.body = null;
-	                }
-
-	            } else {
-	                response.body = text;
-	            }
-
-	            return response;
-
-	        }) : response;
-
-	    });
-	};
-
-	function isJson(str) {
-
-	    var start = str.match(/^\[|^\{(?!\{)/), end = {'[': /]$/, '{': /}$/};
-
-	    return start && end[start[0]].test(str);
-	}
-
-	/**
-	 * JSONP client (Browser).
-	 */
-
-	var jsonpClient = function (request) {
-	    return new PromiseObj(function (resolve) {
-
-	        var name = request.jsonp || 'callback', callback = request.jsonpCallback || '_jsonp' + Math.random().toString(36).substr(2), body = null, handler, script;
-
-	        handler = function (ref) {
-	            var type = ref.type;
-
-
-	            var status = 0;
-
-	            if (type === 'load' && body !== null) {
-	                status = 200;
-	            } else if (type === 'error') {
-	                status = 500;
-	            }
-
-	            if (status && window[callback]) {
-	                delete window[callback];
-	                document.body.removeChild(script);
-	            }
-
-	            resolve(request.respondWith(body, {status: status}));
-	        };
-
-	        window[callback] = function (result) {
-	            body = JSON.stringify(result);
-	        };
-
-	        request.abort = function () {
-	            handler({type: 'abort'});
-	        };
-
-	        request.params[name] = callback;
-
-	        if (request.timeout) {
-	            setTimeout(request.abort, request.timeout);
-	        }
-
-	        script = document.createElement('script');
-	        script.src = request.getUrl();
-	        script.type = 'text/javascript';
-	        script.async = true;
-	        script.onload = handler;
-	        script.onerror = handler;
-
-	        document.body.appendChild(script);
-	    });
-	};
-
-	/**
-	 * JSONP Interceptor.
-	 */
-
-	var jsonp = function (request, next) {
-
-	    if (request.method == 'JSONP') {
-	        request.client = jsonpClient;
-	    }
-
-	    next();
-	};
-
-	/**
-	 * Before Interceptor.
-	 */
-
-	var before = function (request, next) {
-
-	    if (isFunction(request.before)) {
-	        request.before.call(this, request);
-	    }
-
-	    next();
-	};
-
-	/**
-	 * HTTP method override Interceptor.
-	 */
-
-	var method = function (request, next) {
-
-	    if (request.emulateHTTP && /^(PUT|PATCH|DELETE)$/i.test(request.method)) {
-	        request.headers.set('X-HTTP-Method-Override', request.method);
-	        request.method = 'POST';
-	    }
-
-	    next();
-	};
-
-	/**
-	 * Header Interceptor.
-	 */
-
-	var header = function (request, next) {
-
-	    var headers = assign({}, Http.headers.common,
-	        !request.crossOrigin ? Http.headers.custom : {},
-	        Http.headers[toLower(request.method)]
-	    );
-
-	    each(headers, function (value, name) {
-	        if (!request.headers.has(name)) {
-	            request.headers.set(name, value);
-	        }
-	    });
-
-	    next();
-	};
-
-	/**
-	 * XMLHttp client (Browser).
-	 */
-
-	var xhrClient = function (request) {
-	    return new PromiseObj(function (resolve) {
-
-	        var xhr = new XMLHttpRequest(), handler = function (event) {
-
-	            var response = request.respondWith(
-	                'response' in xhr ? xhr.response : xhr.responseText, {
-	                    status: xhr.status === 1223 ? 204 : xhr.status, // IE9 status bug
-	                    statusText: xhr.status === 1223 ? 'No Content' : trim(xhr.statusText)
-	                }
-	            );
-
-	            each(trim(xhr.getAllResponseHeaders()).split('\n'), function (row) {
-	                response.headers.append(row.slice(0, row.indexOf(':')), row.slice(row.indexOf(':') + 1));
-	            });
-
-	            resolve(response);
-	        };
-
-	        request.abort = function () { return xhr.abort(); };
-
-	        if (request.progress) {
-	            if (request.method === 'GET') {
-	                xhr.addEventListener('progress', request.progress);
-	            } else if (/^(POST|PUT)$/i.test(request.method)) {
-	                xhr.upload.addEventListener('progress', request.progress);
-	            }
-	        }
-
-	        xhr.open(request.method, request.getUrl(), true);
-
-	        if (request.timeout) {
-	            xhr.timeout = request.timeout;
-	        }
-
-	        if (request.responseType && 'responseType' in xhr) {
-	            xhr.responseType = request.responseType;
-	        }
-
-	        if (request.withCredentials || request.credentials) {
-	            xhr.withCredentials = true;
-	        }
-
-	        if (!request.crossOrigin) {
-	            request.headers.set('X-Requested-With', 'XMLHttpRequest');
-	        }
-
-	        request.headers.forEach(function (value, name) {
-	            xhr.setRequestHeader(name, value);
-	        });
-
-	        xhr.onload = handler;
-	        xhr.onabort = handler;
-	        xhr.onerror = handler;
-	        xhr.ontimeout = handler;
-	        xhr.send(request.getBody());
-	    });
-	};
-
-	/**
-	 * Http client (Node).
-	 */
-
-	var nodeClient = function (request) {
-
-	    var client = __webpack_require__(311);
-
-	    return new PromiseObj(function (resolve) {
-
-	        var url = request.getUrl();
-	        var body = request.getBody();
-	        var method = request.method;
-	        var headers = {}, handler;
-
-	        request.headers.forEach(function (value, name) {
-	            headers[name] = value;
-	        });
-
-	        client(url, {body: body, method: method, headers: headers}).then(handler = function (resp) {
-
-	            var response = request.respondWith(resp.body, {
-	                    status: resp.statusCode,
-	                    statusText: trim(resp.statusMessage)
-	                }
-	            );
-
-	            each(resp.headers, function (value, name) {
-	                response.headers.set(name, value);
-	            });
-
-	            resolve(response);
-
-	        }, function (error$$1) { return handler(error$$1.response); });
-	    });
-	};
-
-	/**
-	 * Base client.
-	 */
-
-	var Client = function (context) {
-
-	    var reqHandlers = [sendRequest], resHandlers = [], handler;
-
-	    if (!isObject(context)) {
-	        context = null;
-	    }
-
-	    function Client(request) {
-	        return new PromiseObj(function (resolve) {
-
-	            function exec() {
-
-	                handler = reqHandlers.pop();
-
-	                if (isFunction(handler)) {
-	                    handler.call(context, request, next);
-	                } else {
-	                    warn(("Invalid interceptor of type " + (typeof handler) + ", must be a function"));
-	                    next();
-	                }
-	            }
-
-	            function next(response) {
-
-	                if (isFunction(response)) {
-
-	                    resHandlers.unshift(response);
-
-	                } else if (isObject(response)) {
-
-	                    resHandlers.forEach(function (handler) {
-	                        response = when(response, function (response) {
-	                            return handler.call(context, response) || response;
-	                        });
-	                    });
-
-	                    when(response, resolve);
-
-	                    return;
-	                }
-
-	                exec();
-	            }
-
-	            exec();
-
-	        }, context);
-	    }
-
-	    Client.use = function (handler) {
-	        reqHandlers.push(handler);
-	    };
-
-	    return Client;
-	};
-
-	function sendRequest(request, resolve) {
-
-	    var client = request.client || (inBrowser ? xhrClient : nodeClient);
-
-	    resolve(client(request));
-	}
-
-	/**
-	 * HTTP Headers.
-	 */
-
-	var Headers = function Headers(headers) {
-	    var this$1 = this;
-
-
-	    this.map = {};
-
-	    each(headers, function (value, name) { return this$1.append(name, value); });
-	};
-
-	Headers.prototype.has = function has (name) {
-	    return getName(this.map, name) !== null;
-	};
-
-	Headers.prototype.get = function get (name) {
-
-	    var list = this.map[getName(this.map, name)];
-
-	    return list ? list.join() : null;
-	};
-
-	Headers.prototype.getAll = function getAll (name) {
-	    return this.map[getName(this.map, name)] || [];
-	};
-
-	Headers.prototype.set = function set (name, value) {
-	    this.map[normalizeName(getName(this.map, name) || name)] = [trim(value)];
-	};
-
-	Headers.prototype.append = function append (name, value){
-
-	    var list = this.map[getName(this.map, name)];
-
-	    if (list) {
-	        list.push(trim(value));
-	    } else {
-	        this.set(name, value);
-	    }
-	};
-
-	Headers.prototype.delete = function delete$1 (name){
-	    delete this.map[getName(this.map, name)];
-	};
-
-	Headers.prototype.deleteAll = function deleteAll (){
-	    this.map = {};
-	};
-
-	Headers.prototype.forEach = function forEach (callback, thisArg) {
-	        var this$1 = this;
-
-	    each(this.map, function (list, name) {
-	        each(list, function (value) { return callback.call(thisArg, value, name, this$1); });
-	    });
-	};
-
-	function getName(map, name) {
-	    return Object.keys(map).reduce(function (prev, curr) {
-	        return toLower(name) === toLower(curr) ? curr : prev;
-	    }, null);
-	}
-
-	function normalizeName(name) {
-
-	    if (/[^a-z0-9\-#$%&'*+.\^_`|~]/i.test(name)) {
-	        throw new TypeError('Invalid character in header field name');
-	    }
-
-	    return trim(name);
-	}
-
-	/**
-	 * HTTP Response.
-	 */
-
-	var Response = function Response(body, ref) {
-	    var url = ref.url;
-	    var headers = ref.headers;
-	    var status = ref.status;
-	    var statusText = ref.statusText;
-
-
-	    this.url = url;
-	    this.ok = status >= 200 && status < 300;
-	    this.status = status || 0;
-	    this.statusText = statusText || '';
-	    this.headers = new Headers(headers);
-	    this.body = body;
-
-	    if (isString(body)) {
-
-	        this.bodyText = body;
-
-	    } else if (isBlob(body)) {
-
-	        this.bodyBlob = body;
-
-	        if (isBlobText(body)) {
-	            this.bodyText = blobText(body);
-	        }
-	    }
-	};
-
-	Response.prototype.blob = function blob () {
-	    return when(this.bodyBlob);
-	};
-
-	Response.prototype.text = function text () {
-	    return when(this.bodyText);
-	};
-
-	Response.prototype.json = function json () {
-	    return when(this.text(), function (text) { return JSON.parse(text); });
-	};
-
-	function blobText(body) {
-	    return new PromiseObj(function (resolve) {
-
-	        var reader = new FileReader();
-
-	        reader.readAsText(body);
-	        reader.onload = function () {
-	            resolve(reader.result);
-	        };
-
-	    });
-	}
-
-	function isBlobText(body) {
-	    return body.type.indexOf('text') === 0 || body.type.indexOf('json') !== -1;
-	}
-
-	/**
-	 * HTTP Request.
-	 */
-
-	var Request = function Request(options$$1) {
-
-	    this.body = null;
-	    this.params = {};
-
-	    assign(this, options$$1, {
-	        method: toUpper(options$$1.method || 'GET')
-	    });
-
-	    if (!(this.headers instanceof Headers)) {
-	        this.headers = new Headers(this.headers);
-	    }
-	};
-
-	Request.prototype.getUrl = function getUrl (){
-	    return Url(this);
-	};
-
-	Request.prototype.getBody = function getBody (){
-	    return this.body;
-	};
-
-	Request.prototype.respondWith = function respondWith (body, options$$1) {
-	    return new Response(body, assign(options$$1 || {}, {url: this.getUrl()}));
-	};
-
-	/**
-	 * Service for sending network requests.
-	 */
-
-	var COMMON_HEADERS = {'Accept': 'application/json, text/plain, */*'};
-	var JSON_CONTENT_TYPE = {'Content-Type': 'application/json;charset=utf-8'};
-
-	function Http(options$$1) {
-
-	    var self = this || {}, client = Client(self.$vm);
-
-	    defaults(options$$1 || {}, self.$options, Http.options);
-
-	    Http.interceptors.forEach(function (handler) {
-
-	        if (isString(handler)) {
-	            handler = Http.interceptor[handler];
-	        }
-
-	        if (isFunction(handler)) {
-	            client.use(handler);
-	        }
-
-	    });
-
-	    return client(new Request(options$$1)).then(function (response) {
-
-	        return response.ok ? response : PromiseObj.reject(response);
-
-	    }, function (response) {
-
-	        if (response instanceof Error) {
-	            error(response);
-	        }
-
-	        return PromiseObj.reject(response);
-	    });
-	}
-
-	Http.options = {};
-
-	Http.headers = {
-	    put: JSON_CONTENT_TYPE,
-	    post: JSON_CONTENT_TYPE,
-	    patch: JSON_CONTENT_TYPE,
-	    delete: JSON_CONTENT_TYPE,
-	    common: COMMON_HEADERS,
-	    custom: {}
-	};
-
-	Http.interceptor = {before: before, method: method, body: body, jsonp: jsonp, header: header, cors: cors};
-	Http.interceptors = ['before', 'method', 'body', 'jsonp', 'header', 'cors'];
-
-	['get', 'delete', 'head', 'jsonp'].forEach(function (method$$1) {
-
-	    Http[method$$1] = function (url, options$$1) {
-	        return this(assign(options$$1 || {}, {url: url, method: method$$1}));
-	    };
-
-	});
-
-	['post', 'put', 'patch'].forEach(function (method$$1) {
-
-	    Http[method$$1] = function (url, body$$1, options$$1) {
-	        return this(assign(options$$1 || {}, {url: url, method: method$$1, body: body$$1}));
-	    };
-
-	});
-
-	/**
-	 * Service for interacting with RESTful services.
-	 */
-
-	function Resource(url, params, actions, options$$1) {
-
-	    var self = this || {}, resource = {};
-
-	    actions = assign({},
-	        Resource.actions,
-	        actions
-	    );
-
-	    each(actions, function (action, name) {
-
-	        action = merge({url: url, params: assign({}, params)}, options$$1, action);
-
-	        resource[name] = function () {
-	            return (self.$http || Http)(opts(action, arguments));
-	        };
-	    });
-
-	    return resource;
-	}
-
-	function opts(action, args) {
-
-	    var options$$1 = assign({}, action), params = {}, body;
-
-	    switch (args.length) {
-
-	        case 2:
-
-	            params = args[0];
-	            body = args[1];
-
-	            break;
-
-	        case 1:
-
-	            if (/^(POST|PUT|PATCH)$/i.test(options$$1.method)) {
-	                body = args[0];
-	            } else {
-	                params = args[0];
-	            }
-
-	            break;
-
-	        case 0:
-
-	            break;
-
-	        default:
-
-	            throw 'Expected up to 2 arguments [params, body], got ' + args.length + ' arguments';
-	    }
-
-	    options$$1.body = body;
-	    options$$1.params = assign({}, options$$1.params, params);
-
-	    return options$$1;
-	}
-
-	Resource.actions = {
-
-	    get: {method: 'GET'},
-	    save: {method: 'POST'},
-	    query: {method: 'GET'},
-	    update: {method: 'PUT'},
-	    remove: {method: 'DELETE'},
-	    delete: {method: 'DELETE'}
-
-	};
-
-	/**
-	 * Install plugin.
-	 */
-
-	function plugin(Vue) {
-
-	    if (plugin.installed) {
-	        return;
-	    }
-
-	    Util(Vue);
-
-	    Vue.url = Url;
-	    Vue.http = Http;
-	    Vue.resource = Resource;
-	    Vue.Promise = PromiseObj;
-
-	    Object.defineProperties(Vue.prototype, {
-
-	        $url: {
-	            get: function get() {
-	                return options(Vue.url, this, this.$options.url);
-	            }
-	        },
-
-	        $http: {
-	            get: function get() {
-	                return options(Vue.http, this, this.$options.http);
-	            }
-	        },
-
-	        $resource: {
-	            get: function get() {
-	                return Vue.resource.bind(this);
-	            }
-	        },
-
-	        $promise: {
-	            get: function get() {
-	                var this$1 = this;
-
-	                return function (executor) { return new Vue.Promise(executor, this$1); };
-	            }
-	        }
-
-	    });
-	}
-
-	if (typeof window !== 'undefined' && window.Vue) {
-	    window.Vue.use(plugin);
-	}
-
-	module.exports = plugin;
-
-
-/***/ },
-/* 311 */
-/***/ function(module, exports) {
-
-	/* (ignored) */
-
-/***/ },
-/* 312 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {/**
-	  * vue-router v2.4.0
-	  * (c) 2017 Evan You
-	  * @license MIT
-	  */
-	'use strict';
-
-	/*  */
-
-	function assert (condition, message) {
-	  if (!condition) {
-	    throw new Error(("[vue-router] " + message))
-	  }
-	}
-
-	function warn (condition, message) {
-	  if (process.env.NODE_ENV !== 'production' && !condition) {
-	    typeof console !== 'undefined' && console.warn(("[vue-router] " + message));
-	  }
-	}
-
-	var View = {
-	  name: 'router-view',
-	  functional: true,
-	  props: {
-	    name: {
-	      type: String,
-	      default: 'default'
-	    }
-	  },
-	  render: function render (h, ref) {
-	    var props = ref.props;
-	    var children = ref.children;
-	    var parent = ref.parent;
-	    var data = ref.data;
-
-	    data.routerView = true;
-
-	    var name = props.name;
-	    var route = parent.$route;
-	    var cache = parent._routerViewCache || (parent._routerViewCache = {});
-
-	    // determine current view depth, also check to see if the tree
-	    // has been toggled inactive but kept-alive.
-	    var depth = 0;
-	    var inactive = false;
-	    while (parent) {
-	      if (parent.$vnode && parent.$vnode.data.routerView) {
-	        depth++;
-	      }
-	      if (parent._inactive) {
-	        inactive = true;
-	      }
-	      parent = parent.$parent;
-	    }
-	    data.routerViewDepth = depth;
-
-	    // render previous view if the tree is inactive and kept-alive
-	    if (inactive) {
-	      return h(cache[name], data, children)
-	    }
-
-	    var matched = route.matched[depth];
-	    // render empty node if no matched route
-	    if (!matched) {
-	      cache[name] = null;
-	      return h()
-	    }
-
-	    var component = cache[name] = matched.components[name];
-
-	    // attach instance registration hook
-	    // this will be called in the instance's injected lifecycle hooks
-	    data.registerRouteInstance = function (vm, val) {
-	      // val could be undefined for unregistration
-	      if (matched.instances[name] !== vm) {
-	        matched.instances[name] = val;
-	      }
-	    };
-
-	    // resolve props
-	    data.props = resolveProps(route, matched.props && matched.props[name]);
-
-	    return h(component, data, children)
-	  }
-	};
-
-	function resolveProps (route, config) {
-	  switch (typeof config) {
-	    case 'undefined':
-	      return
-	    case 'object':
-	      return config
-	    case 'function':
-	      return config(route)
-	    case 'boolean':
-	      return config ? route.params : undefined
-	    default:
-	      if (process.env.NODE_ENV !== 'production') {
-	        warn(
-	          false,
-	          "props in \"" + (route.path) + "\" is a " + (typeof config) + ", " +
-	          "expecting an object, function or boolean."
-	        );
-	      }
-	  }
-	}
-
-	/*  */
-
-	var encodeReserveRE = /[!'()*]/g;
-	var encodeReserveReplacer = function (c) { return '%' + c.charCodeAt(0).toString(16); };
-	var commaRE = /%2C/g;
-
-	// fixed encodeURIComponent which is more conformant to RFC3986:
-	// - escapes [!'()*]
-	// - preserve commas
-	var encode = function (str) { return encodeURIComponent(str)
-	  .replace(encodeReserveRE, encodeReserveReplacer)
-	  .replace(commaRE, ','); };
-
-	var decode = decodeURIComponent;
-
-	function resolveQuery (
-	  query,
-	  extraQuery,
-	  _parseQuery
-	) {
-	  if ( extraQuery === void 0 ) extraQuery = {};
-
-	  var parse = _parseQuery || parseQuery;
-	  var parsedQuery;
-	  try {
-	    parsedQuery = parse(query || '');
-	  } catch (e) {
-	    process.env.NODE_ENV !== 'production' && warn(false, e.message);
-	    parsedQuery = {};
-	  }
-	  for (var key in extraQuery) {
-	    var val = extraQuery[key];
-	    parsedQuery[key] = Array.isArray(val) ? val.slice() : val;
-	  }
-	  return parsedQuery
-	}
-
-	function parseQuery (query) {
-	  var res = {};
-
-	  query = query.trim().replace(/^(\?|#|&)/, '');
-
-	  if (!query) {
-	    return res
-	  }
-
-	  query.split('&').forEach(function (param) {
-	    var parts = param.replace(/\+/g, ' ').split('=');
-	    var key = decode(parts.shift());
-	    var val = parts.length > 0
-	      ? decode(parts.join('='))
-	      : null;
-
-	    if (res[key] === undefined) {
-	      res[key] = val;
-	    } else if (Array.isArray(res[key])) {
-	      res[key].push(val);
-	    } else {
-	      res[key] = [res[key], val];
-	    }
-	  });
-
-	  return res
-	}
-
-	function stringifyQuery (obj) {
-	  var res = obj ? Object.keys(obj).map(function (key) {
-	    var val = obj[key];
-
-	    if (val === undefined) {
-	      return ''
-	    }
-
-	    if (val === null) {
-	      return encode(key)
-	    }
-
-	    if (Array.isArray(val)) {
-	      var result = [];
-	      val.slice().forEach(function (val2) {
-	        if (val2 === undefined) {
-	          return
-	        }
-	        if (val2 === null) {
-	          result.push(encode(key));
-	        } else {
-	          result.push(encode(key) + '=' + encode(val2));
-	        }
-	      });
-	      return result.join('&')
-	    }
-
-	    return encode(key) + '=' + encode(val)
-	  }).filter(function (x) { return x.length > 0; }).join('&') : null;
-	  return res ? ("?" + res) : ''
-	}
-
-	/*  */
-
-
-	var trailingSlashRE = /\/?$/;
-
-	function createRoute (
-	  record,
-	  location,
-	  redirectedFrom,
-	  router
-	) {
-	  var stringifyQuery$$1 = router && router.options.stringifyQuery;
-	  var route = {
-	    name: location.name || (record && record.name),
-	    meta: (record && record.meta) || {},
-	    path: location.path || '/',
-	    hash: location.hash || '',
-	    query: location.query || {},
-	    params: location.params || {},
-	    fullPath: getFullPath(location, stringifyQuery$$1),
-	    matched: record ? formatMatch(record) : []
-	  };
-	  if (redirectedFrom) {
-	    route.redirectedFrom = getFullPath(redirectedFrom, stringifyQuery$$1);
-	  }
-	  return Object.freeze(route)
-	}
-
-	// the starting route that represents the initial state
-	var START = createRoute(null, {
-	  path: '/'
-	});
-
-	function formatMatch (record) {
-	  var res = [];
-	  while (record) {
-	    res.unshift(record);
-	    record = record.parent;
-	  }
-	  return res
-	}
-
-	function getFullPath (
-	  ref,
-	  _stringifyQuery
-	) {
-	  var path = ref.path;
-	  var query = ref.query; if ( query === void 0 ) query = {};
-	  var hash = ref.hash; if ( hash === void 0 ) hash = '';
-
-	  var stringify = _stringifyQuery || stringifyQuery;
-	  return (path || '/') + stringify(query) + hash
-	}
-
-	function isSameRoute (a, b) {
-	  if (b === START) {
-	    return a === b
-	  } else if (!b) {
-	    return false
-	  } else if (a.path && b.path) {
-	    return (
-	      a.path.replace(trailingSlashRE, '') === b.path.replace(trailingSlashRE, '') &&
-	      a.hash === b.hash &&
-	      isObjectEqual(a.query, b.query)
-	    )
-	  } else if (a.name && b.name) {
-	    return (
-	      a.name === b.name &&
-	      a.hash === b.hash &&
-	      isObjectEqual(a.query, b.query) &&
-	      isObjectEqual(a.params, b.params)
-	    )
-	  } else {
-	    return false
-	  }
-	}
-
-	function isObjectEqual (a, b) {
-	  if ( a === void 0 ) a = {};
-	  if ( b === void 0 ) b = {};
-
-	  var aKeys = Object.keys(a);
-	  var bKeys = Object.keys(b);
-	  if (aKeys.length !== bKeys.length) {
-	    return false
-	  }
-	  return aKeys.every(function (key) { return String(a[key]) === String(b[key]); })
-	}
-
-	function isIncludedRoute (current, target) {
-	  return (
-	    current.path.replace(trailingSlashRE, '/').indexOf(
-	      target.path.replace(trailingSlashRE, '/')
-	    ) === 0 &&
-	    (!target.hash || current.hash === target.hash) &&
-	    queryIncludes(current.query, target.query)
-	  )
-	}
-
-	function queryIncludes (current, target) {
-	  for (var key in target) {
-	    if (!(key in current)) {
-	      return false
-	    }
-	  }
-	  return true
-	}
-
-	/*  */
-
-	// work around weird flow bug
-	var toTypes = [String, Object];
-	var eventTypes = [String, Array];
-
-	var Link = {
-	  name: 'router-link',
-	  props: {
-	    to: {
-	      type: toTypes,
-	      required: true
-	    },
-	    tag: {
-	      type: String,
-	      default: 'a'
-	    },
-	    exact: Boolean,
-	    append: Boolean,
-	    replace: Boolean,
-	    activeClass: {
-	      type: String,
-	      default: 'router-link-active'
-	    },
-	    event: {
-	      type: eventTypes,
-	      default: 'click'
-	    }
-	  },
-	  render: function render (h) {
-	    var this$1 = this;
-
-	    var router = this.$router;
-	    var current = this.$route;
-	    var ref = router.resolve(this.to, current, this.append);
-	    var location = ref.location;
-	    var route = ref.route;
-	    var href = ref.href;
-
-	    var classes = {};
-	    var globalActiveClass = router.options.linkActiveClass;
-	    var activeClass = globalActiveClass == null
-	      ? this.activeClass
-	      : globalActiveClass;
-	    var compareTarget = location.path
-	      ? createRoute(null, location, null, router)
-	      : route;
-
-	    classes[activeClass] = this.exact
-	      ? isSameRoute(current, compareTarget)
-	      : isIncludedRoute(current, compareTarget);
-
-	    var handler = function (e) {
-	      if (guardEvent(e)) {
-	        if (this$1.replace) {
-	          router.replace(location);
-	        } else {
-	          router.push(location);
-	        }
-	      }
-	    };
-
-	    var on = { click: guardEvent };
-	    if (Array.isArray(this.event)) {
-	      this.event.forEach(function (e) { on[e] = handler; });
-	    } else {
-	      on[this.event] = handler;
-	    }
-
-	    var data = {
-	      class: classes
-	    };
-
-	    if (this.tag === 'a') {
-	      data.on = on;
-	      data.attrs = { href: href };
-	    } else {
-	      // find the first <a> child and apply listener and href
-	      var a = findAnchor(this.$slots.default);
-	      if (a) {
-	        // in case the <a> is a static node
-	        a.isStatic = false;
-	        var extend = _Vue.util.extend;
-	        var aData = a.data = extend({}, a.data);
-	        aData.on = on;
-	        var aAttrs = a.data.attrs = extend({}, a.data.attrs);
-	        aAttrs.href = href;
-	      } else {
-	        // doesn't have <a> child, apply listener to self
-	        data.on = on;
-	      }
-	    }
-
-	    return h(this.tag, data, this.$slots.default)
-	  }
-	};
-
-	function guardEvent (e) {
-	  // don't redirect with control keys
-	  if (e.metaKey || e.ctrlKey || e.shiftKey) { return }
-	  // don't redirect when preventDefault called
-	  if (e.defaultPrevented) { return }
-	  // don't redirect on right click
-	  if (e.button !== undefined && e.button !== 0) { return }
-	  // don't redirect if `target="_blank"`
-	  if (e.currentTarget && e.currentTarget.getAttribute) {
-	    var target = e.currentTarget.getAttribute('target');
-	    if (/\b_blank\b/i.test(target)) { return }
-	  }
-	  // this may be a Weex event which doesn't have this method
-	  if (e.preventDefault) {
-	    e.preventDefault();
-	  }
-	  return true
-	}
-
-	function findAnchor (children) {
-	  if (children) {
-	    var child;
-	    for (var i = 0; i < children.length; i++) {
-	      child = children[i];
-	      if (child.tag === 'a') {
-	        return child
-	      }
-	      if (child.children && (child = findAnchor(child.children))) {
-	        return child
-	      }
-	    }
-	  }
-	}
-
-	var _Vue;
-
-	function install (Vue) {
-	  if (install.installed) { return }
-	  install.installed = true;
-
-	  _Vue = Vue;
-
-	  Object.defineProperty(Vue.prototype, '$router', {
-	    get: function get () { return this.$root._router }
-	  });
-
-	  Object.defineProperty(Vue.prototype, '$route', {
-	    get: function get () { return this.$root._route }
-	  });
-
-	  var isDef = function (v) { return v !== undefined; };
-
-	  var registerInstance = function (vm, callVal) {
-	    var i = vm.$options._parentVnode;
-	    if (isDef(i) && isDef(i = i.data) && isDef(i = i.registerRouteInstance)) {
-	      i(vm, callVal);
-	    }
-	  };
-
-	  Vue.mixin({
-	    beforeCreate: function beforeCreate () {
-	      if (isDef(this.$options.router)) {
-	        this._router = this.$options.router;
-	        this._router.init(this);
-	        Vue.util.defineReactive(this, '_route', this._router.history.current);
-	      }
-	      registerInstance(this, this);
-	    },
-	    destroyed: function destroyed () {
-	      registerInstance(this);
-	    }
-	  });
-
-	  Vue.component('router-view', View);
-	  Vue.component('router-link', Link);
-
-	  var strats = Vue.config.optionMergeStrategies;
-	  // use the same hook merging strategy for route hooks
-	  strats.beforeRouteEnter = strats.beforeRouteLeave = strats.created;
-	}
-
-	/*  */
-
-	var inBrowser = typeof window !== 'undefined';
-
-	/*  */
-
-	function resolvePath (
-	  relative,
-	  base,
-	  append
-	) {
-	  var firstChar = relative.charAt(0);
-	  if (firstChar === '/') {
-	    return relative
-	  }
-
-	  if (firstChar === '?' || firstChar === '#') {
-	    return base + relative
-	  }
-
-	  var stack = base.split('/');
-
-	  // remove trailing segment if:
-	  // - not appending
-	  // - appending to trailing slash (last segment is empty)
-	  if (!append || !stack[stack.length - 1]) {
-	    stack.pop();
-	  }
-
-	  // resolve relative path
-	  var segments = relative.replace(/^\//, '').split('/');
-	  for (var i = 0; i < segments.length; i++) {
-	    var segment = segments[i];
-	    if (segment === '..') {
-	      stack.pop();
-	    } else if (segment !== '.') {
-	      stack.push(segment);
-	    }
-	  }
-
-	  // ensure leading slash
-	  if (stack[0] !== '') {
-	    stack.unshift('');
-	  }
-
-	  return stack.join('/')
-	}
-
-	function parsePath (path) {
-	  var hash = '';
-	  var query = '';
-
-	  var hashIndex = path.indexOf('#');
-	  if (hashIndex >= 0) {
-	    hash = path.slice(hashIndex);
-	    path = path.slice(0, hashIndex);
-	  }
-
-	  var queryIndex = path.indexOf('?');
-	  if (queryIndex >= 0) {
-	    query = path.slice(queryIndex + 1);
-	    path = path.slice(0, queryIndex);
-	  }
-
-	  return {
-	    path: path,
-	    query: query,
-	    hash: hash
-	  }
-	}
-
-	function cleanPath (path) {
-	  return path.replace(/\/\//g, '/')
-	}
-
-	/*  */
-
-	function createRouteMap (
-	  routes,
-	  oldPathMap,
-	  oldNameMap
-	) {
-	  var pathMap = oldPathMap || Object.create(null);
-	  var nameMap = oldNameMap || Object.create(null);
-
-	  routes.forEach(function (route) {
-	    addRouteRecord(pathMap, nameMap, route);
-	  });
-
-	  return {
-	    pathMap: pathMap,
-	    nameMap: nameMap
-	  }
-	}
-
-	function addRouteRecord (
-	  pathMap,
-	  nameMap,
-	  route,
-	  parent,
-	  matchAs
-	) {
-	  var path = route.path;
-	  var name = route.name;
-	  if (process.env.NODE_ENV !== 'production') {
-	    assert(path != null, "\"path\" is required in a route configuration.");
-	    assert(
-	      typeof route.component !== 'string',
-	      "route config \"component\" for path: " + (String(path || name)) + " cannot be a " +
-	      "string id. Use an actual component instead."
-	    );
-	  }
-
-	  var record = {
-	    path: normalizePath(path, parent),
-	    components: route.components || { default: route.component },
-	    instances: {},
-	    name: name,
-	    parent: parent,
-	    matchAs: matchAs,
-	    redirect: route.redirect,
-	    beforeEnter: route.beforeEnter,
-	    meta: route.meta || {},
-	    props: route.props == null
-	      ? {}
-	      : route.components
-	        ? route.props
-	        : { default: route.props }
-	  };
-
-	  if (route.children) {
-	    // Warn if route is named and has a default child route.
-	    // If users navigate to this route by name, the default child will
-	    // not be rendered (GH Issue #629)
-	    if (process.env.NODE_ENV !== 'production') {
-	      if (route.name && route.children.some(function (child) { return /^\/?$/.test(child.path); })) {
-	        warn(
-	          false,
-	          "Named Route '" + (route.name) + "' has a default child route. " +
-	          "When navigating to this named route (:to=\"{name: '" + (route.name) + "'\"), " +
-	          "the default child route will not be rendered. Remove the name from " +
-	          "this route and use the name of the default child route for named " +
-	          "links instead."
-	        );
-	      }
-	    }
-	    route.children.forEach(function (child) {
-	      var childMatchAs = matchAs
-	        ? cleanPath((matchAs + "/" + (child.path)))
-	        : undefined;
-	      addRouteRecord(pathMap, nameMap, child, record, childMatchAs);
-	    });
-	  }
-
-	  if (route.alias !== undefined) {
-	    if (Array.isArray(route.alias)) {
-	      route.alias.forEach(function (alias) {
-	        var aliasRoute = {
-	          path: alias,
-	          children: route.children
-	        };
-	        addRouteRecord(pathMap, nameMap, aliasRoute, parent, record.path);
-	      });
-	    } else {
-	      var aliasRoute = {
-	        path: route.alias,
-	        children: route.children
-	      };
-	      addRouteRecord(pathMap, nameMap, aliasRoute, parent, record.path);
-	    }
-	  }
-
-	  if (!pathMap[record.path]) {
-	    pathMap[record.path] = record;
-	  }
-
-	  if (name) {
-	    if (!nameMap[name]) {
-	      nameMap[name] = record;
-	    } else if (process.env.NODE_ENV !== 'production' && !matchAs) {
-	      warn(
-	        false,
-	        "Duplicate named routes definition: " +
-	        "{ name: \"" + name + "\", path: \"" + (record.path) + "\" }"
-	      );
-	    }
-	  }
-	}
-
-	function normalizePath (path, parent) {
-	  path = path.replace(/\/$/, '');
-	  if (path[0] === '/') { return path }
-	  if (parent == null) { return path }
-	  return cleanPath(((parent.path) + "/" + path))
-	}
-
-	var index$1 = Array.isArray || function (arr) {
-	  return Object.prototype.toString.call(arr) == '[object Array]';
-	};
-
-	var isarray = index$1;
-
-	/**
-	 * Expose `pathToRegexp`.
-	 */
-	var index = pathToRegexp;
-	var parse_1 = parse;
-	var compile_1 = compile;
-	var tokensToFunction_1 = tokensToFunction;
-	var tokensToRegExp_1 = tokensToRegExp;
-
-	/**
-	 * The main path matching regexp utility.
-	 *
-	 * @type {RegExp}
-	 */
-	var PATH_REGEXP = new RegExp([
-	  // Match escaped characters that would otherwise appear in future matches.
-	  // This allows the user to escape special characters that won't transform.
-	  '(\\\\.)',
-	  // Match Express-style parameters and un-named parameters with a prefix
-	  // and optional suffixes. Matches appear as:
-	  //
-	  // "/:test(\\d+)?" => ["/", "test", "\d+", undefined, "?", undefined]
-	  // "/route(\\d+)"  => [undefined, undefined, undefined, "\d+", undefined, undefined]
-	  // "/*"            => ["/", undefined, undefined, undefined, undefined, "*"]
-	  '([\\/.])?(?:(?:\\:(\\w+)(?:\\(((?:\\\\.|[^\\\\()])+)\\))?|\\(((?:\\\\.|[^\\\\()])+)\\))([+*?])?|(\\*))'
-	].join('|'), 'g');
-
-	/**
-	 * Parse a string for the raw tokens.
-	 *
-	 * @param  {string}  str
-	 * @param  {Object=} options
-	 * @return {!Array}
-	 */
-	function parse (str, options) {
-	  var tokens = [];
-	  var key = 0;
-	  var index = 0;
-	  var path = '';
-	  var defaultDelimiter = options && options.delimiter || '/';
-	  var res;
-
-	  while ((res = PATH_REGEXP.exec(str)) != null) {
-	    var m = res[0];
-	    var escaped = res[1];
-	    var offset = res.index;
-	    path += str.slice(index, offset);
-	    index = offset + m.length;
-
-	    // Ignore already escaped sequences.
-	    if (escaped) {
-	      path += escaped[1];
-	      continue
-	    }
-
-	    var next = str[index];
-	    var prefix = res[2];
-	    var name = res[3];
-	    var capture = res[4];
-	    var group = res[5];
-	    var modifier = res[6];
-	    var asterisk = res[7];
-
-	    // Push the current path onto the tokens.
-	    if (path) {
-	      tokens.push(path);
-	      path = '';
-	    }
-
-	    var partial = prefix != null && next != null && next !== prefix;
-	    var repeat = modifier === '+' || modifier === '*';
-	    var optional = modifier === '?' || modifier === '*';
-	    var delimiter = res[2] || defaultDelimiter;
-	    var pattern = capture || group;
-
-	    tokens.push({
-	      name: name || key++,
-	      prefix: prefix || '',
-	      delimiter: delimiter,
-	      optional: optional,
-	      repeat: repeat,
-	      partial: partial,
-	      asterisk: !!asterisk,
-	      pattern: pattern ? escapeGroup(pattern) : (asterisk ? '.*' : '[^' + escapeString(delimiter) + ']+?')
-	    });
-	  }
-
-	  // Match any characters still remaining.
-	  if (index < str.length) {
-	    path += str.substr(index);
-	  }
-
-	  // If the path exists, push it onto the end.
-	  if (path) {
-	    tokens.push(path);
-	  }
-
-	  return tokens
-	}
-
-	/**
-	 * Compile a string to a template function for the path.
-	 *
-	 * @param  {string}             str
-	 * @param  {Object=}            options
-	 * @return {!function(Object=, Object=)}
-	 */
-	function compile (str, options) {
-	  return tokensToFunction(parse(str, options))
-	}
-
-	/**
-	 * Prettier encoding of URI path segments.
-	 *
-	 * @param  {string}
-	 * @return {string}
-	 */
-	function encodeURIComponentPretty (str) {
-	  return encodeURI(str).replace(/[\/?#]/g, function (c) {
-	    return '%' + c.charCodeAt(0).toString(16).toUpperCase()
-	  })
-	}
-
-	/**
-	 * Encode the asterisk parameter. Similar to `pretty`, but allows slashes.
-	 *
-	 * @param  {string}
-	 * @return {string}
-	 */
-	function encodeAsterisk (str) {
-	  return encodeURI(str).replace(/[?#]/g, function (c) {
-	    return '%' + c.charCodeAt(0).toString(16).toUpperCase()
-	  })
-	}
-
-	/**
-	 * Expose a method for transforming tokens into the path function.
-	 */
-	function tokensToFunction (tokens) {
-	  // Compile all the tokens into regexps.
-	  var matches = new Array(tokens.length);
-
-	  // Compile all the patterns before compilation.
-	  for (var i = 0; i < tokens.length; i++) {
-	    if (typeof tokens[i] === 'object') {
-	      matches[i] = new RegExp('^(?:' + tokens[i].pattern + ')$');
-	    }
-	  }
-
-	  return function (obj, opts) {
-	    var path = '';
-	    var data = obj || {};
-	    var options = opts || {};
-	    var encode = options.pretty ? encodeURIComponentPretty : encodeURIComponent;
-
-	    for (var i = 0; i < tokens.length; i++) {
-	      var token = tokens[i];
-
-	      if (typeof token === 'string') {
-	        path += token;
-
-	        continue
-	      }
-
-	      var value = data[token.name];
-	      var segment;
-
-	      if (value == null) {
-	        if (token.optional) {
-	          // Prepend partial segment prefixes.
-	          if (token.partial) {
-	            path += token.prefix;
-	          }
-
-	          continue
-	        } else {
-	          throw new TypeError('Expected "' + token.name + '" to be defined')
-	        }
-	      }
-
-	      if (isarray(value)) {
-	        if (!token.repeat) {
-	          throw new TypeError('Expected "' + token.name + '" to not repeat, but received `' + JSON.stringify(value) + '`')
-	        }
-
-	        if (value.length === 0) {
-	          if (token.optional) {
-	            continue
-	          } else {
-	            throw new TypeError('Expected "' + token.name + '" to not be empty')
-	          }
-	        }
-
-	        for (var j = 0; j < value.length; j++) {
-	          segment = encode(value[j]);
-
-	          if (!matches[i].test(segment)) {
-	            throw new TypeError('Expected all "' + token.name + '" to match "' + token.pattern + '", but received `' + JSON.stringify(segment) + '`')
-	          }
-
-	          path += (j === 0 ? token.prefix : token.delimiter) + segment;
-	        }
-
-	        continue
-	      }
-
-	      segment = token.asterisk ? encodeAsterisk(value) : encode(value);
-
-	      if (!matches[i].test(segment)) {
-	        throw new TypeError('Expected "' + token.name + '" to match "' + token.pattern + '", but received "' + segment + '"')
-	      }
-
-	      path += token.prefix + segment;
-	    }
-
-	    return path
-	  }
-	}
-
-	/**
-	 * Escape a regular expression string.
-	 *
-	 * @param  {string} str
-	 * @return {string}
-	 */
-	function escapeString (str) {
-	  return str.replace(/([.+*?=^!:${}()[\]|\/\\])/g, '\\$1')
-	}
-
-	/**
-	 * Escape the capturing group by escaping special characters and meaning.
-	 *
-	 * @param  {string} group
-	 * @return {string}
-	 */
-	function escapeGroup (group) {
-	  return group.replace(/([=!:$\/()])/g, '\\$1')
-	}
-
-	/**
-	 * Attach the keys as a property of the regexp.
-	 *
-	 * @param  {!RegExp} re
-	 * @param  {Array}   keys
-	 * @return {!RegExp}
-	 */
-	function attachKeys (re, keys) {
-	  re.keys = keys;
-	  return re
-	}
-
-	/**
-	 * Get the flags for a regexp from the options.
-	 *
-	 * @param  {Object} options
-	 * @return {string}
-	 */
-	function flags (options) {
-	  return options.sensitive ? '' : 'i'
-	}
-
-	/**
-	 * Pull out keys from a regexp.
-	 *
-	 * @param  {!RegExp} path
-	 * @param  {!Array}  keys
-	 * @return {!RegExp}
-	 */
-	function regexpToRegexp (path, keys) {
-	  // Use a negative lookahead to match only capturing groups.
-	  var groups = path.source.match(/\((?!\?)/g);
-
-	  if (groups) {
-	    for (var i = 0; i < groups.length; i++) {
-	      keys.push({
-	        name: i,
-	        prefix: null,
-	        delimiter: null,
-	        optional: false,
-	        repeat: false,
-	        partial: false,
-	        asterisk: false,
-	        pattern: null
-	      });
-	    }
-	  }
-
-	  return attachKeys(path, keys)
-	}
-
-	/**
-	 * Transform an array into a regexp.
-	 *
-	 * @param  {!Array}  path
-	 * @param  {Array}   keys
-	 * @param  {!Object} options
-	 * @return {!RegExp}
-	 */
-	function arrayToRegexp (path, keys, options) {
-	  var parts = [];
-
-	  for (var i = 0; i < path.length; i++) {
-	    parts.push(pathToRegexp(path[i], keys, options).source);
-	  }
-
-	  var regexp = new RegExp('(?:' + parts.join('|') + ')', flags(options));
-
-	  return attachKeys(regexp, keys)
-	}
-
-	/**
-	 * Create a path regexp from string input.
-	 *
-	 * @param  {string}  path
-	 * @param  {!Array}  keys
-	 * @param  {!Object} options
-	 * @return {!RegExp}
-	 */
-	function stringToRegexp (path, keys, options) {
-	  return tokensToRegExp(parse(path, options), keys, options)
-	}
-
-	/**
-	 * Expose a function for taking tokens and returning a RegExp.
-	 *
-	 * @param  {!Array}          tokens
-	 * @param  {(Array|Object)=} keys
-	 * @param  {Object=}         options
-	 * @return {!RegExp}
-	 */
-	function tokensToRegExp (tokens, keys, options) {
-	  if (!isarray(keys)) {
-	    options = /** @type {!Object} */ (keys || options);
-	    keys = [];
-	  }
-
-	  options = options || {};
-
-	  var strict = options.strict;
-	  var end = options.end !== false;
-	  var route = '';
-
-	  // Iterate over the tokens and create our regexp string.
-	  for (var i = 0; i < tokens.length; i++) {
-	    var token = tokens[i];
-
-	    if (typeof token === 'string') {
-	      route += escapeString(token);
-	    } else {
-	      var prefix = escapeString(token.prefix);
-	      var capture = '(?:' + token.pattern + ')';
-
-	      keys.push(token);
-
-	      if (token.repeat) {
-	        capture += '(?:' + prefix + capture + ')*';
-	      }
-
-	      if (token.optional) {
-	        if (!token.partial) {
-	          capture = '(?:' + prefix + '(' + capture + '))?';
-	        } else {
-	          capture = prefix + '(' + capture + ')?';
-	        }
-	      } else {
-	        capture = prefix + '(' + capture + ')';
-	      }
-
-	      route += capture;
-	    }
-	  }
-
-	  var delimiter = escapeString(options.delimiter || '/');
-	  var endsWithDelimiter = route.slice(-delimiter.length) === delimiter;
-
-	  // In non-strict mode we allow a slash at the end of match. If the path to
-	  // match already ends with a slash, we remove it for consistency. The slash
-	  // is valid at the end of a path match, not in the middle. This is important
-	  // in non-ending mode, where "/test/" shouldn't match "/test//route".
-	  if (!strict) {
-	    route = (endsWithDelimiter ? route.slice(0, -delimiter.length) : route) + '(?:' + delimiter + '(?=$))?';
-	  }
-
-	  if (end) {
-	    route += '$';
-	  } else {
-	    // In non-ending mode, we need the capturing groups to match as much as
-	    // possible by using a positive lookahead to the end or next path segment.
-	    route += strict && endsWithDelimiter ? '' : '(?=' + delimiter + '|$)';
-	  }
-
-	  return attachKeys(new RegExp('^' + route, flags(options)), keys)
-	}
-
-	/**
-	 * Normalize the given path string, returning a regular expression.
-	 *
-	 * An empty array can be passed in for the keys, which will hold the
-	 * placeholder key descriptions. For example, using `/user/:id`, `keys` will
-	 * contain `[{ name: 'id', delimiter: '/', optional: false, repeat: false }]`.
-	 *
-	 * @param  {(string|RegExp|Array)} path
-	 * @param  {(Array|Object)=}       keys
-	 * @param  {Object=}               options
-	 * @return {!RegExp}
-	 */
-	function pathToRegexp (path, keys, options) {
-	  if (!isarray(keys)) {
-	    options = /** @type {!Object} */ (keys || options);
-	    keys = [];
-	  }
-
-	  options = options || {};
-
-	  if (path instanceof RegExp) {
-	    return regexpToRegexp(path, /** @type {!Array} */ (keys))
-	  }
-
-	  if (isarray(path)) {
-	    return arrayToRegexp(/** @type {!Array} */ (path), /** @type {!Array} */ (keys), options)
-	  }
-
-	  return stringToRegexp(/** @type {string} */ (path), /** @type {!Array} */ (keys), options)
-	}
-
-	index.parse = parse_1;
-	index.compile = compile_1;
-	index.tokensToFunction = tokensToFunction_1;
-	index.tokensToRegExp = tokensToRegExp_1;
-
-	/*  */
-
-	var regexpCache = Object.create(null);
-
-	function getRouteRegex (path) {
-	  var hit = regexpCache[path];
-	  var keys, regexp;
-
-	  if (hit) {
-	    keys = hit.keys;
-	    regexp = hit.regexp;
-	  } else {
-	    keys = [];
-	    regexp = index(path, keys);
-	    regexpCache[path] = { keys: keys, regexp: regexp };
-	  }
-
-	  return { keys: keys, regexp: regexp }
-	}
-
-	var regexpCompileCache = Object.create(null);
-
-	function fillParams (
-	  path,
-	  params,
-	  routeMsg
-	) {
-	  try {
-	    var filler =
-	      regexpCompileCache[path] ||
-	      (regexpCompileCache[path] = index.compile(path));
-	    return filler(params || {}, { pretty: true })
-	  } catch (e) {
-	    if (process.env.NODE_ENV !== 'production') {
-	      warn(false, ("missing param for " + routeMsg + ": " + (e.message)));
-	    }
-	    return ''
-	  }
-	}
-
-	/*  */
-
-
-	function normalizeLocation (
-	  raw,
-	  current,
-	  append,
-	  router
-	) {
-	  var next = typeof raw === 'string' ? { path: raw } : raw;
-	  // named target
-	  if (next.name || next._normalized) {
-	    return next
-	  }
-
-	  // relative params
-	  if (!next.path && next.params && current) {
-	    next = assign({}, next);
-	    next._normalized = true;
-	    var params = assign(assign({}, current.params), next.params);
-	    if (current.name) {
-	      next.name = current.name;
-	      next.params = params;
-	    } else if (current.matched) {
-	      var rawPath = current.matched[current.matched.length - 1].path;
-	      next.path = fillParams(rawPath, params, ("path " + (current.path)));
-	    } else if (process.env.NODE_ENV !== 'production') {
-	      warn(false, "relative params navigation requires a current route.");
-	    }
-	    return next
-	  }
-
-	  var parsedPath = parsePath(next.path || '');
-	  var basePath = (current && current.path) || '/';
-	  var path = parsedPath.path
-	    ? resolvePath(parsedPath.path, basePath, append || next.append)
-	    : (current && current.path) || '/';
-
-	  var query = resolveQuery(
-	    parsedPath.query,
-	    next.query,
-	    router && router.options.parseQuery
-	  );
-
-	  var hash = next.hash || parsedPath.hash;
-	  if (hash && hash.charAt(0) !== '#') {
-	    hash = "#" + hash;
-	  }
-
-	  return {
-	    _normalized: true,
-	    path: path,
-	    query: query,
-	    hash: hash
-	  }
-	}
-
-	function assign (a, b) {
-	  for (var key in b) {
-	    a[key] = b[key];
-	  }
-	  return a
-	}
-
-	/*  */
-
-
-	function createMatcher (
-	  routes,
-	  router
-	) {
-	  var ref = createRouteMap(routes);
-	  var pathMap = ref.pathMap;
-	  var nameMap = ref.nameMap;
-
-	  function addRoutes (routes) {
-	    createRouteMap(routes, pathMap, nameMap);
-	  }
-
-	  function match (
-	    raw,
-	    currentRoute,
-	    redirectedFrom
-	  ) {
-	    var location = normalizeLocation(raw, currentRoute, false, router);
-	    var name = location.name;
-
-	    if (name) {
-	      var record = nameMap[name];
-	      if (process.env.NODE_ENV !== 'production') {
-	        warn(record, ("Route with name '" + name + "' does not exist"));
-	      }
-	      var paramNames = getRouteRegex(record.path).keys
-	        .filter(function (key) { return !key.optional; })
-	        .map(function (key) { return key.name; });
-
-	      if (typeof location.params !== 'object') {
-	        location.params = {};
-	      }
-
-	      if (currentRoute && typeof currentRoute.params === 'object') {
-	        for (var key in currentRoute.params) {
-	          if (!(key in location.params) && paramNames.indexOf(key) > -1) {
-	            location.params[key] = currentRoute.params[key];
-	          }
-	        }
-	      }
-
-	      if (record) {
-	        location.path = fillParams(record.path, location.params, ("named route \"" + name + "\""));
-	        return _createRoute(record, location, redirectedFrom)
-	      }
-	    } else if (location.path) {
-	      location.params = {};
-	      for (var path in pathMap) {
-	        if (matchRoute(path, location.params, location.path)) {
-	          return _createRoute(pathMap[path], location, redirectedFrom)
-	        }
-	      }
-	    }
-	    // no match
-	    return _createRoute(null, location)
-	  }
-
-	  function redirect (
-	    record,
-	    location
-	  ) {
-	    var originalRedirect = record.redirect;
-	    var redirect = typeof originalRedirect === 'function'
-	        ? originalRedirect(createRoute(record, location, null, router))
-	        : originalRedirect;
-
-	    if (typeof redirect === 'string') {
-	      redirect = { path: redirect };
-	    }
-
-	    if (!redirect || typeof redirect !== 'object') {
-	      if (process.env.NODE_ENV !== 'production') {
-	        warn(
-	          false, ("invalid redirect option: " + (JSON.stringify(redirect)))
-	        );
-	      }
-	      return _createRoute(null, location)
-	    }
-
-	    var re = redirect;
-	    var name = re.name;
-	    var path = re.path;
-	    var query = location.query;
-	    var hash = location.hash;
-	    var params = location.params;
-	    query = re.hasOwnProperty('query') ? re.query : query;
-	    hash = re.hasOwnProperty('hash') ? re.hash : hash;
-	    params = re.hasOwnProperty('params') ? re.params : params;
-
-	    if (name) {
-	      // resolved named direct
-	      var targetRecord = nameMap[name];
-	      if (process.env.NODE_ENV !== 'production') {
-	        assert(targetRecord, ("redirect failed: named route \"" + name + "\" not found."));
-	      }
-	      return match({
-	        _normalized: true,
-	        name: name,
-	        query: query,
-	        hash: hash,
-	        params: params
-	      }, undefined, location)
-	    } else if (path) {
-	      // 1. resolve relative redirect
-	      var rawPath = resolveRecordPath(path, record);
-	      // 2. resolve params
-	      var resolvedPath = fillParams(rawPath, params, ("redirect route with path \"" + rawPath + "\""));
-	      // 3. rematch with existing query and hash
-	      return match({
-	        _normalized: true,
-	        path: resolvedPath,
-	        query: query,
-	        hash: hash
-	      }, undefined, location)
-	    } else {
-	      if (process.env.NODE_ENV !== 'production') {
-	        warn(false, ("invalid redirect option: " + (JSON.stringify(redirect))));
-	      }
-	      return _createRoute(null, location)
-	    }
-	  }
-
-	  function alias (
-	    record,
-	    location,
-	    matchAs
-	  ) {
-	    var aliasedPath = fillParams(matchAs, location.params, ("aliased route with path \"" + matchAs + "\""));
-	    var aliasedMatch = match({
-	      _normalized: true,
-	      path: aliasedPath
-	    });
-	    if (aliasedMatch) {
-	      var matched = aliasedMatch.matched;
-	      var aliasedRecord = matched[matched.length - 1];
-	      location.params = aliasedMatch.params;
-	      return _createRoute(aliasedRecord, location)
-	    }
-	    return _createRoute(null, location)
-	  }
-
-	  function _createRoute (
-	    record,
-	    location,
-	    redirectedFrom
-	  ) {
-	    if (record && record.redirect) {
-	      return redirect(record, redirectedFrom || location)
-	    }
-	    if (record && record.matchAs) {
-	      return alias(record, location, record.matchAs)
-	    }
-	    return createRoute(record, location, redirectedFrom, router)
-	  }
-
-	  return {
-	    match: match,
-	    addRoutes: addRoutes
-	  }
-	}
-
-	function matchRoute (
-	  path,
-	  params,
-	  pathname
-	) {
-	  var ref = getRouteRegex(path);
-	  var regexp = ref.regexp;
-	  var keys = ref.keys;
-	  var m = pathname.match(regexp);
-
-	  if (!m) {
-	    return false
-	  } else if (!params) {
-	    return true
-	  }
-
-	  for (var i = 1, len = m.length; i < len; ++i) {
-	    var key = keys[i - 1];
-	    var val = typeof m[i] === 'string' ? decodeURIComponent(m[i]) : m[i];
-	    if (key) { params[key.name] = val; }
-	  }
-
-	  return true
-	}
-
-	function resolveRecordPath (path, record) {
-	  return resolvePath(path, record.parent ? record.parent.path : '/', true)
-	}
-
-	/*  */
-
-
-	var positionStore = Object.create(null);
-
-	function setupScroll () {
-	  window.addEventListener('popstate', function (e) {
-	    saveScrollPosition();
-	    if (e.state && e.state.key) {
-	      setStateKey(e.state.key);
-	    }
-	  });
-	}
-
-	function handleScroll (
-	  router,
-	  to,
-	  from,
-	  isPop
-	) {
-	  if (!router.app) {
-	    return
-	  }
-
-	  var behavior = router.options.scrollBehavior;
-	  if (!behavior) {
-	    return
-	  }
-
-	  if (process.env.NODE_ENV !== 'production') {
-	    assert(typeof behavior === 'function', "scrollBehavior must be a function");
-	  }
-
-	  // wait until re-render finishes before scrolling
-	  router.app.$nextTick(function () {
-	    var position = getScrollPosition();
-	    var shouldScroll = behavior(to, from, isPop ? position : null);
-	    if (!shouldScroll) {
-	      return
-	    }
-	    var isObject = typeof shouldScroll === 'object';
-	    if (isObject && typeof shouldScroll.selector === 'string') {
-	      var el = document.querySelector(shouldScroll.selector);
-	      if (el) {
-	        position = getElementPosition(el);
-	      } else if (isValidPosition(shouldScroll)) {
-	        position = normalizePosition(shouldScroll);
-	      }
-	    } else if (isObject && isValidPosition(shouldScroll)) {
-	      position = normalizePosition(shouldScroll);
-	    }
-
-	    if (position) {
-	      window.scrollTo(position.x, position.y);
-	    }
-	  });
-	}
-
-	function saveScrollPosition () {
-	  var key = getStateKey();
-	  if (key) {
-	    positionStore[key] = {
-	      x: window.pageXOffset,
-	      y: window.pageYOffset
-	    };
-	  }
-	}
-
-	function getScrollPosition () {
-	  var key = getStateKey();
-	  if (key) {
-	    return positionStore[key]
-	  }
-	}
-
-	function getElementPosition (el) {
-	  var docEl = document.documentElement;
-	  var docRect = docEl.getBoundingClientRect();
-	  var elRect = el.getBoundingClientRect();
-	  return {
-	    x: elRect.left - docRect.left,
-	    y: elRect.top - docRect.top
-	  }
-	}
-
-	function isValidPosition (obj) {
-	  return isNumber(obj.x) || isNumber(obj.y)
-	}
-
-	function normalizePosition (obj) {
-	  return {
-	    x: isNumber(obj.x) ? obj.x : window.pageXOffset,
-	    y: isNumber(obj.y) ? obj.y : window.pageYOffset
-	  }
-	}
-
-	function isNumber (v) {
-	  return typeof v === 'number'
-	}
-
-	/*  */
-
-	var supportsPushState = inBrowser && (function () {
-	  var ua = window.navigator.userAgent;
-
-	  if (
-	    (ua.indexOf('Android 2.') !== -1 || ua.indexOf('Android 4.0') !== -1) &&
-	    ua.indexOf('Mobile Safari') !== -1 &&
-	    ua.indexOf('Chrome') === -1 &&
-	    ua.indexOf('Windows Phone') === -1
-	  ) {
-	    return false
-	  }
-
-	  return window.history && 'pushState' in window.history
-	})();
-
-	// use User Timing api (if present) for more accurate key precision
-	var Time = inBrowser && window.performance && window.performance.now
-	  ? window.performance
-	  : Date;
-
-	var _key = genKey();
-
-	function genKey () {
-	  return Time.now().toFixed(3)
-	}
-
-	function getStateKey () {
-	  return _key
-	}
-
-	function setStateKey (key) {
-	  _key = key;
-	}
-
-	function pushState (url, replace) {
-	  saveScrollPosition();
-	  // try...catch the pushState call to get around Safari
-	  // DOM Exception 18 where it limits to 100 pushState calls
-	  var history = window.history;
-	  try {
-	    if (replace) {
-	      history.replaceState({ key: _key }, '', url);
-	    } else {
-	      _key = genKey();
-	      history.pushState({ key: _key }, '', url);
-	    }
-	  } catch (e) {
-	    window.location[replace ? 'replace' : 'assign'](url);
-	  }
-	}
-
-	function replaceState (url) {
-	  pushState(url, true);
-	}
-
-	/*  */
-
-	function runQueue (queue, fn, cb) {
-	  var step = function (index) {
-	    if (index >= queue.length) {
-	      cb();
-	    } else {
-	      if (queue[index]) {
-	        fn(queue[index], function () {
-	          step(index + 1);
-	        });
-	      } else {
-	        step(index + 1);
-	      }
-	    }
-	  };
-	  step(0);
-	}
-
-	/*  */
-
-	var History = function History (router, base) {
-	  this.router = router;
-	  this.base = normalizeBase(base);
-	  // start with a route object that stands for "nowhere"
-	  this.current = START;
-	  this.pending = null;
-	  this.ready = false;
-	  this.readyCbs = [];
-	  this.readyErrorCbs = [];
-	  this.errorCbs = [];
-	};
-
-	History.prototype.listen = function listen (cb) {
-	  this.cb = cb;
-	};
-
-	History.prototype.onReady = function onReady (cb, errorCb) {
-	  if (this.ready) {
-	    cb();
-	  } else {
-	    this.readyCbs.push(cb);
-	    if (errorCb) {
-	      this.readyErrorCbs.push(errorCb);
-	    }
-	  }
-	};
-
-	History.prototype.onError = function onError (errorCb) {
-	  this.errorCbs.push(errorCb);
-	};
-
-	History.prototype.transitionTo = function transitionTo (location, onComplete, onAbort) {
-	    var this$1 = this;
-
-	  var route = this.router.match(location, this.current);
-	  this.confirmTransition(route, function () {
-	    this$1.updateRoute(route);
-	    onComplete && onComplete(route);
-	    this$1.ensureURL();
-
-	    // fire ready cbs once
-	    if (!this$1.ready) {
-	      this$1.ready = true;
-	      this$1.readyCbs.forEach(function (cb) { cb(route); });
-	    }
-	  }, function (err) {
-	    if (onAbort) {
-	      onAbort(err);
-	    }
-	    if (err && !this$1.ready) {
-	      this$1.ready = true;
-	      this$1.readyErrorCbs.forEach(function (cb) { cb(err); });
-	    }
-	  });
-	};
-
-	History.prototype.confirmTransition = function confirmTransition (route, onComplete, onAbort) {
-	    var this$1 = this;
-
-	  var current = this.current;
-	  var abort = function (err) {
-	    if (err instanceof Error) {
-	      this$1.errorCbs.forEach(function (cb) { cb(err); });
-	    }
-	    onAbort && onAbort(err);
-	  };
-	  if (
-	    isSameRoute(route, current) &&
-	    // in the case the route map has been dynamically appended to
-	    route.matched.length === current.matched.length
-	  ) {
-	    this.ensureURL();
-	    return abort()
-	  }
-
-	  var ref = resolveQueue(this.current.matched, route.matched);
-	    var updated = ref.updated;
-	    var deactivated = ref.deactivated;
-	    var activated = ref.activated;
-
-	  var queue = [].concat(
-	    // in-component leave guards
-	    extractLeaveGuards(deactivated),
-	    // global before hooks
-	    this.router.beforeHooks,
-	    // in-component update hooks
-	    extractUpdateHooks(updated),
-	    // in-config enter guards
-	    activated.map(function (m) { return m.beforeEnter; }),
-	    // async components
-	    resolveAsyncComponents(activated)
-	  );
-
-	  this.pending = route;
-	  var iterator = function (hook, next) {
-	    if (this$1.pending !== route) {
-	      return abort()
-	    }
-	    try {
-	      hook(route, current, function (to) {
-	        if (to === false || to instanceof Error) {
-	          // next(false) -> abort navigation, ensure current URL
-	          this$1.ensureURL(true);
-	          abort(to);
-	        } else if (typeof to === 'string' || typeof to === 'object') {
-	          // next('/') or next({ path: '/' }) -> redirect
-	          abort();
-	          if (typeof to === 'object' && to.replace) {
-	            this$1.replace(to);
-	          } else {
-	            this$1.push(to);
-	          }
-	        } else {
-	          // confirm transition and pass on the value
-	          next(to);
-	        }
-	      });
-	    } catch (e) {
-	      abort(e);
-	    }
-	  };
-
-	  runQueue(queue, iterator, function () {
-	    var postEnterCbs = [];
-	    var isValid = function () { return this$1.current === route; };
-	    var enterGuards = extractEnterGuards(activated, postEnterCbs, isValid);
-	    // wait until async components are resolved before
-	    // extracting in-component enter guards
-	    runQueue(enterGuards, iterator, function () {
-	      if (this$1.pending !== route) {
-	        return abort()
-	      }
-	      this$1.pending = null;
-	      onComplete(route);
-	      if (this$1.router.app) {
-	        this$1.router.app.$nextTick(function () {
-	          postEnterCbs.forEach(function (cb) { cb(); });
-	        });
-	      }
-	    });
-	  });
-	};
-
-	History.prototype.updateRoute = function updateRoute (route) {
-	  var prev = this.current;
-	  this.current = route;
-	  this.cb && this.cb(route);
-	  this.router.afterHooks.forEach(function (hook) {
-	    hook && hook(route, prev);
-	  });
-	};
-
-	function normalizeBase (base) {
-	  if (!base) {
-	    if (inBrowser) {
-	      // respect <base> tag
-	      var baseEl = document.querySelector('base');
-	      base = (baseEl && baseEl.getAttribute('href')) || '/';
-	    } else {
-	      base = '/';
-	    }
-	  }
-	  // make sure there's the starting slash
-	  if (base.charAt(0) !== '/') {
-	    base = '/' + base;
-	  }
-	  // remove trailing slash
-	  return base.replace(/\/$/, '')
-	}
-
-	function resolveQueue (
-	  current,
-	  next
-	) {
-	  var i;
-	  var max = Math.max(current.length, next.length);
-	  for (i = 0; i < max; i++) {
-	    if (current[i] !== next[i]) {
-	      break
-	    }
-	  }
-	  return {
-	    updated: next.slice(0, i),
-	    activated: next.slice(i),
-	    deactivated: current.slice(i)
-	  }
-	}
-
-	function extractGuards (
-	  records,
-	  name,
-	  bind,
-	  reverse
-	) {
-	  var guards = flatMapComponents(records, function (def, instance, match, key) {
-	    var guard = extractGuard(def, name);
-	    if (guard) {
-	      return Array.isArray(guard)
-	        ? guard.map(function (guard) { return bind(guard, instance, match, key); })
-	        : bind(guard, instance, match, key)
-	    }
-	  });
-	  return flatten(reverse ? guards.reverse() : guards)
-	}
-
-	function extractGuard (
-	  def,
-	  key
-	) {
-	  if (typeof def !== 'function') {
-	    // extend now so that global mixins are applied.
-	    def = _Vue.extend(def);
-	  }
-	  return def.options[key]
-	}
-
-	function extractLeaveGuards (deactivated) {
-	  return extractGuards(deactivated, 'beforeRouteLeave', bindGuard, true)
-	}
-
-	function extractUpdateHooks (updated) {
-	  return extractGuards(updated, 'beforeRouteUpdate', bindGuard)
-	}
-
-	function bindGuard (guard, instance) {
-	  return function boundRouteGuard () {
-	    return guard.apply(instance, arguments)
-	  }
-	}
-
-	function extractEnterGuards (
-	  activated,
-	  cbs,
-	  isValid
-	) {
-	  return extractGuards(activated, 'beforeRouteEnter', function (guard, _, match, key) {
-	    return bindEnterGuard(guard, match, key, cbs, isValid)
-	  })
-	}
-
-	function bindEnterGuard (
-	  guard,
-	  match,
-	  key,
-	  cbs,
-	  isValid
-	) {
-	  return function routeEnterGuard (to, from, next) {
-	    return guard(to, from, function (cb) {
-	      next(cb);
-	      if (typeof cb === 'function') {
-	        cbs.push(function () {
-	          // #750
-	          // if a router-view is wrapped with an out-in transition,
-	          // the instance may not have been registered at this time.
-	          // we will need to poll for registration until current route
-	          // is no longer valid.
-	          poll(cb, match.instances, key, isValid);
-	        });
-	      }
-	    })
-	  }
-	}
-
-	function poll (
-	  cb, // somehow flow cannot infer this is a function
-	  instances,
-	  key,
-	  isValid
-	) {
-	  if (instances[key]) {
-	    cb(instances[key]);
-	  } else if (isValid()) {
-	    setTimeout(function () {
-	      poll(cb, instances, key, isValid);
-	    }, 16);
-	  }
-	}
-
-	function resolveAsyncComponents (matched) {
-	  var _next;
-	  var pending = 0;
-	  var error = null;
-
-	  flatMapComponents(matched, function (def, _, match, key) {
-	    // if it's a function and doesn't have cid attached,
-	    // assume it's an async component resolve function.
-	    // we are not using Vue's default async resolving mechanism because
-	    // we want to halt the navigation until the incoming component has been
-	    // resolved.
-	    if (typeof def === 'function' && def.cid === undefined) {
-	      pending++;
-
-	      var resolve = once(function (resolvedDef) {
-	        // save resolved on async factory in case it's used elsewhere
-	        def.resolved = typeof resolvedDef === 'function'
-	          ? resolvedDef
-	          : _Vue.extend(resolvedDef);
-	        match.components[key] = resolvedDef;
-	        pending--;
-	        if (pending <= 0 && _next) {
-	          _next();
-	        }
-	      });
-
-	      var reject = once(function (reason) {
-	        var msg = "Failed to resolve async component " + key + ": " + reason;
-	        process.env.NODE_ENV !== 'production' && warn(false, msg);
-	        if (!error) {
-	          error = reason instanceof Error
-	            ? reason
-	            : new Error(msg);
-	          if (_next) { _next(error); }
-	        }
-	      });
-
-	      var res;
-	      try {
-	        res = def(resolve, reject);
-	      } catch (e) {
-	        reject(e);
-	      }
-	      if (res) {
-	        if (typeof res.then === 'function') {
-	          res.then(resolve, reject);
-	        } else {
-	          // new syntax in Vue 2.3
-	          var comp = res.component;
-	          if (comp && typeof comp.then === 'function') {
-	            comp.then(resolve, reject);
-	          }
-	        }
-	      }
-	    }
-	  });
-
-	  return function (to, from, next) {
-	    if (error) {
-	      next(error);
-	    } else if (pending <= 0) {
-	      next();
-	    } else {
-	      _next = next;
-	    }
-	  }
-	}
-
-	function flatMapComponents (
-	  matched,
-	  fn
-	) {
-	  return flatten(matched.map(function (m) {
-	    return Object.keys(m.components).map(function (key) { return fn(
-	      m.components[key],
-	      m.instances[key],
-	      m, key
-	    ); })
-	  }))
-	}
-
-	function flatten (arr) {
-	  return Array.prototype.concat.apply([], arr)
-	}
-
-	// in Webpack 2, require.ensure now also returns a Promise
-	// so the resolve/reject functions may get called an extra time
-	// if the user uses an arrow function shorthand that happens to
-	// return that Promise.
-	function once (fn) {
-	  var called = false;
-	  return function () {
-	    if (called) { return }
-	    called = true;
-	    return fn.apply(this, arguments)
-	  }
-	}
-
-	/*  */
-
-
-	var HTML5History = (function (History$$1) {
-	  function HTML5History (router, base) {
-	    var this$1 = this;
-
-	    History$$1.call(this, router, base);
-
-	    var expectScroll = router.options.scrollBehavior;
-
-	    if (expectScroll) {
-	      setupScroll();
-	    }
-
-	    window.addEventListener('popstate', function (e) {
-	      this$1.transitionTo(getLocation(this$1.base), function (route) {
-	        if (expectScroll) {
-	          handleScroll(router, route, this$1.current, true);
-	        }
-	      });
-	    });
-	  }
-
-	  if ( History$$1 ) HTML5History.__proto__ = History$$1;
-	  HTML5History.prototype = Object.create( History$$1 && History$$1.prototype );
-	  HTML5History.prototype.constructor = HTML5History;
-
-	  HTML5History.prototype.go = function go (n) {
-	    window.history.go(n);
-	  };
-
-	  HTML5History.prototype.push = function push (location, onComplete, onAbort) {
-	    var this$1 = this;
-
-	    var ref = this;
-	    var fromRoute = ref.current;
-	    this.transitionTo(location, function (route) {
-	      pushState(cleanPath(this$1.base + route.fullPath));
-	      handleScroll(this$1.router, route, fromRoute, false);
-	      onComplete && onComplete(route);
-	    }, onAbort);
-	  };
-
-	  HTML5History.prototype.replace = function replace (location, onComplete, onAbort) {
-	    var this$1 = this;
-
-	    var ref = this;
-	    var fromRoute = ref.current;
-	    this.transitionTo(location, function (route) {
-	      replaceState(cleanPath(this$1.base + route.fullPath));
-	      handleScroll(this$1.router, route, fromRoute, false);
-	      onComplete && onComplete(route);
-	    }, onAbort);
-	  };
-
-	  HTML5History.prototype.ensureURL = function ensureURL (push) {
-	    if (getLocation(this.base) !== this.current.fullPath) {
-	      var current = cleanPath(this.base + this.current.fullPath);
-	      push ? pushState(current) : replaceState(current);
-	    }
-	  };
-
-	  HTML5History.prototype.getCurrentLocation = function getCurrentLocation () {
-	    return getLocation(this.base)
-	  };
-
-	  return HTML5History;
-	}(History));
-
-	function getLocation (base) {
-	  var path = window.location.pathname;
-	  if (base && path.indexOf(base) === 0) {
-	    path = path.slice(base.length);
-	  }
-	  return (path || '/') + window.location.search + window.location.hash
-	}
-
-	/*  */
-
-
-	var HashHistory = (function (History$$1) {
-	  function HashHistory (router, base, fallback) {
-	    History$$1.call(this, router, base);
-	    // check history fallback deeplinking
-	    if (fallback && checkFallback(this.base)) {
-	      return
-	    }
-	    ensureSlash();
-	  }
-
-	  if ( History$$1 ) HashHistory.__proto__ = History$$1;
-	  HashHistory.prototype = Object.create( History$$1 && History$$1.prototype );
-	  HashHistory.prototype.constructor = HashHistory;
-
-	  // this is delayed until the app mounts
-	  // to avoid the hashchange listener being fired too early
-	  HashHistory.prototype.setupListeners = function setupListeners () {
-	    var this$1 = this;
-
-	    window.addEventListener('hashchange', function () {
-	      if (!ensureSlash()) {
-	        return
-	      }
-	      this$1.transitionTo(getHash(), function (route) {
-	        replaceHash(route.fullPath);
-	      });
-	    });
-	  };
-
-	  HashHistory.prototype.push = function push (location, onComplete, onAbort) {
-	    this.transitionTo(location, function (route) {
-	      pushHash(route.fullPath);
-	      onComplete && onComplete(route);
-	    }, onAbort);
-	  };
-
-	  HashHistory.prototype.replace = function replace (location, onComplete, onAbort) {
-	    this.transitionTo(location, function (route) {
-	      replaceHash(route.fullPath);
-	      onComplete && onComplete(route);
-	    }, onAbort);
-	  };
-
-	  HashHistory.prototype.go = function go (n) {
-	    window.history.go(n);
-	  };
-
-	  HashHistory.prototype.ensureURL = function ensureURL (push) {
-	    var current = this.current.fullPath;
-	    if (getHash() !== current) {
-	      push ? pushHash(current) : replaceHash(current);
-	    }
-	  };
-
-	  HashHistory.prototype.getCurrentLocation = function getCurrentLocation () {
-	    return getHash()
-	  };
-
-	  return HashHistory;
-	}(History));
-
-	function checkFallback (base) {
-	  var location = getLocation(base);
-	  if (!/^\/#/.test(location)) {
-	    window.location.replace(
-	      cleanPath(base + '/#' + location)
-	    );
-	    return true
-	  }
-	}
-
-	function ensureSlash () {
-	  var path = getHash();
-	  if (path.charAt(0) === '/') {
-	    return true
-	  }
-	  replaceHash('/' + path);
-	  return false
-	}
-
-	function getHash () {
-	  // We can't use window.location.hash here because it's not
-	  // consistent across browsers - Firefox will pre-decode it!
-	  var href = window.location.href;
-	  var index = href.indexOf('#');
-	  return index === -1 ? '' : href.slice(index + 1)
-	}
-
-	function pushHash (path) {
-	  window.location.hash = path;
-	}
-
-	function replaceHash (path) {
-	  var i = window.location.href.indexOf('#');
-	  window.location.replace(
-	    window.location.href.slice(0, i >= 0 ? i : 0) + '#' + path
-	  );
-	}
-
-	/*  */
-
-
-	var AbstractHistory = (function (History$$1) {
-	  function AbstractHistory (router, base) {
-	    History$$1.call(this, router, base);
-	    this.stack = [];
-	    this.index = -1;
-	  }
-
-	  if ( History$$1 ) AbstractHistory.__proto__ = History$$1;
-	  AbstractHistory.prototype = Object.create( History$$1 && History$$1.prototype );
-	  AbstractHistory.prototype.constructor = AbstractHistory;
-
-	  AbstractHistory.prototype.push = function push (location, onComplete, onAbort) {
-	    var this$1 = this;
-
-	    this.transitionTo(location, function (route) {
-	      this$1.stack = this$1.stack.slice(0, this$1.index + 1).concat(route);
-	      this$1.index++;
-	      onComplete && onComplete(route);
-	    }, onAbort);
-	  };
-
-	  AbstractHistory.prototype.replace = function replace (location, onComplete, onAbort) {
-	    var this$1 = this;
-
-	    this.transitionTo(location, function (route) {
-	      this$1.stack = this$1.stack.slice(0, this$1.index).concat(route);
-	      onComplete && onComplete(route);
-	    }, onAbort);
-	  };
-
-	  AbstractHistory.prototype.go = function go (n) {
-	    var this$1 = this;
-
-	    var targetIndex = this.index + n;
-	    if (targetIndex < 0 || targetIndex >= this.stack.length) {
-	      return
-	    }
-	    var route = this.stack[targetIndex];
-	    this.confirmTransition(route, function () {
-	      this$1.index = targetIndex;
-	      this$1.updateRoute(route);
-	    });
-	  };
-
-	  AbstractHistory.prototype.getCurrentLocation = function getCurrentLocation () {
-	    var current = this.stack[this.stack.length - 1];
-	    return current ? current.fullPath : '/'
-	  };
-
-	  AbstractHistory.prototype.ensureURL = function ensureURL () {
-	    // noop
-	  };
-
-	  return AbstractHistory;
-	}(History));
-
-	/*  */
-
-	var VueRouter = function VueRouter (options) {
-	  if ( options === void 0 ) options = {};
-
-	  this.app = null;
-	  this.apps = [];
-	  this.options = options;
-	  this.beforeHooks = [];
-	  this.afterHooks = [];
-	  this.matcher = createMatcher(options.routes || [], this);
-
-	  var mode = options.mode || 'hash';
-	  this.fallback = mode === 'history' && !supportsPushState;
-	  if (this.fallback) {
-	    mode = 'hash';
-	  }
-	  if (!inBrowser) {
-	    mode = 'abstract';
-	  }
-	  this.mode = mode;
-
-	  switch (mode) {
-	    case 'history':
-	      this.history = new HTML5History(this, options.base);
-	      break
-	    case 'hash':
-	      this.history = new HashHistory(this, options.base, this.fallback);
-	      break
-	    case 'abstract':
-	      this.history = new AbstractHistory(this, options.base);
-	      break
-	    default:
-	      if (process.env.NODE_ENV !== 'production') {
-	        assert(false, ("invalid mode: " + mode));
-	      }
-	  }
-	};
-
-	var prototypeAccessors = { currentRoute: {} };
-
-	VueRouter.prototype.match = function match (
-	  raw,
-	  current,
-	  redirectedFrom
-	) {
-	  return this.matcher.match(raw, current, redirectedFrom)
-	};
-
-	prototypeAccessors.currentRoute.get = function () {
-	  return this.history && this.history.current
-	};
-
-	VueRouter.prototype.init = function init (app /* Vue component instance */) {
-	    var this$1 = this;
-
-	  process.env.NODE_ENV !== 'production' && assert(
-	    install.installed,
-	    "not installed. Make sure to call `Vue.use(VueRouter)` " +
-	    "before creating root instance."
-	  );
-
-	  this.apps.push(app);
-
-	  // main app already initialized.
-	  if (this.app) {
-	    return
-	  }
-
-	  this.app = app;
-
-	  var history = this.history;
-
-	  if (history instanceof HTML5History) {
-	    history.transitionTo(history.getCurrentLocation());
-	  } else if (history instanceof HashHistory) {
-	    var setupHashListener = function () {
-	      history.setupListeners();
-	    };
-	    history.transitionTo(
-	      history.getCurrentLocation(),
-	      setupHashListener,
-	      setupHashListener
-	    );
-	  }
-
-	  history.listen(function (route) {
-	    this$1.apps.forEach(function (app) {
-	      app._route = route;
-	    });
-	  });
-	};
-
-	VueRouter.prototype.beforeEach = function beforeEach (fn) {
-	  this.beforeHooks.push(fn);
-	};
-
-	VueRouter.prototype.afterEach = function afterEach (fn) {
-	  this.afterHooks.push(fn);
-	};
-
-	VueRouter.prototype.onReady = function onReady (cb, errorCb) {
-	  this.history.onReady(cb, errorCb);
-	};
-
-	VueRouter.prototype.onError = function onError (errorCb) {
-	  this.history.onError(errorCb);
-	};
-
-	VueRouter.prototype.push = function push (location, onComplete, onAbort) {
-	  this.history.push(location, onComplete, onAbort);
-	};
-
-	VueRouter.prototype.replace = function replace (location, onComplete, onAbort) {
-	  this.history.replace(location, onComplete, onAbort);
-	};
-
-	VueRouter.prototype.go = function go (n) {
-	  this.history.go(n);
-	};
-
-	VueRouter.prototype.back = function back () {
-	  this.go(-1);
-	};
-
-	VueRouter.prototype.forward = function forward () {
-	  this.go(1);
-	};
-
-	VueRouter.prototype.getMatchedComponents = function getMatchedComponents (to) {
-	  var route = to
-	    ? this.resolve(to).route
-	    : this.currentRoute;
-	  if (!route) {
-	    return []
-	  }
-	  return [].concat.apply([], route.matched.map(function (m) {
-	    return Object.keys(m.components).map(function (key) {
-	      return m.components[key]
-	    })
-	  }))
-	};
-
-	VueRouter.prototype.resolve = function resolve (
-	  to,
-	  current,
-	  append
-	) {
-	  var location = normalizeLocation(
-	    to,
-	    current || this.history.current,
-	    append,
-	    this
-	  );
-	  var route = this.match(location, current);
-	  var fullPath = route.redirectedFrom || route.fullPath;
-	  var base = this.history.base;
-	  var href = createHref(base, fullPath, this.mode);
-	  return {
-	    location: location,
-	    route: route,
-	    href: href,
-	    // for backwards compat
-	    normalizedTo: location,
-	    resolved: route
-	  }
-	};
-
-	VueRouter.prototype.addRoutes = function addRoutes (routes) {
-	  this.matcher.addRoutes(routes);
-	  if (this.history.current !== START) {
-	    this.history.transitionTo(this.history.getCurrentLocation());
-	  }
-	};
-
-	Object.defineProperties( VueRouter.prototype, prototypeAccessors );
-
-	function createHref (base, fullPath, mode) {
-	  var path = mode === 'hash' ? '#' + fullPath : fullPath;
-	  return base ? cleanPath(base + '/' + path) : path
-	}
-
-	VueRouter.install = install;
-	VueRouter.version = '2.4.0';
-
-	if (inBrowser && window.Vue) {
-	  window.Vue.use(VueRouter);
-	}
-
-	module.exports = VueRouter;
-
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(313)))
-
-/***/ },
-/* 313 */
-/***/ function(module, exports) {
-
-	// shim for using process in browser
-	var process = module.exports = {};
-
-	// cached from whatever global is present so that test runners that stub it
-	// don't break things.  But we need to wrap it in a try catch in case it is
-	// wrapped in strict mode code which doesn't define any globals.  It's inside a
-	// function because try/catches deoptimize in certain engines.
-
-	var cachedSetTimeout;
-	var cachedClearTimeout;
-
-	function defaultSetTimout() {
-	    throw new Error('setTimeout has not been defined');
-	}
-	function defaultClearTimeout () {
-	    throw new Error('clearTimeout has not been defined');
-	}
-	(function () {
-	    try {
-	        if (typeof setTimeout === 'function') {
-	            cachedSetTimeout = setTimeout;
-	        } else {
-	            cachedSetTimeout = defaultSetTimout;
-	        }
-	    } catch (e) {
-	        cachedSetTimeout = defaultSetTimout;
-	    }
-	    try {
-	        if (typeof clearTimeout === 'function') {
-	            cachedClearTimeout = clearTimeout;
-	        } else {
-	            cachedClearTimeout = defaultClearTimeout;
-	        }
-	    } catch (e) {
-	        cachedClearTimeout = defaultClearTimeout;
-	    }
-	} ())
-	function runTimeout(fun) {
-	    if (cachedSetTimeout === setTimeout) {
-	        //normal enviroments in sane situations
-	        return setTimeout(fun, 0);
-	    }
-	    // if setTimeout wasn't available but was latter defined
-	    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-	        cachedSetTimeout = setTimeout;
-	        return setTimeout(fun, 0);
-	    }
-	    try {
-	        // when when somebody has screwed with setTimeout but no I.E. maddness
-	        return cachedSetTimeout(fun, 0);
-	    } catch(e){
-	        try {
-	            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-	            return cachedSetTimeout.call(null, fun, 0);
-	        } catch(e){
-	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-	            return cachedSetTimeout.call(this, fun, 0);
-	        }
-	    }
-
-
-	}
-	function runClearTimeout(marker) {
-	    if (cachedClearTimeout === clearTimeout) {
-	        //normal enviroments in sane situations
-	        return clearTimeout(marker);
-	    }
-	    // if clearTimeout wasn't available but was latter defined
-	    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-	        cachedClearTimeout = clearTimeout;
-	        return clearTimeout(marker);
-	    }
-	    try {
-	        // when when somebody has screwed with setTimeout but no I.E. maddness
-	        return cachedClearTimeout(marker);
-	    } catch (e){
-	        try {
-	            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-	            return cachedClearTimeout.call(null, marker);
-	        } catch (e){
-	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-	            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-	            return cachedClearTimeout.call(this, marker);
-	        }
-	    }
-
-
-
-	}
-	var queue = [];
-	var draining = false;
-	var currentQueue;
-	var queueIndex = -1;
-
-	function cleanUpNextTick() {
-	    if (!draining || !currentQueue) {
-	        return;
-	    }
-	    draining = false;
-	    if (currentQueue.length) {
-	        queue = currentQueue.concat(queue);
-	    } else {
-	        queueIndex = -1;
-	    }
-	    if (queue.length) {
-	        drainQueue();
-	    }
-	}
-
-	function drainQueue() {
-	    if (draining) {
-	        return;
-	    }
-	    var timeout = runTimeout(cleanUpNextTick);
-	    draining = true;
-
-	    var len = queue.length;
-	    while(len) {
-	        currentQueue = queue;
-	        queue = [];
-	        while (++queueIndex < len) {
-	            if (currentQueue) {
-	                currentQueue[queueIndex].run();
-	            }
-	        }
-	        queueIndex = -1;
-	        len = queue.length;
-	    }
-	    currentQueue = null;
-	    draining = false;
-	    runClearTimeout(timeout);
-	}
-
-	process.nextTick = function (fun) {
-	    var args = new Array(arguments.length - 1);
-	    if (arguments.length > 1) {
-	        for (var i = 1; i < arguments.length; i++) {
-	            args[i - 1] = arguments[i];
-	        }
-	    }
-	    queue.push(new Item(fun, args));
-	    if (queue.length === 1 && !draining) {
-	        runTimeout(drainQueue);
-	    }
-	};
-
-	// v8 likes predictible objects
-	function Item(fun, array) {
-	    this.fun = fun;
-	    this.array = array;
-	}
-	Item.prototype.run = function () {
-	    this.fun.apply(null, this.array);
-	};
-	process.title = 'browser';
-	process.browser = true;
-	process.env = {};
-	process.argv = [];
-	process.version = ''; // empty string to avoid regexp issues
-	process.versions = {};
-
-	function noop() {}
-
-	process.on = noop;
-	process.addListener = noop;
-	process.once = noop;
-	process.off = noop;
-	process.removeListener = noop;
-	process.removeAllListeners = noop;
-	process.emit = noop;
-
-	process.binding = function (name) {
-	    throw new Error('process.binding is not supported');
-	};
-
-	process.cwd = function () { return '/' };
-	process.chdir = function (dir) {
-	    throw new Error('process.chdir is not supported');
-	};
-	process.umask = function() { return 0; };
-
-
-/***/ },
-/* 314 */
+/* 300 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function (global, factory) {
-	   true ? factory(__webpack_require__(315)) :
+	   true ? factory(__webpack_require__(301)) :
 	  typeof define === 'function' && define.amd ? define(['hammerjs'], factory) :
 	  (factory(global.Hammer));
 	}(this, (function (Hammer) { 'use strict';
@@ -40785,7 +36207,7 @@
 
 
 /***/ },
-/* 315 */
+/* 301 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*! Hammer.JS - v2.0.7 - 2016-04-22
@@ -43431,6 +38853,4613 @@
 	}
 
 	})(window, document, 'Hammer');
+
+
+/***/ },
+/* 302 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div id=\"page-lesson\">\n\n\t<div  class=\"panel\" id=\"start\" v-if=\"page == 'start'\">\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"back\">\n\t\t\t<i class=\"icon-back\"></i>\n\t\t</router-link>\n\n\t\t<div id=\"popUp\">\n\t\t\t<i class=\"big icon-yipp_apple_full\"></i>\n\t\t\t<h3>Lesson 2: Screentime</h3>\n\t\t\t<p>TestIn this lesson, we will help to start the first practice appetizers</p>\n\t\t\t<hr>\n\t\t\t<span><i class=\"icon-yipp_check_full\"></i> 5min</span>\n\t\t</div>\n\t\t\t\n\t\t<a href=\"#\" v-on:click.prevent=\"startLesson\" class=\"btn bottom white\">Start</a>\n\t</div>\n\n\t<div class=\"panel\" id=\"cards\" v-if=\"page == 'cards'\">\n\t\t<a v-on:click.prevent=\"back('start')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<span class=\"bar-inner\"></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div id=\"paper-1\" class=\"paper\">\n\n\t\t\t<h3>Why?</h3>\n\n\t\t\t<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>\n\n\t\t\t<i class=\"heart icon-yipp_check_full\"></i>\n\n\t\t\t<div id=\"paper_foo1\">\n\t\t\t\t<div id=\"paper_foo2\"></div>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div id=\"paper-2\" class=\"paper\">\n\n\t\t\t<h3>Why?2</h3>\n\n\t\t\t<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>\n\n\t\t\t<i class=\"heart icon-yipp_check_full\"></i>\n\n\t\t\t<div id=\"paper_foo1\">\n\t\t\t\t<div id=\"paper_foo2\"></div>\n\t\t\t</div>\n\t\t</div>\n\n\t</div>\n\t\t\n\t<div class=\"panel\" id=\"stack\" v-if=\"page == 'stack'\">\n\t\t<a v-on:click.prevent=\"back('cards')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<span class=\"bar-inner\"></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"content\" v-on:click.prevent=\"next('complete')\">\n\t\t\t\n\t\t\t<p class=\"text-center\">Te weinig slapen vergroot de kans op overgewicht bij kinderen, omdat:</p>\n\t\t\t\n\t\t\t<ul>\n\t\t\t\t\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t\n\t\t\t</ul>\n\n\t\t</div>\n\n\t</div>\n\t\t\t\n\t<div class=\"panel\" id=\"complete\" v-if=\"page == 'complete'\">\n\t\t<a v-on:click.prevent=\"back('stack')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<span class=\"bar-inner\"></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"content\">\n\t\t\n\t\t\t<h1>Les compleet!</h1>\n\t\t\t\n\t\t\t<i class=\"biggest icon-yipp_check_full\"></i>\n\t\t\t\n\t\t\t<p class=\"text-center\">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>\n\t\t\t\n\t\t\t\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<router-link :to=\"{ name: 'challenge'}\" class=\"btn white\">\n\t\t\t\tStart Challenge\n\t\t\t\t</router-link>\n\n\t\t\t\t<br>\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"back('start')\" class=\"btn white\">Reset Lesson</a>\n\t\t\t</div>\n\t\t\n\t\t</div>\n\n\t</div>\n\n\t<modal v-if=\"showModal\" @close=\"showModal = false\">\n        <h3 slot=\"header\">Lorem Ipsum</h3>\n        <p slot=\"body\">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>\n    </modal>\n\n</div>\n\t\n";
+
+/***/ },
+/* 303 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__vue_script__ = __webpack_require__(304)
+	__vue_template__ = __webpack_require__(305)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "/Users/racheljaro/webroot/yipp/app/src/components/Challenge.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 304 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _index = __webpack_require__(8);
+
+	var _config = __webpack_require__(1);
+
+	var _config2 = _interopRequireDefault(_config);
+
+	var _auth = __webpack_require__(184);
+
+	var _auth2 = _interopRequireDefault(_auth);
+
+	var _timeline = __webpack_require__(290);
+
+	var _timeline2 = _interopRequireDefault(_timeline);
+
+	var _jquery = __webpack_require__(11);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	var _Modal = __webpack_require__(291);
+
+	var _Modal2 = _interopRequireDefault(_Modal);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// http://dev.fedvas.com/cms/api.dsuite/yipp/todos/37/en
+
+	// <template>
+	// 	<div id="container">
+	//
+	// 		<div class="header">
+	//
+	// 			<router-link :to="{ name: 'timeline'}" class="icon">
+	// 				<i class="icon-yipp_profile_line"></i>
+	// 			</router-link>
+	//
+	// 			<div class="title">Challenge</div>
+	//
+	// 		</div>
+	//
+	//
+	// 		<div class="content" v-if="empty">
+	//
+	// 			<div class="panel">
+	// 			Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+	// 			</div>
+	//
+	// 			<a href="" class="btn">Explore training</a>
+	//
+	// 		</div>
+	//
+	// 		<div class="content" v-if="empty == false">
+	//
+	// 			<ul class="blockList">
+	// 				<li>
+	// 					<span class="set">
+	// 					<i class="icon-yipp_notification_line"></i>
+	// 					14:00
+	// 					| <i class="icon-yipp_repeat_line"></i>
+	// 					Every day
+	// 					</span>
+	// 					<p>Lorem Ipsum</p>
+	//
+	// 					<router-link :to="{ path: 'challenge-1'}">
+	// 					<i class="arrow icon-yipp_forward"></i>
+	// 					</router-link>
+	//
+	// 				</li>
+	// 				<li>
+	// 				<span class="set">
+	// 					<i class="icon-yipp_notification_line"></i>
+	// 					14:00
+	// 					| <i class="icon-yipp_repeat_line"></i>
+	// 					Every day
+	// 					</span>
+	// 					<p>Lorem Ipsum</p>
+	//
+	// 					<router-link :to="{ path: 'challenge-2'}">
+	// 						<i class="arrow icon-yipp_forward"></i>
+	// 					</router-link>
+	// 				</li>
+	// 			</ul>		
+	//
+	// 			<a href="" v-if="isShowDoneChallenges == false" v-on:click.prevent="toggleDoneChallenges" class="link">Show finished challenges</a>
+	// 			<a href="" v-if="isShowDoneChallenges" v-on:click.prevent="toggleDoneChallenges" class="link">Hide finished challenges</a>
+	//
+	// 			<ul class="blockList2" v-if="isShowDoneChallenges">
+	// 				<li>
+	// 					<p>Lorem Ipsum</p>
+	//
+	// 					<i class="arrow icon-yipp_forward"></i>
+	//
+	// 				</li>
+	// 				<li>
+	// 					<p>Lorem Ipsum</p>
+	//
+	// 						<i class="arrow icon-yipp_forward"></i>
+	// 				</li>
+	// 			</ul>
+	// 		</div>
+	//
+	// 		<footer>
+	// 			<ul>
+	// 				<li>
+	// 					<router-link :to="{ name: 'timeline'}"><span class="icon-yipp_home_full-"></span>Training</router-link>
+	// 				</li>
+	// 				<li>
+	// 					<a href="javascript:void(0);" class="active"><span class="icon-yipp_challenge_line"></span>Challenge</a>
+	// 				</li>
+	// 			</ul>
+	// 		</footer>
+	//
+	// 	</div>	
+	// </template>
+	//
+	// <script>
+	exports.default = {
+	    data: function data() {
+	        return {
+	            empty: false,
+	            isShowDoneChallenges: false,
+	            page: 'start',
+	            levels: [],
+	            lessons: [],
+	            showModal: false,
+	            currentLevel: 1
+	        };
+	    },
+
+	    created: function created() {
+	        _auth2.default.check();
+	        if (!_auth2.default.authenticated) {
+	            this.redirectGuest();
+	        }
+	    },
+	    methods: {
+	        startLesson: function startLesson() {
+	            this.page = 'cards';
+	        },
+	        toggleDoneChallenges: function toggleDoneChallenges() {
+	            if (this.isShowDoneChallenges) {
+	                this.isShowDoneChallenges = false;
+	            } else {
+	                this.isShowDoneChallenges = true;
+	            }
+	        },
+	        redirectGuest: function redirectGuest() {
+	            this.$router.push('login');
+	        }
+	    },
+
+	    watch: {
+	        '$route': function $route(to, from) {
+	            console.log(to, from);
+	            this.currentLesson = to;
+	        }
+	    },
+
+	    components: {
+	        Modal: _Modal2.default
+	    }
+	};
+
+	// </script>
+
+/***/ },
+/* 305 */
+/***/ function(module, exports) {
+
+	module.exports = "\n\t<div id=\"container\">\n\t\n\t\t<div class=\"header\">\n\n\t\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"icon\">\n\t\t\t\t<i class=\"icon-yipp_profile_line\"></i>\n\t\t\t</router-link>\n\n\t\t\t<div class=\"title\">Challenge</div>\n\n\t\t</div>\n\n\t\t\n\t\t<div class=\"content\" v-if=\"empty\">\n\t\t\n\t\t\t<div class=\"panel\">\n\t\t\tLorem Ipsum is simply dummy text of the printing and typesetting industry.\n\t\t\t</div>\n\t\t\t\n\t\t\t<a href=\"\" class=\"btn\">Explore training</a>\n\t\t\n\t\t</div>\n\n\t\t<div class=\"content\" v-if=\"empty == false\">\n\n\t\t\t<ul class=\"blockList\">\n\t\t\t\t<li>\n\t\t\t\t\t<span class=\"set\">\n\t\t\t\t\t<i class=\"icon-yipp_notification_line\"></i>\n\t\t\t\t\t14:00\n\t\t\t\t\t| <i class=\"icon-yipp_repeat_line\"></i>\n\t\t\t\t\tEvery day\n\t\t\t\t\t</span>\n\t\t\t\t\t<p>Lorem Ipsum</p>\n\t\t\t\t\t\n\t\t\t\t\t<router-link :to=\"{ path: 'challenge-1'}\">\n\t\t\t\t\t<i class=\"arrow icon-yipp_forward\"></i>\n\t\t\t\t\t</router-link>\n\t\t\t\t\t\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t<span class=\"set\">\n\t\t\t\t\t<i class=\"icon-yipp_notification_line\"></i>\n\t\t\t\t\t14:00\n\t\t\t\t\t| <i class=\"icon-yipp_repeat_line\"></i>\n\t\t\t\t\tEvery day\n\t\t\t\t\t</span>\n\t\t\t\t\t<p>Lorem Ipsum</p>\n\t\t\t\t\t\n\t\t\t\t\t<router-link :to=\"{ path: 'challenge-2'}\">\n\t\t\t\t\t\t<i class=\"arrow icon-yipp_forward\"></i>\n\t\t\t\t\t</router-link>\n\t\t\t\t</li>\n\t\t\t</ul>\t\t\n\n\t\t\t<a href=\"\" v-if=\"isShowDoneChallenges == false\" v-on:click.prevent=\"toggleDoneChallenges\" class=\"link\">Show finished challenges</a>\n\t\t\t<a href=\"\" v-if=\"isShowDoneChallenges\" v-on:click.prevent=\"toggleDoneChallenges\" class=\"link\">Hide finished challenges</a>\n\n\t\t\t<ul class=\"blockList2\" v-if=\"isShowDoneChallenges\">\n\t\t\t\t<li>\n\t\t\t\t\t<p>Lorem Ipsum</p>\n\t\t\t\t\t\n\t\t\t\t\t<i class=\"arrow icon-yipp_forward\"></i>\n\t\t\t\t\t\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<p>Lorem Ipsum</p>\n\t\t\t\t\t\n\t\t\t\t\t\t<i class=\"arrow icon-yipp_forward\"></i>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t</div>\n\n\t\t<footer>\n\t\t\t<ul>\n\t\t\t\t<li>\n\t\t\t\t\t<router-link :to=\"{ name: 'timeline'}\"><span class=\"icon-yipp_home_full-\"></span>Training</router-link>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a href=\"javascript:void(0);\" class=\"active\"><span class=\"icon-yipp_challenge_line\"></span>Challenge</a>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t</footer>\n\t\t\n\t</div>\t\n";
+
+/***/ },
+/* 306 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__vue_template__ = __webpack_require__(307)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "/Users/racheljaro/webroot/yipp/app/src/components/ChallengeNew.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 307 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div id=\"\">\nto follow\n</div>\n";
+
+/***/ },
+/* 308 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__vue_script__ = __webpack_require__(309)
+	__vue_template__ = __webpack_require__(310)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "/Users/racheljaro/webroot/yipp/app/src/components/ChallengeContent.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 309 */
+/***/ function(module, exports) {
+
+	// <template>
+	// 	<div >
+	//
+	// 		<div class="header">
+	//
+	// 			<router-link :to="{ name: 'challenge'}" class="icon">
+	// 				<i class=" icon-yipp_back"></i>
+	// 			</router-link>
+	//
+	// 			<div class="title">Challenge Details</div>
+	//
+	// 		</div>
+	//
+	// 		<div class="wrap">
+	//
+	// 			<div class="details">
+	//
+	// 			<span class="set">
+	// 					<i class="icon-yipp_notification_line"></i>
+	// 					14:00
+	// 					| <i class="icon-yipp_repeat_line"></i>
+	// 					Every day
+	// 					</span>
+	//
+	// 				<table width="100%" border="0">
+	// 					<tbody>
+	// 						<tr>
+	// 							<td>
+	// 								<p>Eating more vegetable</p>
+	// 								<p>1. Broco</p>
+	// 							</td>
+	// 							<td>
+	// 							<a href="" class="edit"><i class="icon-yipp_pencil_line"></i></a>
+	// 							</td>
+	// 						</tr>
+	// 					</tbody>
+	// 				</table>
+	//
+	// 			</div>
+	//
+	// 		</div>
+	//
+	// 		<div class="steps">
+	//
+	// 				<ul>
+	// 					<li>1</li>
+	// 					<li>2</li>
+	// 					<li>3</li>
+	// 					<li>4</li>
+	// 					<li>5</li>
+	// 				</ul>
+	//
+	// 			<hr>
+	//
+	// 		</div>
+	//
+	// 		<div class="pic" style="background-image: url(assets/img/slider-1.jpg);">
+	//
+	// 		</div>
+	//
+	// 		<h4>Evaluation</h4>
+	//
+	// 		<textarea></textarea>
+	//
+	// 		<ul class="selection">
+	// 			<li><a href=""><i class="icon-yipp_emoticon_sad"></i></a></li>
+	// 			<li><a href="" class="active"><i class="icon-yipp_emoticon_neutral"></i></a></li>
+	// 			<li><a href=""><i class="icon-yipp_emoticon_happy-"></i></a></li>
+	// 		</ul>
+	//
+	// 		<h4>Notes</h4>
+	//
+	// 		<textarea></textarea>
+	//
+	// 		<a href="" class="btn">Done</a>
+	//
+	// 	</div>
+	//
+	// 	<section class="resultCard">
+	//
+	// 		<i class="icon-yipp_check_full"></i>
+	//
+	// 		<h3>You can do it!</h3>
+	// 		<p>We made a beautiful photo collage of this week check it out!</p>
+	//
+	// 		<div class="bottom">
+	// 		<a href="javascript:void(0);" class="btn mid">See result</a>
+	//
+	// 		<a href="javascript:void(0);" class="btn big">Restart challenge</a>
+	//
+	// 		</div>
+	//
+	// 		<div id="modal">
+	//
+	// 			<div id="msg">
+	//
+	// 				<h3>Are you sure?</h3>
+	//
+	// 				<p>Do you want to restart challenge?</p>
+	//
+	// 				<a href="javascript:void(0);">Restart challenge</a>
+	//
+	// 			</div>
+	//
+	// 		</div>
+	//
+	// 	</section>
+	//
+	// 	<section id="collage">
+	//
+	// 		<div class="header">
+	// 			<a href="">X</a> Photo Collage
+	// 			<h3>Fruit and Vegetables</h3>
+	// 		</div>
+	//
+	// 		<ul>
+	// 			<li class="active">
+	// 				<img src="" alt="">
+	//
+	// 				<div class="elements">
+	// 					<div class="day">Day 1</div>
+	// 					<i class="icon icon-yipp_emoticon_sad"></i>
+	// 				</div>
+	//
+	// 				<div class="data">
+	// 					<p>"It went great this day"</p>
+	// 				</div>	
+	//
+	// 			</li>
+	//
+	// 			<li class="active">
+	// 				<img src="" alt="">
+	//
+	// 				<div class="elements">
+	// 					<div class="day">Day 2</div>
+	// 					<i class="icon icon-yipp_emoticon_happy-"></i>
+	// 				</div>
+	//
+	// 				<div class="data">
+	// 					<p>"It went great this day"</p>
+	// 				</div>	
+	//
+	// 			</li>
+	//
+	// 			<li>
+	//
+	//
+	// 				<div class="elements">
+	// 					<div class="day">Day 3</div>
+	// 					<i class="icon icon-yipp_emoticon_neutral"></i>
+	// 				</div>
+	//
+	// 				<div class="data">
+	// 					<p>"It went great this day"</p>
+	// 				</div>	
+	//
+	// 			</li>
+	//
+	// 			<li class="active">
+	// 				<img src="" alt="">
+	//
+	// 				<div class="elements">
+	// 					<div class="day">Day 4</div>
+	// 					<i class="icon icon-yipp_emoticon_happy-"></i>
+	// 				</div>
+	//
+	// 				<div class="data">
+	// 					<p>"It went great this day"</p>
+	// 				</div>	
+	//
+	// 			</li>
+	// 		</ul>
+	//
+	// 	</section>
+	//
+	// 	<div class="restart">
+	//
+	// 	<a href="" >Restart challenge</a>
+	//
+	// 	</div>	
+	// </template>
+	//
+	// <script>
+
+	// </script>
+	"use strict";
+
+/***/ },
+/* 310 */
+/***/ function(module, exports) {
+
+	module.exports = "\n\t<div >\n\t\n\t\t<div class=\"header\">\n\t\t\n\t\t\t<router-link :to=\"{ name: 'challenge'}\" class=\"icon\">\n\t\t\t\t<i class=\" icon-yipp_back\"></i>\n\t\t\t</router-link>\n\n\t\t\t<div class=\"title\">Challenge Details</div>\n\t\t\n\t\t</div>\n\t\t\n\t\t<div class=\"wrap\">\n\t\t\n\t\t\t<div class=\"details\">\n\t\t\t\n\t\t\t<span class=\"set\">\n\t\t\t\t\t<i class=\"icon-yipp_notification_line\"></i>\n\t\t\t\t\t14:00\n\t\t\t\t\t| <i class=\"icon-yipp_repeat_line\"></i>\n\t\t\t\t\tEvery day\n\t\t\t\t\t</span>\n\t\t\t\t\n\t\t\t\t<table width=\"100%\" border=\"0\">\n\t\t\t\t\t<tbody>\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t<p>Eating more vegetable</p>\n\t\t\t\t\t\t\t\t<p>1. Broco</p>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t<a href=\"\" class=\"edit\"><i class=\"icon-yipp_pencil_line\"></i></a>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t</tbody>\n\t\t\t\t</table>\n\t\t\t\t\n\t\t\t</div>\n\t\t\n\t\t</div>\n\t\n\t\t<div class=\"steps\">\n\t\n\t\t\t\t<ul>\n\t\t\t\t\t<li>1</li>\n\t\t\t\t\t<li>2</li>\n\t\t\t\t\t<li>3</li>\n\t\t\t\t\t<li>4</li>\n\t\t\t\t\t<li>5</li>\n\t\t\t\t</ul>\n\n\t\t\t<hr>\n\t\t\n\t\t</div>\n\t\t\n\t\t<div class=\"pic\" style=\"background-image: url(assets/img/slider-1.jpg);\">\n\t\t\n\t\t</div>\n\t\n\t\t<h4>Evaluation</h4>\n\t\t\n\t\t<textarea></textarea>\n\t\t\n\t\t<ul class=\"selection\">\n\t\t\t<li><a href=\"\"><i class=\"icon-yipp_emoticon_sad\"></i></a></li>\n\t\t\t<li><a href=\"\" class=\"active\"><i class=\"icon-yipp_emoticon_neutral\"></i></a></li>\n\t\t\t<li><a href=\"\"><i class=\"icon-yipp_emoticon_happy-\"></i></a></li>\n\t\t</ul>\n\t\t\n\t\t<h4>Notes</h4>\n\t\t\n\t\t<textarea></textarea>\n\t\t\n\t\t<a href=\"\" class=\"btn\">Done</a>\n\t\n\t</div>\n\t\n\t<section class=\"resultCard\">\n\t\t\n\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t\n\t\t<h3>You can do it!</h3>\n\t\t<p>We made a beautiful photo collage of this week check it out!</p>\n\t\t\n\t\t<div class=\"bottom\">\n\t\t<a href=\"javascript:void(0);\" class=\"btn mid\">See result</a>\n\n\t\t<a href=\"javascript:void(0);\" class=\"btn big\">Restart challenge</a>\n\t\t\n\t\t</div>\n\t\n\t\t<div id=\"modal\">\n\n\t\t\t<div id=\"msg\">\n\n\t\t\t\t<h3>Are you sure?</h3>\n\n\t\t\t\t<p>Do you want to restart challenge?</p>\n\n\t\t\t\t<a href=\"javascript:void(0);\">Restart challenge</a>\n\n\t\t\t</div>\n\n\t\t</div>\n\n\t</section>\n\t\n\t<section id=\"collage\">\n\t\n\t\t<div class=\"header\">\n\t\t\t<a href=\"\">X</a> Photo Collage\n\t\t\t<h3>Fruit and Vegetables</h3>\n\t\t</div>\n\t\n\t\t<ul>\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.40662873997470530.08745612050958695xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 1</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_sad\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.6438731489979730.5064285892766949xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 2</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_happy-\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li>\n\t\t\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 3</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_neutral\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.70313509395563580.9073443357052431xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 4</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_happy-\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t</ul>\n\t\n\t</section>\n\t\n\t<div class=\"restart\">\n\t\n\t<a href=\"\" >Restart challenge</a>\n\t\n\t</div>\t\n";
+
+/***/ },
+/* 311 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/*!
+	 * vue-resource v1.3.0
+	 * https://github.com/pagekit/vue-resource
+	 * Released under the MIT License.
+	 */
+
+	'use strict';
+
+	/**
+	 * Promises/A+ polyfill v1.1.4 (https://github.com/bramstein/promis)
+	 */
+
+	var RESOLVED = 0;
+	var REJECTED = 1;
+	var PENDING  = 2;
+
+	function Promise$1(executor) {
+
+	    this.state = PENDING;
+	    this.value = undefined;
+	    this.deferred = [];
+
+	    var promise = this;
+
+	    try {
+	        executor(function (x) {
+	            promise.resolve(x);
+	        }, function (r) {
+	            promise.reject(r);
+	        });
+	    } catch (e) {
+	        promise.reject(e);
+	    }
+	}
+
+	Promise$1.reject = function (r) {
+	    return new Promise$1(function (resolve, reject) {
+	        reject(r);
+	    });
+	};
+
+	Promise$1.resolve = function (x) {
+	    return new Promise$1(function (resolve, reject) {
+	        resolve(x);
+	    });
+	};
+
+	Promise$1.all = function all(iterable) {
+	    return new Promise$1(function (resolve, reject) {
+	        var count = 0, result = [];
+
+	        if (iterable.length === 0) {
+	            resolve(result);
+	        }
+
+	        function resolver(i) {
+	            return function (x) {
+	                result[i] = x;
+	                count += 1;
+
+	                if (count === iterable.length) {
+	                    resolve(result);
+	                }
+	            };
+	        }
+
+	        for (var i = 0; i < iterable.length; i += 1) {
+	            Promise$1.resolve(iterable[i]).then(resolver(i), reject);
+	        }
+	    });
+	};
+
+	Promise$1.race = function race(iterable) {
+	    return new Promise$1(function (resolve, reject) {
+	        for (var i = 0; i < iterable.length; i += 1) {
+	            Promise$1.resolve(iterable[i]).then(resolve, reject);
+	        }
+	    });
+	};
+
+	var p$1 = Promise$1.prototype;
+
+	p$1.resolve = function resolve(x) {
+	    var promise = this;
+
+	    if (promise.state === PENDING) {
+	        if (x === promise) {
+	            throw new TypeError('Promise settled with itself.');
+	        }
+
+	        var called = false;
+
+	        try {
+	            var then = x && x['then'];
+
+	            if (x !== null && typeof x === 'object' && typeof then === 'function') {
+	                then.call(x, function (x) {
+	                    if (!called) {
+	                        promise.resolve(x);
+	                    }
+	                    called = true;
+
+	                }, function (r) {
+	                    if (!called) {
+	                        promise.reject(r);
+	                    }
+	                    called = true;
+	                });
+	                return;
+	            }
+	        } catch (e) {
+	            if (!called) {
+	                promise.reject(e);
+	            }
+	            return;
+	        }
+
+	        promise.state = RESOLVED;
+	        promise.value = x;
+	        promise.notify();
+	    }
+	};
+
+	p$1.reject = function reject(reason) {
+	    var promise = this;
+
+	    if (promise.state === PENDING) {
+	        if (reason === promise) {
+	            throw new TypeError('Promise settled with itself.');
+	        }
+
+	        promise.state = REJECTED;
+	        promise.value = reason;
+	        promise.notify();
+	    }
+	};
+
+	p$1.notify = function notify() {
+	    var promise = this;
+
+	    nextTick(function () {
+	        if (promise.state !== PENDING) {
+	            while (promise.deferred.length) {
+	                var deferred = promise.deferred.shift(),
+	                    onResolved = deferred[0],
+	                    onRejected = deferred[1],
+	                    resolve = deferred[2],
+	                    reject = deferred[3];
+
+	                try {
+	                    if (promise.state === RESOLVED) {
+	                        if (typeof onResolved === 'function') {
+	                            resolve(onResolved.call(undefined, promise.value));
+	                        } else {
+	                            resolve(promise.value);
+	                        }
+	                    } else if (promise.state === REJECTED) {
+	                        if (typeof onRejected === 'function') {
+	                            resolve(onRejected.call(undefined, promise.value));
+	                        } else {
+	                            reject(promise.value);
+	                        }
+	                    }
+	                } catch (e) {
+	                    reject(e);
+	                }
+	            }
+	        }
+	    });
+	};
+
+	p$1.then = function then(onResolved, onRejected) {
+	    var promise = this;
+
+	    return new Promise$1(function (resolve, reject) {
+	        promise.deferred.push([onResolved, onRejected, resolve, reject]);
+	        promise.notify();
+	    });
+	};
+
+	p$1.catch = function (onRejected) {
+	    return this.then(undefined, onRejected);
+	};
+
+	/**
+	 * Promise adapter.
+	 */
+
+	if (typeof Promise === 'undefined') {
+	    window.Promise = Promise$1;
+	}
+
+	function PromiseObj(executor, context) {
+
+	    if (executor instanceof Promise) {
+	        this.promise = executor;
+	    } else {
+	        this.promise = new Promise(executor.bind(context));
+	    }
+
+	    this.context = context;
+	}
+
+	PromiseObj.all = function (iterable, context) {
+	    return new PromiseObj(Promise.all(iterable), context);
+	};
+
+	PromiseObj.resolve = function (value, context) {
+	    return new PromiseObj(Promise.resolve(value), context);
+	};
+
+	PromiseObj.reject = function (reason, context) {
+	    return new PromiseObj(Promise.reject(reason), context);
+	};
+
+	PromiseObj.race = function (iterable, context) {
+	    return new PromiseObj(Promise.race(iterable), context);
+	};
+
+	var p = PromiseObj.prototype;
+
+	p.bind = function (context) {
+	    this.context = context;
+	    return this;
+	};
+
+	p.then = function (fulfilled, rejected) {
+
+	    if (fulfilled && fulfilled.bind && this.context) {
+	        fulfilled = fulfilled.bind(this.context);
+	    }
+
+	    if (rejected && rejected.bind && this.context) {
+	        rejected = rejected.bind(this.context);
+	    }
+
+	    return new PromiseObj(this.promise.then(fulfilled, rejected), this.context);
+	};
+
+	p.catch = function (rejected) {
+
+	    if (rejected && rejected.bind && this.context) {
+	        rejected = rejected.bind(this.context);
+	    }
+
+	    return new PromiseObj(this.promise.catch(rejected), this.context);
+	};
+
+	p.finally = function (callback) {
+
+	    return this.then(function (value) {
+	            callback.call(this);
+	            return value;
+	        }, function (reason) {
+	            callback.call(this);
+	            return Promise.reject(reason);
+	        }
+	    );
+	};
+
+	/**
+	 * Utility functions.
+	 */
+
+	var ref = {};
+	var hasOwnProperty = ref.hasOwnProperty;
+
+	var ref$1 = [];
+	var slice = ref$1.slice;
+	var debug = false;
+	var ntick;
+
+	var inBrowser = typeof window !== 'undefined';
+
+	var Util = function (ref) {
+	    var config = ref.config;
+	    var nextTick = ref.nextTick;
+
+	    ntick = nextTick;
+	    debug = config.debug || !config.silent;
+	};
+
+	function warn(msg) {
+	    if (typeof console !== 'undefined' && debug) {
+	        console.warn('[VueResource warn]: ' + msg);
+	    }
+	}
+
+	function error(msg) {
+	    if (typeof console !== 'undefined') {
+	        console.error(msg);
+	    }
+	}
+
+	function nextTick(cb, ctx) {
+	    return ntick(cb, ctx);
+	}
+
+	function trim(str) {
+	    return str ? str.replace(/^\s*|\s*$/g, '') : '';
+	}
+
+	function toLower(str) {
+	    return str ? str.toLowerCase() : '';
+	}
+
+	function toUpper(str) {
+	    return str ? str.toUpperCase() : '';
+	}
+
+	var isArray = Array.isArray;
+
+	function isString(val) {
+	    return typeof val === 'string';
+	}
+
+
+
+	function isFunction(val) {
+	    return typeof val === 'function';
+	}
+
+	function isObject(obj) {
+	    return obj !== null && typeof obj === 'object';
+	}
+
+	function isPlainObject(obj) {
+	    return isObject(obj) && Object.getPrototypeOf(obj) == Object.prototype;
+	}
+
+	function isBlob(obj) {
+	    return typeof Blob !== 'undefined' && obj instanceof Blob;
+	}
+
+	function isFormData(obj) {
+	    return typeof FormData !== 'undefined' && obj instanceof FormData;
+	}
+
+	function when(value, fulfilled, rejected) {
+
+	    var promise = PromiseObj.resolve(value);
+
+	    if (arguments.length < 2) {
+	        return promise;
+	    }
+
+	    return promise.then(fulfilled, rejected);
+	}
+
+	function options(fn, obj, opts) {
+
+	    opts = opts || {};
+
+	    if (isFunction(opts)) {
+	        opts = opts.call(obj);
+	    }
+
+	    return merge(fn.bind({$vm: obj, $options: opts}), fn, {$options: opts});
+	}
+
+	function each(obj, iterator) {
+
+	    var i, key;
+
+	    if (isArray(obj)) {
+	        for (i = 0; i < obj.length; i++) {
+	            iterator.call(obj[i], obj[i], i);
+	        }
+	    } else if (isObject(obj)) {
+	        for (key in obj) {
+	            if (hasOwnProperty.call(obj, key)) {
+	                iterator.call(obj[key], obj[key], key);
+	            }
+	        }
+	    }
+
+	    return obj;
+	}
+
+	var assign = Object.assign || _assign;
+
+	function merge(target) {
+
+	    var args = slice.call(arguments, 1);
+
+	    args.forEach(function (source) {
+	        _merge(target, source, true);
+	    });
+
+	    return target;
+	}
+
+	function defaults(target) {
+
+	    var args = slice.call(arguments, 1);
+
+	    args.forEach(function (source) {
+
+	        for (var key in source) {
+	            if (target[key] === undefined) {
+	                target[key] = source[key];
+	            }
+	        }
+
+	    });
+
+	    return target;
+	}
+
+	function _assign(target) {
+
+	    var args = slice.call(arguments, 1);
+
+	    args.forEach(function (source) {
+	        _merge(target, source);
+	    });
+
+	    return target;
+	}
+
+	function _merge(target, source, deep) {
+	    for (var key in source) {
+	        if (deep && (isPlainObject(source[key]) || isArray(source[key]))) {
+	            if (isPlainObject(source[key]) && !isPlainObject(target[key])) {
+	                target[key] = {};
+	            }
+	            if (isArray(source[key]) && !isArray(target[key])) {
+	                target[key] = [];
+	            }
+	            _merge(target[key], source[key], deep);
+	        } else if (source[key] !== undefined) {
+	            target[key] = source[key];
+	        }
+	    }
+	}
+
+	/**
+	 * Root Prefix Transform.
+	 */
+
+	var root = function (options$$1, next) {
+
+	    var url = next(options$$1);
+
+	    if (isString(options$$1.root) && !url.match(/^(https?:)?\//)) {
+	        url = options$$1.root + '/' + url;
+	    }
+
+	    return url;
+	};
+
+	/**
+	 * Query Parameter Transform.
+	 */
+
+	var query = function (options$$1, next) {
+
+	    var urlParams = Object.keys(Url.options.params), query = {}, url = next(options$$1);
+
+	    each(options$$1.params, function (value, key) {
+	        if (urlParams.indexOf(key) === -1) {
+	            query[key] = value;
+	        }
+	    });
+
+	    query = Url.params(query);
+
+	    if (query) {
+	        url += (url.indexOf('?') == -1 ? '?' : '&') + query;
+	    }
+
+	    return url;
+	};
+
+	/**
+	 * URL Template v2.0.6 (https://github.com/bramstein/url-template)
+	 */
+
+	function expand(url, params, variables) {
+
+	    var tmpl = parse(url), expanded = tmpl.expand(params);
+
+	    if (variables) {
+	        variables.push.apply(variables, tmpl.vars);
+	    }
+
+	    return expanded;
+	}
+
+	function parse(template) {
+
+	    var operators = ['+', '#', '.', '/', ';', '?', '&'], variables = [];
+
+	    return {
+	        vars: variables,
+	        expand: function expand(context) {
+	            return template.replace(/\{([^\{\}]+)\}|([^\{\}]+)/g, function (_, expression, literal) {
+	                if (expression) {
+
+	                    var operator = null, values = [];
+
+	                    if (operators.indexOf(expression.charAt(0)) !== -1) {
+	                        operator = expression.charAt(0);
+	                        expression = expression.substr(1);
+	                    }
+
+	                    expression.split(/,/g).forEach(function (variable) {
+	                        var tmp = /([^:\*]*)(?::(\d+)|(\*))?/.exec(variable);
+	                        values.push.apply(values, getValues(context, operator, tmp[1], tmp[2] || tmp[3]));
+	                        variables.push(tmp[1]);
+	                    });
+
+	                    if (operator && operator !== '+') {
+
+	                        var separator = ',';
+
+	                        if (operator === '?') {
+	                            separator = '&';
+	                        } else if (operator !== '#') {
+	                            separator = operator;
+	                        }
+
+	                        return (values.length !== 0 ? operator : '') + values.join(separator);
+	                    } else {
+	                        return values.join(',');
+	                    }
+
+	                } else {
+	                    return encodeReserved(literal);
+	                }
+	            });
+	        }
+	    };
+	}
+
+	function getValues(context, operator, key, modifier) {
+
+	    var value = context[key], result = [];
+
+	    if (isDefined(value) && value !== '') {
+	        if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
+	            value = value.toString();
+
+	            if (modifier && modifier !== '*') {
+	                value = value.substring(0, parseInt(modifier, 10));
+	            }
+
+	            result.push(encodeValue(operator, value, isKeyOperator(operator) ? key : null));
+	        } else {
+	            if (modifier === '*') {
+	                if (Array.isArray(value)) {
+	                    value.filter(isDefined).forEach(function (value) {
+	                        result.push(encodeValue(operator, value, isKeyOperator(operator) ? key : null));
+	                    });
+	                } else {
+	                    Object.keys(value).forEach(function (k) {
+	                        if (isDefined(value[k])) {
+	                            result.push(encodeValue(operator, value[k], k));
+	                        }
+	                    });
+	                }
+	            } else {
+	                var tmp = [];
+
+	                if (Array.isArray(value)) {
+	                    value.filter(isDefined).forEach(function (value) {
+	                        tmp.push(encodeValue(operator, value));
+	                    });
+	                } else {
+	                    Object.keys(value).forEach(function (k) {
+	                        if (isDefined(value[k])) {
+	                            tmp.push(encodeURIComponent(k));
+	                            tmp.push(encodeValue(operator, value[k].toString()));
+	                        }
+	                    });
+	                }
+
+	                if (isKeyOperator(operator)) {
+	                    result.push(encodeURIComponent(key) + '=' + tmp.join(','));
+	                } else if (tmp.length !== 0) {
+	                    result.push(tmp.join(','));
+	                }
+	            }
+	        }
+	    } else {
+	        if (operator === ';') {
+	            result.push(encodeURIComponent(key));
+	        } else if (value === '' && (operator === '&' || operator === '?')) {
+	            result.push(encodeURIComponent(key) + '=');
+	        } else if (value === '') {
+	            result.push('');
+	        }
+	    }
+
+	    return result;
+	}
+
+	function isDefined(value) {
+	    return value !== undefined && value !== null;
+	}
+
+	function isKeyOperator(operator) {
+	    return operator === ';' || operator === '&' || operator === '?';
+	}
+
+	function encodeValue(operator, value, key) {
+
+	    value = (operator === '+' || operator === '#') ? encodeReserved(value) : encodeURIComponent(value);
+
+	    if (key) {
+	        return encodeURIComponent(key) + '=' + value;
+	    } else {
+	        return value;
+	    }
+	}
+
+	function encodeReserved(str) {
+	    return str.split(/(%[0-9A-Fa-f]{2})/g).map(function (part) {
+	        if (!/%[0-9A-Fa-f]/.test(part)) {
+	            part = encodeURI(part);
+	        }
+	        return part;
+	    }).join('');
+	}
+
+	/**
+	 * URL Template (RFC 6570) Transform.
+	 */
+
+	var template = function (options) {
+
+	    var variables = [], url = expand(options.url, options.params, variables);
+
+	    variables.forEach(function (key) {
+	        delete options.params[key];
+	    });
+
+	    return url;
+	};
+
+	/**
+	 * Service for URL templating.
+	 */
+
+	function Url(url, params) {
+
+	    var self = this || {}, options$$1 = url, transform;
+
+	    if (isString(url)) {
+	        options$$1 = {url: url, params: params};
+	    }
+
+	    options$$1 = merge({}, Url.options, self.$options, options$$1);
+
+	    Url.transforms.forEach(function (handler) {
+
+	        if (isString(handler)) {
+	            handler = Url.transform[handler];
+	        }
+
+	        if (isFunction(handler)) {
+	            transform = factory(handler, transform, self.$vm);
+	        }
+
+	    });
+
+	    return transform(options$$1);
+	}
+
+	/**
+	 * Url options.
+	 */
+
+	Url.options = {
+	    url: '',
+	    root: null,
+	    params: {}
+	};
+
+	/**
+	 * Url transforms.
+	 */
+
+	Url.transform = {template: template, query: query, root: root};
+	Url.transforms = ['template', 'query', 'root'];
+
+	/**
+	 * Encodes a Url parameter string.
+	 *
+	 * @param {Object} obj
+	 */
+
+	Url.params = function (obj) {
+
+	    var params = [], escape = encodeURIComponent;
+
+	    params.add = function (key, value) {
+
+	        if (isFunction(value)) {
+	            value = value();
+	        }
+
+	        if (value === null) {
+	            value = '';
+	        }
+
+	        this.push(escape(key) + '=' + escape(value));
+	    };
+
+	    serialize(params, obj);
+
+	    return params.join('&').replace(/%20/g, '+');
+	};
+
+	/**
+	 * Parse a URL and return its components.
+	 *
+	 * @param {String} url
+	 */
+
+	Url.parse = function (url) {
+
+	    var el = document.createElement('a');
+
+	    if (document.documentMode) {
+	        el.href = url;
+	        url = el.href;
+	    }
+
+	    el.href = url;
+
+	    return {
+	        href: el.href,
+	        protocol: el.protocol ? el.protocol.replace(/:$/, '') : '',
+	        port: el.port,
+	        host: el.host,
+	        hostname: el.hostname,
+	        pathname: el.pathname.charAt(0) === '/' ? el.pathname : '/' + el.pathname,
+	        search: el.search ? el.search.replace(/^\?/, '') : '',
+	        hash: el.hash ? el.hash.replace(/^#/, '') : ''
+	    };
+	};
+
+	function factory(handler, next, vm) {
+	    return function (options$$1) {
+	        return handler.call(vm, options$$1, next);
+	    };
+	}
+
+	function serialize(params, obj, scope) {
+
+	    var array = isArray(obj), plain = isPlainObject(obj), hash;
+
+	    each(obj, function (value, key) {
+
+	        hash = isObject(value) || isArray(value);
+
+	        if (scope) {
+	            key = scope + '[' + (plain || hash ? key : '') + ']';
+	        }
+
+	        if (!scope && array) {
+	            params.add(value.name, value.value);
+	        } else if (hash) {
+	            serialize(params, value, key);
+	        } else {
+	            params.add(key, value);
+	        }
+	    });
+	}
+
+	/**
+	 * XDomain client (Internet Explorer).
+	 */
+
+	var xdrClient = function (request) {
+	    return new PromiseObj(function (resolve) {
+
+	        var xdr = new XDomainRequest(), handler = function (ref) {
+	            var type = ref.type;
+
+
+	            var status = 0;
+
+	            if (type === 'load') {
+	                status = 200;
+	            } else if (type === 'error') {
+	                status = 500;
+	            }
+
+	            resolve(request.respondWith(xdr.responseText, {status: status}));
+	        };
+
+	        request.abort = function () { return xdr.abort(); };
+
+	        xdr.open(request.method, request.getUrl());
+
+	        if (request.timeout) {
+	            xdr.timeout = request.timeout;
+	        }
+
+	        xdr.onload = handler;
+	        xdr.onabort = handler;
+	        xdr.onerror = handler;
+	        xdr.ontimeout = handler;
+	        xdr.onprogress = function () {};
+	        xdr.send(request.getBody());
+	    });
+	};
+
+	/**
+	 * CORS Interceptor.
+	 */
+
+	var SUPPORTS_CORS = inBrowser && 'withCredentials' in new XMLHttpRequest();
+
+	var cors = function (request, next) {
+
+	    if (inBrowser) {
+
+	        var orgUrl = Url.parse(location.href);
+	        var reqUrl = Url.parse(request.getUrl());
+
+	        if (reqUrl.protocol !== orgUrl.protocol || reqUrl.host !== orgUrl.host) {
+
+	            request.crossOrigin = true;
+	            request.emulateHTTP = false;
+
+	            if (!SUPPORTS_CORS) {
+	                request.client = xdrClient;
+	            }
+	        }
+	    }
+
+	    next();
+	};
+
+	/**
+	 * Body Interceptor.
+	 */
+
+	var body = function (request, next) {
+
+	    if (isFormData(request.body)) {
+
+	        request.headers.delete('Content-Type');
+
+	    } else if (isObject(request.body) || isArray(request.body)) {
+
+	        if (request.emulateJSON) {
+	            request.body = Url.params(request.body);
+	            request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
+	        } else {
+	            request.body = JSON.stringify(request.body);
+	        }
+	    }
+
+	    next(function (response) {
+
+	        Object.defineProperty(response, 'data', {
+
+	            get: function get() {
+	                return this.body;
+	            },
+
+	            set: function set(body) {
+	                this.body = body;
+	            }
+
+	        });
+
+	        return response.bodyText ? when(response.text(), function (text) {
+
+	            var type = response.headers.get('Content-Type') || '';
+
+	            if (type.indexOf('application/json') === 0 || isJson(text)) {
+
+	                try {
+	                    response.body = JSON.parse(text);
+	                } catch (e) {
+	                    response.body = null;
+	                }
+
+	            } else {
+	                response.body = text;
+	            }
+
+	            return response;
+
+	        }) : response;
+
+	    });
+	};
+
+	function isJson(str) {
+
+	    var start = str.match(/^\[|^\{(?!\{)/), end = {'[': /]$/, '{': /}$/};
+
+	    return start && end[start[0]].test(str);
+	}
+
+	/**
+	 * JSONP client (Browser).
+	 */
+
+	var jsonpClient = function (request) {
+	    return new PromiseObj(function (resolve) {
+
+	        var name = request.jsonp || 'callback', callback = request.jsonpCallback || '_jsonp' + Math.random().toString(36).substr(2), body = null, handler, script;
+
+	        handler = function (ref) {
+	            var type = ref.type;
+
+
+	            var status = 0;
+
+	            if (type === 'load' && body !== null) {
+	                status = 200;
+	            } else if (type === 'error') {
+	                status = 500;
+	            }
+
+	            if (status && window[callback]) {
+	                delete window[callback];
+	                document.body.removeChild(script);
+	            }
+
+	            resolve(request.respondWith(body, {status: status}));
+	        };
+
+	        window[callback] = function (result) {
+	            body = JSON.stringify(result);
+	        };
+
+	        request.abort = function () {
+	            handler({type: 'abort'});
+	        };
+
+	        request.params[name] = callback;
+
+	        if (request.timeout) {
+	            setTimeout(request.abort, request.timeout);
+	        }
+
+	        script = document.createElement('script');
+	        script.src = request.getUrl();
+	        script.type = 'text/javascript';
+	        script.async = true;
+	        script.onload = handler;
+	        script.onerror = handler;
+
+	        document.body.appendChild(script);
+	    });
+	};
+
+	/**
+	 * JSONP Interceptor.
+	 */
+
+	var jsonp = function (request, next) {
+
+	    if (request.method == 'JSONP') {
+	        request.client = jsonpClient;
+	    }
+
+	    next();
+	};
+
+	/**
+	 * Before Interceptor.
+	 */
+
+	var before = function (request, next) {
+
+	    if (isFunction(request.before)) {
+	        request.before.call(this, request);
+	    }
+
+	    next();
+	};
+
+	/**
+	 * HTTP method override Interceptor.
+	 */
+
+	var method = function (request, next) {
+
+	    if (request.emulateHTTP && /^(PUT|PATCH|DELETE)$/i.test(request.method)) {
+	        request.headers.set('X-HTTP-Method-Override', request.method);
+	        request.method = 'POST';
+	    }
+
+	    next();
+	};
+
+	/**
+	 * Header Interceptor.
+	 */
+
+	var header = function (request, next) {
+
+	    var headers = assign({}, Http.headers.common,
+	        !request.crossOrigin ? Http.headers.custom : {},
+	        Http.headers[toLower(request.method)]
+	    );
+
+	    each(headers, function (value, name) {
+	        if (!request.headers.has(name)) {
+	            request.headers.set(name, value);
+	        }
+	    });
+
+	    next();
+	};
+
+	/**
+	 * XMLHttp client (Browser).
+	 */
+
+	var xhrClient = function (request) {
+	    return new PromiseObj(function (resolve) {
+
+	        var xhr = new XMLHttpRequest(), handler = function (event) {
+
+	            var response = request.respondWith(
+	                'response' in xhr ? xhr.response : xhr.responseText, {
+	                    status: xhr.status === 1223 ? 204 : xhr.status, // IE9 status bug
+	                    statusText: xhr.status === 1223 ? 'No Content' : trim(xhr.statusText)
+	                }
+	            );
+
+	            each(trim(xhr.getAllResponseHeaders()).split('\n'), function (row) {
+	                response.headers.append(row.slice(0, row.indexOf(':')), row.slice(row.indexOf(':') + 1));
+	            });
+
+	            resolve(response);
+	        };
+
+	        request.abort = function () { return xhr.abort(); };
+
+	        if (request.progress) {
+	            if (request.method === 'GET') {
+	                xhr.addEventListener('progress', request.progress);
+	            } else if (/^(POST|PUT)$/i.test(request.method)) {
+	                xhr.upload.addEventListener('progress', request.progress);
+	            }
+	        }
+
+	        xhr.open(request.method, request.getUrl(), true);
+
+	        if (request.timeout) {
+	            xhr.timeout = request.timeout;
+	        }
+
+	        if (request.responseType && 'responseType' in xhr) {
+	            xhr.responseType = request.responseType;
+	        }
+
+	        if (request.withCredentials || request.credentials) {
+	            xhr.withCredentials = true;
+	        }
+
+	        if (!request.crossOrigin) {
+	            request.headers.set('X-Requested-With', 'XMLHttpRequest');
+	        }
+
+	        request.headers.forEach(function (value, name) {
+	            xhr.setRequestHeader(name, value);
+	        });
+
+	        xhr.onload = handler;
+	        xhr.onabort = handler;
+	        xhr.onerror = handler;
+	        xhr.ontimeout = handler;
+	        xhr.send(request.getBody());
+	    });
+	};
+
+	/**
+	 * Http client (Node).
+	 */
+
+	var nodeClient = function (request) {
+
+	    var client = __webpack_require__(312);
+
+	    return new PromiseObj(function (resolve) {
+
+	        var url = request.getUrl();
+	        var body = request.getBody();
+	        var method = request.method;
+	        var headers = {}, handler;
+
+	        request.headers.forEach(function (value, name) {
+	            headers[name] = value;
+	        });
+
+	        client(url, {body: body, method: method, headers: headers}).then(handler = function (resp) {
+
+	            var response = request.respondWith(resp.body, {
+	                    status: resp.statusCode,
+	                    statusText: trim(resp.statusMessage)
+	                }
+	            );
+
+	            each(resp.headers, function (value, name) {
+	                response.headers.set(name, value);
+	            });
+
+	            resolve(response);
+
+	        }, function (error$$1) { return handler(error$$1.response); });
+	    });
+	};
+
+	/**
+	 * Base client.
+	 */
+
+	var Client = function (context) {
+
+	    var reqHandlers = [sendRequest], resHandlers = [], handler;
+
+	    if (!isObject(context)) {
+	        context = null;
+	    }
+
+	    function Client(request) {
+	        return new PromiseObj(function (resolve) {
+
+	            function exec() {
+
+	                handler = reqHandlers.pop();
+
+	                if (isFunction(handler)) {
+	                    handler.call(context, request, next);
+	                } else {
+	                    warn(("Invalid interceptor of type " + (typeof handler) + ", must be a function"));
+	                    next();
+	                }
+	            }
+
+	            function next(response) {
+
+	                if (isFunction(response)) {
+
+	                    resHandlers.unshift(response);
+
+	                } else if (isObject(response)) {
+
+	                    resHandlers.forEach(function (handler) {
+	                        response = when(response, function (response) {
+	                            return handler.call(context, response) || response;
+	                        });
+	                    });
+
+	                    when(response, resolve);
+
+	                    return;
+	                }
+
+	                exec();
+	            }
+
+	            exec();
+
+	        }, context);
+	    }
+
+	    Client.use = function (handler) {
+	        reqHandlers.push(handler);
+	    };
+
+	    return Client;
+	};
+
+	function sendRequest(request, resolve) {
+
+	    var client = request.client || (inBrowser ? xhrClient : nodeClient);
+
+	    resolve(client(request));
+	}
+
+	/**
+	 * HTTP Headers.
+	 */
+
+	var Headers = function Headers(headers) {
+	    var this$1 = this;
+
+
+	    this.map = {};
+
+	    each(headers, function (value, name) { return this$1.append(name, value); });
+	};
+
+	Headers.prototype.has = function has (name) {
+	    return getName(this.map, name) !== null;
+	};
+
+	Headers.prototype.get = function get (name) {
+
+	    var list = this.map[getName(this.map, name)];
+
+	    return list ? list.join() : null;
+	};
+
+	Headers.prototype.getAll = function getAll (name) {
+	    return this.map[getName(this.map, name)] || [];
+	};
+
+	Headers.prototype.set = function set (name, value) {
+	    this.map[normalizeName(getName(this.map, name) || name)] = [trim(value)];
+	};
+
+	Headers.prototype.append = function append (name, value){
+
+	    var list = this.map[getName(this.map, name)];
+
+	    if (list) {
+	        list.push(trim(value));
+	    } else {
+	        this.set(name, value);
+	    }
+	};
+
+	Headers.prototype.delete = function delete$1 (name){
+	    delete this.map[getName(this.map, name)];
+	};
+
+	Headers.prototype.deleteAll = function deleteAll (){
+	    this.map = {};
+	};
+
+	Headers.prototype.forEach = function forEach (callback, thisArg) {
+	        var this$1 = this;
+
+	    each(this.map, function (list, name) {
+	        each(list, function (value) { return callback.call(thisArg, value, name, this$1); });
+	    });
+	};
+
+	function getName(map, name) {
+	    return Object.keys(map).reduce(function (prev, curr) {
+	        return toLower(name) === toLower(curr) ? curr : prev;
+	    }, null);
+	}
+
+	function normalizeName(name) {
+
+	    if (/[^a-z0-9\-#$%&'*+.\^_`|~]/i.test(name)) {
+	        throw new TypeError('Invalid character in header field name');
+	    }
+
+	    return trim(name);
+	}
+
+	/**
+	 * HTTP Response.
+	 */
+
+	var Response = function Response(body, ref) {
+	    var url = ref.url;
+	    var headers = ref.headers;
+	    var status = ref.status;
+	    var statusText = ref.statusText;
+
+
+	    this.url = url;
+	    this.ok = status >= 200 && status < 300;
+	    this.status = status || 0;
+	    this.statusText = statusText || '';
+	    this.headers = new Headers(headers);
+	    this.body = body;
+
+	    if (isString(body)) {
+
+	        this.bodyText = body;
+
+	    } else if (isBlob(body)) {
+
+	        this.bodyBlob = body;
+
+	        if (isBlobText(body)) {
+	            this.bodyText = blobText(body);
+	        }
+	    }
+	};
+
+	Response.prototype.blob = function blob () {
+	    return when(this.bodyBlob);
+	};
+
+	Response.prototype.text = function text () {
+	    return when(this.bodyText);
+	};
+
+	Response.prototype.json = function json () {
+	    return when(this.text(), function (text) { return JSON.parse(text); });
+	};
+
+	function blobText(body) {
+	    return new PromiseObj(function (resolve) {
+
+	        var reader = new FileReader();
+
+	        reader.readAsText(body);
+	        reader.onload = function () {
+	            resolve(reader.result);
+	        };
+
+	    });
+	}
+
+	function isBlobText(body) {
+	    return body.type.indexOf('text') === 0 || body.type.indexOf('json') !== -1;
+	}
+
+	/**
+	 * HTTP Request.
+	 */
+
+	var Request = function Request(options$$1) {
+
+	    this.body = null;
+	    this.params = {};
+
+	    assign(this, options$$1, {
+	        method: toUpper(options$$1.method || 'GET')
+	    });
+
+	    if (!(this.headers instanceof Headers)) {
+	        this.headers = new Headers(this.headers);
+	    }
+	};
+
+	Request.prototype.getUrl = function getUrl (){
+	    return Url(this);
+	};
+
+	Request.prototype.getBody = function getBody (){
+	    return this.body;
+	};
+
+	Request.prototype.respondWith = function respondWith (body, options$$1) {
+	    return new Response(body, assign(options$$1 || {}, {url: this.getUrl()}));
+	};
+
+	/**
+	 * Service for sending network requests.
+	 */
+
+	var COMMON_HEADERS = {'Accept': 'application/json, text/plain, */*'};
+	var JSON_CONTENT_TYPE = {'Content-Type': 'application/json;charset=utf-8'};
+
+	function Http(options$$1) {
+
+	    var self = this || {}, client = Client(self.$vm);
+
+	    defaults(options$$1 || {}, self.$options, Http.options);
+
+	    Http.interceptors.forEach(function (handler) {
+
+	        if (isString(handler)) {
+	            handler = Http.interceptor[handler];
+	        }
+
+	        if (isFunction(handler)) {
+	            client.use(handler);
+	        }
+
+	    });
+
+	    return client(new Request(options$$1)).then(function (response) {
+
+	        return response.ok ? response : PromiseObj.reject(response);
+
+	    }, function (response) {
+
+	        if (response instanceof Error) {
+	            error(response);
+	        }
+
+	        return PromiseObj.reject(response);
+	    });
+	}
+
+	Http.options = {};
+
+	Http.headers = {
+	    put: JSON_CONTENT_TYPE,
+	    post: JSON_CONTENT_TYPE,
+	    patch: JSON_CONTENT_TYPE,
+	    delete: JSON_CONTENT_TYPE,
+	    common: COMMON_HEADERS,
+	    custom: {}
+	};
+
+	Http.interceptor = {before: before, method: method, body: body, jsonp: jsonp, header: header, cors: cors};
+	Http.interceptors = ['before', 'method', 'body', 'jsonp', 'header', 'cors'];
+
+	['get', 'delete', 'head', 'jsonp'].forEach(function (method$$1) {
+
+	    Http[method$$1] = function (url, options$$1) {
+	        return this(assign(options$$1 || {}, {url: url, method: method$$1}));
+	    };
+
+	});
+
+	['post', 'put', 'patch'].forEach(function (method$$1) {
+
+	    Http[method$$1] = function (url, body$$1, options$$1) {
+	        return this(assign(options$$1 || {}, {url: url, method: method$$1, body: body$$1}));
+	    };
+
+	});
+
+	/**
+	 * Service for interacting with RESTful services.
+	 */
+
+	function Resource(url, params, actions, options$$1) {
+
+	    var self = this || {}, resource = {};
+
+	    actions = assign({},
+	        Resource.actions,
+	        actions
+	    );
+
+	    each(actions, function (action, name) {
+
+	        action = merge({url: url, params: assign({}, params)}, options$$1, action);
+
+	        resource[name] = function () {
+	            return (self.$http || Http)(opts(action, arguments));
+	        };
+	    });
+
+	    return resource;
+	}
+
+	function opts(action, args) {
+
+	    var options$$1 = assign({}, action), params = {}, body;
+
+	    switch (args.length) {
+
+	        case 2:
+
+	            params = args[0];
+	            body = args[1];
+
+	            break;
+
+	        case 1:
+
+	            if (/^(POST|PUT|PATCH)$/i.test(options$$1.method)) {
+	                body = args[0];
+	            } else {
+	                params = args[0];
+	            }
+
+	            break;
+
+	        case 0:
+
+	            break;
+
+	        default:
+
+	            throw 'Expected up to 2 arguments [params, body], got ' + args.length + ' arguments';
+	    }
+
+	    options$$1.body = body;
+	    options$$1.params = assign({}, options$$1.params, params);
+
+	    return options$$1;
+	}
+
+	Resource.actions = {
+
+	    get: {method: 'GET'},
+	    save: {method: 'POST'},
+	    query: {method: 'GET'},
+	    update: {method: 'PUT'},
+	    remove: {method: 'DELETE'},
+	    delete: {method: 'DELETE'}
+
+	};
+
+	/**
+	 * Install plugin.
+	 */
+
+	function plugin(Vue) {
+
+	    if (plugin.installed) {
+	        return;
+	    }
+
+	    Util(Vue);
+
+	    Vue.url = Url;
+	    Vue.http = Http;
+	    Vue.resource = Resource;
+	    Vue.Promise = PromiseObj;
+
+	    Object.defineProperties(Vue.prototype, {
+
+	        $url: {
+	            get: function get() {
+	                return options(Vue.url, this, this.$options.url);
+	            }
+	        },
+
+	        $http: {
+	            get: function get() {
+	                return options(Vue.http, this, this.$options.http);
+	            }
+	        },
+
+	        $resource: {
+	            get: function get() {
+	                return Vue.resource.bind(this);
+	            }
+	        },
+
+	        $promise: {
+	            get: function get() {
+	                var this$1 = this;
+
+	                return function (executor) { return new Vue.Promise(executor, this$1); };
+	            }
+	        }
+
+	    });
+	}
+
+	if (typeof window !== 'undefined' && window.Vue) {
+	    window.Vue.use(plugin);
+	}
+
+	module.exports = plugin;
+
+
+/***/ },
+/* 312 */
+/***/ function(module, exports) {
+
+	/* (ignored) */
+
+/***/ },
+/* 313 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	  * vue-router v2.4.0
+	  * (c) 2017 Evan You
+	  * @license MIT
+	  */
+	'use strict';
+
+	/*  */
+
+	function assert (condition, message) {
+	  if (!condition) {
+	    throw new Error(("[vue-router] " + message))
+	  }
+	}
+
+	function warn (condition, message) {
+	  if (process.env.NODE_ENV !== 'production' && !condition) {
+	    typeof console !== 'undefined' && console.warn(("[vue-router] " + message));
+	  }
+	}
+
+	var View = {
+	  name: 'router-view',
+	  functional: true,
+	  props: {
+	    name: {
+	      type: String,
+	      default: 'default'
+	    }
+	  },
+	  render: function render (h, ref) {
+	    var props = ref.props;
+	    var children = ref.children;
+	    var parent = ref.parent;
+	    var data = ref.data;
+
+	    data.routerView = true;
+
+	    var name = props.name;
+	    var route = parent.$route;
+	    var cache = parent._routerViewCache || (parent._routerViewCache = {});
+
+	    // determine current view depth, also check to see if the tree
+	    // has been toggled inactive but kept-alive.
+	    var depth = 0;
+	    var inactive = false;
+	    while (parent) {
+	      if (parent.$vnode && parent.$vnode.data.routerView) {
+	        depth++;
+	      }
+	      if (parent._inactive) {
+	        inactive = true;
+	      }
+	      parent = parent.$parent;
+	    }
+	    data.routerViewDepth = depth;
+
+	    // render previous view if the tree is inactive and kept-alive
+	    if (inactive) {
+	      return h(cache[name], data, children)
+	    }
+
+	    var matched = route.matched[depth];
+	    // render empty node if no matched route
+	    if (!matched) {
+	      cache[name] = null;
+	      return h()
+	    }
+
+	    var component = cache[name] = matched.components[name];
+
+	    // attach instance registration hook
+	    // this will be called in the instance's injected lifecycle hooks
+	    data.registerRouteInstance = function (vm, val) {
+	      // val could be undefined for unregistration
+	      if (matched.instances[name] !== vm) {
+	        matched.instances[name] = val;
+	      }
+	    };
+
+	    // resolve props
+	    data.props = resolveProps(route, matched.props && matched.props[name]);
+
+	    return h(component, data, children)
+	  }
+	};
+
+	function resolveProps (route, config) {
+	  switch (typeof config) {
+	    case 'undefined':
+	      return
+	    case 'object':
+	      return config
+	    case 'function':
+	      return config(route)
+	    case 'boolean':
+	      return config ? route.params : undefined
+	    default:
+	      if (process.env.NODE_ENV !== 'production') {
+	        warn(
+	          false,
+	          "props in \"" + (route.path) + "\" is a " + (typeof config) + ", " +
+	          "expecting an object, function or boolean."
+	        );
+	      }
+	  }
+	}
+
+	/*  */
+
+	var encodeReserveRE = /[!'()*]/g;
+	var encodeReserveReplacer = function (c) { return '%' + c.charCodeAt(0).toString(16); };
+	var commaRE = /%2C/g;
+
+	// fixed encodeURIComponent which is more conformant to RFC3986:
+	// - escapes [!'()*]
+	// - preserve commas
+	var encode = function (str) { return encodeURIComponent(str)
+	  .replace(encodeReserveRE, encodeReserveReplacer)
+	  .replace(commaRE, ','); };
+
+	var decode = decodeURIComponent;
+
+	function resolveQuery (
+	  query,
+	  extraQuery,
+	  _parseQuery
+	) {
+	  if ( extraQuery === void 0 ) extraQuery = {};
+
+	  var parse = _parseQuery || parseQuery;
+	  var parsedQuery;
+	  try {
+	    parsedQuery = parse(query || '');
+	  } catch (e) {
+	    process.env.NODE_ENV !== 'production' && warn(false, e.message);
+	    parsedQuery = {};
+	  }
+	  for (var key in extraQuery) {
+	    var val = extraQuery[key];
+	    parsedQuery[key] = Array.isArray(val) ? val.slice() : val;
+	  }
+	  return parsedQuery
+	}
+
+	function parseQuery (query) {
+	  var res = {};
+
+	  query = query.trim().replace(/^(\?|#|&)/, '');
+
+	  if (!query) {
+	    return res
+	  }
+
+	  query.split('&').forEach(function (param) {
+	    var parts = param.replace(/\+/g, ' ').split('=');
+	    var key = decode(parts.shift());
+	    var val = parts.length > 0
+	      ? decode(parts.join('='))
+	      : null;
+
+	    if (res[key] === undefined) {
+	      res[key] = val;
+	    } else if (Array.isArray(res[key])) {
+	      res[key].push(val);
+	    } else {
+	      res[key] = [res[key], val];
+	    }
+	  });
+
+	  return res
+	}
+
+	function stringifyQuery (obj) {
+	  var res = obj ? Object.keys(obj).map(function (key) {
+	    var val = obj[key];
+
+	    if (val === undefined) {
+	      return ''
+	    }
+
+	    if (val === null) {
+	      return encode(key)
+	    }
+
+	    if (Array.isArray(val)) {
+	      var result = [];
+	      val.slice().forEach(function (val2) {
+	        if (val2 === undefined) {
+	          return
+	        }
+	        if (val2 === null) {
+	          result.push(encode(key));
+	        } else {
+	          result.push(encode(key) + '=' + encode(val2));
+	        }
+	      });
+	      return result.join('&')
+	    }
+
+	    return encode(key) + '=' + encode(val)
+	  }).filter(function (x) { return x.length > 0; }).join('&') : null;
+	  return res ? ("?" + res) : ''
+	}
+
+	/*  */
+
+
+	var trailingSlashRE = /\/?$/;
+
+	function createRoute (
+	  record,
+	  location,
+	  redirectedFrom,
+	  router
+	) {
+	  var stringifyQuery$$1 = router && router.options.stringifyQuery;
+	  var route = {
+	    name: location.name || (record && record.name),
+	    meta: (record && record.meta) || {},
+	    path: location.path || '/',
+	    hash: location.hash || '',
+	    query: location.query || {},
+	    params: location.params || {},
+	    fullPath: getFullPath(location, stringifyQuery$$1),
+	    matched: record ? formatMatch(record) : []
+	  };
+	  if (redirectedFrom) {
+	    route.redirectedFrom = getFullPath(redirectedFrom, stringifyQuery$$1);
+	  }
+	  return Object.freeze(route)
+	}
+
+	// the starting route that represents the initial state
+	var START = createRoute(null, {
+	  path: '/'
+	});
+
+	function formatMatch (record) {
+	  var res = [];
+	  while (record) {
+	    res.unshift(record);
+	    record = record.parent;
+	  }
+	  return res
+	}
+
+	function getFullPath (
+	  ref,
+	  _stringifyQuery
+	) {
+	  var path = ref.path;
+	  var query = ref.query; if ( query === void 0 ) query = {};
+	  var hash = ref.hash; if ( hash === void 0 ) hash = '';
+
+	  var stringify = _stringifyQuery || stringifyQuery;
+	  return (path || '/') + stringify(query) + hash
+	}
+
+	function isSameRoute (a, b) {
+	  if (b === START) {
+	    return a === b
+	  } else if (!b) {
+	    return false
+	  } else if (a.path && b.path) {
+	    return (
+	      a.path.replace(trailingSlashRE, '') === b.path.replace(trailingSlashRE, '') &&
+	      a.hash === b.hash &&
+	      isObjectEqual(a.query, b.query)
+	    )
+	  } else if (a.name && b.name) {
+	    return (
+	      a.name === b.name &&
+	      a.hash === b.hash &&
+	      isObjectEqual(a.query, b.query) &&
+	      isObjectEqual(a.params, b.params)
+	    )
+	  } else {
+	    return false
+	  }
+	}
+
+	function isObjectEqual (a, b) {
+	  if ( a === void 0 ) a = {};
+	  if ( b === void 0 ) b = {};
+
+	  var aKeys = Object.keys(a);
+	  var bKeys = Object.keys(b);
+	  if (aKeys.length !== bKeys.length) {
+	    return false
+	  }
+	  return aKeys.every(function (key) { return String(a[key]) === String(b[key]); })
+	}
+
+	function isIncludedRoute (current, target) {
+	  return (
+	    current.path.replace(trailingSlashRE, '/').indexOf(
+	      target.path.replace(trailingSlashRE, '/')
+	    ) === 0 &&
+	    (!target.hash || current.hash === target.hash) &&
+	    queryIncludes(current.query, target.query)
+	  )
+	}
+
+	function queryIncludes (current, target) {
+	  for (var key in target) {
+	    if (!(key in current)) {
+	      return false
+	    }
+	  }
+	  return true
+	}
+
+	/*  */
+
+	// work around weird flow bug
+	var toTypes = [String, Object];
+	var eventTypes = [String, Array];
+
+	var Link = {
+	  name: 'router-link',
+	  props: {
+	    to: {
+	      type: toTypes,
+	      required: true
+	    },
+	    tag: {
+	      type: String,
+	      default: 'a'
+	    },
+	    exact: Boolean,
+	    append: Boolean,
+	    replace: Boolean,
+	    activeClass: {
+	      type: String,
+	      default: 'router-link-active'
+	    },
+	    event: {
+	      type: eventTypes,
+	      default: 'click'
+	    }
+	  },
+	  render: function render (h) {
+	    var this$1 = this;
+
+	    var router = this.$router;
+	    var current = this.$route;
+	    var ref = router.resolve(this.to, current, this.append);
+	    var location = ref.location;
+	    var route = ref.route;
+	    var href = ref.href;
+
+	    var classes = {};
+	    var globalActiveClass = router.options.linkActiveClass;
+	    var activeClass = globalActiveClass == null
+	      ? this.activeClass
+	      : globalActiveClass;
+	    var compareTarget = location.path
+	      ? createRoute(null, location, null, router)
+	      : route;
+
+	    classes[activeClass] = this.exact
+	      ? isSameRoute(current, compareTarget)
+	      : isIncludedRoute(current, compareTarget);
+
+	    var handler = function (e) {
+	      if (guardEvent(e)) {
+	        if (this$1.replace) {
+	          router.replace(location);
+	        } else {
+	          router.push(location);
+	        }
+	      }
+	    };
+
+	    var on = { click: guardEvent };
+	    if (Array.isArray(this.event)) {
+	      this.event.forEach(function (e) { on[e] = handler; });
+	    } else {
+	      on[this.event] = handler;
+	    }
+
+	    var data = {
+	      class: classes
+	    };
+
+	    if (this.tag === 'a') {
+	      data.on = on;
+	      data.attrs = { href: href };
+	    } else {
+	      // find the first <a> child and apply listener and href
+	      var a = findAnchor(this.$slots.default);
+	      if (a) {
+	        // in case the <a> is a static node
+	        a.isStatic = false;
+	        var extend = _Vue.util.extend;
+	        var aData = a.data = extend({}, a.data);
+	        aData.on = on;
+	        var aAttrs = a.data.attrs = extend({}, a.data.attrs);
+	        aAttrs.href = href;
+	      } else {
+	        // doesn't have <a> child, apply listener to self
+	        data.on = on;
+	      }
+	    }
+
+	    return h(this.tag, data, this.$slots.default)
+	  }
+	};
+
+	function guardEvent (e) {
+	  // don't redirect with control keys
+	  if (e.metaKey || e.ctrlKey || e.shiftKey) { return }
+	  // don't redirect when preventDefault called
+	  if (e.defaultPrevented) { return }
+	  // don't redirect on right click
+	  if (e.button !== undefined && e.button !== 0) { return }
+	  // don't redirect if `target="_blank"`
+	  if (e.currentTarget && e.currentTarget.getAttribute) {
+	    var target = e.currentTarget.getAttribute('target');
+	    if (/\b_blank\b/i.test(target)) { return }
+	  }
+	  // this may be a Weex event which doesn't have this method
+	  if (e.preventDefault) {
+	    e.preventDefault();
+	  }
+	  return true
+	}
+
+	function findAnchor (children) {
+	  if (children) {
+	    var child;
+	    for (var i = 0; i < children.length; i++) {
+	      child = children[i];
+	      if (child.tag === 'a') {
+	        return child
+	      }
+	      if (child.children && (child = findAnchor(child.children))) {
+	        return child
+	      }
+	    }
+	  }
+	}
+
+	var _Vue;
+
+	function install (Vue) {
+	  if (install.installed) { return }
+	  install.installed = true;
+
+	  _Vue = Vue;
+
+	  Object.defineProperty(Vue.prototype, '$router', {
+	    get: function get () { return this.$root._router }
+	  });
+
+	  Object.defineProperty(Vue.prototype, '$route', {
+	    get: function get () { return this.$root._route }
+	  });
+
+	  var isDef = function (v) { return v !== undefined; };
+
+	  var registerInstance = function (vm, callVal) {
+	    var i = vm.$options._parentVnode;
+	    if (isDef(i) && isDef(i = i.data) && isDef(i = i.registerRouteInstance)) {
+	      i(vm, callVal);
+	    }
+	  };
+
+	  Vue.mixin({
+	    beforeCreate: function beforeCreate () {
+	      if (isDef(this.$options.router)) {
+	        this._router = this.$options.router;
+	        this._router.init(this);
+	        Vue.util.defineReactive(this, '_route', this._router.history.current);
+	      }
+	      registerInstance(this, this);
+	    },
+	    destroyed: function destroyed () {
+	      registerInstance(this);
+	    }
+	  });
+
+	  Vue.component('router-view', View);
+	  Vue.component('router-link', Link);
+
+	  var strats = Vue.config.optionMergeStrategies;
+	  // use the same hook merging strategy for route hooks
+	  strats.beforeRouteEnter = strats.beforeRouteLeave = strats.created;
+	}
+
+	/*  */
+
+	var inBrowser = typeof window !== 'undefined';
+
+	/*  */
+
+	function resolvePath (
+	  relative,
+	  base,
+	  append
+	) {
+	  var firstChar = relative.charAt(0);
+	  if (firstChar === '/') {
+	    return relative
+	  }
+
+	  if (firstChar === '?' || firstChar === '#') {
+	    return base + relative
+	  }
+
+	  var stack = base.split('/');
+
+	  // remove trailing segment if:
+	  // - not appending
+	  // - appending to trailing slash (last segment is empty)
+	  if (!append || !stack[stack.length - 1]) {
+	    stack.pop();
+	  }
+
+	  // resolve relative path
+	  var segments = relative.replace(/^\//, '').split('/');
+	  for (var i = 0; i < segments.length; i++) {
+	    var segment = segments[i];
+	    if (segment === '..') {
+	      stack.pop();
+	    } else if (segment !== '.') {
+	      stack.push(segment);
+	    }
+	  }
+
+	  // ensure leading slash
+	  if (stack[0] !== '') {
+	    stack.unshift('');
+	  }
+
+	  return stack.join('/')
+	}
+
+	function parsePath (path) {
+	  var hash = '';
+	  var query = '';
+
+	  var hashIndex = path.indexOf('#');
+	  if (hashIndex >= 0) {
+	    hash = path.slice(hashIndex);
+	    path = path.slice(0, hashIndex);
+	  }
+
+	  var queryIndex = path.indexOf('?');
+	  if (queryIndex >= 0) {
+	    query = path.slice(queryIndex + 1);
+	    path = path.slice(0, queryIndex);
+	  }
+
+	  return {
+	    path: path,
+	    query: query,
+	    hash: hash
+	  }
+	}
+
+	function cleanPath (path) {
+	  return path.replace(/\/\//g, '/')
+	}
+
+	/*  */
+
+	function createRouteMap (
+	  routes,
+	  oldPathMap,
+	  oldNameMap
+	) {
+	  var pathMap = oldPathMap || Object.create(null);
+	  var nameMap = oldNameMap || Object.create(null);
+
+	  routes.forEach(function (route) {
+	    addRouteRecord(pathMap, nameMap, route);
+	  });
+
+	  return {
+	    pathMap: pathMap,
+	    nameMap: nameMap
+	  }
+	}
+
+	function addRouteRecord (
+	  pathMap,
+	  nameMap,
+	  route,
+	  parent,
+	  matchAs
+	) {
+	  var path = route.path;
+	  var name = route.name;
+	  if (process.env.NODE_ENV !== 'production') {
+	    assert(path != null, "\"path\" is required in a route configuration.");
+	    assert(
+	      typeof route.component !== 'string',
+	      "route config \"component\" for path: " + (String(path || name)) + " cannot be a " +
+	      "string id. Use an actual component instead."
+	    );
+	  }
+
+	  var record = {
+	    path: normalizePath(path, parent),
+	    components: route.components || { default: route.component },
+	    instances: {},
+	    name: name,
+	    parent: parent,
+	    matchAs: matchAs,
+	    redirect: route.redirect,
+	    beforeEnter: route.beforeEnter,
+	    meta: route.meta || {},
+	    props: route.props == null
+	      ? {}
+	      : route.components
+	        ? route.props
+	        : { default: route.props }
+	  };
+
+	  if (route.children) {
+	    // Warn if route is named and has a default child route.
+	    // If users navigate to this route by name, the default child will
+	    // not be rendered (GH Issue #629)
+	    if (process.env.NODE_ENV !== 'production') {
+	      if (route.name && route.children.some(function (child) { return /^\/?$/.test(child.path); })) {
+	        warn(
+	          false,
+	          "Named Route '" + (route.name) + "' has a default child route. " +
+	          "When navigating to this named route (:to=\"{name: '" + (route.name) + "'\"), " +
+	          "the default child route will not be rendered. Remove the name from " +
+	          "this route and use the name of the default child route for named " +
+	          "links instead."
+	        );
+	      }
+	    }
+	    route.children.forEach(function (child) {
+	      var childMatchAs = matchAs
+	        ? cleanPath((matchAs + "/" + (child.path)))
+	        : undefined;
+	      addRouteRecord(pathMap, nameMap, child, record, childMatchAs);
+	    });
+	  }
+
+	  if (route.alias !== undefined) {
+	    if (Array.isArray(route.alias)) {
+	      route.alias.forEach(function (alias) {
+	        var aliasRoute = {
+	          path: alias,
+	          children: route.children
+	        };
+	        addRouteRecord(pathMap, nameMap, aliasRoute, parent, record.path);
+	      });
+	    } else {
+	      var aliasRoute = {
+	        path: route.alias,
+	        children: route.children
+	      };
+	      addRouteRecord(pathMap, nameMap, aliasRoute, parent, record.path);
+	    }
+	  }
+
+	  if (!pathMap[record.path]) {
+	    pathMap[record.path] = record;
+	  }
+
+	  if (name) {
+	    if (!nameMap[name]) {
+	      nameMap[name] = record;
+	    } else if (process.env.NODE_ENV !== 'production' && !matchAs) {
+	      warn(
+	        false,
+	        "Duplicate named routes definition: " +
+	        "{ name: \"" + name + "\", path: \"" + (record.path) + "\" }"
+	      );
+	    }
+	  }
+	}
+
+	function normalizePath (path, parent) {
+	  path = path.replace(/\/$/, '');
+	  if (path[0] === '/') { return path }
+	  if (parent == null) { return path }
+	  return cleanPath(((parent.path) + "/" + path))
+	}
+
+	var index$1 = Array.isArray || function (arr) {
+	  return Object.prototype.toString.call(arr) == '[object Array]';
+	};
+
+	var isarray = index$1;
+
+	/**
+	 * Expose `pathToRegexp`.
+	 */
+	var index = pathToRegexp;
+	var parse_1 = parse;
+	var compile_1 = compile;
+	var tokensToFunction_1 = tokensToFunction;
+	var tokensToRegExp_1 = tokensToRegExp;
+
+	/**
+	 * The main path matching regexp utility.
+	 *
+	 * @type {RegExp}
+	 */
+	var PATH_REGEXP = new RegExp([
+	  // Match escaped characters that would otherwise appear in future matches.
+	  // This allows the user to escape special characters that won't transform.
+	  '(\\\\.)',
+	  // Match Express-style parameters and un-named parameters with a prefix
+	  // and optional suffixes. Matches appear as:
+	  //
+	  // "/:test(\\d+)?" => ["/", "test", "\d+", undefined, "?", undefined]
+	  // "/route(\\d+)"  => [undefined, undefined, undefined, "\d+", undefined, undefined]
+	  // "/*"            => ["/", undefined, undefined, undefined, undefined, "*"]
+	  '([\\/.])?(?:(?:\\:(\\w+)(?:\\(((?:\\\\.|[^\\\\()])+)\\))?|\\(((?:\\\\.|[^\\\\()])+)\\))([+*?])?|(\\*))'
+	].join('|'), 'g');
+
+	/**
+	 * Parse a string for the raw tokens.
+	 *
+	 * @param  {string}  str
+	 * @param  {Object=} options
+	 * @return {!Array}
+	 */
+	function parse (str, options) {
+	  var tokens = [];
+	  var key = 0;
+	  var index = 0;
+	  var path = '';
+	  var defaultDelimiter = options && options.delimiter || '/';
+	  var res;
+
+	  while ((res = PATH_REGEXP.exec(str)) != null) {
+	    var m = res[0];
+	    var escaped = res[1];
+	    var offset = res.index;
+	    path += str.slice(index, offset);
+	    index = offset + m.length;
+
+	    // Ignore already escaped sequences.
+	    if (escaped) {
+	      path += escaped[1];
+	      continue
+	    }
+
+	    var next = str[index];
+	    var prefix = res[2];
+	    var name = res[3];
+	    var capture = res[4];
+	    var group = res[5];
+	    var modifier = res[6];
+	    var asterisk = res[7];
+
+	    // Push the current path onto the tokens.
+	    if (path) {
+	      tokens.push(path);
+	      path = '';
+	    }
+
+	    var partial = prefix != null && next != null && next !== prefix;
+	    var repeat = modifier === '+' || modifier === '*';
+	    var optional = modifier === '?' || modifier === '*';
+	    var delimiter = res[2] || defaultDelimiter;
+	    var pattern = capture || group;
+
+	    tokens.push({
+	      name: name || key++,
+	      prefix: prefix || '',
+	      delimiter: delimiter,
+	      optional: optional,
+	      repeat: repeat,
+	      partial: partial,
+	      asterisk: !!asterisk,
+	      pattern: pattern ? escapeGroup(pattern) : (asterisk ? '.*' : '[^' + escapeString(delimiter) + ']+?')
+	    });
+	  }
+
+	  // Match any characters still remaining.
+	  if (index < str.length) {
+	    path += str.substr(index);
+	  }
+
+	  // If the path exists, push it onto the end.
+	  if (path) {
+	    tokens.push(path);
+	  }
+
+	  return tokens
+	}
+
+	/**
+	 * Compile a string to a template function for the path.
+	 *
+	 * @param  {string}             str
+	 * @param  {Object=}            options
+	 * @return {!function(Object=, Object=)}
+	 */
+	function compile (str, options) {
+	  return tokensToFunction(parse(str, options))
+	}
+
+	/**
+	 * Prettier encoding of URI path segments.
+	 *
+	 * @param  {string}
+	 * @return {string}
+	 */
+	function encodeURIComponentPretty (str) {
+	  return encodeURI(str).replace(/[\/?#]/g, function (c) {
+	    return '%' + c.charCodeAt(0).toString(16).toUpperCase()
+	  })
+	}
+
+	/**
+	 * Encode the asterisk parameter. Similar to `pretty`, but allows slashes.
+	 *
+	 * @param  {string}
+	 * @return {string}
+	 */
+	function encodeAsterisk (str) {
+	  return encodeURI(str).replace(/[?#]/g, function (c) {
+	    return '%' + c.charCodeAt(0).toString(16).toUpperCase()
+	  })
+	}
+
+	/**
+	 * Expose a method for transforming tokens into the path function.
+	 */
+	function tokensToFunction (tokens) {
+	  // Compile all the tokens into regexps.
+	  var matches = new Array(tokens.length);
+
+	  // Compile all the patterns before compilation.
+	  for (var i = 0; i < tokens.length; i++) {
+	    if (typeof tokens[i] === 'object') {
+	      matches[i] = new RegExp('^(?:' + tokens[i].pattern + ')$');
+	    }
+	  }
+
+	  return function (obj, opts) {
+	    var path = '';
+	    var data = obj || {};
+	    var options = opts || {};
+	    var encode = options.pretty ? encodeURIComponentPretty : encodeURIComponent;
+
+	    for (var i = 0; i < tokens.length; i++) {
+	      var token = tokens[i];
+
+	      if (typeof token === 'string') {
+	        path += token;
+
+	        continue
+	      }
+
+	      var value = data[token.name];
+	      var segment;
+
+	      if (value == null) {
+	        if (token.optional) {
+	          // Prepend partial segment prefixes.
+	          if (token.partial) {
+	            path += token.prefix;
+	          }
+
+	          continue
+	        } else {
+	          throw new TypeError('Expected "' + token.name + '" to be defined')
+	        }
+	      }
+
+	      if (isarray(value)) {
+	        if (!token.repeat) {
+	          throw new TypeError('Expected "' + token.name + '" to not repeat, but received `' + JSON.stringify(value) + '`')
+	        }
+
+	        if (value.length === 0) {
+	          if (token.optional) {
+	            continue
+	          } else {
+	            throw new TypeError('Expected "' + token.name + '" to not be empty')
+	          }
+	        }
+
+	        for (var j = 0; j < value.length; j++) {
+	          segment = encode(value[j]);
+
+	          if (!matches[i].test(segment)) {
+	            throw new TypeError('Expected all "' + token.name + '" to match "' + token.pattern + '", but received `' + JSON.stringify(segment) + '`')
+	          }
+
+	          path += (j === 0 ? token.prefix : token.delimiter) + segment;
+	        }
+
+	        continue
+	      }
+
+	      segment = token.asterisk ? encodeAsterisk(value) : encode(value);
+
+	      if (!matches[i].test(segment)) {
+	        throw new TypeError('Expected "' + token.name + '" to match "' + token.pattern + '", but received "' + segment + '"')
+	      }
+
+	      path += token.prefix + segment;
+	    }
+
+	    return path
+	  }
+	}
+
+	/**
+	 * Escape a regular expression string.
+	 *
+	 * @param  {string} str
+	 * @return {string}
+	 */
+	function escapeString (str) {
+	  return str.replace(/([.+*?=^!:${}()[\]|\/\\])/g, '\\$1')
+	}
+
+	/**
+	 * Escape the capturing group by escaping special characters and meaning.
+	 *
+	 * @param  {string} group
+	 * @return {string}
+	 */
+	function escapeGroup (group) {
+	  return group.replace(/([=!:$\/()])/g, '\\$1')
+	}
+
+	/**
+	 * Attach the keys as a property of the regexp.
+	 *
+	 * @param  {!RegExp} re
+	 * @param  {Array}   keys
+	 * @return {!RegExp}
+	 */
+	function attachKeys (re, keys) {
+	  re.keys = keys;
+	  return re
+	}
+
+	/**
+	 * Get the flags for a regexp from the options.
+	 *
+	 * @param  {Object} options
+	 * @return {string}
+	 */
+	function flags (options) {
+	  return options.sensitive ? '' : 'i'
+	}
+
+	/**
+	 * Pull out keys from a regexp.
+	 *
+	 * @param  {!RegExp} path
+	 * @param  {!Array}  keys
+	 * @return {!RegExp}
+	 */
+	function regexpToRegexp (path, keys) {
+	  // Use a negative lookahead to match only capturing groups.
+	  var groups = path.source.match(/\((?!\?)/g);
+
+	  if (groups) {
+	    for (var i = 0; i < groups.length; i++) {
+	      keys.push({
+	        name: i,
+	        prefix: null,
+	        delimiter: null,
+	        optional: false,
+	        repeat: false,
+	        partial: false,
+	        asterisk: false,
+	        pattern: null
+	      });
+	    }
+	  }
+
+	  return attachKeys(path, keys)
+	}
+
+	/**
+	 * Transform an array into a regexp.
+	 *
+	 * @param  {!Array}  path
+	 * @param  {Array}   keys
+	 * @param  {!Object} options
+	 * @return {!RegExp}
+	 */
+	function arrayToRegexp (path, keys, options) {
+	  var parts = [];
+
+	  for (var i = 0; i < path.length; i++) {
+	    parts.push(pathToRegexp(path[i], keys, options).source);
+	  }
+
+	  var regexp = new RegExp('(?:' + parts.join('|') + ')', flags(options));
+
+	  return attachKeys(regexp, keys)
+	}
+
+	/**
+	 * Create a path regexp from string input.
+	 *
+	 * @param  {string}  path
+	 * @param  {!Array}  keys
+	 * @param  {!Object} options
+	 * @return {!RegExp}
+	 */
+	function stringToRegexp (path, keys, options) {
+	  return tokensToRegExp(parse(path, options), keys, options)
+	}
+
+	/**
+	 * Expose a function for taking tokens and returning a RegExp.
+	 *
+	 * @param  {!Array}          tokens
+	 * @param  {(Array|Object)=} keys
+	 * @param  {Object=}         options
+	 * @return {!RegExp}
+	 */
+	function tokensToRegExp (tokens, keys, options) {
+	  if (!isarray(keys)) {
+	    options = /** @type {!Object} */ (keys || options);
+	    keys = [];
+	  }
+
+	  options = options || {};
+
+	  var strict = options.strict;
+	  var end = options.end !== false;
+	  var route = '';
+
+	  // Iterate over the tokens and create our regexp string.
+	  for (var i = 0; i < tokens.length; i++) {
+	    var token = tokens[i];
+
+	    if (typeof token === 'string') {
+	      route += escapeString(token);
+	    } else {
+	      var prefix = escapeString(token.prefix);
+	      var capture = '(?:' + token.pattern + ')';
+
+	      keys.push(token);
+
+	      if (token.repeat) {
+	        capture += '(?:' + prefix + capture + ')*';
+	      }
+
+	      if (token.optional) {
+	        if (!token.partial) {
+	          capture = '(?:' + prefix + '(' + capture + '))?';
+	        } else {
+	          capture = prefix + '(' + capture + ')?';
+	        }
+	      } else {
+	        capture = prefix + '(' + capture + ')';
+	      }
+
+	      route += capture;
+	    }
+	  }
+
+	  var delimiter = escapeString(options.delimiter || '/');
+	  var endsWithDelimiter = route.slice(-delimiter.length) === delimiter;
+
+	  // In non-strict mode we allow a slash at the end of match. If the path to
+	  // match already ends with a slash, we remove it for consistency. The slash
+	  // is valid at the end of a path match, not in the middle. This is important
+	  // in non-ending mode, where "/test/" shouldn't match "/test//route".
+	  if (!strict) {
+	    route = (endsWithDelimiter ? route.slice(0, -delimiter.length) : route) + '(?:' + delimiter + '(?=$))?';
+	  }
+
+	  if (end) {
+	    route += '$';
+	  } else {
+	    // In non-ending mode, we need the capturing groups to match as much as
+	    // possible by using a positive lookahead to the end or next path segment.
+	    route += strict && endsWithDelimiter ? '' : '(?=' + delimiter + '|$)';
+	  }
+
+	  return attachKeys(new RegExp('^' + route, flags(options)), keys)
+	}
+
+	/**
+	 * Normalize the given path string, returning a regular expression.
+	 *
+	 * An empty array can be passed in for the keys, which will hold the
+	 * placeholder key descriptions. For example, using `/user/:id`, `keys` will
+	 * contain `[{ name: 'id', delimiter: '/', optional: false, repeat: false }]`.
+	 *
+	 * @param  {(string|RegExp|Array)} path
+	 * @param  {(Array|Object)=}       keys
+	 * @param  {Object=}               options
+	 * @return {!RegExp}
+	 */
+	function pathToRegexp (path, keys, options) {
+	  if (!isarray(keys)) {
+	    options = /** @type {!Object} */ (keys || options);
+	    keys = [];
+	  }
+
+	  options = options || {};
+
+	  if (path instanceof RegExp) {
+	    return regexpToRegexp(path, /** @type {!Array} */ (keys))
+	  }
+
+	  if (isarray(path)) {
+	    return arrayToRegexp(/** @type {!Array} */ (path), /** @type {!Array} */ (keys), options)
+	  }
+
+	  return stringToRegexp(/** @type {string} */ (path), /** @type {!Array} */ (keys), options)
+	}
+
+	index.parse = parse_1;
+	index.compile = compile_1;
+	index.tokensToFunction = tokensToFunction_1;
+	index.tokensToRegExp = tokensToRegExp_1;
+
+	/*  */
+
+	var regexpCache = Object.create(null);
+
+	function getRouteRegex (path) {
+	  var hit = regexpCache[path];
+	  var keys, regexp;
+
+	  if (hit) {
+	    keys = hit.keys;
+	    regexp = hit.regexp;
+	  } else {
+	    keys = [];
+	    regexp = index(path, keys);
+	    regexpCache[path] = { keys: keys, regexp: regexp };
+	  }
+
+	  return { keys: keys, regexp: regexp }
+	}
+
+	var regexpCompileCache = Object.create(null);
+
+	function fillParams (
+	  path,
+	  params,
+	  routeMsg
+	) {
+	  try {
+	    var filler =
+	      regexpCompileCache[path] ||
+	      (regexpCompileCache[path] = index.compile(path));
+	    return filler(params || {}, { pretty: true })
+	  } catch (e) {
+	    if (process.env.NODE_ENV !== 'production') {
+	      warn(false, ("missing param for " + routeMsg + ": " + (e.message)));
+	    }
+	    return ''
+	  }
+	}
+
+	/*  */
+
+
+	function normalizeLocation (
+	  raw,
+	  current,
+	  append,
+	  router
+	) {
+	  var next = typeof raw === 'string' ? { path: raw } : raw;
+	  // named target
+	  if (next.name || next._normalized) {
+	    return next
+	  }
+
+	  // relative params
+	  if (!next.path && next.params && current) {
+	    next = assign({}, next);
+	    next._normalized = true;
+	    var params = assign(assign({}, current.params), next.params);
+	    if (current.name) {
+	      next.name = current.name;
+	      next.params = params;
+	    } else if (current.matched) {
+	      var rawPath = current.matched[current.matched.length - 1].path;
+	      next.path = fillParams(rawPath, params, ("path " + (current.path)));
+	    } else if (process.env.NODE_ENV !== 'production') {
+	      warn(false, "relative params navigation requires a current route.");
+	    }
+	    return next
+	  }
+
+	  var parsedPath = parsePath(next.path || '');
+	  var basePath = (current && current.path) || '/';
+	  var path = parsedPath.path
+	    ? resolvePath(parsedPath.path, basePath, append || next.append)
+	    : (current && current.path) || '/';
+
+	  var query = resolveQuery(
+	    parsedPath.query,
+	    next.query,
+	    router && router.options.parseQuery
+	  );
+
+	  var hash = next.hash || parsedPath.hash;
+	  if (hash && hash.charAt(0) !== '#') {
+	    hash = "#" + hash;
+	  }
+
+	  return {
+	    _normalized: true,
+	    path: path,
+	    query: query,
+	    hash: hash
+	  }
+	}
+
+	function assign (a, b) {
+	  for (var key in b) {
+	    a[key] = b[key];
+	  }
+	  return a
+	}
+
+	/*  */
+
+
+	function createMatcher (
+	  routes,
+	  router
+	) {
+	  var ref = createRouteMap(routes);
+	  var pathMap = ref.pathMap;
+	  var nameMap = ref.nameMap;
+
+	  function addRoutes (routes) {
+	    createRouteMap(routes, pathMap, nameMap);
+	  }
+
+	  function match (
+	    raw,
+	    currentRoute,
+	    redirectedFrom
+	  ) {
+	    var location = normalizeLocation(raw, currentRoute, false, router);
+	    var name = location.name;
+
+	    if (name) {
+	      var record = nameMap[name];
+	      if (process.env.NODE_ENV !== 'production') {
+	        warn(record, ("Route with name '" + name + "' does not exist"));
+	      }
+	      var paramNames = getRouteRegex(record.path).keys
+	        .filter(function (key) { return !key.optional; })
+	        .map(function (key) { return key.name; });
+
+	      if (typeof location.params !== 'object') {
+	        location.params = {};
+	      }
+
+	      if (currentRoute && typeof currentRoute.params === 'object') {
+	        for (var key in currentRoute.params) {
+	          if (!(key in location.params) && paramNames.indexOf(key) > -1) {
+	            location.params[key] = currentRoute.params[key];
+	          }
+	        }
+	      }
+
+	      if (record) {
+	        location.path = fillParams(record.path, location.params, ("named route \"" + name + "\""));
+	        return _createRoute(record, location, redirectedFrom)
+	      }
+	    } else if (location.path) {
+	      location.params = {};
+	      for (var path in pathMap) {
+	        if (matchRoute(path, location.params, location.path)) {
+	          return _createRoute(pathMap[path], location, redirectedFrom)
+	        }
+	      }
+	    }
+	    // no match
+	    return _createRoute(null, location)
+	  }
+
+	  function redirect (
+	    record,
+	    location
+	  ) {
+	    var originalRedirect = record.redirect;
+	    var redirect = typeof originalRedirect === 'function'
+	        ? originalRedirect(createRoute(record, location, null, router))
+	        : originalRedirect;
+
+	    if (typeof redirect === 'string') {
+	      redirect = { path: redirect };
+	    }
+
+	    if (!redirect || typeof redirect !== 'object') {
+	      if (process.env.NODE_ENV !== 'production') {
+	        warn(
+	          false, ("invalid redirect option: " + (JSON.stringify(redirect)))
+	        );
+	      }
+	      return _createRoute(null, location)
+	    }
+
+	    var re = redirect;
+	    var name = re.name;
+	    var path = re.path;
+	    var query = location.query;
+	    var hash = location.hash;
+	    var params = location.params;
+	    query = re.hasOwnProperty('query') ? re.query : query;
+	    hash = re.hasOwnProperty('hash') ? re.hash : hash;
+	    params = re.hasOwnProperty('params') ? re.params : params;
+
+	    if (name) {
+	      // resolved named direct
+	      var targetRecord = nameMap[name];
+	      if (process.env.NODE_ENV !== 'production') {
+	        assert(targetRecord, ("redirect failed: named route \"" + name + "\" not found."));
+	      }
+	      return match({
+	        _normalized: true,
+	        name: name,
+	        query: query,
+	        hash: hash,
+	        params: params
+	      }, undefined, location)
+	    } else if (path) {
+	      // 1. resolve relative redirect
+	      var rawPath = resolveRecordPath(path, record);
+	      // 2. resolve params
+	      var resolvedPath = fillParams(rawPath, params, ("redirect route with path \"" + rawPath + "\""));
+	      // 3. rematch with existing query and hash
+	      return match({
+	        _normalized: true,
+	        path: resolvedPath,
+	        query: query,
+	        hash: hash
+	      }, undefined, location)
+	    } else {
+	      if (process.env.NODE_ENV !== 'production') {
+	        warn(false, ("invalid redirect option: " + (JSON.stringify(redirect))));
+	      }
+	      return _createRoute(null, location)
+	    }
+	  }
+
+	  function alias (
+	    record,
+	    location,
+	    matchAs
+	  ) {
+	    var aliasedPath = fillParams(matchAs, location.params, ("aliased route with path \"" + matchAs + "\""));
+	    var aliasedMatch = match({
+	      _normalized: true,
+	      path: aliasedPath
+	    });
+	    if (aliasedMatch) {
+	      var matched = aliasedMatch.matched;
+	      var aliasedRecord = matched[matched.length - 1];
+	      location.params = aliasedMatch.params;
+	      return _createRoute(aliasedRecord, location)
+	    }
+	    return _createRoute(null, location)
+	  }
+
+	  function _createRoute (
+	    record,
+	    location,
+	    redirectedFrom
+	  ) {
+	    if (record && record.redirect) {
+	      return redirect(record, redirectedFrom || location)
+	    }
+	    if (record && record.matchAs) {
+	      return alias(record, location, record.matchAs)
+	    }
+	    return createRoute(record, location, redirectedFrom, router)
+	  }
+
+	  return {
+	    match: match,
+	    addRoutes: addRoutes
+	  }
+	}
+
+	function matchRoute (
+	  path,
+	  params,
+	  pathname
+	) {
+	  var ref = getRouteRegex(path);
+	  var regexp = ref.regexp;
+	  var keys = ref.keys;
+	  var m = pathname.match(regexp);
+
+	  if (!m) {
+	    return false
+	  } else if (!params) {
+	    return true
+	  }
+
+	  for (var i = 1, len = m.length; i < len; ++i) {
+	    var key = keys[i - 1];
+	    var val = typeof m[i] === 'string' ? decodeURIComponent(m[i]) : m[i];
+	    if (key) { params[key.name] = val; }
+	  }
+
+	  return true
+	}
+
+	function resolveRecordPath (path, record) {
+	  return resolvePath(path, record.parent ? record.parent.path : '/', true)
+	}
+
+	/*  */
+
+
+	var positionStore = Object.create(null);
+
+	function setupScroll () {
+	  window.addEventListener('popstate', function (e) {
+	    saveScrollPosition();
+	    if (e.state && e.state.key) {
+	      setStateKey(e.state.key);
+	    }
+	  });
+	}
+
+	function handleScroll (
+	  router,
+	  to,
+	  from,
+	  isPop
+	) {
+	  if (!router.app) {
+	    return
+	  }
+
+	  var behavior = router.options.scrollBehavior;
+	  if (!behavior) {
+	    return
+	  }
+
+	  if (process.env.NODE_ENV !== 'production') {
+	    assert(typeof behavior === 'function', "scrollBehavior must be a function");
+	  }
+
+	  // wait until re-render finishes before scrolling
+	  router.app.$nextTick(function () {
+	    var position = getScrollPosition();
+	    var shouldScroll = behavior(to, from, isPop ? position : null);
+	    if (!shouldScroll) {
+	      return
+	    }
+	    var isObject = typeof shouldScroll === 'object';
+	    if (isObject && typeof shouldScroll.selector === 'string') {
+	      var el = document.querySelector(shouldScroll.selector);
+	      if (el) {
+	        position = getElementPosition(el);
+	      } else if (isValidPosition(shouldScroll)) {
+	        position = normalizePosition(shouldScroll);
+	      }
+	    } else if (isObject && isValidPosition(shouldScroll)) {
+	      position = normalizePosition(shouldScroll);
+	    }
+
+	    if (position) {
+	      window.scrollTo(position.x, position.y);
+	    }
+	  });
+	}
+
+	function saveScrollPosition () {
+	  var key = getStateKey();
+	  if (key) {
+	    positionStore[key] = {
+	      x: window.pageXOffset,
+	      y: window.pageYOffset
+	    };
+	  }
+	}
+
+	function getScrollPosition () {
+	  var key = getStateKey();
+	  if (key) {
+	    return positionStore[key]
+	  }
+	}
+
+	function getElementPosition (el) {
+	  var docEl = document.documentElement;
+	  var docRect = docEl.getBoundingClientRect();
+	  var elRect = el.getBoundingClientRect();
+	  return {
+	    x: elRect.left - docRect.left,
+	    y: elRect.top - docRect.top
+	  }
+	}
+
+	function isValidPosition (obj) {
+	  return isNumber(obj.x) || isNumber(obj.y)
+	}
+
+	function normalizePosition (obj) {
+	  return {
+	    x: isNumber(obj.x) ? obj.x : window.pageXOffset,
+	    y: isNumber(obj.y) ? obj.y : window.pageYOffset
+	  }
+	}
+
+	function isNumber (v) {
+	  return typeof v === 'number'
+	}
+
+	/*  */
+
+	var supportsPushState = inBrowser && (function () {
+	  var ua = window.navigator.userAgent;
+
+	  if (
+	    (ua.indexOf('Android 2.') !== -1 || ua.indexOf('Android 4.0') !== -1) &&
+	    ua.indexOf('Mobile Safari') !== -1 &&
+	    ua.indexOf('Chrome') === -1 &&
+	    ua.indexOf('Windows Phone') === -1
+	  ) {
+	    return false
+	  }
+
+	  return window.history && 'pushState' in window.history
+	})();
+
+	// use User Timing api (if present) for more accurate key precision
+	var Time = inBrowser && window.performance && window.performance.now
+	  ? window.performance
+	  : Date;
+
+	var _key = genKey();
+
+	function genKey () {
+	  return Time.now().toFixed(3)
+	}
+
+	function getStateKey () {
+	  return _key
+	}
+
+	function setStateKey (key) {
+	  _key = key;
+	}
+
+	function pushState (url, replace) {
+	  saveScrollPosition();
+	  // try...catch the pushState call to get around Safari
+	  // DOM Exception 18 where it limits to 100 pushState calls
+	  var history = window.history;
+	  try {
+	    if (replace) {
+	      history.replaceState({ key: _key }, '', url);
+	    } else {
+	      _key = genKey();
+	      history.pushState({ key: _key }, '', url);
+	    }
+	  } catch (e) {
+	    window.location[replace ? 'replace' : 'assign'](url);
+	  }
+	}
+
+	function replaceState (url) {
+	  pushState(url, true);
+	}
+
+	/*  */
+
+	function runQueue (queue, fn, cb) {
+	  var step = function (index) {
+	    if (index >= queue.length) {
+	      cb();
+	    } else {
+	      if (queue[index]) {
+	        fn(queue[index], function () {
+	          step(index + 1);
+	        });
+	      } else {
+	        step(index + 1);
+	      }
+	    }
+	  };
+	  step(0);
+	}
+
+	/*  */
+
+	var History = function History (router, base) {
+	  this.router = router;
+	  this.base = normalizeBase(base);
+	  // start with a route object that stands for "nowhere"
+	  this.current = START;
+	  this.pending = null;
+	  this.ready = false;
+	  this.readyCbs = [];
+	  this.readyErrorCbs = [];
+	  this.errorCbs = [];
+	};
+
+	History.prototype.listen = function listen (cb) {
+	  this.cb = cb;
+	};
+
+	History.prototype.onReady = function onReady (cb, errorCb) {
+	  if (this.ready) {
+	    cb();
+	  } else {
+	    this.readyCbs.push(cb);
+	    if (errorCb) {
+	      this.readyErrorCbs.push(errorCb);
+	    }
+	  }
+	};
+
+	History.prototype.onError = function onError (errorCb) {
+	  this.errorCbs.push(errorCb);
+	};
+
+	History.prototype.transitionTo = function transitionTo (location, onComplete, onAbort) {
+	    var this$1 = this;
+
+	  var route = this.router.match(location, this.current);
+	  this.confirmTransition(route, function () {
+	    this$1.updateRoute(route);
+	    onComplete && onComplete(route);
+	    this$1.ensureURL();
+
+	    // fire ready cbs once
+	    if (!this$1.ready) {
+	      this$1.ready = true;
+	      this$1.readyCbs.forEach(function (cb) { cb(route); });
+	    }
+	  }, function (err) {
+	    if (onAbort) {
+	      onAbort(err);
+	    }
+	    if (err && !this$1.ready) {
+	      this$1.ready = true;
+	      this$1.readyErrorCbs.forEach(function (cb) { cb(err); });
+	    }
+	  });
+	};
+
+	History.prototype.confirmTransition = function confirmTransition (route, onComplete, onAbort) {
+	    var this$1 = this;
+
+	  var current = this.current;
+	  var abort = function (err) {
+	    if (err instanceof Error) {
+	      this$1.errorCbs.forEach(function (cb) { cb(err); });
+	    }
+	    onAbort && onAbort(err);
+	  };
+	  if (
+	    isSameRoute(route, current) &&
+	    // in the case the route map has been dynamically appended to
+	    route.matched.length === current.matched.length
+	  ) {
+	    this.ensureURL();
+	    return abort()
+	  }
+
+	  var ref = resolveQueue(this.current.matched, route.matched);
+	    var updated = ref.updated;
+	    var deactivated = ref.deactivated;
+	    var activated = ref.activated;
+
+	  var queue = [].concat(
+	    // in-component leave guards
+	    extractLeaveGuards(deactivated),
+	    // global before hooks
+	    this.router.beforeHooks,
+	    // in-component update hooks
+	    extractUpdateHooks(updated),
+	    // in-config enter guards
+	    activated.map(function (m) { return m.beforeEnter; }),
+	    // async components
+	    resolveAsyncComponents(activated)
+	  );
+
+	  this.pending = route;
+	  var iterator = function (hook, next) {
+	    if (this$1.pending !== route) {
+	      return abort()
+	    }
+	    try {
+	      hook(route, current, function (to) {
+	        if (to === false || to instanceof Error) {
+	          // next(false) -> abort navigation, ensure current URL
+	          this$1.ensureURL(true);
+	          abort(to);
+	        } else if (typeof to === 'string' || typeof to === 'object') {
+	          // next('/') or next({ path: '/' }) -> redirect
+	          abort();
+	          if (typeof to === 'object' && to.replace) {
+	            this$1.replace(to);
+	          } else {
+	            this$1.push(to);
+	          }
+	        } else {
+	          // confirm transition and pass on the value
+	          next(to);
+	        }
+	      });
+	    } catch (e) {
+	      abort(e);
+	    }
+	  };
+
+	  runQueue(queue, iterator, function () {
+	    var postEnterCbs = [];
+	    var isValid = function () { return this$1.current === route; };
+	    var enterGuards = extractEnterGuards(activated, postEnterCbs, isValid);
+	    // wait until async components are resolved before
+	    // extracting in-component enter guards
+	    runQueue(enterGuards, iterator, function () {
+	      if (this$1.pending !== route) {
+	        return abort()
+	      }
+	      this$1.pending = null;
+	      onComplete(route);
+	      if (this$1.router.app) {
+	        this$1.router.app.$nextTick(function () {
+	          postEnterCbs.forEach(function (cb) { cb(); });
+	        });
+	      }
+	    });
+	  });
+	};
+
+	History.prototype.updateRoute = function updateRoute (route) {
+	  var prev = this.current;
+	  this.current = route;
+	  this.cb && this.cb(route);
+	  this.router.afterHooks.forEach(function (hook) {
+	    hook && hook(route, prev);
+	  });
+	};
+
+	function normalizeBase (base) {
+	  if (!base) {
+	    if (inBrowser) {
+	      // respect <base> tag
+	      var baseEl = document.querySelector('base');
+	      base = (baseEl && baseEl.getAttribute('href')) || '/';
+	    } else {
+	      base = '/';
+	    }
+	  }
+	  // make sure there's the starting slash
+	  if (base.charAt(0) !== '/') {
+	    base = '/' + base;
+	  }
+	  // remove trailing slash
+	  return base.replace(/\/$/, '')
+	}
+
+	function resolveQueue (
+	  current,
+	  next
+	) {
+	  var i;
+	  var max = Math.max(current.length, next.length);
+	  for (i = 0; i < max; i++) {
+	    if (current[i] !== next[i]) {
+	      break
+	    }
+	  }
+	  return {
+	    updated: next.slice(0, i),
+	    activated: next.slice(i),
+	    deactivated: current.slice(i)
+	  }
+	}
+
+	function extractGuards (
+	  records,
+	  name,
+	  bind,
+	  reverse
+	) {
+	  var guards = flatMapComponents(records, function (def, instance, match, key) {
+	    var guard = extractGuard(def, name);
+	    if (guard) {
+	      return Array.isArray(guard)
+	        ? guard.map(function (guard) { return bind(guard, instance, match, key); })
+	        : bind(guard, instance, match, key)
+	    }
+	  });
+	  return flatten(reverse ? guards.reverse() : guards)
+	}
+
+	function extractGuard (
+	  def,
+	  key
+	) {
+	  if (typeof def !== 'function') {
+	    // extend now so that global mixins are applied.
+	    def = _Vue.extend(def);
+	  }
+	  return def.options[key]
+	}
+
+	function extractLeaveGuards (deactivated) {
+	  return extractGuards(deactivated, 'beforeRouteLeave', bindGuard, true)
+	}
+
+	function extractUpdateHooks (updated) {
+	  return extractGuards(updated, 'beforeRouteUpdate', bindGuard)
+	}
+
+	function bindGuard (guard, instance) {
+	  return function boundRouteGuard () {
+	    return guard.apply(instance, arguments)
+	  }
+	}
+
+	function extractEnterGuards (
+	  activated,
+	  cbs,
+	  isValid
+	) {
+	  return extractGuards(activated, 'beforeRouteEnter', function (guard, _, match, key) {
+	    return bindEnterGuard(guard, match, key, cbs, isValid)
+	  })
+	}
+
+	function bindEnterGuard (
+	  guard,
+	  match,
+	  key,
+	  cbs,
+	  isValid
+	) {
+	  return function routeEnterGuard (to, from, next) {
+	    return guard(to, from, function (cb) {
+	      next(cb);
+	      if (typeof cb === 'function') {
+	        cbs.push(function () {
+	          // #750
+	          // if a router-view is wrapped with an out-in transition,
+	          // the instance may not have been registered at this time.
+	          // we will need to poll for registration until current route
+	          // is no longer valid.
+	          poll(cb, match.instances, key, isValid);
+	        });
+	      }
+	    })
+	  }
+	}
+
+	function poll (
+	  cb, // somehow flow cannot infer this is a function
+	  instances,
+	  key,
+	  isValid
+	) {
+	  if (instances[key]) {
+	    cb(instances[key]);
+	  } else if (isValid()) {
+	    setTimeout(function () {
+	      poll(cb, instances, key, isValid);
+	    }, 16);
+	  }
+	}
+
+	function resolveAsyncComponents (matched) {
+	  var _next;
+	  var pending = 0;
+	  var error = null;
+
+	  flatMapComponents(matched, function (def, _, match, key) {
+	    // if it's a function and doesn't have cid attached,
+	    // assume it's an async component resolve function.
+	    // we are not using Vue's default async resolving mechanism because
+	    // we want to halt the navigation until the incoming component has been
+	    // resolved.
+	    if (typeof def === 'function' && def.cid === undefined) {
+	      pending++;
+
+	      var resolve = once(function (resolvedDef) {
+	        // save resolved on async factory in case it's used elsewhere
+	        def.resolved = typeof resolvedDef === 'function'
+	          ? resolvedDef
+	          : _Vue.extend(resolvedDef);
+	        match.components[key] = resolvedDef;
+	        pending--;
+	        if (pending <= 0 && _next) {
+	          _next();
+	        }
+	      });
+
+	      var reject = once(function (reason) {
+	        var msg = "Failed to resolve async component " + key + ": " + reason;
+	        process.env.NODE_ENV !== 'production' && warn(false, msg);
+	        if (!error) {
+	          error = reason instanceof Error
+	            ? reason
+	            : new Error(msg);
+	          if (_next) { _next(error); }
+	        }
+	      });
+
+	      var res;
+	      try {
+	        res = def(resolve, reject);
+	      } catch (e) {
+	        reject(e);
+	      }
+	      if (res) {
+	        if (typeof res.then === 'function') {
+	          res.then(resolve, reject);
+	        } else {
+	          // new syntax in Vue 2.3
+	          var comp = res.component;
+	          if (comp && typeof comp.then === 'function') {
+	            comp.then(resolve, reject);
+	          }
+	        }
+	      }
+	    }
+	  });
+
+	  return function (to, from, next) {
+	    if (error) {
+	      next(error);
+	    } else if (pending <= 0) {
+	      next();
+	    } else {
+	      _next = next;
+	    }
+	  }
+	}
+
+	function flatMapComponents (
+	  matched,
+	  fn
+	) {
+	  return flatten(matched.map(function (m) {
+	    return Object.keys(m.components).map(function (key) { return fn(
+	      m.components[key],
+	      m.instances[key],
+	      m, key
+	    ); })
+	  }))
+	}
+
+	function flatten (arr) {
+	  return Array.prototype.concat.apply([], arr)
+	}
+
+	// in Webpack 2, require.ensure now also returns a Promise
+	// so the resolve/reject functions may get called an extra time
+	// if the user uses an arrow function shorthand that happens to
+	// return that Promise.
+	function once (fn) {
+	  var called = false;
+	  return function () {
+	    if (called) { return }
+	    called = true;
+	    return fn.apply(this, arguments)
+	  }
+	}
+
+	/*  */
+
+
+	var HTML5History = (function (History$$1) {
+	  function HTML5History (router, base) {
+	    var this$1 = this;
+
+	    History$$1.call(this, router, base);
+
+	    var expectScroll = router.options.scrollBehavior;
+
+	    if (expectScroll) {
+	      setupScroll();
+	    }
+
+	    window.addEventListener('popstate', function (e) {
+	      this$1.transitionTo(getLocation(this$1.base), function (route) {
+	        if (expectScroll) {
+	          handleScroll(router, route, this$1.current, true);
+	        }
+	      });
+	    });
+	  }
+
+	  if ( History$$1 ) HTML5History.__proto__ = History$$1;
+	  HTML5History.prototype = Object.create( History$$1 && History$$1.prototype );
+	  HTML5History.prototype.constructor = HTML5History;
+
+	  HTML5History.prototype.go = function go (n) {
+	    window.history.go(n);
+	  };
+
+	  HTML5History.prototype.push = function push (location, onComplete, onAbort) {
+	    var this$1 = this;
+
+	    var ref = this;
+	    var fromRoute = ref.current;
+	    this.transitionTo(location, function (route) {
+	      pushState(cleanPath(this$1.base + route.fullPath));
+	      handleScroll(this$1.router, route, fromRoute, false);
+	      onComplete && onComplete(route);
+	    }, onAbort);
+	  };
+
+	  HTML5History.prototype.replace = function replace (location, onComplete, onAbort) {
+	    var this$1 = this;
+
+	    var ref = this;
+	    var fromRoute = ref.current;
+	    this.transitionTo(location, function (route) {
+	      replaceState(cleanPath(this$1.base + route.fullPath));
+	      handleScroll(this$1.router, route, fromRoute, false);
+	      onComplete && onComplete(route);
+	    }, onAbort);
+	  };
+
+	  HTML5History.prototype.ensureURL = function ensureURL (push) {
+	    if (getLocation(this.base) !== this.current.fullPath) {
+	      var current = cleanPath(this.base + this.current.fullPath);
+	      push ? pushState(current) : replaceState(current);
+	    }
+	  };
+
+	  HTML5History.prototype.getCurrentLocation = function getCurrentLocation () {
+	    return getLocation(this.base)
+	  };
+
+	  return HTML5History;
+	}(History));
+
+	function getLocation (base) {
+	  var path = window.location.pathname;
+	  if (base && path.indexOf(base) === 0) {
+	    path = path.slice(base.length);
+	  }
+	  return (path || '/') + window.location.search + window.location.hash
+	}
+
+	/*  */
+
+
+	var HashHistory = (function (History$$1) {
+	  function HashHistory (router, base, fallback) {
+	    History$$1.call(this, router, base);
+	    // check history fallback deeplinking
+	    if (fallback && checkFallback(this.base)) {
+	      return
+	    }
+	    ensureSlash();
+	  }
+
+	  if ( History$$1 ) HashHistory.__proto__ = History$$1;
+	  HashHistory.prototype = Object.create( History$$1 && History$$1.prototype );
+	  HashHistory.prototype.constructor = HashHistory;
+
+	  // this is delayed until the app mounts
+	  // to avoid the hashchange listener being fired too early
+	  HashHistory.prototype.setupListeners = function setupListeners () {
+	    var this$1 = this;
+
+	    window.addEventListener('hashchange', function () {
+	      if (!ensureSlash()) {
+	        return
+	      }
+	      this$1.transitionTo(getHash(), function (route) {
+	        replaceHash(route.fullPath);
+	      });
+	    });
+	  };
+
+	  HashHistory.prototype.push = function push (location, onComplete, onAbort) {
+	    this.transitionTo(location, function (route) {
+	      pushHash(route.fullPath);
+	      onComplete && onComplete(route);
+	    }, onAbort);
+	  };
+
+	  HashHistory.prototype.replace = function replace (location, onComplete, onAbort) {
+	    this.transitionTo(location, function (route) {
+	      replaceHash(route.fullPath);
+	      onComplete && onComplete(route);
+	    }, onAbort);
+	  };
+
+	  HashHistory.prototype.go = function go (n) {
+	    window.history.go(n);
+	  };
+
+	  HashHistory.prototype.ensureURL = function ensureURL (push) {
+	    var current = this.current.fullPath;
+	    if (getHash() !== current) {
+	      push ? pushHash(current) : replaceHash(current);
+	    }
+	  };
+
+	  HashHistory.prototype.getCurrentLocation = function getCurrentLocation () {
+	    return getHash()
+	  };
+
+	  return HashHistory;
+	}(History));
+
+	function checkFallback (base) {
+	  var location = getLocation(base);
+	  if (!/^\/#/.test(location)) {
+	    window.location.replace(
+	      cleanPath(base + '/#' + location)
+	    );
+	    return true
+	  }
+	}
+
+	function ensureSlash () {
+	  var path = getHash();
+	  if (path.charAt(0) === '/') {
+	    return true
+	  }
+	  replaceHash('/' + path);
+	  return false
+	}
+
+	function getHash () {
+	  // We can't use window.location.hash here because it's not
+	  // consistent across browsers - Firefox will pre-decode it!
+	  var href = window.location.href;
+	  var index = href.indexOf('#');
+	  return index === -1 ? '' : href.slice(index + 1)
+	}
+
+	function pushHash (path) {
+	  window.location.hash = path;
+	}
+
+	function replaceHash (path) {
+	  var i = window.location.href.indexOf('#');
+	  window.location.replace(
+	    window.location.href.slice(0, i >= 0 ? i : 0) + '#' + path
+	  );
+	}
+
+	/*  */
+
+
+	var AbstractHistory = (function (History$$1) {
+	  function AbstractHistory (router, base) {
+	    History$$1.call(this, router, base);
+	    this.stack = [];
+	    this.index = -1;
+	  }
+
+	  if ( History$$1 ) AbstractHistory.__proto__ = History$$1;
+	  AbstractHistory.prototype = Object.create( History$$1 && History$$1.prototype );
+	  AbstractHistory.prototype.constructor = AbstractHistory;
+
+	  AbstractHistory.prototype.push = function push (location, onComplete, onAbort) {
+	    var this$1 = this;
+
+	    this.transitionTo(location, function (route) {
+	      this$1.stack = this$1.stack.slice(0, this$1.index + 1).concat(route);
+	      this$1.index++;
+	      onComplete && onComplete(route);
+	    }, onAbort);
+	  };
+
+	  AbstractHistory.prototype.replace = function replace (location, onComplete, onAbort) {
+	    var this$1 = this;
+
+	    this.transitionTo(location, function (route) {
+	      this$1.stack = this$1.stack.slice(0, this$1.index).concat(route);
+	      onComplete && onComplete(route);
+	    }, onAbort);
+	  };
+
+	  AbstractHistory.prototype.go = function go (n) {
+	    var this$1 = this;
+
+	    var targetIndex = this.index + n;
+	    if (targetIndex < 0 || targetIndex >= this.stack.length) {
+	      return
+	    }
+	    var route = this.stack[targetIndex];
+	    this.confirmTransition(route, function () {
+	      this$1.index = targetIndex;
+	      this$1.updateRoute(route);
+	    });
+	  };
+
+	  AbstractHistory.prototype.getCurrentLocation = function getCurrentLocation () {
+	    var current = this.stack[this.stack.length - 1];
+	    return current ? current.fullPath : '/'
+	  };
+
+	  AbstractHistory.prototype.ensureURL = function ensureURL () {
+	    // noop
+	  };
+
+	  return AbstractHistory;
+	}(History));
+
+	/*  */
+
+	var VueRouter = function VueRouter (options) {
+	  if ( options === void 0 ) options = {};
+
+	  this.app = null;
+	  this.apps = [];
+	  this.options = options;
+	  this.beforeHooks = [];
+	  this.afterHooks = [];
+	  this.matcher = createMatcher(options.routes || [], this);
+
+	  var mode = options.mode || 'hash';
+	  this.fallback = mode === 'history' && !supportsPushState;
+	  if (this.fallback) {
+	    mode = 'hash';
+	  }
+	  if (!inBrowser) {
+	    mode = 'abstract';
+	  }
+	  this.mode = mode;
+
+	  switch (mode) {
+	    case 'history':
+	      this.history = new HTML5History(this, options.base);
+	      break
+	    case 'hash':
+	      this.history = new HashHistory(this, options.base, this.fallback);
+	      break
+	    case 'abstract':
+	      this.history = new AbstractHistory(this, options.base);
+	      break
+	    default:
+	      if (process.env.NODE_ENV !== 'production') {
+	        assert(false, ("invalid mode: " + mode));
+	      }
+	  }
+	};
+
+	var prototypeAccessors = { currentRoute: {} };
+
+	VueRouter.prototype.match = function match (
+	  raw,
+	  current,
+	  redirectedFrom
+	) {
+	  return this.matcher.match(raw, current, redirectedFrom)
+	};
+
+	prototypeAccessors.currentRoute.get = function () {
+	  return this.history && this.history.current
+	};
+
+	VueRouter.prototype.init = function init (app /* Vue component instance */) {
+	    var this$1 = this;
+
+	  process.env.NODE_ENV !== 'production' && assert(
+	    install.installed,
+	    "not installed. Make sure to call `Vue.use(VueRouter)` " +
+	    "before creating root instance."
+	  );
+
+	  this.apps.push(app);
+
+	  // main app already initialized.
+	  if (this.app) {
+	    return
+	  }
+
+	  this.app = app;
+
+	  var history = this.history;
+
+	  if (history instanceof HTML5History) {
+	    history.transitionTo(history.getCurrentLocation());
+	  } else if (history instanceof HashHistory) {
+	    var setupHashListener = function () {
+	      history.setupListeners();
+	    };
+	    history.transitionTo(
+	      history.getCurrentLocation(),
+	      setupHashListener,
+	      setupHashListener
+	    );
+	  }
+
+	  history.listen(function (route) {
+	    this$1.apps.forEach(function (app) {
+	      app._route = route;
+	    });
+	  });
+	};
+
+	VueRouter.prototype.beforeEach = function beforeEach (fn) {
+	  this.beforeHooks.push(fn);
+	};
+
+	VueRouter.prototype.afterEach = function afterEach (fn) {
+	  this.afterHooks.push(fn);
+	};
+
+	VueRouter.prototype.onReady = function onReady (cb, errorCb) {
+	  this.history.onReady(cb, errorCb);
+	};
+
+	VueRouter.prototype.onError = function onError (errorCb) {
+	  this.history.onError(errorCb);
+	};
+
+	VueRouter.prototype.push = function push (location, onComplete, onAbort) {
+	  this.history.push(location, onComplete, onAbort);
+	};
+
+	VueRouter.prototype.replace = function replace (location, onComplete, onAbort) {
+	  this.history.replace(location, onComplete, onAbort);
+	};
+
+	VueRouter.prototype.go = function go (n) {
+	  this.history.go(n);
+	};
+
+	VueRouter.prototype.back = function back () {
+	  this.go(-1);
+	};
+
+	VueRouter.prototype.forward = function forward () {
+	  this.go(1);
+	};
+
+	VueRouter.prototype.getMatchedComponents = function getMatchedComponents (to) {
+	  var route = to
+	    ? this.resolve(to).route
+	    : this.currentRoute;
+	  if (!route) {
+	    return []
+	  }
+	  return [].concat.apply([], route.matched.map(function (m) {
+	    return Object.keys(m.components).map(function (key) {
+	      return m.components[key]
+	    })
+	  }))
+	};
+
+	VueRouter.prototype.resolve = function resolve (
+	  to,
+	  current,
+	  append
+	) {
+	  var location = normalizeLocation(
+	    to,
+	    current || this.history.current,
+	    append,
+	    this
+	  );
+	  var route = this.match(location, current);
+	  var fullPath = route.redirectedFrom || route.fullPath;
+	  var base = this.history.base;
+	  var href = createHref(base, fullPath, this.mode);
+	  return {
+	    location: location,
+	    route: route,
+	    href: href,
+	    // for backwards compat
+	    normalizedTo: location,
+	    resolved: route
+	  }
+	};
+
+	VueRouter.prototype.addRoutes = function addRoutes (routes) {
+	  this.matcher.addRoutes(routes);
+	  if (this.history.current !== START) {
+	    this.history.transitionTo(this.history.getCurrentLocation());
+	  }
+	};
+
+	Object.defineProperties( VueRouter.prototype, prototypeAccessors );
+
+	function createHref (base, fullPath, mode) {
+	  var path = mode === 'hash' ? '#' + fullPath : fullPath;
+	  return base ? cleanPath(base + '/' + path) : path
+	}
+
+	VueRouter.install = install;
+	VueRouter.version = '2.4.0';
+
+	if (inBrowser && window.Vue) {
+	  window.Vue.use(VueRouter);
+	}
+
+	module.exports = VueRouter;
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(314)))
+
+/***/ },
+/* 314 */
+/***/ function(module, exports) {
+
+	// shim for using process in browser
+	var process = module.exports = {};
+
+	// cached from whatever global is present so that test runners that stub it
+	// don't break things.  But we need to wrap it in a try catch in case it is
+	// wrapped in strict mode code which doesn't define any globals.  It's inside a
+	// function because try/catches deoptimize in certain engines.
+
+	var cachedSetTimeout;
+	var cachedClearTimeout;
+
+	function defaultSetTimout() {
+	    throw new Error('setTimeout has not been defined');
+	}
+	function defaultClearTimeout () {
+	    throw new Error('clearTimeout has not been defined');
+	}
+	(function () {
+	    try {
+	        if (typeof setTimeout === 'function') {
+	            cachedSetTimeout = setTimeout;
+	        } else {
+	            cachedSetTimeout = defaultSetTimout;
+	        }
+	    } catch (e) {
+	        cachedSetTimeout = defaultSetTimout;
+	    }
+	    try {
+	        if (typeof clearTimeout === 'function') {
+	            cachedClearTimeout = clearTimeout;
+	        } else {
+	            cachedClearTimeout = defaultClearTimeout;
+	        }
+	    } catch (e) {
+	        cachedClearTimeout = defaultClearTimeout;
+	    }
+	} ())
+	function runTimeout(fun) {
+	    if (cachedSetTimeout === setTimeout) {
+	        //normal enviroments in sane situations
+	        return setTimeout(fun, 0);
+	    }
+	    // if setTimeout wasn't available but was latter defined
+	    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+	        cachedSetTimeout = setTimeout;
+	        return setTimeout(fun, 0);
+	    }
+	    try {
+	        // when when somebody has screwed with setTimeout but no I.E. maddness
+	        return cachedSetTimeout(fun, 0);
+	    } catch(e){
+	        try {
+	            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+	            return cachedSetTimeout.call(null, fun, 0);
+	        } catch(e){
+	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+	            return cachedSetTimeout.call(this, fun, 0);
+	        }
+	    }
+
+
+	}
+	function runClearTimeout(marker) {
+	    if (cachedClearTimeout === clearTimeout) {
+	        //normal enviroments in sane situations
+	        return clearTimeout(marker);
+	    }
+	    // if clearTimeout wasn't available but was latter defined
+	    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+	        cachedClearTimeout = clearTimeout;
+	        return clearTimeout(marker);
+	    }
+	    try {
+	        // when when somebody has screwed with setTimeout but no I.E. maddness
+	        return cachedClearTimeout(marker);
+	    } catch (e){
+	        try {
+	            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+	            return cachedClearTimeout.call(null, marker);
+	        } catch (e){
+	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+	            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+	            return cachedClearTimeout.call(this, marker);
+	        }
+	    }
+
+
+
+	}
+	var queue = [];
+	var draining = false;
+	var currentQueue;
+	var queueIndex = -1;
+
+	function cleanUpNextTick() {
+	    if (!draining || !currentQueue) {
+	        return;
+	    }
+	    draining = false;
+	    if (currentQueue.length) {
+	        queue = currentQueue.concat(queue);
+	    } else {
+	        queueIndex = -1;
+	    }
+	    if (queue.length) {
+	        drainQueue();
+	    }
+	}
+
+	function drainQueue() {
+	    if (draining) {
+	        return;
+	    }
+	    var timeout = runTimeout(cleanUpNextTick);
+	    draining = true;
+
+	    var len = queue.length;
+	    while(len) {
+	        currentQueue = queue;
+	        queue = [];
+	        while (++queueIndex < len) {
+	            if (currentQueue) {
+	                currentQueue[queueIndex].run();
+	            }
+	        }
+	        queueIndex = -1;
+	        len = queue.length;
+	    }
+	    currentQueue = null;
+	    draining = false;
+	    runClearTimeout(timeout);
+	}
+
+	process.nextTick = function (fun) {
+	    var args = new Array(arguments.length - 1);
+	    if (arguments.length > 1) {
+	        for (var i = 1; i < arguments.length; i++) {
+	            args[i - 1] = arguments[i];
+	        }
+	    }
+	    queue.push(new Item(fun, args));
+	    if (queue.length === 1 && !draining) {
+	        runTimeout(drainQueue);
+	    }
+	};
+
+	// v8 likes predictible objects
+	function Item(fun, array) {
+	    this.fun = fun;
+	    this.array = array;
+	}
+	Item.prototype.run = function () {
+	    this.fun.apply(null, this.array);
+	};
+	process.title = 'browser';
+	process.browser = true;
+	process.env = {};
+	process.argv = [];
+	process.version = ''; // empty string to avoid regexp issues
+	process.versions = {};
+
+	function noop() {}
+
+	process.on = noop;
+	process.addListener = noop;
+	process.once = noop;
+	process.off = noop;
+	process.removeListener = noop;
+	process.removeAllListeners = noop;
+	process.emit = noop;
+
+	process.binding = function (name) {
+	    throw new Error('process.binding is not supported');
+	};
+
+	process.cwd = function () { return '/' };
+	process.chdir = function (dir) {
+	    throw new Error('process.chdir is not supported');
+	};
+	process.umask = function() { return 0; };
 
 
 /***/ }

@@ -95,3 +95,20 @@ header .user-area .photo img {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
+
+.rotate-left {
+  transition: 1s;
+  margin-left: 400px;
+  cursor: e-resize;
+  opacity: 0;
+  z-index: 10;
+  transform: translateX(50px) rotate(20deg) scale(0.8);
+}
+.rotate-right {
+  transform: translateX(-50px) rotate(-20deg) scale(0.8);
+  transition: 1s;
+  opacity: 0;
+  margin-left: -400px;
+  cursor: w-resize;
+  z-index: 10;
+}
