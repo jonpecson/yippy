@@ -22,7 +22,8 @@
 			<i class="icon-yipp_check_full"></i>
 		</a>
 		<div class="bar">
-			<span class="bar-inner"></span>
+			<!-- <span class="bar-inner"></span> -->
+			<input type="range" min="0" max="5" value="1" step="0" disabled>
 		</div>
 		<router-link :to="{ name: 'timeline'}" class="home">
 			<i class="icon-yipp_home_full-"></i>
@@ -63,7 +64,8 @@
 			<i class="icon-yipp_check_full"></i>
 		</a>
 		<div class="bar">
-			<span class="bar-inner"></span>
+			<!-- <span class="bar-inner"></span> -->
+			<input type="range" min="0" max="5" value="1" step="1" disabled>
 		</div>
 		<router-link :to="{ name: 'timeline'}" class="home">
 			<i class="icon-yipp_home_full-"></i>
@@ -91,7 +93,8 @@
 			<i class="icon-yipp_check_full"></i>
 		</a>
 		<div class="bar">
-			<span class="bar-inner"></span>
+			<!-- <span class="bar-inner"></span> -->
+			<input type="range" min="0" max="5" value="5" step="1" disabled>
 		</div>
 		<router-link :to="{ name: 'timeline'}" class="home">
 			<i class="icon-yipp_home_full-"></i>
@@ -138,12 +141,7 @@ import $ from 'jquery'
 import Modal from '../components/Modal.vue'
 
 import 'hammerjs/hammer.js'
-
-// http://dev.fedvas.com/cms/api.dsuite/yipp/todos/37/en
-
-import Vue from 'vue'
-var VueTouch = require('vue-touch')
-Vue.use(VueTouch, {name: 'v-touch'})
+import rangesliderJs from 'rangeslider-js';
 
 export default {
     data() {
@@ -166,6 +164,14 @@ export default {
 	    this.getLesson();
     },
     methods: {
+    	initSlider: function () {
+    		setTimeout(function(){
+    			var slider = document.querySelectorAll('.bar input[type="range"]');
+    			console.log(slider)
+	    		rangesliderJs.create(slider);
+	    		
+	        }, 2);
+    	},
     	getLesson: function () {
             var that = this;
 
@@ -198,6 +204,8 @@ export default {
         },
     	startLesson: function () {
     		this.page = 'cards';
+
+    		this.initSlider();
 
     		var that = this;
     		setTimeout(function(){
@@ -235,7 +243,7 @@ export default {
 
 			    if ( item.is(':last-child') ) {
 					setTimeout(function(){
-		    			that.next('complete')
+		    			that.next('stack')
 			        }, swipeSpeedDelay);
 				} else {
 					item.next().removeClass('rotate-left rotate-right').fadeIn(swipeSpeedFadeIn);

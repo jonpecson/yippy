@@ -89,8 +89,6 @@ import $ from 'jquery'
 
 import Modal from '../components/Modal.vue'
 
-// http://dev.fedvas.com/cms/api.dsuite/yipp/todos/37/en
-
 export default {
     data() {
         return {

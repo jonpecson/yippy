@@ -51,7 +51,7 @@
 	__webpack_require__(8);
 	__webpack_require__(184);
 	__webpack_require__(193);
-	module.exports = __webpack_require__(290);
+	module.exports = __webpack_require__(293);
 
 
 /***/ },
@@ -65,7 +65,7 @@
 	});
 	exports.default = {
 			api: {
-					'url': 'http://dev.fedvas.com/cms/api.dsuite/yipp',
+					'url': 'http://85.17.15.209/websites/cms/api/yipp',
 					'lang': 'en',
 					'localhost': '/yipp/app/#'
 			}
@@ -9797,11 +9797,11 @@
 
 	var _Timeline2 = _interopRequireDefault(_Timeline);
 
-	var _Emergency = __webpack_require__(295);
+	var _Emergency = __webpack_require__(291);
 
 	var _Emergency2 = _interopRequireDefault(_Emergency);
 
-	var _Lesson = __webpack_require__(298);
+	var _Lesson = __webpack_require__(295);
 
 	var _Lesson2 = _interopRequireDefault(_Lesson);
 
@@ -35171,7 +35171,7 @@
 
 	var __vue_script__, __vue_template__
 	__vue_script__ = __webpack_require__(289)
-	__vue_template__ = __webpack_require__(294)
+	__vue_template__ = __webpack_require__(290)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -35207,7 +35207,7 @@
 
 	var _auth2 = _interopRequireDefault(_auth);
 
-	var _timeline = __webpack_require__(290);
+	var _timeline = __webpack_require__(293);
 
 	var _timeline2 = _interopRequireDefault(_timeline);
 
@@ -35215,13 +35215,11 @@
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
-	var _Modal = __webpack_require__(291);
+	var _Modal = __webpack_require__(297);
 
 	var _Modal2 = _interopRequireDefault(_Modal);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	// http://dev.fedvas.com/cms/api.dsuite/yipp/todos/37/en
 
 	// <template>
 	// <div id="timeline-container">
@@ -35442,6 +35440,119 @@
 
 /***/ },
 /* 290 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div id=\"timeline-container\">\n    <header>\n        <div class=\"title-area\">\n            <a href=\"javascript:void(0);\"><i class=\"icon-yipp_profile_line\"></i></a>\n            <span>Trainingen</span>\n            <router-link :to=\"{ name: 'emergency'}\"><i class=\"icon-yipp_notification_line2\"></i></router-link>\n        </div>\n\n        <div class=\"user-area\">\n            <div class=\"child-name\">{{ child.get('name') }}</div>\n            <ul class=\"months-level\">\n                <li>\n                    <span>{{ child.get('age') }}</span>  \n                    <span>Maanden</span>\n                </li>\n                <li>\n                    <span>{{ currentLevel }}</span>\n                    <span>Level</span>\n                </li>\n                <li>\n                    <a href=\"#\" v-on:click.prevent=\"toggle\" v-if=\"page == 'lessons'\"><i class=\"icon-yipp_down\"></i></a>\n                    <a href=\"#\" v-on:click.prevent=\"toggle\" v-if=\"page == 'levels'\"><i class=\"icon-yipp_up\"></i></a>\n                </li>\n            </ul>\n\n            <div class=\"photo\"><img class=\"avatar\" v-bind:src=\"child.get('image')\"></div>\n            \n        </div>\n    </header>\n        \n        <section class=\"traingen\" v-if=\"page == 'lessons'\">\n            <ul id=\"list-icons\">\n                <li v-for=\"lesson in lessons\">\n                    <a href=\"#\" v-bind:data-id=\"lesson.id\" v-on:click.prevent=\"goTodo\">\n                        <span class=\"icon big active\" v-bind:class=\"lesson.icon\"></span> \n                        {{ lesson.counter }}. {{ lesson.description }}\n                    </a>\n                </li>\n            </ul>\n        </section>\n        \n            \n        <section class=\"traingen2\" v-if=\"page == 'levels'\">\n                    \n            <ul id=\"list-text\">\n                <li v-for=\"level in levels\">\n                    <a href=\"#\" v-if=\"level.active == 'active'\" \n                        v-bind:data-id=\"level.id\" \n                        v-on:click.prevent=\"setCurrentLevel\"\n                        v-bind:class=\"level.active\">\n                        <span v-bind:data-id=\"level.id\" class=\"level\">{{ level.counter }}</span> \n                        <span v-bind:data-id=\"level.id\" class=\"months\">{{ level.description }}</span>\n                    </a>\n\n                    <a href=\"#\" v-if=\"level.active == ''\" \n                        v-bind:data-id=\"level.id\" \n                        v-on:click.prevent=\"\"\n                        @click=\"showModal = true\"\n                        v-bind:class=\"level.active\">\n                        <span v-bind:data-id=\"level.id\" class=\"level\">{{ level.counter }}</span> \n                        <span v-bind:data-id=\"level.id\" class=\"months\">{{ level.description }}</span>\n                    </a>\n                </li>\n            </ul>\n        \n        </section>\n        \n        <footer>\n            <ul>\n                <li><a href=\"javascript:void(0);\" class=\"active\"><span class=\"icon-yipp_home_full-\"></span>Training</a></li>\n                <li><router-link :to=\"{ path: 'challenge'}\"><span class=\"icon-yipp_challenge_line\"></span>Challenge</router-link></li>\n            </ul>\n        </footer>\n\n        <modal v-if=\"showModal\" @close=\"showModal = false\">\n            <h3 slot=\"header\">Ooops...</h3>\n            <p slot=\"body\">This is not yet available</p>\n        </modal>\n</div>\n";
+
+/***/ },
+/* 291 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__vue_script__ = __webpack_require__(292)
+	__vue_template__ = __webpack_require__(294)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "/Users/racheljaro/webroot/yipp/app/src/components/Emergency.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 292 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _index = __webpack_require__(8);
+
+	var _config = __webpack_require__(1);
+
+	var _config2 = _interopRequireDefault(_config);
+
+	var _auth = __webpack_require__(184);
+
+	var _auth2 = _interopRequireDefault(_auth);
+
+	var _timeline = __webpack_require__(293);
+
+	var _timeline2 = _interopRequireDefault(_timeline);
+
+	var _jquery = __webpack_require__(11);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	    data: function data() {
+	        return {
+	            page: '1'
+	        };
+	    },
+
+	    created: function created() {},
+	    methods: {
+	        view: function view() {
+	            this.page = 2;
+	        },
+	        back: function back() {
+	            this.page = 1;
+	        }
+	    }
+	};
+
+	// </script>
+	// <template>
+	// 	<div id="page-emergency">
+	// 		<section class="emergency" v-if="page == 1">
+	// 			<header class="normal-header">
+	// 				<router-link :to="{ name: 'timeline'}"><span class="icon-close" style="font-weight: normal">X</span></router-link>
+	// 				<h2>Emergency</h2>
+	// 			</header>
+	//
+	// 			<ul id="list-image">
+	// 				<li v-on:click.prevent="view" style="background-image: url(assets/img/slider-1.jpg);"><h3>{title here}</h3></li>
+	// 				<li v-on:click.prevent="view" style="background-image: url(assets/img/slider-2.jpg);"><h3>{title here}</h3></li>
+	// 				<li v-on:click.prevent="view" style="background-image: url(assets/img/slider-3.jpg);"><h3>{title here}</h3></li>
+	// 				<li v-on:click.prevent="view" style="background-image: url(assets/img/slider-4.jpg);"><h3>{title here}</h3></li>
+	// 			</ul>
+	// 		</section>
+	//
+	// 		<section class="imageContent" v-if="page == 2">
+	// 			<div id="headerImage" v-on:click.prevent="back" style="background-image: url(assets/img/slider-1.jpg);">
+	// 			</div>
+	//
+	// 			<div id="content">
+	// 				<h3>{Title Text}</h3>
+	// 					<ol>
+	// 						<li class="item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis, fugiat.</li>
+	// 						<li class="item">Rerum quis voluptatem eligendi consequatur, ipsum, ducimus reiciendis hic amet.</li>
+	// 						<li class="item">Unde doloribus ipsam cum. Fuga quod illum voluptates voluptatum nulla.</li>
+	// 						<li class="item">Fugit ipsam, aliquam laudantium reiciendis repellendus illo! Eaque doloremque, veritatis!</li>
+	// 					</ol>
+	// 			</div>
+	// 		</section>
+	//
+	// 	</div>
+	// </template>
+	//
+	// <script>
+
+/***/ },
+/* 293 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35530,12 +35641,348 @@
 	};
 
 /***/ },
-/* 291 */
+/* 294 */
+/***/ function(module, exports) {
+
+	module.exports = "\n\t<div id=\"page-emergency\">\n\t\t<section class=\"emergency\" v-if=\"page == 1\">\n\t\t\t<header class=\"normal-header\">\n\t\t\t\t<router-link :to=\"{ name: 'timeline'}\"><span class=\"icon-close\" style=\"font-weight: normal\">X</span></router-link>\n\t\t\t\t<h2>Emergency</h2>\n\t\t\t</header>\n\n\t\t\t<ul id=\"list-image\">\n\t\t\t\t<li v-on:click.prevent=\"view\" style=\"background-image: url(assets/img/slider-1.jpg);\"><h3>{title here}</h3></li>\n\t\t\t\t<li v-on:click.prevent=\"view\" style=\"background-image: url(assets/img/slider-2.jpg);\"><h3>{title here}</h3></li>\n\t\t\t\t<li v-on:click.prevent=\"view\" style=\"background-image: url(assets/img/slider-3.jpg);\"><h3>{title here}</h3></li>\n\t\t\t\t<li v-on:click.prevent=\"view\" style=\"background-image: url(assets/img/slider-4.jpg);\"><h3>{title here}</h3></li>\n\t\t\t</ul>\n\t\t</section>\n\t\t\n\t\t<section class=\"imageContent\" v-if=\"page == 2\">\n\t\t\t<div id=\"headerImage\" v-on:click.prevent=\"back\" style=\"background-image: url(assets/img/slider-1.jpg);\">\n\t\t\t</div>\n\n\t\t\t<div id=\"content\">\n\t\t\t\t<h3>{Title Text}</h3>\n\t\t\t\t\t<ol>\n\t\t\t\t\t\t<li class=\"item\">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis, fugiat.</li>\n\t\t\t\t\t\t<li class=\"item\">Rerum quis voluptatem eligendi consequatur, ipsum, ducimus reiciendis hic amet.</li>\n\t\t\t\t\t\t<li class=\"item\">Unde doloribus ipsam cum. Fuga quod illum voluptates voluptatum nulla.</li>\n\t\t\t\t\t\t<li class=\"item\">Fugit ipsam, aliquam laudantium reiciendis repellendus illo! Eaque doloremque, veritatis!</li>\n\t\t\t\t\t</ol>\n\t\t\t</div>\n\t\t</section>\n\t\n\t</div>\n";
+
+/***/ },
+/* 295 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(292)
-	__vue_template__ = __webpack_require__(293)
+	__vue_script__ = __webpack_require__(296)
+	__vue_template__ = __webpack_require__(302)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "/Users/racheljaro/webroot/yipp/app/src/components/Lesson.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 296 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _index = __webpack_require__(8);
+
+	var _config = __webpack_require__(1);
+
+	var _config2 = _interopRequireDefault(_config);
+
+	var _auth = __webpack_require__(184);
+
+	var _auth2 = _interopRequireDefault(_auth);
+
+	var _timeline = __webpack_require__(293);
+
+	var _timeline2 = _interopRequireDefault(_timeline);
+
+	var _jquery = __webpack_require__(11);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	var _Modal = __webpack_require__(297);
+
+	var _Modal2 = _interopRequireDefault(_Modal);
+
+	__webpack_require__(300);
+
+	var _rangesliderJs = __webpack_require__(315);
+
+	var _rangesliderJs2 = _interopRequireDefault(_rangesliderJs);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// <template>
+	// <div id="page-lesson">
+	//
+	// 	<div  class="panel" id="start" v-if="page == 'start'">
+	// 		<router-link :to="{ name: 'timeline'}" class="back">
+	// 			<i class="icon-back"></i>
+	// 		</router-link>
+	//
+	// 		<div id="popUp">
+	// 			<i class="big icon-yipp_apple_full"></i>
+	// 			<h3>Lesson 2: Screentime</h3>
+	// 			<p>TestIn this lesson, we will help to start the first practice appetizers</p>
+	// 			<hr>
+	// 			<span><i class="icon-yipp_check_full"></i> 5min</span>
+	// 		</div>
+	//
+	// 		<a href="#" v-on:click.prevent="startLesson" class="btn bottom white">Start</a>
+	// 	</div>
+	//
+	// 	<div class="panel" id="cards" v-if="page == 'cards'">
+	// 		<a v-on:click.prevent="back('start')" class="back">
+	// 			<i class="icon-yipp_check_full"></i>
+	// 		</a>
+	// 		<div class="bar">
+	// 			<!-- <span class="bar-inner"></span> -->
+	// 			<input type="range" min="0" max="5" value="1" step="0" disabled>
+	// 		</div>
+	// 		<router-link :to="{ name: 'timeline'}" class="home">
+	// 			<i class="icon-yipp_home_full-"></i>
+	// 		</router-link>
+	//
+	// 		<div id="knowledge-cards">
+	// 			<div id="paper-1" class="paper">
+	//
+	// 				<h3>Why?</h3>
+	//
+	// 				<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>
+	//
+	// 				<i class="heart icon-yipp_check_full"></i>
+	//
+	// 				<div id="paper_foo1">
+	// 					<div id="paper_foo2"></div>
+	// 				</div>
+	// 			</div>
+	//
+	// 			<div id="paper-2" class="paper">
+	//
+	// 				<h3>Why?2</h3>
+	//
+	// 				<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>
+	//
+	// 				<i class="heart icon-yipp_check_full"></i>
+	//
+	// 				<div id="paper_foo1">
+	// 					<div id="paper_foo2"></div>
+	// 				</div>
+	// 			</div>
+	// 		</div>
+	//
+	// 	</div>
+	//
+	// 	<div class="panel" id="stack" v-if="page == 'stack'">
+	// 		<a v-on:click.prevent="back('cards')" class="back">
+	// 			<i class="icon-yipp_check_full"></i>
+	// 		</a>
+	// 		<div class="bar">
+	// 			<!-- <span class="bar-inner"></span> -->
+	// 			<input type="range" min="0" max="5" value="1" step="1" disabled>
+	// 		</div>
+	// 		<router-link :to="{ name: 'timeline'}" class="home">
+	// 			<i class="icon-yipp_home_full-"></i>
+	// 		</router-link>
+	//
+	// 		<div class="content" v-on:click.prevent="next('complete')">
+	//
+	// 			<p class="text-center">Te weinig slapen vergroot de kans op overgewicht bij kinderen, omdat:</p>
+	//
+	// 			<ul>
+	//
+	// 				<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
+	// 				<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
+	// 				<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
+	// 				<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
+	//
+	// 			</ul>
+	//
+	// 		</div>
+	//
+	// 	</div>
+	//
+	// 	<div class="panel" id="complete" v-if="page == 'complete'">
+	// 		<a v-on:click.prevent="back('stack')" class="back">
+	// 			<i class="icon-yipp_check_full"></i>
+	// 		</a>
+	// 		<div class="bar">
+	// 			<!-- <span class="bar-inner"></span> -->
+	// 			<input type="range" min="0" max="5" value="5" step="1" disabled>
+	// 		</div>
+	// 		<router-link :to="{ name: 'timeline'}" class="home">
+	// 			<i class="icon-yipp_home_full-"></i>
+	// 		</router-link>
+	//
+	// 		<div class="content">
+	//
+	// 			<h1>Les compleet!</h1>
+	//
+	// 			<i class="biggest icon-yipp_check_full"></i>
+	//
+	// 			<p class="text-center">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
+	//
+	//
+	// 			<div class="bottom">
+	// 				<router-link :to="{ name: 'challenge'}" class="btn white">
+	// 				Start Challenge
+	// 				</router-link>
+	//
+	// 				<br>
+	// 				<a href="" v-on:click.prevent="back('start')" class="btn white">Reset Lesson</a>
+	// 			</div>
+	//
+	// 		</div>
+	//
+	// 	</div>
+	//
+	// 	<modal v-if="showModal" @close="showModal = false">
+	//         <h3 slot="header">Lorem Ipsum</h3>
+	//         <p slot="body">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+	//     </modal>
+	//
+	// </div>
+	//
+	// </template>
+	//
+	// <script>
+	exports.default = {
+	    data: function data() {
+	        return {
+	            child: {},
+	            page: 'start',
+	            levels: [],
+	            lessons: [],
+	            showModal: false,
+	            currentLesson: 1
+	        };
+	    },
+
+	    created: function created() {
+	        _auth2.default.check();
+	        if (!_auth2.default.authenticated) {
+	            this.redirectGuest();
+	        }
+
+	        this.currentLesson = 37;
+	        this.getLesson();
+	    },
+	    methods: {
+	        initSlider: function initSlider() {
+	            setTimeout(function () {
+	                var slider = document.querySelectorAll('.bar input[type="range"]');
+	                console.log(slider);
+	                _rangesliderJs2.default.create(slider);
+	            }, 2);
+	        },
+	        getLesson: function getLesson() {
+	            var that = this;
+
+	            _timeline2.default.lesson(this, this.currentLesson, function (response) {
+	                console.log(response);
+
+	                var counter = 0;
+	                _jquery2.default.each(response.todos.todos, function (index, content) {
+	                    switch (content.card_type) {
+	                        case 'knowledge':
+
+	                            break;
+
+	                        case 'multiple_choice':
+
+	                            break;
+
+	                        case 'list_field':
+
+	                            break;
+
+	                        case 'sliders':
+
+	                            break;
+	                    }
+	                });
+	            }, function (msg, response) {
+	                that.logError(msg);
+	            });
+	        },
+	        startLesson: function startLesson() {
+	            this.page = 'cards';
+
+	            this.initSlider();
+
+	            var that = this;
+	            setTimeout(function () {
+	                (0, _jquery2.default)('#knowledge-cards .paper').css('display', 'none');
+	                (0, _jquery2.default)('#knowledge-cards .paper:first-child').css('display', 'block');
+
+	                (0, _jquery2.default)('#knowledge-cards .paper').each(function () {
+	                    var stage = (0, _jquery2.default)(this);
+	                    that.initSwipe(this);
+	                });
+	            }, 1);
+	        },
+	        initSwipe: function initSwipe(elem) {
+	            var that = this;
+	            var swipeSpeedDelay = 700;
+	            var swipeSpeedFadeIn = 400;
+
+	            // var stage = elem;
+	            var mc = new Hammer.Manager(elem);
+	            mc.add(new Hammer.Swipe({ event: 'swipe' }));
+
+	            var object = (0, _jquery2.default)(elem);
+	            mc.on('swipe', function (event) {
+	                console.log(event);
+	                event.preventDefault();
+	                var item = (0, _jquery2.default)(event.target);
+
+	                if (event.direction == 4) {
+	                    // swipe to the right
+	                    item.addClass('rotate-left').delay(swipeSpeedDelay).fadeOut(1);
+	                }
+
+	                if (event.direction == 2) {
+	                    // swipe to the left
+	                    item.addClass('rotate-right').delay(swipeSpeedDelay).fadeOut(1);
+	                }
+
+	                if (item.is(':last-child')) {
+	                    setTimeout(function () {
+	                        that.next('stack');
+	                    }, swipeSpeedDelay);
+	                } else {
+	                    item.next().removeClass('rotate-left rotate-right').fadeIn(swipeSpeedFadeIn);
+	                }
+	            });
+	        },
+	        back: function back(page) {
+	            this.page = page;
+	        },
+	        next: function next(page) {
+	            this.page = page;
+	        },
+	        redirectGuest: function redirectGuest() {
+	            this.$router.push('login');
+	        }
+	    },
+
+	    watch: {
+	        '$route': function $route(to, from) {
+	            console.log(to);
+	            this.currentLesson = to;
+	        }
+	    },
+
+	    components: {
+	        Modal: _Modal2.default
+	    }
+	};
+
+	// </script>
+
+/***/ },
+/* 297 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__vue_script__ = __webpack_require__(298)
+	__vue_template__ = __webpack_require__(299)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -35552,7 +35999,7 @@
 	})()}
 
 /***/ },
-/* 292 */
+/* 298 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -35600,453 +36047,10 @@
 	//
 
 /***/ },
-/* 293 */
+/* 299 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<transition name=\"modal\">\n    <div class=\"modal-mask\">\n      <div class=\"modal-wrapper\">\n        <div class=\"modal-container\">\n\n          <div class=\"modal-header\">\n            <slot name=\"header\">\n              default header\n            </slot>\n          </div>\n\n          <div class=\"modal-body\">\n            <slot name=\"body\">\n              default message\n            </slot>\n          </div>\n\n          <div class=\"modal-footer\">\n            <slot name=\"footer\">\n              <button class=\"form-button-small\" @click=\"$emit('close')\">\n                Got it!\n              </button>\n            </slot>\n          </div>\n        </div>\n      </div>\n    </div>\n</transition>\n";
-
-/***/ },
-/* 294 */
-/***/ function(module, exports) {
-
-	module.exports = "\n<div id=\"timeline-container\">\n    <header>\n        <div class=\"title-area\">\n            <a href=\"javascript:void(0);\"><i class=\"icon-yipp_profile_line\"></i></a>\n            <span>Trainingen</span>\n            <router-link :to=\"{ name: 'emergency'}\"><i class=\"icon-yipp_notification_line2\"></i></router-link>\n        </div>\n\n        <div class=\"user-area\">\n            <div class=\"child-name\">{{ child.get('name') }}</div>\n            <ul class=\"months-level\">\n                <li>\n                    <span>{{ child.get('age') }}</span>  \n                    <span>Maanden</span>\n                </li>\n                <li>\n                    <span>{{ currentLevel }}</span>\n                    <span>Level</span>\n                </li>\n                <li>\n                    <a href=\"#\" v-on:click.prevent=\"toggle\" v-if=\"page == 'lessons'\"><i class=\"icon-yipp_down\"></i></a>\n                    <a href=\"#\" v-on:click.prevent=\"toggle\" v-if=\"page == 'levels'\"><i class=\"icon-yipp_up\"></i></a>\n                </li>\n            </ul>\n\n            <div class=\"photo\"><img class=\"avatar\" v-bind:src=\"child.get('image')\"></div>\n            \n        </div>\n    </header>\n        \n        <section class=\"traingen\" v-if=\"page == 'lessons'\">\n            <ul id=\"list-icons\">\n                <li v-for=\"lesson in lessons\">\n                    <a href=\"#\" v-bind:data-id=\"lesson.id\" v-on:click.prevent=\"goTodo\">\n                        <span class=\"icon big active\" v-bind:class=\"lesson.icon\"></span> \n                        {{ lesson.counter }}. {{ lesson.description }}\n                    </a>\n                </li>\n            </ul>\n        </section>\n        \n            \n        <section class=\"traingen2\" v-if=\"page == 'levels'\">\n                    \n            <ul id=\"list-text\">\n                <li v-for=\"level in levels\">\n                    <a href=\"#\" v-if=\"level.active == 'active'\" \n                        v-bind:data-id=\"level.id\" \n                        v-on:click.prevent=\"setCurrentLevel\"\n                        v-bind:class=\"level.active\">\n                        <span v-bind:data-id=\"level.id\" class=\"level\">{{ level.counter }}</span> \n                        <span v-bind:data-id=\"level.id\" class=\"months\">{{ level.description }}</span>\n                    </a>\n\n                    <a href=\"#\" v-if=\"level.active == ''\" \n                        v-bind:data-id=\"level.id\" \n                        v-on:click.prevent=\"\"\n                        @click=\"showModal = true\"\n                        v-bind:class=\"level.active\">\n                        <span v-bind:data-id=\"level.id\" class=\"level\">{{ level.counter }}</span> \n                        <span v-bind:data-id=\"level.id\" class=\"months\">{{ level.description }}</span>\n                    </a>\n                </li>\n            </ul>\n        \n        </section>\n        \n        <footer>\n            <ul>\n                <li><a href=\"javascript:void(0);\" class=\"active\"><span class=\"icon-yipp_home_full-\"></span>Training</a></li>\n                <li><router-link :to=\"{ path: 'challenge'}\"><span class=\"icon-yipp_challenge_line\"></span>Challenge</router-link></li>\n            </ul>\n        </footer>\n\n        <modal v-if=\"showModal\" @close=\"showModal = false\">\n            <h3 slot=\"header\">Ooops...</h3>\n            <p slot=\"body\">This is not yet available</p>\n        </modal>\n</div>\n";
-
-/***/ },
-/* 295 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(296)
-	__vue_template__ = __webpack_require__(297)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), true)
-	  if (!hotAPI.compatible) return
-	  var id = "/Users/racheljaro/webroot/yipp/app/src/components/Emergency.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 296 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _index = __webpack_require__(8);
-
-	var _config = __webpack_require__(1);
-
-	var _config2 = _interopRequireDefault(_config);
-
-	var _auth = __webpack_require__(184);
-
-	var _auth2 = _interopRequireDefault(_auth);
-
-	var _timeline = __webpack_require__(290);
-
-	var _timeline2 = _interopRequireDefault(_timeline);
-
-	var _jquery = __webpack_require__(11);
-
-	var _jquery2 = _interopRequireDefault(_jquery);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = {
-	    data: function data() {
-	        return {
-	            page: '1'
-	        };
-	    },
-
-	    created: function created() {},
-	    methods: {
-	        view: function view() {
-	            this.page = 2;
-	        },
-	        back: function back() {
-	            this.page = 1;
-	        }
-	    }
-	};
-
-	// </script>
-	// <template>
-	// 	<div id="page-emergency">
-	// 		<section class="emergency" v-if="page == 1">
-	// 			<header class="normal-header">
-	// 				<router-link :to="{ name: 'timeline'}"><span class="icon-close" style="font-weight: normal">X</span></router-link>
-	// 				<h2>Emergency</h2>
-	// 			</header>
-	//
-	// 			<ul id="list-image">
-	// 				<li v-on:click.prevent="view" style="background-image: url(assets/img/slider-1.jpg);"><h3>{title here}</h3></li>
-	// 				<li v-on:click.prevent="view" style="background-image: url(assets/img/slider-2.jpg);"><h3>{title here}</h3></li>
-	// 				<li v-on:click.prevent="view" style="background-image: url(assets/img/slider-3.jpg);"><h3>{title here}</h3></li>
-	// 				<li v-on:click.prevent="view" style="background-image: url(assets/img/slider-4.jpg);"><h3>{title here}</h3></li>
-	// 			</ul>
-	// 		</section>
-	//
-	// 		<section class="imageContent" v-if="page == 2">
-	// 			<div id="headerImage" v-on:click.prevent="back" style="background-image: url(assets/img/slider-1.jpg);">
-	// 			</div>
-	//
-	// 			<div id="content">
-	// 				<h3>{Title Text}</h3>
-	// 					<ol>
-	// 						<li class="item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis, fugiat.</li>
-	// 						<li class="item">Rerum quis voluptatem eligendi consequatur, ipsum, ducimus reiciendis hic amet.</li>
-	// 						<li class="item">Unde doloribus ipsam cum. Fuga quod illum voluptates voluptatum nulla.</li>
-	// 						<li class="item">Fugit ipsam, aliquam laudantium reiciendis repellendus illo! Eaque doloremque, veritatis!</li>
-	// 					</ol>
-	// 			</div>
-	// 		</section>
-	//
-	// 	</div>
-	// </template>
-	//
-	// <script>
-
-/***/ },
-/* 297 */
-/***/ function(module, exports) {
-
-	module.exports = "\n\t<div id=\"page-emergency\">\n\t\t<section class=\"emergency\" v-if=\"page == 1\">\n\t\t\t<header class=\"normal-header\">\n\t\t\t\t<router-link :to=\"{ name: 'timeline'}\"><span class=\"icon-close\" style=\"font-weight: normal\">X</span></router-link>\n\t\t\t\t<h2>Emergency</h2>\n\t\t\t</header>\n\n\t\t\t<ul id=\"list-image\">\n\t\t\t\t<li v-on:click.prevent=\"view\" style=\"background-image: url(assets/img/slider-1.jpg);\"><h3>{title here}</h3></li>\n\t\t\t\t<li v-on:click.prevent=\"view\" style=\"background-image: url(assets/img/slider-2.jpg);\"><h3>{title here}</h3></li>\n\t\t\t\t<li v-on:click.prevent=\"view\" style=\"background-image: url(assets/img/slider-3.jpg);\"><h3>{title here}</h3></li>\n\t\t\t\t<li v-on:click.prevent=\"view\" style=\"background-image: url(assets/img/slider-4.jpg);\"><h3>{title here}</h3></li>\n\t\t\t</ul>\n\t\t</section>\n\t\t\n\t\t<section class=\"imageContent\" v-if=\"page == 2\">\n\t\t\t<div id=\"headerImage\" v-on:click.prevent=\"back\" style=\"background-image: url(assets/img/slider-1.jpg);\">\n\t\t\t</div>\n\n\t\t\t<div id=\"content\">\n\t\t\t\t<h3>{Title Text}</h3>\n\t\t\t\t\t<ol>\n\t\t\t\t\t\t<li class=\"item\">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis, fugiat.</li>\n\t\t\t\t\t\t<li class=\"item\">Rerum quis voluptatem eligendi consequatur, ipsum, ducimus reiciendis hic amet.</li>\n\t\t\t\t\t\t<li class=\"item\">Unde doloribus ipsam cum. Fuga quod illum voluptates voluptatum nulla.</li>\n\t\t\t\t\t\t<li class=\"item\">Fugit ipsam, aliquam laudantium reiciendis repellendus illo! Eaque doloremque, veritatis!</li>\n\t\t\t\t\t</ol>\n\t\t\t</div>\n\t\t</section>\n\t\n\t</div>\n";
-
-/***/ },
-/* 298 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(299)
-	__vue_template__ = __webpack_require__(302)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), true)
-	  if (!hotAPI.compatible) return
-	  var id = "/Users/racheljaro/webroot/yipp/app/src/components/Lesson.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 299 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _index = __webpack_require__(8);
-
-	var _config = __webpack_require__(1);
-
-	var _config2 = _interopRequireDefault(_config);
-
-	var _auth = __webpack_require__(184);
-
-	var _auth2 = _interopRequireDefault(_auth);
-
-	var _timeline = __webpack_require__(290);
-
-	var _timeline2 = _interopRequireDefault(_timeline);
-
-	var _jquery = __webpack_require__(11);
-
-	var _jquery2 = _interopRequireDefault(_jquery);
-
-	var _Modal = __webpack_require__(291);
-
-	var _Modal2 = _interopRequireDefault(_Modal);
-
-	__webpack_require__(300);
-
-	var _vue = __webpack_require__(3);
-
-	var _vue2 = _interopRequireDefault(_vue);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	// <template>
-	// <div id="page-lesson">
-	//
-	// 	<div  class="panel" id="start" v-if="page == 'start'">
-	// 		<router-link :to="{ name: 'timeline'}" class="back">
-	// 			<i class="icon-back"></i>
-	// 		</router-link>
-	//
-	// 		<div id="popUp">
-	// 			<i class="big icon-yipp_apple_full"></i>
-	// 			<h3>Lesson 2: Screentime</h3>
-	// 			<p>TestIn this lesson, we will help to start the first practice appetizers</p>
-	// 			<hr>
-	// 			<span><i class="icon-yipp_check_full"></i> 5min</span>
-	// 		</div>
-	//
-	// 		<a href="#" v-on:click.prevent="startLesson" class="btn bottom white">Start</a>
-	// 	</div>
-	//
-	// 	<div class="panel" id="cards" v-if="page == 'cards'">
-	// 		<a v-on:click.prevent="back('start')" class="back">
-	// 			<i class="icon-yipp_check_full"></i>
-	// 		</a>
-	// 		<div class="bar">
-	// 			<span class="bar-inner"></span>
-	// 		</div>
-	// 		<router-link :to="{ name: 'timeline'}" class="home">
-	// 			<i class="icon-yipp_home_full-"></i>
-	// 		</router-link>
-	//
-	// 		<div id="knowledge-cards">
-	// 			<div id="paper-1" class="paper">
-	//
-	// 				<h3>Why?</h3>
-	//
-	// 				<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>
-	//
-	// 				<i class="heart icon-yipp_check_full"></i>
-	//
-	// 				<div id="paper_foo1">
-	// 					<div id="paper_foo2"></div>
-	// 				</div>
-	// 			</div>
-	//
-	// 			<div id="paper-2" class="paper">
-	//
-	// 				<h3>Why?2</h3>
-	//
-	// 				<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>
-	//
-	// 				<i class="heart icon-yipp_check_full"></i>
-	//
-	// 				<div id="paper_foo1">
-	// 					<div id="paper_foo2"></div>
-	// 				</div>
-	// 			</div>
-	// 		</div>
-	//
-	// 	</div>
-	//
-	// 	<div class="panel" id="stack" v-if="page == 'stack'">
-	// 		<a v-on:click.prevent="back('cards')" class="back">
-	// 			<i class="icon-yipp_check_full"></i>
-	// 		</a>
-	// 		<div class="bar">
-	// 			<span class="bar-inner"></span>
-	// 		</div>
-	// 		<router-link :to="{ name: 'timeline'}" class="home">
-	// 			<i class="icon-yipp_home_full-"></i>
-	// 		</router-link>
-	//
-	// 		<div class="content" v-on:click.prevent="next('complete')">
-	//
-	// 			<p class="text-center">Te weinig slapen vergroot de kans op overgewicht bij kinderen, omdat:</p>
-	//
-	// 			<ul>
-	//
-	// 				<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
-	// 				<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
-	// 				<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
-	// 				<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
-	//
-	// 			</ul>
-	//
-	// 		</div>
-	//
-	// 	</div>
-	//
-	// 	<div class="panel" id="complete" v-if="page == 'complete'">
-	// 		<a v-on:click.prevent="back('stack')" class="back">
-	// 			<i class="icon-yipp_check_full"></i>
-	// 		</a>
-	// 		<div class="bar">
-	// 			<span class="bar-inner"></span>
-	// 		</div>
-	// 		<router-link :to="{ name: 'timeline'}" class="home">
-	// 			<i class="icon-yipp_home_full-"></i>
-	// 		</router-link>
-	//
-	// 		<div class="content">
-	//
-	// 			<h1>Les compleet!</h1>
-	//
-	// 			<i class="biggest icon-yipp_check_full"></i>
-	//
-	// 			<p class="text-center">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
-	//
-	//
-	// 			<div class="bottom">
-	// 				<router-link :to="{ name: 'challenge'}" class="btn white">
-	// 				Start Challenge
-	// 				</router-link>
-	//
-	// 				<br>
-	// 				<a href="" v-on:click.prevent="back('start')" class="btn white">Reset Lesson</a>
-	// 			</div>
-	//
-	// 		</div>
-	//
-	// 	</div>
-	//
-	// 	<modal v-if="showModal" @close="showModal = false">
-	//         <h3 slot="header">Lorem Ipsum</h3>
-	//         <p slot="body">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-	//     </modal>
-	//
-	// </div>
-	//
-	// </template>
-	//
-	// <script>
-	var VueTouch = __webpack_require__(301);
-
-	// http://dev.fedvas.com/cms/api.dsuite/yipp/todos/37/en
-
-	_vue2.default.use(VueTouch, { name: 'v-touch' });
-
-	exports.default = {
-	    data: function data() {
-	        return {
-	            child: {},
-	            page: 'start',
-	            levels: [],
-	            lessons: [],
-	            showModal: false,
-	            currentLesson: 1
-	        };
-	    },
-
-	    created: function created() {
-	        _auth2.default.check();
-	        if (!_auth2.default.authenticated) {
-	            this.redirectGuest();
-	        }
-
-	        this.currentLesson = 37;
-	        this.getLesson();
-	    },
-	    methods: {
-	        getLesson: function getLesson() {
-	            var that = this;
-
-	            _timeline2.default.lesson(this, this.currentLesson, function (response) {
-	                console.log(response);
-
-	                var counter = 0;
-	                _jquery2.default.each(response.todos.todos, function (index, content) {
-	                    switch (content.card_type) {
-	                        case 'knowledge':
-
-	                            break;
-
-	                        case 'multiple_choice':
-
-	                            break;
-
-	                        case 'list_field':
-
-	                            break;
-
-	                        case 'sliders':
-
-	                            break;
-	                    }
-	                });
-	            }, function (msg, response) {
-	                that.logError(msg);
-	            });
-	        },
-	        startLesson: function startLesson() {
-	            this.page = 'cards';
-
-	            var that = this;
-	            setTimeout(function () {
-	                (0, _jquery2.default)('#knowledge-cards .paper').css('display', 'none');
-	                (0, _jquery2.default)('#knowledge-cards .paper:first-child').css('display', 'block');
-
-	                (0, _jquery2.default)('#knowledge-cards .paper').each(function () {
-	                    var stage = (0, _jquery2.default)(this);
-	                    that.initSwipe(this);
-	                });
-	            }, 1);
-	        },
-	        initSwipe: function initSwipe(elem) {
-	            var that = this;
-	            var swipeSpeedDelay = 700;
-	            var swipeSpeedFadeIn = 400;
-
-	            // var stage = elem;
-	            var mc = new Hammer.Manager(elem);
-	            mc.add(new Hammer.Swipe({ event: 'swipe' }));
-
-	            var object = (0, _jquery2.default)(elem);
-	            mc.on('swipe', function (event) {
-	                console.log(event);
-	                event.preventDefault();
-	                var item = (0, _jquery2.default)(event.target);
-
-	                if (event.direction == 4) {
-	                    // swipe to the right
-	                    item.addClass('rotate-left').delay(swipeSpeedDelay).fadeOut(1);
-	                }
-
-	                if (event.direction == 2) {
-	                    // swipe to the left
-	                    item.addClass('rotate-right').delay(swipeSpeedDelay).fadeOut(1);
-	                }
-
-	                if (item.is(':last-child')) {
-	                    setTimeout(function () {
-	                        that.next('complete');
-	                    }, swipeSpeedDelay);
-	                } else {
-	                    item.next().removeClass('rotate-left rotate-right').fadeIn(swipeSpeedFadeIn);
-	                }
-	            });
-	        },
-	        back: function back(page) {
-	            this.page = page;
-	        },
-	        next: function next(page) {
-	            this.page = page;
-	        },
-	        redirectGuest: function redirectGuest() {
-	            this.$router.push('login');
-	        }
-	    },
-
-	    watch: {
-	        '$route': function $route(to, from) {
-	            console.log(to);
-	            this.currentLesson = to;
-	        }
-	    },
-
-	    components: {
-	        Modal: _Modal2.default
-	    }
-	};
-
-	// </script>
 
 /***/ },
 /* 300 */
@@ -38972,7 +38976,7 @@
 /* 302 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div id=\"page-lesson\">\n\n\t<div  class=\"panel\" id=\"start\" v-if=\"page == 'start'\">\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"back\">\n\t\t\t<i class=\"icon-back\"></i>\n\t\t</router-link>\n\n\t\t<div id=\"popUp\">\n\t\t\t<i class=\"big icon-yipp_apple_full\"></i>\n\t\t\t<h3>Lesson 2: Screentime</h3>\n\t\t\t<p>TestIn this lesson, we will help to start the first practice appetizers</p>\n\t\t\t<hr>\n\t\t\t<span><i class=\"icon-yipp_check_full\"></i> 5min</span>\n\t\t</div>\n\t\t\t\n\t\t<a href=\"#\" v-on:click.prevent=\"startLesson\" class=\"btn bottom white\">Start</a>\n\t</div>\n\n\t<div class=\"panel\" id=\"cards\" v-if=\"page == 'cards'\">\n\t\t<a v-on:click.prevent=\"back('start')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<span class=\"bar-inner\"></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div id=\"knowledge-cards\">\n\t\t\t<div id=\"paper-1\" class=\"paper\">\n\n\t\t\t\t<h3>Why?</h3>\n\n\t\t\t\t<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>\n\n\t\t\t\t<i class=\"heart icon-yipp_check_full\"></i>\n\n\t\t\t\t<div id=\"paper_foo1\">\n\t\t\t\t\t<div id=\"paper_foo2\"></div>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t\t<div id=\"paper-2\" class=\"paper\">\n\n\t\t\t\t<h3>Why?2</h3>\n\n\t\t\t\t<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>\n\n\t\t\t\t<i class=\"heart icon-yipp_check_full\"></i>\n\n\t\t\t\t<div id=\"paper_foo1\">\n\t\t\t\t\t<div id=\"paper_foo2\"></div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\n\t</div>\n\t\t\n\t<div class=\"panel\" id=\"stack\" v-if=\"page == 'stack'\">\n\t\t<a v-on:click.prevent=\"back('cards')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<span class=\"bar-inner\"></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"content\" v-on:click.prevent=\"next('complete')\">\n\t\t\t\n\t\t\t<p class=\"text-center\">Te weinig slapen vergroot de kans op overgewicht bij kinderen, omdat:</p>\n\t\t\t\n\t\t\t<ul>\n\t\t\t\t\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t\n\t\t\t</ul>\n\n\t\t</div>\n\n\t</div>\n\t\t\t\n\t<div class=\"panel\" id=\"complete\" v-if=\"page == 'complete'\">\n\t\t<a v-on:click.prevent=\"back('stack')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<span class=\"bar-inner\"></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"content\">\n\t\t\n\t\t\t<h1>Les compleet!</h1>\n\t\t\t\n\t\t\t<i class=\"biggest icon-yipp_check_full\"></i>\n\t\t\t\n\t\t\t<p class=\"text-center\">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>\n\t\t\t\n\t\t\t\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<router-link :to=\"{ name: 'challenge'}\" class=\"btn white\">\n\t\t\t\tStart Challenge\n\t\t\t\t</router-link>\n\n\t\t\t\t<br>\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"back('start')\" class=\"btn white\">Reset Lesson</a>\n\t\t\t</div>\n\t\t\n\t\t</div>\n\n\t</div>\n\n\t<modal v-if=\"showModal\" @close=\"showModal = false\">\n        <h3 slot=\"header\">Lorem Ipsum</h3>\n        <p slot=\"body\">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>\n    </modal>\n\n</div>\n\t\n";
+	module.exports = "\n<div id=\"page-lesson\">\n\n\t<div  class=\"panel\" id=\"start\" v-if=\"page == 'start'\">\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"back\">\n\t\t\t<i class=\"icon-back\"></i>\n\t\t</router-link>\n\n\t\t<div id=\"popUp\">\n\t\t\t<i class=\"big icon-yipp_apple_full\"></i>\n\t\t\t<h3>Lesson 2: Screentime</h3>\n\t\t\t<p>TestIn this lesson, we will help to start the first practice appetizers</p>\n\t\t\t<hr>\n\t\t\t<span><i class=\"icon-yipp_check_full\"></i> 5min</span>\n\t\t</div>\n\t\t\t\n\t\t<a href=\"#\" v-on:click.prevent=\"startLesson\" class=\"btn bottom white\">Start</a>\n\t</div>\n\n\t<div class=\"panel\" id=\"cards\" v-if=\"page == 'cards'\">\n\t\t<a v-on:click.prevent=\"back('start')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<!-- <span class=\"bar-inner\"></span> -->\n\t\t\t<input type=\"range\" min=\"0\" max=\"5\" value=\"1\" step=\"0\" disabled>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div id=\"knowledge-cards\">\n\t\t\t<div id=\"paper-1\" class=\"paper\">\n\n\t\t\t\t<h3>Why?</h3>\n\n\t\t\t\t<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>\n\n\t\t\t\t<i class=\"heart icon-yipp_check_full\"></i>\n\n\t\t\t\t<div id=\"paper_foo1\">\n\t\t\t\t\t<div id=\"paper_foo2\"></div>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t\t<div id=\"paper-2\" class=\"paper\">\n\n\t\t\t\t<h3>Why?2</h3>\n\n\t\t\t\t<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>\n\n\t\t\t\t<i class=\"heart icon-yipp_check_full\"></i>\n\n\t\t\t\t<div id=\"paper_foo1\">\n\t\t\t\t\t<div id=\"paper_foo2\"></div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\n\t</div>\n\t\t\n\t<div class=\"panel\" id=\"stack\" v-if=\"page == 'stack'\">\n\t\t<a v-on:click.prevent=\"back('cards')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<!-- <span class=\"bar-inner\"></span> -->\n\t\t\t<input type=\"range\" min=\"0\" max=\"5\" value=\"1\" step=\"1\" disabled>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"content\" v-on:click.prevent=\"next('complete')\">\n\t\t\t\n\t\t\t<p class=\"text-center\">Te weinig slapen vergroot de kans op overgewicht bij kinderen, omdat:</p>\n\t\t\t\n\t\t\t<ul>\n\t\t\t\t\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t\n\t\t\t</ul>\n\n\t\t</div>\n\n\t</div>\n\t\t\t\n\t<div class=\"panel\" id=\"complete\" v-if=\"page == 'complete'\">\n\t\t<a v-on:click.prevent=\"back('stack')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<!-- <span class=\"bar-inner\"></span> -->\n\t\t\t<input type=\"range\" min=\"0\" max=\"5\" value=\"5\" step=\"1\" disabled>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"content\">\n\t\t\n\t\t\t<h1>Les compleet!</h1>\n\t\t\t\n\t\t\t<i class=\"biggest icon-yipp_check_full\"></i>\n\t\t\t\n\t\t\t<p class=\"text-center\">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>\n\t\t\t\n\t\t\t\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<router-link :to=\"{ name: 'challenge'}\" class=\"btn white\">\n\t\t\t\tStart Challenge\n\t\t\t\t</router-link>\n\n\t\t\t\t<br>\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"back('start')\" class=\"btn white\">Reset Lesson</a>\n\t\t\t</div>\n\t\t\n\t\t</div>\n\n\t</div>\n\n\t<modal v-if=\"showModal\" @close=\"showModal = false\">\n        <h3 slot=\"header\">Lorem Ipsum</h3>\n        <p slot=\"body\">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>\n    </modal>\n\n</div>\n\t\n";
 
 /***/ },
 /* 303 */
@@ -39016,7 +39020,7 @@
 
 	var _auth2 = _interopRequireDefault(_auth);
 
-	var _timeline = __webpack_require__(290);
+	var _timeline = __webpack_require__(293);
 
 	var _timeline2 = _interopRequireDefault(_timeline);
 
@@ -39024,7 +39028,7 @@
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
-	var _Modal = __webpack_require__(291);
+	var _Modal = __webpack_require__(297);
 
 	var _Modal2 = _interopRequireDefault(_Modal);
 
@@ -39420,7 +39424,7 @@
 /* 310 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\t<div >\n\t\n\t\t<div class=\"header\">\n\t\t\n\t\t\t<router-link :to=\"{ name: 'challenge'}\" class=\"icon\">\n\t\t\t\t<i class=\" icon-yipp_back\"></i>\n\t\t\t</router-link>\n\n\t\t\t<div class=\"title\">Challenge Details</div>\n\t\t\n\t\t</div>\n\t\t\n\t\t<div class=\"wrap\">\n\t\t\n\t\t\t<div class=\"details\">\n\t\t\t\n\t\t\t<span class=\"set\">\n\t\t\t\t\t<i class=\"icon-yipp_notification_line\"></i>\n\t\t\t\t\t14:00\n\t\t\t\t\t| <i class=\"icon-yipp_repeat_line\"></i>\n\t\t\t\t\tEvery day\n\t\t\t\t\t</span>\n\t\t\t\t\n\t\t\t\t<table width=\"100%\" border=\"0\">\n\t\t\t\t\t<tbody>\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t<p>Eating more vegetable</p>\n\t\t\t\t\t\t\t\t<p>1. Broco</p>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t<a href=\"\" class=\"edit\"><i class=\"icon-yipp_pencil_line\"></i></a>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t</tbody>\n\t\t\t\t</table>\n\t\t\t\t\n\t\t\t</div>\n\t\t\n\t\t</div>\n\t\n\t\t<div class=\"steps\">\n\t\n\t\t\t\t<ul>\n\t\t\t\t\t<li>1</li>\n\t\t\t\t\t<li>2</li>\n\t\t\t\t\t<li>3</li>\n\t\t\t\t\t<li>4</li>\n\t\t\t\t\t<li>5</li>\n\t\t\t\t</ul>\n\n\t\t\t<hr>\n\t\t\n\t\t</div>\n\t\t\n\t\t<div class=\"pic\" style=\"background-image: url(assets/img/slider-1.jpg);\">\n\t\t\n\t\t</div>\n\t\n\t\t<h4>Evaluation</h4>\n\t\t\n\t\t<textarea></textarea>\n\t\t\n\t\t<ul class=\"selection\">\n\t\t\t<li><a href=\"\"><i class=\"icon-yipp_emoticon_sad\"></i></a></li>\n\t\t\t<li><a href=\"\" class=\"active\"><i class=\"icon-yipp_emoticon_neutral\"></i></a></li>\n\t\t\t<li><a href=\"\"><i class=\"icon-yipp_emoticon_happy-\"></i></a></li>\n\t\t</ul>\n\t\t\n\t\t<h4>Notes</h4>\n\t\t\n\t\t<textarea></textarea>\n\t\t\n\t\t<a href=\"\" class=\"btn\">Done</a>\n\t\n\t</div>\n\t\n\t<section class=\"resultCard\">\n\t\t\n\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t\n\t\t<h3>You can do it!</h3>\n\t\t<p>We made a beautiful photo collage of this week check it out!</p>\n\t\t\n\t\t<div class=\"bottom\">\n\t\t<a href=\"javascript:void(0);\" class=\"btn mid\">See result</a>\n\n\t\t<a href=\"javascript:void(0);\" class=\"btn big\">Restart challenge</a>\n\t\t\n\t\t</div>\n\t\n\t\t<div id=\"modal\">\n\n\t\t\t<div id=\"msg\">\n\n\t\t\t\t<h3>Are you sure?</h3>\n\n\t\t\t\t<p>Do you want to restart challenge?</p>\n\n\t\t\t\t<a href=\"javascript:void(0);\">Restart challenge</a>\n\n\t\t\t</div>\n\n\t\t</div>\n\n\t</section>\n\t\n\t<section id=\"collage\">\n\t\n\t\t<div class=\"header\">\n\t\t\t<a href=\"\">X</a> Photo Collage\n\t\t\t<h3>Fruit and Vegetables</h3>\n\t\t</div>\n\t\n\t\t<ul>\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.61398226607259130.46812920440579187xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 1</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_sad\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.97511721209847830.5469244222962304xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 2</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_happy-\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li>\n\t\t\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 3</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_neutral\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.034704055506768360.23302879075156646xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 4</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_happy-\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t</ul>\n\t\n\t</section>\n\t\n\t<div class=\"restart\">\n\t\n\t<a href=\"\" >Restart challenge</a>\n\t\n\t</div>\t\n";
+	module.exports = "\n\t<div >\n\t\n\t\t<div class=\"header\">\n\t\t\n\t\t\t<router-link :to=\"{ name: 'challenge'}\" class=\"icon\">\n\t\t\t\t<i class=\" icon-yipp_back\"></i>\n\t\t\t</router-link>\n\n\t\t\t<div class=\"title\">Challenge Details</div>\n\t\t\n\t\t</div>\n\t\t\n\t\t<div class=\"wrap\">\n\t\t\n\t\t\t<div class=\"details\">\n\t\t\t\n\t\t\t<span class=\"set\">\n\t\t\t\t\t<i class=\"icon-yipp_notification_line\"></i>\n\t\t\t\t\t14:00\n\t\t\t\t\t| <i class=\"icon-yipp_repeat_line\"></i>\n\t\t\t\t\tEvery day\n\t\t\t\t\t</span>\n\t\t\t\t\n\t\t\t\t<table width=\"100%\" border=\"0\">\n\t\t\t\t\t<tbody>\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t<p>Eating more vegetable</p>\n\t\t\t\t\t\t\t\t<p>1. Broco</p>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t<a href=\"\" class=\"edit\"><i class=\"icon-yipp_pencil_line\"></i></a>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t</tbody>\n\t\t\t\t</table>\n\t\t\t\t\n\t\t\t</div>\n\t\t\n\t\t</div>\n\t\n\t\t<div class=\"steps\">\n\t\n\t\t\t\t<ul>\n\t\t\t\t\t<li>1</li>\n\t\t\t\t\t<li>2</li>\n\t\t\t\t\t<li>3</li>\n\t\t\t\t\t<li>4</li>\n\t\t\t\t\t<li>5</li>\n\t\t\t\t</ul>\n\n\t\t\t<hr>\n\t\t\n\t\t</div>\n\t\t\n\t\t<div class=\"pic\" style=\"background-image: url(assets/img/slider-1.jpg);\">\n\t\t\n\t\t</div>\n\t\n\t\t<h4>Evaluation</h4>\n\t\t\n\t\t<textarea></textarea>\n\t\t\n\t\t<ul class=\"selection\">\n\t\t\t<li><a href=\"\"><i class=\"icon-yipp_emoticon_sad\"></i></a></li>\n\t\t\t<li><a href=\"\" class=\"active\"><i class=\"icon-yipp_emoticon_neutral\"></i></a></li>\n\t\t\t<li><a href=\"\"><i class=\"icon-yipp_emoticon_happy-\"></i></a></li>\n\t\t</ul>\n\t\t\n\t\t<h4>Notes</h4>\n\t\t\n\t\t<textarea></textarea>\n\t\t\n\t\t<a href=\"\" class=\"btn\">Done</a>\n\t\n\t</div>\n\t\n\t<section class=\"resultCard\">\n\t\t\n\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t\n\t\t<h3>You can do it!</h3>\n\t\t<p>We made a beautiful photo collage of this week check it out!</p>\n\t\t\n\t\t<div class=\"bottom\">\n\t\t<a href=\"javascript:void(0);\" class=\"btn mid\">See result</a>\n\n\t\t<a href=\"javascript:void(0);\" class=\"btn big\">Restart challenge</a>\n\t\t\n\t\t</div>\n\t\n\t\t<div id=\"modal\">\n\n\t\t\t<div id=\"msg\">\n\n\t\t\t\t<h3>Are you sure?</h3>\n\n\t\t\t\t<p>Do you want to restart challenge?</p>\n\n\t\t\t\t<a href=\"javascript:void(0);\">Restart challenge</a>\n\n\t\t\t</div>\n\n\t\t</div>\n\n\t</section>\n\t\n\t<section id=\"collage\">\n\t\n\t\t<div class=\"header\">\n\t\t\t<a href=\"\">X</a> Photo Collage\n\t\t\t<h3>Fruit and Vegetables</h3>\n\t\t</div>\n\t\n\t\t<ul>\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.59302122609286220.7668320930084973xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 1</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_sad\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.62422689537192590.9732704269160846xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 2</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_happy-\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li>\n\t\t\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 3</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_neutral\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.96746033611813660.1252095136749123xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 4</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_happy-\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t</ul>\n\t\n\t</section>\n\t\n\t<div class=\"restart\">\n\t\n\t<a href=\"\" >Restart challenge</a>\n\t\n\t</div>\t\n";
 
 /***/ },
 /* 311 */
@@ -43573,6 +43577,1120 @@
 	    throw new Error('process.chdir is not supported');
 	};
 	process.umask = function() { return 0; };
+
+
+/***/ },
+/* 315 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(316);
+
+	/** @module RangeSlider */
+	var debounce = __webpack_require__(320);
+	var evPos = __webpack_require__(322);
+	var utils = __webpack_require__(323);
+
+	var CONST = {
+	    MAX_SET_BY_DEFAULT: 100,
+	    HANDLE_RESIZE_DEBOUNCE: 100,
+	    RANGE_CLASS: 'rangeslider',
+	    FILL_CLASS: 'rangeslider__fill',
+	    FILL_BG_CLASS: 'rangeslider__fill__bg',
+	    HANDLE_CLASS: 'rangeslider__handle',
+	    DISABLED_CLASS: 'rangeslider--disabled',
+	    STEP_SET_BY_DEFAULT: 1,
+	    START_EVENTS: ['mousedown', 'touchstart', 'pointerdown'],
+	    MOVE_EVENTS: ['mousemove', 'touchmove', 'pointermove'],
+	    END_EVENTS: ['mouseup', 'touchend', 'pointerup'],
+	    PLUGIN_NAME: 'rangeslider-js'
+	};
+
+	// counter
+	var pluginIdentifier = 0;
+
+	/**
+	 *
+	 * @param {string} className
+	 * @returns {Element}
+	 */
+	var createChild = function (className) {
+	    var child = document.createElement('div');
+	    child.classList.add(className);
+	    return child;
+	};
+
+	/**
+	 *
+	 * @param step
+	 * @returns {number}
+	 */
+	var stepToFixed = function (step) {
+	    return (step + '').replace('.', '').length - 1;
+	};
+
+	/**
+	 * RangeSlider
+	 * @param {Element} el
+	 * @param {object} options
+	 * @property {number} [options.min]
+	 * @property {number} [options.max]
+	 * @property {number} [options.value]
+	 * @property {number} [options.step]
+	 * @property {function} [options.onInit] - init callback
+	 * @property {function} [options.onSlideStart] - slide start callback
+	 * @property {function} [options.onSlide] - slide callback
+	 * @property {function} [options.onSlideEnd] - slide end callback
+	 */
+	function RangeSlider(el, options) {
+
+	    options = options || {};
+
+	    this.element = el;
+	    this.options = options;
+
+	    this.onSlideEventsCount = -1;
+	    this.isInteracting = false;
+	    this.needTriggerEvents = false;
+
+	    this.identifier = 'js-' + CONST.PLUGIN_NAME + '-' + (pluginIdentifier++);
+
+	    this.min = utils.getFirstNumberLike(options.min, parseFloat(el.getAttribute('min')), 0);
+	    this.max = utils.getFirstNumberLike(options.max, parseFloat(el.getAttribute('max')), CONST.MAX_SET_BY_DEFAULT);
+	    this.value = utils.getFirstNumberLike(options.value, parseFloat(el.value), this.min + (this.max - this.min) / 2);
+	    this.step = utils.getFirstNumberLike(options.step, parseFloat(el.getAttribute('step')), CONST.STEP_SET_BY_DEFAULT);
+
+	    this.percent = null;
+	    this._updatePercentFromValue();
+	    this.toFixed = stepToFixed(this.step);
+
+	    this.range = createChild(CONST.RANGE_CLASS);
+	    this.range.id = this.identifier;
+
+	    this.fillBg = createChild(CONST.FILL_BG_CLASS);
+	    this.fill = createChild(CONST.FILL_CLASS);
+	    this.handle = createChild(CONST.HANDLE_CLASS);
+
+	    ['fillBg', 'fill', 'handle'].forEach(function (str) {
+	        this.range.appendChild(this[str]);
+	    }, this);
+	    ['min', 'max', 'step'].forEach(function (str) {
+	        el.setAttribute(str, '' + this[str]);
+	    }, this);
+
+	    this._setValue(this.value);
+
+	    utils.insertAfter(el, this.range);
+
+	    el.style.position = 'absolute';
+	    el.style.width = '1px';
+	    el.style.height = '1px';
+	    el.style.overflow = 'hidden';
+	    el.style.opacity = '0';
+
+	    ['_update', '_handleDown', '_handleMove', '_handleEnd', '_startEventListener', '_changeEventListener']
+	        .forEach(function (fnName) {
+	            this[fnName] = this[fnName].bind(this);
+	        }, this);
+
+	    this._init();
+
+	    window.addEventListener('resize', debounce(this._update, CONST.HANDLE_RESIZE_DEBOUNCE));
+
+	    CONST.START_EVENTS.forEach(function (evName) {
+	        this.range.addEventListener(evName, this._startEventListener);
+	    }, this);
+
+	    el.addEventListener('change', this._changeEventListener);
+	}
+
+	RangeSlider.prototype.constructor = RangeSlider;
+
+	/**
+	 *
+	 * @private
+	 */
+	RangeSlider.prototype._init = function () {
+	    if (this.options.onInit) {
+	        this.options.onInit();
+	    }
+	    this._update();
+	};
+
+	/**
+	 *
+	 * @private
+	 */
+	RangeSlider.prototype._updatePercentFromValue = function () {
+	    this.percent = (this.value - this.min) / (this.max - this.min);
+	};
+
+	/**
+	 * This method check if this.identifier exists in ev.target's ancestors
+	 * @param {Event} ev
+	 * @param data
+	 */
+	RangeSlider.prototype._startEventListener = function (ev, data) {
+
+	    var el = ev.target;
+	    var isEventOnSlider = false;
+	    var identifier = this.identifier;
+
+	    utils.forEachAncestorsAndSelf(el, function (el) {
+	        isEventOnSlider = el.id === identifier && !el.classList.contains(CONST.DISABLED_CLASS);
+	        return isEventOnSlider;
+	    });
+
+	    if (isEventOnSlider) {
+	        this._handleDown(ev, data);
+	    }
+	};
+
+	/**
+	 *
+	 * @param {Event} ev
+	 * @param data
+	 * @private
+	 */
+	RangeSlider.prototype._changeEventListener = function (ev, data) {
+	    if (!(data && data.origin === this.identifier)) {
+	        this._setPosition(this._getPositionFromValue(ev.target.value));
+	    }
+	};
+
+	/**
+	 *
+	 * @private
+	 */
+	RangeSlider.prototype._update = function () {
+
+	    this.handleWidth = utils.getDimension(this.handle, 'offsetWidth');
+	    this.rangeWidth = utils.getDimension(this.range, 'offsetWidth');
+	    this.maxHandleX = this.rangeWidth - this.handleWidth;
+	    this.grabX = this.handleWidth / 2;
+	    this.position = this._getPositionFromValue(this.value);
+
+	    this.range.classList[this.element.disabled ? 'add' : 'remove'](CONST.DISABLED_CLASS);
+
+	    this._setPosition(this.position);
+	    this._updatePercentFromValue();
+	    utils.emit(this.element, 'change');
+	};
+
+	/**
+	 *
+	 * @param {boolean} bool
+	 * @private
+	 */
+	RangeSlider.prototype._listen = function (bool) {
+
+	    var addOrRemoveListener = (bool ? 'add' : 'remove') + 'EventListener';
+
+	    CONST.MOVE_EVENTS.forEach(function (evName) {
+	        document[addOrRemoveListener](evName, this._handleMove);
+	    }, this);
+	    CONST.END_EVENTS.forEach(function (evName) {
+	        document[addOrRemoveListener](evName, this._handleEnd);
+	        this.range[addOrRemoveListener](evName, this._handleEnd);
+	    }, this);
+
+	};
+
+	/**
+	 *
+	 * @param {Event} e
+	 * @private
+	 */
+	RangeSlider.prototype._handleDown = function (e) {
+	    e.preventDefault();
+
+	    this.isInteracting = true;
+
+	    this._listen(true);
+	    if (e.target.classList.contains(CONST.HANDLE_CLASS)) {
+	        return;
+	    }
+
+	    var posX = evPos(e, this.range).x,
+	        rangeX = this.range.getBoundingClientRect().left,
+	        handleX = this.handle.getBoundingClientRect().left - rangeX;
+
+	    this._setPosition(posX - this.grabX);
+
+	    if (posX >= handleX && posX < handleX + this.handleWidth) {
+	        this.grabX = posX - handleX;
+	    }
+	    this._updatePercentFromValue();
+
+	};
+
+	/**
+	 *
+	 * @param {Event} e
+	 * @private
+	 */
+	RangeSlider.prototype._handleMove = function (e) {
+	    this.isInteracting = true;
+	    e.preventDefault();
+	    var posX = evPos(e, this.range).x;
+	    this._setPosition(posX - this.grabX);
+	};
+
+	/**
+	 *
+	 * @param {Event} e
+	 * @private
+	 */
+	RangeSlider.prototype._handleEnd = function (e) {
+	    e.preventDefault();
+
+	    this._listen(false);
+	    utils.emit(this.element, 'change', {
+	        origin: this.identifier
+	    });
+
+	    if ((this.isInteracting || this.needTriggerEvents) && this.options.onSlideEnd) {
+	        this.options.onSlideEnd(this.value, this.percent, this.position);
+	    }
+	    this.onSlideEventsCount = 0;
+	    this.isInteracting = false;
+	};
+
+	/**
+	 *
+	 * @param pos
+	 * @private
+	 */
+	RangeSlider.prototype._setPosition = function (pos) {
+
+	    var value = this._getValueFromPosition(utils.clamp(pos, 0, this.maxHandleX)),
+	        x = this._getPositionFromValue(value);
+
+	    // Update ui
+	    this.fill.style.width = (x + this.grabX) + 'px';
+	    this.handle.style.webkitTransform = this.handle.style.transform = 'translate(' + x + 'px, 0px)';
+	    this._setValue(value);
+
+	    // Update globals
+	    this.position = x;
+	    this.value = value;
+	    this._updatePercentFromValue();
+
+	    if (this.isInteracting || this.needTriggerEvents) {
+	        if (this.options.onSlideStart && this.onSlideEventsCount === 0) {
+	            this.options.onSlideStart(this.value, this.percent, this.position);
+	        }
+
+	        if (this.options.onSlide) {
+	            this.options.onSlide(this.value, this.percent, this.position);
+	        }
+	    }
+
+	    this.onSlideEventsCount++;
+	};
+
+	/**
+	 *
+	 * @param {number} value
+	 * @returns {number}
+	 * @private
+	 */
+	RangeSlider.prototype._getPositionFromValue = function (value) {
+	    var percentage = (value - this.min) / (this.max - this.min);
+
+	    return percentage * this.maxHandleX;
+	};
+
+	/**
+	 *
+	 * @param pos
+	 * @returns {number}
+	 * @private
+	 */
+	RangeSlider.prototype._getValueFromPosition = function (pos) {
+	    var percentage = ((pos) / (this.maxHandleX || 1)),
+	        value = this.step * Math.round(percentage * (this.max - this.min) / this.step) + this.min;
+
+	    return Number((value).toFixed(this.toFixed));
+	};
+
+	/**
+	 *
+	 * @param {number} value
+	 * @private
+	 */
+	RangeSlider.prototype._setValue = function (value) {
+
+	    if (!(value === this.value && value === this.element.value)) {
+	        this.value = this.element.value = value;
+	        utils.emit(this.element, 'input', {
+	            origin: this.identifier
+	        });
+	    }
+	};
+
+	/**
+	 * Update
+	 *
+	 * @param {Object} [obj={}] like {min : Number, max : Number, value : Number, step : Number}
+	 * @param {Boolean} [triggerEvents]
+	 * @returns {RangeSlider}
+	 */
+	RangeSlider.prototype.update = function (obj, triggerEvents) {
+
+	    obj = obj || {};
+	    this.needTriggerEvents = !!triggerEvents;
+
+	    if (utils.isFiniteNumber(obj.min)) {
+	        this.element.setAttribute('min', '' + obj.min);
+	        this.min = obj.min;
+	    }
+
+	    if (utils.isFiniteNumber(obj.max)) {
+	        this.element.setAttribute('max', '' + obj.max);
+	        this.max = obj.max;
+	    }
+
+	    if (utils.isFiniteNumber(obj.step)) {
+	        this.element.setAttribute('step', '' + obj.step);
+	        this.step = obj.step;
+	        this.toFixed = stepToFixed(obj.step);
+	    }
+
+	    if (utils.isFiniteNumber(obj.value)) {
+	        this._setValue(obj.value);
+	    }
+
+	    this._update();
+	    this.onSlideEventsCount = 0;
+	    this.needTriggerEvents = false;
+	    return this;
+	};
+
+	/**
+	 *
+	 */
+	RangeSlider.prototype.destroy = function () {
+
+	    window.removeEventListener('resize', this._update, false);
+
+	    CONST.START_EVENTS.forEach(function (evName) {
+	        this.range.removeEventListener(evName, this._startEventListener);
+	    }, this);
+
+	    this.element.removeEventListener('change', this._changeEventListener);
+
+	    this.element.style.cssText = '';
+	    delete this.element[CONST.PLUGIN_NAME];
+
+	    // Remove the generated markup
+	    this.range.parentNode.removeChild(this.range);
+	};
+
+	/**
+	 * A lightweight plugin wrapper around the constructor, preventing multiple instantiations
+	 * @param {Element|NodeList} el
+	 * @param {object} options
+	 */
+	RangeSlider.create = function (el, options) {
+	    function createInstance(el) {
+	        el[CONST.PLUGIN_NAME] = el[CONST.PLUGIN_NAME] || new RangeSlider(el, options);
+	    }
+
+	    if (el.length) {
+	        Array.prototype.slice.call(el).forEach(function (el) {
+	            createInstance(el);
+	        });
+	    } else {
+	        createInstance(el);
+	    }
+	};
+
+	module.exports = RangeSlider;
+
+
+/***/ },
+/* 316 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(317);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(319)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!../../../css-loader/index.js!./base.css", function() {
+				var newContent = require("!!../../../css-loader/index.js!./base.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 317 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(318)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".rangeslider {\n    position: relative;\n    cursor: pointer;\n    height: 30px;\n    width: 100%;\n}\n.rangeslider,\n.rangeslider__fill,\n.rangeslider__fill__bg {\n    display: block;\n}\n.rangeslider__fill,\n.rangeslider__fill__bg,\n.rangeslider__handle {\n    position: absolute;\n}\n.rangeslider__fill,\n.rangeslider__fill__bg {\n    top: calc(50% - 6px);\n    height: 12px;\n    z-index: 2;\n    background: #29e;\n    border-radius: 10px;\n    will-change: width;\n}\n.rangeslider__handle {\n    display: inline-block;\n    top: calc(50% - 15px);\n    background: #29e;\n    width: 30px;\n    height: 30px;\n    z-index: 3;\n    cursor: pointer;\n    border: solid 2px #ffffff;\n    border-radius: 50%;\n}\n.rangeslider__handle:active {\n    background: #107ecd;\n}\n.rangeslider__fill__bg {\n    background: #ccc;\n    width: 100%;\n}\n.rangeslider--disabled {\n    opacity: 0.4;\n}\n.rangeslider--slim .rangeslider {\n    height: 25px;\n}\n.rangeslider--slim .rangeslider:active .rangeslider__handle {\n    width: 21px;\n    height: 21px;\n    top: calc(50% - 10px);\n    background: #29e;\n}\n.rangeslider--slim .rangeslider__fill,\n.rangeslider--slim .rangeslider__fill__bg {\n    top: calc(50% - 1px);\n    height: 2px;\n}\n.rangeslider--slim .rangeslider__handle {\n    will-change: width, height, top;\n    -webkit-transition: width 0.1s ease-in-out, height 0.1s ease-in-out, top 0.1s ease-in-out;\n    transition: width 0.1s ease-in-out, height 0.1s ease-in-out, top 0.1s ease-in-out;\n    width: 14px;\n    height: 14px;\n    top: calc(50% - 7px);\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 318 */
+/***/ function(module, exports) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	// css base code, injected by the css-loader
+	module.exports = function() {
+		var list = [];
+
+		// return the list of modules as css string
+		list.toString = function toString() {
+			var result = [];
+			for(var i = 0; i < this.length; i++) {
+				var item = this[i];
+				if(item[2]) {
+					result.push("@media " + item[2] + "{" + item[1] + "}");
+				} else {
+					result.push(item[1]);
+				}
+			}
+			return result.join("");
+		};
+
+		// import a list of modules into the list
+		list.i = function(modules, mediaQuery) {
+			if(typeof modules === "string")
+				modules = [[null, modules, ""]];
+			var alreadyImportedModules = {};
+			for(var i = 0; i < this.length; i++) {
+				var id = this[i][0];
+				if(typeof id === "number")
+					alreadyImportedModules[id] = true;
+			}
+			for(i = 0; i < modules.length; i++) {
+				var item = modules[i];
+				// skip already imported module
+				// this implementation is not 100% perfect for weird media query combinations
+				//  when a module is imported multiple times with different media queries.
+				//  I hope this will never occur (Hey this way we have smaller bundles)
+				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+					if(mediaQuery && !item[2]) {
+						item[2] = mediaQuery;
+					} else if(mediaQuery) {
+						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+					}
+					list.push(item);
+				}
+			}
+		};
+		return list;
+	};
+
+
+/***/ },
+/* 319 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	var stylesInDom = {},
+		memoize = function(fn) {
+			var memo;
+			return function () {
+				if (typeof memo === "undefined") memo = fn.apply(this, arguments);
+				return memo;
+			};
+		},
+		isOldIE = memoize(function() {
+			return /msie [6-9]\b/.test(self.navigator.userAgent.toLowerCase());
+		}),
+		getHeadElement = memoize(function () {
+			return document.head || document.getElementsByTagName("head")[0];
+		}),
+		singletonElement = null,
+		singletonCounter = 0,
+		styleElementsInsertedAtTop = [];
+
+	module.exports = function(list, options) {
+		if(false) {
+			if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
+		}
+
+		options = options || {};
+		// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+		// tags it will allow on a page
+		if (typeof options.singleton === "undefined") options.singleton = isOldIE();
+
+		// By default, add <style> tags to the bottom of <head>.
+		if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
+
+		var styles = listToStyles(list);
+		addStylesToDom(styles, options);
+
+		return function update(newList) {
+			var mayRemove = [];
+			for(var i = 0; i < styles.length; i++) {
+				var item = styles[i];
+				var domStyle = stylesInDom[item.id];
+				domStyle.refs--;
+				mayRemove.push(domStyle);
+			}
+			if(newList) {
+				var newStyles = listToStyles(newList);
+				addStylesToDom(newStyles, options);
+			}
+			for(var i = 0; i < mayRemove.length; i++) {
+				var domStyle = mayRemove[i];
+				if(domStyle.refs === 0) {
+					for(var j = 0; j < domStyle.parts.length; j++)
+						domStyle.parts[j]();
+					delete stylesInDom[domStyle.id];
+				}
+			}
+		};
+	}
+
+	function addStylesToDom(styles, options) {
+		for(var i = 0; i < styles.length; i++) {
+			var item = styles[i];
+			var domStyle = stylesInDom[item.id];
+			if(domStyle) {
+				domStyle.refs++;
+				for(var j = 0; j < domStyle.parts.length; j++) {
+					domStyle.parts[j](item.parts[j]);
+				}
+				for(; j < item.parts.length; j++) {
+					domStyle.parts.push(addStyle(item.parts[j], options));
+				}
+			} else {
+				var parts = [];
+				for(var j = 0; j < item.parts.length; j++) {
+					parts.push(addStyle(item.parts[j], options));
+				}
+				stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
+			}
+		}
+	}
+
+	function listToStyles(list) {
+		var styles = [];
+		var newStyles = {};
+		for(var i = 0; i < list.length; i++) {
+			var item = list[i];
+			var id = item[0];
+			var css = item[1];
+			var media = item[2];
+			var sourceMap = item[3];
+			var part = {css: css, media: media, sourceMap: sourceMap};
+			if(!newStyles[id])
+				styles.push(newStyles[id] = {id: id, parts: [part]});
+			else
+				newStyles[id].parts.push(part);
+		}
+		return styles;
+	}
+
+	function insertStyleElement(options, styleElement) {
+		var head = getHeadElement();
+		var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
+		if (options.insertAt === "top") {
+			if(!lastStyleElementInsertedAtTop) {
+				head.insertBefore(styleElement, head.firstChild);
+			} else if(lastStyleElementInsertedAtTop.nextSibling) {
+				head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
+			} else {
+				head.appendChild(styleElement);
+			}
+			styleElementsInsertedAtTop.push(styleElement);
+		} else if (options.insertAt === "bottom") {
+			head.appendChild(styleElement);
+		} else {
+			throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
+		}
+	}
+
+	function removeStyleElement(styleElement) {
+		styleElement.parentNode.removeChild(styleElement);
+		var idx = styleElementsInsertedAtTop.indexOf(styleElement);
+		if(idx >= 0) {
+			styleElementsInsertedAtTop.splice(idx, 1);
+		}
+	}
+
+	function createStyleElement(options) {
+		var styleElement = document.createElement("style");
+		styleElement.type = "text/css";
+		insertStyleElement(options, styleElement);
+		return styleElement;
+	}
+
+	function createLinkElement(options) {
+		var linkElement = document.createElement("link");
+		linkElement.rel = "stylesheet";
+		insertStyleElement(options, linkElement);
+		return linkElement;
+	}
+
+	function addStyle(obj, options) {
+		var styleElement, update, remove;
+
+		if (options.singleton) {
+			var styleIndex = singletonCounter++;
+			styleElement = singletonElement || (singletonElement = createStyleElement(options));
+			update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
+			remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
+		} else if(obj.sourceMap &&
+			typeof URL === "function" &&
+			typeof URL.createObjectURL === "function" &&
+			typeof URL.revokeObjectURL === "function" &&
+			typeof Blob === "function" &&
+			typeof btoa === "function") {
+			styleElement = createLinkElement(options);
+			update = updateLink.bind(null, styleElement);
+			remove = function() {
+				removeStyleElement(styleElement);
+				if(styleElement.href)
+					URL.revokeObjectURL(styleElement.href);
+			};
+		} else {
+			styleElement = createStyleElement(options);
+			update = applyToTag.bind(null, styleElement);
+			remove = function() {
+				removeStyleElement(styleElement);
+			};
+		}
+
+		update(obj);
+
+		return function updateStyle(newObj) {
+			if(newObj) {
+				if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
+					return;
+				update(obj = newObj);
+			} else {
+				remove();
+			}
+		};
+	}
+
+	var replaceText = (function () {
+		var textStore = [];
+
+		return function (index, replacement) {
+			textStore[index] = replacement;
+			return textStore.filter(Boolean).join('\n');
+		};
+	})();
+
+	function applyToSingletonTag(styleElement, index, remove, obj) {
+		var css = remove ? "" : obj.css;
+
+		if (styleElement.styleSheet) {
+			styleElement.styleSheet.cssText = replaceText(index, css);
+		} else {
+			var cssNode = document.createTextNode(css);
+			var childNodes = styleElement.childNodes;
+			if (childNodes[index]) styleElement.removeChild(childNodes[index]);
+			if (childNodes.length) {
+				styleElement.insertBefore(cssNode, childNodes[index]);
+			} else {
+				styleElement.appendChild(cssNode);
+			}
+		}
+	}
+
+	function applyToTag(styleElement, obj) {
+		var css = obj.css;
+		var media = obj.media;
+
+		if(media) {
+			styleElement.setAttribute("media", media)
+		}
+
+		if(styleElement.styleSheet) {
+			styleElement.styleSheet.cssText = css;
+		} else {
+			while(styleElement.firstChild) {
+				styleElement.removeChild(styleElement.firstChild);
+			}
+			styleElement.appendChild(document.createTextNode(css));
+		}
+	}
+
+	function updateLink(linkElement, obj) {
+		var css = obj.css;
+		var sourceMap = obj.sourceMap;
+
+		if(sourceMap) {
+			// http://stackoverflow.com/a/26603875
+			css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
+		}
+
+		var blob = new Blob([css], { type: "text/css" });
+
+		var oldSrc = linkElement.href;
+
+		linkElement.href = URL.createObjectURL(blob);
+
+		if(oldSrc)
+			URL.revokeObjectURL(oldSrc);
+	}
+
+
+/***/ },
+/* 320 */
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	/**
+	 * Module dependencies.
+	 */
+
+	var now = __webpack_require__(321);
+
+	/**
+	 * Returns a function, that, as long as it continues to be invoked, will not
+	 * be triggered. The function will be called after it stops being called for
+	 * N milliseconds. If `immediate` is passed, trigger the function on the
+	 * leading edge, instead of the trailing.
+	 *
+	 * @source underscore.js
+	 * @see http://unscriptable.com/2009/03/20/debouncing-javascript-methods/
+	 * @param {Function} function to wrap
+	 * @param {Number} timeout in ms (`100`)
+	 * @param {Boolean} whether to execute at the beginning (`false`)
+	 * @api public
+	 */
+
+	module.exports = function debounce(func, wait, immediate){
+	  var timeout, args, context, timestamp, result;
+	  if (null == wait) wait = 100;
+
+	  function later() {
+	    var last = now() - timestamp;
+
+	    if (last < wait && last > 0) {
+	      timeout = setTimeout(later, wait - last);
+	    } else {
+	      timeout = null;
+	      if (!immediate) {
+	        result = func.apply(context, args);
+	        if (!timeout) context = args = null;
+	      }
+	    }
+	  };
+
+	  return function debounced() {
+	    context = this;
+	    args = arguments;
+	    timestamp = now();
+	    var callNow = immediate && !timeout;
+	    if (!timeout) timeout = setTimeout(later, wait);
+	    if (callNow) {
+	      result = func.apply(context, args);
+	      context = args = null;
+	    }
+
+	    return result;
+	  };
+	};
+
+
+/***/ },
+/* 321 */
+/***/ function(module, exports) {
+
+	module.exports = Date.now || now
+
+	function now() {
+	    return new Date().getTime()
+	}
+
+
+/***/ },
+/* 322 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	/**
+	 * Returns true if the type is 'number' and it's not NaN
+	 * @param  {*} val
+	 * @return {boolean}
+	 */
+	var isNum = function (val) {
+	    return typeof val === 'number' && !isNaN(val);
+	};
+
+	/**
+	 * Get the relative position from a mouse/touch event to an element
+	 *
+	 * @param  {Event}   ev                           The mouse or touch event
+	 * @param  {Element} [toElement=ev.currentTarget] The element
+	 * @return {object}                               {x, y}
+	 */
+	var getRelativePosition = function (ev, toElement) {
+	    toElement = toElement || toElement.currentTarget;
+
+	    var toElementBoundingRect = toElement.getBoundingClientRect(),
+	        orgEv = ev.originalEvent || ev,
+	        hasTouches = ev.touches && ev.touches.length,
+	        pageX = 0,
+	        pageY = 0;
+
+	    if (hasTouches) {
+	        if (isNum(ev.touches[0].pageX) && isNum(ev.touches[0].pageY)) {
+	            pageX = ev.touches[0].pageX;
+	            pageY = ev.touches[0].pageY;
+	        } else if (isNum(ev.touches[0].clientX) && isNum(ev.touches[0].clientY)) {
+	            pageX = orgEv.touches[0].clientX;
+	            pageY = orgEv.touches[0].clientY;
+	        }
+	    } else {
+	        if (isNum(ev.pageX) && isNum(ev.pageY)) {
+	            pageX = ev.pageX;
+	            pageY = ev.pageY;
+	        } else if (ev.currentPoint && isNum(ev.currentPoint.x) && isNum(ev.currentPoint.y)) {
+	            pageX = ev.currentPoint.x;
+	            pageY = ev.currentPoint.y;
+	        }
+	    }
+
+	    return {
+	        x: pageX - toElementBoundingRect.left,
+	        y: pageY - toElementBoundingRect.top
+	    };
+	};
+
+	/**
+	 * @type {Function}
+	 */
+	module.exports = getRelativePosition;
+
+
+/***/ },
+/* 323 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var CE = __webpack_require__(324);
+	var isFiniteNumber = __webpack_require__(325);
+
+	function clamp(val, min, max) {
+	    return min < max ?
+	        (val < min ? min : val > max ? max : val) :
+	        (val < max ? max : val > min ? min : val);
+	}
+
+	function isHidden(el) {
+	    return (el.offsetWidth === 0 || el.offsetHeight === 0 || el.open === false);
+	}
+
+	function isNumberLike(obj) {
+	    return isFiniteNumber(parseFloat(obj)) || (isFiniteNumber(obj));
+	}
+
+	function getFirstNumberLike() {
+	    if (!arguments.length) {
+	        return null;
+	    }
+	    for (var i = 0, len = arguments.length; i < len; i++) {
+	        if (isNumberLike(arguments[i])) {
+	            return arguments[i];
+	        }
+	    }
+	}
+
+	function getHiddenParentNodes(element) {
+
+	    var parents = [];
+	    var node = element.parentNode;
+
+	    while (node && isHidden(node)) {
+	        parents.push(node);
+	        node = node.parentNode;
+	    }
+	    return parents;
+	}
+
+	/**
+	 * Returns dimensions for an element even if it is not visible in the DOM.
+	 *
+	 * @param  {Element} element
+	 * @param  {string}  key     (e.g. offsetWidth …)
+	 * @return {Number}
+	 */
+	function getDimension(element, key) {
+
+	    var hiddenParentNodes = getHiddenParentNodes(element),
+	        hiddenParentNodesLength = hiddenParentNodes.length,
+	        dimension = element[key],
+	        displayProperty = [],
+	        i = 0, hiddenStyles;
+
+	    // Used for native `<details>` elements
+	    function toggleOpenProperty(element) {
+	        if (typeof element.open !== 'undefined') {
+	            element.open = !element.open;
+	        }
+	    }
+
+	    if (hiddenParentNodesLength) {
+
+	        for (i = 0; i < hiddenParentNodesLength; i++) {
+	            hiddenStyles = hiddenParentNodes[i].style;
+	            // Cache the display property to restore it later.
+	            displayProperty[i] = hiddenStyles.display;
+	            hiddenStyles.display = 'block';
+	            hiddenStyles.height = '0';
+	            hiddenStyles.overflow = 'hidden';
+	            hiddenStyles.visibility = 'hidden';
+
+	            toggleOpenProperty(hiddenParentNodes[i]);
+	        }
+
+	        dimension = element[key];
+
+	        for (i = 0; i < hiddenParentNodesLength; i++) {
+	            hiddenStyles = hiddenParentNodes[i].style;
+	            toggleOpenProperty(hiddenParentNodes[i]);
+	            hiddenStyles.display = displayProperty[i];
+	            hiddenStyles.height = '';
+	            hiddenStyles.overflow = '';
+	            hiddenStyles.visibility = '';
+	        }
+	    }
+	    return dimension;
+	}
+
+	/**
+	 *
+	 * @param {Element} el
+	 * @param {function} callback
+	 * @returns {Element}
+	 */
+	function forEachAncestorsAndSelf(el, callback) {
+	    callback(el);
+	    while (el.parentNode && !callback(el)) {
+	        el = el.parentNode;
+	    }
+	    return el;
+	}
+
+	/**
+	 * @param {Element} referenceNode after this
+	 * @param {Element} newNode insert this
+	 */
+	function insertAfter(referenceNode, newNode) {
+	    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+	}
+
+	module.exports = {
+	    emit: function (el, name, opt) {
+	        el.dispatchEvent(new CE(name, opt));
+	    },
+	    isFiniteNumber: isFiniteNumber,
+	    getFirstNumberLike: getFirstNumberLike,
+	    getDimension: getDimension,
+	    insertAfter: insertAfter,
+	    forEachAncestorsAndSelf: forEachAncestorsAndSelf,
+	    clamp: clamp
+	};
+
+
+/***/ },
+/* 324 */
+/***/ function(module, exports) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {
+	var NativeCustomEvent = global.CustomEvent;
+
+	function useNative () {
+	  try {
+	    var p = new NativeCustomEvent('cat', { detail: { foo: 'bar' } });
+	    return  'cat' === p.type && 'bar' === p.detail.foo;
+	  } catch (e) {
+	  }
+	  return false;
+	}
+
+	/**
+	 * Cross-browser `CustomEvent` constructor.
+	 *
+	 * https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent.CustomEvent
+	 *
+	 * @public
+	 */
+
+	module.exports = useNative() ? NativeCustomEvent :
+
+	// IE >= 9
+	'undefined' !== typeof document && 'function' === typeof document.createEvent ? function CustomEvent (type, params) {
+	  var e = document.createEvent('CustomEvent');
+	  if (params) {
+	    e.initCustomEvent(type, params.bubbles, params.cancelable, params.detail);
+	  } else {
+	    e.initCustomEvent(type, false, false, void 0);
+	  }
+	  return e;
+	} :
+
+	// IE <= 8
+	function CustomEvent (type, params) {
+	  var e = document.createEventObject();
+	  e.type = type;
+	  if (params) {
+	    e.bubbles = Boolean(params.bubbles);
+	    e.cancelable = Boolean(params.cancelable);
+	    e.detail = params.detail;
+	  } else {
+	    e.bubbles = false;
+	    e.cancelable = false;
+	    e.detail = void 0;
+	  }
+	  return e;
+	}
+
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 325 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var numberIsNan = __webpack_require__(326);
+
+	module.exports = Number.isFinite || function (val) {
+		return !(typeof val !== 'number' || numberIsNan(val) || val === Infinity || val === -Infinity);
+	};
+
+
+/***/ },
+/* 326 */
+/***/ function(module, exports) {
+
+	'use strict';
+	module.exports = Number.isNaN || function (x) {
+		return x !== x;
+	};
 
 
 /***/ }

@@ -1,6 +1,6 @@
 export default {
   	api: {
-		'url': 'http://dev.fedvas.com/cms/api.dsuite/yipp',
+		'url': 'http://85.17.15.209/websites/cms/api/yipp',
 		'lang': 'en',
 		'localhost': '/yipp/app/#'
 	}
