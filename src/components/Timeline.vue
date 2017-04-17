@@ -49,8 +49,8 @@
                         v-bind:data-id="level.id" 
                         v-on:click.prevent="setCurrentLevel"
                         v-bind:class="level.active">
-                        <span v-bind:data-id="level.id" class="level">Level {{ level.counter }}</span> 
-                        <span v-bind:data-id="level.id" class="months">{{ level.description }} months</span>
+                        <span v-bind:data-id="level.id" class="level">{{ level.counter }}</span> 
+                        <span v-bind:data-id="level.id" class="months">{{ level.description }}</span>
                     </a>
 
                     <a href="#" v-if="level.active == ''" 
@@ -58,8 +58,8 @@
                         v-on:click.prevent=""
                         @click="showModal = true"
                         v-bind:class="level.active">
-                        <span v-bind:data-id="level.id" class="level">Level {{ level.counter }}</span> 
-                        <span v-bind:data-id="level.id" class="months">{{ level.description }} months</span>
+                        <span v-bind:data-id="level.id" class="level">{{ level.counter }}</span> 
+                        <span v-bind:data-id="level.id" class="months">{{ level.description }}</span>
                     </a>
                 </li>
             </ul>
@@ -99,7 +99,8 @@ export default {
             levels: [],
             lessons: [],
             showModal: false,
-            currentLevel: 1
+            currentLevel: 1,
+            child_age: 0
         }
     },
     created: function() {
@@ -109,9 +110,65 @@ export default {
         }
 
         this.child = auth.user.data.child;
+        this.child_age = this.child.get('age');
         this.showTimeline();
+
+        this.getLevels();
+
+        this.currentLevel = 2;
+        this.getLessons();
     },
     methods: {
+        getLevels: function () {
+            var that = this;
+
+            // Dummy
+            this.levels.push({
+                id: 3,
+                counter: 'Level 1',
+                description: 'dummy data',
+                active: 'active'
+            });
+            
+            timeline.levels(this, function (response) {
+                $.each(response.data, function (index, value) {
+                    var active = '';
+                    if (that.child_age >= value.min_month && that.child_age <= value.max_month) {
+                        active = 'active';
+                    }
+                    that.levels.push({
+                        id: value.id,
+                        counter: value.title,
+                        description: value.description,
+                        active: active
+                    });
+                });
+                
+            }, function (msg, response) {
+                that.logError(msg);
+            });
+        },
+        getLessons: function () {
+            var that = this;
+
+            timeline.lessons(this, this.currentLevel, function (response) {
+                var counter = 0;
+                $.each(response.data, function (index, value) {
+                    var active = '';
+                    counter++;
+
+                    that.lessons.push({
+                        id: value.id,
+                        counter: counter,
+                        description: value.title,
+                        icon: value.icon
+                    });
+                });
+
+            }, function (msg, response) {
+                that.logError(msg);
+            });
+        },
         toggle: function() {
             if (this.page == 'lessons') {
                 this.showLevels();
@@ -120,39 +177,18 @@ export default {
             }
         },
         showTimeline: function() {
-            this.lessons = [
-                {
-                    id: 1,
-                    counter: 1,
-                    description: 'Nutrition fruit & vegetable',
-                    icon: 'icon-yipp_check_full'
-                }
-            ];
+            // this.lessons = [
+            //     {
+            //         id: 1,
+            //         counter: 1,
+            //         description: 'Nutrition fruit & vegetable',
+            //         icon: 'icon-yipp_check_full'
+            //     }
+            // ];
 
             this.page = 'lessons';
-            
-            // timeline.lessons(this, 1, function (response) {
-            //     console.log(response)
-            // }, function (msg, response) {
-
-            // });
         },
         showLevels: function() {
-            this.levels = [
-                {
-                    id: 3,
-                    counter: 1,
-                    description: '7 - 12',
-                    active: 'active'
-                },
-                {
-                    id: 2,
-                    counter: 2,
-                    description: '8',
-                    active: ''
-                }
-            ];
-
             this.page = 'levels';
         },
         setCurrentLevel: function (e) {
@@ -162,13 +198,25 @@ export default {
         },
         goTodo: function (e) {
             var id = e.target.getAttribute('data-id');
-            console.log('goto todo/' + id);
-            this.$router.push('challenge/content');   
+            this.$router.push('challenge-' + id);   
         },
         redirectGuest: function()
         {
             this.$router.push('login');
-        }
+        },
+        logError(msg) {
+            this.loading = false;
+            var msgStr = '';
+            if (typeof msg == 'string') {
+                msgStr = msg;
+            } else {
+                $.each(msg, function(label, value) {
+                    msgStr += value + ' ';
+                })
+            }
+            
+            this.error_message = msgStr;
+        },
     },
 
     components: { 

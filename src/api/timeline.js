@@ -14,7 +14,7 @@ export default {
             var result = response.body.result;
 
             if (response.body.status == 'OK') {
-                that.lessons(context, 2, successCallback, errorCallback)
+                successCallback.call(this, result);
             } else if (errorCallback) {
                 console.log('error in api.timeline');
                 errorCallback.call(this, result.message, response);
@@ -31,13 +31,11 @@ export default {
     lessons(context, level, successCallback, errorCallback) {
         var that = this;
 
-        context.$http.get(config.api.url + '/lessons/2').then(response => {
+        context.$http.get(config.api.url + '/lessons/' + level).then(response => {
             var result = response.body.result;
 
             if (response.body.status == 'OK') {
-
-                console.log(result)
-                successCallback.call(this, response);
+                successCallback.call(this, result);
             } else if (errorCallback) {
                 console.log('error in api.timeline');
                 errorCallback.call(this, result.message, response);
