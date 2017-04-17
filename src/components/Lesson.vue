@@ -28,29 +28,31 @@
 			<i class="icon-yipp_home_full-"></i>
 		</router-link>
 
-		<div id="paper-1" class="paper">
+		<div id="knowledge-cards">
+			<div id="paper-1" class="paper">
 
-			<h3>Why?</h3>
+				<h3>Why?</h3>
 
-			<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>
+				<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>
 
-			<i class="heart icon-yipp_check_full"></i>
+				<i class="heart icon-yipp_check_full"></i>
 
-			<div id="paper_foo1">
-				<div id="paper_foo2"></div>
+				<div id="paper_foo1">
+					<div id="paper_foo2"></div>
+				</div>
 			</div>
-		</div>
 
-		<div id="paper-2" class="paper">
+			<div id="paper-2" class="paper">
 
-			<h3>Why?2</h3>
+				<h3>Why?2</h3>
 
-			<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>
+				<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>
 
-			<i class="heart icon-yipp_check_full"></i>
+				<i class="heart icon-yipp_check_full"></i>
 
-			<div id="paper_foo1">
-				<div id="paper_foo2"></div>
+				<div id="paper_foo1">
+					<div id="paper_foo2"></div>
+				</div>
 			</div>
 		</div>
 
@@ -151,7 +153,7 @@ export default {
             levels: [],
             lessons: [],
             showModal: false,
-            currentLevel: 1
+            currentLesson: 1
         }
     },
     created: function() {
@@ -159,46 +161,86 @@ export default {
         if (!auth.authenticated) {
             this.redirectGuest();
         }
-	        
+	    
+	    this.currentLesson = 37;
+	    this.getLesson();
     },
     methods: {
+    	getLesson: function () {
+            var that = this;
+
+            timeline.lesson(this, this.currentLesson, function (response) {
+                console.log(response)
+
+                var counter = 0;
+                $.each(response.todos.todos, function (index, content) {
+                    switch (content.card_type) {
+                    	case 'knowledge':
+
+                    	break;
+
+                    	case 'multiple_choice':
+
+                    	break;
+
+                    	case 'list_field':
+
+                    	break;
+
+                    	case 'sliders':
+
+                    	break;
+                    }
+                });
+            }, function (msg, response) {
+                that.logError(msg);
+            });
+        },
     	startLesson: function () {
     		this.page = 'cards';
 
+    		var that = this;
     		setTimeout(function(){
-	        	var stage = $('.paper').css('display', 'none');
-	        	$('#paper-1').css('display', 'block');
+    			$('#knowledge-cards .paper').css('display', 'none');
+	        	$('#knowledge-cards .paper:first-child').css('display', 'block');
 
-	        	var mc = new Hammer.Manager(stage[0]);
-	        	console.log(mc)
-
-	        	mc.add( new Hammer.Swipe({ event: 'swipe' }) );
-
-	        	mc.on('swipe', function(event){
-				    event.preventDefault();
-				    if (event.direction == 4) { // swipe to the right
-				        stage.addClass('rotate-left').delay(700).fadeOut(1);
-						
-						if ( stage.is(':last-child') ) {
-							// $('.buddy:nth-child(1)').removeClass ('rotate-left rotate-right').fadeIn(300);
-						} else {
-							console.log('hi')
-							stage.next().removeClass('rotate-left rotate-right').fadeIn(400);
-						}
-				    }
-
-				    if (event.direction == 2) { // swipe to the left
-						stage.addClass('rotate-right').delay(700).fadeOut(1);
-						
-						if ( $(this).is(':last-child') ) {
-							$('.paper:nth-child(1)').removeClass ('rotate-left rotate-right').fadeIn(300);
-							alert('OUPS');
-						} else {
-							stage.next().removeClass('rotate-left rotate-right').fadeIn(400);
-						} 
-				    }
-				});
+    			$('#knowledge-cards .paper').each(function () {
+    				var stage = $(this);
+    				that.initSwipe(this);
+    			});
 	        }, 1);
+    	},
+    	initSwipe: function (elem) {
+    		var that = this;
+    		var swipeSpeedDelay = 700;
+    		var swipeSpeedFadeIn = 400;
+
+    		// var stage = elem;
+    		var mc = new Hammer.Manager(elem);
+    		mc.add( new Hammer.Swipe({ event: 'swipe' }) );
+
+    		var object = $(elem);
+    		mc.on('swipe', function(event){
+        		console.log(event)
+			    event.preventDefault();
+			    var item = $(event.target);
+
+			    if (event.direction == 4) { // swipe to the right
+			    	item.addClass('rotate-left').delay(swipeSpeedDelay).fadeOut(1);
+			    }
+
+			    if (event.direction == 2) { // swipe to the left
+			    	item.addClass('rotate-right').delay(swipeSpeedDelay).fadeOut(1);
+			    }
+
+			    if ( item.is(':last-child') ) {
+					setTimeout(function(){
+		    			that.next('complete')
+			        }, swipeSpeedDelay);
+				} else {
+					item.next().removeClass('rotate-left rotate-right').fadeIn(swipeSpeedFadeIn);
+				} 
+			});
     	},
     	back: function (page) {
     		this.page = page;

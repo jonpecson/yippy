@@ -198,7 +198,7 @@ export default {
         },
         goTodo: function (e) {
             var id = e.target.getAttribute('data-id');
-            this.$router.push('challenge-' + id);   
+            this.$router.push('lesson-' + id);   
         },
         redirectGuest: function()
         {

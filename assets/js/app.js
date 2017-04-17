@@ -35412,7 +35412,7 @@
 	        },
 	        goTodo: function goTodo(e) {
 	            var id = e.target.getAttribute('data-id');
-	            this.$router.push('challenge-' + id);
+	            this.$router.push('lesson-' + id);
 	        },
 	        redirectGuest: function redirectGuest() {
 	            this.$router.push('login');
@@ -35503,6 +35503,27 @@
 
 	            if (errorCallback) {
 	                errorCallback.call(_this2, response.body.result.error, response);
+	            }
+	        });
+	    },
+	    lesson: function lesson(context, _lesson, successCallback, errorCallback) {
+	        var _this3 = this;
+
+	        var that = this;
+
+	        context.$http.get(_config2.default.api.url + '/todos/' + _lesson + '/en').then(function (response) {
+	            var result = response.body.result;
+
+	            if (response.body.status == 'OK') {
+	                successCallback.call(_this3, result);
+	            } else if (errorCallback) {
+	                console.log('error in api.timeline');
+	                errorCallback.call(_this3, result.message, response);
+	            }
+	        }, function (response) {
+
+	            if (errorCallback) {
+	                errorCallback.call(_this3, response.body.result.error, response);
 	            }
 	        });
 	    }
@@ -35795,29 +35816,31 @@
 	// 			<i class="icon-yipp_home_full-"></i>
 	// 		</router-link>
 	//
-	// 		<div id="paper-1" class="paper">
+	// 		<div id="knowledge-cards">
+	// 			<div id="paper-1" class="paper">
 	//
-	// 			<h3>Why?</h3>
+	// 				<h3>Why?</h3>
 	//
-	// 			<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>
+	// 				<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>
 	//
-	// 			<i class="heart icon-yipp_check_full"></i>
+	// 				<i class="heart icon-yipp_check_full"></i>
 	//
-	// 			<div id="paper_foo1">
-	// 				<div id="paper_foo2"></div>
+	// 				<div id="paper_foo1">
+	// 					<div id="paper_foo2"></div>
+	// 				</div>
 	// 			</div>
-	// 		</div>
 	//
-	// 		<div id="paper-2" class="paper">
+	// 			<div id="paper-2" class="paper">
 	//
-	// 			<h3>Why?2</h3>
+	// 				<h3>Why?2</h3>
 	//
-	// 			<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>
+	// 				<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>
 	//
-	// 			<i class="heart icon-yipp_check_full"></i>
+	// 				<i class="heart icon-yipp_check_full"></i>
 	//
-	// 			<div id="paper_foo1">
-	// 				<div id="paper_foo2"></div>
+	// 				<div id="paper_foo1">
+	// 					<div id="paper_foo2"></div>
+	// 				</div>
 	// 			</div>
 	// 		</div>
 	//
@@ -35908,7 +35931,7 @@
 	            levels: [],
 	            lessons: [],
 	            showModal: false,
-	            currentLevel: 1
+	            currentLesson: 1
 	        };
 	    },
 
@@ -35917,47 +35940,88 @@
 	        if (!_auth2.default.authenticated) {
 	            this.redirectGuest();
 	        }
+
+	        this.currentLesson = 37;
+	        this.getLesson();
 	    },
 	    methods: {
+	        getLesson: function getLesson() {
+	            var that = this;
+
+	            _timeline2.default.lesson(this, this.currentLesson, function (response) {
+	                console.log(response);
+
+	                var counter = 0;
+	                _jquery2.default.each(response.todos.todos, function (index, content) {
+	                    switch (content.card_type) {
+	                        case 'knowledge':
+
+	                            break;
+
+	                        case 'multiple_choice':
+
+	                            break;
+
+	                        case 'list_field':
+
+	                            break;
+
+	                        case 'sliders':
+
+	                            break;
+	                    }
+	                });
+	            }, function (msg, response) {
+	                that.logError(msg);
+	            });
+	        },
 	        startLesson: function startLesson() {
 	            this.page = 'cards';
 
+	            var that = this;
 	            setTimeout(function () {
-	                var stage = (0, _jquery2.default)('.paper').css('display', 'none');
-	                (0, _jquery2.default)('#paper-1').css('display', 'block');
+	                (0, _jquery2.default)('#knowledge-cards .paper').css('display', 'none');
+	                (0, _jquery2.default)('#knowledge-cards .paper:first-child').css('display', 'block');
 
-	                var mc = new Hammer.Manager(stage[0]);
-	                console.log(mc);
-
-	                mc.add(new Hammer.Swipe({ event: 'swipe' }));
-
-	                mc.on('swipe', function (event) {
-	                    event.preventDefault();
-	                    if (event.direction == 4) {
-	                        // swipe to the right
-	                        stage.addClass('rotate-left').delay(700).fadeOut(1);
-
-	                        if (stage.is(':last-child')) {
-	                            // $('.buddy:nth-child(1)').removeClass ('rotate-left rotate-right').fadeIn(300);
-	                        } else {
-	                            console.log('hi');
-	                            stage.next().removeClass('rotate-left rotate-right').fadeIn(400);
-	                        }
-	                    }
-
-	                    if (event.direction == 2) {
-	                        // swipe to the left
-	                        stage.addClass('rotate-right').delay(700).fadeOut(1);
-
-	                        if ((0, _jquery2.default)(this).is(':last-child')) {
-	                            (0, _jquery2.default)('.paper:nth-child(1)').removeClass('rotate-left rotate-right').fadeIn(300);
-	                            alert('OUPS');
-	                        } else {
-	                            stage.next().removeClass('rotate-left rotate-right').fadeIn(400);
-	                        }
-	                    }
+	                (0, _jquery2.default)('#knowledge-cards .paper').each(function () {
+	                    var stage = (0, _jquery2.default)(this);
+	                    that.initSwipe(this);
 	                });
 	            }, 1);
+	        },
+	        initSwipe: function initSwipe(elem) {
+	            var that = this;
+	            var swipeSpeedDelay = 700;
+	            var swipeSpeedFadeIn = 400;
+
+	            // var stage = elem;
+	            var mc = new Hammer.Manager(elem);
+	            mc.add(new Hammer.Swipe({ event: 'swipe' }));
+
+	            var object = (0, _jquery2.default)(elem);
+	            mc.on('swipe', function (event) {
+	                console.log(event);
+	                event.preventDefault();
+	                var item = (0, _jquery2.default)(event.target);
+
+	                if (event.direction == 4) {
+	                    // swipe to the right
+	                    item.addClass('rotate-left').delay(swipeSpeedDelay).fadeOut(1);
+	                }
+
+	                if (event.direction == 2) {
+	                    // swipe to the left
+	                    item.addClass('rotate-right').delay(swipeSpeedDelay).fadeOut(1);
+	                }
+
+	                if (item.is(':last-child')) {
+	                    setTimeout(function () {
+	                        that.next('complete');
+	                    }, swipeSpeedDelay);
+	                } else {
+	                    item.next().removeClass('rotate-left rotate-right').fadeIn(swipeSpeedFadeIn);
+	                }
+	            });
 	        },
 	        back: function back(page) {
 	            this.page = page;
@@ -38908,7 +38972,7 @@
 /* 302 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div id=\"page-lesson\">\n\n\t<div  class=\"panel\" id=\"start\" v-if=\"page == 'start'\">\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"back\">\n\t\t\t<i class=\"icon-back\"></i>\n\t\t</router-link>\n\n\t\t<div id=\"popUp\">\n\t\t\t<i class=\"big icon-yipp_apple_full\"></i>\n\t\t\t<h3>Lesson 2: Screentime</h3>\n\t\t\t<p>TestIn this lesson, we will help to start the first practice appetizers</p>\n\t\t\t<hr>\n\t\t\t<span><i class=\"icon-yipp_check_full\"></i> 5min</span>\n\t\t</div>\n\t\t\t\n\t\t<a href=\"#\" v-on:click.prevent=\"startLesson\" class=\"btn bottom white\">Start</a>\n\t</div>\n\n\t<div class=\"panel\" id=\"cards\" v-if=\"page == 'cards'\">\n\t\t<a v-on:click.prevent=\"back('start')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<span class=\"bar-inner\"></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div id=\"paper-1\" class=\"paper\">\n\n\t\t\t<h3>Why?</h3>\n\n\t\t\t<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>\n\n\t\t\t<i class=\"heart icon-yipp_check_full\"></i>\n\n\t\t\t<div id=\"paper_foo1\">\n\t\t\t\t<div id=\"paper_foo2\"></div>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div id=\"paper-2\" class=\"paper\">\n\n\t\t\t<h3>Why?2</h3>\n\n\t\t\t<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>\n\n\t\t\t<i class=\"heart icon-yipp_check_full\"></i>\n\n\t\t\t<div id=\"paper_foo1\">\n\t\t\t\t<div id=\"paper_foo2\"></div>\n\t\t\t</div>\n\t\t</div>\n\n\t</div>\n\t\t\n\t<div class=\"panel\" id=\"stack\" v-if=\"page == 'stack'\">\n\t\t<a v-on:click.prevent=\"back('cards')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<span class=\"bar-inner\"></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"content\" v-on:click.prevent=\"next('complete')\">\n\t\t\t\n\t\t\t<p class=\"text-center\">Te weinig slapen vergroot de kans op overgewicht bij kinderen, omdat:</p>\n\t\t\t\n\t\t\t<ul>\n\t\t\t\t\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t\n\t\t\t</ul>\n\n\t\t</div>\n\n\t</div>\n\t\t\t\n\t<div class=\"panel\" id=\"complete\" v-if=\"page == 'complete'\">\n\t\t<a v-on:click.prevent=\"back('stack')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<span class=\"bar-inner\"></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"content\">\n\t\t\n\t\t\t<h1>Les compleet!</h1>\n\t\t\t\n\t\t\t<i class=\"biggest icon-yipp_check_full\"></i>\n\t\t\t\n\t\t\t<p class=\"text-center\">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>\n\t\t\t\n\t\t\t\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<router-link :to=\"{ name: 'challenge'}\" class=\"btn white\">\n\t\t\t\tStart Challenge\n\t\t\t\t</router-link>\n\n\t\t\t\t<br>\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"back('start')\" class=\"btn white\">Reset Lesson</a>\n\t\t\t</div>\n\t\t\n\t\t</div>\n\n\t</div>\n\n\t<modal v-if=\"showModal\" @close=\"showModal = false\">\n        <h3 slot=\"header\">Lorem Ipsum</h3>\n        <p slot=\"body\">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>\n    </modal>\n\n</div>\n\t\n";
+	module.exports = "\n<div id=\"page-lesson\">\n\n\t<div  class=\"panel\" id=\"start\" v-if=\"page == 'start'\">\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"back\">\n\t\t\t<i class=\"icon-back\"></i>\n\t\t</router-link>\n\n\t\t<div id=\"popUp\">\n\t\t\t<i class=\"big icon-yipp_apple_full\"></i>\n\t\t\t<h3>Lesson 2: Screentime</h3>\n\t\t\t<p>TestIn this lesson, we will help to start the first practice appetizers</p>\n\t\t\t<hr>\n\t\t\t<span><i class=\"icon-yipp_check_full\"></i> 5min</span>\n\t\t</div>\n\t\t\t\n\t\t<a href=\"#\" v-on:click.prevent=\"startLesson\" class=\"btn bottom white\">Start</a>\n\t</div>\n\n\t<div class=\"panel\" id=\"cards\" v-if=\"page == 'cards'\">\n\t\t<a v-on:click.prevent=\"back('start')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<span class=\"bar-inner\"></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div id=\"knowledge-cards\">\n\t\t\t<div id=\"paper-1\" class=\"paper\">\n\n\t\t\t\t<h3>Why?</h3>\n\n\t\t\t\t<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>\n\n\t\t\t\t<i class=\"heart icon-yipp_check_full\"></i>\n\n\t\t\t\t<div id=\"paper_foo1\">\n\t\t\t\t\t<div id=\"paper_foo2\"></div>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t\t<div id=\"paper-2\" class=\"paper\">\n\n\t\t\t\t<h3>Why?2</h3>\n\n\t\t\t\t<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>\n\n\t\t\t\t<i class=\"heart icon-yipp_check_full\"></i>\n\n\t\t\t\t<div id=\"paper_foo1\">\n\t\t\t\t\t<div id=\"paper_foo2\"></div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\n\t</div>\n\t\t\n\t<div class=\"panel\" id=\"stack\" v-if=\"page == 'stack'\">\n\t\t<a v-on:click.prevent=\"back('cards')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<span class=\"bar-inner\"></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"content\" v-on:click.prevent=\"next('complete')\">\n\t\t\t\n\t\t\t<p class=\"text-center\">Te weinig slapen vergroot de kans op overgewicht bij kinderen, omdat:</p>\n\t\t\t\n\t\t\t<ul>\n\t\t\t\t\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t\n\t\t\t</ul>\n\n\t\t</div>\n\n\t</div>\n\t\t\t\n\t<div class=\"panel\" id=\"complete\" v-if=\"page == 'complete'\">\n\t\t<a v-on:click.prevent=\"back('stack')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<span class=\"bar-inner\"></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"content\">\n\t\t\n\t\t\t<h1>Les compleet!</h1>\n\t\t\t\n\t\t\t<i class=\"biggest icon-yipp_check_full\"></i>\n\t\t\t\n\t\t\t<p class=\"text-center\">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>\n\t\t\t\n\t\t\t\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<router-link :to=\"{ name: 'challenge'}\" class=\"btn white\">\n\t\t\t\tStart Challenge\n\t\t\t\t</router-link>\n\n\t\t\t\t<br>\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"back('start')\" class=\"btn white\">Reset Lesson</a>\n\t\t\t</div>\n\t\t\n\t\t</div>\n\n\t</div>\n\n\t<modal v-if=\"showModal\" @close=\"showModal = false\">\n        <h3 slot=\"header\">Lorem Ipsum</h3>\n        <p slot=\"body\">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>\n    </modal>\n\n</div>\n\t\n";
 
 /***/ },
 /* 303 */
@@ -39356,7 +39420,7 @@
 /* 310 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\t<div >\n\t\n\t\t<div class=\"header\">\n\t\t\n\t\t\t<router-link :to=\"{ name: 'challenge'}\" class=\"icon\">\n\t\t\t\t<i class=\" icon-yipp_back\"></i>\n\t\t\t</router-link>\n\n\t\t\t<div class=\"title\">Challenge Details</div>\n\t\t\n\t\t</div>\n\t\t\n\t\t<div class=\"wrap\">\n\t\t\n\t\t\t<div class=\"details\">\n\t\t\t\n\t\t\t<span class=\"set\">\n\t\t\t\t\t<i class=\"icon-yipp_notification_line\"></i>\n\t\t\t\t\t14:00\n\t\t\t\t\t| <i class=\"icon-yipp_repeat_line\"></i>\n\t\t\t\t\tEvery day\n\t\t\t\t\t</span>\n\t\t\t\t\n\t\t\t\t<table width=\"100%\" border=\"0\">\n\t\t\t\t\t<tbody>\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t<p>Eating more vegetable</p>\n\t\t\t\t\t\t\t\t<p>1. Broco</p>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t<a href=\"\" class=\"edit\"><i class=\"icon-yipp_pencil_line\"></i></a>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t</tbody>\n\t\t\t\t</table>\n\t\t\t\t\n\t\t\t</div>\n\t\t\n\t\t</div>\n\t\n\t\t<div class=\"steps\">\n\t\n\t\t\t\t<ul>\n\t\t\t\t\t<li>1</li>\n\t\t\t\t\t<li>2</li>\n\t\t\t\t\t<li>3</li>\n\t\t\t\t\t<li>4</li>\n\t\t\t\t\t<li>5</li>\n\t\t\t\t</ul>\n\n\t\t\t<hr>\n\t\t\n\t\t</div>\n\t\t\n\t\t<div class=\"pic\" style=\"background-image: url(assets/img/slider-1.jpg);\">\n\t\t\n\t\t</div>\n\t\n\t\t<h4>Evaluation</h4>\n\t\t\n\t\t<textarea></textarea>\n\t\t\n\t\t<ul class=\"selection\">\n\t\t\t<li><a href=\"\"><i class=\"icon-yipp_emoticon_sad\"></i></a></li>\n\t\t\t<li><a href=\"\" class=\"active\"><i class=\"icon-yipp_emoticon_neutral\"></i></a></li>\n\t\t\t<li><a href=\"\"><i class=\"icon-yipp_emoticon_happy-\"></i></a></li>\n\t\t</ul>\n\t\t\n\t\t<h4>Notes</h4>\n\t\t\n\t\t<textarea></textarea>\n\t\t\n\t\t<a href=\"\" class=\"btn\">Done</a>\n\t\n\t</div>\n\t\n\t<section class=\"resultCard\">\n\t\t\n\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t\n\t\t<h3>You can do it!</h3>\n\t\t<p>We made a beautiful photo collage of this week check it out!</p>\n\t\t\n\t\t<div class=\"bottom\">\n\t\t<a href=\"javascript:void(0);\" class=\"btn mid\">See result</a>\n\n\t\t<a href=\"javascript:void(0);\" class=\"btn big\">Restart challenge</a>\n\t\t\n\t\t</div>\n\t\n\t\t<div id=\"modal\">\n\n\t\t\t<div id=\"msg\">\n\n\t\t\t\t<h3>Are you sure?</h3>\n\n\t\t\t\t<p>Do you want to restart challenge?</p>\n\n\t\t\t\t<a href=\"javascript:void(0);\">Restart challenge</a>\n\n\t\t\t</div>\n\n\t\t</div>\n\n\t</section>\n\t\n\t<section id=\"collage\">\n\t\n\t\t<div class=\"header\">\n\t\t\t<a href=\"\">X</a> Photo Collage\n\t\t\t<h3>Fruit and Vegetables</h3>\n\t\t</div>\n\t\n\t\t<ul>\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.31653261806005760.5087729370613256xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 1</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_sad\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.852024523831920.9065760526795674xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 2</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_happy-\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li>\n\t\t\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 3</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_neutral\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.33876430447345050.3791118352030076xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 4</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_happy-\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t</ul>\n\t\n\t</section>\n\t\n\t<div class=\"restart\">\n\t\n\t<a href=\"\" >Restart challenge</a>\n\t\n\t</div>\t\n";
+	module.exports = "\n\t<div >\n\t\n\t\t<div class=\"header\">\n\t\t\n\t\t\t<router-link :to=\"{ name: 'challenge'}\" class=\"icon\">\n\t\t\t\t<i class=\" icon-yipp_back\"></i>\n\t\t\t</router-link>\n\n\t\t\t<div class=\"title\">Challenge Details</div>\n\t\t\n\t\t</div>\n\t\t\n\t\t<div class=\"wrap\">\n\t\t\n\t\t\t<div class=\"details\">\n\t\t\t\n\t\t\t<span class=\"set\">\n\t\t\t\t\t<i class=\"icon-yipp_notification_line\"></i>\n\t\t\t\t\t14:00\n\t\t\t\t\t| <i class=\"icon-yipp_repeat_line\"></i>\n\t\t\t\t\tEvery day\n\t\t\t\t\t</span>\n\t\t\t\t\n\t\t\t\t<table width=\"100%\" border=\"0\">\n\t\t\t\t\t<tbody>\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t<p>Eating more vegetable</p>\n\t\t\t\t\t\t\t\t<p>1. Broco</p>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t<a href=\"\" class=\"edit\"><i class=\"icon-yipp_pencil_line\"></i></a>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t</tbody>\n\t\t\t\t</table>\n\t\t\t\t\n\t\t\t</div>\n\t\t\n\t\t</div>\n\t\n\t\t<div class=\"steps\">\n\t\n\t\t\t\t<ul>\n\t\t\t\t\t<li>1</li>\n\t\t\t\t\t<li>2</li>\n\t\t\t\t\t<li>3</li>\n\t\t\t\t\t<li>4</li>\n\t\t\t\t\t<li>5</li>\n\t\t\t\t</ul>\n\n\t\t\t<hr>\n\t\t\n\t\t</div>\n\t\t\n\t\t<div class=\"pic\" style=\"background-image: url(assets/img/slider-1.jpg);\">\n\t\t\n\t\t</div>\n\t\n\t\t<h4>Evaluation</h4>\n\t\t\n\t\t<textarea></textarea>\n\t\t\n\t\t<ul class=\"selection\">\n\t\t\t<li><a href=\"\"><i class=\"icon-yipp_emoticon_sad\"></i></a></li>\n\t\t\t<li><a href=\"\" class=\"active\"><i class=\"icon-yipp_emoticon_neutral\"></i></a></li>\n\t\t\t<li><a href=\"\"><i class=\"icon-yipp_emoticon_happy-\"></i></a></li>\n\t\t</ul>\n\t\t\n\t\t<h4>Notes</h4>\n\t\t\n\t\t<textarea></textarea>\n\t\t\n\t\t<a href=\"\" class=\"btn\">Done</a>\n\t\n\t</div>\n\t\n\t<section class=\"resultCard\">\n\t\t\n\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t\n\t\t<h3>You can do it!</h3>\n\t\t<p>We made a beautiful photo collage of this week check it out!</p>\n\t\t\n\t\t<div class=\"bottom\">\n\t\t<a href=\"javascript:void(0);\" class=\"btn mid\">See result</a>\n\n\t\t<a href=\"javascript:void(0);\" class=\"btn big\">Restart challenge</a>\n\t\t\n\t\t</div>\n\t\n\t\t<div id=\"modal\">\n\n\t\t\t<div id=\"msg\">\n\n\t\t\t\t<h3>Are you sure?</h3>\n\n\t\t\t\t<p>Do you want to restart challenge?</p>\n\n\t\t\t\t<a href=\"javascript:void(0);\">Restart challenge</a>\n\n\t\t\t</div>\n\n\t\t</div>\n\n\t</section>\n\t\n\t<section id=\"collage\">\n\t\n\t\t<div class=\"header\">\n\t\t\t<a href=\"\">X</a> Photo Collage\n\t\t\t<h3>Fruit and Vegetables</h3>\n\t\t</div>\n\t\n\t\t<ul>\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.61398226607259130.46812920440579187xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 1</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_sad\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.97511721209847830.5469244222962304xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 2</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_happy-\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li>\n\t\t\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 3</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_neutral\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.034704055506768360.23302879075156646xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 4</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_happy-\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t</ul>\n\t\n\t</section>\n\t\n\t<div class=\"restart\">\n\t\n\t<a href=\"\" >Restart challenge</a>\n\t\n\t</div>\t\n";
 
 /***/ },
 /* 311 */

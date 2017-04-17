@@ -48,5 +48,26 @@ export default {
 
         });
     },
+
+    lesson(context, lesson, successCallback, errorCallback) {
+        var that = this;
+
+        context.$http.get(config.api.url + '/todos/' + lesson + '/en').then(response => {
+            var result = response.body.result;
+
+            if (response.body.status == 'OK') {
+                successCallback.call(this, result);
+            } else if (errorCallback) {
+                console.log('error in api.timeline');
+                errorCallback.call(this, result.message, response);
+            }
+        }, response => {
+
+            if (errorCallback) {
+                errorCallback.call(this, response.body.result.error, response);
+            }
+
+        });
+    },
     
 }

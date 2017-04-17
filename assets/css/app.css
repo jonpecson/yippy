@@ -112,3 +112,13 @@ header .user-area .photo img {
   cursor: w-resize;
   z-index: 10;
 }
+
+#knowledge-cards {
+  position: relative;
+}
+
+#knowledge-cards .paper {
+  position: absolute;
+  left: 50%;
+  margin-left: -150px;
+}
