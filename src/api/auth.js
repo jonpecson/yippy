@@ -37,6 +37,42 @@ export default {
         });
     },
 
+    resetPassword(context, creds, successCallback, errorCallback) {
+        var that = this;
+
+        context.$http.post(config.api.url + '/forgotpassword', creds).then(response => {
+            var result = response.body.result;
+            
+            if (response.body.status == 'OK') {
+                successCallback.call(this, result);
+            } else if (errorCallback) {
+                errorCallback.call(this, result.message, response);
+            }
+        }, response => {
+            if (errorCallback) {
+                errorCallback.call(this, response.body.result.error, response);
+            }
+        });
+    },
+
+    newPassword(context, creds, successCallback, errorCallback) {
+        var that = this;
+
+        context.$http.post(config.api.url + '/newpassword', creds).then(response => {
+            var result = response.body.result;
+            
+            if (response.body.status == 'OK') {
+                successCallback.call(this, result);
+            } else if (errorCallback) {
+                errorCallback.call(this, result.message, response);
+            }
+        }, response => {
+            if (errorCallback) {
+                errorCallback.call(this, response.body.result.error, response);
+            }
+        });
+    },
+
     logout() {
         Storage.delete('token');
         localStorage.removeItem('user');

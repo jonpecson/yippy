@@ -49,10 +49,10 @@ export default {
         });
     },
 
-    lesson(context, lesson, successCallback, errorCallback) {
+    lesson(context, lesson, language, successCallback, errorCallback) {
         var that = this;
 
-        context.$http.get(config.api.url + '/todos/' + lesson + '/en').then(response => {
+        context.$http.get(config.api.url + '/todos/' + lesson + '/' + language).then(response => {
             var result = response.body.result;
 
             if (response.body.status == 'OK') {

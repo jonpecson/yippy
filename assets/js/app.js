@@ -51,7 +51,7 @@
 	__webpack_require__(8);
 	__webpack_require__(184);
 	__webpack_require__(193);
-	module.exports = __webpack_require__(293);
+	module.exports = __webpack_require__(290);
 
 
 /***/ },
@@ -9797,31 +9797,31 @@
 
 	var _Timeline2 = _interopRequireDefault(_Timeline);
 
-	var _Emergency = __webpack_require__(291);
+	var _Emergency = __webpack_require__(295);
 
 	var _Emergency2 = _interopRequireDefault(_Emergency);
 
-	var _Lesson = __webpack_require__(295);
+	var _Lesson = __webpack_require__(298);
 
 	var _Lesson2 = _interopRequireDefault(_Lesson);
 
-	var _Challenge = __webpack_require__(303);
+	var _Challenge = __webpack_require__(314);
 
 	var _Challenge2 = _interopRequireDefault(_Challenge);
 
-	var _ChallengeNew = __webpack_require__(306);
+	var _ChallengeNew = __webpack_require__(317);
 
 	var _ChallengeNew2 = _interopRequireDefault(_ChallengeNew);
 
-	var _ChallengeContent = __webpack_require__(308);
+	var _ChallengeContent = __webpack_require__(319);
 
 	var _ChallengeContent2 = _interopRequireDefault(_ChallengeContent);
 
-	var _vueResource = __webpack_require__(311);
+	var _vueResource = __webpack_require__(322);
 
 	var _vueResource2 = _interopRequireDefault(_vueResource);
 
-	var _vueRouter = __webpack_require__(313);
+	var _vueRouter = __webpack_require__(324);
 
 	var _vueRouter2 = _interopRequireDefault(_vueRouter);
 
@@ -9837,10 +9837,10 @@
 
 	_vue2.default.use(_vueCookie2.default);
 
-	var VueTouch = __webpack_require__(301);
+	var VueTouch = __webpack_require__(326);
 	_vue2.default.use(VueTouch, { name: 'v-touch' });
 
-	var routes = [{ path: '/', component: _Home2.default, name: 'home' }, { path: '/login', component: _Auth2.default, name: 'login' }, { path: '/logout', component: _Logout2.default, name: 'logout' }, { path: '/register', component: _Register2.default, name: 'register' }, { path: '/timeline', component: _Timeline2.default, name: 'timeline' }, { path: '/emergency', component: _Emergency2.default, name: 'emergency' }, { path: '/lesson-:id', component: _Lesson2.default, name: 'lesson' }, { path: '/challenge', component: _Challenge2.default, name: 'challenge' }, { path: '/challenge-new', component: _ChallengeNew2.default, name: 'challenge_new' }, { path: '/challenge-:id', component: _ChallengeContent2.default, name: 'challenge_content' }];
+	var routes = [{ path: '/', component: _Home2.default, name: 'home' }, { path: '/login', component: _Auth2.default, name: 'login' }, { path: '/newpassword', component: _Auth2.default, name: 'newpassword' }, { path: '/logout', component: _Logout2.default, name: 'logout' }, { path: '/register', component: _Register2.default, name: 'register' }, { path: '/timeline', component: _Timeline2.default, name: 'timeline' }, { path: '/emergency', component: _Emergency2.default, name: 'emergency' }, { path: '/lesson-:id', component: _Lesson2.default, name: 'lesson' }, { path: '/challenge', component: _Challenge2.default, name: 'challenge' }, { path: '/challenge-new', component: _ChallengeNew2.default, name: 'challenge_new' }, { path: '/challenge-:id', component: _ChallengeContent2.default, name: 'challenge_content' }];
 
 	var router = new _vueRouter2.default({
 	  routes: routes
@@ -23518,26 +23518,30 @@
 	//
 	// 	<div id="reset" class="panel" v-else-if="step == 3">
 	// 		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back"></a> Reset password</div>
-	// 		<form action="" method="post" class="middle-area full">
+	// 		<form action="" method="post" class="middle-area full" v-on:submit.prevent="resetPassword">
 	// 			<div class="placer bottom">
+	// 				<div class="error" v-if="error_message">{{ error_message }}</div>
+	// 				<div class="success" v-if="success_message">{{ success_message }}</div>
 	// 				<p>We will send you an email with a link so you can set up a new password</p>
-	// 				<input type="email" placeholder="E-mailadres">
+	// 				<input type="email" placeholder="E-mailadres" v-model="pw_email">
 	// 			</div>
 	// 			<div class="bottom-area">
-	// 				<button class="form-button-medium">Reset</button>
+	// 				<button class="form-button-medium">Reset<span v-if="loading" class="loading"></span></button>
 	// 			</div>
 	// 		</form>
 	// 	</div>	
 	//
 	// 	<div id="renew" class="panel" v-else-if="step == 4">
 	// 		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back"></a> Reset password</div>
-	// 		<form action="" method="post" class="middle-area full">
+	// 		<form action="" method="post" class="middle-area full" v-on:submit.prevent="newPassword">
 	// 			<div class="placer middle">
-	// 				<input type="password" placeholder="New password">
-	// 				<input type="password" placeholder="Repeat password">
+	// 				<div class="error" v-if="error_message">{{ error_message }}</div>
+	// 				<div class="success" v-if="success_message">{{ success_message }}</div>
+	// 				<input type="password" placeholder="New password" v-model="pw_newpassword">
+	// 				<input type="text" placeholder="Code" v-model="pw_code">
 	// 			</div>
 	// 			<div class="bottom-area">
-	// 				<button class="form-button-medium">Confirm</button>
+	// 				<button class="form-button-medium">Confirm<span v-if="loading" class="loading"></span></button>
 	// 			</div>
 	// 		</form>
 	// 	</div>	
@@ -23550,10 +23554,14 @@
 		data: function data() {
 			return {
 				step: 1,
+				success_message: '',
 				error_message: '',
 				login_email: '',
 				login_pw: '',
-				loading: false
+				loading: false,
+				pw_newpassword: '',
+				pw_code: '',
+				pw_email: ''
 			};
 		},
 
@@ -23561,6 +23569,10 @@
 			_auth2.default.check();
 			if (_auth2.default.authenticated) {
 				this.redirectAuth();
+			}
+
+			if (this.$route.path == '/newpassword') {
+				this.showNewPasswordForm();
 			}
 		},
 		methods: {
@@ -23571,6 +23583,10 @@
 			showResetForm: function showResetForm() {
 				this.resetError();
 				this.step = 3;
+			},
+			showNewPasswordForm: function showNewPasswordForm() {
+				this.resetError();
+				this.step = 4;
 			},
 			back: function back() {
 				this.resetError();
@@ -23599,11 +23615,48 @@
 					this.$router.push('register');
 				}
 			},
+			resetPassword: function resetPassword() {
+				this.loading = true;
+				var credentials = {
+					email: this.pw_email
+				};
+
+				var that = this;
+				_auth2.default.resetPassword(this, credentials, function (response) {
+					that.loading = false;
+					that.showMessage(response.message);
+				}, function (msg, response) {
+					that.loading = false;
+					that.logError(msg);
+				});
+			},
+			newPassword: function newPassword() {
+				this.loading = true;
+				var credentials = {
+					password: this.pw_newpassword,
+					code: this.pw_code
+				};
+
+				var that = this;
+				_auth2.default.newPassword(this, credentials, function (response) {
+					that.loading = false;
+					that.showMessage(response.message);
+				}, function (msg, response) {
+					that.loading = false;
+					that.logError(msg);
+				});
+			},
 			resetError: function resetError() {
 				this.error_message = '';
+				this.success_message = '';
 			},
 			logError: function logError(msg) {
+				this.success_message = '';
 				this.error_message = msg;
+			},
+			showMessage: function showMessage(msg) {
+				this.error_message = '';
+				this.success_message = msg;
 			}
 		}
 	};
@@ -23670,6 +23723,44 @@
 	            }
 	        });
 	    },
+	    resetPassword: function resetPassword(context, creds, successCallback, errorCallback) {
+	        var _this2 = this;
+
+	        var that = this;
+
+	        context.$http.post(_config2.default.api.url + '/forgotpassword', creds).then(function (response) {
+	            var result = response.body.result;
+
+	            if (response.body.status == 'OK') {
+	                successCallback.call(_this2, result);
+	            } else if (errorCallback) {
+	                errorCallback.call(_this2, result.message, response);
+	            }
+	        }, function (response) {
+	            if (errorCallback) {
+	                errorCallback.call(_this2, response.body.result.error, response);
+	            }
+	        });
+	    },
+	    newPassword: function newPassword(context, creds, successCallback, errorCallback) {
+	        var _this3 = this;
+
+	        var that = this;
+
+	        context.$http.post(_config2.default.api.url + '/newpassword', creds).then(function (response) {
+	            var result = response.body.result;
+
+	            if (response.body.status == 'OK') {
+	                successCallback.call(_this3, result);
+	            } else if (errorCallback) {
+	                errorCallback.call(_this3, result.message, response);
+	            }
+	        }, function (response) {
+	            if (errorCallback) {
+	                errorCallback.call(_this3, response.body.result.error, response);
+	            }
+	        });
+	    },
 	    logout: function logout() {
 	        _storage2.default.delete('token');
 	        localStorage.removeItem('user');
@@ -23731,7 +23822,7 @@
 /* 187 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div id=\"signUp\">\n\t<div id=\"onBoarding\" class=\"panel\" v-if=\"step == 1\">\n\t\t<div id=\"companyLogo\"></div>\n\t\t<div class=\"bottom-area\">\n\t\t\t<router-link :to=\"{ name: 'register'}\" class=\"button-big\">Sign up</router-link>\n\t\t\t<a href=\"javascript:void(0);\" v-on:click.prevent=\"showLoginForm\">I already have an account</a>\n\t\t</div>\n\t</div>\n\t\n\t<div id=\"login1\" class=\"panel\" v-else-if=\"step == 2\">\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Log in</div>\n\t\t<form action=\"\" method=\"post\" class=\"middle-area full\" v-on:submit.prevent=\"logMeIn\">\n\t\t\t<div class=\"placer middle\">\n\t\t\t\t<div class=\"error\" v-if=\"error_message\">{{ error_message }}</div>\n\t\t\t\t<input name=\"login_email\" type=\"email\" placeholder=\"E-mailadres\" v-model=\"login_email\">\n\t\t\t\t<input name=\"login_pw\" type=\"password\" placeholder=\"Wachtwoord\" v-model=\"login_pw\">\n\t\t\t</div>\n\t\t\t\t\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<button class=\"form-button-medium\">Login<span v-if=\"loading\" class=\"loading\"></span></button>\n\t\t\t\t<router-link :to=\"{ name: 'register'}\">I don't have an account</router-link>\n\t\t\t\t<br>\n\t\t\t\t<a href=\"javascript:void(0);\" v-on:click=\"showResetForm\">Forgot password</a>\n\t\t\t</div>\n\t\t</form>\n\t</div>\n\t\t\t\n\t<div id=\"reset\" class=\"panel\" v-else-if=\"step == 3\">\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Reset password</div>\n\t\t<form action=\"\" method=\"post\" class=\"middle-area full\">\n\t\t\t<div class=\"placer bottom\">\n\t\t\t\t<p>We will send you an email with a link so you can set up a new password</p>\n\t\t\t\t<input type=\"email\" placeholder=\"E-mailadres\">\n\t\t\t</div>\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<button class=\"form-button-medium\">Reset</button>\n\t\t\t</div>\n\t\t</form>\n\t</div>\t\n\t\n\t<div id=\"renew\" class=\"panel\" v-else-if=\"step == 4\">\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Reset password</div>\n\t\t<form action=\"\" method=\"post\" class=\"middle-area full\">\n\t\t\t<div class=\"placer middle\">\n\t\t\t\t<input type=\"password\" placeholder=\"New password\">\n\t\t\t\t<input type=\"password\" placeholder=\"Repeat password\">\n\t\t\t</div>\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<button class=\"form-button-medium\">Confirm</button>\n\t\t\t</div>\n\t\t</form>\n\t</div>\t\n</div>\n";
+	module.exports = "\n<div id=\"signUp\">\n\t<div id=\"onBoarding\" class=\"panel\" v-if=\"step == 1\">\n\t\t<div id=\"companyLogo\"></div>\n\t\t<div class=\"bottom-area\">\n\t\t\t<router-link :to=\"{ name: 'register'}\" class=\"button-big\">Sign up</router-link>\n\t\t\t<a href=\"javascript:void(0);\" v-on:click.prevent=\"showLoginForm\">I already have an account</a>\n\t\t</div>\n\t</div>\n\t\n\t<div id=\"login1\" class=\"panel\" v-else-if=\"step == 2\">\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Log in</div>\n\t\t<form action=\"\" method=\"post\" class=\"middle-area full\" v-on:submit.prevent=\"logMeIn\">\n\t\t\t<div class=\"placer middle\">\n\t\t\t\t<div class=\"error\" v-if=\"error_message\">{{ error_message }}</div>\n\t\t\t\t<input name=\"login_email\" type=\"email\" placeholder=\"E-mailadres\" v-model=\"login_email\">\n\t\t\t\t<input name=\"login_pw\" type=\"password\" placeholder=\"Wachtwoord\" v-model=\"login_pw\">\n\t\t\t</div>\n\t\t\t\t\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<button class=\"form-button-medium\">Login<span v-if=\"loading\" class=\"loading\"></span></button>\n\t\t\t\t<router-link :to=\"{ name: 'register'}\">I don't have an account</router-link>\n\t\t\t\t<br>\n\t\t\t\t<a href=\"javascript:void(0);\" v-on:click=\"showResetForm\">Forgot password</a>\n\t\t\t</div>\n\t\t</form>\n\t</div>\n\t\t\t\n\t<div id=\"reset\" class=\"panel\" v-else-if=\"step == 3\">\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Reset password</div>\n\t\t<form action=\"\" method=\"post\" class=\"middle-area full\" v-on:submit.prevent=\"resetPassword\">\n\t\t\t<div class=\"placer bottom\">\n\t\t\t\t<div class=\"error\" v-if=\"error_message\">{{ error_message }}</div>\n\t\t\t\t<div class=\"success\" v-if=\"success_message\">{{ success_message }}</div>\n\t\t\t\t<p>We will send you an email with a link so you can set up a new password</p>\n\t\t\t\t<input type=\"email\" placeholder=\"E-mailadres\" v-model=\"pw_email\">\n\t\t\t</div>\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<button class=\"form-button-medium\">Reset<span v-if=\"loading\" class=\"loading\"></span></button>\n\t\t\t</div>\n\t\t</form>\n\t</div>\t\n\t\n\t<div id=\"renew\" class=\"panel\" v-else-if=\"step == 4\">\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Reset password</div>\n\t\t<form action=\"\" method=\"post\" class=\"middle-area full\" v-on:submit.prevent=\"newPassword\">\n\t\t\t<div class=\"placer middle\">\n\t\t\t\t<div class=\"error\" v-if=\"error_message\">{{ error_message }}</div>\n\t\t\t\t<div class=\"success\" v-if=\"success_message\">{{ success_message }}</div>\n\t\t\t\t<input type=\"password\" placeholder=\"New password\" v-model=\"pw_newpassword\">\n\t\t\t\t<input type=\"text\" placeholder=\"Code\" v-model=\"pw_code\">\n\t\t\t</div>\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<button class=\"form-button-medium\">Confirm<span v-if=\"loading\" class=\"loading\"></span></button>\n\t\t\t</div>\n\t\t</form>\n\t</div>\t\n</div>\n";
 
 /***/ },
 /* 188 */
@@ -35171,7 +35262,7 @@
 
 	var __vue_script__, __vue_template__
 	__vue_script__ = __webpack_require__(289)
-	__vue_template__ = __webpack_require__(290)
+	__vue_template__ = __webpack_require__(294)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -35207,7 +35298,7 @@
 
 	var _auth2 = _interopRequireDefault(_auth);
 
-	var _timeline = __webpack_require__(293);
+	var _timeline = __webpack_require__(290);
 
 	var _timeline2 = _interopRequireDefault(_timeline);
 
@@ -35215,7 +35306,7 @@
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
-	var _Modal = __webpack_require__(297);
+	var _Modal = __webpack_require__(291);
 
 	var _Modal2 = _interopRequireDefault(_Modal);
 
@@ -35440,9 +35531,92 @@
 
 /***/ },
 /* 290 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "\n<div id=\"timeline-container\">\n    <header>\n        <div class=\"title-area\">\n            <a href=\"javascript:void(0);\"><i class=\"icon-yipp_profile_line\"></i></a>\n            <span>Trainingen</span>\n            <router-link :to=\"{ name: 'emergency'}\"><i class=\"icon-yipp_notification_line2\"></i></router-link>\n        </div>\n\n        <div class=\"user-area\">\n            <div class=\"child-name\">{{ child.get('name') }}</div>\n            <ul class=\"months-level\">\n                <li>\n                    <span>{{ child.get('age') }}</span>  \n                    <span>Maanden</span>\n                </li>\n                <li>\n                    <span>{{ currentLevel }}</span>\n                    <span>Level</span>\n                </li>\n                <li>\n                    <a href=\"#\" v-on:click.prevent=\"toggle\" v-if=\"page == 'lessons'\"><i class=\"icon-yipp_down\"></i></a>\n                    <a href=\"#\" v-on:click.prevent=\"toggle\" v-if=\"page == 'levels'\"><i class=\"icon-yipp_up\"></i></a>\n                </li>\n            </ul>\n\n            <div class=\"photo\"><img class=\"avatar\" v-bind:src=\"child.get('image')\"></div>\n            \n        </div>\n    </header>\n        \n        <section class=\"traingen\" v-if=\"page == 'lessons'\">\n            <ul id=\"list-icons\">\n                <li v-for=\"lesson in lessons\">\n                    <a href=\"#\" v-bind:data-id=\"lesson.id\" v-on:click.prevent=\"goTodo\">\n                        <span class=\"icon big active\" v-bind:class=\"lesson.icon\"></span> \n                        {{ lesson.counter }}. {{ lesson.description }}\n                    </a>\n                </li>\n            </ul>\n        </section>\n        \n            \n        <section class=\"traingen2\" v-if=\"page == 'levels'\">\n                    \n            <ul id=\"list-text\">\n                <li v-for=\"level in levels\">\n                    <a href=\"#\" v-if=\"level.active == 'active'\" \n                        v-bind:data-id=\"level.id\" \n                        v-on:click.prevent=\"setCurrentLevel\"\n                        v-bind:class=\"level.active\">\n                        <span v-bind:data-id=\"level.id\" class=\"level\">{{ level.counter }}</span> \n                        <span v-bind:data-id=\"level.id\" class=\"months\">{{ level.description }}</span>\n                    </a>\n\n                    <a href=\"#\" v-if=\"level.active == ''\" \n                        v-bind:data-id=\"level.id\" \n                        v-on:click.prevent=\"\"\n                        @click=\"showModal = true\"\n                        v-bind:class=\"level.active\">\n                        <span v-bind:data-id=\"level.id\" class=\"level\">{{ level.counter }}</span> \n                        <span v-bind:data-id=\"level.id\" class=\"months\">{{ level.description }}</span>\n                    </a>\n                </li>\n            </ul>\n        \n        </section>\n        \n        <footer>\n            <ul>\n                <li><a href=\"javascript:void(0);\" class=\"active\"><span class=\"icon-yipp_home_full-\"></span>Training</a></li>\n                <li><router-link :to=\"{ path: 'challenge'}\"><span class=\"icon-yipp_challenge_line\"></span>Challenge</router-link></li>\n            </ul>\n        </footer>\n\n        <modal v-if=\"showModal\" @close=\"showModal = false\">\n            <h3 slot=\"header\">Ooops...</h3>\n            <p slot=\"body\">This is not yet available</p>\n        </modal>\n</div>\n";
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _config = __webpack_require__(1);
+
+	var _config2 = _interopRequireDefault(_config);
+
+	var _auth = __webpack_require__(184);
+
+	var _auth2 = _interopRequireDefault(_auth);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	    getAll: function getAll(context, successCallback, errorCallback) {
+	        this.levels(context, successCallback, errorCallback);
+	    },
+	    levels: function levels(context, successCallback, errorCallback) {
+	        var _this = this;
+
+	        var that = this;
+
+	        context.$http.get(_config2.default.api.url + '/levels').then(function (response) {
+	            var result = response.body.result;
+
+	            if (response.body.status == 'OK') {
+	                successCallback.call(_this, result);
+	            } else if (errorCallback) {
+	                console.log('error in api.timeline');
+	                errorCallback.call(_this, result.message, response);
+	            }
+	        }, function (response) {
+
+	            if (errorCallback) {
+	                errorCallback.call(_this, response.body.result.error, response);
+	            }
+	        });
+	    },
+	    lessons: function lessons(context, level, successCallback, errorCallback) {
+	        var _this2 = this;
+
+	        var that = this;
+
+	        context.$http.get(_config2.default.api.url + '/lessons/' + level).then(function (response) {
+	            var result = response.body.result;
+
+	            if (response.body.status == 'OK') {
+	                successCallback.call(_this2, result);
+	            } else if (errorCallback) {
+	                console.log('error in api.timeline');
+	                errorCallback.call(_this2, result.message, response);
+	            }
+	        }, function (response) {
+
+	            if (errorCallback) {
+	                errorCallback.call(_this2, response.body.result.error, response);
+	            }
+	        });
+	    },
+	    lesson: function lesson(context, _lesson, language, successCallback, errorCallback) {
+	        var _this3 = this;
+
+	        var that = this;
+
+	        context.$http.get(_config2.default.api.url + '/todos/' + _lesson + '/' + language).then(function (response) {
+	            var result = response.body.result;
+
+	            if (response.body.status == 'OK') {
+	                successCallback.call(_this3, result);
+	            } else if (errorCallback) {
+	                console.log('error in api.timeline');
+	                errorCallback.call(_this3, result.message, response);
+	            }
+	        }, function (response) {
+
+	            if (errorCallback) {
+	                errorCallback.call(_this3, response.body.result.error, response);
+	            }
+	        });
+	    }
+	};
 
 /***/ },
 /* 291 */
@@ -35450,7 +35624,89 @@
 
 	var __vue_script__, __vue_template__
 	__vue_script__ = __webpack_require__(292)
-	__vue_template__ = __webpack_require__(294)
+	__vue_template__ = __webpack_require__(293)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "/Users/racheljaro/webroot/yipp/app/src/components/Modal.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 292 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	// <template>
+	// <transition name="modal">
+	//     <div class="modal-mask">
+	//       <div class="modal-wrapper">
+	//         <div class="modal-container">
+	//
+	//           <div class="modal-header">
+	//             <slot name="header">
+	//               default header
+	//             </slot>
+	//           </div>
+	//
+	//           <div class="modal-body">
+	//             <slot name="body">
+	//               default message
+	//             </slot>
+	//           </div>
+	//
+	//           <div class="modal-footer">
+	//             <slot name="footer">
+	//               <button class="form-button-small" @click="$emit('close')">
+	//                 Got it!
+	//               </button>
+	//             </slot>
+	//           </div>
+	//         </div>
+	//       </div>
+	//     </div>
+	// </transition>
+	// </template>
+	//
+	// <script>
+	exports.default = {
+	    props: ['name', 'message'],
+	    showModal: false
+	};
+	// </script>
+	//
+
+/***/ },
+/* 293 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<transition name=\"modal\">\n    <div class=\"modal-mask\">\n      <div class=\"modal-wrapper\">\n        <div class=\"modal-container\">\n\n          <div class=\"modal-header\">\n            <slot name=\"header\">\n              default header\n            </slot>\n          </div>\n\n          <div class=\"modal-body\">\n            <slot name=\"body\">\n              default message\n            </slot>\n          </div>\n\n          <div class=\"modal-footer\">\n            <slot name=\"footer\">\n              <button class=\"form-button-small\" @click=\"$emit('close')\">\n                Got it!\n              </button>\n            </slot>\n          </div>\n        </div>\n      </div>\n    </div>\n</transition>\n";
+
+/***/ },
+/* 294 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div id=\"timeline-container\">\n    <header>\n        <div class=\"title-area\">\n            <a href=\"javascript:void(0);\"><i class=\"icon-yipp_profile_line\"></i></a>\n            <span>Trainingen</span>\n            <router-link :to=\"{ name: 'emergency'}\"><i class=\"icon-yipp_notification_line2\"></i></router-link>\n        </div>\n\n        <div class=\"user-area\">\n            <div class=\"child-name\">{{ child.get('name') }}</div>\n            <ul class=\"months-level\">\n                <li>\n                    <span>{{ child.get('age') }}</span>  \n                    <span>Maanden</span>\n                </li>\n                <li>\n                    <span>{{ currentLevel }}</span>\n                    <span>Level</span>\n                </li>\n                <li>\n                    <a href=\"#\" v-on:click.prevent=\"toggle\" v-if=\"page == 'lessons'\"><i class=\"icon-yipp_down\"></i></a>\n                    <a href=\"#\" v-on:click.prevent=\"toggle\" v-if=\"page == 'levels'\"><i class=\"icon-yipp_up\"></i></a>\n                </li>\n            </ul>\n\n            <div class=\"photo\"><img class=\"avatar\" v-bind:src=\"child.get('image')\"></div>\n            \n        </div>\n    </header>\n        \n        <section class=\"traingen\" v-if=\"page == 'lessons'\">\n            <ul id=\"list-icons\">\n                <li v-for=\"lesson in lessons\">\n                    <a href=\"#\" v-bind:data-id=\"lesson.id\" v-on:click.prevent=\"goTodo\">\n                        <span class=\"icon big active\" v-bind:class=\"lesson.icon\"></span> \n                        {{ lesson.counter }}. {{ lesson.description }}\n                    </a>\n                </li>\n            </ul>\n        </section>\n        \n            \n        <section class=\"traingen2\" v-if=\"page == 'levels'\">\n                    \n            <ul id=\"list-text\">\n                <li v-for=\"level in levels\">\n                    <a href=\"#\" v-if=\"level.active == 'active'\" \n                        v-bind:data-id=\"level.id\" \n                        v-on:click.prevent=\"setCurrentLevel\"\n                        v-bind:class=\"level.active\">\n                        <span v-bind:data-id=\"level.id\" class=\"level\">{{ level.counter }}</span> \n                        <span v-bind:data-id=\"level.id\" class=\"months\">{{ level.description }}</span>\n                    </a>\n\n                    <a href=\"#\" v-if=\"level.active == ''\" \n                        v-bind:data-id=\"level.id\" \n                        v-on:click.prevent=\"\"\n                        @click=\"showModal = true\"\n                        v-bind:class=\"level.active\">\n                        <span v-bind:data-id=\"level.id\" class=\"level\">{{ level.counter }}</span> \n                        <span v-bind:data-id=\"level.id\" class=\"months\">{{ level.description }}</span>\n                    </a>\n                </li>\n            </ul>\n        \n        </section>\n        \n        <footer>\n            <ul>\n                <li><a href=\"javascript:void(0);\" class=\"active\"><span class=\"icon-yipp_home_full-\"></span>Training</a></li>\n                <li><router-link :to=\"{ path: 'challenge'}\"><span class=\"icon-yipp_challenge_line\"></span>Challenge</router-link></li>\n            </ul>\n        </footer>\n\n        <modal v-if=\"showModal\" @close=\"showModal = false\">\n            <h3 slot=\"header\">Ooops...</h3>\n            <p slot=\"body\">This is not yet available</p>\n        </modal>\n</div>\n";
+
+/***/ },
+/* 295 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__vue_script__ = __webpack_require__(296)
+	__vue_template__ = __webpack_require__(297)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -35467,7 +35723,7 @@
 	})()}
 
 /***/ },
-/* 292 */
+/* 296 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35486,7 +35742,7 @@
 
 	var _auth2 = _interopRequireDefault(_auth);
 
-	var _timeline = __webpack_require__(293);
+	var _timeline = __webpack_require__(290);
 
 	var _timeline2 = _interopRequireDefault(_timeline);
 
@@ -35552,107 +35808,18 @@
 	// <script>
 
 /***/ },
-/* 293 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _config = __webpack_require__(1);
-
-	var _config2 = _interopRequireDefault(_config);
-
-	var _auth = __webpack_require__(184);
-
-	var _auth2 = _interopRequireDefault(_auth);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = {
-	    getAll: function getAll(context, successCallback, errorCallback) {
-	        this.levels(context, successCallback, errorCallback);
-	    },
-	    levels: function levels(context, successCallback, errorCallback) {
-	        var _this = this;
-
-	        var that = this;
-
-	        context.$http.get(_config2.default.api.url + '/levels').then(function (response) {
-	            var result = response.body.result;
-
-	            if (response.body.status == 'OK') {
-	                successCallback.call(_this, result);
-	            } else if (errorCallback) {
-	                console.log('error in api.timeline');
-	                errorCallback.call(_this, result.message, response);
-	            }
-	        }, function (response) {
-
-	            if (errorCallback) {
-	                errorCallback.call(_this, response.body.result.error, response);
-	            }
-	        });
-	    },
-	    lessons: function lessons(context, level, successCallback, errorCallback) {
-	        var _this2 = this;
-
-	        var that = this;
-
-	        context.$http.get(_config2.default.api.url + '/lessons/' + level).then(function (response) {
-	            var result = response.body.result;
-
-	            if (response.body.status == 'OK') {
-	                successCallback.call(_this2, result);
-	            } else if (errorCallback) {
-	                console.log('error in api.timeline');
-	                errorCallback.call(_this2, result.message, response);
-	            }
-	        }, function (response) {
-
-	            if (errorCallback) {
-	                errorCallback.call(_this2, response.body.result.error, response);
-	            }
-	        });
-	    },
-	    lesson: function lesson(context, _lesson, successCallback, errorCallback) {
-	        var _this3 = this;
-
-	        var that = this;
-
-	        context.$http.get(_config2.default.api.url + '/todos/' + _lesson + '/en').then(function (response) {
-	            var result = response.body.result;
-
-	            if (response.body.status == 'OK') {
-	                successCallback.call(_this3, result);
-	            } else if (errorCallback) {
-	                console.log('error in api.timeline');
-	                errorCallback.call(_this3, result.message, response);
-	            }
-	        }, function (response) {
-
-	            if (errorCallback) {
-	                errorCallback.call(_this3, response.body.result.error, response);
-	            }
-	        });
-	    }
-	};
-
-/***/ },
-/* 294 */
+/* 297 */
 /***/ function(module, exports) {
 
 	module.exports = "\n\t<div id=\"page-emergency\">\n\t\t<section class=\"emergency\" v-if=\"page == 1\">\n\t\t\t<header class=\"normal-header\">\n\t\t\t\t<router-link :to=\"{ name: 'timeline'}\"><span class=\"icon-close\" style=\"font-weight: normal\">X</span></router-link>\n\t\t\t\t<h2>Emergency</h2>\n\t\t\t</header>\n\n\t\t\t<ul id=\"list-image\">\n\t\t\t\t<li v-on:click.prevent=\"view\" style=\"background-image: url(assets/img/slider-1.jpg);\"><h3>{title here}</h3></li>\n\t\t\t\t<li v-on:click.prevent=\"view\" style=\"background-image: url(assets/img/slider-2.jpg);\"><h3>{title here}</h3></li>\n\t\t\t\t<li v-on:click.prevent=\"view\" style=\"background-image: url(assets/img/slider-3.jpg);\"><h3>{title here}</h3></li>\n\t\t\t\t<li v-on:click.prevent=\"view\" style=\"background-image: url(assets/img/slider-4.jpg);\"><h3>{title here}</h3></li>\n\t\t\t</ul>\n\t\t</section>\n\t\t\n\t\t<section class=\"imageContent\" v-if=\"page == 2\">\n\t\t\t<div id=\"headerImage\" v-on:click.prevent=\"back\" style=\"background-image: url(assets/img/slider-1.jpg);\">\n\t\t\t</div>\n\n\t\t\t<div id=\"content\">\n\t\t\t\t<h3>{Title Text}</h3>\n\t\t\t\t\t<ol>\n\t\t\t\t\t\t<li class=\"item\">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis, fugiat.</li>\n\t\t\t\t\t\t<li class=\"item\">Rerum quis voluptatem eligendi consequatur, ipsum, ducimus reiciendis hic amet.</li>\n\t\t\t\t\t\t<li class=\"item\">Unde doloribus ipsam cum. Fuga quod illum voluptates voluptatum nulla.</li>\n\t\t\t\t\t\t<li class=\"item\">Fugit ipsam, aliquam laudantium reiciendis repellendus illo! Eaque doloremque, veritatis!</li>\n\t\t\t\t\t</ol>\n\t\t\t</div>\n\t\t</section>\n\t\n\t</div>\n";
 
 /***/ },
-/* 295 */
+/* 298 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(296)
-	__vue_template__ = __webpack_require__(302)
+	__vue_script__ = __webpack_require__(299)
+	__vue_template__ = __webpack_require__(313)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -35669,7 +35836,7 @@
 	})()}
 
 /***/ },
-/* 296 */
+/* 299 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35688,7 +35855,7 @@
 
 	var _auth2 = _interopRequireDefault(_auth);
 
-	var _timeline = __webpack_require__(293);
+	var _timeline = __webpack_require__(290);
 
 	var _timeline2 = _interopRequireDefault(_timeline);
 
@@ -35696,13 +35863,13 @@
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
-	var _Modal = __webpack_require__(297);
+	var _Modal = __webpack_require__(291);
 
 	var _Modal2 = _interopRequireDefault(_Modal);
 
 	__webpack_require__(300);
 
-	var _rangesliderJs = __webpack_require__(315);
+	var _rangesliderJs = __webpack_require__(301);
 
 	var _rangesliderJs2 = _interopRequireDefault(_rangesliderJs);
 
@@ -35860,21 +36027,20 @@
 	            this.redirectGuest();
 	        }
 
-	        this.currentLesson = 37;
+	        this.currentLesson = 6;
 	        this.getLesson();
 	    },
 	    methods: {
 	        initSlider: function initSlider() {
 	            setTimeout(function () {
 	                var slider = document.querySelectorAll('.bar input[type="range"]');
-	                console.log(slider);
 	                _rangesliderJs2.default.create(slider);
 	            }, 2);
 	        },
 	        getLesson: function getLesson() {
 	            var that = this;
 
-	            _timeline2.default.lesson(this, this.currentLesson, function (response) {
+	            _timeline2.default.lesson(this, this.currentLesson, 'nl', function (response) {
 	                console.log(response);
 
 	                var counter = 0;
@@ -35964,7 +36130,6 @@
 
 	    watch: {
 	        '$route': function $route(to, from) {
-	            console.log(to);
 	            this.currentLesson = to;
 	        }
 	    },
@@ -35975,82 +36140,6 @@
 	};
 
 	// </script>
-
-/***/ },
-/* 297 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(298)
-	__vue_template__ = __webpack_require__(299)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), true)
-	  if (!hotAPI.compatible) return
-	  var id = "/Users/racheljaro/webroot/yipp/app/src/components/Modal.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 298 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	// <template>
-	// <transition name="modal">
-	//     <div class="modal-mask">
-	//       <div class="modal-wrapper">
-	//         <div class="modal-container">
-	//
-	//           <div class="modal-header">
-	//             <slot name="header">
-	//               default header
-	//             </slot>
-	//           </div>
-	//
-	//           <div class="modal-body">
-	//             <slot name="body">
-	//               default message
-	//             </slot>
-	//           </div>
-	//
-	//           <div class="modal-footer">
-	//             <slot name="footer">
-	//               <button class="form-button-small" @click="$emit('close')">
-	//                 Got it!
-	//               </button>
-	//             </slot>
-	//           </div>
-	//         </div>
-	//       </div>
-	//     </div>
-	// </transition>
-	// </template>
-	//
-	// <script>
-	exports.default = {
-	    props: ['name', 'message'],
-	    showModal: false
-	};
-	// </script>
-	//
-
-/***/ },
-/* 299 */
-/***/ function(module, exports) {
-
-	module.exports = "\n<transition name=\"modal\">\n    <div class=\"modal-mask\">\n      <div class=\"modal-wrapper\">\n        <div class=\"modal-container\">\n\n          <div class=\"modal-header\">\n            <slot name=\"header\">\n              default header\n            </slot>\n          </div>\n\n          <div class=\"modal-body\">\n            <slot name=\"body\">\n              default message\n            </slot>\n          </div>\n\n          <div class=\"modal-footer\">\n            <slot name=\"footer\">\n              <button class=\"form-button-small\" @click=\"$emit('close')\">\n                Got it!\n              </button>\n            </slot>\n          </div>\n        </div>\n      </div>\n    </div>\n</transition>\n";
 
 /***/ },
 /* 300 */
@@ -38705,286 +38794,1129 @@
 /* 301 */
 /***/ function(module, exports, __webpack_require__) {
 
-	(function (global, factory) {
-	   true ? factory(__webpack_require__(300)) :
-	  typeof define === 'function' && define.amd ? define(['hammerjs'], factory) :
-	  (factory(global.Hammer));
-	}(this, (function (Hammer) { 'use strict';
+	__webpack_require__(302);
 
-	Hammer = 'default' in Hammer ? Hammer['default'] : Hammer;
+	/** @module RangeSlider */
+	var debounce = __webpack_require__(306);
+	var evPos = __webpack_require__(308);
+	var utils = __webpack_require__(309);
 
-	function assign(target) {
-	  var sources = [], len = arguments.length - 1;
-	  while ( len-- > 0 ) sources[ len ] = arguments[ len + 1 ];
-	  for (var i = 0; i < sources.length; i++) {
-	    var source = sources[i];
-	    var keys = Object.keys(source);
-	    for (var i$1 = 0; i$1 < keys.length; i$1++) {
-	      var key = keys[i$1];
-	      target[key] = source[key];
+	var CONST = {
+	    MAX_SET_BY_DEFAULT: 100,
+	    HANDLE_RESIZE_DEBOUNCE: 100,
+	    RANGE_CLASS: 'rangeslider',
+	    FILL_CLASS: 'rangeslider__fill',
+	    FILL_BG_CLASS: 'rangeslider__fill__bg',
+	    HANDLE_CLASS: 'rangeslider__handle',
+	    DISABLED_CLASS: 'rangeslider--disabled',
+	    STEP_SET_BY_DEFAULT: 1,
+	    START_EVENTS: ['mousedown', 'touchstart', 'pointerdown'],
+	    MOVE_EVENTS: ['mousemove', 'touchmove', 'pointermove'],
+	    END_EVENTS: ['mouseup', 'touchend', 'pointerup'],
+	    PLUGIN_NAME: 'rangeslider-js'
+	};
+
+	// counter
+	var pluginIdentifier = 0;
+
+	/**
+	 *
+	 * @param {string} className
+	 * @returns {Element}
+	 */
+	var createChild = function (className) {
+	    var child = document.createElement('div');
+	    child.classList.add(className);
+	    return child;
+	};
+
+	/**
+	 *
+	 * @param step
+	 * @returns {number}
+	 */
+	var stepToFixed = function (step) {
+	    return (step + '').replace('.', '').length - 1;
+	};
+
+	/**
+	 * RangeSlider
+	 * @param {Element} el
+	 * @param {object} options
+	 * @property {number} [options.min]
+	 * @property {number} [options.max]
+	 * @property {number} [options.value]
+	 * @property {number} [options.step]
+	 * @property {function} [options.onInit] - init callback
+	 * @property {function} [options.onSlideStart] - slide start callback
+	 * @property {function} [options.onSlide] - slide callback
+	 * @property {function} [options.onSlideEnd] - slide end callback
+	 */
+	function RangeSlider(el, options) {
+
+	    options = options || {};
+
+	    this.element = el;
+	    this.options = options;
+
+	    this.onSlideEventsCount = -1;
+	    this.isInteracting = false;
+	    this.needTriggerEvents = false;
+
+	    this.identifier = 'js-' + CONST.PLUGIN_NAME + '-' + (pluginIdentifier++);
+
+	    this.min = utils.getFirstNumberLike(options.min, parseFloat(el.getAttribute('min')), 0);
+	    this.max = utils.getFirstNumberLike(options.max, parseFloat(el.getAttribute('max')), CONST.MAX_SET_BY_DEFAULT);
+	    this.value = utils.getFirstNumberLike(options.value, parseFloat(el.value), this.min + (this.max - this.min) / 2);
+	    this.step = utils.getFirstNumberLike(options.step, parseFloat(el.getAttribute('step')), CONST.STEP_SET_BY_DEFAULT);
+
+	    this.percent = null;
+	    this._updatePercentFromValue();
+	    this.toFixed = stepToFixed(this.step);
+
+	    this.range = createChild(CONST.RANGE_CLASS);
+	    this.range.id = this.identifier;
+
+	    this.fillBg = createChild(CONST.FILL_BG_CLASS);
+	    this.fill = createChild(CONST.FILL_CLASS);
+	    this.handle = createChild(CONST.HANDLE_CLASS);
+
+	    ['fillBg', 'fill', 'handle'].forEach(function (str) {
+	        this.range.appendChild(this[str]);
+	    }, this);
+	    ['min', 'max', 'step'].forEach(function (str) {
+	        el.setAttribute(str, '' + this[str]);
+	    }, this);
+
+	    this._setValue(this.value);
+
+	    utils.insertAfter(el, this.range);
+
+	    el.style.position = 'absolute';
+	    el.style.width = '1px';
+	    el.style.height = '1px';
+	    el.style.overflow = 'hidden';
+	    el.style.opacity = '0';
+
+	    ['_update', '_handleDown', '_handleMove', '_handleEnd', '_startEventListener', '_changeEventListener']
+	        .forEach(function (fnName) {
+	            this[fnName] = this[fnName].bind(this);
+	        }, this);
+
+	    this._init();
+
+	    window.addEventListener('resize', debounce(this._update, CONST.HANDLE_RESIZE_DEBOUNCE));
+
+	    CONST.START_EVENTS.forEach(function (evName) {
+	        this.range.addEventListener(evName, this._startEventListener);
+	    }, this);
+
+	    el.addEventListener('change', this._changeEventListener);
+	}
+
+	RangeSlider.prototype.constructor = RangeSlider;
+
+	/**
+	 *
+	 * @private
+	 */
+	RangeSlider.prototype._init = function () {
+	    if (this.options.onInit) {
+	        this.options.onInit();
 	    }
-	  }
-	  return target
-	}
-	function createProp() {
-	  return {
-	    type: Object,
-	    default: function() { return {} }
-	  }
-	}
-	function capitalize (str) {
-	  return str.charAt(0).toUpperCase() + str.slice(1)
-	}
-	var directions = ['up', 'down', 'left', 'right', 'horizontal', 'vertical', 'all'];
-	function guardDirections (options) {
-	  var dir = options.direction;
-	  if (typeof dir === 'string') {
-	    var hammerDirection = 'DIRECTION_' + dir.toUpperCase();
-	    if (directions.indexOf(dir) > -1 && Hammer.hasOwnProperty(hammerDirection)) {
-	      options.direction = Hammer[hammerDirection];
+	    this._update();
+	};
+
+	/**
+	 *
+	 * @private
+	 */
+	RangeSlider.prototype._updatePercentFromValue = function () {
+	    this.percent = (this.value - this.min) / (this.max - this.min);
+	};
+
+	/**
+	 * This method check if this.identifier exists in ev.target's ancestors
+	 * @param {Event} ev
+	 * @param data
+	 */
+	RangeSlider.prototype._startEventListener = function (ev, data) {
+
+	    var el = ev.target;
+	    var isEventOnSlider = false;
+	    var identifier = this.identifier;
+
+	    utils.forEachAncestorsAndSelf(el, function (el) {
+	        isEventOnSlider = el.id === identifier && !el.classList.contains(CONST.DISABLED_CLASS);
+	        return isEventOnSlider;
+	    });
+
+	    if (isEventOnSlider) {
+	        this._handleDown(ev, data);
+	    }
+	};
+
+	/**
+	 *
+	 * @param {Event} ev
+	 * @param data
+	 * @private
+	 */
+	RangeSlider.prototype._changeEventListener = function (ev, data) {
+	    if (!(data && data.origin === this.identifier)) {
+	        this._setPosition(this._getPositionFromValue(ev.target.value));
+	    }
+	};
+
+	/**
+	 *
+	 * @private
+	 */
+	RangeSlider.prototype._update = function () {
+
+	    this.handleWidth = utils.getDimension(this.handle, 'offsetWidth');
+	    this.rangeWidth = utils.getDimension(this.range, 'offsetWidth');
+	    this.maxHandleX = this.rangeWidth - this.handleWidth;
+	    this.grabX = this.handleWidth / 2;
+	    this.position = this._getPositionFromValue(this.value);
+
+	    this.range.classList[this.element.disabled ? 'add' : 'remove'](CONST.DISABLED_CLASS);
+
+	    this._setPosition(this.position);
+	    this._updatePercentFromValue();
+	    utils.emit(this.element, 'change');
+	};
+
+	/**
+	 *
+	 * @param {boolean} bool
+	 * @private
+	 */
+	RangeSlider.prototype._listen = function (bool) {
+
+	    var addOrRemoveListener = (bool ? 'add' : 'remove') + 'EventListener';
+
+	    CONST.MOVE_EVENTS.forEach(function (evName) {
+	        document[addOrRemoveListener](evName, this._handleMove);
+	    }, this);
+	    CONST.END_EVENTS.forEach(function (evName) {
+	        document[addOrRemoveListener](evName, this._handleEnd);
+	        this.range[addOrRemoveListener](evName, this._handleEnd);
+	    }, this);
+
+	};
+
+	/**
+	 *
+	 * @param {Event} e
+	 * @private
+	 */
+	RangeSlider.prototype._handleDown = function (e) {
+	    e.preventDefault();
+
+	    this.isInteracting = true;
+
+	    this._listen(true);
+	    if (e.target.classList.contains(CONST.HANDLE_CLASS)) {
+	        return;
+	    }
+
+	    var posX = evPos(e, this.range).x,
+	        rangeX = this.range.getBoundingClientRect().left,
+	        handleX = this.handle.getBoundingClientRect().left - rangeX;
+
+	    this._setPosition(posX - this.grabX);
+
+	    if (posX >= handleX && posX < handleX + this.handleWidth) {
+	        this.grabX = posX - handleX;
+	    }
+	    this._updatePercentFromValue();
+
+	};
+
+	/**
+	 *
+	 * @param {Event} e
+	 * @private
+	 */
+	RangeSlider.prototype._handleMove = function (e) {
+	    this.isInteracting = true;
+	    e.preventDefault();
+	    var posX = evPos(e, this.range).x;
+	    this._setPosition(posX - this.grabX);
+	};
+
+	/**
+	 *
+	 * @param {Event} e
+	 * @private
+	 */
+	RangeSlider.prototype._handleEnd = function (e) {
+	    e.preventDefault();
+
+	    this._listen(false);
+	    utils.emit(this.element, 'change', {
+	        origin: this.identifier
+	    });
+
+	    if ((this.isInteracting || this.needTriggerEvents) && this.options.onSlideEnd) {
+	        this.options.onSlideEnd(this.value, this.percent, this.position);
+	    }
+	    this.onSlideEventsCount = 0;
+	    this.isInteracting = false;
+	};
+
+	/**
+	 *
+	 * @param pos
+	 * @private
+	 */
+	RangeSlider.prototype._setPosition = function (pos) {
+
+	    var value = this._getValueFromPosition(utils.clamp(pos, 0, this.maxHandleX)),
+	        x = this._getPositionFromValue(value);
+
+	    // Update ui
+	    this.fill.style.width = (x + this.grabX) + 'px';
+	    this.handle.style.webkitTransform = this.handle.style.transform = 'translate(' + x + 'px, 0px)';
+	    this._setValue(value);
+
+	    // Update globals
+	    this.position = x;
+	    this.value = value;
+	    this._updatePercentFromValue();
+
+	    if (this.isInteracting || this.needTriggerEvents) {
+	        if (this.options.onSlideStart && this.onSlideEventsCount === 0) {
+	            this.options.onSlideStart(this.value, this.percent, this.position);
+	        }
+
+	        if (this.options.onSlide) {
+	            this.options.onSlide(this.value, this.percent, this.position);
+	        }
+	    }
+
+	    this.onSlideEventsCount++;
+	};
+
+	/**
+	 *
+	 * @param {number} value
+	 * @returns {number}
+	 * @private
+	 */
+	RangeSlider.prototype._getPositionFromValue = function (value) {
+	    var percentage = (value - this.min) / (this.max - this.min);
+
+	    return percentage * this.maxHandleX;
+	};
+
+	/**
+	 *
+	 * @param pos
+	 * @returns {number}
+	 * @private
+	 */
+	RangeSlider.prototype._getValueFromPosition = function (pos) {
+	    var percentage = ((pos) / (this.maxHandleX || 1)),
+	        value = this.step * Math.round(percentage * (this.max - this.min) / this.step) + this.min;
+
+	    return Number((value).toFixed(this.toFixed));
+	};
+
+	/**
+	 *
+	 * @param {number} value
+	 * @private
+	 */
+	RangeSlider.prototype._setValue = function (value) {
+
+	    if (!(value === this.value && value === this.element.value)) {
+	        this.value = this.element.value = value;
+	        utils.emit(this.element, 'input', {
+	            origin: this.identifier
+	        });
+	    }
+	};
+
+	/**
+	 * Update
+	 *
+	 * @param {Object} [obj={}] like {min : Number, max : Number, value : Number, step : Number}
+	 * @param {Boolean} [triggerEvents]
+	 * @returns {RangeSlider}
+	 */
+	RangeSlider.prototype.update = function (obj, triggerEvents) {
+
+	    obj = obj || {};
+	    this.needTriggerEvents = !!triggerEvents;
+
+	    if (utils.isFiniteNumber(obj.min)) {
+	        this.element.setAttribute('min', '' + obj.min);
+	        this.min = obj.min;
+	    }
+
+	    if (utils.isFiniteNumber(obj.max)) {
+	        this.element.setAttribute('max', '' + obj.max);
+	        this.max = obj.max;
+	    }
+
+	    if (utils.isFiniteNumber(obj.step)) {
+	        this.element.setAttribute('step', '' + obj.step);
+	        this.step = obj.step;
+	        this.toFixed = stepToFixed(obj.step);
+	    }
+
+	    if (utils.isFiniteNumber(obj.value)) {
+	        this._setValue(obj.value);
+	    }
+
+	    this._update();
+	    this.onSlideEventsCount = 0;
+	    this.needTriggerEvents = false;
+	    return this;
+	};
+
+	/**
+	 *
+	 */
+	RangeSlider.prototype.destroy = function () {
+
+	    window.removeEventListener('resize', this._update, false);
+
+	    CONST.START_EVENTS.forEach(function (evName) {
+	        this.range.removeEventListener(evName, this._startEventListener);
+	    }, this);
+
+	    this.element.removeEventListener('change', this._changeEventListener);
+
+	    this.element.style.cssText = '';
+	    delete this.element[CONST.PLUGIN_NAME];
+
+	    // Remove the generated markup
+	    this.range.parentNode.removeChild(this.range);
+	};
+
+	/**
+	 * A lightweight plugin wrapper around the constructor, preventing multiple instantiations
+	 * @param {Element|NodeList} el
+	 * @param {object} options
+	 */
+	RangeSlider.create = function (el, options) {
+	    function createInstance(el) {
+	        el[CONST.PLUGIN_NAME] = el[CONST.PLUGIN_NAME] || new RangeSlider(el, options);
+	    }
+
+	    if (el.length) {
+	        Array.prototype.slice.call(el).forEach(function (el) {
+	            createInstance(el);
+	        });
 	    } else {
-	      console.warn('[vue-touch] invalid direction: ' + dir);
+	        createInstance(el);
 	    }
-	  }
-	  return options
-	}
-	var config = {
-	};
-	var customEvents = {
-	};
-	var gestures = [
-	  'pan','panstart','panmove','panend','pancancel','panleft','panright','panup','pandown',
-	  'pinch','pinchstart','pinchmove','pinchend','pinchcancel','pinchin','pinchout',
-	  'press','pressup',
-	  'rotate','rotatestart','rotatemove','rotateend','rotatecancel',
-	  'swipe','swipeleft','swiperight','swipeup','swipedown',
-	  'tap'
-	];
-	var gestureMap = {
-	  pan: 'pan',
-	  panstart: 'pan',
-	  panmove: 'pan',
-	  panend: 'pan',
-	  pancancel: 'pan',
-	  panleft: 'pan',
-	  panright: 'pan',
-	  panup: 'pan',
-	  pandown: 'pan',
-	  pinch: 'pinch',
-	  pinchstart: 'pinch',
-	  pinchmove: 'pinch',
-	  pinchend: 'pinch',
-	  pinchcancel: 'pinch',
-	  pinchin: 'pinch',
-	  pinchout: 'pinch',
-	  press: 'press',
-	  pressup: 'press',
-	  rotate: 'rotate',
-	  rotatestart: 'rotate',
-	  rotatemove: 'rotate',
-	  rotateend: 'rotate',
-	  rotatecancel: 'rotate',
-	  swipe: 'swipe',
-	  swipeleft: 'swipe',
-	  swiperight: 'swipe',
-	  swipeup: 'swipe',
-	  swipedown: 'swipe',
-	  tap: 'tap'
 	};
 
-	var Component = {
-	  props: {
-	    options: createProp(),
-	    tapOptions: createProp(),
-	    panOptions: createProp(),
-	    pinchOptions: createProp(),
-	    pressOptions: createProp(),
-	    rotateOptions: createProp(),
-	    swipeOptions: createProp(),
-	    tag: { type: String, default: 'div' },
-	    enabled: {
-	      default: true,
-	      type: [Boolean, Object],
-	    }
-	  },
-	  mounted: function mounted() {
-	    if (!this.$isServer) {
-	      this.hammer = new Hammer.Manager(this.$el, this.options);
-	      this.recognizers = {};
-	      this.setupBuiltinRecognizers();
-	      this.setupCustomRecognizers();
-	      this.updateEnabled(this.enabled);
-	    }
-	  },
-	  destroyed: function destroyed() {
-	    if (!this.$isServer) {
-	      this.hammer.destroy();
-	    }
-	  },
-	  watch: {
-	    enabled: {
-	      deep: true,
-	      handler: function handler() {
-	        var args = [], len = arguments.length;
-	        while ( len-- ) args[ len ] = arguments[ len ];
-	        (ref = this).updateEnabled.apply(ref, args);
-	        var ref;
-	      }
-	    }
-	  },
-	  methods: {
-	    setupBuiltinRecognizers: function setupBuiltinRecognizers()  {
-	      var this$1 = this;
-	      for (var i = 0; i < gestures.length; i++) {
-	        var gesture = gestures[i];
-	        if (this$1._events[gesture]) {
-	          var mainGesture = gestureMap[gesture];
-	          var options = assign({}, (config[mainGesture] || {}), this$1[(mainGesture + "Options")]);
-	          this$1.addRecognizer(mainGesture, options);
-	          this$1.addEvent(gesture);
-	        }
-	      }
-	    },
-	    setupCustomRecognizers: function setupCustomRecognizers() {
-	      var this$1 = this;
-	      var gestures$$1 = Object.keys(customEvents);
-	      for (var i = 0; i < gestures$$1.length; i++) {
-	        var gesture = gestures$$1[i];
-	        if (this$1._events[gesture]) {
-	          var opts = customEvents[gesture];
-	          var localCustomOpts = this$1[(gesture + "Options")] || {};
-	          var options = assign({}, opts, localCustomOpts);
-	          this$1.addRecognizer(gesture, options, {mainGesture: options.type});
-	          this$1.addEvent(gesture);
-	        }
-	      }
-	    },
-	    addRecognizer: function addRecognizer(gesture, options, ref) {
-	      if ( ref === void 0 ) ref = {};
-	      var mainGesture = ref.mainGesture;
-	      if (!this.recognizers[gesture]) {
-	        var recognizer = new Hammer[capitalize(mainGesture || gesture)](guardDirections(options));
-	        this.recognizers[gesture] = recognizer;
-	        this.hammer.add(recognizer);
-	        recognizer.recognizeWith(this.hammer.recognizers);
-	      }
-	    },
-	    addEvent: function addEvent(gesture) {
-	      var this$1 = this;
-	      this.hammer.on(gesture, function (e) { return this$1.$emit(gesture, e); });
-	    },
-	    updateEnabled: function updateEnabled(newVal, oldVal) {
-	      var this$1 = this;
-	      if (newVal === true) {
-	        this.enableAll();
-	      } else if (newVal === false) {
-	        this.disableAll();
-	      } else if (typeof newVal === 'object') {
-	        var keys = Object.keys(newVal);
-	        for (var i = 0; i < keys.length; i++) {
-	          var event = keys[i];
-	          if (this$1.recognizers[event]) {
-	            newVal[event]
-	              ? this$1.enable(event)
-	              : this$1.disable(event);
-	          }
-	        }
-	      }
-	    },
-	    enable: function enable(r) {
-	      var recognizer = this.recognizers[r];
-	      if (!recognizer.options.enable) {
-	        recognizer.set({ enable: true });
-	      }
-	    },
-	    disable: function disable(r) {
-	      var recognizer = this.recognizers[r];
-	      if (recognizer.options.enable) {
-	        recognizer.set({ enable: false });
-	      }
-	    },
-	    toggle: function toggle(r) {
-	      var recognizer = this.recognizers[r];
-	      if (recognizer) {
-	        recognizer.options.enable
-	          ? this.disable(r)
-	          : this.enable(r);
-	      }
-	    },
-	    enableAll: function enableAll(r) {
-	      this.toggleAll({ enable: true });
-	    },
-	    disableAll: function disableAll(r) {
-	      this.toggleAll({ enable: false });
-	    },
-	    toggleAll: function toggleAll(ref) {
-	      var this$1 = this;
-	      var enable = ref.enable;
-	      var keys = Object.keys(this.recognizers);
-	      for (var i = 0; i < keys.length; i++) {
-	        var r = this$1.recognizers[keys[i]];
-	        if (r.options.enable !== enable) {
-	          r.set({ enable: enable });
-	        }
-	      }
-	    },
-	    isEnabled: function isEnabled(r) {
-	      return this.recognizers[r] && this.recognizers[r].options.enable
-	    }
-	  },
-	  render: function render(h) {
-	    return h(this.tag, {}, this.$slots.default)
-	  }
-	};
-
-	var installed = false;
-	var vueTouch = { config: config, customEvents: customEvents };
-	vueTouch.install = function install(Vue, opts) {
-	  if ( opts === void 0 ) opts = {};
-	  var name = opts.name || 'v-touch';
-	  Vue.component(name, assign(Component, { name: name }));
-	  installed = true;
-	}.bind(vueTouch);
-	vueTouch.registerCustomEvent = function registerCustomEvent(event, options) {
-	  if ( options === void 0 ) options = {};
-	  if (installed) {
-	    console.warn(("\n      [vue-touch]: Custom Event '" + event + "' couldn't be added to vue-touch.\n      Custom Events have to be registered before installing the plugin.\n      "));
-	    return
-	  }
-	  options.event = event;
-	  customEvents[event] = options;
-	  Component.props[(event + "Options")] = {
-	    type: Object,
-	    default: function default$1() { return {} }
-	  };
-	}.bind(vueTouch);
-	vueTouch.component = Component;
-	if (true) {
-	  module.exports = vueTouch;
-	} else if (typeof define == "function" && define.amd) {
-	  define([], function(){ return vueTouch });
-	} else if (typeof window !== 'undefined' && window.Vue) {
-	  window.VueTouch = vueTouch;
-	  Vue.use(vueTouch);
-	}
-
-	})));
-	//# sourceMappingURL=vue-touch.js.map
+	module.exports = RangeSlider;
 
 
 /***/ },
 /* 302 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "\n<div id=\"page-lesson\">\n\n\t<div  class=\"panel\" id=\"start\" v-if=\"page == 'start'\">\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"back\">\n\t\t\t<i class=\"icon-back\"></i>\n\t\t</router-link>\n\n\t\t<div id=\"popUp\">\n\t\t\t<i class=\"big icon-yipp_apple_full\"></i>\n\t\t\t<h3>Lesson 2: Screentime</h3>\n\t\t\t<p>TestIn this lesson, we will help to start the first practice appetizers</p>\n\t\t\t<hr>\n\t\t\t<span><i class=\"icon-yipp_check_full\"></i> 5min</span>\n\t\t</div>\n\t\t\t\n\t\t<a href=\"#\" v-on:click.prevent=\"startLesson\" class=\"btn bottom white\">Start</a>\n\t</div>\n\n\t<div class=\"panel\" id=\"cards\" v-if=\"page == 'cards'\">\n\t\t<a v-on:click.prevent=\"back('start')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<!-- <span class=\"bar-inner\"></span> -->\n\t\t\t<input type=\"range\" min=\"0\" max=\"5\" value=\"1\" step=\"0\" disabled>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div id=\"knowledge-cards\">\n\t\t\t<div id=\"paper-1\" class=\"paper\">\n\n\t\t\t\t<h3>Why?</h3>\n\n\t\t\t\t<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>\n\n\t\t\t\t<i class=\"heart icon-yipp_check_full\"></i>\n\n\t\t\t\t<div id=\"paper_foo1\">\n\t\t\t\t\t<div id=\"paper_foo2\"></div>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t\t<div id=\"paper-2\" class=\"paper\">\n\n\t\t\t\t<h3>Why?2</h3>\n\n\t\t\t\t<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>\n\n\t\t\t\t<i class=\"heart icon-yipp_check_full\"></i>\n\n\t\t\t\t<div id=\"paper_foo1\">\n\t\t\t\t\t<div id=\"paper_foo2\"></div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\n\t</div>\n\t\t\n\t<div class=\"panel\" id=\"stack\" v-if=\"page == 'stack'\">\n\t\t<a v-on:click.prevent=\"back('cards')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<!-- <span class=\"bar-inner\"></span> -->\n\t\t\t<input type=\"range\" min=\"0\" max=\"5\" value=\"1\" step=\"1\" disabled>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"content\" v-on:click.prevent=\"next('complete')\">\n\t\t\t\n\t\t\t<p class=\"text-center\">Te weinig slapen vergroot de kans op overgewicht bij kinderen, omdat:</p>\n\t\t\t\n\t\t\t<ul>\n\t\t\t\t\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t\n\t\t\t</ul>\n\n\t\t</div>\n\n\t</div>\n\t\t\t\n\t<div class=\"panel\" id=\"complete\" v-if=\"page == 'complete'\">\n\t\t<a v-on:click.prevent=\"back('stack')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<!-- <span class=\"bar-inner\"></span> -->\n\t\t\t<input type=\"range\" min=\"0\" max=\"5\" value=\"5\" step=\"1\" disabled>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"content\">\n\t\t\n\t\t\t<h1>Les compleet!</h1>\n\t\t\t\n\t\t\t<i class=\"biggest icon-yipp_check_full\"></i>\n\t\t\t\n\t\t\t<p class=\"text-center\">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>\n\t\t\t\n\t\t\t\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<router-link :to=\"{ name: 'challenge'}\" class=\"btn white\">\n\t\t\t\tStart Challenge\n\t\t\t\t</router-link>\n\n\t\t\t\t<br>\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"back('start')\" class=\"btn white\">Reset Lesson</a>\n\t\t\t</div>\n\t\t\n\t\t</div>\n\n\t</div>\n\n\t<modal v-if=\"showModal\" @close=\"showModal = false\">\n        <h3 slot=\"header\">Lorem Ipsum</h3>\n        <p slot=\"body\">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>\n    </modal>\n\n</div>\n\t\n";
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(303);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(305)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!../../../css-loader/index.js!./base.css", function() {
+				var newContent = require("!!../../../css-loader/index.js!./base.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
 
 /***/ },
 /* 303 */
 /***/ function(module, exports, __webpack_require__) {
 
+	exports = module.exports = __webpack_require__(304)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".rangeslider {\n    position: relative;\n    cursor: pointer;\n    height: 30px;\n    width: 100%;\n}\n.rangeslider,\n.rangeslider__fill,\n.rangeslider__fill__bg {\n    display: block;\n}\n.rangeslider__fill,\n.rangeslider__fill__bg,\n.rangeslider__handle {\n    position: absolute;\n}\n.rangeslider__fill,\n.rangeslider__fill__bg {\n    top: calc(50% - 6px);\n    height: 12px;\n    z-index: 2;\n    background: #29e;\n    border-radius: 10px;\n    will-change: width;\n}\n.rangeslider__handle {\n    display: inline-block;\n    top: calc(50% - 15px);\n    background: #29e;\n    width: 30px;\n    height: 30px;\n    z-index: 3;\n    cursor: pointer;\n    border: solid 2px #ffffff;\n    border-radius: 50%;\n}\n.rangeslider__handle:active {\n    background: #107ecd;\n}\n.rangeslider__fill__bg {\n    background: #ccc;\n    width: 100%;\n}\n.rangeslider--disabled {\n    opacity: 0.4;\n}\n.rangeslider--slim .rangeslider {\n    height: 25px;\n}\n.rangeslider--slim .rangeslider:active .rangeslider__handle {\n    width: 21px;\n    height: 21px;\n    top: calc(50% - 10px);\n    background: #29e;\n}\n.rangeslider--slim .rangeslider__fill,\n.rangeslider--slim .rangeslider__fill__bg {\n    top: calc(50% - 1px);\n    height: 2px;\n}\n.rangeslider--slim .rangeslider__handle {\n    will-change: width, height, top;\n    -webkit-transition: width 0.1s ease-in-out, height 0.1s ease-in-out, top 0.1s ease-in-out;\n    transition: width 0.1s ease-in-out, height 0.1s ease-in-out, top 0.1s ease-in-out;\n    width: 14px;\n    height: 14px;\n    top: calc(50% - 7px);\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 304 */
+/***/ function(module, exports) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	// css base code, injected by the css-loader
+	module.exports = function() {
+		var list = [];
+
+		// return the list of modules as css string
+		list.toString = function toString() {
+			var result = [];
+			for(var i = 0; i < this.length; i++) {
+				var item = this[i];
+				if(item[2]) {
+					result.push("@media " + item[2] + "{" + item[1] + "}");
+				} else {
+					result.push(item[1]);
+				}
+			}
+			return result.join("");
+		};
+
+		// import a list of modules into the list
+		list.i = function(modules, mediaQuery) {
+			if(typeof modules === "string")
+				modules = [[null, modules, ""]];
+			var alreadyImportedModules = {};
+			for(var i = 0; i < this.length; i++) {
+				var id = this[i][0];
+				if(typeof id === "number")
+					alreadyImportedModules[id] = true;
+			}
+			for(i = 0; i < modules.length; i++) {
+				var item = modules[i];
+				// skip already imported module
+				// this implementation is not 100% perfect for weird media query combinations
+				//  when a module is imported multiple times with different media queries.
+				//  I hope this will never occur (Hey this way we have smaller bundles)
+				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+					if(mediaQuery && !item[2]) {
+						item[2] = mediaQuery;
+					} else if(mediaQuery) {
+						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+					}
+					list.push(item);
+				}
+			}
+		};
+		return list;
+	};
+
+
+/***/ },
+/* 305 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	var stylesInDom = {},
+		memoize = function(fn) {
+			var memo;
+			return function () {
+				if (typeof memo === "undefined") memo = fn.apply(this, arguments);
+				return memo;
+			};
+		},
+		isOldIE = memoize(function() {
+			return /msie [6-9]\b/.test(self.navigator.userAgent.toLowerCase());
+		}),
+		getHeadElement = memoize(function () {
+			return document.head || document.getElementsByTagName("head")[0];
+		}),
+		singletonElement = null,
+		singletonCounter = 0,
+		styleElementsInsertedAtTop = [];
+
+	module.exports = function(list, options) {
+		if(false) {
+			if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
+		}
+
+		options = options || {};
+		// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+		// tags it will allow on a page
+		if (typeof options.singleton === "undefined") options.singleton = isOldIE();
+
+		// By default, add <style> tags to the bottom of <head>.
+		if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
+
+		var styles = listToStyles(list);
+		addStylesToDom(styles, options);
+
+		return function update(newList) {
+			var mayRemove = [];
+			for(var i = 0; i < styles.length; i++) {
+				var item = styles[i];
+				var domStyle = stylesInDom[item.id];
+				domStyle.refs--;
+				mayRemove.push(domStyle);
+			}
+			if(newList) {
+				var newStyles = listToStyles(newList);
+				addStylesToDom(newStyles, options);
+			}
+			for(var i = 0; i < mayRemove.length; i++) {
+				var domStyle = mayRemove[i];
+				if(domStyle.refs === 0) {
+					for(var j = 0; j < domStyle.parts.length; j++)
+						domStyle.parts[j]();
+					delete stylesInDom[domStyle.id];
+				}
+			}
+		};
+	}
+
+	function addStylesToDom(styles, options) {
+		for(var i = 0; i < styles.length; i++) {
+			var item = styles[i];
+			var domStyle = stylesInDom[item.id];
+			if(domStyle) {
+				domStyle.refs++;
+				for(var j = 0; j < domStyle.parts.length; j++) {
+					domStyle.parts[j](item.parts[j]);
+				}
+				for(; j < item.parts.length; j++) {
+					domStyle.parts.push(addStyle(item.parts[j], options));
+				}
+			} else {
+				var parts = [];
+				for(var j = 0; j < item.parts.length; j++) {
+					parts.push(addStyle(item.parts[j], options));
+				}
+				stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
+			}
+		}
+	}
+
+	function listToStyles(list) {
+		var styles = [];
+		var newStyles = {};
+		for(var i = 0; i < list.length; i++) {
+			var item = list[i];
+			var id = item[0];
+			var css = item[1];
+			var media = item[2];
+			var sourceMap = item[3];
+			var part = {css: css, media: media, sourceMap: sourceMap};
+			if(!newStyles[id])
+				styles.push(newStyles[id] = {id: id, parts: [part]});
+			else
+				newStyles[id].parts.push(part);
+		}
+		return styles;
+	}
+
+	function insertStyleElement(options, styleElement) {
+		var head = getHeadElement();
+		var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
+		if (options.insertAt === "top") {
+			if(!lastStyleElementInsertedAtTop) {
+				head.insertBefore(styleElement, head.firstChild);
+			} else if(lastStyleElementInsertedAtTop.nextSibling) {
+				head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
+			} else {
+				head.appendChild(styleElement);
+			}
+			styleElementsInsertedAtTop.push(styleElement);
+		} else if (options.insertAt === "bottom") {
+			head.appendChild(styleElement);
+		} else {
+			throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
+		}
+	}
+
+	function removeStyleElement(styleElement) {
+		styleElement.parentNode.removeChild(styleElement);
+		var idx = styleElementsInsertedAtTop.indexOf(styleElement);
+		if(idx >= 0) {
+			styleElementsInsertedAtTop.splice(idx, 1);
+		}
+	}
+
+	function createStyleElement(options) {
+		var styleElement = document.createElement("style");
+		styleElement.type = "text/css";
+		insertStyleElement(options, styleElement);
+		return styleElement;
+	}
+
+	function createLinkElement(options) {
+		var linkElement = document.createElement("link");
+		linkElement.rel = "stylesheet";
+		insertStyleElement(options, linkElement);
+		return linkElement;
+	}
+
+	function addStyle(obj, options) {
+		var styleElement, update, remove;
+
+		if (options.singleton) {
+			var styleIndex = singletonCounter++;
+			styleElement = singletonElement || (singletonElement = createStyleElement(options));
+			update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
+			remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
+		} else if(obj.sourceMap &&
+			typeof URL === "function" &&
+			typeof URL.createObjectURL === "function" &&
+			typeof URL.revokeObjectURL === "function" &&
+			typeof Blob === "function" &&
+			typeof btoa === "function") {
+			styleElement = createLinkElement(options);
+			update = updateLink.bind(null, styleElement);
+			remove = function() {
+				removeStyleElement(styleElement);
+				if(styleElement.href)
+					URL.revokeObjectURL(styleElement.href);
+			};
+		} else {
+			styleElement = createStyleElement(options);
+			update = applyToTag.bind(null, styleElement);
+			remove = function() {
+				removeStyleElement(styleElement);
+			};
+		}
+
+		update(obj);
+
+		return function updateStyle(newObj) {
+			if(newObj) {
+				if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
+					return;
+				update(obj = newObj);
+			} else {
+				remove();
+			}
+		};
+	}
+
+	var replaceText = (function () {
+		var textStore = [];
+
+		return function (index, replacement) {
+			textStore[index] = replacement;
+			return textStore.filter(Boolean).join('\n');
+		};
+	})();
+
+	function applyToSingletonTag(styleElement, index, remove, obj) {
+		var css = remove ? "" : obj.css;
+
+		if (styleElement.styleSheet) {
+			styleElement.styleSheet.cssText = replaceText(index, css);
+		} else {
+			var cssNode = document.createTextNode(css);
+			var childNodes = styleElement.childNodes;
+			if (childNodes[index]) styleElement.removeChild(childNodes[index]);
+			if (childNodes.length) {
+				styleElement.insertBefore(cssNode, childNodes[index]);
+			} else {
+				styleElement.appendChild(cssNode);
+			}
+		}
+	}
+
+	function applyToTag(styleElement, obj) {
+		var css = obj.css;
+		var media = obj.media;
+
+		if(media) {
+			styleElement.setAttribute("media", media)
+		}
+
+		if(styleElement.styleSheet) {
+			styleElement.styleSheet.cssText = css;
+		} else {
+			while(styleElement.firstChild) {
+				styleElement.removeChild(styleElement.firstChild);
+			}
+			styleElement.appendChild(document.createTextNode(css));
+		}
+	}
+
+	function updateLink(linkElement, obj) {
+		var css = obj.css;
+		var sourceMap = obj.sourceMap;
+
+		if(sourceMap) {
+			// http://stackoverflow.com/a/26603875
+			css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
+		}
+
+		var blob = new Blob([css], { type: "text/css" });
+
+		var oldSrc = linkElement.href;
+
+		linkElement.href = URL.createObjectURL(blob);
+
+		if(oldSrc)
+			URL.revokeObjectURL(oldSrc);
+	}
+
+
+/***/ },
+/* 306 */
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	/**
+	 * Module dependencies.
+	 */
+
+	var now = __webpack_require__(307);
+
+	/**
+	 * Returns a function, that, as long as it continues to be invoked, will not
+	 * be triggered. The function will be called after it stops being called for
+	 * N milliseconds. If `immediate` is passed, trigger the function on the
+	 * leading edge, instead of the trailing.
+	 *
+	 * @source underscore.js
+	 * @see http://unscriptable.com/2009/03/20/debouncing-javascript-methods/
+	 * @param {Function} function to wrap
+	 * @param {Number} timeout in ms (`100`)
+	 * @param {Boolean} whether to execute at the beginning (`false`)
+	 * @api public
+	 */
+
+	module.exports = function debounce(func, wait, immediate){
+	  var timeout, args, context, timestamp, result;
+	  if (null == wait) wait = 100;
+
+	  function later() {
+	    var last = now() - timestamp;
+
+	    if (last < wait && last > 0) {
+	      timeout = setTimeout(later, wait - last);
+	    } else {
+	      timeout = null;
+	      if (!immediate) {
+	        result = func.apply(context, args);
+	        if (!timeout) context = args = null;
+	      }
+	    }
+	  };
+
+	  return function debounced() {
+	    context = this;
+	    args = arguments;
+	    timestamp = now();
+	    var callNow = immediate && !timeout;
+	    if (!timeout) timeout = setTimeout(later, wait);
+	    if (callNow) {
+	      result = func.apply(context, args);
+	      context = args = null;
+	    }
+
+	    return result;
+	  };
+	};
+
+
+/***/ },
+/* 307 */
+/***/ function(module, exports) {
+
+	module.exports = Date.now || now
+
+	function now() {
+	    return new Date().getTime()
+	}
+
+
+/***/ },
+/* 308 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	/**
+	 * Returns true if the type is 'number' and it's not NaN
+	 * @param  {*} val
+	 * @return {boolean}
+	 */
+	var isNum = function (val) {
+	    return typeof val === 'number' && !isNaN(val);
+	};
+
+	/**
+	 * Get the relative position from a mouse/touch event to an element
+	 *
+	 * @param  {Event}   ev                           The mouse or touch event
+	 * @param  {Element} [toElement=ev.currentTarget] The element
+	 * @return {object}                               {x, y}
+	 */
+	var getRelativePosition = function (ev, toElement) {
+	    toElement = toElement || toElement.currentTarget;
+
+	    var toElementBoundingRect = toElement.getBoundingClientRect(),
+	        orgEv = ev.originalEvent || ev,
+	        hasTouches = ev.touches && ev.touches.length,
+	        pageX = 0,
+	        pageY = 0;
+
+	    if (hasTouches) {
+	        if (isNum(ev.touches[0].pageX) && isNum(ev.touches[0].pageY)) {
+	            pageX = ev.touches[0].pageX;
+	            pageY = ev.touches[0].pageY;
+	        } else if (isNum(ev.touches[0].clientX) && isNum(ev.touches[0].clientY)) {
+	            pageX = orgEv.touches[0].clientX;
+	            pageY = orgEv.touches[0].clientY;
+	        }
+	    } else {
+	        if (isNum(ev.pageX) && isNum(ev.pageY)) {
+	            pageX = ev.pageX;
+	            pageY = ev.pageY;
+	        } else if (ev.currentPoint && isNum(ev.currentPoint.x) && isNum(ev.currentPoint.y)) {
+	            pageX = ev.currentPoint.x;
+	            pageY = ev.currentPoint.y;
+	        }
+	    }
+
+	    return {
+	        x: pageX - toElementBoundingRect.left,
+	        y: pageY - toElementBoundingRect.top
+	    };
+	};
+
+	/**
+	 * @type {Function}
+	 */
+	module.exports = getRelativePosition;
+
+
+/***/ },
+/* 309 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var CE = __webpack_require__(310);
+	var isFiniteNumber = __webpack_require__(311);
+
+	function clamp(val, min, max) {
+	    return min < max ?
+	        (val < min ? min : val > max ? max : val) :
+	        (val < max ? max : val > min ? min : val);
+	}
+
+	function isHidden(el) {
+	    return (el.offsetWidth === 0 || el.offsetHeight === 0 || el.open === false);
+	}
+
+	function isNumberLike(obj) {
+	    return isFiniteNumber(parseFloat(obj)) || (isFiniteNumber(obj));
+	}
+
+	function getFirstNumberLike() {
+	    if (!arguments.length) {
+	        return null;
+	    }
+	    for (var i = 0, len = arguments.length; i < len; i++) {
+	        if (isNumberLike(arguments[i])) {
+	            return arguments[i];
+	        }
+	    }
+	}
+
+	function getHiddenParentNodes(element) {
+
+	    var parents = [];
+	    var node = element.parentNode;
+
+	    while (node && isHidden(node)) {
+	        parents.push(node);
+	        node = node.parentNode;
+	    }
+	    return parents;
+	}
+
+	/**
+	 * Returns dimensions for an element even if it is not visible in the DOM.
+	 *
+	 * @param  {Element} element
+	 * @param  {string}  key     (e.g. offsetWidth …)
+	 * @return {Number}
+	 */
+	function getDimension(element, key) {
+
+	    var hiddenParentNodes = getHiddenParentNodes(element),
+	        hiddenParentNodesLength = hiddenParentNodes.length,
+	        dimension = element[key],
+	        displayProperty = [],
+	        i = 0, hiddenStyles;
+
+	    // Used for native `<details>` elements
+	    function toggleOpenProperty(element) {
+	        if (typeof element.open !== 'undefined') {
+	            element.open = !element.open;
+	        }
+	    }
+
+	    if (hiddenParentNodesLength) {
+
+	        for (i = 0; i < hiddenParentNodesLength; i++) {
+	            hiddenStyles = hiddenParentNodes[i].style;
+	            // Cache the display property to restore it later.
+	            displayProperty[i] = hiddenStyles.display;
+	            hiddenStyles.display = 'block';
+	            hiddenStyles.height = '0';
+	            hiddenStyles.overflow = 'hidden';
+	            hiddenStyles.visibility = 'hidden';
+
+	            toggleOpenProperty(hiddenParentNodes[i]);
+	        }
+
+	        dimension = element[key];
+
+	        for (i = 0; i < hiddenParentNodesLength; i++) {
+	            hiddenStyles = hiddenParentNodes[i].style;
+	            toggleOpenProperty(hiddenParentNodes[i]);
+	            hiddenStyles.display = displayProperty[i];
+	            hiddenStyles.height = '';
+	            hiddenStyles.overflow = '';
+	            hiddenStyles.visibility = '';
+	        }
+	    }
+	    return dimension;
+	}
+
+	/**
+	 *
+	 * @param {Element} el
+	 * @param {function} callback
+	 * @returns {Element}
+	 */
+	function forEachAncestorsAndSelf(el, callback) {
+	    callback(el);
+	    while (el.parentNode && !callback(el)) {
+	        el = el.parentNode;
+	    }
+	    return el;
+	}
+
+	/**
+	 * @param {Element} referenceNode after this
+	 * @param {Element} newNode insert this
+	 */
+	function insertAfter(referenceNode, newNode) {
+	    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+	}
+
+	module.exports = {
+	    emit: function (el, name, opt) {
+	        el.dispatchEvent(new CE(name, opt));
+	    },
+	    isFiniteNumber: isFiniteNumber,
+	    getFirstNumberLike: getFirstNumberLike,
+	    getDimension: getDimension,
+	    insertAfter: insertAfter,
+	    forEachAncestorsAndSelf: forEachAncestorsAndSelf,
+	    clamp: clamp
+	};
+
+
+/***/ },
+/* 310 */
+/***/ function(module, exports) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {
+	var NativeCustomEvent = global.CustomEvent;
+
+	function useNative () {
+	  try {
+	    var p = new NativeCustomEvent('cat', { detail: { foo: 'bar' } });
+	    return  'cat' === p.type && 'bar' === p.detail.foo;
+	  } catch (e) {
+	  }
+	  return false;
+	}
+
+	/**
+	 * Cross-browser `CustomEvent` constructor.
+	 *
+	 * https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent.CustomEvent
+	 *
+	 * @public
+	 */
+
+	module.exports = useNative() ? NativeCustomEvent :
+
+	// IE >= 9
+	'undefined' !== typeof document && 'function' === typeof document.createEvent ? function CustomEvent (type, params) {
+	  var e = document.createEvent('CustomEvent');
+	  if (params) {
+	    e.initCustomEvent(type, params.bubbles, params.cancelable, params.detail);
+	  } else {
+	    e.initCustomEvent(type, false, false, void 0);
+	  }
+	  return e;
+	} :
+
+	// IE <= 8
+	function CustomEvent (type, params) {
+	  var e = document.createEventObject();
+	  e.type = type;
+	  if (params) {
+	    e.bubbles = Boolean(params.bubbles);
+	    e.cancelable = Boolean(params.cancelable);
+	    e.detail = params.detail;
+	  } else {
+	    e.bubbles = false;
+	    e.cancelable = false;
+	    e.detail = void 0;
+	  }
+	  return e;
+	}
+
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 311 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var numberIsNan = __webpack_require__(312);
+
+	module.exports = Number.isFinite || function (val) {
+		return !(typeof val !== 'number' || numberIsNan(val) || val === Infinity || val === -Infinity);
+	};
+
+
+/***/ },
+/* 312 */
+/***/ function(module, exports) {
+
+	'use strict';
+	module.exports = Number.isNaN || function (x) {
+		return x !== x;
+	};
+
+
+/***/ },
+/* 313 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div id=\"page-lesson\">\n\n\t<div  class=\"panel\" id=\"start\" v-if=\"page == 'start'\">\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"back\">\n\t\t\t<i class=\"icon-back\"></i>\n\t\t</router-link>\n\n\t\t<div id=\"popUp\">\n\t\t\t<i class=\"big icon-yipp_apple_full\"></i>\n\t\t\t<h3>Lesson 2: Screentime</h3>\n\t\t\t<p>TestIn this lesson, we will help to start the first practice appetizers</p>\n\t\t\t<hr>\n\t\t\t<span><i class=\"icon-yipp_check_full\"></i> 5min</span>\n\t\t</div>\n\t\t\t\n\t\t<a href=\"#\" v-on:click.prevent=\"startLesson\" class=\"btn bottom white\">Start</a>\n\t</div>\n\n\t<div class=\"panel\" id=\"cards\" v-if=\"page == 'cards'\">\n\t\t<a v-on:click.prevent=\"back('start')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<!-- <span class=\"bar-inner\"></span> -->\n\t\t\t<input type=\"range\" min=\"0\" max=\"5\" value=\"1\" step=\"0\" disabled>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div id=\"knowledge-cards\">\n\t\t\t<div id=\"paper-1\" class=\"paper\">\n\n\t\t\t\t<h3>Why?</h3>\n\n\t\t\t\t<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>\n\n\t\t\t\t<i class=\"heart icon-yipp_check_full\"></i>\n\n\t\t\t\t<div id=\"paper_foo1\">\n\t\t\t\t\t<div id=\"paper_foo2\"></div>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t\t<div id=\"paper-2\" class=\"paper\">\n\n\t\t\t\t<h3>Why?2</h3>\n\n\t\t\t\t<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>\n\n\t\t\t\t<i class=\"heart icon-yipp_check_full\"></i>\n\n\t\t\t\t<div id=\"paper_foo1\">\n\t\t\t\t\t<div id=\"paper_foo2\"></div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\n\t</div>\n\t\t\n\t<div class=\"panel\" id=\"stack\" v-if=\"page == 'stack'\">\n\t\t<a v-on:click.prevent=\"back('cards')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<!-- <span class=\"bar-inner\"></span> -->\n\t\t\t<input type=\"range\" min=\"0\" max=\"5\" value=\"1\" step=\"1\" disabled>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"content\" v-on:click.prevent=\"next('complete')\">\n\t\t\t\n\t\t\t<p class=\"text-center\">Te weinig slapen vergroot de kans op overgewicht bij kinderen, omdat:</p>\n\t\t\t\n\t\t\t<ul>\n\t\t\t\t\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t\n\t\t\t</ul>\n\n\t\t</div>\n\n\t</div>\n\t\t\t\n\t<div class=\"panel\" id=\"complete\" v-if=\"page == 'complete'\">\n\t\t<a v-on:click.prevent=\"back('stack')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<!-- <span class=\"bar-inner\"></span> -->\n\t\t\t<input type=\"range\" min=\"0\" max=\"5\" value=\"5\" step=\"1\" disabled>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"content\">\n\t\t\n\t\t\t<h1>Les compleet!</h1>\n\t\t\t\n\t\t\t<i class=\"biggest icon-yipp_check_full\"></i>\n\t\t\t\n\t\t\t<p class=\"text-center\">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>\n\t\t\t\n\t\t\t\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<router-link :to=\"{ name: 'challenge'}\" class=\"btn white\">\n\t\t\t\tStart Challenge\n\t\t\t\t</router-link>\n\n\t\t\t\t<br>\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"back('start')\" class=\"btn white\">Reset Lesson</a>\n\t\t\t</div>\n\t\t\n\t\t</div>\n\n\t</div>\n\n\t<modal v-if=\"showModal\" @close=\"showModal = false\">\n        <h3 slot=\"header\">Lorem Ipsum</h3>\n        <p slot=\"body\">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>\n    </modal>\n\n</div>\n\t\n";
+
+/***/ },
+/* 314 */
+/***/ function(module, exports, __webpack_require__) {
+
 	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(304)
-	__vue_template__ = __webpack_require__(305)
+	__vue_script__ = __webpack_require__(315)
+	__vue_template__ = __webpack_require__(316)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -39001,7 +39933,7 @@
 	})()}
 
 /***/ },
-/* 304 */
+/* 315 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39020,7 +39952,7 @@
 
 	var _auth2 = _interopRequireDefault(_auth);
 
-	var _timeline = __webpack_require__(293);
+	var _timeline = __webpack_require__(290);
 
 	var _timeline2 = _interopRequireDefault(_timeline);
 
@@ -39028,7 +39960,7 @@
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
-	var _Modal = __webpack_require__(297);
+	var _Modal = __webpack_require__(291);
 
 	var _Modal2 = _interopRequireDefault(_Modal);
 
@@ -39175,17 +40107,17 @@
 	// </script>
 
 /***/ },
-/* 305 */
+/* 316 */
 /***/ function(module, exports) {
 
 	module.exports = "\n\t<div id=\"container\">\n\t\n\t\t<div class=\"header\">\n\n\t\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"icon\">\n\t\t\t\t<i class=\"icon-yipp_profile_line\"></i>\n\t\t\t</router-link>\n\n\t\t\t<div class=\"title\">Challenge</div>\n\n\t\t</div>\n\n\t\t\n\t\t<div class=\"content\" v-if=\"empty\">\n\t\t\n\t\t\t<div class=\"panel\">\n\t\t\tLorem Ipsum is simply dummy text of the printing and typesetting industry.\n\t\t\t</div>\n\t\t\t\n\t\t\t<a href=\"\" class=\"btn\">Explore training</a>\n\t\t\n\t\t</div>\n\n\t\t<div class=\"content\" v-if=\"empty == false\">\n\n\t\t\t<ul class=\"blockList\">\n\t\t\t\t<li>\n\t\t\t\t\t<span class=\"set\">\n\t\t\t\t\t<i class=\"icon-yipp_notification_line\"></i>\n\t\t\t\t\t14:00\n\t\t\t\t\t| <i class=\"icon-yipp_repeat_line\"></i>\n\t\t\t\t\tEvery day\n\t\t\t\t\t</span>\n\t\t\t\t\t<p>Lorem Ipsum</p>\n\t\t\t\t\t\n\t\t\t\t\t<router-link :to=\"{ path: 'challenge-1'}\">\n\t\t\t\t\t<i class=\"arrow icon-yipp_forward\"></i>\n\t\t\t\t\t</router-link>\n\t\t\t\t\t\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t<span class=\"set\">\n\t\t\t\t\t<i class=\"icon-yipp_notification_line\"></i>\n\t\t\t\t\t14:00\n\t\t\t\t\t| <i class=\"icon-yipp_repeat_line\"></i>\n\t\t\t\t\tEvery day\n\t\t\t\t\t</span>\n\t\t\t\t\t<p>Lorem Ipsum</p>\n\t\t\t\t\t\n\t\t\t\t\t<router-link :to=\"{ path: 'challenge-2'}\">\n\t\t\t\t\t\t<i class=\"arrow icon-yipp_forward\"></i>\n\t\t\t\t\t</router-link>\n\t\t\t\t</li>\n\t\t\t</ul>\t\t\n\n\t\t\t<a href=\"\" v-if=\"isShowDoneChallenges == false\" v-on:click.prevent=\"toggleDoneChallenges\" class=\"link\">Show finished challenges</a>\n\t\t\t<a href=\"\" v-if=\"isShowDoneChallenges\" v-on:click.prevent=\"toggleDoneChallenges\" class=\"link\">Hide finished challenges</a>\n\n\t\t\t<ul class=\"blockList2\" v-if=\"isShowDoneChallenges\">\n\t\t\t\t<li>\n\t\t\t\t\t<p>Lorem Ipsum</p>\n\t\t\t\t\t\n\t\t\t\t\t<i class=\"arrow icon-yipp_forward\"></i>\n\t\t\t\t\t\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<p>Lorem Ipsum</p>\n\t\t\t\t\t\n\t\t\t\t\t\t<i class=\"arrow icon-yipp_forward\"></i>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t</div>\n\n\t\t<footer>\n\t\t\t<ul>\n\t\t\t\t<li>\n\t\t\t\t\t<router-link :to=\"{ name: 'timeline'}\"><span class=\"icon-yipp_home_full-\"></span>Training</router-link>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a href=\"javascript:void(0);\" class=\"active\"><span class=\"icon-yipp_challenge_line\"></span>Challenge</a>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t</footer>\n\t\t\n\t</div>\t\n";
 
 /***/ },
-/* 306 */
+/* 317 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_template__ = __webpack_require__(307)
+	__vue_template__ = __webpack_require__(318)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -39202,18 +40134,18 @@
 	})()}
 
 /***/ },
-/* 307 */
+/* 318 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div id=\"\">\nto follow\n</div>\n";
 
 /***/ },
-/* 308 */
+/* 319 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(309)
-	__vue_template__ = __webpack_require__(310)
+	__vue_script__ = __webpack_require__(320)
+	__vue_template__ = __webpack_require__(321)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -39230,7 +40162,7 @@
 	})()}
 
 /***/ },
-/* 309 */
+/* 320 */
 /***/ function(module, exports) {
 
 	// <template>
@@ -39421,13 +40353,13 @@
 	"use strict";
 
 /***/ },
-/* 310 */
+/* 321 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\t<div >\n\t\n\t\t<div class=\"header\">\n\t\t\n\t\t\t<router-link :to=\"{ name: 'challenge'}\" class=\"icon\">\n\t\t\t\t<i class=\" icon-yipp_back\"></i>\n\t\t\t</router-link>\n\n\t\t\t<div class=\"title\">Challenge Details</div>\n\t\t\n\t\t</div>\n\t\t\n\t\t<div class=\"wrap\">\n\t\t\n\t\t\t<div class=\"details\">\n\t\t\t\n\t\t\t<span class=\"set\">\n\t\t\t\t\t<i class=\"icon-yipp_notification_line\"></i>\n\t\t\t\t\t14:00\n\t\t\t\t\t| <i class=\"icon-yipp_repeat_line\"></i>\n\t\t\t\t\tEvery day\n\t\t\t\t\t</span>\n\t\t\t\t\n\t\t\t\t<table width=\"100%\" border=\"0\">\n\t\t\t\t\t<tbody>\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t<p>Eating more vegetable</p>\n\t\t\t\t\t\t\t\t<p>1. Broco</p>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t<a href=\"\" class=\"edit\"><i class=\"icon-yipp_pencil_line\"></i></a>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t</tbody>\n\t\t\t\t</table>\n\t\t\t\t\n\t\t\t</div>\n\t\t\n\t\t</div>\n\t\n\t\t<div class=\"steps\">\n\t\n\t\t\t\t<ul>\n\t\t\t\t\t<li>1</li>\n\t\t\t\t\t<li>2</li>\n\t\t\t\t\t<li>3</li>\n\t\t\t\t\t<li>4</li>\n\t\t\t\t\t<li>5</li>\n\t\t\t\t</ul>\n\n\t\t\t<hr>\n\t\t\n\t\t</div>\n\t\t\n\t\t<div class=\"pic\" style=\"background-image: url(assets/img/slider-1.jpg);\">\n\t\t\n\t\t</div>\n\t\n\t\t<h4>Evaluation</h4>\n\t\t\n\t\t<textarea></textarea>\n\t\t\n\t\t<ul class=\"selection\">\n\t\t\t<li><a href=\"\"><i class=\"icon-yipp_emoticon_sad\"></i></a></li>\n\t\t\t<li><a href=\"\" class=\"active\"><i class=\"icon-yipp_emoticon_neutral\"></i></a></li>\n\t\t\t<li><a href=\"\"><i class=\"icon-yipp_emoticon_happy-\"></i></a></li>\n\t\t</ul>\n\t\t\n\t\t<h4>Notes</h4>\n\t\t\n\t\t<textarea></textarea>\n\t\t\n\t\t<a href=\"\" class=\"btn\">Done</a>\n\t\n\t</div>\n\t\n\t<section class=\"resultCard\">\n\t\t\n\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t\n\t\t<h3>You can do it!</h3>\n\t\t<p>We made a beautiful photo collage of this week check it out!</p>\n\t\t\n\t\t<div class=\"bottom\">\n\t\t<a href=\"javascript:void(0);\" class=\"btn mid\">See result</a>\n\n\t\t<a href=\"javascript:void(0);\" class=\"btn big\">Restart challenge</a>\n\t\t\n\t\t</div>\n\t\n\t\t<div id=\"modal\">\n\n\t\t\t<div id=\"msg\">\n\n\t\t\t\t<h3>Are you sure?</h3>\n\n\t\t\t\t<p>Do you want to restart challenge?</p>\n\n\t\t\t\t<a href=\"javascript:void(0);\">Restart challenge</a>\n\n\t\t\t</div>\n\n\t\t</div>\n\n\t</section>\n\t\n\t<section id=\"collage\">\n\t\n\t\t<div class=\"header\">\n\t\t\t<a href=\"\">X</a> Photo Collage\n\t\t\t<h3>Fruit and Vegetables</h3>\n\t\t</div>\n\t\n\t\t<ul>\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.59302122609286220.7668320930084973xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 1</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_sad\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.62422689537192590.9732704269160846xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 2</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_happy-\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li>\n\t\t\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 3</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_neutral\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.96746033611813660.1252095136749123xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 4</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_happy-\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t</ul>\n\t\n\t</section>\n\t\n\t<div class=\"restart\">\n\t\n\t<a href=\"\" >Restart challenge</a>\n\t\n\t</div>\t\n";
+	module.exports = "\n\t<div >\n\t\n\t\t<div class=\"header\">\n\t\t\n\t\t\t<router-link :to=\"{ name: 'challenge'}\" class=\"icon\">\n\t\t\t\t<i class=\" icon-yipp_back\"></i>\n\t\t\t</router-link>\n\n\t\t\t<div class=\"title\">Challenge Details</div>\n\t\t\n\t\t</div>\n\t\t\n\t\t<div class=\"wrap\">\n\t\t\n\t\t\t<div class=\"details\">\n\t\t\t\n\t\t\t<span class=\"set\">\n\t\t\t\t\t<i class=\"icon-yipp_notification_line\"></i>\n\t\t\t\t\t14:00\n\t\t\t\t\t| <i class=\"icon-yipp_repeat_line\"></i>\n\t\t\t\t\tEvery day\n\t\t\t\t\t</span>\n\t\t\t\t\n\t\t\t\t<table width=\"100%\" border=\"0\">\n\t\t\t\t\t<tbody>\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t<p>Eating more vegetable</p>\n\t\t\t\t\t\t\t\t<p>1. Broco</p>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t<a href=\"\" class=\"edit\"><i class=\"icon-yipp_pencil_line\"></i></a>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t</tbody>\n\t\t\t\t</table>\n\t\t\t\t\n\t\t\t</div>\n\t\t\n\t\t</div>\n\t\n\t\t<div class=\"steps\">\n\t\n\t\t\t\t<ul>\n\t\t\t\t\t<li>1</li>\n\t\t\t\t\t<li>2</li>\n\t\t\t\t\t<li>3</li>\n\t\t\t\t\t<li>4</li>\n\t\t\t\t\t<li>5</li>\n\t\t\t\t</ul>\n\n\t\t\t<hr>\n\t\t\n\t\t</div>\n\t\t\n\t\t<div class=\"pic\" style=\"background-image: url(assets/img/slider-1.jpg);\">\n\t\t\n\t\t</div>\n\t\n\t\t<h4>Evaluation</h4>\n\t\t\n\t\t<textarea></textarea>\n\t\t\n\t\t<ul class=\"selection\">\n\t\t\t<li><a href=\"\"><i class=\"icon-yipp_emoticon_sad\"></i></a></li>\n\t\t\t<li><a href=\"\" class=\"active\"><i class=\"icon-yipp_emoticon_neutral\"></i></a></li>\n\t\t\t<li><a href=\"\"><i class=\"icon-yipp_emoticon_happy-\"></i></a></li>\n\t\t</ul>\n\t\t\n\t\t<h4>Notes</h4>\n\t\t\n\t\t<textarea></textarea>\n\t\t\n\t\t<a href=\"\" class=\"btn\">Done</a>\n\t\n\t</div>\n\t\n\t<section class=\"resultCard\">\n\t\t\n\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t\n\t\t<h3>You can do it!</h3>\n\t\t<p>We made a beautiful photo collage of this week check it out!</p>\n\t\t\n\t\t<div class=\"bottom\">\n\t\t<a href=\"javascript:void(0);\" class=\"btn mid\">See result</a>\n\n\t\t<a href=\"javascript:void(0);\" class=\"btn big\">Restart challenge</a>\n\t\t\n\t\t</div>\n\t\n\t\t<div id=\"modal\">\n\n\t\t\t<div id=\"msg\">\n\n\t\t\t\t<h3>Are you sure?</h3>\n\n\t\t\t\t<p>Do you want to restart challenge?</p>\n\n\t\t\t\t<a href=\"javascript:void(0);\">Restart challenge</a>\n\n\t\t\t</div>\n\n\t\t</div>\n\n\t</section>\n\t\n\t<section id=\"collage\">\n\t\n\t\t<div class=\"header\">\n\t\t\t<a href=\"\">X</a> Photo Collage\n\t\t\t<h3>Fruit and Vegetables</h3>\n\t\t</div>\n\t\n\t\t<ul>\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.30271774307363140.12938578362919406xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 1</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_sad\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.064262789362010020.017811765246702693xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 2</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_happy-\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li>\n\t\t\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 3</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_neutral\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.25348647022093560.0522524099596553xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 4</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_happy-\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t</ul>\n\t\n\t</section>\n\t\n\t<div class=\"restart\">\n\t\n\t<a href=\"\" >Restart challenge</a>\n\t\n\t</div>\t\n";
 
 /***/ },
-/* 311 */
+/* 322 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -40514,7 +41446,7 @@
 
 	var nodeClient = function (request) {
 
-	    var client = __webpack_require__(312);
+	    var client = __webpack_require__(323);
 
 	    return new PromiseObj(function (resolve) {
 
@@ -40977,13 +41909,13 @@
 
 
 /***/ },
-/* 312 */
+/* 323 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
-/* 313 */
+/* 324 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -43391,10 +44323,10 @@
 
 	module.exports = VueRouter;
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(314)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(325)))
 
 /***/ },
-/* 314 */
+/* 325 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -43580,1117 +44512,274 @@
 
 
 /***/ },
-/* 315 */
+/* 326 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(316);
+	(function (global, factory) {
+	   true ? factory(__webpack_require__(300)) :
+	  typeof define === 'function' && define.amd ? define(['hammerjs'], factory) :
+	  (factory(global.Hammer));
+	}(this, (function (Hammer) { 'use strict';
 
-	/** @module RangeSlider */
-	var debounce = __webpack_require__(320);
-	var evPos = __webpack_require__(322);
-	var utils = __webpack_require__(323);
+	Hammer = 'default' in Hammer ? Hammer['default'] : Hammer;
 
-	var CONST = {
-	    MAX_SET_BY_DEFAULT: 100,
-	    HANDLE_RESIZE_DEBOUNCE: 100,
-	    RANGE_CLASS: 'rangeslider',
-	    FILL_CLASS: 'rangeslider__fill',
-	    FILL_BG_CLASS: 'rangeslider__fill__bg',
-	    HANDLE_CLASS: 'rangeslider__handle',
-	    DISABLED_CLASS: 'rangeslider--disabled',
-	    STEP_SET_BY_DEFAULT: 1,
-	    START_EVENTS: ['mousedown', 'touchstart', 'pointerdown'],
-	    MOVE_EVENTS: ['mousemove', 'touchmove', 'pointermove'],
-	    END_EVENTS: ['mouseup', 'touchend', 'pointerup'],
-	    PLUGIN_NAME: 'rangeslider-js'
-	};
-
-	// counter
-	var pluginIdentifier = 0;
-
-	/**
-	 *
-	 * @param {string} className
-	 * @returns {Element}
-	 */
-	var createChild = function (className) {
-	    var child = document.createElement('div');
-	    child.classList.add(className);
-	    return child;
-	};
-
-	/**
-	 *
-	 * @param step
-	 * @returns {number}
-	 */
-	var stepToFixed = function (step) {
-	    return (step + '').replace('.', '').length - 1;
-	};
-
-	/**
-	 * RangeSlider
-	 * @param {Element} el
-	 * @param {object} options
-	 * @property {number} [options.min]
-	 * @property {number} [options.max]
-	 * @property {number} [options.value]
-	 * @property {number} [options.step]
-	 * @property {function} [options.onInit] - init callback
-	 * @property {function} [options.onSlideStart] - slide start callback
-	 * @property {function} [options.onSlide] - slide callback
-	 * @property {function} [options.onSlideEnd] - slide end callback
-	 */
-	function RangeSlider(el, options) {
-
-	    options = options || {};
-
-	    this.element = el;
-	    this.options = options;
-
-	    this.onSlideEventsCount = -1;
-	    this.isInteracting = false;
-	    this.needTriggerEvents = false;
-
-	    this.identifier = 'js-' + CONST.PLUGIN_NAME + '-' + (pluginIdentifier++);
-
-	    this.min = utils.getFirstNumberLike(options.min, parseFloat(el.getAttribute('min')), 0);
-	    this.max = utils.getFirstNumberLike(options.max, parseFloat(el.getAttribute('max')), CONST.MAX_SET_BY_DEFAULT);
-	    this.value = utils.getFirstNumberLike(options.value, parseFloat(el.value), this.min + (this.max - this.min) / 2);
-	    this.step = utils.getFirstNumberLike(options.step, parseFloat(el.getAttribute('step')), CONST.STEP_SET_BY_DEFAULT);
-
-	    this.percent = null;
-	    this._updatePercentFromValue();
-	    this.toFixed = stepToFixed(this.step);
-
-	    this.range = createChild(CONST.RANGE_CLASS);
-	    this.range.id = this.identifier;
-
-	    this.fillBg = createChild(CONST.FILL_BG_CLASS);
-	    this.fill = createChild(CONST.FILL_CLASS);
-	    this.handle = createChild(CONST.HANDLE_CLASS);
-
-	    ['fillBg', 'fill', 'handle'].forEach(function (str) {
-	        this.range.appendChild(this[str]);
-	    }, this);
-	    ['min', 'max', 'step'].forEach(function (str) {
-	        el.setAttribute(str, '' + this[str]);
-	    }, this);
-
-	    this._setValue(this.value);
-
-	    utils.insertAfter(el, this.range);
-
-	    el.style.position = 'absolute';
-	    el.style.width = '1px';
-	    el.style.height = '1px';
-	    el.style.overflow = 'hidden';
-	    el.style.opacity = '0';
-
-	    ['_update', '_handleDown', '_handleMove', '_handleEnd', '_startEventListener', '_changeEventListener']
-	        .forEach(function (fnName) {
-	            this[fnName] = this[fnName].bind(this);
-	        }, this);
-
-	    this._init();
-
-	    window.addEventListener('resize', debounce(this._update, CONST.HANDLE_RESIZE_DEBOUNCE));
-
-	    CONST.START_EVENTS.forEach(function (evName) {
-	        this.range.addEventListener(evName, this._startEventListener);
-	    }, this);
-
-	    el.addEventListener('change', this._changeEventListener);
+	function assign(target) {
+	  var sources = [], len = arguments.length - 1;
+	  while ( len-- > 0 ) sources[ len ] = arguments[ len + 1 ];
+	  for (var i = 0; i < sources.length; i++) {
+	    var source = sources[i];
+	    var keys = Object.keys(source);
+	    for (var i$1 = 0; i$1 < keys.length; i$1++) {
+	      var key = keys[i$1];
+	      target[key] = source[key];
+	    }
+	  }
+	  return target
 	}
-
-	RangeSlider.prototype.constructor = RangeSlider;
-
-	/**
-	 *
-	 * @private
-	 */
-	RangeSlider.prototype._init = function () {
-	    if (this.options.onInit) {
-	        this.options.onInit();
-	    }
-	    this._update();
-	};
-
-	/**
-	 *
-	 * @private
-	 */
-	RangeSlider.prototype._updatePercentFromValue = function () {
-	    this.percent = (this.value - this.min) / (this.max - this.min);
-	};
-
-	/**
-	 * This method check if this.identifier exists in ev.target's ancestors
-	 * @param {Event} ev
-	 * @param data
-	 */
-	RangeSlider.prototype._startEventListener = function (ev, data) {
-
-	    var el = ev.target;
-	    var isEventOnSlider = false;
-	    var identifier = this.identifier;
-
-	    utils.forEachAncestorsAndSelf(el, function (el) {
-	        isEventOnSlider = el.id === identifier && !el.classList.contains(CONST.DISABLED_CLASS);
-	        return isEventOnSlider;
-	    });
-
-	    if (isEventOnSlider) {
-	        this._handleDown(ev, data);
-	    }
-	};
-
-	/**
-	 *
-	 * @param {Event} ev
-	 * @param data
-	 * @private
-	 */
-	RangeSlider.prototype._changeEventListener = function (ev, data) {
-	    if (!(data && data.origin === this.identifier)) {
-	        this._setPosition(this._getPositionFromValue(ev.target.value));
-	    }
-	};
-
-	/**
-	 *
-	 * @private
-	 */
-	RangeSlider.prototype._update = function () {
-
-	    this.handleWidth = utils.getDimension(this.handle, 'offsetWidth');
-	    this.rangeWidth = utils.getDimension(this.range, 'offsetWidth');
-	    this.maxHandleX = this.rangeWidth - this.handleWidth;
-	    this.grabX = this.handleWidth / 2;
-	    this.position = this._getPositionFromValue(this.value);
-
-	    this.range.classList[this.element.disabled ? 'add' : 'remove'](CONST.DISABLED_CLASS);
-
-	    this._setPosition(this.position);
-	    this._updatePercentFromValue();
-	    utils.emit(this.element, 'change');
-	};
-
-	/**
-	 *
-	 * @param {boolean} bool
-	 * @private
-	 */
-	RangeSlider.prototype._listen = function (bool) {
-
-	    var addOrRemoveListener = (bool ? 'add' : 'remove') + 'EventListener';
-
-	    CONST.MOVE_EVENTS.forEach(function (evName) {
-	        document[addOrRemoveListener](evName, this._handleMove);
-	    }, this);
-	    CONST.END_EVENTS.forEach(function (evName) {
-	        document[addOrRemoveListener](evName, this._handleEnd);
-	        this.range[addOrRemoveListener](evName, this._handleEnd);
-	    }, this);
-
-	};
-
-	/**
-	 *
-	 * @param {Event} e
-	 * @private
-	 */
-	RangeSlider.prototype._handleDown = function (e) {
-	    e.preventDefault();
-
-	    this.isInteracting = true;
-
-	    this._listen(true);
-	    if (e.target.classList.contains(CONST.HANDLE_CLASS)) {
-	        return;
-	    }
-
-	    var posX = evPos(e, this.range).x,
-	        rangeX = this.range.getBoundingClientRect().left,
-	        handleX = this.handle.getBoundingClientRect().left - rangeX;
-
-	    this._setPosition(posX - this.grabX);
-
-	    if (posX >= handleX && posX < handleX + this.handleWidth) {
-	        this.grabX = posX - handleX;
-	    }
-	    this._updatePercentFromValue();
-
-	};
-
-	/**
-	 *
-	 * @param {Event} e
-	 * @private
-	 */
-	RangeSlider.prototype._handleMove = function (e) {
-	    this.isInteracting = true;
-	    e.preventDefault();
-	    var posX = evPos(e, this.range).x;
-	    this._setPosition(posX - this.grabX);
-	};
-
-	/**
-	 *
-	 * @param {Event} e
-	 * @private
-	 */
-	RangeSlider.prototype._handleEnd = function (e) {
-	    e.preventDefault();
-
-	    this._listen(false);
-	    utils.emit(this.element, 'change', {
-	        origin: this.identifier
-	    });
-
-	    if ((this.isInteracting || this.needTriggerEvents) && this.options.onSlideEnd) {
-	        this.options.onSlideEnd(this.value, this.percent, this.position);
-	    }
-	    this.onSlideEventsCount = 0;
-	    this.isInteracting = false;
-	};
-
-	/**
-	 *
-	 * @param pos
-	 * @private
-	 */
-	RangeSlider.prototype._setPosition = function (pos) {
-
-	    var value = this._getValueFromPosition(utils.clamp(pos, 0, this.maxHandleX)),
-	        x = this._getPositionFromValue(value);
-
-	    // Update ui
-	    this.fill.style.width = (x + this.grabX) + 'px';
-	    this.handle.style.webkitTransform = this.handle.style.transform = 'translate(' + x + 'px, 0px)';
-	    this._setValue(value);
-
-	    // Update globals
-	    this.position = x;
-	    this.value = value;
-	    this._updatePercentFromValue();
-
-	    if (this.isInteracting || this.needTriggerEvents) {
-	        if (this.options.onSlideStart && this.onSlideEventsCount === 0) {
-	            this.options.onSlideStart(this.value, this.percent, this.position);
-	        }
-
-	        if (this.options.onSlide) {
-	            this.options.onSlide(this.value, this.percent, this.position);
-	        }
-	    }
-
-	    this.onSlideEventsCount++;
-	};
-
-	/**
-	 *
-	 * @param {number} value
-	 * @returns {number}
-	 * @private
-	 */
-	RangeSlider.prototype._getPositionFromValue = function (value) {
-	    var percentage = (value - this.min) / (this.max - this.min);
-
-	    return percentage * this.maxHandleX;
-	};
-
-	/**
-	 *
-	 * @param pos
-	 * @returns {number}
-	 * @private
-	 */
-	RangeSlider.prototype._getValueFromPosition = function (pos) {
-	    var percentage = ((pos) / (this.maxHandleX || 1)),
-	        value = this.step * Math.round(percentage * (this.max - this.min) / this.step) + this.min;
-
-	    return Number((value).toFixed(this.toFixed));
-	};
-
-	/**
-	 *
-	 * @param {number} value
-	 * @private
-	 */
-	RangeSlider.prototype._setValue = function (value) {
-
-	    if (!(value === this.value && value === this.element.value)) {
-	        this.value = this.element.value = value;
-	        utils.emit(this.element, 'input', {
-	            origin: this.identifier
-	        });
-	    }
-	};
-
-	/**
-	 * Update
-	 *
-	 * @param {Object} [obj={}] like {min : Number, max : Number, value : Number, step : Number}
-	 * @param {Boolean} [triggerEvents]
-	 * @returns {RangeSlider}
-	 */
-	RangeSlider.prototype.update = function (obj, triggerEvents) {
-
-	    obj = obj || {};
-	    this.needTriggerEvents = !!triggerEvents;
-
-	    if (utils.isFiniteNumber(obj.min)) {
-	        this.element.setAttribute('min', '' + obj.min);
-	        this.min = obj.min;
-	    }
-
-	    if (utils.isFiniteNumber(obj.max)) {
-	        this.element.setAttribute('max', '' + obj.max);
-	        this.max = obj.max;
-	    }
-
-	    if (utils.isFiniteNumber(obj.step)) {
-	        this.element.setAttribute('step', '' + obj.step);
-	        this.step = obj.step;
-	        this.toFixed = stepToFixed(obj.step);
-	    }
-
-	    if (utils.isFiniteNumber(obj.value)) {
-	        this._setValue(obj.value);
-	    }
-
-	    this._update();
-	    this.onSlideEventsCount = 0;
-	    this.needTriggerEvents = false;
-	    return this;
-	};
-
-	/**
-	 *
-	 */
-	RangeSlider.prototype.destroy = function () {
-
-	    window.removeEventListener('resize', this._update, false);
-
-	    CONST.START_EVENTS.forEach(function (evName) {
-	        this.range.removeEventListener(evName, this._startEventListener);
-	    }, this);
-
-	    this.element.removeEventListener('change', this._changeEventListener);
-
-	    this.element.style.cssText = '';
-	    delete this.element[CONST.PLUGIN_NAME];
-
-	    // Remove the generated markup
-	    this.range.parentNode.removeChild(this.range);
-	};
-
-	/**
-	 * A lightweight plugin wrapper around the constructor, preventing multiple instantiations
-	 * @param {Element|NodeList} el
-	 * @param {object} options
-	 */
-	RangeSlider.create = function (el, options) {
-	    function createInstance(el) {
-	        el[CONST.PLUGIN_NAME] = el[CONST.PLUGIN_NAME] || new RangeSlider(el, options);
-	    }
-
-	    if (el.length) {
-	        Array.prototype.slice.call(el).forEach(function (el) {
-	            createInstance(el);
-	        });
+	function createProp() {
+	  return {
+	    type: Object,
+	    default: function() { return {} }
+	  }
+	}
+	function capitalize (str) {
+	  return str.charAt(0).toUpperCase() + str.slice(1)
+	}
+	var directions = ['up', 'down', 'left', 'right', 'horizontal', 'vertical', 'all'];
+	function guardDirections (options) {
+	  var dir = options.direction;
+	  if (typeof dir === 'string') {
+	    var hammerDirection = 'DIRECTION_' + dir.toUpperCase();
+	    if (directions.indexOf(dir) > -1 && Hammer.hasOwnProperty(hammerDirection)) {
+	      options.direction = Hammer[hammerDirection];
 	    } else {
-	        createInstance(el);
+	      console.warn('[vue-touch] invalid direction: ' + dir);
 	    }
+	  }
+	  return options
+	}
+	var config = {
+	};
+	var customEvents = {
+	};
+	var gestures = [
+	  'pan','panstart','panmove','panend','pancancel','panleft','panright','panup','pandown',
+	  'pinch','pinchstart','pinchmove','pinchend','pinchcancel','pinchin','pinchout',
+	  'press','pressup',
+	  'rotate','rotatestart','rotatemove','rotateend','rotatecancel',
+	  'swipe','swipeleft','swiperight','swipeup','swipedown',
+	  'tap'
+	];
+	var gestureMap = {
+	  pan: 'pan',
+	  panstart: 'pan',
+	  panmove: 'pan',
+	  panend: 'pan',
+	  pancancel: 'pan',
+	  panleft: 'pan',
+	  panright: 'pan',
+	  panup: 'pan',
+	  pandown: 'pan',
+	  pinch: 'pinch',
+	  pinchstart: 'pinch',
+	  pinchmove: 'pinch',
+	  pinchend: 'pinch',
+	  pinchcancel: 'pinch',
+	  pinchin: 'pinch',
+	  pinchout: 'pinch',
+	  press: 'press',
+	  pressup: 'press',
+	  rotate: 'rotate',
+	  rotatestart: 'rotate',
+	  rotatemove: 'rotate',
+	  rotateend: 'rotate',
+	  rotatecancel: 'rotate',
+	  swipe: 'swipe',
+	  swipeleft: 'swipe',
+	  swiperight: 'swipe',
+	  swipeup: 'swipe',
+	  swipedown: 'swipe',
+	  tap: 'tap'
 	};
 
-	module.exports = RangeSlider;
-
-
-/***/ },
-/* 316 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(317);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(319)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!../../../css-loader/index.js!./base.css", function() {
-				var newContent = require("!!../../../css-loader/index.js!./base.css");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 317 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(318)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".rangeslider {\n    position: relative;\n    cursor: pointer;\n    height: 30px;\n    width: 100%;\n}\n.rangeslider,\n.rangeslider__fill,\n.rangeslider__fill__bg {\n    display: block;\n}\n.rangeslider__fill,\n.rangeslider__fill__bg,\n.rangeslider__handle {\n    position: absolute;\n}\n.rangeslider__fill,\n.rangeslider__fill__bg {\n    top: calc(50% - 6px);\n    height: 12px;\n    z-index: 2;\n    background: #29e;\n    border-radius: 10px;\n    will-change: width;\n}\n.rangeslider__handle {\n    display: inline-block;\n    top: calc(50% - 15px);\n    background: #29e;\n    width: 30px;\n    height: 30px;\n    z-index: 3;\n    cursor: pointer;\n    border: solid 2px #ffffff;\n    border-radius: 50%;\n}\n.rangeslider__handle:active {\n    background: #107ecd;\n}\n.rangeslider__fill__bg {\n    background: #ccc;\n    width: 100%;\n}\n.rangeslider--disabled {\n    opacity: 0.4;\n}\n.rangeslider--slim .rangeslider {\n    height: 25px;\n}\n.rangeslider--slim .rangeslider:active .rangeslider__handle {\n    width: 21px;\n    height: 21px;\n    top: calc(50% - 10px);\n    background: #29e;\n}\n.rangeslider--slim .rangeslider__fill,\n.rangeslider--slim .rangeslider__fill__bg {\n    top: calc(50% - 1px);\n    height: 2px;\n}\n.rangeslider--slim .rangeslider__handle {\n    will-change: width, height, top;\n    -webkit-transition: width 0.1s ease-in-out, height 0.1s ease-in-out, top 0.1s ease-in-out;\n    transition: width 0.1s ease-in-out, height 0.1s ease-in-out, top 0.1s ease-in-out;\n    width: 14px;\n    height: 14px;\n    top: calc(50% - 7px);\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 318 */
-/***/ function(module, exports) {
-
-	/*
-		MIT License http://www.opensource.org/licenses/mit-license.php
-		Author Tobias Koppers @sokra
-	*/
-	// css base code, injected by the css-loader
-	module.exports = function() {
-		var list = [];
-
-		// return the list of modules as css string
-		list.toString = function toString() {
-			var result = [];
-			for(var i = 0; i < this.length; i++) {
-				var item = this[i];
-				if(item[2]) {
-					result.push("@media " + item[2] + "{" + item[1] + "}");
-				} else {
-					result.push(item[1]);
-				}
-			}
-			return result.join("");
-		};
-
-		// import a list of modules into the list
-		list.i = function(modules, mediaQuery) {
-			if(typeof modules === "string")
-				modules = [[null, modules, ""]];
-			var alreadyImportedModules = {};
-			for(var i = 0; i < this.length; i++) {
-				var id = this[i][0];
-				if(typeof id === "number")
-					alreadyImportedModules[id] = true;
-			}
-			for(i = 0; i < modules.length; i++) {
-				var item = modules[i];
-				// skip already imported module
-				// this implementation is not 100% perfect for weird media query combinations
-				//  when a module is imported multiple times with different media queries.
-				//  I hope this will never occur (Hey this way we have smaller bundles)
-				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-					if(mediaQuery && !item[2]) {
-						item[2] = mediaQuery;
-					} else if(mediaQuery) {
-						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-					}
-					list.push(item);
-				}
-			}
-		};
-		return list;
-	};
-
-
-/***/ },
-/* 319 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/*
-		MIT License http://www.opensource.org/licenses/mit-license.php
-		Author Tobias Koppers @sokra
-	*/
-	var stylesInDom = {},
-		memoize = function(fn) {
-			var memo;
-			return function () {
-				if (typeof memo === "undefined") memo = fn.apply(this, arguments);
-				return memo;
-			};
-		},
-		isOldIE = memoize(function() {
-			return /msie [6-9]\b/.test(self.navigator.userAgent.toLowerCase());
-		}),
-		getHeadElement = memoize(function () {
-			return document.head || document.getElementsByTagName("head")[0];
-		}),
-		singletonElement = null,
-		singletonCounter = 0,
-		styleElementsInsertedAtTop = [];
-
-	module.exports = function(list, options) {
-		if(false) {
-			if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
-		}
-
-		options = options || {};
-		// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-		// tags it will allow on a page
-		if (typeof options.singleton === "undefined") options.singleton = isOldIE();
-
-		// By default, add <style> tags to the bottom of <head>.
-		if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
-
-		var styles = listToStyles(list);
-		addStylesToDom(styles, options);
-
-		return function update(newList) {
-			var mayRemove = [];
-			for(var i = 0; i < styles.length; i++) {
-				var item = styles[i];
-				var domStyle = stylesInDom[item.id];
-				domStyle.refs--;
-				mayRemove.push(domStyle);
-			}
-			if(newList) {
-				var newStyles = listToStyles(newList);
-				addStylesToDom(newStyles, options);
-			}
-			for(var i = 0; i < mayRemove.length; i++) {
-				var domStyle = mayRemove[i];
-				if(domStyle.refs === 0) {
-					for(var j = 0; j < domStyle.parts.length; j++)
-						domStyle.parts[j]();
-					delete stylesInDom[domStyle.id];
-				}
-			}
-		};
-	}
-
-	function addStylesToDom(styles, options) {
-		for(var i = 0; i < styles.length; i++) {
-			var item = styles[i];
-			var domStyle = stylesInDom[item.id];
-			if(domStyle) {
-				domStyle.refs++;
-				for(var j = 0; j < domStyle.parts.length; j++) {
-					domStyle.parts[j](item.parts[j]);
-				}
-				for(; j < item.parts.length; j++) {
-					domStyle.parts.push(addStyle(item.parts[j], options));
-				}
-			} else {
-				var parts = [];
-				for(var j = 0; j < item.parts.length; j++) {
-					parts.push(addStyle(item.parts[j], options));
-				}
-				stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
-			}
-		}
-	}
-
-	function listToStyles(list) {
-		var styles = [];
-		var newStyles = {};
-		for(var i = 0; i < list.length; i++) {
-			var item = list[i];
-			var id = item[0];
-			var css = item[1];
-			var media = item[2];
-			var sourceMap = item[3];
-			var part = {css: css, media: media, sourceMap: sourceMap};
-			if(!newStyles[id])
-				styles.push(newStyles[id] = {id: id, parts: [part]});
-			else
-				newStyles[id].parts.push(part);
-		}
-		return styles;
-	}
-
-	function insertStyleElement(options, styleElement) {
-		var head = getHeadElement();
-		var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
-		if (options.insertAt === "top") {
-			if(!lastStyleElementInsertedAtTop) {
-				head.insertBefore(styleElement, head.firstChild);
-			} else if(lastStyleElementInsertedAtTop.nextSibling) {
-				head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
-			} else {
-				head.appendChild(styleElement);
-			}
-			styleElementsInsertedAtTop.push(styleElement);
-		} else if (options.insertAt === "bottom") {
-			head.appendChild(styleElement);
-		} else {
-			throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
-		}
-	}
-
-	function removeStyleElement(styleElement) {
-		styleElement.parentNode.removeChild(styleElement);
-		var idx = styleElementsInsertedAtTop.indexOf(styleElement);
-		if(idx >= 0) {
-			styleElementsInsertedAtTop.splice(idx, 1);
-		}
-	}
-
-	function createStyleElement(options) {
-		var styleElement = document.createElement("style");
-		styleElement.type = "text/css";
-		insertStyleElement(options, styleElement);
-		return styleElement;
-	}
-
-	function createLinkElement(options) {
-		var linkElement = document.createElement("link");
-		linkElement.rel = "stylesheet";
-		insertStyleElement(options, linkElement);
-		return linkElement;
-	}
-
-	function addStyle(obj, options) {
-		var styleElement, update, remove;
-
-		if (options.singleton) {
-			var styleIndex = singletonCounter++;
-			styleElement = singletonElement || (singletonElement = createStyleElement(options));
-			update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
-			remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
-		} else if(obj.sourceMap &&
-			typeof URL === "function" &&
-			typeof URL.createObjectURL === "function" &&
-			typeof URL.revokeObjectURL === "function" &&
-			typeof Blob === "function" &&
-			typeof btoa === "function") {
-			styleElement = createLinkElement(options);
-			update = updateLink.bind(null, styleElement);
-			remove = function() {
-				removeStyleElement(styleElement);
-				if(styleElement.href)
-					URL.revokeObjectURL(styleElement.href);
-			};
-		} else {
-			styleElement = createStyleElement(options);
-			update = applyToTag.bind(null, styleElement);
-			remove = function() {
-				removeStyleElement(styleElement);
-			};
-		}
-
-		update(obj);
-
-		return function updateStyle(newObj) {
-			if(newObj) {
-				if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
-					return;
-				update(obj = newObj);
-			} else {
-				remove();
-			}
-		};
-	}
-
-	var replaceText = (function () {
-		var textStore = [];
-
-		return function (index, replacement) {
-			textStore[index] = replacement;
-			return textStore.filter(Boolean).join('\n');
-		};
-	})();
-
-	function applyToSingletonTag(styleElement, index, remove, obj) {
-		var css = remove ? "" : obj.css;
-
-		if (styleElement.styleSheet) {
-			styleElement.styleSheet.cssText = replaceText(index, css);
-		} else {
-			var cssNode = document.createTextNode(css);
-			var childNodes = styleElement.childNodes;
-			if (childNodes[index]) styleElement.removeChild(childNodes[index]);
-			if (childNodes.length) {
-				styleElement.insertBefore(cssNode, childNodes[index]);
-			} else {
-				styleElement.appendChild(cssNode);
-			}
-		}
-	}
-
-	function applyToTag(styleElement, obj) {
-		var css = obj.css;
-		var media = obj.media;
-
-		if(media) {
-			styleElement.setAttribute("media", media)
-		}
-
-		if(styleElement.styleSheet) {
-			styleElement.styleSheet.cssText = css;
-		} else {
-			while(styleElement.firstChild) {
-				styleElement.removeChild(styleElement.firstChild);
-			}
-			styleElement.appendChild(document.createTextNode(css));
-		}
-	}
-
-	function updateLink(linkElement, obj) {
-		var css = obj.css;
-		var sourceMap = obj.sourceMap;
-
-		if(sourceMap) {
-			// http://stackoverflow.com/a/26603875
-			css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
-		}
-
-		var blob = new Blob([css], { type: "text/css" });
-
-		var oldSrc = linkElement.href;
-
-		linkElement.href = URL.createObjectURL(blob);
-
-		if(oldSrc)
-			URL.revokeObjectURL(oldSrc);
-	}
-
-
-/***/ },
-/* 320 */
-/***/ function(module, exports, __webpack_require__) {
-
-	
-	/**
-	 * Module dependencies.
-	 */
-
-	var now = __webpack_require__(321);
-
-	/**
-	 * Returns a function, that, as long as it continues to be invoked, will not
-	 * be triggered. The function will be called after it stops being called for
-	 * N milliseconds. If `immediate` is passed, trigger the function on the
-	 * leading edge, instead of the trailing.
-	 *
-	 * @source underscore.js
-	 * @see http://unscriptable.com/2009/03/20/debouncing-javascript-methods/
-	 * @param {Function} function to wrap
-	 * @param {Number} timeout in ms (`100`)
-	 * @param {Boolean} whether to execute at the beginning (`false`)
-	 * @api public
-	 */
-
-	module.exports = function debounce(func, wait, immediate){
-	  var timeout, args, context, timestamp, result;
-	  if (null == wait) wait = 100;
-
-	  function later() {
-	    var last = now() - timestamp;
-
-	    if (last < wait && last > 0) {
-	      timeout = setTimeout(later, wait - last);
-	    } else {
-	      timeout = null;
-	      if (!immediate) {
-	        result = func.apply(context, args);
-	        if (!timeout) context = args = null;
+	var Component = {
+	  props: {
+	    options: createProp(),
+	    tapOptions: createProp(),
+	    panOptions: createProp(),
+	    pinchOptions: createProp(),
+	    pressOptions: createProp(),
+	    rotateOptions: createProp(),
+	    swipeOptions: createProp(),
+	    tag: { type: String, default: 'div' },
+	    enabled: {
+	      default: true,
+	      type: [Boolean, Object],
+	    }
+	  },
+	  mounted: function mounted() {
+	    if (!this.$isServer) {
+	      this.hammer = new Hammer.Manager(this.$el, this.options);
+	      this.recognizers = {};
+	      this.setupBuiltinRecognizers();
+	      this.setupCustomRecognizers();
+	      this.updateEnabled(this.enabled);
+	    }
+	  },
+	  destroyed: function destroyed() {
+	    if (!this.$isServer) {
+	      this.hammer.destroy();
+	    }
+	  },
+	  watch: {
+	    enabled: {
+	      deep: true,
+	      handler: function handler() {
+	        var args = [], len = arguments.length;
+	        while ( len-- ) args[ len ] = arguments[ len ];
+	        (ref = this).updateEnabled.apply(ref, args);
+	        var ref;
 	      }
 	    }
-	  };
-
-	  return function debounced() {
-	    context = this;
-	    args = arguments;
-	    timestamp = now();
-	    var callNow = immediate && !timeout;
-	    if (!timeout) timeout = setTimeout(later, wait);
-	    if (callNow) {
-	      result = func.apply(context, args);
-	      context = args = null;
-	    }
-
-	    return result;
-	  };
-	};
-
-
-/***/ },
-/* 321 */
-/***/ function(module, exports) {
-
-	module.exports = Date.now || now
-
-	function now() {
-	    return new Date().getTime()
-	}
-
-
-/***/ },
-/* 322 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	/**
-	 * Returns true if the type is 'number' and it's not NaN
-	 * @param  {*} val
-	 * @return {boolean}
-	 */
-	var isNum = function (val) {
-	    return typeof val === 'number' && !isNaN(val);
-	};
-
-	/**
-	 * Get the relative position from a mouse/touch event to an element
-	 *
-	 * @param  {Event}   ev                           The mouse or touch event
-	 * @param  {Element} [toElement=ev.currentTarget] The element
-	 * @return {object}                               {x, y}
-	 */
-	var getRelativePosition = function (ev, toElement) {
-	    toElement = toElement || toElement.currentTarget;
-
-	    var toElementBoundingRect = toElement.getBoundingClientRect(),
-	        orgEv = ev.originalEvent || ev,
-	        hasTouches = ev.touches && ev.touches.length,
-	        pageX = 0,
-	        pageY = 0;
-
-	    if (hasTouches) {
-	        if (isNum(ev.touches[0].pageX) && isNum(ev.touches[0].pageY)) {
-	            pageX = ev.touches[0].pageX;
-	            pageY = ev.touches[0].pageY;
-	        } else if (isNum(ev.touches[0].clientX) && isNum(ev.touches[0].clientY)) {
-	            pageX = orgEv.touches[0].clientX;
-	            pageY = orgEv.touches[0].clientY;
+	  },
+	  methods: {
+	    setupBuiltinRecognizers: function setupBuiltinRecognizers()  {
+	      var this$1 = this;
+	      for (var i = 0; i < gestures.length; i++) {
+	        var gesture = gestures[i];
+	        if (this$1._events[gesture]) {
+	          var mainGesture = gestureMap[gesture];
+	          var options = assign({}, (config[mainGesture] || {}), this$1[(mainGesture + "Options")]);
+	          this$1.addRecognizer(mainGesture, options);
+	          this$1.addEvent(gesture);
 	        }
-	    } else {
-	        if (isNum(ev.pageX) && isNum(ev.pageY)) {
-	            pageX = ev.pageX;
-	            pageY = ev.pageY;
-	        } else if (ev.currentPoint && isNum(ev.currentPoint.x) && isNum(ev.currentPoint.y)) {
-	            pageX = ev.currentPoint.x;
-	            pageY = ev.currentPoint.y;
-	        }
-	    }
-
-	    return {
-	        x: pageX - toElementBoundingRect.left,
-	        y: pageY - toElementBoundingRect.top
-	    };
-	};
-
-	/**
-	 * @type {Function}
-	 */
-	module.exports = getRelativePosition;
-
-
-/***/ },
-/* 323 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var CE = __webpack_require__(324);
-	var isFiniteNumber = __webpack_require__(325);
-
-	function clamp(val, min, max) {
-	    return min < max ?
-	        (val < min ? min : val > max ? max : val) :
-	        (val < max ? max : val > min ? min : val);
-	}
-
-	function isHidden(el) {
-	    return (el.offsetWidth === 0 || el.offsetHeight === 0 || el.open === false);
-	}
-
-	function isNumberLike(obj) {
-	    return isFiniteNumber(parseFloat(obj)) || (isFiniteNumber(obj));
-	}
-
-	function getFirstNumberLike() {
-	    if (!arguments.length) {
-	        return null;
-	    }
-	    for (var i = 0, len = arguments.length; i < len; i++) {
-	        if (isNumberLike(arguments[i])) {
-	            return arguments[i];
-	        }
-	    }
-	}
-
-	function getHiddenParentNodes(element) {
-
-	    var parents = [];
-	    var node = element.parentNode;
-
-	    while (node && isHidden(node)) {
-	        parents.push(node);
-	        node = node.parentNode;
-	    }
-	    return parents;
-	}
-
-	/**
-	 * Returns dimensions for an element even if it is not visible in the DOM.
-	 *
-	 * @param  {Element} element
-	 * @param  {string}  key     (e.g. offsetWidth …)
-	 * @return {Number}
-	 */
-	function getDimension(element, key) {
-
-	    var hiddenParentNodes = getHiddenParentNodes(element),
-	        hiddenParentNodesLength = hiddenParentNodes.length,
-	        dimension = element[key],
-	        displayProperty = [],
-	        i = 0, hiddenStyles;
-
-	    // Used for native `<details>` elements
-	    function toggleOpenProperty(element) {
-	        if (typeof element.open !== 'undefined') {
-	            element.open = !element.open;
-	        }
-	    }
-
-	    if (hiddenParentNodesLength) {
-
-	        for (i = 0; i < hiddenParentNodesLength; i++) {
-	            hiddenStyles = hiddenParentNodes[i].style;
-	            // Cache the display property to restore it later.
-	            displayProperty[i] = hiddenStyles.display;
-	            hiddenStyles.display = 'block';
-	            hiddenStyles.height = '0';
-	            hiddenStyles.overflow = 'hidden';
-	            hiddenStyles.visibility = 'hidden';
-
-	            toggleOpenProperty(hiddenParentNodes[i]);
-	        }
-
-	        dimension = element[key];
-
-	        for (i = 0; i < hiddenParentNodesLength; i++) {
-	            hiddenStyles = hiddenParentNodes[i].style;
-	            toggleOpenProperty(hiddenParentNodes[i]);
-	            hiddenStyles.display = displayProperty[i];
-	            hiddenStyles.height = '';
-	            hiddenStyles.overflow = '';
-	            hiddenStyles.visibility = '';
-	        }
-	    }
-	    return dimension;
-	}
-
-	/**
-	 *
-	 * @param {Element} el
-	 * @param {function} callback
-	 * @returns {Element}
-	 */
-	function forEachAncestorsAndSelf(el, callback) {
-	    callback(el);
-	    while (el.parentNode && !callback(el)) {
-	        el = el.parentNode;
-	    }
-	    return el;
-	}
-
-	/**
-	 * @param {Element} referenceNode after this
-	 * @param {Element} newNode insert this
-	 */
-	function insertAfter(referenceNode, newNode) {
-	    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-	}
-
-	module.exports = {
-	    emit: function (el, name, opt) {
-	        el.dispatchEvent(new CE(name, opt));
+	      }
 	    },
-	    isFiniteNumber: isFiniteNumber,
-	    getFirstNumberLike: getFirstNumberLike,
-	    getDimension: getDimension,
-	    insertAfter: insertAfter,
-	    forEachAncestorsAndSelf: forEachAncestorsAndSelf,
-	    clamp: clamp
+	    setupCustomRecognizers: function setupCustomRecognizers() {
+	      var this$1 = this;
+	      var gestures$$1 = Object.keys(customEvents);
+	      for (var i = 0; i < gestures$$1.length; i++) {
+	        var gesture = gestures$$1[i];
+	        if (this$1._events[gesture]) {
+	          var opts = customEvents[gesture];
+	          var localCustomOpts = this$1[(gesture + "Options")] || {};
+	          var options = assign({}, opts, localCustomOpts);
+	          this$1.addRecognizer(gesture, options, {mainGesture: options.type});
+	          this$1.addEvent(gesture);
+	        }
+	      }
+	    },
+	    addRecognizer: function addRecognizer(gesture, options, ref) {
+	      if ( ref === void 0 ) ref = {};
+	      var mainGesture = ref.mainGesture;
+	      if (!this.recognizers[gesture]) {
+	        var recognizer = new Hammer[capitalize(mainGesture || gesture)](guardDirections(options));
+	        this.recognizers[gesture] = recognizer;
+	        this.hammer.add(recognizer);
+	        recognizer.recognizeWith(this.hammer.recognizers);
+	      }
+	    },
+	    addEvent: function addEvent(gesture) {
+	      var this$1 = this;
+	      this.hammer.on(gesture, function (e) { return this$1.$emit(gesture, e); });
+	    },
+	    updateEnabled: function updateEnabled(newVal, oldVal) {
+	      var this$1 = this;
+	      if (newVal === true) {
+	        this.enableAll();
+	      } else if (newVal === false) {
+	        this.disableAll();
+	      } else if (typeof newVal === 'object') {
+	        var keys = Object.keys(newVal);
+	        for (var i = 0; i < keys.length; i++) {
+	          var event = keys[i];
+	          if (this$1.recognizers[event]) {
+	            newVal[event]
+	              ? this$1.enable(event)
+	              : this$1.disable(event);
+	          }
+	        }
+	      }
+	    },
+	    enable: function enable(r) {
+	      var recognizer = this.recognizers[r];
+	      if (!recognizer.options.enable) {
+	        recognizer.set({ enable: true });
+	      }
+	    },
+	    disable: function disable(r) {
+	      var recognizer = this.recognizers[r];
+	      if (recognizer.options.enable) {
+	        recognizer.set({ enable: false });
+	      }
+	    },
+	    toggle: function toggle(r) {
+	      var recognizer = this.recognizers[r];
+	      if (recognizer) {
+	        recognizer.options.enable
+	          ? this.disable(r)
+	          : this.enable(r);
+	      }
+	    },
+	    enableAll: function enableAll(r) {
+	      this.toggleAll({ enable: true });
+	    },
+	    disableAll: function disableAll(r) {
+	      this.toggleAll({ enable: false });
+	    },
+	    toggleAll: function toggleAll(ref) {
+	      var this$1 = this;
+	      var enable = ref.enable;
+	      var keys = Object.keys(this.recognizers);
+	      for (var i = 0; i < keys.length; i++) {
+	        var r = this$1.recognizers[keys[i]];
+	        if (r.options.enable !== enable) {
+	          r.set({ enable: enable });
+	        }
+	      }
+	    },
+	    isEnabled: function isEnabled(r) {
+	      return this.recognizers[r] && this.recognizers[r].options.enable
+	    }
+	  },
+	  render: function render(h) {
+	    return h(this.tag, {}, this.$slots.default)
+	  }
 	};
 
-
-/***/ },
-/* 324 */
-/***/ function(module, exports) {
-
-	/* WEBPACK VAR INJECTION */(function(global) {
-	var NativeCustomEvent = global.CustomEvent;
-
-	function useNative () {
-	  try {
-	    var p = new NativeCustomEvent('cat', { detail: { foo: 'bar' } });
-	    return  'cat' === p.type && 'bar' === p.detail.foo;
-	  } catch (e) {
+	var installed = false;
+	var vueTouch = { config: config, customEvents: customEvents };
+	vueTouch.install = function install(Vue, opts) {
+	  if ( opts === void 0 ) opts = {};
+	  var name = opts.name || 'v-touch';
+	  Vue.component(name, assign(Component, { name: name }));
+	  installed = true;
+	}.bind(vueTouch);
+	vueTouch.registerCustomEvent = function registerCustomEvent(event, options) {
+	  if ( options === void 0 ) options = {};
+	  if (installed) {
+	    console.warn(("\n      [vue-touch]: Custom Event '" + event + "' couldn't be added to vue-touch.\n      Custom Events have to be registered before installing the plugin.\n      "));
+	    return
 	  }
-	  return false;
+	  options.event = event;
+	  customEvents[event] = options;
+	  Component.props[(event + "Options")] = {
+	    type: Object,
+	    default: function default$1() { return {} }
+	  };
+	}.bind(vueTouch);
+	vueTouch.component = Component;
+	if (true) {
+	  module.exports = vueTouch;
+	} else if (typeof define == "function" && define.amd) {
+	  define([], function(){ return vueTouch });
+	} else if (typeof window !== 'undefined' && window.Vue) {
+	  window.VueTouch = vueTouch;
+	  Vue.use(vueTouch);
 	}
 
-	/**
-	 * Cross-browser `CustomEvent` constructor.
-	 *
-	 * https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent.CustomEvent
-	 *
-	 * @public
-	 */
-
-	module.exports = useNative() ? NativeCustomEvent :
-
-	// IE >= 9
-	'undefined' !== typeof document && 'function' === typeof document.createEvent ? function CustomEvent (type, params) {
-	  var e = document.createEvent('CustomEvent');
-	  if (params) {
-	    e.initCustomEvent(type, params.bubbles, params.cancelable, params.detail);
-	  } else {
-	    e.initCustomEvent(type, false, false, void 0);
-	  }
-	  return e;
-	} :
-
-	// IE <= 8
-	function CustomEvent (type, params) {
-	  var e = document.createEventObject();
-	  e.type = type;
-	  if (params) {
-	    e.bubbles = Boolean(params.bubbles);
-	    e.cancelable = Boolean(params.cancelable);
-	    e.detail = params.detail;
-	  } else {
-	    e.bubbles = false;
-	    e.cancelable = false;
-	    e.detail = void 0;
-	  }
-	  return e;
-	}
-
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
-
-/***/ },
-/* 325 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	var numberIsNan = __webpack_require__(326);
-
-	module.exports = Number.isFinite || function (val) {
-		return !(typeof val !== 'number' || numberIsNan(val) || val === Infinity || val === -Infinity);
-	};
-
-
-/***/ },
-/* 326 */
-/***/ function(module, exports) {
-
-	'use strict';
-	module.exports = Number.isNaN || function (x) {
-		return x !== x;
-	};
+	})));
+	//# sourceMappingURL=vue-touch.js.map
 
 
 /***/ }

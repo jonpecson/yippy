@@ -24,6 +24,7 @@ Vue.use(VueTouch, {name: 'v-touch'})
 const routes = [
   { path: '/', component: Home, name: 'home' },
   { path: '/login', component: Auth, name: 'login' },
+  { path: '/newpassword', component: Auth, name: 'newpassword' },
   { path: '/logout', component: Logout, name: 'logout' },
   { path: '/register', component: Register, name: 'register' },
   { path: '/timeline', component: Timeline, name: 'timeline' },

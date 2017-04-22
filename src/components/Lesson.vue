@@ -160,22 +160,21 @@ export default {
             this.redirectGuest();
         }
 	    
-	    this.currentLesson = 37;
+	    this.currentLesson = 6;
 	    this.getLesson();
     },
     methods: {
     	initSlider: function () {
     		setTimeout(function(){
     			var slider = document.querySelectorAll('.bar input[type="range"]');
-    			console.log(slider)
-	    		rangesliderJs.create(slider);
+    			rangesliderJs.create(slider);
 	    		
 	        }, 2);
     	},
     	getLesson: function () {
             var that = this;
 
-            timeline.lesson(this, this.currentLesson, function (response) {
+            timeline.lesson(this, this.currentLesson, 'nl', function (response) {
                 console.log(response)
 
                 var counter = 0;
@@ -264,8 +263,7 @@ export default {
 
     watch: {
 		'$route' (to, from) {
-			console.log(to);
-	  		this.currentLesson = to;
+			this.currentLesson = to;
 		}
 	},
 
