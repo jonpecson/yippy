@@ -11,7 +11,7 @@
             <div class="child-name">{{ child.get('name') }}</div>
             <ul class="months-level">
                 <li>
-                    <span>{{ child.get('age') }}</span>  
+                    <span>{{ childAge }}</span>  
                     <span>Maanden</span>
                 </li>
                 <li>
@@ -98,7 +98,7 @@ export default {
             lessons: [],
             showModal: false,
             currentLevel: 1,
-            child_age: 0
+            childAge: 0
         }
     },
     created: function() {
@@ -108,37 +108,29 @@ export default {
         }
 
         this.child = auth.user.data.child;
-        this.child_age = this.child.get('age');
+        this.childAge = 8;// this.child.get('age');
         this.showTimeline();
 
         this.getLevels();
 
-        this.currentLevel = 2;
+        this.currentLevel = 1;
         this.getLessons();
     },
     methods: {
         getLevels: function () {
             var that = this;
 
-            // Dummy
-            this.levels.push({
-                id: 3,
-                counter: 'Level 1',
-                description: 'dummy data',
-                active: 'active'
-            });
-            
             timeline.levels(this, function (response) {
                 $.each(response.data, function (index, value) {
-                    var active = '';
-                    if (that.child_age >= value.min_month && that.child_age <= value.max_month) {
-                        active = 'active';
+                    var activeStr = '';
+                    if (that.childAge >= parseInt(value.min_month) && that.childAge <= parseInt(value.max_month)) {
+                        activeStr = 'active';
                     }
                     that.levels.push({
                         id: value.id,
                         counter: value.title,
                         description: value.description,
-                        active: active
+                        active: activeStr
                     });
                 });
                 
@@ -150,6 +142,7 @@ export default {
             var that = this;
 
             timeline.lessons(this, this.currentLevel, function (response) {
+                console.log(response)
                 var counter = 0;
                 $.each(response.data, function (index, value) {
                     var active = '';

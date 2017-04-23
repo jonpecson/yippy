@@ -134,8 +134,8 @@ body {
   margin: 0 20px;
   text-align: center;
 }
-#page-lesson #paper_foo1,
-#page-lesson #paper_foo2 {
+#page-lesson .paper_foo1,
+#page-lesson .paper_foo2 {
   position: absolute;
   background: #fff;
   bottom: -8px;
@@ -144,10 +144,10 @@ body {
   margin-left: 7px;
   border-radius: 0px 0px 8px 8px;
 }
-#page-lesson #paper_foo1 {
+#page-lesson .paper_foo1 {
   opacity: 0.80;
 }
-#page-lesson #paper_foo2 {
+#page-lesson .paper_foo2 {
   width: 270px;
   opacity: 0.75;
 }
@@ -201,11 +201,11 @@ body {
 #page-lesson .text-left {
   text-align: left;
 }
-#page-lesson #stack ul {
+#page-lesson .stack ul {
   margin: 30px 0;
   padding: 0;
 }
-#page-lesson #stack ul li {
+#page-lesson .stack ul li {
   width: 240px;
   color: #1e1e1e;
   display: block;

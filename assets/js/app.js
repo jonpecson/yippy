@@ -9667,7 +9667,12 @@
 			this.data.type = result.child_type;
 			this.data.parent_id = result.user_id;
 			this.data.birthday = result.child_birthday;
-			this.data.age = result.child_month;
+
+			this.data.age = 1;
+			if (result.child_month) {
+				this.data.age = result.child_month;
+			}
+
 			this.data.image = result.image;
 		},
 		get: function get(key) {
@@ -35325,7 +35330,7 @@
 	//             <div class="child-name">{{ child.get('name') }}</div>
 	//             <ul class="months-level">
 	//                 <li>
-	//                     <span>{{ child.get('age') }}</span>  
+	//                     <span>{{ childAge }}</span>  
 	//                     <span>Maanden</span>
 	//                 </li>
 	//                 <li>
@@ -35404,7 +35409,7 @@
 	            lessons: [],
 	            showModal: false,
 	            currentLevel: 1,
-	            child_age: 0
+	            childAge: 0
 	        };
 	    },
 
@@ -35415,37 +35420,29 @@
 	        }
 
 	        this.child = _auth2.default.user.data.child;
-	        this.child_age = this.child.get('age');
+	        this.childAge = 8; // this.child.get('age');
 	        this.showTimeline();
 
 	        this.getLevels();
 
-	        this.currentLevel = 2;
+	        this.currentLevel = 1;
 	        this.getLessons();
 	    },
 	    methods: {
 	        getLevels: function getLevels() {
 	            var that = this;
 
-	            // Dummy
-	            this.levels.push({
-	                id: 3,
-	                counter: 'Level 1',
-	                description: 'dummy data',
-	                active: 'active'
-	            });
-
 	            _timeline2.default.levels(this, function (response) {
 	                _jquery2.default.each(response.data, function (index, value) {
-	                    var active = '';
-	                    if (that.child_age >= value.min_month && that.child_age <= value.max_month) {
-	                        active = 'active';
+	                    var activeStr = '';
+	                    if (that.childAge >= parseInt(value.min_month) && that.childAge <= parseInt(value.max_month)) {
+	                        activeStr = 'active';
 	                    }
 	                    that.levels.push({
 	                        id: value.id,
 	                        counter: value.title,
 	                        description: value.description,
-	                        active: active
+	                        active: activeStr
 	                    });
 	                });
 	            }, function (msg, response) {
@@ -35456,6 +35453,7 @@
 	            var that = this;
 
 	            _timeline2.default.lessons(this, this.currentLevel, function (response) {
+	                console.log(response);
 	                var counter = 0;
 	                _jquery2.default.each(response.data, function (index, value) {
 	                    var active = '';
@@ -35698,7 +35696,7 @@
 /* 294 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div id=\"timeline-container\">\n    <header>\n        <div class=\"title-area\">\n            <a href=\"javascript:void(0);\"><i class=\"icon-yipp_profile_line\"></i></a>\n            <span>Trainingen</span>\n            <router-link :to=\"{ name: 'emergency'}\"><i class=\"icon-yipp_notification_line2\"></i></router-link>\n        </div>\n\n        <div class=\"user-area\">\n            <div class=\"child-name\">{{ child.get('name') }}</div>\n            <ul class=\"months-level\">\n                <li>\n                    <span>{{ child.get('age') }}</span>  \n                    <span>Maanden</span>\n                </li>\n                <li>\n                    <span>{{ currentLevel }}</span>\n                    <span>Level</span>\n                </li>\n                <li>\n                    <a href=\"#\" v-on:click.prevent=\"toggle\" v-if=\"page == 'lessons'\"><i class=\"icon-yipp_down\"></i></a>\n                    <a href=\"#\" v-on:click.prevent=\"toggle\" v-if=\"page == 'levels'\"><i class=\"icon-yipp_up\"></i></a>\n                </li>\n            </ul>\n\n            <div class=\"photo\"><img class=\"avatar\" v-bind:src=\"child.get('image')\"></div>\n            \n        </div>\n    </header>\n        \n        <section class=\"traingen\" v-if=\"page == 'lessons'\">\n            <ul id=\"list-icons\">\n                <li v-for=\"lesson in lessons\">\n                    <a href=\"#\" v-bind:data-id=\"lesson.id\" v-on:click.prevent=\"goTodo\">\n                        <span class=\"icon big active\" v-bind:class=\"lesson.icon\"></span> \n                        {{ lesson.counter }}. {{ lesson.description }}\n                    </a>\n                </li>\n            </ul>\n        </section>\n        \n            \n        <section class=\"traingen2\" v-if=\"page == 'levels'\">\n                    \n            <ul id=\"list-text\">\n                <li v-for=\"level in levels\">\n                    <a href=\"#\" v-if=\"level.active == 'active'\" \n                        v-bind:data-id=\"level.id\" \n                        v-on:click.prevent=\"setCurrentLevel\"\n                        v-bind:class=\"level.active\">\n                        <span v-bind:data-id=\"level.id\" class=\"level\">{{ level.counter }}</span> \n                        <span v-bind:data-id=\"level.id\" class=\"months\">{{ level.description }}</span>\n                    </a>\n\n                    <a href=\"#\" v-if=\"level.active == ''\" \n                        v-bind:data-id=\"level.id\" \n                        v-on:click.prevent=\"\"\n                        @click=\"showModal = true\"\n                        v-bind:class=\"level.active\">\n                        <span v-bind:data-id=\"level.id\" class=\"level\">{{ level.counter }}</span> \n                        <span v-bind:data-id=\"level.id\" class=\"months\">{{ level.description }}</span>\n                    </a>\n                </li>\n            </ul>\n        \n        </section>\n        \n        <footer>\n            <ul>\n                <li><a href=\"javascript:void(0);\" class=\"active\"><span class=\"icon-yipp_home_full-\"></span>Training</a></li>\n                <li><router-link :to=\"{ path: 'challenge'}\"><span class=\"icon-yipp_challenge_line\"></span>Challenge</router-link></li>\n            </ul>\n        </footer>\n\n        <modal v-if=\"showModal\" @close=\"showModal = false\">\n            <h3 slot=\"header\">Ooops...</h3>\n            <p slot=\"body\">This is not yet available</p>\n        </modal>\n</div>\n";
+	module.exports = "\n<div id=\"timeline-container\">\n    <header>\n        <div class=\"title-area\">\n            <a href=\"javascript:void(0);\"><i class=\"icon-yipp_profile_line\"></i></a>\n            <span>Trainingen</span>\n            <router-link :to=\"{ name: 'emergency'}\"><i class=\"icon-yipp_notification_line2\"></i></router-link>\n        </div>\n\n        <div class=\"user-area\">\n            <div class=\"child-name\">{{ child.get('name') }}</div>\n            <ul class=\"months-level\">\n                <li>\n                    <span>{{ childAge }}</span>  \n                    <span>Maanden</span>\n                </li>\n                <li>\n                    <span>{{ currentLevel }}</span>\n                    <span>Level</span>\n                </li>\n                <li>\n                    <a href=\"#\" v-on:click.prevent=\"toggle\" v-if=\"page == 'lessons'\"><i class=\"icon-yipp_down\"></i></a>\n                    <a href=\"#\" v-on:click.prevent=\"toggle\" v-if=\"page == 'levels'\"><i class=\"icon-yipp_up\"></i></a>\n                </li>\n            </ul>\n\n            <div class=\"photo\"><img class=\"avatar\" v-bind:src=\"child.get('image')\"></div>\n            \n        </div>\n    </header>\n        \n        <section class=\"traingen\" v-if=\"page == 'lessons'\">\n            <ul id=\"list-icons\">\n                <li v-for=\"lesson in lessons\">\n                    <a href=\"#\" v-bind:data-id=\"lesson.id\" v-on:click.prevent=\"goTodo\">\n                        <span class=\"icon big active\" v-bind:class=\"lesson.icon\"></span> \n                        {{ lesson.counter }}. {{ lesson.description }}\n                    </a>\n                </li>\n            </ul>\n        </section>\n        \n            \n        <section class=\"traingen2\" v-if=\"page == 'levels'\">\n                    \n            <ul id=\"list-text\">\n                <li v-for=\"level in levels\">\n                    <a href=\"#\" v-if=\"level.active == 'active'\" \n                        v-bind:data-id=\"level.id\" \n                        v-on:click.prevent=\"setCurrentLevel\"\n                        v-bind:class=\"level.active\">\n                        <span v-bind:data-id=\"level.id\" class=\"level\">{{ level.counter }}</span> \n                        <span v-bind:data-id=\"level.id\" class=\"months\">{{ level.description }}</span>\n                    </a>\n\n                    <a href=\"#\" v-if=\"level.active == ''\" \n                        v-bind:data-id=\"level.id\" \n                        v-on:click.prevent=\"\"\n                        @click=\"showModal = true\"\n                        v-bind:class=\"level.active\">\n                        <span v-bind:data-id=\"level.id\" class=\"level\">{{ level.counter }}</span> \n                        <span v-bind:data-id=\"level.id\" class=\"months\">{{ level.description }}</span>\n                    </a>\n                </li>\n            </ul>\n        \n        </section>\n        \n        <footer>\n            <ul>\n                <li><a href=\"javascript:void(0);\" class=\"active\"><span class=\"icon-yipp_home_full-\"></span>Training</a></li>\n                <li><router-link :to=\"{ path: 'challenge'}\"><span class=\"icon-yipp_challenge_line\"></span>Challenge</router-link></li>\n            </ul>\n        </footer>\n\n        <modal v-if=\"showModal\" @close=\"showModal = false\">\n            <h3 slot=\"header\">Ooops...</h3>\n            <p slot=\"body\">This is not yet available</p>\n        </modal>\n</div>\n";
 
 /***/ },
 /* 295 */
@@ -35894,54 +35892,54 @@
 	// 		<a href="#" v-on:click.prevent="startLesson" class="btn bottom white">Start</a>
 	// 	</div>
 	//
-	// 	<div class="panel" id="cards" v-if="page == 'cards'">
+	// 	<div class="panel" v-if="page == 'page_lesson'">
 	// 		<a v-on:click.prevent="back('start')" class="back">
 	// 			<i class="icon-yipp_check_full"></i>
 	// 		</a>
 	// 		<div class="bar">
 	// 			<!-- <span class="bar-inner"></span> -->
-	// 			<input type="range" min="0" max="5" value="1" step="0" disabled>
+	// 			<input id="bar-input" type="range" v-bind:min="bar_min" v-bind:max="bar_max" v-bind:value="bar_current" step="0" >
 	// 		</div>
 	// 		<router-link :to="{ name: 'timeline'}" class="home">
 	// 			<i class="icon-yipp_home_full-"></i>
 	// 		</router-link>
 	//
-	// 		<div id="knowledge-cards">
-	// 			<div id="paper-1" class="paper">
+	// 		<div v-if="lessonType == 'knowledge_card'">
+	// 			<div id="knowledge-cards"  v-for="card in cards">
+	// 				<div class="paper">
+	// 					<h3>{{ card.title }}</h3>
+	// 					<p>{{ card.details }}</p>
 	//
-	// 				<h3>Why?</h3>
-	//
-	// 				<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>
-	//
-	// 				<i class="heart icon-yipp_check_full"></i>
-	//
-	// 				<div id="paper_foo1">
-	// 					<div id="paper_foo2"></div>
-	// 				</div>
-	// 			</div>
-	//
-	// 			<div id="paper-2" class="paper">
-	//
-	// 				<h3>Why?2</h3>
-	//
-	// 				<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>
-	//
-	// 				<i class="heart icon-yipp_check_full"></i>
-	//
-	// 				<div id="paper_foo1">
-	// 					<div id="paper_foo2"></div>
+	// 					<i class="heart icon-yipp_check_full"></i>
+	// 					<div class="paper_foo1">
+	// 						<div class="paper_foo2"></div>
+	// 					</div>
 	// 				</div>
 	// 			</div>
 	// 		</div>
 	//
+	// 		<div class="content" v-else>
+	// 			<h1>{{ currentTodoContent.title }}</h1>
+	// 			<i class="biggest icon-yipp_check_full"></i>
+	// 			<p class="text-center">{{ currentTodoContent.details }}</p>
+	//
+	// 			<div class="bottom">
+	// 				<router-link :to="{ name: 'challenge'}" class="btn white">
+	// 					Start Challenge
+	// 				</router-link>
+	//
+	// 				<br>
+	// 				<a href="" v-on:click.prevent="nextLesson" class="btn white">Next Lesson</a>
+	// 			</div>
+	//
+	// 		</div>
 	// 	</div>
 	//
-	// 	<div class="panel" id="stack" v-if="page == 'stack'">
+	// 	<!-- <div class="panel stack" id="" v-if="page == 'stack'">
 	// 		<a v-on:click.prevent="back('cards')" class="back">
 	// 			<i class="icon-yipp_check_full"></i>
 	// 		</a>
 	// 		<div class="bar">
-	// 			<!-- <span class="bar-inner"></span> -->
 	// 			<input type="range" min="0" max="5" value="1" step="1" disabled>
 	// 		</div>
 	// 		<router-link :to="{ name: 'timeline'}" class="home">
@@ -35963,15 +35961,15 @@
 	//
 	// 		</div>
 	//
-	// 	</div>
+	// 	</div> -->
 	//
-	// 	<div class="panel" id="complete" v-if="page == 'complete'">
+	// 	<div class="panel" v-if="page == 'complete'">
 	// 		<a v-on:click.prevent="back('stack')" class="back">
 	// 			<i class="icon-yipp_check_full"></i>
 	// 		</a>
 	// 		<div class="bar">
 	// 			<!-- <span class="bar-inner"></span> -->
-	// 			<input type="range" min="0" max="5" value="5" step="1" disabled>
+	// 			<!-- <input type="range" min="0" max="5" value="5" step="1" disabled> -->
 	// 		</div>
 	// 		<router-link :to="{ name: 'timeline'}" class="home">
 	// 			<i class="icon-yipp_home_full-"></i>
@@ -36017,7 +36015,16 @@
 	            levels: [],
 	            lessons: [],
 	            showModal: false,
-	            currentLesson: 1
+	            currentLesson: 1,
+	            cards: [],
+	            todos: [],
+	            currentTodoContent: {},
+	            currentTodoCount: 0,
+	            lessonType: '',
+	            bar_min: 0,
+	            bar_max: 0,
+	            bar_current: 0,
+	            slider: ''
 	        };
 	    },
 
@@ -36032,45 +36039,85 @@
 	    },
 	    methods: {
 	        initSlider: function initSlider() {
+	            var that = this;
 	            setTimeout(function () {
-	                var slider = document.querySelectorAll('.bar input[type="range"]');
-	                _rangesliderJs2.default.create(slider);
+	                slider = document.querySelectorAll('#bar-input');
+	                that.slider = _rangesliderJs2.default.create(slider);
 	            }, 2);
 	        },
 	        getLesson: function getLesson() {
 	            var that = this;
 
 	            _timeline2.default.lesson(this, this.currentLesson, 'nl', function (response) {
-	                console.log(response);
-
 	                var counter = 0;
-	                _jquery2.default.each(response.todos.todos, function (index, content) {
-	                    switch (content.card_type) {
-	                        case 'knowledge':
-
-	                            break;
-
-	                        case 'multiple_choice':
-
-	                            break;
-
-	                        case 'list_field':
-
-	                            break;
-
-	                        case 'sliders':
-
-	                            break;
-	                    }
-	                });
+	                that.todos = response.todos;
+	                that.bar_max = response.todos.length;
+	                /*
+	                   $.each(response.todos, function (index, content) {
+	                   	console.log(content.Contents.card_style, content.Contents.card_type)
+	                   	if (content.Contents.card_style == 'card' && content.Contents.card_type == 'knowledge') {
+	                   		that.cards.push(content.Contents);
+	                   		// console.log(that.cards)
+	                   	} else {
+	                   		
+	                   	}
+	                       // switch (content.card_type) {
+	                       // 	case 'knowledge':
+	                        // 	break;
+	                        // 	case 'multiple_choice':
+	                        // 	break;
+	                        // 	case 'list_field':
+	                        // 	break;
+	                        // 	case 'sliders':
+	                        // 	break;
+	                       // }
+	                   });
+	                   */
 	            }, function (msg, response) {
 	                that.logError(msg);
 	            });
 	        },
 	        startLesson: function startLesson() {
-	            this.page = 'cards';
-
 	            this.initSlider();
+	            this.page = 'page_lesson';
+	            this.nextLesson();
+	        },
+	        nextLesson: function nextLesson() {
+	            if (this.currentTodoCount == this.bar_max) {
+	                return;
+	            }
+
+	            console.log('next lesson', this.currentTodoCount);
+	            var ctr = 0;
+	            var todo = '';
+	            var that = this;
+
+	            _jquery2.default.each(this.todos, function (index, content) {
+	                if (ctr == that.currentTodoCount) {
+	                    that.bar_current = ctr;
+	                    var inputRange = (0, _jquery2.default)(that.slider);
+	                    inputRange.val(ctr).change();
+
+	                    that.otherType(content);
+
+	                    // 		console.log(content.Contents.card_style)
+	                    // 		if (content.Contents.card_style == 'card' && content.Contents.card_type == 'knowledge') {
+	                    // that.knowledgeCardType(content);
+	                    // 		} else {
+	                    // 			that.otherType(content);
+	                    // 		}
+
+	                    that.currentTodoCount++;
+	                    return false;
+	                }
+
+	                ctr++;
+	            });
+	        },
+	        knowledgeCardType: function knowledgeCardType(content) {
+	            this.lessonType = 'knowledge_card';
+	            this.cards = [];
+	            this.cards = [content.Contents];
 
 	            var that = this;
 	            setTimeout(function () {
@@ -36082,6 +36129,11 @@
 	                    that.initSwipe(this);
 	                });
 	            }, 1);
+	        },
+	        otherType: function otherType(content) {
+	            console.log('other');
+	            this.lessonType = 'other';
+	            this.currentTodoContent = content.Contents;
 	        },
 	        initSwipe: function initSwipe(elem) {
 	            var that = this;
@@ -36121,7 +36173,8 @@
 	            this.page = page;
 	        },
 	        next: function next(page) {
-	            this.page = page;
+	            this.nextLesson();
+	            // this.page = page;
 	        },
 	        redirectGuest: function redirectGuest() {
 	            this.$router.push('login');
@@ -39908,7 +39961,7 @@
 /* 313 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div id=\"page-lesson\">\n\n\t<div  class=\"panel\" id=\"start\" v-if=\"page == 'start'\">\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"back\">\n\t\t\t<i class=\"icon-back\"></i>\n\t\t</router-link>\n\n\t\t<div id=\"popUp\">\n\t\t\t<i class=\"big icon-yipp_apple_full\"></i>\n\t\t\t<h3>Lesson 2: Screentime</h3>\n\t\t\t<p>TestIn this lesson, we will help to start the first practice appetizers</p>\n\t\t\t<hr>\n\t\t\t<span><i class=\"icon-yipp_check_full\"></i> 5min</span>\n\t\t</div>\n\t\t\t\n\t\t<a href=\"#\" v-on:click.prevent=\"startLesson\" class=\"btn bottom white\">Start</a>\n\t</div>\n\n\t<div class=\"panel\" id=\"cards\" v-if=\"page == 'cards'\">\n\t\t<a v-on:click.prevent=\"back('start')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<!-- <span class=\"bar-inner\"></span> -->\n\t\t\t<input type=\"range\" min=\"0\" max=\"5\" value=\"1\" step=\"0\" disabled>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div id=\"knowledge-cards\">\n\t\t\t<div id=\"paper-1\" class=\"paper\">\n\n\t\t\t\t<h3>Why?</h3>\n\n\t\t\t\t<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>\n\n\t\t\t\t<i class=\"heart icon-yipp_check_full\"></i>\n\n\t\t\t\t<div id=\"paper_foo1\">\n\t\t\t\t\t<div id=\"paper_foo2\"></div>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t\t<div id=\"paper-2\" class=\"paper\">\n\n\t\t\t\t<h3>Why?2</h3>\n\n\t\t\t\t<p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>\n\n\t\t\t\t<i class=\"heart icon-yipp_check_full\"></i>\n\n\t\t\t\t<div id=\"paper_foo1\">\n\t\t\t\t\t<div id=\"paper_foo2\"></div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\n\t</div>\n\t\t\n\t<div class=\"panel\" id=\"stack\" v-if=\"page == 'stack'\">\n\t\t<a v-on:click.prevent=\"back('cards')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<!-- <span class=\"bar-inner\"></span> -->\n\t\t\t<input type=\"range\" min=\"0\" max=\"5\" value=\"1\" step=\"1\" disabled>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"content\" v-on:click.prevent=\"next('complete')\">\n\t\t\t\n\t\t\t<p class=\"text-center\">Te weinig slapen vergroot de kans op overgewicht bij kinderen, omdat:</p>\n\t\t\t\n\t\t\t<ul>\n\t\t\t\t\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t\n\t\t\t</ul>\n\n\t\t</div>\n\n\t</div>\n\t\t\t\n\t<div class=\"panel\" id=\"complete\" v-if=\"page == 'complete'\">\n\t\t<a v-on:click.prevent=\"back('stack')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<!-- <span class=\"bar-inner\"></span> -->\n\t\t\t<input type=\"range\" min=\"0\" max=\"5\" value=\"5\" step=\"1\" disabled>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"content\">\n\t\t\n\t\t\t<h1>Les compleet!</h1>\n\t\t\t\n\t\t\t<i class=\"biggest icon-yipp_check_full\"></i>\n\t\t\t\n\t\t\t<p class=\"text-center\">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>\n\t\t\t\n\t\t\t\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<router-link :to=\"{ name: 'challenge'}\" class=\"btn white\">\n\t\t\t\tStart Challenge\n\t\t\t\t</router-link>\n\n\t\t\t\t<br>\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"back('start')\" class=\"btn white\">Reset Lesson</a>\n\t\t\t</div>\n\t\t\n\t\t</div>\n\n\t</div>\n\n\t<modal v-if=\"showModal\" @close=\"showModal = false\">\n        <h3 slot=\"header\">Lorem Ipsum</h3>\n        <p slot=\"body\">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>\n    </modal>\n\n</div>\n\t\n";
+	module.exports = "\n<div id=\"page-lesson\">\n\n\t<div  class=\"panel\" id=\"start\" v-if=\"page == 'start'\">\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"back\">\n\t\t\t<i class=\"icon-back\"></i>\n\t\t</router-link>\n\n\t\t<div id=\"popUp\">\n\t\t\t<i class=\"big icon-yipp_apple_full\"></i>\n\t\t\t<h3>Lesson 2: Screentime</h3>\n\t\t\t<p>TestIn this lesson, we will help to start the first practice appetizers</p>\n\t\t\t<hr>\n\t\t\t<span><i class=\"icon-yipp_check_full\"></i> 5min</span>\n\t\t</div>\n\t\t\t\n\t\t<a href=\"#\" v-on:click.prevent=\"startLesson\" class=\"btn bottom white\">Start</a>\n\t</div>\n\n\t<div class=\"panel\" v-if=\"page == 'page_lesson'\">\n\t\t<a v-on:click.prevent=\"back('start')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<!-- <span class=\"bar-inner\"></span> -->\n\t\t\t<input id=\"bar-input\" type=\"range\" v-bind:min=\"bar_min\" v-bind:max=\"bar_max\" v-bind:value=\"bar_current\" step=\"0\" >\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div v-if=\"lessonType == 'knowledge_card'\">\n\t\t\t<div id=\"knowledge-cards\"  v-for=\"card in cards\">\n\t\t\t\t<div class=\"paper\">\n\t\t\t\t\t<h3>{{ card.title }}</h3>\n\t\t\t\t\t<p>{{ card.details }}</p>\n\n\t\t\t\t\t<i class=\"heart icon-yipp_check_full\"></i>\n\t\t\t\t\t<div class=\"paper_foo1\">\n\t\t\t\t\t\t<div class=\"paper_foo2\"></div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"content\" v-else>\n\t\t\t<h1>{{ currentTodoContent.title }}</h1>\n\t\t\t<i class=\"biggest icon-yipp_check_full\"></i>\n\t\t\t<p class=\"text-center\">{{ currentTodoContent.details }}</p>\n\t\t\t\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<router-link :to=\"{ name: 'challenge'}\" class=\"btn white\">\n\t\t\t\t\tStart Challenge\n\t\t\t\t</router-link>\n\n\t\t\t\t<br>\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"nextLesson\" class=\"btn white\">Next Lesson</a>\n\t\t\t</div>\n\t\t\n\t\t</div>\n\t</div>\n\t\t\n\t<!-- <div class=\"panel stack\" id=\"\" v-if=\"page == 'stack'\">\n\t\t<a v-on:click.prevent=\"back('cards')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<input type=\"range\" min=\"0\" max=\"5\" value=\"1\" step=\"1\" disabled>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"content\" v-on:click.prevent=\"next('complete')\">\n\t\t\t\n\t\t\t<p class=\"text-center\">Te weinig slapen vergroot de kans op overgewicht bij kinderen, omdat:</p>\n\t\t\t\n\t\t\t<ul>\n\t\t\t\t\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t\n\t\t\t</ul>\n\n\t\t</div>\n\n\t</div> -->\n\t\t\t\n\t<div class=\"panel\" v-if=\"page == 'complete'\">\n\t\t<a v-on:click.prevent=\"back('stack')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<!-- <span class=\"bar-inner\"></span> -->\n\t\t\t<!-- <input type=\"range\" min=\"0\" max=\"5\" value=\"5\" step=\"1\" disabled> -->\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"content\">\n\t\t\n\t\t\t<h1>Les compleet!</h1>\n\t\t\t\n\t\t\t<i class=\"biggest icon-yipp_check_full\"></i>\n\t\t\t\n\t\t\t<p class=\"text-center\">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>\n\t\t\t\n\t\t\t\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<router-link :to=\"{ name: 'challenge'}\" class=\"btn white\">\n\t\t\t\tStart Challenge\n\t\t\t\t</router-link>\n\n\t\t\t\t<br>\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"back('start')\" class=\"btn white\">Reset Lesson</a>\n\t\t\t</div>\n\t\t\n\t\t</div>\n\n\t</div>\n\n\t<modal v-if=\"showModal\" @close=\"showModal = false\">\n        <h3 slot=\"header\">Lorem Ipsum</h3>\n        <p slot=\"body\">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>\n    </modal>\n\n</div>\n\t\n";
 
 /***/ },
 /* 314 */

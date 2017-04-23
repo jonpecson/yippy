@@ -17,54 +17,37 @@
 		<a href="#" v-on:click.prevent="startLesson" class="btn bottom white">Start</a>
 	</div>
 
-	<div class="panel" v-if="page == 'page_lesson'">
+	<div class="panel" id="cards" v-if="page == 'cards'">
 		<a v-on:click.prevent="back('start')" class="back">
 			<i class="icon-yipp_check_full"></i>
 		</a>
 		<div class="bar">
 			<!-- <span class="bar-inner"></span> -->
-			<input id="bar-input" type="range" v-bind:min="bar_min" v-bind:max="bar_max" v-bind:value="bar_current" step="0" >
+			<input type="range" min="0" max="5" value="1" step="0" disabled>
 		</div>
 		<router-link :to="{ name: 'timeline'}" class="home">
 			<i class="icon-yipp_home_full-"></i>
 		</router-link>
 
-		<div v-if="lessonType == 'knowledge_card'">
-			<div id="knowledge-cards"  v-for="card in cards">
-				<div class="paper">
-					<h3>{{ card.title }}</h3>
-					<p>{{ card.details }}</p>
+		<div id="knowledge-cards"  v-for="card in cards">
+			<div v-bind:id="'paper-' + card.id" class="paper">
+				<h3>{{ card.title }}</h3>
+				<p>{{ card.details }}</p>
 
-					<i class="heart icon-yipp_check_full"></i>
-					<div class="paper_foo1">
-						<div class="paper_foo2"></div>
-					</div>
+				<i class="heart icon-yipp_check_full"></i>
+				<div id="paper_foo1">
+					<div id="paper_foo2"></div>
 				</div>
 			</div>
 		</div>
-
-		<div class="content" v-else>
-			<h1>{{ currentTodoContent.title }}</h1>
-			<i class="biggest icon-yipp_check_full"></i>
-			<p class="text-center">{{ currentTodoContent.details }}</p>
-			
-			<div class="bottom">
-				<router-link :to="{ name: 'challenge'}" class="btn white">
-					Start Challenge
-				</router-link>
-
-				<br>
-				<a href="" v-on:click.prevent="nextLesson" class="btn white">Next Lesson</a>
-			</div>
-		
-		</div>
 	</div>
 		
-	<!-- <div class="panel stack" id="" v-if="page == 'stack'">
+	<div class="panel" id="stack" v-if="page == 'stack'">
 		<a v-on:click.prevent="back('cards')" class="back">
 			<i class="icon-yipp_check_full"></i>
 		</a>
 		<div class="bar">
+			<!-- <span class="bar-inner"></span> -->
 			<input type="range" min="0" max="5" value="1" step="1" disabled>
 		</div>
 		<router-link :to="{ name: 'timeline'}" class="home">
@@ -86,15 +69,15 @@
 
 		</div>
 
-	</div> -->
+	</div>
 			
-	<div class="panel" v-if="page == 'complete'">
+	<div class="panel" id="complete" v-if="page == 'complete'">
 		<a v-on:click.prevent="back('stack')" class="back">
 			<i class="icon-yipp_check_full"></i>
 		</a>
 		<div class="bar">
 			<!-- <span class="bar-inner"></span> -->
-			<!-- <input type="range" min="0" max="5" value="5" step="1" disabled> -->
+			<input type="range" min="0" max="5" value="5" step="1" disabled>
 		</div>
 		<router-link :to="{ name: 'timeline'}" class="home">
 			<i class="icon-yipp_home_full-"></i>
@@ -152,15 +135,7 @@ export default {
             lessons: [],
             showModal: false,
             currentLesson: 1,
-            cards: [],
-            todos: [],
-            currentTodoContent: {},
-            currentTodoCount: 0,
-            lessonType: '',
-            bar_min: 0,
-            bar_max: 0,
-            bar_current: 0,
-            slider: '',
+            cards: []
         }
     },
     created: function() {
@@ -174,10 +149,9 @@ export default {
     },
     methods: {
     	initSlider: function () {
-    		var that = this;
     		setTimeout(function(){
-    			slider = document.querySelectorAll('#bar-input');
-    			that.slider = rangesliderJs.create(slider);
+    			var slider = document.querySelectorAll('.bar input[type="range"]');
+    			rangesliderJs.create(slider);
 	    		
 	        }, 2);
     	},
@@ -186,9 +160,6 @@ export default {
 
             timeline.lesson(this, this.currentLesson, 'nl', function (response) {
             	var counter = 0;
-            	that.todos = response.todos;
-            	that.bar_max = response.todos.length;
-            	/*
                 $.each(response.todos, function (index, content) {
                 	console.log(content.Contents.card_style, content.Contents.card_type)
                 	if (content.Contents.card_style == 'card' && content.Contents.card_type == 'knowledge') {
@@ -215,54 +186,14 @@ export default {
                     // 	break;
                     // }
                 });
-                */
             }, function (msg, response) {
                 that.logError(msg);
             });
         },
     	startLesson: function () {
+    		this.page = 'cards';
+
     		this.initSlider();
-    		this.page = 'page_lesson';
-    		this.nextLesson();
-    	},
-    	nextLesson: function () {
-    		if (this.currentTodoCount == this.bar_max) {
-    			return;
-    		}
-
-    		console.log('next lesson', this.currentTodoCount)
-    		var ctr = 0;
-    		var todo = '';
-    		var that = this;
-    		
-    		$.each(this.todos, function (index, content) {
-    			if (ctr == that.currentTodoCount) {
-    				that.bar_current = ctr;
-    				var inputRange = $(that.slider);
-    				inputRange.val(ctr).change()
-
-    				that.otherType(content);
-
-    		// 		console.log(content.Contents.card_style)
-	    	// 		if (content.Contents.card_style == 'card' && content.Contents.card_type == 'knowledge') {
-						// that.knowledgeCardType(content);
-	    	// 		} else {
-	    	// 			that.otherType(content);
-	    	// 		}
-    			
-    				that.currentTodoCount++;
-    				return false;
-    			}
-
-    			ctr++;
-    		}); 
-    	},
-    	knowledgeCardType: function (content) {
-    		this.lessonType = 'knowledge_card';
-    		this.cards = [];
-    		this.cards = [
-				content.Contents
-			]; 
 
     		var that = this;
     		setTimeout(function(){
@@ -275,10 +206,8 @@ export default {
     			});
 	        }, 1);
     	},
-    	otherType: function (content) {
-    		console.log('other')
-    		this.lessonType = 'other';
-    		this.currentTodoContent = content.Contents;
+    	knowledgeCardType: function () {
+
     	},
     	initSwipe: function (elem) {
     		var that = this;
@@ -316,8 +245,7 @@ export default {
     		this.page = page;
     	},
     	next: function (page) {
-    		this.nextLesson();
-    		// this.page = page;
+    		this.page = page;
     	},
       	redirectGuest: function()
         {

@@ -14,7 +14,12 @@ export default {
 		this.data.type = result.child_type;
 		this.data.parent_id = result.user_id;
 		this.data.birthday = result.child_birthday;
-		this.data.age = result.child_month;
+
+		this.data.age = 1;
+		if (result.child_month) {
+			this.data.age = result.child_month;
+		}
+		
 		this.data.image = result.image;
 	},
 
