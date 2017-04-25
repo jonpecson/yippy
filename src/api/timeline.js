@@ -28,10 +28,10 @@ export default {
         });
     },
 
-    lessons(context, level, successCallback, errorCallback) {
+    lessons(context, level, userID, successCallback, errorCallback) {
         var that = this;
 
-        context.$http.get(config.api.url + '/lessons/' + level).then(response => {
+        context.$http.get(config.api.url + '/lessons/' + userID + '/' + level).then(response => {
             var result = response.body.result;
 
             if (response.body.status == 'OK') {

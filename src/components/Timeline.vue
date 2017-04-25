@@ -98,7 +98,8 @@ export default {
             lessons: [],
             showModal: false,
             currentLevel: 1,
-            childAge: 0
+            childAge: 0,
+            userID: 0
         }
     },
     created: function() {
@@ -108,17 +109,18 @@ export default {
         }
 
         this.child = auth.user.data.child;
-        this.childAge = 8;// this.child.get('age');
+        this.childAge = this.child.get('age');
         this.showTimeline();
 
         this.getLevels();
 
-        this.currentLevel = 1;
-        this.getLessons();
+        this.userID = auth.user.get('id');
+        this.userID = 32;
     },
     methods: {
         getLevels: function () {
             var that = this;
+            var first = false;
 
             timeline.levels(this, function (response) {
                 $.each(response.data, function (index, value) {
@@ -126,6 +128,13 @@ export default {
                     if (that.childAge >= parseInt(value.min_month) && that.childAge <= parseInt(value.max_month)) {
                         activeStr = 'active';
                     }
+
+                    if (first == false) {
+                        that.currentLevel = value.id;
+                        that.getLessons();
+                        first = true;
+                    }
+
                     that.levels.push({
                         id: value.id,
                         counter: value.title,
@@ -141,7 +150,11 @@ export default {
         getLessons: function () {
             var that = this;
 
-            timeline.lessons(this, this.currentLevel, function (response) {
+            if (this.currentLevel <= 0) {
+                return;
+            }
+
+            timeline.lessons(this, this.currentLevel, this.userID, function (response) {
                 console.log(response)
                 var counter = 0;
                 $.each(response.data, function (index, value) {
@@ -178,6 +191,7 @@ export default {
             // ];
 
             this.page = 'lessons';
+            this.getLessons();
         },
         showLevels: function() {
             this.page = 'levels';

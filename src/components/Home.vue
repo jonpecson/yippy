@@ -40,7 +40,7 @@ export default {
         }
 
         var that = this;
-        this.$http.get(config.api.url + '/explanation/en').then(response => {
+        this.$http.get(config.api.url + '/explanation/' + config.api.lang).then(response => {
             var result = response.body.result;
             if (response.body.status == 'OK') {
                 $.each(result.data, function(x, y) {

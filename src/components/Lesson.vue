@@ -184,7 +184,7 @@ export default {
     	getLesson: function () {
             var that = this;
 
-            timeline.lesson(this, this.currentLesson, 'nl', function (response) {
+            timeline.lesson(this, this.currentLesson, config.api.lang, function (response) {
             	var counter = 0;
             	that.todos = response.todos;
             	that.bar_max = response.todos.length;
