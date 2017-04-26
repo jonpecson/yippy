@@ -55,6 +55,19 @@
 			</ul>
 		</div>
 
+		<div class="content" v-else-if="lessonType == 'challenge_no'">
+			TODO
+			<h3 style="text-align: center;">{{ currentCardContent.Contents.title }}</h3>
+			<p>{{ currentCardContent.Contents.details }}</p>
+			<ul>
+				<li v-for="quiz in currentCardContent.Quiz">
+					<a href="javascript:void(0);" style='text-decoration:none; color:#333; display:block;' class='my-answer' data-position='1' v-bind:data-answer-id='quiz.Answer.id' v-bind:data-answer-title='quiz.Answer.title' v-bind:data-answer-details='quiz.Answer.details' @click="quizShowAnswer">
+						{{ quiz.question }}
+					</a>
+				</li>
+			</ul>
+		</div>
+
 		<div class="content" v-else>
 			<h3 style='text-align: center;'>{{ currentCardContent.Contents.title }}</h3>
 			<p>{{ currentCardContent.Contents.details }}</p>
@@ -226,6 +239,8 @@ export default {
 	    			this.knowledgeCardType(card);
 	    		} else if (card.Contents.card_style == 'no' && card.Contents.card_type == 'multiple_choice') {
 	    			this.quizNoType(card);
+	    		} else if (card.Contents.card_style == 'no' && card.Contents.card_type == 'list_field') {
+	    			this.challengeNoType(card);
 	    		} else {
 	    			this.otherType(card);
 	    		}
@@ -249,7 +264,6 @@ export default {
 	        }, 1);
     	},
     	quizNoType: function () {
-    		console.log(this.currentCardContent);
     		this.lessonType = 'quiz_no';
     	},
     	otherType: function () {
@@ -262,6 +276,9 @@ export default {
     		var details = e.target.getAttribute('data-answer-details');
 
     		this.modalShow(title, details)
+    	},
+    	challengeNoType: function () {
+    		this.lessonType = 'challenge_no';
     	},
     	initSwipe: function (elem) {
     		var that = this;
