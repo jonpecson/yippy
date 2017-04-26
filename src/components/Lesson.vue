@@ -14,14 +14,16 @@
 			<span><i class="icon-yipp_check_full"></i> 5min</span>
 		</div>
 			
-		<a href="#" v-on:click.prevent="startLesson" class="btn bottom white">Start</a>
+		<a href="#" v-on:click.prevent="startLesson" class="btn bottom white" v-if="start">Start</a>
 	</div>
 
 	<div class="panel" v-if="page == 'page_lesson'">
 		<a v-on:click.prevent="back('start')" class="back">
 			<i class="icon-yipp_check_full"></i>
 		</a>
-		<div class="bar"> <span class="bar-inner" v-bind:style='bar_length'></span></div>
+		<div class="bar"> 
+			<span class="bar-inner" v-bind:style='bar_length'></span>
+		</div>
 		<router-link :to="{ name: 'timeline'}" class="home">
 			<i class="icon-yipp_home_full-"></i>
 		</router-link>
@@ -29,10 +31,11 @@
 		<div v-if="lessonType == 'knowledge_card'">
 			<div id="knowledge-cards"  v-for="card in cards">
 				<div class="paper">
-					<h3>{{ card.title }}</h3>
-					<p>{{ card.details }}</p>
+					<h3>{{ currentCardContent.Contents.title }}</h3>
+					<p>{{ currentCardContent.Contents.details }}</p>
 
-					<i class="heart icon-yipp_check_full"></i>
+					<i class="heart icon-yipp_check_full" v-if="currentCardContent.is_favorite"></i>
+					<i class="heart icon-yipp_check_line" v-if="currentCardContent.is_favorite == false"></i>
 					<div class="paper_foo1">
 						<div class="paper_foo2"></div>
 					</div>
@@ -40,18 +43,24 @@
 			</div>
 		</div>
 
+		<div class="content" v-else-if="lessonType == 'quiz_no'">
+			<h3 style="text-align: center;">{{ currentCardContent.Contents.title }}</h3>
+			<p>{{ currentCardContent.Contents.details }}</p>
+			<ul>
+				<li v-for="quiz in currentCardContent.Quiz">
+					<a href="javascript:void(0);" style='text-decoration:none; color:#333; display:block;' class='my-answer' data-position='1' v-bind:data-answer-id='quiz.Answer.id' v-bind:data-answer-title='quiz.Answer.title' v-bind:data-answer-details='quiz.Answer.details' @click="quizShowAnswer">
+						{{ quiz.question }}
+					</a>
+				</li>
+			</ul>
+		</div>
+
 		<div class="content" v-else>
-			<h1>{{ currentTodoContent.title }}</h1>
-			<i class="biggest icon-yipp_check_full"></i>
-			<p class="text-center">{{ currentTodoContent.details }}</p>
+			<h3 style='text-align: center;'>{{ currentCardContent.Contents.title }}</h3>
+			<p>{{ currentCardContent.Contents.details }}</p>
 			
 			<div class="bottom">
-				<router-link :to="{ name: 'challenge'}" class="btn white">
-					Start Challenge
-				</router-link>
-
-				<br>
-				<a href="" v-on:click.prevent="nextLesson" class="btn white">Next Lesson</a>
+				<a href="" v-on:click.prevent="nextLesson" class="button-medium white btn-next-card">Next</a>
 			</div>
 		
 		</div>
@@ -85,13 +94,12 @@
 
 	</div> -->
 			
-	<div class="panel" v-if="page == 'complete'">
+	<div class="panel" v-if="page == 'page_complete'">
 		<a v-on:click.prevent="back('stack')" class="back">
 			<i class="icon-yipp_check_full"></i>
 		</a>
-		<div class="bar">
-			<!-- <span class="bar-inner"></span> -->
-			<!-- <input type="range" min="0" max="5" value="5" step="1" disabled> -->
+		<div class="bar"> 
+			<span class="bar-inner" style='width: 100%'></span>
 		</div>
 		<router-link :to="{ name: 'timeline'}" class="home">
 			<i class="icon-yipp_home_full-"></i>
@@ -100,17 +108,14 @@
 		<div class="content">
 		
 			<h1>Les compleet!</h1>
-			
 			<i class="biggest icon-yipp_check_full"></i>
 			
 			<p class="text-center">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
 			
-			
 			<div class="bottom">
 				<router-link :to="{ name: 'challenge'}" class="btn white">
-				Start Challenge
+					Start Challenge
 				</router-link>
-
 				<br>
 				<a href="" v-on:click.prevent="back('start')" class="btn white">Reset Lesson</a>
 			</div>
@@ -119,9 +124,9 @@
 
 	</div>
 
-	<modal v-if="showModal" @close="showModal = false">
-        <h3 slot="header">Lorem Ipsum</h3>
-        <p slot="body">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+	<modal v-if="showModal" @close="modalClose">
+        <h3 slot="header">{{ modalContent.title }}</h3>
+        <p slot="body">{{ modalContent.message }}</p>
     </modal>
 
 </div>
@@ -138,7 +143,6 @@ import $ from 'jquery'
 import Modal from '../components/Modal.vue'
 
 import 'hammerjs/hammer.js'
-import rangesliderJs from 'rangeslider-js';
 
 export default {
     data() {
@@ -150,9 +154,8 @@ export default {
             showModal: false,
             currentLesson: 1,
             cards: [],
-            todos: [],
-            currentTodoContent: {},
-            currentTodoCount: 0,
+            currentCardContent: {},
+            currentCardCount: 0,
             lessonType: '',
             bar_length: '',
             bar_min: 0,
@@ -160,112 +163,79 @@ export default {
             bar_current: 0,
             slider: '',
             userID: 0,
+            start: false,
         }
     },
-    created: function() {
+    mounted: function() {
         auth.check();
         if (!auth.authenticated) {
             this.redirectGuest();
         }
 	    
-	    this.currentLesson = 6;
+	    this.currentLesson = 36;
 	    this.userID = 32;
 	    this.getLesson();
 
 	    this.bar_length = 'width: 20%';
     },
     methods: {
-    	initSlider: function () {
-    		var that = this;
-    		setTimeout(function(){
-    			slider = document.querySelectorAll('#bar-input');
-    			that.slider = rangesliderJs.create(slider);
-	    		
-	        }, 2);
-    	},
     	getLesson: function () {
             var that = this;
 
             timeline.lesson(this, this.currentLesson, this.userID, config.api.lang, function (response) {
-            	console.log(response)
+            	
             	var counter = 0;
-            	that.todos = response.todos;
-            	that.bar_max = response.todos.length;
-            	/*
-                $.each(response.todos, function (index, content) {
-                	console.log(content.Contents.card_style, content.Contents.card_type)
-                	if (content.Contents.card_style == 'card' && content.Contents.card_type == 'knowledge') {
-                		that.cards.push(content.Contents);
-                		// console.log(that.cards)
-                	} else {
-                		
-                	}
-                    // switch (content.card_type) {
-                    // 	case 'knowledge':
+            	that.cards = response.cards;
+            	that.bar_max = response.cards.length
+            	that.updateBarStep(0);
 
-                    // 	break;
+            	that.start = true;
 
-                    // 	case 'multiple_choice':
-
-                    // 	break;
-
-                    // 	case 'list_field':
-
-                    // 	break;
-
-                    // 	case 'sliders':
-
-                    // 	break;
-                    // }
-                });
-                */
             }, function (msg, response) {
                 that.logError(msg);
             });
         },
+        updateBarStep: function (index)
+        {	
+        	var step =  (100 / (this.bar_max + 1)) * index;
+        	this.bar_length = 'width: ' + step + '%';
+        },
     	startLesson: function () {
-    		this.initSlider();
     		this.page = 'page_lesson';
     		this.nextLesson();
     	},
+    	endLesson: function () {
+    		this.page = 'page_complete';
+    	},
     	nextLesson: function () {
-    		if (this.currentTodoCount == this.bar_max) {
+    		if (this.currentCardCount >= this.bar_max) {
+    			this.endLesson();
     			return;
     		}
 
-    		console.log('next lesson', this.currentTodoCount)
-    		var ctr = 0;
-    		var todo = '';
-    		var that = this;
-    		
-    		$.each(this.todos, function (index, content) {
-    			if (ctr == that.currentTodoCount) {
-    				that.bar_current = ctr;
-    				var inputRange = $(that.slider);
-    				inputRange.val(ctr).change()
+    		if (this.cards) {
+    			this.currentCardCount += 1;
+    			// console.log('next lesson: ', this.currentCardCount, ' out of ', this.bar_max);
 
-    				that.otherType(content);
+    			var ctr = this.currentCardCount - 1;
+    			var card = this.cards[ctr];
+	    		this.updateBarStep(this.currentCardCount)
 
-    		// 		console.log(content.Contents.card_style)
-	    	// 		if (content.Contents.card_style == 'card' && content.Contents.card_type == 'knowledge') {
-						// that.knowledgeCardType(content);
-	    	// 		} else {
-	    	// 			that.otherType(content);
-	    	// 		}
-    			
-    				that.currentTodoCount++;
-    				return false;
-    			}
+	    		this.currentCardContent = card;
+	    		if (card.Contents.card_style == 'card' && card.Contents.card_type == 'knowledge') {
+	    			this.knowledgeCardType(card);
+	    		} else if (card.Contents.card_style == 'no' && card.Contents.card_type == 'multiple_choice') {
+	    			this.quizNoType(card);
+	    		} else {
+	    			this.otherType(card);
+	    		}
 
-    			ctr++;
-    		}); 
+	    		
+	    		console.log(card.Contents.card_style, ' ', card.Contents.card_type)
+    		}
     	},
-    	knowledgeCardType: function (content) {
+    	knowledgeCardType: function () {
     		this.lessonType = 'knowledge_card';
-    		this.cards = [];
-    		this.cards = [
-				content.Contents
-			]; 
 
     		var that = this;
     		setTimeout(function(){
@@ -278,10 +248,20 @@ export default {
     			});
 	        }, 1);
     	},
-    	otherType: function (content) {
-    		console.log('other')
+    	quizNoType: function () {
+    		console.log(this.currentCardContent);
+    		this.lessonType = 'quiz_no';
+    	},
+    	otherType: function () {
     		this.lessonType = 'other';
-    		this.currentTodoContent = content.Contents;
+    	},
+    	quizShowAnswer: function (e) {
+    		var me = $(e);
+    		var id = e.target.getAttribute('data-answer-id');
+    		var title = e.target.getAttribute('data-answer-title');
+    		var details = e.target.getAttribute('data-answer-details');
+
+    		this.modalShow(title, details)
     	},
     	initSwipe: function (elem) {
     		var that = this;
@@ -294,8 +274,7 @@ export default {
 
     		var object = $(elem);
     		mc.on('swipe', function(event){
-        		console.log(event)
-			    event.preventDefault();
+        		event.preventDefault();
 			    var item = $(event.target);
 
 			    if (event.direction == 4) { // swipe to the right
@@ -325,7 +304,18 @@ export default {
       	redirectGuest: function()
         {
         	this.$router.push('login');
-        }  
+        },
+        modalShow(title, body) {
+        	this.modalContent = {
+		    	title: title,
+		    	message: body
+		    };
+		    this.showModal = true;
+        },
+        modalClose: function () {
+        	this.showModal = false;
+        	this.nextLesson()
+        }
     },
 
     watch: {

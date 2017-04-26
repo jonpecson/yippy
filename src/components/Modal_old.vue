@@ -6,13 +6,13 @@
 
           <div class="modal-header">
             <slot name="header">
-              Modal header
+              default header
             </slot>
           </div>
 
           <div class="modal-body">
             <slot name="body">
-              Modal body
+              default message
             </slot>
           </div>
 
@@ -31,6 +31,7 @@
 
 <script>
 export default {
-    props: ['title', 'message']
+    props: ['name', 'message'],
+    showModal: false
 };
 </script>

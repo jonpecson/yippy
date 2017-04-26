@@ -116,6 +116,8 @@ export default {
 
         this.getLevels();
         this.showTimeline();
+
+        this.showModal = true
     },
     methods: {
         getLevels: function () {
