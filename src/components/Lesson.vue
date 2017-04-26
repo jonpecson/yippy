@@ -21,10 +21,7 @@
 		<a v-on:click.prevent="back('start')" class="back">
 			<i class="icon-yipp_check_full"></i>
 		</a>
-		<div class="bar">
-			<!-- <span class="bar-inner"></span> -->
-			<input id="bar-input" type="range" v-bind:min="bar_min" v-bind:max="bar_max" v-bind:value="bar_current" step="0" >
-		</div>
+		<div class="bar"> <span class="bar-inner" v-bind:style='bar_length'></span></div>
 		<router-link :to="{ name: 'timeline'}" class="home">
 			<i class="icon-yipp_home_full-"></i>
 		</router-link>
@@ -157,10 +154,12 @@ export default {
             currentTodoContent: {},
             currentTodoCount: 0,
             lessonType: '',
+            bar_length: '',
             bar_min: 0,
             bar_max: 0,
             bar_current: 0,
             slider: '',
+            userID: 0,
         }
     },
     created: function() {
@@ -170,7 +169,10 @@ export default {
         }
 	    
 	    this.currentLesson = 6;
+	    this.userID = 32;
 	    this.getLesson();
+
+	    this.bar_length = 'width: 20%';
     },
     methods: {
     	initSlider: function () {
@@ -184,7 +186,8 @@ export default {
     	getLesson: function () {
             var that = this;
 
-            timeline.lesson(this, this.currentLesson, config.api.lang, function (response) {
+            timeline.lesson(this, this.currentLesson, this.userID, config.api.lang, function (response) {
+            	console.log(response)
             	var counter = 0;
             	that.todos = response.todos;
             	that.bar_max = response.todos.length;

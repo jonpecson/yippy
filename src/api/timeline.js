@@ -31,7 +31,15 @@ export default {
     lessons(context, level, userID, successCallback, errorCallback) {
         var that = this;
 
-        context.$http.get(config.api.url + '/lessons/' + userID + '/' + level).then(response => {
+        var url = config.api.url + '/lessons/' + userID;
+        if (level > 0) {
+            url += '/' + level;
+        }
+
+        console.log(url)
+
+        context.$http.get(url).then(response => {
+            console.log(response)
             var result = response.body.result;
 
             if (response.body.status == 'OK') {
@@ -49,10 +57,10 @@ export default {
         });
     },
 
-    lesson(context, lesson, language, successCallback, errorCallback) {
+    lesson(context, lesson, userID, language, successCallback, errorCallback) {
         var that = this;
 
-        context.$http.get(config.api.url + '/todos/' + lesson + '/' + language).then(response => {
+        context.$http.get(config.api.url + '/cards/' + lesson + '/' + userID + '/' + language).then(response => {
             var result = response.body.result;
 
             if (response.body.status == 'OK') {

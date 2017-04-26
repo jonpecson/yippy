@@ -33,7 +33,7 @@
             <ul id="list-icons">
                 <li v-for="lesson in lessons">
                     <a href="#" v-bind:data-id="lesson.id" v-on:click.prevent="goTodo">
-                        <span class="icon big active" v-bind:class="lesson.icon"></span> 
+                        <span class="icon big active" v-bind:class="lesson.icon"></span>
                         {{ lesson.counter }}. {{ lesson.description }}
                     </a>
                 </li>
@@ -97,7 +97,7 @@ export default {
             levels: [],
             lessons: [],
             showModal: false,
-            currentLevel: 1,
+            currentLevel: 0,
             childAge: 0,
             userID: 0
         }
@@ -110,29 +110,23 @@ export default {
 
         this.child = auth.user.data.child;
         this.childAge = this.child.get('age');
-        this.showTimeline();
+        
+        this.userID = auth.user.get('id');
+        this.userID = 32; // hard coded
 
         this.getLevels();
-
-        this.userID = auth.user.get('id');
-        this.userID = 32;
+        this.showTimeline();
     },
     methods: {
         getLevels: function () {
             var that = this;
-            var first = false;
-
+            
+            this.levels = [];
             timeline.levels(this, function (response) {
                 $.each(response.data, function (index, value) {
                     var activeStr = '';
                     if (that.childAge >= parseInt(value.min_month) && that.childAge <= parseInt(value.max_month)) {
                         activeStr = 'active';
-                    }
-
-                    if (first == false) {
-                        that.currentLevel = value.id;
-                        that.getLessons();
-                        first = true;
                     }
 
                     that.levels.push({
@@ -150,12 +144,8 @@ export default {
         getLessons: function () {
             var that = this;
 
-            if (this.currentLevel <= 0) {
-                return;
-            }
-
+            this.lessons = [];
             timeline.lessons(this, this.currentLevel, this.userID, function (response) {
-                console.log(response)
                 var counter = 0;
                 $.each(response.data, function (index, value) {
                     var active = '';
@@ -181,15 +171,6 @@ export default {
             }
         },
         showTimeline: function() {
-            // this.lessons = [
-            //     {
-            //         id: 1,
-            //         counter: 1,
-            //         description: 'Nutrition fruit & vegetable',
-            //         icon: 'icon-yipp_check_full'
-            //     }
-            // ];
-
             this.page = 'lessons';
             this.getLessons();
         },
