@@ -28,6 +28,8 @@
 			<i class="icon-yipp_home_full-"></i>
 		</router-link>
 
+		<div class="error" v-if="error_message">{{ error_message }}</div>
+
 		<div v-if="lessonType == 'knowledge_card'">
 			<div id="knowledge-cards"  v-for="card in cards">
 				<div class="paper">
@@ -56,16 +58,20 @@
 		</div>
 
 		<div class="content" v-else-if="lessonType == 'challenge_no'">
-			TODO
 			<h3 style="text-align: center;">{{ currentCardContent.Contents.title }}</h3>
 			<p>{{ currentCardContent.Contents.details }}</p>
-			<ul>
-				<li v-for="quiz in currentCardContent.Quiz">
-					<a href="javascript:void(0);" style='text-decoration:none; color:#333; display:block;' class='my-answer' data-position='1' v-bind:data-answer-id='quiz.Answer.id' v-bind:data-answer-title='quiz.Answer.title' v-bind:data-answer-details='quiz.Answer.details' @click="quizShowAnswer">
-						{{ quiz.question }}
-					</a>
-				</li>
-			</ul>
+			<div class="challenge-boxes">
+				<div v-for="challenge in currentCardContent.Challenges" class="challenge-box">
+					<input type="text" name="challenge[]" v-model="challenge.Challenge.message" v-bind:placeholder="challenge.placeholder" v-bind:data-id="challenge.id">
+					<a href="#" v-bind:data-id="challenge.id" v-if="challenge.deletable" v-on:click.prevent="removeChallenge">Delete</a>
+				</div>
+			</div>
+
+			<a href="#" v-on:click.prevent="addFieldChallenge">Add</a>
+
+			<div class="bottom">
+				<a href="" v-on:click.prevent="updateChallenge" class="button-medium white btn-next-card">Next</a>
+			</div>
 		</div>
 
 		<div class="content" v-else>
@@ -177,6 +183,8 @@ export default {
             slider: '',
             userID: 0,
             start: false,
+            lastChallengeID: 0,
+            error_message: ''
         }
     },
     mounted: function() {
@@ -193,6 +201,7 @@ export default {
     },
     methods: {
     	getLesson: function () {
+    		this.resetError();
             var that = this;
 
             timeline.lesson(this, this.currentLesson, this.userID, config.api.lang, function (response) {
@@ -214,13 +223,16 @@ export default {
         	this.bar_length = 'width: ' + step + '%';
         },
     	startLesson: function () {
+    		this.resetError();
     		this.page = 'page_lesson';
     		this.nextLesson();
     	},
     	endLesson: function () {
+    		this.resetError();
     		this.page = 'page_complete';
     	},
     	nextLesson: function () {
+    		this.resetError();
     		if (this.currentCardCount >= this.bar_max) {
     			this.endLesson();
     			return;
@@ -275,7 +287,24 @@ export default {
     		var title = e.target.getAttribute('data-answer-title');
     		var details = e.target.getAttribute('data-answer-details');
 
-    		this.modalShow(title, details)
+    		var data = {
+        		'user_id': this.userID,
+        		'content_id': parseInt(this.currentCardContent.Contents.id),
+        		'block_id': parseInt(id),
+        	};
+
+        	console.log('quizShowAnswer', data);
+
+        	this.modalShow(title, details)
+        	// return;
+
+        	var that = this;
+        	timeline.updateAnswer(this, data, function (response) {
+            	console.log('api response',response);
+            	
+            }, function (msg, response) {
+                that.logError(msg);
+            });
     	},
     	challengeNoType: function () {
     		this.lessonType = 'challenge_no';
@@ -332,7 +361,92 @@ export default {
         modalClose: function () {
         	this.showModal = false;
         	this.nextLesson()
-        }
+        },
+        addFieldChallenge: function () {
+        	if (this.lastChallengeID == 0) {
+        		this.lastChallengeID = Math.floor((Math.random() * 1000) + 1);
+        	} else {
+        		this.lastChallengeID++;
+        	}
+
+        	this.currentCardContent.Challenges.push({
+        		id: this.lastChallengeID,
+        		placeholder: '',
+        		deletable: 1,
+        		new: 1,
+        		Challenge: {
+        			message: ''
+        		}
+        	})
+        },
+        updateChallenge: function () {
+        	var that = this;
+        	var isError = false;
+
+        	$.each(this.currentCardContent.Challenges, function (index, value) {
+        		if (!value.Challenge.message) {
+        			return;
+        		}
+
+        		if (value.new) {
+        			// todo create
+        			return;
+        		}
+
+        		// update
+        		var data = {
+	        		'user_id': that.userID,
+	        		'content_id': parseInt(that.currentCardContent.Contents.id),
+	        		'block_id': parseInt(value.id),
+	        		'message': value.Challenge.message
+	        	};
+
+	        	timeline.updateChallenge(that, data, function (response) {
+	            	isSaved = true;
+	            	console.log('api response',response);
+
+	            }, function (msg, response) {
+	            	isError = true
+	                that.logError(msg);
+	            });
+
+        	});
+
+        	if (!isError) {
+        		this.nextLesson();
+        	}
+        },
+        addChallenge: function () {
+        	// TODO
+        },
+        removeChallenge: function (e) {
+        	var that = this;
+
+        	var id = e.target.getAttribute('data-id');
+        	$.each(this.currentCardContent.Challenges, function (index, value) {
+        		if (value.id == id) {
+        			that.currentCardContent.Challenges.splice(index, 1);
+        			console.log('remove found', id);
+        		}
+        	});
+
+        	// TODO
+        },
+        resetError: function () {
+			this.error_message = '';
+		},
+		logError(msg) {
+			var msgStr = '';
+			if (typeof msg == 'string') {
+				msgStr = msg;
+			} else {
+				$.each(msg, function(label, value) {
+					msgStr += value + ' ';
+				})
+			}
+	        
+	        this.error_message = msgStr;
+	    },
     },
 
     watch: {
