@@ -304,13 +304,27 @@ export default {
 
     		this.currentCardContent = card;
     		if (card.Contents.card_style == 'card' && card.Contents.card_type == 'knowledge') {
-    			this.knowledgeCardType(card);
+    			this.lessonType = 'knowledge_card';
+
+	    		var that = this;
+	    		setTimeout(function(){
+	    			$('#knowledge-cards .paper').css('display', 'none');
+		        	$('#knowledge-cards .paper:first-child').css('display', 'block');
+
+	    			$('#knowledge-cards .paper').each(function () {
+	    				stack.createCard(this);
+	    			});
+		        }, 1);
+
+		        stack.on('throwout', (event) => {
+		        	that.nextLesson();
+				});
     		} else if (card.Contents.card_style == 'no' && card.Contents.card_type == 'multiple_choice') {
-    			this.quizNoType(card);
+    			this.lessonType = 'quiz_no';
     		} else if (card.Contents.card_style == 'no' && card.Contents.card_type == 'list_field') {
-    			this.challengeNoType(card);
+    			this.lessonType = 'challenge_no';
     		} else {
-    			this.otherType(card);
+    			this.lessonType = 'other';
     		}
     		
     		// console.log(card.Contents.card_style, ' ', card.Contents.card_type)
@@ -325,31 +339,6 @@ export default {
 	    	this.currentCardContent = null;
 	    	this.getLesson();
 	    },
-    	knowledgeCardType: function () {
-    		this.lessonType = 'knowledge_card';
-
-    		var that = this;
-    		setTimeout(function(){
-    			$('#knowledge-cards .paper').css('display', 'none');
-	        	$('#knowledge-cards .paper:first-child').css('display', 'block');
-
-    			$('#knowledge-cards .paper').each(function () {
-    				var stage = $(this);
-    				stack.createCard(this);
-    				// that.initSwipe(this);
-    			});
-	        }, 1);
-
-	        stack.on('throwout', (event) => {
-	        	that.nextLesson();
-			});
-    	},
-    	quizNoType: function () {
-    		this.lessonType = 'quiz_no';
-    	},
-    	otherType: function () {
-    		this.lessonType = 'other';
-    	},
     	quizShowAnswer: function (e) {
     		var me = $(e);
     		var id = e.target.getAttribute('data-answer-id');
@@ -374,16 +363,12 @@ export default {
             });
     	},
     	challengeNoType: function () {
-    		this.lessonType = 'challenge_no';
+    		
     	},
     	back: function (page) {
     		this.page = page;
     	},
-    	next: function (page) {
-    		this.nextLesson();
-    		// this.page = page;
-    	},
-      	redirectGuest: function()
+    	redirectGuest: function()
         {
         	this.$router.push('login');
         },
@@ -519,13 +504,7 @@ export default {
 	        this.error_message = msgStr;
 	    },
     },
-
-    watch: {
-		'$route' (to, from) {
-			this.currentLesson = to;
-		}
-	},
-
+    
     components: { 
         Modal 
     },
