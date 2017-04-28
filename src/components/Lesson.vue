@@ -172,6 +172,9 @@ import Storage from '../storage'
 
 import 'hammerjs/hammer.js'
 
+const Swing = require('swing')
+const stack = Swing.Stack();
+
 export default {
     data() {
         return {
@@ -309,9 +312,14 @@ export default {
 
     			$('#knowledge-cards .paper').each(function () {
     				var stage = $(this);
-    				that.initSwipe(this);
+    				stack.createCard(this);
+    				// that.initSwipe(this);
     			});
 	        }, 1);
+
+	        stack.on('throwout', (event) => {
+	        	that.nextLesson();
+			});
     	},
     	quizNoType: function () {
     		this.lessonType = 'quiz_no';
@@ -344,37 +352,6 @@ export default {
     	},
     	challengeNoType: function () {
     		this.lessonType = 'challenge_no';
-    	},
-    	initSwipe: function (elem) {
-    		var that = this;
-    		var swipeSpeedDelay = 700;
-    		var swipeSpeedFadeIn = 400;
-
-    		// var stage = elem;
-    		var mc = new Hammer.Manager(elem);
-    		mc.add( new Hammer.Swipe({ event: 'swipe' }) );
-
-    		var object = $(elem);
-    		mc.on('swipe', function(event){
-        		event.preventDefault();
-			    var item = $(event.target);
-
-			    if (event.direction == 4) { // swipe to the right
-			    	item.addClass('rotate-left').delay(swipeSpeedDelay).fadeOut(1);
-			    }
-
-			    if (event.direction == 2) { // swipe to the left
-			    	item.addClass('rotate-right').delay(swipeSpeedDelay).fadeOut(1);
-			    }
-
-			    if ( item.is(':last-child') ) {
-					setTimeout(function(){
-		    			that.next('stack')
-			        }, swipeSpeedDelay);
-				} else {
-					item.next().removeClass('rotate-left rotate-right').fadeIn(swipeSpeedFadeIn);
-				} 
-			});
     	},
     	back: function (page) {
     		this.page = page;
