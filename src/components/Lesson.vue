@@ -18,7 +18,7 @@
 	</div>
 
 	<div class="panel" v-if="page == 'page_lesson'">
-		<a v-on:click.prevent="back('start')" class="back">
+		<a v-on:click.prevent="prevLesson" class="back">
 			<i class="icon-yipp_check_full"></i>
 		</a>
 		<div class="bar"> 
@@ -104,7 +104,7 @@
 	</div>
 			
 	<div class="panel" v-if="page == 'page_complete'">
-		<a v-on:click.prevent="back('stack')" class="back">
+		<a v-on:click.prevent="prevLesson" class="back">
 			<i class="icon-yipp_check_full"></i>
 		</a>
 		<div class="bar"> 
@@ -273,6 +273,18 @@ export default {
     		this.resetError();
     		this.page = 'page_complete';
     	},
+    	prevLesson: function () {
+    		this.resetError();
+    		if (this.currentCardCount <= 1) {
+    			this.restartLesson();
+    			return;
+    		}
+
+    		if (this.cards) {
+    			this.currentCardCount -= 1;
+    			this.showCard();
+    		}
+    	},
     	nextLesson: function () {
     		this.resetError();
     		if (this.currentCardCount >= this.bar_max) {
@@ -282,26 +294,37 @@ export default {
 
     		if (this.cards) {
     			this.currentCardCount += 1;
-    			// console.log('next lesson: ', this.currentCardCount, ' out of ', this.bar_max);
-
-    			var ctr = this.currentCardCount - 1;
-    			var card = this.cards[ctr];
-	    		this.updateBarStep(this.currentCardCount)
-
-	    		this.currentCardContent = card;
-	    		if (card.Contents.card_style == 'card' && card.Contents.card_type == 'knowledge') {
-	    			this.knowledgeCardType(card);
-	    		} else if (card.Contents.card_style == 'no' && card.Contents.card_type == 'multiple_choice') {
-	    			this.quizNoType(card);
-	    		} else if (card.Contents.card_style == 'no' && card.Contents.card_type == 'list_field') {
-	    			this.challengeNoType(card);
-	    		} else {
-	    			this.otherType(card);
-	    		}
-	    		
-	    		// console.log(card.Contents.card_style, ' ', card.Contents.card_type)
-    		}
+	    		this.showCard();
+    		}	
     	},
+    	showCard: function () {
+			var ctr = this.currentCardCount - 1;
+			var card = this.cards[ctr];
+    		this.updateBarStep(this.currentCardCount)
+
+    		this.currentCardContent = card;
+    		if (card.Contents.card_style == 'card' && card.Contents.card_type == 'knowledge') {
+    			this.knowledgeCardType(card);
+    		} else if (card.Contents.card_style == 'no' && card.Contents.card_type == 'multiple_choice') {
+    			this.quizNoType(card);
+    		} else if (card.Contents.card_style == 'no' && card.Contents.card_type == 'list_field') {
+    			this.challengeNoType(card);
+    		} else {
+    			this.otherType(card);
+    		}
+    		
+    		// console.log(card.Contents.card_style, ' ', card.Contents.card_type)
+    	},
+    	resetLesson: function () {
+	    	this.resetLessonModal = true;
+	    },
+	    restartLesson: function () {
+	    	this.resetLessonModal = false;
+	    	this.page = 'start';
+	    	this.currentCardCount = 0;
+	    	this.currentCardContent = null;
+	    	this.getLesson();
+	    },
     	knowledgeCardType: function () {
     		this.lessonType = 'knowledge_card';
 
@@ -495,17 +518,6 @@ export default {
 	        
 	        this.error_message = msgStr;
 	    },
-
-	    resetLesson: function () {
-	    	this.resetLessonModal = true;
-	    },
-	    restartLesson: function () {
-	    	this.resetLessonModal = false;
-	    	this.page = 'start';
-	    	this.currentCardCount = 0;
-	    	this.currentCardContent = null;
-	    	this.getLesson();
-	    }
     },
 
     watch: {
