@@ -8,10 +8,10 @@
 
 		<div id="popUp">
 			<i class="big icon-yipp_apple_full"></i>
-			<h3>Lesson 2: Screentime</h3>
-			<p>TestIn this lesson, we will help to start the first practice appetizers</p>
+			<h3>{{ lessonInfo.counter }}. {{ lessonInfo.title }}</h3>
+			<p>{{ lessonInfo.description }}</p>
 			<hr>
-			<span><i class="icon-yipp_check_full"></i> 5min</span>
+			<span><i class="icon-yipp_check_full"></i> {{lessonInfo.duration}} min</span>
 		</div>
 			
 		<a href="#" v-on:click.prevent="startLesson" class="btn bottom white" v-if="start">Start</a>
@@ -63,7 +63,10 @@
 			<div class="challenge-boxes">
 				<div v-for="challenge in currentCardContent.Challenges" class="challenge-box">
 					<input type="text" name="challenge[]" v-model="challenge.Challenge.message" v-bind:placeholder="challenge.placeholder" v-bind:data-id="challenge.id">
-					<a href="#" v-bind:data-id="challenge.id" v-if="challenge.deletable" v-on:click.prevent="removeChallenge">Delete</a>
+				</div>
+				<div v-for="challenge in currentCardContent.MyChallenges" class="challenge-box">
+					<input type="text" name="challenge[]" v-model="challenge.message" v-bind:data-id="challenge.id">
+					<a href="#" v-bind:data-id="challenge.id" v-on:click.prevent="removeMyChallenge">Delete</a>
 				</div>
 			</div>
 
@@ -71,6 +74,21 @@
 
 			<div class="bottom">
 				<a href="" v-on:click.prevent="updateChallenge" class="button-medium white btn-next-card">Next</a>
+			</div>
+		</div>
+
+		<div class="content" v-else-if="lessonType == 'challenge_no_next'">
+			<h3 style="text-align: center;">{{ currentCardContent.Contents.title }}</h3>
+			<p>{{ currentCardContent.Contents.details }}</p>
+			<ul>
+				<li v-for="challenge in currentCardContent.Challenges">{{ challenge.Challenge.message }}</li>
+				<li v-for="challenge in currentCardContent.MyChallenges">{{ challenge.message }}</li>
+			</ul>
+
+			<a href="#" v-on:click.prevent="addReminder">Add reminder</a>
+
+			<div class="bottom">
+				<a href="" v-on:click.prevent="doneChallengeNoType" class="button-medium white btn-next-card">Next</a>
 			</div>
 		</div>
 
@@ -84,34 +102,6 @@
 		
 		</div>
 	</div>
-		
-	<!-- <div class="panel stack" id="" v-if="page == 'stack'">
-		<a v-on:click.prevent="back('cards')" class="back">
-			<i class="icon-yipp_check_full"></i>
-		</a>
-		<div class="bar">
-			<input type="range" min="0" max="5" value="1" step="1" disabled>
-		</div>
-		<router-link :to="{ name: 'timeline'}" class="home">
-			<i class="icon-yipp_home_full-"></i>
-		</router-link>
-
-		<div class="content" v-on:click.prevent="next('complete')">
-			
-			<p class="text-center">Te weinig slapen vergroot de kans op overgewicht bij kinderen, omdat:</p>
-			
-			<ul>
-				
-				<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
-				<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
-				<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
-				<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
-				
-			</ul>
-
-		</div>
-
-	</div> -->
 			
 	<div class="panel" v-if="page == 'page_complete'">
 		<a v-on:click.prevent="back('stack')" class="back">
@@ -132,11 +122,11 @@
 			<p class="text-center">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
 			
 			<div class="bottom">
-				<router-link :to="{ name: 'challenge'}" class="btn white">
-					Start Challenge
+				<router-link :to="{ name: 'timeline'}" class="btn white">
+					Next Lesson
 				</router-link>
 				<br>
-				<a href="" v-on:click.prevent="back('start')" class="btn white">Reset Lesson</a>
+				<a href="" v-on:click.prevent="resetLesson" class="btn white">Reset Lesson</a>
 			</div>
 		
 		</div>
@@ -148,6 +138,21 @@
         <p slot="body">{{ modalContent.message }}</p>
     </modal>
 
+    <modal v-if="resetLessonModal" @close="resetLessonModal = false">
+        <h3 slot="header">Are you sure?</h3>
+        <p slot="body">Do you want to restart the challenge?</p>
+        
+        <div slot="footer">
+          <button class="form-button-small" @click="restartLesson">
+            Restart challenge
+          </button>
+          <button class="form-button-small" @click="resetLessonModal = false">
+            Cancel
+          </button>
+        </div>
+
+    </modal>
+
 </div>
 	
 </template>
@@ -157,30 +162,31 @@ import {router} from '../index'
 import config from '../config'
 import auth from '../api/auth'
 import timeline from '../api/timeline'
+import cardAnswer from '../api/cardAnswer'
+import cardChallenge from '../api/cardChallenge'
+import cardMyChallenge from '../api/cardMyChallenge'
 import $ from 'jquery'
 
 import Modal from '../components/Modal.vue'
+import Storage from '../storage'
 
 import 'hammerjs/hammer.js'
 
 export default {
     data() {
         return {
-            child: {},
             page: 'start',
-            levels: [],
             lessons: [],
             showModal: false,
+            resetLessonModal: false,
+            lessonInfo: {},
             currentLesson: 1,
             cards: [],
             currentCardContent: {},
             currentCardCount: 0,
             lessonType: '',
             bar_length: '',
-            bar_min: 0,
             bar_max: 0,
-            bar_current: 0,
-            slider: '',
             userID: 0,
             start: false,
             lastChallengeID: 0,
@@ -192,14 +198,47 @@ export default {
         if (!auth.authenticated) {
             this.redirectGuest();
         }
-	    
-	    this.currentLesson = 36;
-	    this.userID = 32;
-	    this.getLesson();
 
-	    this.bar_length = 'width: 20%';
+        this.currentLesson = this.$route.params.id;
+        this.userID = auth.user.get('id');
+	    
+	    //this.currentLesson = 36;
+        //this.userID = 32;
+	    
+	    this.getLesson();
+	    this.bar_length = 'width: 0%';
+
+	    var str = Storage.get('active_lesson');
+	    if (!str) {
+	    	that.$router.push('lesson-' + id);
+	    }
+
+	    this.lessonInfo = JSON.parse(str);
+	    this.currentLesson = this.lessonInfo.id;
     },
     methods: {
+    	getLessonTitle: function () {
+            var that = this;
+
+            this.lessons = [];
+            timeline.lessons(this, this.currentLevel, this.userID, function (response) {
+                var counter = 0;
+                $.each(response.data, function (index, value) {
+                    var active = '';
+                    counter++;
+
+                    that.lessons.push({
+                        id: value.id,
+                        counter: counter,
+                        description: value.title,
+                        icon: value.icon
+                    });
+                });
+
+            }, function (msg, response) {
+                that.logError(msg);
+            });
+        },
     	getLesson: function () {
     		this.resetError();
             var that = this;
@@ -256,9 +295,8 @@ export default {
 	    		} else {
 	    			this.otherType(card);
 	    		}
-
 	    		
-	    		console.log(card.Contents.card_style, ' ', card.Contents.card_type)
+	    		// console.log(card.Contents.card_style, ' ', card.Contents.card_type)
     		}
     	},
     	knowledgeCardType: function () {
@@ -293,13 +331,11 @@ export default {
         		'block_id': parseInt(id),
         	};
 
-        	console.log('quizShowAnswer', data);
-
         	this.modalShow(title, details)
         	// return;
 
         	var that = this;
-        	timeline.updateAnswer(this, data, function (response) {
+        	cardAnswer.update(this, data, function (response) {
             	console.log('api response',response);
             	
             }, function (msg, response) {
@@ -363,20 +399,11 @@ export default {
         	this.nextLesson()
         },
         addFieldChallenge: function () {
-        	if (this.lastChallengeID == 0) {
-        		this.lastChallengeID = Math.floor((Math.random() * 1000) + 1);
-        	} else {
-        		this.lastChallengeID++;
-        	}
+        	this.lastChallengeID++;
 
-        	this.currentCardContent.Challenges.push({
-        		id: this.lastChallengeID,
-        		placeholder: '',
-        		deletable: 1,
-        		new: 1,
-        		Challenge: {
-        			message: ''
-        		}
+        	this.currentCardContent.MyChallenges.push({
+        		id: 'new-' + this.lastChallengeID,
+        		message: ''
         	})
         },
         updateChallenge: function () {
@@ -388,11 +415,6 @@ export default {
         			return;
         		}
 
-        		if (value.new) {
-        			// todo create
-        			return;
-        		}
-
         		// update
         		var data = {
 	        		'user_id': that.userID,
@@ -401,10 +423,8 @@ export default {
 	        		'message': value.Challenge.message
 	        	};
 
-	        	timeline.updateChallenge(that, data, function (response) {
-	            	isSaved = true;
-	            	console.log('api response',response);
-
+	        	cardChallenge.update(that, data, function (response) {
+	            	// none
 	            }, function (msg, response) {
 	            	isError = true
 	                that.logError(msg);
@@ -412,26 +432,77 @@ export default {
 
         	});
 
+        	$.each(this.currentCardContent.MyChallenges, function (index, value) {
+        		if (!value.message) {
+        			return;
+        		}
+
+        		if (value.new) {
+        			// add
+	        		var data = {
+		        		'user_id': that.userID,
+		        		'content_id': parseInt(that.currentCardContent.Contents.id),
+		        		'message': value.message
+		        	};
+
+		        	cardMyChallenge.create(that, data, function (response) {
+		            	// None
+		            }, function (msg, response) {
+		            	isError = true
+		                that.logError(msg);
+		            });
+
+        		} else {
+        			// update
+	        		var data = {
+		        		'id': parseInt(value.id),
+		        		'user_id': that.userID,
+		        		'content_id': parseInt(that.currentCardContent.Contents.id),
+		        		'message': value.message
+		        	};
+
+		        	cardMyChallenge.update(that, data, function (response) {
+		            	// None
+		            }, function (msg, response) {
+		            	isError = true
+		                that.logError(msg);
+		            });
+        		}	
+        	});
+
         	if (!isError) {
-        		this.nextLesson();
+        		this.lessonType = 'challenge_no_next';
         	}
         },
-        addChallenge: function () {
-        	// TODO
-        },
-        removeChallenge: function (e) {
+        removeMyChallenge: function (e) {
         	var that = this;
 
         	var id = e.target.getAttribute('data-id');
-        	$.each(this.currentCardContent.Challenges, function (index, value) {
+        	$.each(this.currentCardContent.MyChallenges, function (index, value) {
         		if (value.id == id) {
-        			that.currentCardContent.Challenges.splice(index, 1);
+        			that.currentCardContent.MyChallenges.splice(index, 1);
         			console.log('remove found', id);
+
+        			var data = {
+		        		'id': parseInt(value.id),
+		        		'user_id': that.userID,
+		        		'content_id': parseInt(that.currentCardContent.Contents.id),
+		        		'message': value.message
+		        	};
+
+		        	cardMyChallenge.delete(that, data, function (response) {
+		            	// None
+		            }, function (msg, response) {
+		            	isError = true
+		                that.logError(msg);
+		            });
         		}
         	});
-
-        	// TODO
         },
+        doneChallengeNoType: function () {
+        	this.nextLesson();
+        },
+
         resetError: function () {
 			this.error_message = '';
 		},
@@ -447,6 +518,17 @@ export default {
 	        
 	        this.error_message = msgStr;
 	    },
+
+	    resetLesson: function () {
+	    	this.resetLessonModal = true;
+	    },
+	    restartLesson: function () {
+	    	this.resetLessonModal = false;
+	    	this.page = 'start';
+	    	this.currentCardCount = 0;
+	    	this.currentCardContent = null;
+	    	this.getLesson();
+	    }
     },
 
     watch: {

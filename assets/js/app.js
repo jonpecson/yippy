@@ -35293,6 +35293,10 @@
 	    value: true
 	});
 
+	var _stringify = __webpack_require__(185);
+
+	var _stringify2 = _interopRequireDefault(_stringify);
+
 	var _index = __webpack_require__(8);
 
 	var _config = __webpack_require__(1);
@@ -35311,95 +35315,16 @@
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
+	var _storage = __webpack_require__(2);
+
+	var _storage2 = _interopRequireDefault(_storage);
+
 	var _Modal = __webpack_require__(291);
 
 	var _Modal2 = _interopRequireDefault(_Modal);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	// <template>
-	// <div id="timeline-container">
-	//     <header>
-	//         <div class="title-area">
-	//             <a href="javascript:void(0);"><i class="icon-yipp_profile_line"></i></a>
-	//             <span>Trainingen</span>
-	//             <router-link :to="{ name: 'emergency'}"><i class="icon-yipp_notification_line2"></i></router-link>
-	//         </div>
-	//
-	//         <div class="user-area">
-	//             <div class="child-name">{{ child.get('name') }}</div>
-	//             <ul class="months-level">
-	//                 <li>
-	//                     <span>{{ childAge }}</span>  
-	//                     <span>Maanden</span>
-	//                 </li>
-	//                 <li>
-	//                     <span>{{ currentLevel }}</span>
-	//                     <span>Level</span>
-	//                 </li>
-	//                 <li>
-	//                     <a href="#" v-on:click.prevent="toggle" v-if="page == 'lessons'"><i class="icon-yipp_down"></i></a>
-	//                     <a href="#" v-on:click.prevent="toggle" v-if="page == 'levels'"><i class="icon-yipp_up"></i></a>
-	//                 </li>
-	//             </ul>
-	//
-	//             <div class="photo"><img class="avatar" v-bind:src="child.get('image')"></div>
-	//
-	//         </div>
-	//     </header>
-	//
-	//         <section class="traingen" v-if="page == 'lessons'">
-	//             <ul id="list-icons">
-	//                 <li v-for="lesson in lessons">
-	//                     <a href="#" v-bind:data-id="lesson.id" v-on:click.prevent="goTodo">
-	//                         <span class="icon big active" v-bind:class="lesson.icon"></span>
-	//                         {{ lesson.counter }}. {{ lesson.description }}
-	//                     </a>
-	//                 </li>
-	//             </ul>
-	//         </section>
-	//
-	//
-	//         <section class="traingen2" v-if="page == 'levels'">
-	//
-	//             <ul id="list-text">
-	//                 <li v-for="level in levels">
-	//                     <a href="#" v-if="level.active == 'active'" 
-	//                         v-bind:data-id="level.id" 
-	//                         v-on:click.prevent="setCurrentLevel"
-	//                         v-bind:class="level.active">
-	//                         <span v-bind:data-id="level.id" class="level">{{ level.counter }}</span> 
-	//                         <span v-bind:data-id="level.id" class="months">{{ level.description }}</span>
-	//                     </a>
-	//
-	//                     <a href="#" v-if="level.active == ''" 
-	//                         v-bind:data-id="level.id" 
-	//                         v-on:click.prevent=""
-	//                         @click="showModal = true"
-	//                         v-bind:class="level.active">
-	//                         <span v-bind:data-id="level.id" class="level">{{ level.counter }}</span> 
-	//                         <span v-bind:data-id="level.id" class="months">{{ level.description }}</span>
-	//                     </a>
-	//                 </li>
-	//             </ul>
-	//
-	//         </section>
-	//
-	//         <footer>
-	//             <ul>
-	//                 <li><a href="javascript:void(0);" class="active"><span class="icon-yipp_home_full-"></span>Training</a></li>
-	//                 <li><router-link :to="{ path: 'challenge'}"><span class="icon-yipp_challenge_line"></span>Challenge</router-link></li>
-	//             </ul>
-	//         </footer>
-	//
-	//         <modal v-if="showModal" @close="showModal = false">
-	//             <h3 slot="header">Ooops...</h3>
-	//             <p slot="body">This is not yet available</p>
-	//         </modal>
-	// </div>
-	// </template>
-	//
-	// <script>
 	exports.default = {
 	    data: function data() {
 	        return {
@@ -35457,17 +35382,13 @@
 
 	            this.lessons = [];
 	            _timeline2.default.lessons(this, this.currentLevel, this.userID, function (response) {
+	                console.log(response);
 	                var counter = 0;
 	                _jquery2.default.each(response.data, function (index, value) {
 	                    var active = '';
 	                    counter++;
-
-	                    that.lessons.push({
-	                        id: value.id,
-	                        counter: counter,
-	                        description: value.title,
-	                        icon: value.icon
-	                    });
+	                    value.counter = counter;
+	                    that.lessons.push(value);
 	                });
 	            }, function (msg, response) {
 	                that.logError(msg);
@@ -35494,7 +35415,15 @@
 	        },
 	        goTodo: function goTodo(e) {
 	            var id = e.target.getAttribute('data-id');
-	            this.$router.push('lesson-' + id);
+
+	            var that = this;
+	            _jquery2.default.each(this.lessons, function (index, value) {
+	                if (value.id == id) {
+	                    var str = (0, _stringify2.default)(value);
+	                    _storage2.default.save('active_lesson', str, 1);
+	                    that.$router.push('lesson-' + id);
+	                }
+	            });
 	        },
 	        redirectGuest: function redirectGuest() {
 	            this.$router.push('login');
@@ -35521,6 +35450,89 @@
 	// </script>
 	//
 	//
+	// <template>
+	// <div id="timeline-container">
+	//     <header>
+	//         <div class="title-area">
+	//             <a href="javascript:void(0);"><i class="icon-yipp_profile_line"></i></a>
+	//             <span>Trainingen</span>
+	//             <router-link :to="{ name: 'emergency'}"><i class="icon-yipp_notification_line2"></i></router-link>
+	//         </div>
+	//
+	//         <div class="user-area">
+	//             <div class="child-name">{{ child.get('name') }}</div>
+	//             <ul class="months-level">
+	//                 <li>
+	//                     <span>{{ childAge }}</span>  
+	//                     <span>Maanden</span>
+	//                 </li>
+	//                 <li>
+	//                     <span>{{ currentLevel }}</span>
+	//                     <span>Level</span>
+	//                 </li>
+	//                 <li>
+	//                     <a href="#" v-on:click.prevent="toggle" v-if="page == 'lessons'"><i class="icon-yipp_down"></i></a>
+	//                     <a href="#" v-on:click.prevent="toggle" v-if="page == 'levels'"><i class="icon-yipp_up"></i></a>
+	//                 </li>
+	//             </ul>
+	//
+	//             <div class="photo"><img class="avatar" v-bind:src="child.get('image')"></div>
+	//
+	//         </div>
+	//     </header>
+	//
+	//         <section class="traingen" v-if="page == 'lessons'">
+	//             <ul id="list-icons">
+	//                 <li v-for="lesson in lessons">
+	//                     <a href="#" v-bind:data-id="lesson.id" v-on:click.prevent="goTodo">
+	//                         <span class="icon big active" v-bind:class="lesson.icon"></span>
+	//                         {{ lesson.counter }}. {{ lesson.title }}
+	//                     </a>
+	//                 </li>
+	//             </ul>
+	//         </section>
+	//
+	//
+	//         <section class="traingen2" v-if="page == 'levels'">
+	//
+	//             <ul id="list-text">
+	//                 <li v-for="level in levels">
+	//                     <a href="#" v-if="level.active == 'active'" 
+	//                         v-bind:data-id="level.id" 
+	//                         v-on:click.prevent="setCurrentLevel"
+	//                         v-bind:class="level.active">
+	//                         <span v-bind:data-id="level.id" class="level">{{ level.counter }}</span> 
+	//                         <span v-bind:data-id="level.id" class="months">{{ level.description }}</span>
+	//                     </a>
+	//
+	//                     <a href="#" v-if="level.active == ''" 
+	//                         v-bind:data-id="level.id" 
+	//                         v-on:click.prevent=""
+	//                         @click="showModal = true"
+	//                         v-bind:class="level.active">
+	//                         <span v-bind:data-id="level.id" class="level">{{ level.counter }}</span> 
+	//                         <span v-bind:data-id="level.id" class="months">{{ level.description }}</span>
+	//                     </a>
+	//                 </li>
+	//             </ul>
+	//
+	//         </section>
+	//
+	//         <footer>
+	//             <ul>
+	//                 <li><a href="javascript:void(0);" class="active"><span class="icon-yipp_home_full-"></span>Training</a></li>
+	//                 <li><router-link :to="{ path: 'challenge'}"><span class="icon-yipp_challenge_line"></span>Challenge</router-link></li>
+	//             </ul>
+	//         </footer>
+	//
+	//         <modal v-if="showModal" @close="showModal = false">
+	//             <h3 slot="header">Ooops...</h3>
+	//             <p slot="body">This is not yet available</p>
+	//         </modal>
+	// </div>
+	// </template>
+	//
+	// <script>
 
 /***/ },
 /* 290 */
@@ -35721,7 +35733,7 @@
 	//           <div class="modal-footer">
 	//             <slot name="footer">
 	//               <button class="form-button-small" @click="$emit('close')">
-	//                 Got it!
+	//                 <slot name="action">Got it!</slot>
 	//               </button>
 	//             </slot>
 	//           </div>
@@ -35742,13 +35754,13 @@
 /* 293 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<transition name=\"modal\">\n    <div class=\"modal-mask\">\n      <div class=\"modal-wrapper\">\n        <div class=\"modal-container\">\n\n          <div class=\"modal-header\">\n            <slot name=\"header\">\n              Modal header\n            </slot>\n          </div>\n\n          <div class=\"modal-body\">\n            <slot name=\"body\">\n              Modal body\n            </slot>\n          </div>\n\n          <div class=\"modal-footer\">\n            <slot name=\"footer\">\n              <button class=\"form-button-small\" @click=\"$emit('close')\">\n                Got it!\n              </button>\n            </slot>\n          </div>\n        </div>\n      </div>\n    </div>\n</transition>\n";
+	module.exports = "\n<transition name=\"modal\">\n    <div class=\"modal-mask\">\n      <div class=\"modal-wrapper\">\n        <div class=\"modal-container\">\n\n          <div class=\"modal-header\">\n            <slot name=\"header\">\n              Modal header\n            </slot>\n          </div>\n\n          <div class=\"modal-body\">\n            <slot name=\"body\">\n              Modal body\n            </slot>\n          </div>\n\n          <div class=\"modal-footer\">\n            <slot name=\"footer\">\n              <button class=\"form-button-small\" @click=\"$emit('close')\">\n                <slot name=\"action\">Got it!</slot>\n              </button>\n            </slot>\n          </div>\n        </div>\n      </div>\n    </div>\n</transition>\n";
 
 /***/ },
 /* 294 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div id=\"timeline-container\">\n    <header>\n        <div class=\"title-area\">\n            <a href=\"javascript:void(0);\"><i class=\"icon-yipp_profile_line\"></i></a>\n            <span>Trainingen</span>\n            <router-link :to=\"{ name: 'emergency'}\"><i class=\"icon-yipp_notification_line2\"></i></router-link>\n        </div>\n\n        <div class=\"user-area\">\n            <div class=\"child-name\">{{ child.get('name') }}</div>\n            <ul class=\"months-level\">\n                <li>\n                    <span>{{ childAge }}</span>  \n                    <span>Maanden</span>\n                </li>\n                <li>\n                    <span>{{ currentLevel }}</span>\n                    <span>Level</span>\n                </li>\n                <li>\n                    <a href=\"#\" v-on:click.prevent=\"toggle\" v-if=\"page == 'lessons'\"><i class=\"icon-yipp_down\"></i></a>\n                    <a href=\"#\" v-on:click.prevent=\"toggle\" v-if=\"page == 'levels'\"><i class=\"icon-yipp_up\"></i></a>\n                </li>\n            </ul>\n\n            <div class=\"photo\"><img class=\"avatar\" v-bind:src=\"child.get('image')\"></div>\n            \n        </div>\n    </header>\n        \n        <section class=\"traingen\" v-if=\"page == 'lessons'\">\n            <ul id=\"list-icons\">\n                <li v-for=\"lesson in lessons\">\n                    <a href=\"#\" v-bind:data-id=\"lesson.id\" v-on:click.prevent=\"goTodo\">\n                        <span class=\"icon big active\" v-bind:class=\"lesson.icon\"></span>\n                        {{ lesson.counter }}. {{ lesson.description }}\n                    </a>\n                </li>\n            </ul>\n        </section>\n        \n            \n        <section class=\"traingen2\" v-if=\"page == 'levels'\">\n                    \n            <ul id=\"list-text\">\n                <li v-for=\"level in levels\">\n                    <a href=\"#\" v-if=\"level.active == 'active'\" \n                        v-bind:data-id=\"level.id\" \n                        v-on:click.prevent=\"setCurrentLevel\"\n                        v-bind:class=\"level.active\">\n                        <span v-bind:data-id=\"level.id\" class=\"level\">{{ level.counter }}</span> \n                        <span v-bind:data-id=\"level.id\" class=\"months\">{{ level.description }}</span>\n                    </a>\n\n                    <a href=\"#\" v-if=\"level.active == ''\" \n                        v-bind:data-id=\"level.id\" \n                        v-on:click.prevent=\"\"\n                        @click=\"showModal = true\"\n                        v-bind:class=\"level.active\">\n                        <span v-bind:data-id=\"level.id\" class=\"level\">{{ level.counter }}</span> \n                        <span v-bind:data-id=\"level.id\" class=\"months\">{{ level.description }}</span>\n                    </a>\n                </li>\n            </ul>\n        \n        </section>\n        \n        <footer>\n            <ul>\n                <li><a href=\"javascript:void(0);\" class=\"active\"><span class=\"icon-yipp_home_full-\"></span>Training</a></li>\n                <li><router-link :to=\"{ path: 'challenge'}\"><span class=\"icon-yipp_challenge_line\"></span>Challenge</router-link></li>\n            </ul>\n        </footer>\n\n        <modal v-if=\"showModal\" @close=\"showModal = false\">\n            <h3 slot=\"header\">Ooops...</h3>\n            <p slot=\"body\">This is not yet available</p>\n        </modal>\n</div>\n";
+	module.exports = "\n<div id=\"timeline-container\">\n    <header>\n        <div class=\"title-area\">\n            <a href=\"javascript:void(0);\"><i class=\"icon-yipp_profile_line\"></i></a>\n            <span>Trainingen</span>\n            <router-link :to=\"{ name: 'emergency'}\"><i class=\"icon-yipp_notification_line2\"></i></router-link>\n        </div>\n\n        <div class=\"user-area\">\n            <div class=\"child-name\">{{ child.get('name') }}</div>\n            <ul class=\"months-level\">\n                <li>\n                    <span>{{ childAge }}</span>  \n                    <span>Maanden</span>\n                </li>\n                <li>\n                    <span>{{ currentLevel }}</span>\n                    <span>Level</span>\n                </li>\n                <li>\n                    <a href=\"#\" v-on:click.prevent=\"toggle\" v-if=\"page == 'lessons'\"><i class=\"icon-yipp_down\"></i></a>\n                    <a href=\"#\" v-on:click.prevent=\"toggle\" v-if=\"page == 'levels'\"><i class=\"icon-yipp_up\"></i></a>\n                </li>\n            </ul>\n\n            <div class=\"photo\"><img class=\"avatar\" v-bind:src=\"child.get('image')\"></div>\n            \n        </div>\n    </header>\n        \n        <section class=\"traingen\" v-if=\"page == 'lessons'\">\n            <ul id=\"list-icons\">\n                <li v-for=\"lesson in lessons\">\n                    <a href=\"#\" v-bind:data-id=\"lesson.id\" v-on:click.prevent=\"goTodo\">\n                        <span class=\"icon big active\" v-bind:class=\"lesson.icon\"></span>\n                        {{ lesson.counter }}. {{ lesson.title }}\n                    </a>\n                </li>\n            </ul>\n        </section>\n        \n            \n        <section class=\"traingen2\" v-if=\"page == 'levels'\">\n                    \n            <ul id=\"list-text\">\n                <li v-for=\"level in levels\">\n                    <a href=\"#\" v-if=\"level.active == 'active'\" \n                        v-bind:data-id=\"level.id\" \n                        v-on:click.prevent=\"setCurrentLevel\"\n                        v-bind:class=\"level.active\">\n                        <span v-bind:data-id=\"level.id\" class=\"level\">{{ level.counter }}</span> \n                        <span v-bind:data-id=\"level.id\" class=\"months\">{{ level.description }}</span>\n                    </a>\n\n                    <a href=\"#\" v-if=\"level.active == ''\" \n                        v-bind:data-id=\"level.id\" \n                        v-on:click.prevent=\"\"\n                        @click=\"showModal = true\"\n                        v-bind:class=\"level.active\">\n                        <span v-bind:data-id=\"level.id\" class=\"level\">{{ level.counter }}</span> \n                        <span v-bind:data-id=\"level.id\" class=\"months\">{{ level.description }}</span>\n                    </a>\n                </li>\n            </ul>\n        \n        </section>\n        \n        <footer>\n            <ul>\n                <li><a href=\"javascript:void(0);\" class=\"active\"><span class=\"icon-yipp_home_full-\"></span>Training</a></li>\n                <li><router-link :to=\"{ path: 'challenge'}\"><span class=\"icon-yipp_challenge_line\"></span>Challenge</router-link></li>\n            </ul>\n        </footer>\n\n        <modal v-if=\"showModal\" @close=\"showModal = false\">\n            <h3 slot=\"header\">Ooops...</h3>\n            <p slot=\"body\">This is not yet available</p>\n        </modal>\n</div>\n";
 
 /***/ },
 /* 295 */
@@ -35909,6 +35921,18 @@
 
 	var _timeline2 = _interopRequireDefault(_timeline);
 
+	var _cardAnswer = __webpack_require__(327);
+
+	var _cardAnswer2 = _interopRequireDefault(_cardAnswer);
+
+	var _cardChallenge = __webpack_require__(328);
+
+	var _cardChallenge2 = _interopRequireDefault(_cardChallenge);
+
+	var _cardMyChallenge = __webpack_require__(329);
+
+	var _cardMyChallenge2 = _interopRequireDefault(_cardMyChallenge);
+
 	var _jquery = __webpack_require__(11);
 
 	var _jquery2 = _interopRequireDefault(_jquery);
@@ -35917,6 +35941,10 @@
 
 	var _Modal2 = _interopRequireDefault(_Modal);
 
+	var _storage = __webpack_require__(2);
+
+	var _storage2 = _interopRequireDefault(_storage);
+
 	__webpack_require__(300);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -35924,21 +35952,18 @@
 	exports.default = {
 	    data: function data() {
 	        return {
-	            child: {},
 	            page: 'start',
-	            levels: [],
 	            lessons: [],
 	            showModal: false,
+	            resetLessonModal: false,
+	            lessonInfo: {},
 	            currentLesson: 1,
 	            cards: [],
 	            currentCardContent: {},
 	            currentCardCount: 0,
 	            lessonType: '',
 	            bar_length: '',
-	            bar_min: 0,
 	            bar_max: 0,
-	            bar_current: 0,
-	            slider: '',
 	            userID: 0,
 	            start: false,
 	            lastChallengeID: 0,
@@ -35952,13 +35977,45 @@
 	            this.redirectGuest();
 	        }
 
-	        this.currentLesson = 36;
-	        this.userID = 32;
-	        this.getLesson();
+	        this.currentLesson = this.$route.params.id;
+	        this.userID = _auth2.default.user.get('id');
 
-	        this.bar_length = 'width: 20%';
+	        //this.currentLesson = 36;
+	        //this.userID = 32;
+
+	        this.getLesson();
+	        this.bar_length = 'width: 0%';
+
+	        var str = _storage2.default.get('active_lesson');
+	        if (!str) {
+	            that.$router.push('lesson-' + id);
+	        }
+
+	        this.lessonInfo = JSON.parse(str);
+	        this.currentLesson = this.lessonInfo.id;
 	    },
 	    methods: {
+	        getLessonTitle: function getLessonTitle() {
+	            var that = this;
+
+	            this.lessons = [];
+	            _timeline2.default.lessons(this, this.currentLevel, this.userID, function (response) {
+	                var counter = 0;
+	                _jquery2.default.each(response.data, function (index, value) {
+	                    var active = '';
+	                    counter++;
+
+	                    that.lessons.push({
+	                        id: value.id,
+	                        counter: counter,
+	                        description: value.title,
+	                        icon: value.icon
+	                    });
+	                });
+	            }, function (msg, response) {
+	                that.logError(msg);
+	            });
+	        },
 	        getLesson: function getLesson() {
 	            this.resetError();
 	            var that = this;
@@ -36014,7 +36071,7 @@
 	                    this.otherType(card);
 	                }
 
-	                console.log(card.Contents.card_style, ' ', card.Contents.card_type);
+	                // console.log(card.Contents.card_style, ' ', card.Contents.card_type)
 	            }
 	        },
 	        knowledgeCardType: function knowledgeCardType() {
@@ -36049,13 +36106,11 @@
 	                'block_id': parseInt(id)
 	            };
 
-	            console.log('quizShowAnswer', data);
-
 	            this.modalShow(title, details);
 	            // return;
 
 	            var that = this;
-	            _timeline2.default.updateAnswer(this, data, function (response) {
+	            _cardAnswer2.default.update(this, data, function (response) {
 	                console.log('api response', response);
 	            }, function (msg, response) {
 	                that.logError(msg);
@@ -36120,20 +36175,11 @@
 	            this.nextLesson();
 	        },
 	        addFieldChallenge: function addFieldChallenge() {
-	            if (this.lastChallengeID == 0) {
-	                this.lastChallengeID = Math.floor(Math.random() * 1000 + 1);
-	            } else {
-	                this.lastChallengeID++;
-	            }
+	            this.lastChallengeID++;
 
-	            this.currentCardContent.Challenges.push({
-	                id: this.lastChallengeID,
-	                placeholder: '',
-	                deletable: 1,
-	                new: 1,
-	                Challenge: {
-	                    message: ''
-	                }
+	            this.currentCardContent.MyChallenges.push({
+	                id: 'new-' + this.lastChallengeID,
+	                message: ''
 	            });
 	        },
 	        updateChallenge: function updateChallenge() {
@@ -36145,11 +36191,6 @@
 	                    return;
 	                }
 
-	                if (value.new) {
-	                    // todo create
-	                    return;
-	                }
-
 	                // update
 	                var data = {
 	                    'user_id': that.userID,
@@ -36158,35 +36199,84 @@
 	                    'message': value.Challenge.message
 	                };
 
-	                _timeline2.default.updateChallenge(that, data, function (response) {
-	                    isSaved = true;
-	                    console.log('api response', response);
+	                _cardChallenge2.default.update(that, data, function (response) {
+	                    // none
 	                }, function (msg, response) {
 	                    isError = true;
 	                    that.logError(msg);
 	                });
 	            });
 
-	            if (!isError) {
-	                this.nextLesson();
-	            }
-	        },
-	        addChallenge: function addChallenge() {
-	            // TODO
-	        },
-	        removeChallenge: function removeChallenge(e) {
-	            var that = this;
+	            _jquery2.default.each(this.currentCardContent.MyChallenges, function (index, value) {
+	                if (!value.message) {
+	                    return;
+	                }
 
-	            var id = e.target.getAttribute('data-id');
-	            _jquery2.default.each(this.currentCardContent.Challenges, function (index, value) {
-	                if (value.id == id) {
-	                    that.currentCardContent.Challenges.splice(index, 1);
-	                    console.log('remove found', id);
+	                if (value.new) {
+	                    // add
+	                    var data = {
+	                        'user_id': that.userID,
+	                        'content_id': parseInt(that.currentCardContent.Contents.id),
+	                        'message': value.message
+	                    };
+
+	                    _cardMyChallenge2.default.create(that, data, function (response) {
+	                        // None
+	                    }, function (msg, response) {
+	                        isError = true;
+	                        that.logError(msg);
+	                    });
+	                } else {
+	                    // update
+	                    var data = {
+	                        'id': parseInt(value.id),
+	                        'user_id': that.userID,
+	                        'content_id': parseInt(that.currentCardContent.Contents.id),
+	                        'message': value.message
+	                    };
+
+	                    _cardMyChallenge2.default.update(that, data, function (response) {
+	                        // None
+	                    }, function (msg, response) {
+	                        isError = true;
+	                        that.logError(msg);
+	                    });
 	                }
 	            });
 
-	            // TODO
+	            if (!isError) {
+	                this.lessonType = 'challenge_no_next';
+	            }
 	        },
+	        removeMyChallenge: function removeMyChallenge(e) {
+	            var that = this;
+
+	            var id = e.target.getAttribute('data-id');
+	            _jquery2.default.each(this.currentCardContent.MyChallenges, function (index, value) {
+	                if (value.id == id) {
+	                    that.currentCardContent.MyChallenges.splice(index, 1);
+	                    console.log('remove found', id);
+
+	                    var data = {
+	                        'id': parseInt(value.id),
+	                        'user_id': that.userID,
+	                        'content_id': parseInt(that.currentCardContent.Contents.id),
+	                        'message': value.message
+	                    };
+
+	                    _cardMyChallenge2.default.delete(that, data, function (response) {
+	                        // None
+	                    }, function (msg, response) {
+	                        isError = true;
+	                        that.logError(msg);
+	                    });
+	                }
+	            });
+	        },
+	        doneChallengeNoType: function doneChallengeNoType() {
+	            this.nextLesson();
+	        },
+
 	        resetError: function resetError() {
 	            this.error_message = '';
 	        },
@@ -36201,6 +36291,18 @@
 	            }
 
 	            this.error_message = msgStr;
+	        },
+
+
+	        resetLesson: function resetLesson() {
+	            this.resetLessonModal = true;
+	        },
+	        restartLesson: function restartLesson() {
+	            this.resetLessonModal = false;
+	            this.page = 'start';
+	            this.currentCardCount = 0;
+	            this.currentCardContent = null;
+	            this.getLesson();
 	        }
 	    },
 
@@ -36226,10 +36328,10 @@
 	//
 	// 		<div id="popUp">
 	// 			<i class="big icon-yipp_apple_full"></i>
-	// 			<h3>Lesson 2: Screentime</h3>
-	// 			<p>TestIn this lesson, we will help to start the first practice appetizers</p>
+	// 			<h3>{{ lessonInfo.counter }}. {{ lessonInfo.title }}</h3>
+	// 			<p>{{ lessonInfo.description }}</p>
 	// 			<hr>
-	// 			<span><i class="icon-yipp_check_full"></i> 5min</span>
+	// 			<span><i class="icon-yipp_check_full"></i> {{lessonInfo.duration}} min</span>
 	// 		</div>
 	//
 	// 		<a href="#" v-on:click.prevent="startLesson" class="btn bottom white" v-if="start">Start</a>
@@ -36281,7 +36383,10 @@
 	// 			<div class="challenge-boxes">
 	// 				<div v-for="challenge in currentCardContent.Challenges" class="challenge-box">
 	// 					<input type="text" name="challenge[]" v-model="challenge.Challenge.message" v-bind:placeholder="challenge.placeholder" v-bind:data-id="challenge.id">
-	// 					<a href="#" v-bind:data-id="challenge.id" v-if="challenge.deletable" v-on:click.prevent="removeChallenge">Delete</a>
+	// 				</div>
+	// 				<div v-for="challenge in currentCardContent.MyChallenges" class="challenge-box">
+	// 					<input type="text" name="challenge[]" v-model="challenge.message" v-bind:data-id="challenge.id">
+	// 					<a href="#" v-bind:data-id="challenge.id" v-on:click.prevent="removeMyChallenge">Delete</a>
 	// 				</div>
 	// 			</div>
 	//
@@ -36289,6 +36394,21 @@
 	//
 	// 			<div class="bottom">
 	// 				<a href="" v-on:click.prevent="updateChallenge" class="button-medium white btn-next-card">Next</a>
+	// 			</div>
+	// 		</div>
+	//
+	// 		<div class="content" v-else-if="lessonType == 'challenge_no_next'">
+	// 			<h3 style="text-align: center;">{{ currentCardContent.Contents.title }}</h3>
+	// 			<p>{{ currentCardContent.Contents.details }}</p>
+	// 			<ul>
+	// 				<li v-for="challenge in currentCardContent.Challenges">{{ challenge.Challenge.message }}</li>
+	// 				<li v-for="challenge in currentCardContent.MyChallenges">{{ challenge.message }}</li>
+	// 			</ul>
+	//
+	// 			<a href="#" v-on:click.prevent="addReminder">Add reminder</a>
+	//
+	// 			<div class="bottom">
+	// 				<a href="" v-on:click.prevent="doneChallengeNoType" class="button-medium white btn-next-card">Next</a>
 	// 			</div>
 	// 		</div>
 	//
@@ -36302,34 +36422,6 @@
 	//
 	// 		</div>
 	// 	</div>
-	//
-	// 	<!-- <div class="panel stack" id="" v-if="page == 'stack'">
-	// 		<a v-on:click.prevent="back('cards')" class="back">
-	// 			<i class="icon-yipp_check_full"></i>
-	// 		</a>
-	// 		<div class="bar">
-	// 			<input type="range" min="0" max="5" value="1" step="1" disabled>
-	// 		</div>
-	// 		<router-link :to="{ name: 'timeline'}" class="home">
-	// 			<i class="icon-yipp_home_full-"></i>
-	// 		</router-link>
-	//
-	// 		<div class="content" v-on:click.prevent="next('complete')">
-	//
-	// 			<p class="text-center">Te weinig slapen vergroot de kans op overgewicht bij kinderen, omdat:</p>
-	//
-	// 			<ul>
-	//
-	// 				<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
-	// 				<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
-	// 				<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
-	// 				<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>
-	//
-	// 			</ul>
-	//
-	// 		</div>
-	//
-	// 	</div> -->
 	//
 	// 	<div class="panel" v-if="page == 'page_complete'">
 	// 		<a v-on:click.prevent="back('stack')" class="back">
@@ -36350,11 +36442,11 @@
 	// 			<p class="text-center">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
 	//
 	// 			<div class="bottom">
-	// 				<router-link :to="{ name: 'challenge'}" class="btn white">
-	// 					Start Challenge
+	// 				<router-link :to="{ name: 'timeline'}" class="btn white">
+	// 					Next Lesson
 	// 				</router-link>
 	// 				<br>
-	// 				<a href="" v-on:click.prevent="back('start')" class="btn white">Reset Lesson</a>
+	// 				<a href="" v-on:click.prevent="resetLesson" class="btn white">Reset Lesson</a>
 	// 			</div>
 	//
 	// 		</div>
@@ -36364,6 +36456,21 @@
 	// 	<modal v-if="showModal" @close="modalClose">
 	//         <h3 slot="header">{{ modalContent.title }}</h3>
 	//         <p slot="body">{{ modalContent.message }}</p>
+	//     </modal>
+	//
+	//     <modal v-if="resetLessonModal" @close="resetLessonModal = false">
+	//         <h3 slot="header">Are you sure?</h3>
+	//         <p slot="body">Do you want to restart the challenge?</p>
+	//
+	//         <div slot="footer">
+	//           <button class="form-button-small" @click="restartLesson">
+	//             Restart challenge
+	//           </button>
+	//           <button class="form-button-small" @click="resetLessonModal = false">
+	//             Cancel
+	//           </button>
+	//         </div>
+	//
 	//     </modal>
 	//
 	// </div>
@@ -39037,7 +39144,7 @@
 /* 313 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div id=\"page-lesson\">\n\n\t<div  class=\"panel\" id=\"start\" v-if=\"page == 'start'\">\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"back\">\n\t\t\t<i class=\"icon-back\"></i>\n\t\t</router-link>\n\n\t\t<div id=\"popUp\">\n\t\t\t<i class=\"big icon-yipp_apple_full\"></i>\n\t\t\t<h3>Lesson 2: Screentime</h3>\n\t\t\t<p>TestIn this lesson, we will help to start the first practice appetizers</p>\n\t\t\t<hr>\n\t\t\t<span><i class=\"icon-yipp_check_full\"></i> 5min</span>\n\t\t</div>\n\t\t\t\n\t\t<a href=\"#\" v-on:click.prevent=\"startLesson\" class=\"btn bottom white\" v-if=\"start\">Start</a>\n\t</div>\n\n\t<div class=\"panel\" v-if=\"page == 'page_lesson'\">\n\t\t<a v-on:click.prevent=\"back('start')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\"> \n\t\t\t<span class=\"bar-inner\" v-bind:style='bar_length'></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"error\" v-if=\"error_message\">{{ error_message }}</div>\n\n\t\t<div v-if=\"lessonType == 'knowledge_card'\">\n\t\t\t<div id=\"knowledge-cards\"  v-for=\"card in cards\">\n\t\t\t\t<div class=\"paper\">\n\t\t\t\t\t<h3>{{ currentCardContent.Contents.title }}</h3>\n\t\t\t\t\t<p>{{ currentCardContent.Contents.details }}</p>\n\n\t\t\t\t\t<i class=\"heart icon-yipp_check_full\" v-if=\"currentCardContent.is_favorite\"></i>\n\t\t\t\t\t<i class=\"heart icon-yipp_check_line\" v-if=\"currentCardContent.is_favorite == false\"></i>\n\t\t\t\t\t<div class=\"paper_foo1\">\n\t\t\t\t\t\t<div class=\"paper_foo2\"></div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"content\" v-else-if=\"lessonType == 'quiz_no'\">\n\t\t\t<h3 style=\"text-align: center;\">{{ currentCardContent.Contents.title }}</h3>\n\t\t\t<p>{{ currentCardContent.Contents.details }}</p>\n\t\t\t<ul>\n\t\t\t\t<li v-for=\"quiz in currentCardContent.Quiz\">\n\t\t\t\t\t<a href=\"javascript:void(0);\" style='text-decoration:none; color:#333; display:block;' class='my-answer' data-position='1' v-bind:data-answer-id='quiz.Answer.id' v-bind:data-answer-title='quiz.Answer.title' v-bind:data-answer-details='quiz.Answer.details' @click=\"quizShowAnswer\">\n\t\t\t\t\t\t{{ quiz.question }}\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t</div>\n\n\t\t<div class=\"content\" v-else-if=\"lessonType == 'challenge_no'\">\n\t\t\t<h3 style=\"text-align: center;\">{{ currentCardContent.Contents.title }}</h3>\n\t\t\t<p>{{ currentCardContent.Contents.details }}</p>\n\t\t\t<div class=\"challenge-boxes\">\n\t\t\t\t<div v-for=\"challenge in currentCardContent.Challenges\" class=\"challenge-box\">\n\t\t\t\t\t<input type=\"text\" name=\"challenge[]\" v-model=\"challenge.Challenge.message\" v-bind:placeholder=\"challenge.placeholder\" v-bind:data-id=\"challenge.id\">\n\t\t\t\t\t<a href=\"#\" v-bind:data-id=\"challenge.id\" v-if=\"challenge.deletable\" v-on:click.prevent=\"removeChallenge\">Delete</a>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t\t<a href=\"#\" v-on:click.prevent=\"addFieldChallenge\">Add</a>\n\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"updateChallenge\" class=\"button-medium white btn-next-card\">Next</a>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"content\" v-else>\n\t\t\t<h3 style='text-align: center;'>{{ currentCardContent.Contents.title }}</h3>\n\t\t\t<p>{{ currentCardContent.Contents.details }}</p>\n\t\t\t\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"nextLesson\" class=\"button-medium white btn-next-card\">Next</a>\n\t\t\t</div>\n\t\t\n\t\t</div>\n\t</div>\n\t\t\n\t<!-- <div class=\"panel stack\" id=\"\" v-if=\"page == 'stack'\">\n\t\t<a v-on:click.prevent=\"back('cards')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\">\n\t\t\t<input type=\"range\" min=\"0\" max=\"5\" value=\"1\" step=\"1\" disabled>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"content\" v-on:click.prevent=\"next('complete')\">\n\t\t\t\n\t\t\t<p class=\"text-center\">Te weinig slapen vergroot de kans op overgewicht bij kinderen, omdat:</p>\n\t\t\t\n\t\t\t<ul>\n\t\t\t\t\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </li>\n\t\t\t\t\n\t\t\t</ul>\n\n\t\t</div>\n\n\t</div> -->\n\t\t\t\n\t<div class=\"panel\" v-if=\"page == 'page_complete'\">\n\t\t<a v-on:click.prevent=\"back('stack')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\"> \n\t\t\t<span class=\"bar-inner\" style='width: 100%'></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"content\">\n\t\t\n\t\t\t<h1>Les compleet!</h1>\n\t\t\t<i class=\"biggest icon-yipp_check_full\"></i>\n\t\t\t\n\t\t\t<p class=\"text-center\">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>\n\t\t\t\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<router-link :to=\"{ name: 'challenge'}\" class=\"btn white\">\n\t\t\t\t\tStart Challenge\n\t\t\t\t</router-link>\n\t\t\t\t<br>\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"back('start')\" class=\"btn white\">Reset Lesson</a>\n\t\t\t</div>\n\t\t\n\t\t</div>\n\n\t</div>\n\n\t<modal v-if=\"showModal\" @close=\"modalClose\">\n        <h3 slot=\"header\">{{ modalContent.title }}</h3>\n        <p slot=\"body\">{{ modalContent.message }}</p>\n    </modal>\n\n</div>\n\t\n";
+	module.exports = "\n<div id=\"page-lesson\">\n\n\t<div  class=\"panel\" id=\"start\" v-if=\"page == 'start'\">\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"back\">\n\t\t\t<i class=\"icon-back\"></i>\n\t\t</router-link>\n\n\t\t<div id=\"popUp\">\n\t\t\t<i class=\"big icon-yipp_apple_full\"></i>\n\t\t\t<h3>{{ lessonInfo.counter }}. {{ lessonInfo.title }}</h3>\n\t\t\t<p>{{ lessonInfo.description }}</p>\n\t\t\t<hr>\n\t\t\t<span><i class=\"icon-yipp_check_full\"></i> {{lessonInfo.duration}} min</span>\n\t\t</div>\n\t\t\t\n\t\t<a href=\"#\" v-on:click.prevent=\"startLesson\" class=\"btn bottom white\" v-if=\"start\">Start</a>\n\t</div>\n\n\t<div class=\"panel\" v-if=\"page == 'page_lesson'\">\n\t\t<a v-on:click.prevent=\"back('start')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\"> \n\t\t\t<span class=\"bar-inner\" v-bind:style='bar_length'></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"error\" v-if=\"error_message\">{{ error_message }}</div>\n\n\t\t<div v-if=\"lessonType == 'knowledge_card'\">\n\t\t\t<div id=\"knowledge-cards\"  v-for=\"card in cards\">\n\t\t\t\t<div class=\"paper\">\n\t\t\t\t\t<h3>{{ currentCardContent.Contents.title }}</h3>\n\t\t\t\t\t<p>{{ currentCardContent.Contents.details }}</p>\n\n\t\t\t\t\t<i class=\"heart icon-yipp_check_full\" v-if=\"currentCardContent.is_favorite\"></i>\n\t\t\t\t\t<i class=\"heart icon-yipp_check_line\" v-if=\"currentCardContent.is_favorite == false\"></i>\n\t\t\t\t\t<div class=\"paper_foo1\">\n\t\t\t\t\t\t<div class=\"paper_foo2\"></div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"content\" v-else-if=\"lessonType == 'quiz_no'\">\n\t\t\t<h3 style=\"text-align: center;\">{{ currentCardContent.Contents.title }}</h3>\n\t\t\t<p>{{ currentCardContent.Contents.details }}</p>\n\t\t\t<ul>\n\t\t\t\t<li v-for=\"quiz in currentCardContent.Quiz\">\n\t\t\t\t\t<a href=\"javascript:void(0);\" style='text-decoration:none; color:#333; display:block;' class='my-answer' data-position='1' v-bind:data-answer-id='quiz.Answer.id' v-bind:data-answer-title='quiz.Answer.title' v-bind:data-answer-details='quiz.Answer.details' @click=\"quizShowAnswer\">\n\t\t\t\t\t\t{{ quiz.question }}\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t</div>\n\n\t\t<div class=\"content\" v-else-if=\"lessonType == 'challenge_no'\">\n\t\t\t<h3 style=\"text-align: center;\">{{ currentCardContent.Contents.title }}</h3>\n\t\t\t<p>{{ currentCardContent.Contents.details }}</p>\n\t\t\t<div class=\"challenge-boxes\">\n\t\t\t\t<div v-for=\"challenge in currentCardContent.Challenges\" class=\"challenge-box\">\n\t\t\t\t\t<input type=\"text\" name=\"challenge[]\" v-model=\"challenge.Challenge.message\" v-bind:placeholder=\"challenge.placeholder\" v-bind:data-id=\"challenge.id\">\n\t\t\t\t</div>\n\t\t\t\t<div v-for=\"challenge in currentCardContent.MyChallenges\" class=\"challenge-box\">\n\t\t\t\t\t<input type=\"text\" name=\"challenge[]\" v-model=\"challenge.message\" v-bind:data-id=\"challenge.id\">\n\t\t\t\t\t<a href=\"#\" v-bind:data-id=\"challenge.id\" v-on:click.prevent=\"removeMyChallenge\">Delete</a>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t\t<a href=\"#\" v-on:click.prevent=\"addFieldChallenge\">Add</a>\n\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"updateChallenge\" class=\"button-medium white btn-next-card\">Next</a>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"content\" v-else-if=\"lessonType == 'challenge_no_next'\">\n\t\t\t<h3 style=\"text-align: center;\">{{ currentCardContent.Contents.title }}</h3>\n\t\t\t<p>{{ currentCardContent.Contents.details }}</p>\n\t\t\t<ul>\n\t\t\t\t<li v-for=\"challenge in currentCardContent.Challenges\">{{ challenge.Challenge.message }}</li>\n\t\t\t\t<li v-for=\"challenge in currentCardContent.MyChallenges\">{{ challenge.message }}</li>\n\t\t\t</ul>\n\n\t\t\t<a href=\"#\" v-on:click.prevent=\"addReminder\">Add reminder</a>\n\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"doneChallengeNoType\" class=\"button-medium white btn-next-card\">Next</a>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"content\" v-else>\n\t\t\t<h3 style='text-align: center;'>{{ currentCardContent.Contents.title }}</h3>\n\t\t\t<p>{{ currentCardContent.Contents.details }}</p>\n\t\t\t\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"nextLesson\" class=\"button-medium white btn-next-card\">Next</a>\n\t\t\t</div>\n\t\t\n\t\t</div>\n\t</div>\n\t\t\t\n\t<div class=\"panel\" v-if=\"page == 'page_complete'\">\n\t\t<a v-on:click.prevent=\"back('stack')\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\"> \n\t\t\t<span class=\"bar-inner\" style='width: 100%'></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"content\">\n\t\t\n\t\t\t<h1>Les compleet!</h1>\n\t\t\t<i class=\"biggest icon-yipp_check_full\"></i>\n\t\t\t\n\t\t\t<p class=\"text-center\">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>\n\t\t\t\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"btn white\">\n\t\t\t\t\tNext Lesson\n\t\t\t\t</router-link>\n\t\t\t\t<br>\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"resetLesson\" class=\"btn white\">Reset Lesson</a>\n\t\t\t</div>\n\t\t\n\t\t</div>\n\n\t</div>\n\n\t<modal v-if=\"showModal\" @close=\"modalClose\">\n        <h3 slot=\"header\">{{ modalContent.title }}</h3>\n        <p slot=\"body\">{{ modalContent.message }}</p>\n    </modal>\n\n    <modal v-if=\"resetLessonModal\" @close=\"resetLessonModal = false\">\n        <h3 slot=\"header\">Are you sure?</h3>\n        <p slot=\"body\">Do you want to restart the challenge?</p>\n        \n        <div slot=\"footer\">\n          <button class=\"form-button-small\" @click=\"restartLesson\">\n            Restart challenge\n          </button>\n          <button class=\"form-button-small\" @click=\"resetLessonModal = false\">\n            Cancel\n          </button>\n        </div>\n\n    </modal>\n\n</div>\n\t\n";
 
 /***/ },
 /* 314 */
@@ -43910,6 +44017,233 @@
 	})));
 	//# sourceMappingURL=vue-touch.js.map
 
+
+/***/ },
+/* 327 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _config = __webpack_require__(1);
+
+	var _config2 = _interopRequireDefault(_config);
+
+	var _auth = __webpack_require__(184);
+
+	var _auth2 = _interopRequireDefault(_auth);
+
+	var _vue = __webpack_require__(3);
+
+	var _vue2 = _interopRequireDefault(_vue);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	    update: function update(context, data, successCallback, errorCallback) {
+	        var _this = this;
+
+	        var that = this;
+
+	        _vue2.default.http.options.emulateJSON = true;
+
+	        context.$http.post(_config2.default.api.url + '/answer', data).then(function (response) {
+	            var result = response.body.result;
+
+	            if (response.body.status == 'OK') {
+	                successCallback.call(_this, result);
+	            } else if (errorCallback) {
+	                console.log('error in api.timeline');
+	                errorCallback.call(_this, result.message, response);
+	            }
+	        }, function (response) {
+
+	            if (errorCallback) {
+	                errorCallback.call(_this, response.body.result.error, response);
+	            }
+	        });
+	    }
+	};
+
+/***/ },
+/* 328 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _config = __webpack_require__(1);
+
+	var _config2 = _interopRequireDefault(_config);
+
+	var _auth = __webpack_require__(184);
+
+	var _auth2 = _interopRequireDefault(_auth);
+
+	var _vue = __webpack_require__(3);
+
+	var _vue2 = _interopRequireDefault(_vue);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	    update: function update(context, data, successCallback, errorCallback) {
+	        var _this = this;
+
+	        var that = this;
+
+	        _vue2.default.http.options.emulateJSON = true;
+
+	        data.action = 'update';
+
+	        context.$http.post(_config2.default.api.url + '/challenge', data).then(function (response) {
+	            var result = response.body.result;
+
+	            if (response.body.status == 'OK') {
+	                successCallback.call(_this, result);
+	            } else if (errorCallback) {
+	                console.log('error in api.timeline');
+	                errorCallback.call(_this, result.message, response);
+	            }
+	        }, function (response) {
+
+	            if (errorCallback) {
+	                errorCallback.call(_this, response.body.result.error, response);
+	            }
+	        });
+	    },
+	    done: function done(context, data, successCallback, errorCallback) {
+	        var _this2 = this;
+
+	        var that = this;
+
+	        _vue2.default.http.options.emulateJSON = true;
+
+	        context.$http.post(_config2.default.api.url + '/challenge', data).then(function (response) {
+	            var result = response.body.result;
+
+	            if (response.body.status == 'OK') {
+	                successCallback.call(_this2, result);
+	            } else if (errorCallback) {
+	                console.log('error in api.timeline');
+	                errorCallback.call(_this2, result.message, response);
+	            }
+	        }, function (response) {
+
+	            if (errorCallback) {
+	                errorCallback.call(_this2, response.body.result.error, response);
+	            }
+	        });
+	    }
+	};
+
+/***/ },
+/* 329 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _config = __webpack_require__(1);
+
+	var _config2 = _interopRequireDefault(_config);
+
+	var _auth = __webpack_require__(184);
+
+	var _auth2 = _interopRequireDefault(_auth);
+
+	var _vue = __webpack_require__(3);
+
+	var _vue2 = _interopRequireDefault(_vue);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	    update: function update(context, data, successCallback, errorCallback) {
+	        var _this = this;
+
+	        var that = this;
+
+	        _vue2.default.http.options.emulateJSON = true;
+
+	        data.action = 'update';
+
+	        context.$http.post(_config2.default.api.url + '/mychallenge', data).then(function (response) {
+	            var result = response.body.result;
+
+	            if (response.body.status == 'OK') {
+	                successCallback.call(_this, result);
+	            } else if (errorCallback) {
+	                console.log('error in api.timeline');
+	                errorCallback.call(_this, result.message, response);
+	            }
+	        }, function (response) {
+
+	            if (errorCallback) {
+	                errorCallback.call(_this, response.body.result.error, response);
+	            }
+	        });
+	    },
+	    create: function create(context, data, successCallback, errorCallback) {
+	        var _this2 = this;
+
+	        var that = this;
+
+	        _vue2.default.http.options.emulateJSON = true;
+
+	        data.action = 'add';
+
+	        context.$http.post(_config2.default.api.url + '/mychallenge', data).then(function (response) {
+	            var result = response.body.result;
+
+	            if (response.body.status == 'OK') {
+	                successCallback.call(_this2, result);
+	            } else if (errorCallback) {
+	                console.log('error in api.timeline');
+	                errorCallback.call(_this2, result.message, response);
+	            }
+	        }, function (response) {
+
+	            if (errorCallback) {
+	                errorCallback.call(_this2, response.body.result.error, response);
+	            }
+	        });
+	    },
+	    delete: function _delete(context, data, successCallback, errorCallback) {
+	        var _this3 = this;
+
+	        var that = this;
+
+	        _vue2.default.http.options.emulateJSON = true;
+
+	        data.action = 'delete';
+
+	        context.$http.post(_config2.default.api.url + '/mychallenge', data).then(function (response) {
+	            var result = response.body.result;
+
+	            if (response.body.status == 'OK') {
+	                successCallback.call(_this3, result);
+	            } else if (errorCallback) {
+	                console.log('error in api.timeline');
+	                errorCallback.call(_this3, result.message, response);
+	            }
+	        }, function (response) {
+
+	            if (errorCallback) {
+	                errorCallback.call(_this3, response.body.result.error, response);
+	            }
+	        });
+	    }
+	};
 
 /***/ }
 /******/ ]);

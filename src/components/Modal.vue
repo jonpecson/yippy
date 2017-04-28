@@ -19,7 +19,7 @@
           <div class="modal-footer">
             <slot name="footer">
               <button class="form-button-small" @click="$emit('close')">
-                Got it!
+                <slot name="action">Got it!</slot>
               </button>
             </slot>
           </div>

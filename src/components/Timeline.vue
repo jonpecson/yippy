@@ -34,7 +34,7 @@
                 <li v-for="lesson in lessons">
                     <a href="#" v-bind:data-id="lesson.id" v-on:click.prevent="goTodo">
                         <span class="icon big active" v-bind:class="lesson.icon"></span>
-                        {{ lesson.counter }}. {{ lesson.description }}
+                        {{ lesson.counter }}. {{ lesson.title }}
                     </a>
                 </li>
             </ul>
@@ -86,6 +86,7 @@ import config from '../config'
 import auth from '../api/auth'
 import timeline from '../api/timeline'
 import $ from 'jquery'
+import Storage from '../storage'
 
 import Modal from '../components/Modal.vue'
 
@@ -146,17 +147,13 @@ export default {
 
             this.lessons = [];
             timeline.lessons(this, this.currentLevel, this.userID, function (response) {
+                console.log(response)
                 var counter = 0;
                 $.each(response.data, function (index, value) {
                     var active = '';
                     counter++;
-
-                    that.lessons.push({
-                        id: value.id,
-                        counter: counter,
-                        description: value.title,
-                        icon: value.icon
-                    });
+                    value.counter = counter;
+                    that.lessons.push(value);
                 });
 
             }, function (msg, response) {
@@ -184,7 +181,15 @@ export default {
         },
         goTodo: function (e) {
             var id = e.target.getAttribute('data-id');
-            this.$router.push('lesson-' + id);   
+
+            var that = this;
+            $.each(this.lessons, function (index, value) {
+                if (value.id == id) {
+                    var str = JSON.stringify(value);
+                    Storage.save('active_lesson', str, 1);
+                    that.$router.push('lesson-' + id);
+                }
+            });
         },
         redirectGuest: function()
         {
