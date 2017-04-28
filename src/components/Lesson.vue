@@ -196,7 +196,7 @@ export default {
             error_message: ''
         }
     },
-    mounted: function() {
+    created: function() {
         auth.check();
         if (!auth.authenticated) {
             this.redirectGuest();
@@ -213,11 +213,14 @@ export default {
 
 	    var str = Storage.get('active_lesson');
 	    if (!str) {
-	    	that.$router.push('lesson-' + id);
+	    	this.$router.push('timeline');
 	    }
 
 	    this.lessonInfo = JSON.parse(str);
-	    this.currentLesson = this.lessonInfo.id;
+	    
+	    if (this.currentLesson != this.lessonInfo.id) {
+	    	this.$router.push('timeline');
+	    }
     },
     methods: {
     	getLessonTitle: function () {
@@ -504,7 +507,7 @@ export default {
 	        this.error_message = msgStr;
 	    },
     },
-    
+
     components: { 
         Modal 
     },

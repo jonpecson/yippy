@@ -36134,7 +36134,7 @@
 	        };
 	    },
 
-	    mounted: function mounted() {
+	    created: function created() {
 	        _auth2.default.check();
 	        if (!_auth2.default.authenticated) {
 	            this.redirectGuest();
@@ -36151,11 +36151,14 @@
 
 	        var str = _storage2.default.get('active_lesson');
 	        if (!str) {
-	            that.$router.push('lesson-' + id);
+	            this.$router.push('timeline');
 	        }
 
 	        this.lessonInfo = JSON.parse(str);
-	        this.currentLesson = this.lessonInfo.id;
+
+	        if (this.currentLesson != this.lessonInfo.id) {
+	            this.$router.push('timeline');
+	        }
 	    },
 	    methods: {
 	        getLessonTitle: function getLessonTitle() {
