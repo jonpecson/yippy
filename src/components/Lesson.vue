@@ -31,13 +31,17 @@
 		<div class="error" v-if="error_message">{{ error_message }}</div>
 
 		<div v-if="lessonType == 'knowledge_card'">
-			<div id="knowledge-cards"  v-for="card in cards">
+			<div id="knowledge-cards" v-for="card in cards">
 				<div class="paper">
 					<h3>{{ currentCardContent.Contents.title }}</h3>
 					<p>{{ currentCardContent.Contents.details }}</p>
 
-					<i class="heart icon-yipp_check_full" v-if="currentCardContent.is_favorite"></i>
-					<i class="heart icon-yipp_check_line" v-if="currentCardContent.is_favorite == false"></i>
+					<i class="heart icon-yipp_check_full" v-if="currentCardContent.is_favorite"
+						v-on:click.prevent="markFavorite" v-bind:data-id="currentCardContent.Contents.id"
+					></i>
+					<i class="heart icon-yipp_check_line" v-if="currentCardContent.is_favorite == false"
+						v-on:click.prevent="markFavorite" v-bind:data-id="currentCardContent.Contents.id"
+					></i>
 					<div class="paper_foo1">
 						<div class="paper_foo2"></div>
 					</div>
@@ -66,7 +70,7 @@
 			</div>
 
 			<div class="bottom">
-				<a href="" v-on:click.prevent="updateChallenge" class="button-medium white btn-next-card">Next</a>
+				<a href="" v-on:click.prevent="nextLesson" class="button-medium white btn-next-card">Next</a>
 			</div>
 		</div>
 
@@ -175,6 +179,7 @@ import {router} from '../index'
 import config from '../config'
 import auth from '../api/auth'
 import timeline from '../api/timeline'
+import card from '../api/card'
 import cardAnswer from '../api/cardAnswer'
 import cardChallenge from '../api/cardChallenge'
 import cardMyChallenge from '../api/cardMyChallenge'
@@ -264,7 +269,7 @@ export default {
     		this.resetError();
             var that = this;
 
-            timeline.lesson(this, this.currentLesson, this.userID, config.api.lang, function (response) {
+            card.lesson(this, this.currentLesson, this.userID, config.api.lang, function (response) {
             	
             	var counter = 0;
             	that.cards = response.cards;
@@ -295,7 +300,7 @@ export default {
     			lesson_id: this.currentLesson
     		}
 
-    		timeline.endLesson(this, data, function (response) {
+    		card.endLesson(this, data, function (response) {
             	// none
             	// that.modalShow(value.Chances.title, value.Chances.details)
             }, function (msg, response) {
@@ -568,6 +573,24 @@ export default {
 	        
 	        this.error_message = msgStr;
 	    },
+	    markFavorite: function(e) {
+	    	var id = e.target.getAttribute('data-id');
+	    	console.log(id)
+
+	    	var that = this;
+	    	card.favorite(that, id, this.userID, function (response) {
+            	console.log('favorite ok')
+            }, function (msg, response) {
+            	isError = true
+                that.logError(msg);
+            });
+
+	    	if (this.currentCardContent.is_favorite) {
+	    		this.currentCardContent.is_favorite = false;
+	    	} else {
+	    		this.currentCardContent.is_favorite = true;
+	    	}
+	    }
     },
 
     components: { 
