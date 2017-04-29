@@ -9,7 +9,7 @@ export default {
 
         Vue.http.options.emulateJSON = true;
         
-        context.$http.post(config.api.url + '/challenge', data).then(response => {
+        context.$http.post(config.api.url + '/chance', data).then(response => {
             var result = response.body.result;
 
             if (response.body.status == 'OK') {
@@ -25,6 +25,6 @@ export default {
             }
 
         });
-    }
+    },
     
 }

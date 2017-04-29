@@ -37,8 +37,6 @@ export default {
             url += '/' + level;
         }
 
-        console.log(url)
-
         context.$http.get(url).then(response => {
             console.log(response)
             var result = response.body.result;
@@ -79,12 +77,12 @@ export default {
         });
     },
 
-    updateAnswer(context, data, successCallback, errorCallback) {
+    endLesson(context, data, successCallback, errorCallback) {
         var that = this;
-        
-        Vue.http.options.emulateJSON = true;
 
-        context.$http.post(config.api.url + '/answer', data).then(response => {
+        Vue.http.options.emulateJSON = true;
+        
+        context.$http.post(config.api.url + '/lessondone', data).then(response => {
             var result = response.body.result;
 
             if (response.body.status == 'OK') {
@@ -102,18 +100,22 @@ export default {
         });
     },
 
-    updateChallenge(context, data, successCallback, errorCallback) {
+    favorite(context, contentID, userID, successCallback, errorCallback) {
         var that = this;
 
         Vue.http.options.emulateJSON = true;
-        
-        context.$http.post(config.api.url + '/challenge', data).then(response => {
+
+        var data = {
+            user_id: userID,
+            content_id: contentID
+        };
+
+        context.$http.post(config.api.url + '/favorite', data).then(response => {
             var result = response.body.result;
 
             if (response.body.status == 'OK') {
-                successCallback.call(this, result);
+                successCallback.call(this, result.status);
             } else if (errorCallback) {
-                console.log('error in api.timeline');
                 errorCallback.call(this, result.message, response);
             }
         }, response => {
