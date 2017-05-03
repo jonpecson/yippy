@@ -31,9 +31,10 @@
 		<div class="error" v-if="error_message">{{ error_message }}</div>
 
 		<div v-if="lessonType == 'knowledge_card'">
-			<div id="knowledge-cards" v-for="card in cards">
-				<div class="paper">
-					<h3>{{ currentCardContent.Contents.title }}</h3>
+			<div id="knowledge-cards">
+                <div class="paper" v-bind:id="currentCardContent.Contents.id" v-on:click="swipeCard">
+					<h3>{{ currentCardContent.Contents.title }} hello</h3>
+                    <img v-bind:data-id="currentCardContent.Contents.id" v-if="currentCardContent.Contents.src_type == 'ext_image'" v-bind:src="currentCardContent.Contents.src_url" style="width: 50%;">
 					<p>{{ currentCardContent.Contents.details }}</p>
 
 					<i class="heart icon-yipp_check_full" v-if="currentCardContent.is_favorite"
@@ -105,7 +106,7 @@
 			</div>
 		</div>
 
-		<div class="content" v-else>
+		<div class="content" v-else-if="lessonType == 'other'">
 			<h3 style='text-align: center;'>{{ currentCardContent.Contents.title }}</h3>
 			<p>{{ currentCardContent.Contents.details }}</p>
 			
@@ -129,7 +130,7 @@
 
 		<div class="content">
 		
-			<h1>Les compleet!</h1>
+			<h1>Les compleet! Last one</h1>
 			<i class="biggest icon-yipp_check_full"></i>
 			
 			<p class="text-center">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
@@ -189,7 +190,24 @@ import 'hammerjs/hammer.js'
 import rangesliderJs from 'rangeslider-js';
 
 const Swing = require('swing')
-const stack = Swing.Stack();
+
+const stack = Swing.Stack({
+  throwOutConfidence: (xOffset, yOffset, element) => {
+    const xConfidence = Math.min(Math.abs(xOffset) / element.offsetWidth, 1);
+    const yConfidence = Math.min(Math.abs(yOffset) / element.offsetHeight, 1);
+
+    var distance = Math.max(xConfidence, yConfidence);
+
+    if (distance > .5) {
+        return 1;
+    }
+
+    return 0;
+  },
+  isThrowOut: () => {
+    return 1;
+  }
+});
 
 export default {
     data() {
@@ -210,7 +228,8 @@ export default {
             start: false,
             lastChallengeID: 0,
             error_message: '',
-            myLessonID: 0
+            myLessonID: 0,
+            stackCard: {}
         }
     },
     created: function() {
@@ -222,45 +241,27 @@ export default {
         this.currentLesson = this.$route.params.id;
         this.userID = auth.user.get('id');
 	    
-	    this.currentLesson = 36;
+	    // this.currentLesson = 36;
         // this.userID = 32;
 	    
 	    this.getLesson();
 	    this.bar_length = 'width: 0%';
 
-	    var str = Storage.get('active_lesson');
-	    if (!str) {
-	    	this.$router.push('timeline');
-	    }
-
-	    this.lessonInfo = JSON.parse(str);
-	    
-	    if (this.currentLesson != this.lessonInfo.id) {
-	    	// this.$router.push('timeline');
-	    }
+        this.getLessonTitle();
     },
     methods: {
     	getLessonTitle: function () {
-            var that = this;
+            var str = Storage.get('active_lesson');
+            if (!str) {
+                this.$router.push('timeline');
+            }
 
-            this.lessons = [];
-            timeline.lessons(this, this.currentLevel, this.userID, function (response) {
-                var counter = 0;
-                $.each(response.data, function (index, value) {
-                    var active = '';
-                    counter++;
-
-                    that.lessons.push({
-                        id: value.id,
-                        counter: counter,
-                        description: value.title,
-                        icon: value.icon
-                    });
-                });
-
-            }, function (msg, response) {
-                that.logError(msg);
-            });
+            this.lessonInfo = JSON.parse(str);
+            console.log(this.lessonInfo)
+            
+            if (this.currentLesson != this.lessonInfo.id) {
+                this.$router.push('timeline');
+            }
         },
     	getLesson: function () {
     		this.resetError();
@@ -302,15 +303,16 @@ export default {
     	},
     	endLesson: function () {
     		this.resetError();
-    		this.page = 'page_complete';
-
+    		
     		var data = {
     			lesson_id: this.currentLesson,
     			user_id: this.userID,
     			my_lesson_id: this.myLessonID
     		}
 
+            var that = this;
     		card.endLesson(this, data, function (response) {
+    			that.page = 'page_complete';
             	// none
             	// that.modalShow(value.Chances.title, value.Chances.details)
             }, function (msg, response) {
@@ -333,40 +335,48 @@ export default {
     		this.resetError();
     		this.page = 'page_lesson';
 
-    		if (this.currentCardCount >= this.bar_max) {
+            if (this.currentCardCount >= this.bar_max) {
+                console.log('endLesson:', this.currentCardContent.id)
     			this.endLesson();
     			return;
     		}
 
-    		if (this.cards) {
-    			this.currentCardCount += 1;
-	    		this.showCard();
-    		}	
+    		this.currentCardCount += 1;
+            
+            console.log('nextLesson:', this.currentCardContent.id, '-', this.currentCardCount + '/' + this.bar_max)
+
+            this.showCard();
     	},
     	showCard: function () {
 			var ctr = this.currentCardCount - 1;
-			var card = this.cards[ctr];
-    		this.updateBarStep(this.currentCardCount)
+            var card = this.cards[ctr];
+            this.updateBarStep(this.currentCardCount)
 
+            this.currentCardContent = card;
+            console.log('currentCard:', card.Contents.card_id, '-', card.Contents.card_style + '_' + card.Contents.card_type);
+            
     		var that = this;
 
-    		this.currentCardContent = card;
     		if (card.Contents.card_style == 'card' && card.Contents.card_type == 'knowledge') {
     			this.lessonType = 'knowledge_card';
+                
+                // setTimeout(function(){
+                //     var e = $('#knowledge-cards .paper');
 
-	    		var that = this;
-	    		setTimeout(function(){
-	    			$('#knowledge-cards .paper').css('display', 'none');
-		        	$('#knowledge-cards .paper:first-child').css('display', 'block');
+                //     console.log('stackCard', stack.getCard(e[0]))
 
-	    			$('#knowledge-cards .paper').each(function () {
-	    				stack.createCard(this);
-	    			});
-		        }, 1);
+                //     var stackCard = stack.createCard(e[0]);
+                //     console.log(stackCard)
+                //     stackCard.on('throwout', (event) => {
+                //         stackCard.destroy()
+                //         that.nextLesson();
+                //     });
 
-		        stack.on('throwout', (event) => {
-		        	that.nextLesson();
-				});
+                //     // $('#knowledge-cards .paper').each(function () {
+                //     //     stack.createCard(this);
+                //     // });
+                // }, 1);
+                    
     		} else if (card.Contents.card_style == 'no' && card.Contents.card_type == 'sliders') {
     			setTimeout(function(){
 	    			var slider = document.querySelectorAll('.slider input[type="range"]');
@@ -393,10 +403,16 @@ export default {
 	    },
 	    restartLesson: function () {
 	    	this.resetLessonModal = false;
-	    	this.page = 'start';
-	    	this.currentCardCount = 0;
-	    	this.currentCardContent = null;
-	    	this.getLesson();
+
+            var that = this;
+            card.restartLesson(this, this.currentLesson, this.userID, function (response) {
+                that.page = 'start';
+                that.currentCardCount = 0;
+                that.currentCardContent = null;
+                that.getLesson();
+            }, function (msg, response) {
+                that.logError(msg);
+            });
 	    },
     	quizShowAnswer: function (e) {
     		var me = $(e);
@@ -591,7 +607,10 @@ export default {
 	    	} else {
 	    		this.currentCardContent.is_favorite = true;
 	    	}
-	    }
+	    },
+        swipeCard: function () {
+            this.nextLesson()
+        }
     },
 
     components: { 

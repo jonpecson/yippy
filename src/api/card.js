@@ -71,6 +71,34 @@ export default {
         });
     },
 
+    restartLesson(context, lessonID, userID, successCallback, errorCallback) {
+        var that = this;
+
+        Vue.http.options.emulateJSON = true;
+
+        var data = {
+            lesson_id: lessonID,
+            user_id: userID
+        }
+        
+        context.$http.post(config.api.url + '/restartlesson', data).then(response => {
+            var result = response.body.result;
+
+            if (response.body.status == 'OK') {
+                successCallback.call(this, result);
+            } else if (errorCallback) {
+                console.log('error in api.timeline');
+                errorCallback.call(this, result.message, response);
+            }
+        }, response => {
+
+            if (errorCallback) {
+                errorCallback.call(this, response.body.result.error, response);
+            }
+
+        });
+    },
+
     favorite(context, data, successCallback, errorCallback) {
         var that = this;
 

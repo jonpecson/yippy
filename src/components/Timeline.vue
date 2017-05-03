@@ -113,7 +113,7 @@ export default {
         this.childAge = this.child.get('age');
         
         this.userID = auth.user.get('id');
-        this.userID = 32; // hard coded
+        // this.userID = 32; // hard coded
 
         this.getLevels();
         this.showTimeline();
@@ -184,10 +184,16 @@ export default {
 
             var that = this;
             $.each(this.lessons, function (index, value) {
+                console.log(id)
                 if (value.id == id) {
                     var str = JSON.stringify(value);
                     Storage.save('active_lesson', str, 1);
-                    that.$router.push('lesson-' + id);
+
+                    if (value.yippLesson.is_done > 0) {
+                        that.$router.push('cheatsheet-' + id);
+                    } else {
+                        that.$router.push('lesson-' + id);
+                    }
                 }
             });
         },
