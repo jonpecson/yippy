@@ -1,0 +1,274 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "AvenirNext", Arial, Helvetica, sans-serif;
+}
+/* ----- Common Related CSS ----- */
+.panel {
+  height: 100vh;
+  position: relative;
+}
+.titleBar {
+  color: #db4747;
+  display: block;
+  font-size: 18px;
+  font-weight: 800;
+  padding-top: 15px;
+  position: relative;
+  text-align: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #D1D1D1;
+  font-family: "AvenirNext-DemiBold", Arial, Helvetica, sans-serif;
+}
+/* ----- Individual Related CSS ----- */
+#companyLogo {
+  top: 50%;
+  left: 50%;
+  width: 240px;
+  height: 180px;
+  display: block;
+  position: absolute;
+  margin: -150px 0 0 -120px;
+  background-size: 100% auto;
+  background-image: url(../img/main-title.svg);
+}
+#signUp,
+#login1,
+#reset,
+#renew,
+#photo,
+#photoAdded {
+  display: block;
+  text-align: center;
+}
+#signUp h3,
+#login1 h3,
+#reset h3,
+#renew h3,
+#photo h3,
+#photoAdded h3 {
+  color: #db4747;
+  font-size: 18px;
+  margin-top: 25px;
+}
+#signUp a,
+#login1 a,
+#reset a,
+#renew a,
+#photo a,
+#photoAdded a {
+  color: #8e8e8e;
+}
+#signUp .picHolder,
+#login1 .picHolder,
+#reset .picHolder,
+#renew .picHolder,
+#photo .picHolder,
+#photoAdded .picHolder {
+  width: 120px;
+  height: 120px;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 50%;
+  background-color: #ccc;
+}
+#login1 .middle,
+#reset .middle,
+#renew .middle {
+  top: 30vh;
+  left: 20px;
+  right: 20px;
+  position: absolute;
+}
+#login1 input[type="email"],
+#reset input[type="email"],
+#renew input[type="email"],
+#login1 input[type="password"],
+#reset input[type="password"],
+#renew input[type="password"] {
+  margin-top: 35px;
+}
+#starten {
+  color: #fff;
+  display: block;
+  text-align: center;
+  background-color: #db4747;
+}
+#starten .middle {
+  left: 0;
+  right: 0;
+  top: 20vh;
+  position: absolute;
+}
+#starten p {
+  font-size: 6vh;
+}
+#starten p span {
+  text-decoration: underline;
+}
+/* ----- Common Form Related CSS ----- */
+.uploadPic {
+  width: 120px;
+  height: 120px;
+  color: #ffffff;
+  display: block;
+  margin: 0 auto;
+  font-size: 80px;
+  line-height: 120px;
+  text-align: center;
+  border-radius: 50%;
+  background-color: #ccc;
+}
+.bottom-area {
+  left: 0;
+  right: 0;
+  bottom: 20px;
+  position: absolute;
+}
+form {
+  display: block;
+  margin: 15px 20px;
+}
+label {
+  display: block;
+  font-size: 16px;
+  text-align: left;
+  margin-top: 15px;
+}
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  border: none;
+  outline: none;
+  display: block;
+  font-size: 16px;
+  margin-top: 15px;
+  background-color: none;
+  border-bottom: 1px solid #404040;
+}
+input[type="text"] {
+  width: 75%;
+}
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+}
+.inputFields {
+  margin-top: 10vh;
+}
+.form-button-medium {
+  margin-top: 10vh;
+}
+.error {
+  display: block;
+  margin: 10px 0;
+  color: #f10e0e;
+  font-size: 14px;
+  text-align: left;
+}
+.success {
+  display: block;
+  margin: 10px 0;
+  color: #00b719;
+  font-size: 14px;
+  text-align: left;
+}
+.selection-group {
+  display: block;
+  margin-left: 3px;
+}
+.selection-group input[type=radio] {
+  display: none;
+}
+.selection-group input[type=radio] + label {
+  width: 50%;
+  height: 40px;
+  color: #DB4747;
+  line-height: 40px;
+  margin: 0 -3px !important;
+  border: 1px solid #DB4747;
+  font-size: 16px !important;
+  text-align: center !important;
+  display: inline-block !important;
+}
+.selection-group input[type=radio]:checked + label {
+  color: #fff;
+  background-color: #DB4747;
+}
+.selection-group .rLeft {
+  border-radius: 8px 0 0 8px;
+  border-right: none !important;
+}
+.selection-group .rRight {
+  border-radius: 0 8px 8px 0;
+}
+ul#date-group {
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+ul#date-group li {
+  padding: 0;
+  width: 60px;
+  font-size: 16px;
+  margin: 0 3px 0 0;
+  list-style: none;
+  display: inline-block;
+  border-bottom: 1px solid #404040;
+}
+ul#date-group li input {
+  width: 60px;
+  outline: none;
+  margin-top: 15px;
+  text-align: center;
+}
+.button-red-big {
+  width: 100%;
+  outline: none;
+  padding: 14px 0;
+  font-size: 16px;
+  display: block;
+  max-width: 244px;
+  margin: 10px auto;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 30px;
+  line-height: normal;
+  text-decoration: none;
+  border: 1px solid #DB4747;
+  color: #DB4747 !important;
+  background-color: transparent;
+}
+.button-red-medium {
+  width: 100%;
+  outline: none;
+  padding: 14px 0;
+  font-size: 16px;
+  display: block;
+  max-width: 144px;
+  margin: 10px auto;
+  font-weight: 600;
+  border-radius: 30px;
+  line-height: normal;
+  text-decoration: none;
+  border: 1px solid #DB4747;
+  color: #DB4747 !important;
+  background-color: transparent;
+}
+.button-white-medium {
+  width: 100%;
+  outline: none;
+  padding: 14px 0;
+  font-size: 16px;
+  display: block;
+  max-width: 144px;
+  margin: 10px auto;
+  font-weight: 600;
+  border-radius: 30px;
+  line-height: normal;
+  text-decoration: none;
+  border: 1px solid #ffffff;
+  color: #ffffff !important;
+  background-color: transparent;
+}
