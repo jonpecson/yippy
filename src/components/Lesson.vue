@@ -79,11 +79,8 @@
 			<p>{{ currentCardContent.Contents.details }}</p>
 			<div class="challenge-boxes">
 				<div v-for="challenge in currentCardContent.Challenges" class="challenge-box">
-					<input type="text" name="challenge[]" v-model="challenge.Challenge.message" v-bind:placeholder="challenge.placeholder" v-bind:data-id="challenge.id">
-				</div>
-				<div v-for="challenge in currentCardContent.MyChallenges" class="challenge-box">
-					<input type="text" name="challenge[]" v-model="challenge.message" v-bind:data-id="challenge.id">
-					<a href="#" v-bind:data-id="challenge.id" v-on:click.prevent="removeMyChallenge">Delete</a>
+					<input type="text" name="challenge[]" v-model="challenge.Challenge.message" v-bind:placeholder="challenge.Blocks.title" v-bind:data-id="challenge.Challenge.id">
+					<a href="#" v-bind:data-id="challenge.Challenge.id" v-on:click.prevent="removeChallenge" v-if="!challenge.Blocks.id">Delete</a>
 				</div>
 			</div>
 
@@ -99,7 +96,6 @@
 			<p>{{ currentCardContent.Contents.details }}</p>
 			<ul>
 				<li v-for="challenge in currentCardContent.Challenges">{{ challenge.Challenge.message }}</li>
-				<li v-for="challenge in currentCardContent.MyChallenges">{{ challenge.message }}</li>
 			</ul>
 
 			<a href="#" v-on:click.prevent="addReminder">Add reminder</a>
@@ -213,7 +209,8 @@ export default {
             userID: 0,
             start: false,
             lastChallengeID: 0,
-            error_message: ''
+            error_message: '',
+            myLessonID: 0
         }
     },
     created: function() {
@@ -226,7 +223,7 @@ export default {
         this.userID = auth.user.get('id');
 	    
 	    this.currentLesson = 36;
-        this.userID = 32;
+        // this.userID = 32;
 	    
 	    this.getLesson();
 	    this.bar_length = 'width: 0%';
@@ -289,15 +286,28 @@ export default {
         },
     	startLesson: function () {
     		this.resetError();
-    		this.page = 'page_lesson';
-    		this.nextLesson();
+    		
+    		var that = this;
+    		var data = {
+    			lesson_id: this.currentLesson,
+    			user_id: this.userID
+    		}
+
+    		card.startLesson(this, data, function (response) {
+    			that.myLessonID = response;
+            	that.nextLesson();
+            }, function (msg, response) {
+                that.logError(msg);
+            });
     	},
     	endLesson: function () {
     		this.resetError();
     		this.page = 'page_complete';
 
     		var data = {
-    			lesson_id: this.currentLesson
+    			lesson_id: this.currentLesson,
+    			user_id: this.userID,
+    			my_lesson_id: this.myLessonID
     		}
 
     		card.endLesson(this, data, function (response) {
@@ -321,6 +331,8 @@ export default {
     	},
     	nextLesson: function () {
     		this.resetError();
+    		this.page = 'page_lesson';
+
     		if (this.currentCardCount >= this.bar_max) {
     			this.endLesson();
     			return;
@@ -396,6 +408,7 @@ export default {
         		'user_id': this.userID,
         		'content_id': parseInt(this.currentCardContent.Contents.id),
         		'block_id': parseInt(id),
+        		'lesson_id': this.currentLesson
         	};
 
         	this.modalShow(title, details)
@@ -438,6 +451,7 @@ export default {
 		        		'user_id': that.userID,
 		        		'content_id': parseInt(value.Chances.id),
 		        		'block_id': parseInt(value.id),
+		        		'lesson_id': that.currentLesson
 		        	};
 
 		        	that.modalShow(value.Chances.title, value.Chances.details)
@@ -456,9 +470,16 @@ export default {
         addFieldChallenge: function () {
         	this.lastChallengeID++;
 
-        	this.currentCardContent.MyChallenges.push({
-        		id: 'new-' + this.lastChallengeID,
-        		message: ''
+        	this.currentCardContent.Challenges.push({
+        		Blocks: {
+        			id: null,
+        			title: ''
+        		},
+        		Challenge: {
+        			id: 'new-' + this.lastChallengeID,
+        			new: true,
+        			message: ''
+        		}
         	})
         },
         updateChallenge: function () {
@@ -470,82 +491,57 @@ export default {
         			return;
         		}
 
-        		// update
-        		var data = {
-	        		'user_id': that.userID,
-	        		'content_id': parseInt(that.currentCardContent.Contents.id),
-	        		'block_id': parseInt(value.id),
-	        		'message': value.Challenge.message
-	        	};
+        		if (value.Challenge.new) {
+        			// create
+	        		var data = {
+		        		'user_id': that.userID,
+		        		'content_id': parseInt(that.currentCardContent.Contents.id),
+		        		'block_id': value.Blocks.id,
+		        		'message': value.Challenge.message,
+		        		'lesson_id': that.currentLesson
+		        	};
 
-	        	cardChallenge.update(that, data, function (response) {
-	            	// none
-	            }, function (msg, response) {
-	            	isError = true
-	                that.logError(msg);
-	            });
+		        	cardChallenge.create(that, data, function (response) {
+		            	// none
+		            }, function (msg, response) {
+		            	isError = true
+		                that.logError(msg);
+		            });
+        		} else if (value.Challenge.id) {
+        			console.log(value.Challenge)
+					// update
+	        		var data = {
+	        			'message': value.Challenge.message,
+		        		'my_challenge_id': value.Challenge.id
+		        	};
 
-        	});
-
-        	$.each(this.currentCardContent.MyChallenges, function (index, value) {
-        		if (!value.message) {
-        			return;
+		        	cardChallenge.update(that, data, function (response) {
+		            	// none
+		            }, function (msg, response) {
+		            	isError = true
+		                that.logError(msg);
+		            });        			
         		}
-
-        		if (value.new) {
-        			// add
-	        		var data = {
-		        		'user_id': that.userID,
-		        		'content_id': parseInt(that.currentCardContent.Contents.id),
-		        		'message': value.message
-		        	};
-
-		        	cardMyChallenge.create(that, data, function (response) {
-		            	// None
-		            }, function (msg, response) {
-		            	isError = true
-		                that.logError(msg);
-		            });
-
-        		} else {
-        			// update
-	        		var data = {
-		        		'id': parseInt(value.id),
-		        		'user_id': that.userID,
-		        		'content_id': parseInt(that.currentCardContent.Contents.id),
-		        		'message': value.message
-		        	};
-
-		        	cardMyChallenge.update(that, data, function (response) {
-		            	// None
-		            }, function (msg, response) {
-		            	isError = true
-		                that.logError(msg);
-		            });
-        		}	
         	});
 
         	if (!isError) {
         		this.lessonType = 'challenge_no_next';
         	}
         },
-        removeMyChallenge: function (e) {
+        removeChallenge: function (e) {
         	var that = this;
 
         	var id = e.target.getAttribute('data-id');
-        	$.each(this.currentCardContent.MyChallenges, function (index, value) {
-        		if (value.id == id) {
-        			that.currentCardContent.MyChallenges.splice(index, 1);
+        	$.each(this.currentCardContent.Challenges, function (index, value) {
+        		if (value.Challenge.id == id) {
+        			that.currentCardContent.Challenges.splice(index, 1);
         			console.log('remove found', id);
 
         			var data = {
-		        		'id': parseInt(value.id),
-		        		'user_id': that.userID,
-		        		'content_id': parseInt(that.currentCardContent.Contents.id),
-		        		'message': value.message
+		        		'my_challenge_id': parseInt(value.Challenge.id)
 		        	};
 
-		        	cardMyChallenge.delete(that, data, function (response) {
+		        	cardChallenge.delete(that, data, function (response) {
 		            	// None
 		            }, function (msg, response) {
 		            	isError = true
@@ -575,10 +571,15 @@ export default {
 	    },
 	    markFavorite: function(e) {
 	    	var id = e.target.getAttribute('data-id');
-	    	console.log(id)
-
+	    	
 	    	var that = this;
-	    	card.favorite(that, id, this.userID, function (response) {
+
+	    	var data = {
+	    		user_id: this.userID,
+	    		content_id: parseInt(id),
+	    		lesson_id: this.currentLesson
+	    	}
+	    	card.favorite(that, data, function (response) {
             	console.log('favorite ok')
             }, function (msg, response) {
             	isError = true
