@@ -130,6 +130,9 @@ export default {
                         activeStr = 'active';
                     }
 
+                    // Hard coded
+                    activeStr = 'active';
+
                     that.levels.push({
                         id: value.id,
                         counter: value.title,
