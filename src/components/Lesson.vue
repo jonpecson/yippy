@@ -31,17 +31,17 @@
 		<div class="error" v-if="error_message">{{ error_message }}</div>
 
 		<div v-if="lessonType == 'knowledge_card'">
-			<div id="knowledge-cards">
-                <div class="paper" v-bind:id="currentCardContent.Contents.id" v-on:click="swipeCard">
-					<h3>{{ currentCardContent.Contents.title }} hello</h3>
-                    <img v-bind:data-id="currentCardContent.Contents.id" v-if="currentCardContent.Contents.src_type == 'ext_image'" v-bind:src="currentCardContent.Contents.src_url" style="width: 50%;">
-					<p>{{ currentCardContent.Contents.details }}</p>
+			<div id="knowledge-cards" v-for="knowledgeCard in knowledgeCards">
+                <div class="paper" v-bind:id="knowledgeCard.Contents.id" v-on:click="swipeCard">
+					<h3>{{ knowledgeCard.Contents.title }} hello</h3>
+                    <img v-bind:data-id="knowledgeCard.Contents.id" v-if="knowledgeCard.Contents.src_type == 'ext_image'" v-bind:src="knowledgeCard.Contents.src_url" style="width: 50%;">
+					<p>{{ knowledgeCard.Contents.details }}</p>
 
-					<i class="heart icon-yipp_check_full" v-if="currentCardContent.is_favorite"
-						v-on:click.prevent="markFavorite" v-bind:data-id="currentCardContent.Contents.id"
+					<i class="heart icon-yipp_check_full" v-if="knowledgeCard.is_favorite"
+						v-on:click.prevent="markFavorite" v-bind:data-id="knowledgeCard.Contents.id"
 					></i>
-					<i class="heart icon-yipp_check_line" v-if="currentCardContent.is_favorite == false"
-						v-on:click.prevent="markFavorite" v-bind:data-id="currentCardContent.Contents.id"
+					<i class="heart icon-yipp_check_line" v-if="knowledgeCard.is_favorite == false"
+						v-on:click.prevent="markFavorite" v-bind:data-id="knowledgeCard.Contents.id"
 					></i>
 					<div class="paper_foo1">
 						<div class="paper_foo2"></div>
@@ -229,7 +229,8 @@ export default {
             lastChallengeID: 0,
             error_message: '',
             myLessonID: 0,
-            stackCard: {}
+            stackCard: {},
+            knowledgeCards: []
         }
     },
     created: function() {
@@ -257,7 +258,6 @@ export default {
             }
 
             this.lessonInfo = JSON.parse(str);
-            console.log(this.lessonInfo)
             
             if (this.currentLesson != this.lessonInfo.id) {
                 this.$router.push('timeline');
@@ -336,15 +336,13 @@ export default {
     		this.page = 'page_lesson';
 
             if (this.currentCardCount >= this.bar_max) {
-                console.log('endLesson:', this.currentCardContent.id)
+                // console.log('endLesson:', this.currentCardContent.id)
     			this.endLesson();
     			return;
     		}
 
     		this.currentCardCount += 1;
-            
-            console.log('nextLesson:', this.currentCardContent.id, '-', this.currentCardCount + '/' + this.bar_max)
-
+            // console.log('nextLesson:', this.currentCardContent.id, '-', this.currentCardCount + '/' + this.bar_max)
             this.showCard();
     	},
     	showCard: function () {
@@ -353,29 +351,23 @@ export default {
             this.updateBarStep(this.currentCardCount)
 
             this.currentCardContent = card;
-            console.log('currentCard:', card.Contents.card_id, '-', card.Contents.card_style + '_' + card.Contents.card_type);
+            // console.log('currentCard:', card.Contents.card_id, '-', card.Contents.card_style + '_' + card.Contents.card_type);
             
     		var that = this;
 
     		if (card.Contents.card_style == 'card' && card.Contents.card_type == 'knowledge') {
     			this.lessonType = 'knowledge_card';
-                
-                // setTimeout(function(){
-                //     var e = $('#knowledge-cards .paper');
+                this.knowledgeCards.push(this.currentCardContent);
 
-                //     console.log('stackCard', stack.getCard(e[0]))
+                setTimeout(function(){
+                    var e = $('#knowledge-cards .paper');
+                    var cnt = e.length - 1;
+                    var stackCard = stack.createCard(e[cnt]);
 
-                //     var stackCard = stack.createCard(e[0]);
-                //     console.log(stackCard)
-                //     stackCard.on('throwout', (event) => {
-                //         stackCard.destroy()
-                //         that.nextLesson();
-                //     });
-
-                //     // $('#knowledge-cards .paper').each(function () {
-                //     //     stack.createCard(this);
-                //     // });
-                // }, 1);
+                    stackCard.on('throwout', (event) => {
+                        that.nextLesson();
+                    });
+                }, 1);
                     
     		} else if (card.Contents.card_style == 'no' && card.Contents.card_type == 'sliders') {
     			setTimeout(function(){
@@ -432,7 +424,7 @@ export default {
 
         	var that = this;
         	cardAnswer.update(this, data, function (response) {
-            	console.log('api response',response);
+            	// console.log('api response',response);
             	
             }, function (msg, response) {
                 that.logError(msg);
@@ -524,7 +516,7 @@ export default {
 		                that.logError(msg);
 		            });
         		} else if (value.Challenge.id) {
-        			console.log(value.Challenge)
+        			// console.log(value.Challenge)
 					// update
 	        		var data = {
 	        			'message': value.Challenge.message,
@@ -551,7 +543,7 @@ export default {
         	$.each(this.currentCardContent.Challenges, function (index, value) {
         		if (value.Challenge.id == id) {
         			that.currentCardContent.Challenges.splice(index, 1);
-        			console.log('remove found', id);
+        			// console.log('remove found', id);
 
         			var data = {
 		        		'my_challenge_id': parseInt(value.Challenge.id)
@@ -596,7 +588,7 @@ export default {
 	    		lesson_id: this.currentLesson
 	    	}
 	    	card.favorite(that, data, function (response) {
-            	console.log('favorite ok')
+            	// console.log('favorite ok')
             }, function (msg, response) {
             	isError = true
                 that.logError(msg);
@@ -609,7 +601,7 @@ export default {
 	    	}
 	    },
         swipeCard: function () {
-            this.nextLesson()
+            // this.nextLesson()
         }
     },
 
