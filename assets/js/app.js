@@ -62000,8 +62000,8 @@
 	        this.currentLesson = this.$route.params.id;
 	        this.userID = _auth2.default.user.get('id');
 
-	        this.currentLesson = 6;
-	        this.userID = 32; // hard coded
+	        // this.currentLesson = 6;
+	        // this.userID = 32; // hard coded
 
 	        this.getLessonTitle();
 	        this.getContent();
@@ -66433,7 +66433,7 @@
 /* 347 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div id=\"page-challenge-details\">\n\t<div v-if=\"page == 'main'\">\n\t\t<div class=\"header\">\n\t\t\t\t<a href=\"\" class=\"icon\">\n\t\t\t\t<i class=\" icon-yipp_back\"></i>\n\t\t\t\t</a>\n\t\t\t\t<div class=\"title\">Challenge Details</div>\n\t\t</div>\n\n\t\t<div class=\"wrap\">\n\t\t\t<div class=\"details\">\n\t\t\t\t<span class=\"set\">\n\t\t\t\t\t<i class=\"icon-yipp_notification_line\"></i>\n\t\t\t\t\t{{ challenges.details.reminder_time }}\n\t\t\t\t\t| <i class=\"icon-yipp_repeat_line\"></i>\n\t\t\t\t\t{{ challenges.details.repeat_type }}\n\t\t\t\t</span>\n\t\t\t\t\n\t\t\t\t<table width=\"100%\" border=\"0\">\n\t\t\t\t\t<tbody>\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t<p>Eating more vegetable</p>\n\t\t\t\t\t\t\t\t<p>1. Broco</p>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t<a href=\"\" class=\"edit\"><i class=\"icon-yipp_pencil_line\"></i></a>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t</tbody>\n\t\t\t\t</table>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"steps\">\n\t\t\t<ul>\n\t\t\t\t<li v-for=\"fd of challenges.feedbacks\" v-bind:class=\"fd.id == activeFeedback.id ? 'active' : ''\" v-on:click=\"next(fd.id)\">\n\t\t\t\t\t<i class=\"icon-yipp_check_full\" v-if=\"fd.is_done\"></i>\n\t\t\t\t\t<span v-if=\"fd.is_done == false\">{{ fd.repeat_number }}</span>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t\t<hr>\n\t\t</div>\n\n\t\t<div class=\"form\" v-for=\"fd of challenges.feedbacks\" v-if=\"fd.id == activeFeedback.id\">\n\t\t\t<div class=\"pic\" style=\"height: 200px; overflow: hidden;\">\n\t\t\t\t<img style=\"width: 100%;\" v-if=\"fd.src_url\" v-bind:src=\"fd.src_url\">\n\t\t\t</div>\n\n\t\t\t<h4>Evaluation</h4>\n\t\t\t\t\n\t\t\t<textarea v-model=\"fd.evaluation\"></textarea>\n\t\t\t\n\t\t\t<ul class=\"selection\">\n\t\t\t\t<li>\n\t\t\t\t\t<a href=\"#\" v-bind:class=\"fd.icon == 'sad' ? 'active' : ''\" v-on:click.prevent=\"iconMark(fd.id, 'sad')\">\n\t\t\t\t\t\t<i class=\"icon-yipp_emoticon_sad\"></i>\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a href=\"#\" v-bind:class=\"fd.icon == 'neutral' ? 'active' : ''\" v-on:click.prevent=\"iconMark(fd.id, 'neutral')\">\n\t\t\t\t\t\t<i class=\"icon-yipp_emoticon_neutral\"></i>\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a href=\"#\" v-bind:class=\"fd.icon == 'happy' ? 'active' : ''\" v-on:click.prevent=\"iconMark(fd.id, 'happy')\">\n\t\t\t\t\t\t<i class=\"icon-yipp_emoticon_happy\"></i>\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t</ul>\n\n\t\t\t<input type=\"hidden\" name=\"icon\" v-model=\"fd.icon\">\n\t\t\t\n\t\t\t<h4>Notes</h4>\n\t\t\t\n\t\t\t<textarea v-model=\"fd.notes\"></textarea>\n\t\t\t\n\t\t\t<a href=\"#\" v-on:click.prevent=\"submitEval(fd.id)\" class=\"btn\">Done</a>\n\t\t</div>\n\n\t</div>\n\n\t<div v-else-if=\"page == 'done'\">\n\t\t<section class=\"resultCard\">\n\t\t\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t\t\n\t\t\t<h3>You can do it!</h3>\n\t\t\t<p>We made a beautiful photo collage of this week check it out!</p>\n\t\t\t\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<a href=\"javascript:void(0);\" v-on:click.prevent=\"showResult\" class=\"btn mid white\">See result</a>\n\t\t\t\t<a href=\"javascript:void(0);\" v-on:click.prevent=\"resetChallenge\" class=\"btn big\">Restart challenge</a>\n\t\t\t</div>\n\n\t\t</section>\n\t</div>\n\t\n\t<div v-else-if=\"page == 'result'\">\n\t\t<section id=\"collage\">\n\t\t\n\t\t\t<div class=\"header\">\n\t\t\t\t<a href=\"#\" v-on:click=\"page = 'done'\">X</a> Photo Collage\n\t\t\t\t<h3>Fruit and Vegetables</h3>\n\t\t\t</div>\n\t\t\n\t\t\t<ul>\n\t\t\t\t<li v-for=\"fd of result.feedbacks\">\n\t\t\t\t\t<div class=\"pic\" style=\"height: 200px; overflow: hidden;\">\n\t\t\t\t\t\t<img style=\"width: 100%;\" v-if=\"fd.src_url\" v-bind:src=\"fd.src_url\">\n\t\t\t\t\t</div>\n\t\t\t\t\t\n\t\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t\t<div class=\"day\">Day {{ fd.repeat_number }}</div>\n\t\t\t\t\t\t<i v-bind:class=\"'icon-yipp_emoticon_' + fd.icon\" class=\"icon \"></i>\n\t\t\t\t\t</div>\n\n\t\t\t\t\t<div class=\"data\">\n\t\t\t\t\t\t<p>{{ fd.evaluation }}</p>\n\t\t\t\t\t</div>\t\n\t\t\t\t\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t\n\t\t</section>\n\t\t\n\t\t<div class=\"restart\">\n\t\t\t<a href=\"javascript:void(0);\" v-on:click.prevent=\"resetChallenge\" class=\"btn big\">Restart challenge</a>\n\t\t</div>\n\t</div>\n\t\n\t<modal v-if=\"resetChallengeModal\" @close=\"resetChallengeModal = false\">\n        <h3 slot=\"header\">Are you sure?</h3>\n        <p slot=\"body\">Do you want to restart the challenge?</p>\n        \n        <div slot=\"footer\">\n          <button class=\"form-button-small\" @click=\"restartChallenge\">\n            Restart challenge\n          </button>\n          <button class=\"form-button-small\" @click=\"resetChallengeModal = false\">\n            Cancel\n          </button>\n        </div>\n    </modal>\n</div>\n\n\t\n";
+	module.exports = "\n<div id=\"page-challenge-details\">\n\t<div v-if=\"page == 'main'\">\n\t\t<div class=\"header\">\n\t\t\t\t<a href=\"#\" class=\"icon\" v-on:click.prevent=\"back\">\n\t\t\t\t\t<i class=\" icon-yipp_back\"></i>\n\t\t\t\t</a>\n\t\t\t\t<div class=\"title\">Challenge Details</div>\n\t\t</div>\n\n\t\t<div class=\"wrap\">\n\t\t\t<div class=\"details\">\n\t\t\t\t<span class=\"set\">\n\t\t\t\t\t<i class=\"icon-yipp_notification_line\"></i>\n\t\t\t\t\t{{ challenges.details.reminder_time }}\n\t\t\t\t\t| <i class=\"icon-yipp_repeat_line\"></i>\n\t\t\t\t\t{{ challenges.details.repeat_type }}\n\t\t\t\t</span>\n\t\t\t\t\n\t\t\t\t<table width=\"100%\" border=\"0\">\n\t\t\t\t\t<tbody>\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t<p>Eating more vegetable</p>\n\t\t\t\t\t\t\t\t<p>1. Broco</p>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t<a href=\"\" class=\"edit\"><i class=\"icon-yipp_pencil_line\"></i></a>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t</tbody>\n\t\t\t\t</table>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"steps\">\n\t\t\t<ul>\n\t\t\t\t<li v-for=\"fd of challenges.feedbacks\" v-bind:class=\"fd.id == activeFeedback.id ? 'active' : ''\" v-on:click=\"next(fd.id)\">\n\t\t\t\t\t<i class=\"icon-yipp_check_full\" v-if=\"fd.is_done\"></i>\n\t\t\t\t\t<span v-if=\"fd.is_done == false\">{{ fd.repeat_number }}</span>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t\t<hr>\n\t\t</div>\n\n\t\t<div class=\"form\" v-for=\"fd of challenges.feedbacks\" v-if=\"fd.id == activeFeedback.id\">\n\t\t\t<div class=\"pic\" style=\"height: 200px; overflow: hidden;\">\n\t\t\t\t<img style=\"width: 100%;\" v-if=\"fd.src_url\" v-bind:src=\"fd.src_url\">\n\t\t\t</div>\n\n\t\t\t<h4>Evaluation</h4>\n\t\t\t\t\n\t\t\t<textarea v-model=\"fd.evaluation\"></textarea>\n\t\t\t\n\t\t\t<ul class=\"selection\">\n\t\t\t\t<li>\n\t\t\t\t\t<a href=\"#\" v-bind:class=\"fd.icon == 'sad' ? 'active' : ''\" v-on:click.prevent=\"iconMark(fd.id, 'sad')\">\n\t\t\t\t\t\t<i class=\"icon-yipp_emoticon_sad\"></i>\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a href=\"#\" v-bind:class=\"fd.icon == 'neutral' ? 'active' : ''\" v-on:click.prevent=\"iconMark(fd.id, 'neutral')\">\n\t\t\t\t\t\t<i class=\"icon-yipp_emoticon_neutral\"></i>\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a href=\"#\" v-bind:class=\"fd.icon == 'happy' ? 'active' : ''\" v-on:click.prevent=\"iconMark(fd.id, 'happy')\">\n\t\t\t\t\t\t<i class=\"icon-yipp_emoticon_happy\"></i>\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t</ul>\n\n\t\t\t<input type=\"hidden\" name=\"icon\" v-model=\"fd.icon\">\n\t\t\t\n\t\t\t<h4>Notes</h4>\n\t\t\t\n\t\t\t<textarea v-model=\"fd.notes\"></textarea>\n\t\t\t\n\t\t\t<a href=\"#\" v-on:click.prevent=\"submitEval(fd.id)\" class=\"btn\">Done</a>\n\t\t</div>\n\n\t</div>\n\n\t<div v-else-if=\"page == 'done'\">\n\t\t<section class=\"resultCard\">\n\t\t\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t\t\n\t\t\t<h3>You can do it!</h3>\n\t\t\t<p>We made a beautiful photo collage of this week check it out!</p>\n\t\t\t\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<a href=\"javascript:void(0);\" v-on:click.prevent=\"showResult\" class=\"btn mid white\">See result</a>\n\t\t\t\t<a href=\"javascript:void(0);\" v-on:click.prevent=\"resetChallenge\" class=\"btn big\">Restart challenge</a>\n\t\t\t</div>\n\n\t\t</section>\n\t</div>\n\t\n\t<div v-else-if=\"page == 'result'\">\n\t\t<section id=\"collage\">\n\t\t\n\t\t\t<div class=\"header\">\n\t\t\t\t<a href=\"#\" v-on:click=\"page = 'done'\">X</a> Photo Collage\n\t\t\t\t<h3>Fruit and Vegetables</h3>\n\t\t\t</div>\n\t\t\n\t\t\t<ul>\n\t\t\t\t<li v-for=\"fd of result.feedbacks\">\n\t\t\t\t\t<div class=\"pic\" style=\"height: 200px; overflow: hidden;\">\n\t\t\t\t\t\t<img style=\"width: 100%;\" v-if=\"fd.src_url\" v-bind:src=\"fd.src_url\">\n\t\t\t\t\t</div>\n\t\t\t\t\t\n\t\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t\t<div class=\"day\">Day {{ fd.repeat_number }}</div>\n\t\t\t\t\t\t<i v-bind:class=\"'icon-yipp_emoticon_' + fd.icon\" class=\"icon \"></i>\n\t\t\t\t\t</div>\n\n\t\t\t\t\t<div class=\"data\">\n\t\t\t\t\t\t<p>{{ fd.evaluation }}</p>\n\t\t\t\t\t</div>\t\n\t\t\t\t\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t\n\t\t</section>\n\t\t\n\t\t<div class=\"restart\">\n\t\t\t<a href=\"javascript:void(0);\" v-on:click.prevent=\"resetChallenge\" class=\"btn big\">Restart challenge</a>\n\t\t</div>\n\t</div>\n\t\n\t<modal v-if=\"resetChallengeModal\" @close=\"resetChallengeModal = false\">\n        <h3 slot=\"header\">Are you sure?</h3>\n        <p slot=\"body\">Do you want to restart the challenge?</p>\n        \n        <div slot=\"footer\">\n          <button class=\"form-button-small\" @click=\"restartChallenge\">\n            Restart challenge\n          </button>\n          <button class=\"form-button-small\" @click=\"resetChallengeModal = false\">\n            Cancel\n          </button>\n        </div>\n    </modal>\n</div>\n\n\t\n";
 
 /***/ },
 /* 348 */
@@ -66506,14 +66506,9 @@
 	        }
 
 	        this.currentChallenge = this.$route.params.id;
-	        this.currentChallenge = 51;
 	        this.userID = _auth2.default.user.get('id');
 
-	        // this.currentLesson = 6;
-	        // this.userID = 32; // hard coded
-
-	        // this.getContent();
-	        this.showResult();
+	        this.getContent();
 	    },
 	    methods: {
 	        getContent: function getContent() {
@@ -66583,7 +66578,7 @@
 	            this.page = 'result';
 
 	            var that = this;
-	            _feedback2.default.result(this, 1, 51, function (response) {
+	            _feedback2.default.result(this, this.userID, this.currentChallenge, function (response) {
 	                that.result = response;
 	            }, function (msg, response) {
 	                that.logError(msg);
@@ -66591,6 +66586,9 @@
 	        },
 	        redirectGuest: function redirectGuest() {
 	            this.$router.push('login');
+	        },
+	        back: function back() {
+	            this.$router.push('cheatsheet-' + this.challenges.details.content_id);
 	        },
 	        logError: function logError(msg) {
 	            this.loading = false;
@@ -66626,8 +66624,8 @@
 	// <div id="page-challenge-details">
 	// 	<div v-if="page == 'main'">
 	// 		<div class="header">
-	// 				<a href="" class="icon">
-	// 				<i class=" icon-yipp_back"></i>
+	// 				<a href="#" class="icon" v-on:click.prevent="back">
+	// 					<i class=" icon-yipp_back"></i>
 	// 				</a>
 	// 				<div class="title">Challenge Details</div>
 	// 		</div>
@@ -66820,12 +66818,12 @@
 	            }
 	        });
 	    },
-	    result: function result(context, feedbackID, challengeID, successCallback, errorCallback) {
+	    result: function result(context, userID, challengeID, successCallback, errorCallback) {
 	        var _this2 = this;
 
 	        var that = this;
 
-	        context.$http.get(_config2.default.api.url + '/feedbacks/' + feedbackID + '/' + challengeID).then(function (response) {
+	        context.$http.get(_config2.default.api.url + '/feedbacks/' + userID + '/' + challengeID).then(function (response) {
 	            var result = response.body.result;
 
 	            if (response.body.status == 'OK') {

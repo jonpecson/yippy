@@ -2,8 +2,8 @@
 <div id="page-challenge-details">
 	<div v-if="page == 'main'">
 		<div class="header">
-				<a href="" class="icon">
-				<i class=" icon-yipp_back"></i>
+				<a href="#" class="icon" v-on:click.prevent="back">
+					<i class=" icon-yipp_back"></i>
 				</a>
 				<div class="title">Challenge Details</div>
 		</div>
@@ -184,14 +184,9 @@ export default {
         }
 
         this.currentChallenge = this.$route.params.id;
-        this.currentChallenge = 51;
         this.userID = auth.user.get('id');
 
-        // this.currentLesson = 6;
-        // this.userID = 32; // hard coded
-
-        // this.getContent();
-        this.showResult();
+        this.getContent();
     },
     methods: {
         getContent: function () {
@@ -261,7 +256,7 @@ export default {
         	this.page = 'result';
 
         	var that = this;
-        	feedback.result(this, 1, 51, function (response) {
+        	feedback.result(this, this.userID, this.currentChallenge, function (response) {
         		that.result = response;
 	        }, function (msg, response) {
 	            that.logError(msg);
@@ -270,6 +265,9 @@ export default {
         redirectGuest: function()
         {
             this.$router.push('login');
+        },
+        back: function () {
+        	this.$router.push('cheatsheet-' + this.challenges.details.content_id);
         },
         logError(msg) {
             this.loading = false;

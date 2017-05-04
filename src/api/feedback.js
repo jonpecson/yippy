@@ -25,10 +25,10 @@ export default {
         });
     },
 
-    result(context, feedbackID, challengeID, successCallback, errorCallback) {
+    result(context, userID, challengeID, successCallback, errorCallback) {
         var that = this;
 
-        context.$http.get(config.api.url + '/feedbacks/' + feedbackID + '/' + challengeID).then(response => {
+        context.$http.get(config.api.url + '/feedbacks/' + userID + '/' + challengeID).then(response => {
             var result = response.body.result;
 
             if (response.body.status == 'OK') {

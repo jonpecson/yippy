@@ -164,8 +164,8 @@ export default {
         this.currentLesson = this.$route.params.id;
         this.userID = auth.user.get('id');
 
-        this.currentLesson = 6;
-        this.userID = 32; // hard coded
+        // this.currentLesson = 6;
+        // this.userID = 32; // hard coded
 
         this.getLessonTitle();
         this.getContent();
