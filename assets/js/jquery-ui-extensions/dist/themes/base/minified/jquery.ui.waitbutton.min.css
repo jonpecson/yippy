@@ -1,0 +1,5 @@
+/*! Ben's jQuery UI Extensions - v1.1.1 - 2014-03-30
+* https://github.com/bseth99/jquery-ui-extensions
+* Copyright 2014 Ben Olson; Licensed MIT */
+
+.ui-wait-button .ui-icon-waiting{background-image:url(images/waitbutton-loading.gif);background-position:0 center}

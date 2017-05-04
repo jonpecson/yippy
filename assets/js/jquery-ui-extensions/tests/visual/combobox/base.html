@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+   <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css">
+
+   <title>ComboBox Extension</title>
+
+   <script src="http://code.jquery.com/jquery.js"></script>
+   <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+
+   <link rel="stylesheet" href="../../../themes/base/jquery.ui.combobox.css">
+   <script src="../../../ui/jquery.ui.combobox.js"></script>
+
+<style>
+   * { font-family: sans-serif,arial; }
+
+   .ui-widget input { font-size: 12pt; }
+
+   #main { width: 900px; margin: auto; }
+</style>
+
+<script>
+   $(function() {
+
+      $('#create').click(function () {
+
+            $('select').combobox({
+               create: function (evt, ui) {
+                  console.log(ui);
+               }
+            });
+
+         });
+
+      $('#destroy').click(function () {
+
+            $('select').combobox('destroy');
+
+         });
+
+   });
+</script>
+
+</head>
+<body>
+
+<a href="https://github.com/bseth99/jquery-ui-extensions"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
+
+<div id="main">
+<h3>ComboBox Test</h3>
+<div>
+   <a href="../index.html">&lt; Back to widget demos</a>
+</div>
+<br/>
+
+<div>
+Test the widget creates and destroys as expected.  Validate CSS layout.
+</div>
+<br/>
+
+<button id="create">Create</button>
+<button id="destroy">Destroy</button>
+
+<form>
+<br/>
+<select>
+   <option>One</option>
+   <option>Two</option>
+   <option>Three</option>
+</select>
+<select>
+   <option>Four</option>
+   <option>Five</option>
+   <option>Six</option>
+</select>
+<br/>
+<select>
+   <option>Seven</option>
+   <option>Eight</option>
+   <option>Nine</option>
+</select>
+</form>
+
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-34780028-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>

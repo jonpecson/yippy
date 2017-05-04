@@ -67,7 +67,7 @@
 			<p>{{ currentCardContent.Contents.details }}</p>
 			
 			<div class="slider">
-				<input type="range" min="0" max="10" value="0" step="2">
+				<!-- <input type="range" min="0" max="10" value="0" step="2"> -->
 			</div>
 
 			<div class="bottom">
@@ -182,12 +182,18 @@ import cardChallenge from '../api/cardChallenge'
 import cardMyChallenge from '../api/cardMyChallenge'
 import cardChance from '../api/cardChance'
 import $ from 'jquery'
+import 'jquery-ui'
+require('jquery-ui/ui/core');
+require('jquery-ui/ui/keycode');
+require('jquery-ui/ui/widget'); 
+require('jquery-ui/ui/version');
+require('jquery-ui/ui/widgets/mouse');
+import slider from 'jquery-ui/ui/widgets/slider';
+
+import '../../assets/js/jquery-ui-extensions/ui/jquery.ui.labeledslider.js'
 
 import Modal from '../components/Modal.vue'
 import Storage from '../storage'
-
-import 'hammerjs/hammer.js'
-import rangesliderJs from 'rangeslider-js';
 
 const Swing = require('swing')
 
@@ -242,7 +248,7 @@ export default {
         this.currentLesson = this.$route.params.id;
         this.userID = auth.user.get('id');
 	    
-	    // this.currentLesson = 36;
+	    this.currentLesson = 36;
         // this.userID = 32;
 	    
 	    this.getLesson();
@@ -260,7 +266,7 @@ export default {
             this.lessonInfo = JSON.parse(str);
             
             if (this.currentLesson != this.lessonInfo.id) {
-                this.$router.push('timeline');
+                // this.$router.push('timeline');
             }
         },
     	getLesson: function () {
@@ -370,13 +376,19 @@ export default {
                 }, 1);
                     
     		} else if (card.Contents.card_style == 'no' && card.Contents.card_type == 'sliders') {
+                $.each(card, function (index, value) {
+
+                });
     			setTimeout(function(){
-	    			var slider = document.querySelectorAll('.slider input[type="range"]');
-	    			rangesliderJs.create(slider, {
-	    				onSlideEnd: function (value, percent, position) {
-	    					that.updateChanceAnswer(value);
-	    				}
-	    			});
+
+                    $('.slider').labeledslider({ 
+                        max: 10, 
+                        step: 2, 
+                        min: 0, 
+                        slide: function ( event, ui ) {
+                            that.updateChanceAnswer(ui.value);
+                        } 
+                    });
 		        }, 2);
 
     			this.lessonType = 'chance_no';
