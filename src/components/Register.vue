@@ -1,10 +1,13 @@
 <template>
 <div id="signUp">
+		
 	<div id="parent" class="panel" v-if="step == 1">
-
-		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back"></a> Sign up parent</div>
+		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back yipp-yipp_back"></a> Sign up parent</div>
+		
 		
 		<form action="" method="post" class="middle-area semi" v-on:submit.prevent="register">
+		
+			<div class="error" v-if="error_message">{{ error_message }}</div>
 		
 			<div class="selection-group">
 				<input type="radio" id="father"  name="parents" value="father" v-model="parent_gender">
@@ -13,8 +16,8 @@
 				<label for="mother" class="rRight">Mother</label>
 			</div>
 
-			<div class="placer bottom">
-				<div class="error" v-if="error_message">{{ error_message }}</div>
+			<div class="inputFields">
+				
 				<label>Naam</label>
 				<input type="text" placeholder="your name" v-model="parent_name">
 
@@ -26,10 +29,9 @@
 			
 			</div>
 
-
-			
+		
 			<div class="bottom-area">
-				<button class="form-button-medium">Next<span v-if="loading" class="loading"></span></button>
+				<button class="button-red-medium">next<span v-if="loading" class="loading"></span></button>
 			</div>
 			
 		</form>
@@ -38,9 +40,11 @@
 
 	<div id="child" class="panel" v-else-if="step == 2">
 
-		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back"></a> Sign up child</div>
+		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back yipp-yipp_back"></a> Sign up child</div>
 		
 		<form action="" method="post" class="middle-area semi" v-on:submit.prevent="addChild">
+		
+			<div class="error" v-if="error_message">{{ error_message }}</div>
 		
 			<div class="selection-group">
 				<input type="radio" id="son"  name="child" value="son" v-model="child_gender">
@@ -49,11 +53,14 @@
 				<label for="daughter" class="rRight">Daughter</label>
 			</div>
 
-			<div class="placer middle">
+			<div class="inputFields">
 				
-				<div class="error" v-if="error_message">{{ error_message }}</div>
 				<label>Naam van jouw kind</label>
 				<input type="text" placeholder="your name" v-model="child_name">
+
+			</div>
+
+			<div class="inputFields">
 
 				<label>Wanneer is jouw kind geboren?</label>
 				<ul id="date-group">
@@ -65,7 +72,7 @@
 			</div>
 			
 			<div class="bottom-area">
-				<button class="form-button-medium">Next<span v-if="loading" class="loading"></span></button>
+				<button class="button-red-medium">next<span v-if="loading" class="loading"></span></button>
 			</div>
 			
 		</form>
@@ -75,18 +82,23 @@
 	
 	<div id="photo" class="panel" v-else-if="step == 3">
 
-		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back"></a> Add photo</div>
+		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back yipp-yipp_back"></a> Add photo</div>
 
 		<form action="" method="post" enctype="multipart/form-data" v-on:submit.prevent="addPicture">
 			<div class="error" v-if="error_message">{{ error_message }}</div>
-			<input type="hidden" role="uploadcare-uploader" name="uploadedfile" id="uploadPic" />
-			<!-- <input type="file" name="uploadedfile"  accept="image/*" id="uploadPic" capture> -->
-			<label for="uploadPic" class="uploadPic">+</label>
+			
+			<div class="inputFields">
+				
+				<input type="hidden" role="uploadcare-uploader" name="uploadedfile" id="uploadPic" />
+				<!-- <input type="file" name="uploadedfile"  accept="image/*" id="uploadPic" capture> -->
+				<label for="uploadPic" class="uploadPic">+</label>
+
+			</div>
 
 			<h3>Choose a nice picture of <br> you and {{ child_name }}!</h3>
 
 			<div class="bottom-area">
-				<input type="submit" value="next" class="form-button-medium"><span v-if="loading" class="loading"></span>
+				<input type="submit" value="next" class="button-red-medium"><span v-if="loading" class="loading"></span>
 				<a href="javascript:void(0);" v-on:click="showLastStep" >Continue without picture</a>
 			</div>
 			
@@ -96,15 +108,20 @@
 						
 	<div id="photoAdded" class="panel" v-else-if="step == 4">
 
-		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back"></a> Add photo2</div>
+		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back yipp-yipp_back"></a> Add photo2</div>
 
-		<div class="picHolder"><img class="avatar" v-bind:src="child_image"></div>
+
+		<div class="inputFields">
 			
-		<h3>What a nice picture! <br> Do you also like?</h3>
-		<a href="javascript:void(0);" v-on:click="showLastStep">Choose another picture</a>
-
+			<div class="picHolder"><img class="avatar" v-bind:src="child_image"></div>
+				
+			<h3>What a nice picture! <br> Do you also like?</h3>
+			<a href="javascript:void(0);" v-on:click="showLastStep">Choose another picture</a>
+	                         
+		</div>                 
+                                                                                                                                                                                                                                                                                                                                                                                                                 
 		<div class="bottom-area">
-			<a href="javascript:void(0);" v-on:click="showLastStep" class="button-medium">Next</a>
+			<a href="javascript:void(0);" v-on:click="showLastStep" class="button-red-medium">next</a>
 		</div>
 	</div>
 	
@@ -112,17 +129,17 @@
 				
 			<div class="placer middle">
 						
-				<p>Become a Supermom for <span>Lisa</span> with <strong>Yipp app!</strong></p>		
+				<p>Become a <br> Supermom <br> for <span>Lisa</span>  <br> with the <strong>Yipp <br> app!</strong></p>		
 						
 			</div> 							
 			
 			<div class="bottom-area">
-				<router-link :to="{ name: 'timeline'}" class="button-medium white"">Begin!</router-link>
+				<router-link :to="{ name: 'timeline'}" class="button-white-medium">Begin!</router-link>
 			</div>
 							
 	</div>
 								
-</div>
+</div>                                                                                                                                        
 </template>
 
 

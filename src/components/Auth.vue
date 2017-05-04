@@ -3,13 +3,13 @@
 	<div id="onBoarding" class="panel" v-if="step == 1">
 		<div id="companyLogo"></div>
 		<div class="bottom-area">
-			<router-link :to="{ name: 'register'}" class="button-big">Sign up</router-link>
+			<router-link :to="{ name: 'register'}" class="button-red-big">Sign up</router-link>
 			<a href="javascript:void(0);" v-on:click.prevent="showLoginForm">I already have an account</a>
 		</div>
 	</div>
 	
 	<div id="login1" class="panel" v-else-if="step == 2">
-		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back"></a> Log in</div>
+		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back yipp-yipp_back"></a> Log in</div>
 		<form action="" method="post" class="middle-area full" v-on:submit.prevent="logMeIn">
 			<div class="placer middle">
 				<div class="error" v-if="error_message">{{ error_message }}</div>
@@ -18,8 +18,8 @@
 			</div>
 				
 			<div class="bottom-area">
-				<button class="form-button-medium">Login<span v-if="loading" class="loading"></span></button>
-				<router-link :to="{ name: 'register'}">I don't have an account</router-link>
+				<button class="button-red-big">Login<span v-if="loading" class="loading"></span></button>
+				<a href=""><router-link :to="{ name: 'register'}">I don't have an account</router-link></a>
 				<br>
 				<a href="javascript:void(0);" v-on:click="showResetForm">Forgot password</a>
 			</div>
@@ -27,31 +27,31 @@
 	</div>
 			
 	<div id="reset" class="panel" v-else-if="step == 3">
-		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back"></a> Reset password</div>
+		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back yipp-yipp_back"></a> Reset password</div>
 		<form action="" method="post" class="middle-area full" v-on:submit.prevent="resetPassword">
-			<div class="placer bottom">
+			<div class="placer middle">
 				<div class="error" v-if="error_message">{{ error_message }}</div>
 				<div class="success" v-if="success_message">{{ success_message }}</div>
 				<p>We will send you an email with a link so you can set up a new password</p>
 				<input type="email" placeholder="E-mailadres" v-model="pw_email">
 			</div>
 			<div class="bottom-area">
-				<button class="form-button-medium">Reset<span v-if="loading" class="loading"></span></button>
+				<button class="button-red-big">Reset<span v-if="loading" class="loading"></span></button>
 			</div>
 		</form>
 	</div>	
 	
 	<div id="renew" class="panel" v-else-if="step == 4">
-		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back"></a> Reset password</div>
+		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back yipp-yipp_back"></a> Reset password</div>
 		<form action="" method="post" class="middle-area full" v-on:submit.prevent="newPassword">
 			<div class="placer middle">
 				<div class="error" v-if="error_message">{{ error_message }}</div>
 				<div class="success" v-if="success_message">{{ success_message }}</div>
 				<input type="password" placeholder="New password" v-model="pw_newpassword">
-				<input type="text" placeholder="Code" v-model="pw_code">
+				<input type="password" placeholder="Repeat password" v-model="pw_code">
 			</div>
 			<div class="bottom-area">
-				<button class="form-button-medium">Confirm<span v-if="loading" class="loading"></span></button>
+				<button class="button-red-big">Confirm<span v-if="loading" class="loading"></span></button>
 			</div>
 		</form>
 	</div>	
