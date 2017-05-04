@@ -17,7 +17,6 @@ export default {
             if (response.body.status == 'OK') {
                 successCallback.call(this, result);
             } else if (errorCallback) {
-                console.log('error in api.timeline');
                 errorCallback.call(this, result.message, response);
             }
         }, response => {
@@ -38,13 +37,11 @@ export default {
         }
 
         context.$http.get(url).then(response => {
-            console.log(response)
             var result = response.body.result;
 
             if (response.body.status == 'OK') {
                 successCallback.call(this, result);
             } else if (errorCallback) {
-                console.log('error in api.timeline');
                 errorCallback.call(this, result.message, response);
             }
         }, response => {

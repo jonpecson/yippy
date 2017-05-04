@@ -14,7 +14,7 @@
 			<span><i class="icon-yipp_check_full"></i> {{lessonInfo.duration}} min</span>
 		</div>
 			
-		<a href="#" v-on:click.prevent="startLesson" class="btn bottom white" v-if="start">Start</a>
+		<a href="#" v-on:click.prevent="startLesson" class="btn bottom white" v-if="start">{{ label.lesson_btn_start }}</a>
 	</div>
 
 	<div class="panel" v-if="page == 'page_lesson'">
@@ -33,7 +33,7 @@
 		<div v-if="lessonType == 'knowledge_card'">
 			<div id="knowledge-cards" v-for="knowledgeCard in knowledgeCards">
                 <div class="paper" v-bind:id="knowledgeCard.Contents.id" v-on:click="swipeCard">
-					<h3>{{ knowledgeCard.Contents.title }} hello</h3>
+					<h3>{{ knowledgeCard.Contents.title }}</h3>
                     <img v-bind:data-id="knowledgeCard.Contents.id" v-if="knowledgeCard.Contents.src_type == 'ext_image'" v-bind:src="knowledgeCard.Contents.src_url" style="width: 50%;">
 					<p>{{ knowledgeCard.Contents.details }}</p>
 
@@ -71,7 +71,7 @@
 			</div>
 
 			<div class="bottom">
-				<a href="" v-on:click.prevent="nextLesson" class="button-medium white btn-next-card">Next</a>
+				<a href="" v-on:click.prevent="nextLesson" class="button-medium white btn-next-card">{{ label.next_btn }}</a>
 			</div>
 		</div>
 
@@ -88,7 +88,7 @@
 			<a href="#" v-on:click.prevent="addFieldChallenge">Add</a>
 
 			<div class="bottom">
-				<a href="" v-on:click.prevent="updateChallenge" class="button-medium white btn-next-card">Next</a>
+				<a href="" v-on:click.prevent="updateChallenge" class="button-medium white btn-next-card">{{ label.next_btn }}</a>
 			</div>
 		</div>
 
@@ -99,10 +99,10 @@
 				<li v-for="challenge in currentCardContent.Challenges">{{ challenge.Challenge.message }}</li>
 			</ul>
 
-			<a href="#" v-on:click.prevent="addReminder">Add reminder</a>
+			<a href="#" v-on:click.prevent="addReminder">{{ label.goal_reminder_btn }}</a>
 
 			<div class="bottom">
-				<a href="" v-on:click.prevent="doneChallengeNoType" class="button-medium white btn-next-card">Next</a>
+				<a href="" v-on:click.prevent="doneChallengeNoType" class="button-medium white btn-next-card">{{ label.next_btn }}</a>
 			</div>
 		</div>
 
@@ -111,7 +111,7 @@
 			<p>{{ currentCardContent.Contents.details }}</p>
 			
 			<div class="bottom">
-				<a href="" v-on:click.prevent="nextLesson" class="button-medium white btn-next-card">Next</a>
+				<a href="" v-on:click.prevent="nextLesson" class="button-medium white btn-next-card">{{ label.next_btn }}</a>
 			</div>
 		
 		</div>
@@ -130,17 +130,17 @@
 
 		<div class="content">
 		
-			<h1>Les compleet! Last one</h1>
+			<h1>{{ label.lesson_finish_title }}</h1>
 			<i class="biggest icon-yipp_check_full"></i>
 			
-			<p class="text-center">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
+			<p class="text-center">{{ label.lesson_finish_msg }}</p>
 			
 			<div class="bottom">
 				<router-link :to="{ name: 'timeline'}" class="btn white">
-					Next Lesson
+					{{ label.lesson_finish_start }}
 				</router-link>
 				<br>
-				<a href="" v-on:click.prevent="resetLesson" class="btn white">Reset Lesson</a>
+				<a href="" v-on:click.prevent="resetLesson" class="btn white">{{ label.lesson_finish_restart }}</a>
 			</div>
 		
 		</div>
@@ -158,7 +158,7 @@
         
         <div slot="footer">
           <button class="form-button-small" @click="restartLesson">
-            Restart challenge
+            {{ label.lesson_finish_restart }}
           </button>
           <button class="form-button-small" @click="resetLessonModal = false">
             Cancel
@@ -172,6 +172,7 @@
 </template>
 
 <script>
+import locale from '../api/locale'
 import {router} from '../index'
 import config from '../config'
 import auth from '../api/auth'
@@ -236,10 +237,12 @@ export default {
             error_message: '',
             myLessonID: 0,
             stackCard: {},
-            knowledgeCards: []
+            knowledgeCards: [],
+            label: {}
         }
     },
     created: function() {
+        this.loadLabels();
         auth.check();
         if (!auth.authenticated) {
             this.redirectGuest();
@@ -257,6 +260,14 @@ export default {
         this.getLessonTitle();
     },
     methods: {
+        loadLabels: function () {
+            var that = this;
+            locale.label(this, config.api.lang, function (response) {
+                that.label = response;
+            }, function (msg, response) {
+                that.logError(msg);
+            });
+        },
     	getLessonTitle: function () {
             var str = Storage.get('active_lesson');
             if (!str) {

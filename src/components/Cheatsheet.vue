@@ -118,7 +118,7 @@
             Restart challenge
           </button>
           <button class="form-button-small" @click="resetLessonModal = false">
-            Cancel
+            {{ label.cancel_btn }}
           </button>
         </div>
 
@@ -128,6 +128,7 @@
 </template>
 
 <script>
+import locale from '../api/locale'
 import {router} from '../index'
 import config from '../config'
 import auth from '../api/auth'
@@ -152,10 +153,11 @@ export default {
 
             removeFavoriteModal: false,
             resetLessonModal: false,
-            
+            label: {}
         }
     },
     created: function() {
+        this.loadLabels();
         auth.check();
         if (!auth.authenticated) {
             this.redirectGuest();
@@ -171,6 +173,14 @@ export default {
         this.getContent();
     },
     methods: {
+        loadLabels: function () {
+            var that = this;
+            locale.label(this, config.api.lang, function (response) {
+                that.label = response;
+            }, function (msg, response) {
+                that.logError(msg);
+            });
+        },
         getLessonTitle: function () {
             var str = Storage.get('active_lesson');
             if (!str) {

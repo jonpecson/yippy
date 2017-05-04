@@ -3,18 +3,18 @@
 	<div id="onBoarding" class="panel" v-if="step == 1">
 		<div id="companyLogo"></div>
 		<div class="bottom-area">
-			<router-link :to="{ name: 'register'}" class="button-red-big">Sign up</router-link>
-			<a href="javascript:void(0);" v-on:click.prevent="showLoginForm">I already have an account</a>
+			<router-link :to="{ name: 'register'}" class="button-red-big">{{ label.sign_up }}</router-link>
+			<a href="javascript:void(0);" v-on:click.prevent="showLoginForm">{{ label.had_account }}</a>
 		</div>
 	</div>
 	
 	<div id="login1" class="panel" v-else-if="step == 2">
-		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back yipp-yipp_back"></a> Log in</div>
+		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back yipp-yipp_back"></a> {{ label.header_login }}</div>
 		<form action="" method="post" class="middle-area full" v-on:submit.prevent="logMeIn">
 			<div class="placer middle">
 				<div class="error" v-if="error_message">{{ error_message }}</div>
-				<input name="login_email" type="email" placeholder="E-mailadres" v-model="login_email">
-				<input name="login_pw" type="password" placeholder="Wachtwoord" v-model="login_pw">
+				<input name="login_email" type="email" v-bind:placeholder="label.email_placeholder" v-model="login_email">
+				<input name="login_pw" type="password" v-bind:placeholder="label.password_placeholder" v-model="login_pw">
 			</div>
 				
 			<div class="bottom-area">
@@ -27,12 +27,12 @@
 	</div>
 			
 	<div id="reset" class="panel" v-else-if="step == 3">
-		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back yipp-yipp_back"></a> Reset password</div>
+		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back yipp-yipp_back"></a> {{ label.header_reset }}</div>
 		<form action="" method="post" class="middle-area full" v-on:submit.prevent="resetPassword">
 			<div class="placer middle">
 				<div class="error" v-if="error_message">{{ error_message }}</div>
 				<div class="success" v-if="success_message">{{ success_message }}</div>
-				<p>We will send you an email with a link so you can set up a new password</p>
+				<p>{{ label.pass_reset_msg }}</p>
 				<input type="email" placeholder="E-mailadres" v-model="pw_email">
 			</div>
 			<div class="bottom-area">
@@ -42,7 +42,7 @@
 	</div>	
 	
 	<div id="renew" class="panel" v-else-if="step == 4">
-		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back yipp-yipp_back"></a> Reset password</div>
+		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back yipp-yipp_back"></a> {{ label.header_reset }}</div>
 		<form action="" method="post" class="middle-area full" v-on:submit.prevent="newPassword">
 			<div class="placer middle">
 				<div class="error" v-if="error_message">{{ error_message }}</div>
@@ -60,6 +60,7 @@
 
 
 <script>
+import locale from '../api/locale'
 import {router} from '../index'
 import config from '../config'
 import auth from '../api/auth'
@@ -76,10 +77,12 @@ export default {
 			loading: false,
 			pw_newpassword: '',
 			pw_code: '',
-			pw_email: ''
+			pw_email: '',
+			label: {}
         }
     },
     created: function() {
+    	this.loadLabels();
     	auth.check();
     	if (auth.authenticated) {
     		this.redirectAuth();
@@ -90,6 +93,14 @@ export default {
 		}
     },
     methods: {
+    	loadLabels: function () {
+            var that = this;
+            locale.label(this, config.api.lang, function (response) {
+                that.label = response;
+            }, function (msg, response) {
+                that.logError(msg);
+            });
+        },
         showLoginForm: function () {
         	this.resetError();
 			this.step = 2;

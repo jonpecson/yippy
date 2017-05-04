@@ -3,7 +3,7 @@
     <header>
         <div class="title-area">
             <a href="javascript:void(0);"><i class="icon-yipp_profile_line"></i></a>
-            <span>Trainingen</span>
+            <span>{{ label.header_timeline }}</span>
             <router-link :to="{ name: 'emergency'}"><i class="icon-yipp_notification_line2"></i></router-link>
         </div>
 
@@ -81,6 +81,7 @@
 </template>
 
 <script>
+import locale from '../api/locale'
 import {router} from '../index'
 import config from '../config'
 import auth from '../api/auth'
@@ -100,10 +101,12 @@ export default {
             showModal: false,
             currentLevel: 0,
             childAge: 0,
-            userID: 0
+            userID: 0,
+            label: {}
         }
     },
     created: function() {
+        this.loadLabels();
         auth.check();
         if (!auth.authenticated) {
             this.redirectGuest();
@@ -119,6 +122,14 @@ export default {
         this.showTimeline();
     },
     methods: {
+        loadLabels: function () {
+            var that = this;
+            locale.label(this, config.api.lang, function (response) {
+                that.label = response;
+            }, function (msg, response) {
+                that.logError(msg);
+            });
+        },
         getLevels: function () {
             var that = this;
             
@@ -150,7 +161,6 @@ export default {
 
             this.lessons = [];
             timeline.lessons(this, this.currentLevel, this.userID, function (response) {
-                console.log(response)
                 var counter = 0;
                 $.each(response.data, function (index, value) {
                     var active = '';

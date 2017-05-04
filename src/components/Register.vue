@@ -3,7 +3,7 @@
 		
 	<div id="parent" class="panel" v-if="step == 1">
 		<div class="titleBar">
-			<router-link :to="{ name: 'login'}" class="back yipp-yipp_back"></router-link> Sign up parent
+			<router-link :to="{ name: 'login'}" class="back yipp-yipp_back"></router-link> {{ label.header_reg }}
 		</div>
 		
 		
@@ -13,27 +13,27 @@
 		
 			<div class="selection-group">
 				<input type="radio" id="father"  name="parents" value="father" v-model="parent_gender">
-				<label for="father" class="rLeft">Father</label>
+				<label for="father" class="rLeft">{{ label.reg_father }}</label>
 				<input type="radio" id="mother"  name="parents" value="mother" v-model="parent_gender">
-				<label for="mother" class="rRight">Mother</label>
+				<label for="mother" class="rRight">{{ label.reg_mother }}</label>
 			</div>
 
 			<div class="inputFields">
 				
-				<label>Naam</label>
-				<input type="text" placeholder="your name" v-model="parent_name">
+				<label>{{ label.reg_name }}</label>
+				<input type="text" v-bind:placeholder="label.reg_name_placeholder" v-model="parent_name">
 
-				<label>E-mailadres</label>
-				<input type="email" placeholder="name@mail.nl" v-model="parent_email">
+				<label>{{ label.reg_email }}</label>
+				<input type="email" v-bind:placeholder="label.reg_email_placeholder" v-model="parent_email">
 
-				<label>Wachwoord</label>
-				<input type="password" placeholder="******" v-model="parent_password">
+				<label>{{ label.reg_password }}</label>
+				<input type="password" v-bind:placeholder="label.password_placeholder" v-model="parent_password">
 			
 			</div>
 
 		
 			<div class="bottom-area">
-				<button class="button-red-medium">next<span v-if="loading" class="loading"></span></button>
+				<button class="button-red-medium">{{ label.reg_btn }}<span v-if="loading" class="loading"></span></button>
 			</div>
 			
 		</form>
@@ -42,7 +42,7 @@
 
 	<div id="child" class="panel" v-else-if="step == 2">
 
-		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back yipp-yipp_back"></a> Sign up child</div>
+		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back yipp-yipp_back"></a> {{ label.reg_header_child }}</div>
 		
 		<form action="" method="post" class="middle-area semi" v-on:submit.prevent="addChild">
 		
@@ -50,21 +50,21 @@
 		
 			<div class="selection-group">
 				<input type="radio" id="son"  name="child" value="son" v-model="child_gender">
-				<label for="son" class="rLeft">Son</label>
+				<label for="son" class="rLeft">{{ label.reg_son }}</label>
 				<input type="radio" id="daughter"  name="child" value="daughter" v-model="child_gender">
-				<label for="daughter" class="rRight">Daughter</label>
+				<label for="daughter" class="rRight">{{ label.reg_daugther }}</label>
 			</div>
 
 			<div class="inputFields">
 				
-				<label>Naam van jouw kind</label>
-				<input type="text" placeholder="your name" v-model="child_name">
+				<label>{{ label.reg_child_name }}</label>
+				<input type="text" v-bind:placeholder="label.reg_child_name_placeholder" v-model="child_name">
 
 			</div>
 
 			<div class="inputFields">
 
-				<label>Wanneer is jouw kind geboren?</label>
+				<label>{{ label.reg_child_birthday }}</label>
 				<ul id="date-group">
 					<li><input type="tel" placeholder="DD" class="date-group" v-model="child_bday_d"></li>
 					<li><input type="tel" placeholder="MM" class="date-group" v-model="child_bday_m"></li> 
@@ -74,7 +74,7 @@
 			</div>
 			
 			<div class="bottom-area">
-				<button class="button-red-medium">next<span v-if="loading" class="loading"></span></button>
+				<button class="button-red-medium">{{ label.reg_btn }}<span v-if="loading" class="loading"></span></button>
 			</div>
 			
 		</form>
@@ -84,7 +84,7 @@
 	
 	<div id="photo" class="panel" v-else-if="step == 3">
 
-		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back yipp-yipp_back"></a> Add photo</div>
+		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back yipp-yipp_back"></a> {{ label.reg_header_photo }}</div>
 
 		<form action="" method="post" enctype="multipart/form-data" v-on:submit.prevent="addPicture">
 			<div class="error" v-if="error_message">{{ error_message }}</div>
@@ -97,11 +97,11 @@
 
 			</div>
 
-			<h3>Choose a nice picture of <br> you and {{ child_name }}!</h3>
+			<h3>{{ label.reg_photo_choose_msg }} {{ child_name }}!</h3>
 
 			<div class="bottom-area">
-				<input type="submit" value="next" class="button-red-medium"><span v-if="loading" class="loading"></span>
-				<a href="javascript:void(0);" v-on:click="showLastStep" >Continue without picture</a>
+				<input type="submit" value="label.reg_btn" class="button-red-medium"><span v-if="loading" class="loading"></span>
+				<a href="javascript:void(0);" v-on:click="showLastStep" >{{ label.reg_photo_btn_nopic }}</a>
 			</div>
 			
 		</form>
@@ -117,8 +117,8 @@
 			
 			<div class="picHolder"><img class="avatar" v-bind:src="child_image"></div>
 				
-			<h3>What a nice picture! <br> Do you also like?</h3>
-			<a href="javascript:void(0);" v-on:click="showLastStep">Choose another picture</a>
+			<h3>{{ label.reg_photo_rechoose_msg }}</h3>
+			<a href="javascript:void(0);" v-on:click="showLastStep">{{ label.reg_photo_rechoose_upload }}</a>
 	                         
 		</div>                 
                                                                                                                                                                                                                                                                                                                                                                                                                  
@@ -131,12 +131,12 @@
 				
 			<div class="placer middle">
 						
-				<p>Become a <br> Supermom <br> for <span>Lisa</span>  <br> with the <strong>Yipp <br> app!</strong></p>		
+				<p>{{ label.reg_finish }} <strong>Yipp <br> app!</strong></p>		
 						
 			</div> 							
 			
 			<div class="bottom-area">
-				<router-link :to="{ name: 'timeline'}" class="button-white-medium">Begin!</router-link>
+				<router-link :to="{ name: 'timeline'}" class="button-white-medium">{{ label.reg_finish_btn }}</router-link>
 			</div>
 							
 	</div>
@@ -146,6 +146,7 @@
 
 
 <script>
+import locale from '../api/locale'
 import {router} from '../index'
 import config from '../config'
 import auth from '../api/auth'
@@ -169,7 +170,8 @@ export default {
 			child_bday_m: '',
 			child_bday_y: '',
 			child_image: '',
-			loading: false
+			loading: false,
+			label: {}
         }
     },
     created: function() {
@@ -177,6 +179,7 @@ export default {
     },
 
     mounted: function () {
+    	this.loadLabels();
     	auth.check();
 
     	if (auth.user) {
@@ -189,7 +192,15 @@ export default {
     },
 
     methods: {
-    	showParentForm: function () {
+    	loadLabels: function () {
+            var that = this;
+            locale.label(this, config.api.lang, function (response) {
+                that.label = response;
+            }, function (msg, response) {
+                that.logError(msg);
+            });
+        },
+        showParentForm: function () {
     		this.resetError();
 			this.step = 1;
     	},

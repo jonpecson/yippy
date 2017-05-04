@@ -5,7 +5,7 @@
 				<a href="#" class="icon" v-on:click.prevent="back">
 					<i class=" icon-yipp_back"></i>
 				</a>
-				<div class="title">Challenge Details</div>
+				<div class="title">{{ label.challenge_details_title }}</div>
 		</div>
 
 		<div class="wrap">
@@ -49,7 +49,7 @@
 				<input v-bind:data-id="fd.id" type="hidden" role="uploadcare-uploader" name="uploadedfile" id="uploadPic" />
 			</div>
 
-			<h4>Evaluation</h4>
+			<h4>{{ label.evaluation_text }}</h4>
 				
 			<textarea v-model="fd.evaluation"></textarea>
 			
@@ -77,7 +77,7 @@
 			
 			<textarea v-model="fd.notes"></textarea>
 			
-			<a href="#" v-on:click.prevent="submitEval(fd.id)" class="btn">Done<span v-if="loading" class="loading"></span></a>
+			<a href="#" v-on:click.prevent="submitEval(fd.id)" class="btn">{{ label.done_btn }}<span v-if="loading" class="loading"></span></a>
 		</div>
 
 	</div>
@@ -87,12 +87,12 @@
 		
 			<i class="icon-yipp_check_full"></i>
 			
-			<h3>You can do it!</h3>
-			<p>We made a beautiful photo collage of this week check it out!</p>
+			<h3>{{ label.challenge_done_title }}</h3>
+			<p>{{ label.challenge_done_msg }}</p>
 			
 			<div class="bottom">
-				<a href="javascript:void(0);" v-on:click.prevent="showResult" class="btn mid white">See result</a>
-				<a href="javascript:void(0);" v-on:click.prevent="resetChallenge" class="btn big">Restart challenge</a>
+				<a href="javascript:void(0);" v-on:click.prevent="showResult" class="btn mid white">{{ label.challenge_result_btn }}</a>
+				<a href="javascript:void(0);" v-on:click.prevent="resetChallenge" class="btn big">{{ label.restart_challenge_btn }}</a>
 			</div>
 
 		</section>
@@ -132,8 +132,8 @@
 	</div>
 	
 	<modal v-if="resetChallengeModal" @close="resetChallengeModal = false">
-        <h3 slot="header">Are you sure?</h3>
-        <p slot="body">Do you want to restart the challenge?</p>
+        <h3 slot="header">{{ label.challenge_restart_popup_title }}</h3>
+        <p slot="body">{{ label.challenge_restart_popup_msg }}</p>
         
         <div slot="footer">
           <button class="form-button-small" @click="restartChallenge">
