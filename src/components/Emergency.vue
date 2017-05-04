@@ -7,25 +7,21 @@
 			</header>
 
 			<ul id="list-image">
-				<li v-on:click.prevent="view" style="background-image: url(assets/img/slider-1.jpg);"><h3>{title here}</h3></li>
-				<li v-on:click.prevent="view" style="background-image: url(assets/img/slider-2.jpg);"><h3>{title here}</h3></li>
-				<li v-on:click.prevent="view" style="background-image: url(assets/img/slider-3.jpg);"><h3>{title here}</h3></li>
-				<li v-on:click.prevent="view" style="background-image: url(assets/img/slider-4.jpg);"><h3>{title here}</h3></li>
+				<li v-on:click.prevent="view(item.id)" v-for="item of content">
+					<img v-bind:src="item.Contents.src_url" v-if="item.Contents.src_type == 'ext_image'">
+					<h3>{{ item.Contents.title }}</h3>
+				</li>
 			</ul>
 		</section>
 		
 		<section class="imageContent" v-if="page == 2">
-			<div id="headerImage" v-on:click.prevent="back" style="background-image: url(assets/img/slider-1.jpg);">
+			<div id="headerImage" v-on:click.prevent="back" style="height: 200px; overflow: hidden;">
+				<img v-bind:src="activeContent.Contents.src_url" v-if="activeContent.Contents.src_type == 'ext_image'">
 			</div>
 
 			<div id="content">
-				<h3>{Title Text}</h3>
-					<ol>
-						<li class="item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis, fugiat.</li>
-						<li class="item">Rerum quis voluptatem eligendi consequatur, ipsum, ducimus reiciendis hic amet.</li>
-						<li class="item">Unde doloribus ipsam cum. Fuga quod illum voluptates voluptatum nulla.</li>
-						<li class="item">Fugit ipsam, aliquam laudantium reiciendis repellendus illo! Eaque doloremque, veritatis!</li>
-					</ol>
+				<h3>{{ activeContent.Contents.title }}</h3>
+				{{ activeContent.Contents.details }}
 			</div>
 		</section>
 	
@@ -33,24 +29,73 @@
 </template>
 
 <script>
+import locale from '../api/locale'
 import {router} from '../index'
 import config from '../config'
 import auth from '../api/auth'
-import timeline from '../api/timeline'
+import emergency from '../api/emergency'
 import $ from 'jquery'
 
 export default {
     data() {
         return {
             page: '1',
+            label: {},
+            content: [],
+            activeContent: {}
         }
     },
     created: function() {
-        
+        this.loadLabels();
+        auth.check();
+        if (!auth.authenticated) {
+            this.redirectGuest();
+        }
+
+        this.getContent();
     },
     methods: {
-        view: function() {
-            this.page = 2;
+        loadLabels: function () {
+            var that = this;
+            locale.label(this, config.api.lang, function (response) {
+                that.label = response;
+            }, function (msg, response) {
+                that.logError(msg);
+            });
+        },
+        redirectGuest: function()
+        {
+            this.$router.push('login');
+        },
+        logError(msg) {
+            this.loading = false;
+            var msgStr = '';
+            if (typeof msg == 'string') {
+                msgStr = msg;
+            } else {
+                $.each(msg, function(label, value) {
+                    msgStr += value + ' ';
+                })
+            }
+            
+            this.error_message = msgStr;
+        },
+        getContent: function () {
+        	var that = this;
+        	emergency.get(this, config.api.lang, function (response) {
+                that.content = response;
+            }, function (msg, response) {
+                that.logError(msg);
+            });
+        },
+        view: function (id) {
+        	var that = this;
+        	$.each(this.content, function (index, value) {
+        		if (value.id == id) {
+        			that.activeContent = value;
+        			that.page = 2;
+        		}
+        	})
         },
         back: function () {
         	this.page = 1;

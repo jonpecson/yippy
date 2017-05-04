@@ -35794,6 +35794,10 @@
 	    value: true
 	});
 
+	var _locale = __webpack_require__(350);
+
+	var _locale2 = _interopRequireDefault(_locale);
+
 	var _index = __webpack_require__(8);
 
 	var _config = __webpack_require__(1);
@@ -35804,9 +35808,9 @@
 
 	var _auth2 = _interopRequireDefault(_auth);
 
-	var _timeline = __webpack_require__(290);
+	var _emergency = __webpack_require__(351);
 
-	var _timeline2 = _interopRequireDefault(_timeline);
+	var _emergency2 = _interopRequireDefault(_emergency);
 
 	var _jquery = __webpack_require__(11);
 
@@ -35814,25 +35818,6 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = {
-	    data: function data() {
-	        return {
-	            page: '1'
-	        };
-	    },
-
-	    created: function created() {},
-	    methods: {
-	        view: function view() {
-	            this.page = 2;
-	        },
-	        back: function back() {
-	            this.page = 1;
-	        }
-	    }
-	};
-
-	// </script>
 	// <template>
 	// 	<div id="page-emergency">
 	// 		<section class="emergency" v-if="page == 1">
@@ -35842,25 +35827,21 @@
 	// 			</header>
 	//
 	// 			<ul id="list-image">
-	// 				<li v-on:click.prevent="view" style="background-image: url(assets/img/slider-1.jpg);"><h3>{title here}</h3></li>
-	// 				<li v-on:click.prevent="view" style="background-image: url(assets/img/slider-2.jpg);"><h3>{title here}</h3></li>
-	// 				<li v-on:click.prevent="view" style="background-image: url(assets/img/slider-3.jpg);"><h3>{title here}</h3></li>
-	// 				<li v-on:click.prevent="view" style="background-image: url(assets/img/slider-4.jpg);"><h3>{title here}</h3></li>
+	// 				<li v-on:click.prevent="view(item.id)" v-for="item of content">
+	// 					<img v-bind:src="item.Contents.src_url" v-if="item.Contents.src_type == 'ext_image'">
+	// 					<h3>{{ item.Contents.title }}</h3>
+	// 				</li>
 	// 			</ul>
 	// 		</section>
 	//
 	// 		<section class="imageContent" v-if="page == 2">
-	// 			<div id="headerImage" v-on:click.prevent="back" style="background-image: url(assets/img/slider-1.jpg);">
+	// 			<div id="headerImage" v-on:click.prevent="back" style="height: 200px; overflow: hidden;">
+	// 				<img v-bind:src="activeContent.Contents.src_url" v-if="activeContent.Contents.src_type == 'ext_image'">
 	// 			</div>
 	//
 	// 			<div id="content">
-	// 				<h3>{Title Text}</h3>
-	// 					<ol>
-	// 						<li class="item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis, fugiat.</li>
-	// 						<li class="item">Rerum quis voluptatem eligendi consequatur, ipsum, ducimus reiciendis hic amet.</li>
-	// 						<li class="item">Unde doloribus ipsam cum. Fuga quod illum voluptates voluptatum nulla.</li>
-	// 						<li class="item">Fugit ipsam, aliquam laudantium reiciendis repellendus illo! Eaque doloremque, veritatis!</li>
-	// 					</ol>
+	// 				<h3>{{ activeContent.Contents.title }}</h3>
+	// 				{{ activeContent.Contents.details }}
 	// 			</div>
 	// 		</section>
 	//
@@ -35868,12 +35849,81 @@
 	// </template>
 	//
 	// <script>
+	exports.default = {
+	    data: function data() {
+	        return {
+	            page: '1',
+	            label: {},
+	            content: [],
+	            activeContent: {}
+	        };
+	    },
+
+	    created: function created() {
+	        this.loadLabels();
+	        _auth2.default.check();
+	        if (!_auth2.default.authenticated) {
+	            this.redirectGuest();
+	        }
+
+	        this.getContent();
+	    },
+	    methods: {
+	        loadLabels: function loadLabels() {
+	            var that = this;
+	            _locale2.default.label(this, _config2.default.api.lang, function (response) {
+	                that.label = response;
+	            }, function (msg, response) {
+	                that.logError(msg);
+	            });
+	        },
+	        redirectGuest: function redirectGuest() {
+	            this.$router.push('login');
+	        },
+	        logError: function logError(msg) {
+	            this.loading = false;
+	            var msgStr = '';
+	            if (typeof msg == 'string') {
+	                msgStr = msg;
+	            } else {
+	                _jquery2.default.each(msg, function (label, value) {
+	                    msgStr += value + ' ';
+	                });
+	            }
+
+	            this.error_message = msgStr;
+	        },
+
+	        getContent: function getContent() {
+	            var that = this;
+	            _emergency2.default.get(this, _config2.default.api.lang, function (response) {
+	                that.content = response;
+	            }, function (msg, response) {
+	                that.logError(msg);
+	            });
+	        },
+	        view: function view(id) {
+	            var that = this;
+	            _jquery2.default.each(this.content, function (index, value) {
+	                if (value.id == id) {
+	                    that.activeContent = value;
+	                    that.page = 2;
+	                }
+	            });
+	        },
+	        back: function back() {
+	            this.page = 1;
+	        }
+	    }
+	};
+
+	// </script>
 
 /***/ },
 /* 297 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\t<div id=\"page-emergency\">\n\t\t<section class=\"emergency\" v-if=\"page == 1\">\n\t\t\t<header class=\"normal-header\">\n\t\t\t\t<router-link :to=\"{ name: 'timeline'}\"><span class=\"icon-close\" style=\"font-weight: normal\">X</span></router-link>\n\t\t\t\t<h2>Emergency</h2>\n\t\t\t</header>\n\n\t\t\t<ul id=\"list-image\">\n\t\t\t\t<li v-on:click.prevent=\"view\" style=\"background-image: url(assets/img/slider-1.jpg);\"><h3>{title here}</h3></li>\n\t\t\t\t<li v-on:click.prevent=\"view\" style=\"background-image: url(assets/img/slider-2.jpg);\"><h3>{title here}</h3></li>\n\t\t\t\t<li v-on:click.prevent=\"view\" style=\"background-image: url(assets/img/slider-3.jpg);\"><h3>{title here}</h3></li>\n\t\t\t\t<li v-on:click.prevent=\"view\" style=\"background-image: url(assets/img/slider-4.jpg);\"><h3>{title here}</h3></li>\n\t\t\t</ul>\n\t\t</section>\n\t\t\n\t\t<section class=\"imageContent\" v-if=\"page == 2\">\n\t\t\t<div id=\"headerImage\" v-on:click.prevent=\"back\" style=\"background-image: url(assets/img/slider-1.jpg);\">\n\t\t\t</div>\n\n\t\t\t<div id=\"content\">\n\t\t\t\t<h3>{Title Text}</h3>\n\t\t\t\t\t<ol>\n\t\t\t\t\t\t<li class=\"item\">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis, fugiat.</li>\n\t\t\t\t\t\t<li class=\"item\">Rerum quis voluptatem eligendi consequatur, ipsum, ducimus reiciendis hic amet.</li>\n\t\t\t\t\t\t<li class=\"item\">Unde doloribus ipsam cum. Fuga quod illum voluptates voluptatum nulla.</li>\n\t\t\t\t\t\t<li class=\"item\">Fugit ipsam, aliquam laudantium reiciendis repellendus illo! Eaque doloremque, veritatis!</li>\n\t\t\t\t\t</ol>\n\t\t\t</div>\n\t\t</section>\n\t\n\t</div>\n";
+	module.exports = "\n\t<div id=\"page-emergency\">\n\t\t<section class=\"emergency\" v-if=\"page == 1\">\n\t\t\t<header class=\"normal-header\">\n\t\t\t\t<router-link :to=\"{ name: 'timeline'}\"><span class=\"icon-close\" style=\"font-weight: normal\">X</span></router-link>\n\t\t\t\t<h2>Emergency</h2>\n\t\t\t</header>\n\n\t\t\t<ul id=\"list-image\">\n\t\t\t\t<li v-on:click.prevent=\"view(item.id)\" v-for=\"item of content\">\n\t\t\t\t\t<img v-bind:src=\"item.Contents.src_url\" v-if=\"item.Contents.src_type == 'ext_image'\">\n\t\t\t\t\t<h3>{{ item.Contents.title }}</h3>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t</section>\n\t\t\n\t\t<section class=\"imageContent\" v-if=\"page == 2\">\n\t\t\t<div id=\"headerImage\" v-on:click.prevent=\"back\" style=\"height: 200px; overflow: hidden;\">\n\t\t\t\t<img v-bind:src=\"activeContent.Contents.src_url\" v-if=\"activeContent.Contents.src_type == 'ext_image'\">\n\t\t\t</div>\n\n\t\t\t<div id=\"content\">\n\t\t\t\t<h3>{{ activeContent.Contents.title }}</h3>\n\t\t\t\t{{ activeContent.Contents.details }}\n\t\t\t</div>\n\t\t</section>\n\t\n\t</div>\n";
 
 /***/ },
 /* 298 */
@@ -66821,6 +66871,52 @@
 	            if (response.body.status == 'OK') {
 	                var result = response.body.result.label;
 	                localStorage.setItem('localelabel', (0, _stringify2.default)(result));
+	                successCallback.call(_this, result);
+	            } else if (errorCallback) {
+	                errorCallback.call(_this, result.message, response);
+	            }
+	        }, function (response) {
+
+	            if (errorCallback) {
+	                errorCallback.call(_this, response.body.result.error, response);
+	            }
+	        });
+	    }
+	};
+
+/***/ },
+/* 351 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _config = __webpack_require__(1);
+
+	var _config2 = _interopRequireDefault(_config);
+
+	var _user = __webpack_require__(7);
+
+	var _user2 = _interopRequireDefault(_user);
+
+	var _storage = __webpack_require__(2);
+
+	var _storage2 = _interopRequireDefault(_storage);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	    get: function get(context, language, successCallback, errorCallback) {
+	        var _this = this;
+
+	        var that = this;
+
+	        context.$http.get(_config2.default.api.url + '/emergency/' + language).then(function (response) {
+	            if (response.body.status == 'OK') {
+	                var result = response.body.result.emergency;
 	                successCallback.call(_this, result);
 	            } else if (errorCallback) {
 	                errorCallback.call(_this, result.message, response);
