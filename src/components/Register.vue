@@ -2,7 +2,9 @@
 <div id="signUp">
 		
 	<div id="parent" class="panel" v-if="step == 1">
-		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back yipp-yipp_back"></a> Sign up parent</div>
+		<div class="titleBar">
+			<router-link :to="{ name: 'login'}" class="back yipp-yipp_back"></router-link> Sign up parent
+		</div>
 		
 		
 		<form action="" method="post" class="middle-area semi" v-on:submit.prevent="register">

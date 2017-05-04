@@ -23502,13 +23502,13 @@
 	// 	<div id="onBoarding" class="panel" v-if="step == 1">
 	// 		<div id="companyLogo"></div>
 	// 		<div class="bottom-area">
-	// 			<router-link :to="{ name: 'register'}" class="button-big">Sign up</router-link>
+	// 			<router-link :to="{ name: 'register'}" class="button-red-big">Sign up</router-link>
 	// 			<a href="javascript:void(0);" v-on:click.prevent="showLoginForm">I already have an account</a>
 	// 		</div>
 	// 	</div>
 	//
 	// 	<div id="login1" class="panel" v-else-if="step == 2">
-	// 		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back"></a> Log in</div>
+	// 		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back yipp-yipp_back"></a> Log in</div>
 	// 		<form action="" method="post" class="middle-area full" v-on:submit.prevent="logMeIn">
 	// 			<div class="placer middle">
 	// 				<div class="error" v-if="error_message">{{ error_message }}</div>
@@ -23517,8 +23517,8 @@
 	// 			</div>
 	//
 	// 			<div class="bottom-area">
-	// 				<button class="form-button-medium">Login<span v-if="loading" class="loading"></span></button>
-	// 				<router-link :to="{ name: 'register'}">I don't have an account</router-link>
+	// 				<button class="button-red-big">Login<span v-if="loading" class="loading"></span></button>
+	// 				<a href=""><router-link :to="{ name: 'register'}">I don't have an account</router-link></a>
 	// 				<br>
 	// 				<a href="javascript:void(0);" v-on:click="showResetForm">Forgot password</a>
 	// 			</div>
@@ -23526,31 +23526,31 @@
 	// 	</div>
 	//
 	// 	<div id="reset" class="panel" v-else-if="step == 3">
-	// 		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back"></a> Reset password</div>
+	// 		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back yipp-yipp_back"></a> Reset password</div>
 	// 		<form action="" method="post" class="middle-area full" v-on:submit.prevent="resetPassword">
-	// 			<div class="placer bottom">
+	// 			<div class="placer middle">
 	// 				<div class="error" v-if="error_message">{{ error_message }}</div>
 	// 				<div class="success" v-if="success_message">{{ success_message }}</div>
 	// 				<p>We will send you an email with a link so you can set up a new password</p>
 	// 				<input type="email" placeholder="E-mailadres" v-model="pw_email">
 	// 			</div>
 	// 			<div class="bottom-area">
-	// 				<button class="form-button-medium">Reset<span v-if="loading" class="loading"></span></button>
+	// 				<button class="button-red-big">Reset<span v-if="loading" class="loading"></span></button>
 	// 			</div>
 	// 		</form>
 	// 	</div>	
 	//
 	// 	<div id="renew" class="panel" v-else-if="step == 4">
-	// 		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back"></a> Reset password</div>
+	// 		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back yipp-yipp_back"></a> Reset password</div>
 	// 		<form action="" method="post" class="middle-area full" v-on:submit.prevent="newPassword">
 	// 			<div class="placer middle">
 	// 				<div class="error" v-if="error_message">{{ error_message }}</div>
 	// 				<div class="success" v-if="success_message">{{ success_message }}</div>
 	// 				<input type="password" placeholder="New password" v-model="pw_newpassword">
-	// 				<input type="text" placeholder="Code" v-model="pw_code">
+	// 				<input type="password" placeholder="Repeat password" v-model="pw_code">
 	// 			</div>
 	// 			<div class="bottom-area">
-	// 				<button class="form-button-medium">Confirm<span v-if="loading" class="loading"></span></button>
+	// 				<button class="button-red-big">Confirm<span v-if="loading" class="loading"></span></button>
 	// 			</div>
 	// 		</form>
 	// 	</div>	
@@ -23831,7 +23831,7 @@
 /* 187 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div id=\"signUp\">\n\t<div id=\"onBoarding\" class=\"panel\" v-if=\"step == 1\">\n\t\t<div id=\"companyLogo\"></div>\n\t\t<div class=\"bottom-area\">\n\t\t\t<router-link :to=\"{ name: 'register'}\" class=\"button-big\">Sign up</router-link>\n\t\t\t<a href=\"javascript:void(0);\" v-on:click.prevent=\"showLoginForm\">I already have an account</a>\n\t\t</div>\n\t</div>\n\t\n\t<div id=\"login1\" class=\"panel\" v-else-if=\"step == 2\">\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Log in</div>\n\t\t<form action=\"\" method=\"post\" class=\"middle-area full\" v-on:submit.prevent=\"logMeIn\">\n\t\t\t<div class=\"placer middle\">\n\t\t\t\t<div class=\"error\" v-if=\"error_message\">{{ error_message }}</div>\n\t\t\t\t<input name=\"login_email\" type=\"email\" placeholder=\"E-mailadres\" v-model=\"login_email\">\n\t\t\t\t<input name=\"login_pw\" type=\"password\" placeholder=\"Wachtwoord\" v-model=\"login_pw\">\n\t\t\t</div>\n\t\t\t\t\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<button class=\"form-button-medium\">Login<span v-if=\"loading\" class=\"loading\"></span></button>\n\t\t\t\t<router-link :to=\"{ name: 'register'}\">I don't have an account</router-link>\n\t\t\t\t<br>\n\t\t\t\t<a href=\"javascript:void(0);\" v-on:click=\"showResetForm\">Forgot password</a>\n\t\t\t</div>\n\t\t</form>\n\t</div>\n\t\t\t\n\t<div id=\"reset\" class=\"panel\" v-else-if=\"step == 3\">\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Reset password</div>\n\t\t<form action=\"\" method=\"post\" class=\"middle-area full\" v-on:submit.prevent=\"resetPassword\">\n\t\t\t<div class=\"placer bottom\">\n\t\t\t\t<div class=\"error\" v-if=\"error_message\">{{ error_message }}</div>\n\t\t\t\t<div class=\"success\" v-if=\"success_message\">{{ success_message }}</div>\n\t\t\t\t<p>We will send you an email with a link so you can set up a new password</p>\n\t\t\t\t<input type=\"email\" placeholder=\"E-mailadres\" v-model=\"pw_email\">\n\t\t\t</div>\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<button class=\"form-button-medium\">Reset<span v-if=\"loading\" class=\"loading\"></span></button>\n\t\t\t</div>\n\t\t</form>\n\t</div>\t\n\t\n\t<div id=\"renew\" class=\"panel\" v-else-if=\"step == 4\">\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Reset password</div>\n\t\t<form action=\"\" method=\"post\" class=\"middle-area full\" v-on:submit.prevent=\"newPassword\">\n\t\t\t<div class=\"placer middle\">\n\t\t\t\t<div class=\"error\" v-if=\"error_message\">{{ error_message }}</div>\n\t\t\t\t<div class=\"success\" v-if=\"success_message\">{{ success_message }}</div>\n\t\t\t\t<input type=\"password\" placeholder=\"New password\" v-model=\"pw_newpassword\">\n\t\t\t\t<input type=\"text\" placeholder=\"Code\" v-model=\"pw_code\">\n\t\t\t</div>\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<button class=\"form-button-medium\">Confirm<span v-if=\"loading\" class=\"loading\"></span></button>\n\t\t\t</div>\n\t\t</form>\n\t</div>\t\n</div>\n";
+	module.exports = "\n<div id=\"signUp\">\n\t<div id=\"onBoarding\" class=\"panel\" v-if=\"step == 1\">\n\t\t<div id=\"companyLogo\"></div>\n\t\t<div class=\"bottom-area\">\n\t\t\t<router-link :to=\"{ name: 'register'}\" class=\"button-red-big\">Sign up</router-link>\n\t\t\t<a href=\"javascript:void(0);\" v-on:click.prevent=\"showLoginForm\">I already have an account</a>\n\t\t</div>\n\t</div>\n\t\n\t<div id=\"login1\" class=\"panel\" v-else-if=\"step == 2\">\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back yipp-yipp_back\"></a> Log in</div>\n\t\t<form action=\"\" method=\"post\" class=\"middle-area full\" v-on:submit.prevent=\"logMeIn\">\n\t\t\t<div class=\"placer middle\">\n\t\t\t\t<div class=\"error\" v-if=\"error_message\">{{ error_message }}</div>\n\t\t\t\t<input name=\"login_email\" type=\"email\" placeholder=\"E-mailadres\" v-model=\"login_email\">\n\t\t\t\t<input name=\"login_pw\" type=\"password\" placeholder=\"Wachtwoord\" v-model=\"login_pw\">\n\t\t\t</div>\n\t\t\t\t\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<button class=\"button-red-big\">Login<span v-if=\"loading\" class=\"loading\"></span></button>\n\t\t\t\t<a href=\"\"><router-link :to=\"{ name: 'register'}\">I don't have an account</router-link></a>\n\t\t\t\t<br>\n\t\t\t\t<a href=\"javascript:void(0);\" v-on:click=\"showResetForm\">Forgot password</a>\n\t\t\t</div>\n\t\t</form>\n\t</div>\n\t\t\t\n\t<div id=\"reset\" class=\"panel\" v-else-if=\"step == 3\">\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back yipp-yipp_back\"></a> Reset password</div>\n\t\t<form action=\"\" method=\"post\" class=\"middle-area full\" v-on:submit.prevent=\"resetPassword\">\n\t\t\t<div class=\"placer middle\">\n\t\t\t\t<div class=\"error\" v-if=\"error_message\">{{ error_message }}</div>\n\t\t\t\t<div class=\"success\" v-if=\"success_message\">{{ success_message }}</div>\n\t\t\t\t<p>We will send you an email with a link so you can set up a new password</p>\n\t\t\t\t<input type=\"email\" placeholder=\"E-mailadres\" v-model=\"pw_email\">\n\t\t\t</div>\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<button class=\"button-red-big\">Reset<span v-if=\"loading\" class=\"loading\"></span></button>\n\t\t\t</div>\n\t\t</form>\n\t</div>\t\n\t\n\t<div id=\"renew\" class=\"panel\" v-else-if=\"step == 4\">\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back yipp-yipp_back\"></a> Reset password</div>\n\t\t<form action=\"\" method=\"post\" class=\"middle-area full\" v-on:submit.prevent=\"newPassword\">\n\t\t\t<div class=\"placer middle\">\n\t\t\t\t<div class=\"error\" v-if=\"error_message\">{{ error_message }}</div>\n\t\t\t\t<div class=\"success\" v-if=\"success_message\">{{ success_message }}</div>\n\t\t\t\t<input type=\"password\" placeholder=\"New password\" v-model=\"pw_newpassword\">\n\t\t\t\t<input type=\"password\" placeholder=\"Repeat password\" v-model=\"pw_code\">\n\t\t\t</div>\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<button class=\"button-red-big\">Confirm<span v-if=\"loading\" class=\"loading\"></span></button>\n\t\t\t</div>\n\t\t</form>\n\t</div>\t\n</div>\n";
 
 /***/ },
 /* 188 */
@@ -23961,11 +23961,16 @@
 
 	// <template>
 	// <div id="signUp">
-	// 	<div id="parent" class="panel" v-if="step == 1">
 	//
-	// 		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back"></a> Sign up parent</div>
+	// 	<div id="parent" class="panel" v-if="step == 1">
+	// 		<div class="titleBar">
+	// 			<router-link :to="{ name: 'login'}" class="back yipp-yipp_back"></router-link> Sign up parent
+	// 		</div>
+	//
 	//
 	// 		<form action="" method="post" class="middle-area semi" v-on:submit.prevent="register">
+	//
+	// 			<div class="error" v-if="error_message">{{ error_message }}</div>
 	//
 	// 			<div class="selection-group">
 	// 				<input type="radio" id="father"  name="parents" value="father" v-model="parent_gender">
@@ -23974,8 +23979,8 @@
 	// 				<label for="mother" class="rRight">Mother</label>
 	// 			</div>
 	//
-	// 			<div class="placer bottom">
-	// 				<div class="error" v-if="error_message">{{ error_message }}</div>
+	// 			<div class="inputFields">
+	//
 	// 				<label>Naam</label>
 	// 				<input type="text" placeholder="your name" v-model="parent_name">
 	//
@@ -23988,9 +23993,8 @@
 	// 			</div>
 	//
 	//
-	//
 	// 			<div class="bottom-area">
-	// 				<button class="form-button-medium">Next<span v-if="loading" class="loading"></span></button>
+	// 				<button class="button-red-medium">next<span v-if="loading" class="loading"></span></button>
 	// 			</div>
 	//
 	// 		</form>
@@ -23999,9 +24003,11 @@
 	//
 	// 	<div id="child" class="panel" v-else-if="step == 2">
 	//
-	// 		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back"></a> Sign up child</div>
+	// 		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back yipp-yipp_back"></a> Sign up child</div>
 	//
 	// 		<form action="" method="post" class="middle-area semi" v-on:submit.prevent="addChild">
+	//
+	// 			<div class="error" v-if="error_message">{{ error_message }}</div>
 	//
 	// 			<div class="selection-group">
 	// 				<input type="radio" id="son"  name="child" value="son" v-model="child_gender">
@@ -24010,11 +24016,14 @@
 	// 				<label for="daughter" class="rRight">Daughter</label>
 	// 			</div>
 	//
-	// 			<div class="placer middle">
+	// 			<div class="inputFields">
 	//
-	// 				<div class="error" v-if="error_message">{{ error_message }}</div>
 	// 				<label>Naam van jouw kind</label>
 	// 				<input type="text" placeholder="your name" v-model="child_name">
+	//
+	// 			</div>
+	//
+	// 			<div class="inputFields">
 	//
 	// 				<label>Wanneer is jouw kind geboren?</label>
 	// 				<ul id="date-group">
@@ -24026,7 +24035,7 @@
 	// 			</div>
 	//
 	// 			<div class="bottom-area">
-	// 				<button class="form-button-medium">Next<span v-if="loading" class="loading"></span></button>
+	// 				<button class="button-red-medium">next<span v-if="loading" class="loading"></span></button>
 	// 			</div>
 	//
 	// 		</form>
@@ -24036,18 +24045,23 @@
 	//
 	// 	<div id="photo" class="panel" v-else-if="step == 3">
 	//
-	// 		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back"></a> Add photo</div>
+	// 		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back yipp-yipp_back"></a> Add photo</div>
 	//
 	// 		<form action="" method="post" enctype="multipart/form-data" v-on:submit.prevent="addPicture">
 	// 			<div class="error" v-if="error_message">{{ error_message }}</div>
-	// 			<input type="hidden" role="uploadcare-uploader" name="uploadedfile" id="uploadPic" />
-	// 			<!-- <input type="file" name="uploadedfile"  accept="image/*" id="uploadPic" capture> -->
-	// 			<label for="uploadPic" class="uploadPic">+</label>
+	//
+	// 			<div class="inputFields">
+	//
+	// 				<input type="hidden" role="uploadcare-uploader" name="uploadedfile" id="uploadPic" />
+	// 				<!-- <input type="file" name="uploadedfile"  accept="image/*" id="uploadPic" capture> -->
+	// 				<label for="uploadPic" class="uploadPic">+</label>
+	//
+	// 			</div>
 	//
 	// 			<h3>Choose a nice picture of <br> you and {{ child_name }}!</h3>
 	//
 	// 			<div class="bottom-area">
-	// 				<input type="submit" value="next" class="form-button-medium"><span v-if="loading" class="loading"></span>
+	// 				<input type="submit" value="next" class="button-red-medium"><span v-if="loading" class="loading"></span>
 	// 				<a href="javascript:void(0);" v-on:click="showLastStep" >Continue without picture</a>
 	// 			</div>
 	//
@@ -24057,15 +24071,20 @@
 	//
 	// 	<div id="photoAdded" class="panel" v-else-if="step == 4">
 	//
-	// 		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back"></a> Add photo2</div>
+	// 		<div class="titleBar"><a href="javascript:void(0);" v-on:click="back" class="back yipp-yipp_back"></a> Add photo2</div>
 	//
-	// 		<div class="picHolder"><img class="avatar" v-bind:src="child_image"></div>
 	//
-	// 		<h3>What a nice picture! <br> Do you also like?</h3>
-	// 		<a href="javascript:void(0);" v-on:click="showLastStep">Choose another picture</a>
+	// 		<div class="inputFields">
+	//
+	// 			<div class="picHolder"><img class="avatar" v-bind:src="child_image"></div>
+	//
+	// 			<h3>What a nice picture! <br> Do you also like?</h3>
+	// 			<a href="javascript:void(0);" v-on:click="showLastStep">Choose another picture</a>
+	//
+	// 		</div>                 
 	//
 	// 		<div class="bottom-area">
-	// 			<a href="javascript:void(0);" v-on:click="showLastStep" class="button-medium">Next</a>
+	// 			<a href="javascript:void(0);" v-on:click="showLastStep" class="button-red-medium">next</a>
 	// 		</div>
 	// 	</div>
 	//
@@ -24073,17 +24092,17 @@
 	//
 	// 			<div class="placer middle">
 	//
-	// 				<p>Become a Supermom for <span>Lisa</span> with <strong>Yipp app!</strong></p>		
+	// 				<p>Become a <br> Supermom <br> for <span>Lisa</span>  <br> with the <strong>Yipp <br> app!</strong></p>		
 	//
 	// 			</div> 							
 	//
 	// 			<div class="bottom-area">
-	// 				<router-link :to="{ name: 'timeline'}" class="button-medium white"">Begin!</router-link>
+	// 				<router-link :to="{ name: 'timeline'}" class="button-white-medium">Begin!</router-link>
 	// 			</div>
 	//
 	// 	</div>
 	//
-	// </div>
+	// </div>                                                                                                                                        
 	// </template>
 	//
 	//
@@ -35263,7 +35282,7 @@
 /* 287 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div id=\"signUp\">\n\t<div id=\"parent\" class=\"panel\" v-if=\"step == 1\">\n\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Sign up parent</div>\n\t\t\n\t\t<form action=\"\" method=\"post\" class=\"middle-area semi\" v-on:submit.prevent=\"register\">\n\t\t\n\t\t\t<div class=\"selection-group\">\n\t\t\t\t<input type=\"radio\" id=\"father\"  name=\"parents\" value=\"father\" v-model=\"parent_gender\">\n\t\t\t\t<label for=\"father\" class=\"rLeft\">Father</label>\n\t\t\t\t<input type=\"radio\" id=\"mother\"  name=\"parents\" value=\"mother\" v-model=\"parent_gender\">\n\t\t\t\t<label for=\"mother\" class=\"rRight\">Mother</label>\n\t\t\t</div>\n\n\t\t\t<div class=\"placer bottom\">\n\t\t\t\t<div class=\"error\" v-if=\"error_message\">{{ error_message }}</div>\n\t\t\t\t<label>Naam</label>\n\t\t\t\t<input type=\"text\" placeholder=\"your name\" v-model=\"parent_name\">\n\n\t\t\t\t<label>E-mailadres</label>\n\t\t\t\t<input type=\"email\" placeholder=\"name@mail.nl\" v-model=\"parent_email\">\n\n\t\t\t\t<label>Wachwoord</label>\n\t\t\t\t<input type=\"password\" placeholder=\"******\" v-model=\"parent_password\">\n\t\t\t\n\t\t\t</div>\n\n\n\t\t\t\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<button class=\"form-button-medium\">Next<span v-if=\"loading\" class=\"loading\"></span></button>\n\t\t\t</div>\n\t\t\t\n\t\t</form>\n\n\t</div>\n\n\t<div id=\"child\" class=\"panel\" v-else-if=\"step == 2\">\n\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Sign up child</div>\n\t\t\n\t\t<form action=\"\" method=\"post\" class=\"middle-area semi\" v-on:submit.prevent=\"addChild\">\n\t\t\n\t\t\t<div class=\"selection-group\">\n\t\t\t\t<input type=\"radio\" id=\"son\"  name=\"child\" value=\"son\" v-model=\"child_gender\">\n\t\t\t\t<label for=\"son\" class=\"rLeft\">Son</label>\n\t\t\t\t<input type=\"radio\" id=\"daughter\"  name=\"child\" value=\"daughter\" v-model=\"child_gender\">\n\t\t\t\t<label for=\"daughter\" class=\"rRight\">Daughter</label>\n\t\t\t</div>\n\n\t\t\t<div class=\"placer middle\">\n\t\t\t\t\n\t\t\t\t<div class=\"error\" v-if=\"error_message\">{{ error_message }}</div>\n\t\t\t\t<label>Naam van jouw kind</label>\n\t\t\t\t<input type=\"text\" placeholder=\"your name\" v-model=\"child_name\">\n\n\t\t\t\t<label>Wanneer is jouw kind geboren?</label>\n\t\t\t\t<ul id=\"date-group\">\n\t\t\t\t\t<li><input type=\"tel\" placeholder=\"DD\" class=\"date-group\" v-model=\"child_bday_d\"></li>\n\t\t\t\t\t<li><input type=\"tel\" placeholder=\"MM\" class=\"date-group\" v-model=\"child_bday_m\"></li> \n\t\t\t\t\t<li><input type=\"tel\" placeholder=\"YYYY\" class=\"date-group\" v-model=\"child_bday_y\"></li>\n\t\t\t\t</ul>\n\t\t\t\n\t\t\t</div>\n\t\t\t\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<button class=\"form-button-medium\">Next<span v-if=\"loading\" class=\"loading\"></span></button>\n\t\t\t</div>\n\t\t\t\n\t\t</form>\n\n\n\t</div>\n\t\n\t<div id=\"photo\" class=\"panel\" v-else-if=\"step == 3\">\n\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Add photo</div>\n\n\t\t<form action=\"\" method=\"post\" enctype=\"multipart/form-data\" v-on:submit.prevent=\"addPicture\">\n\t\t\t<div class=\"error\" v-if=\"error_message\">{{ error_message }}</div>\n\t\t\t<input type=\"hidden\" role=\"uploadcare-uploader\" name=\"uploadedfile\" id=\"uploadPic\" />\n\t\t\t<!-- <input type=\"file\" name=\"uploadedfile\"  accept=\"image/*\" id=\"uploadPic\" capture> -->\n\t\t\t<label for=\"uploadPic\" class=\"uploadPic\">+</label>\n\n\t\t\t<h3>Choose a nice picture of <br> you and {{ child_name }}!</h3>\n\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<input type=\"submit\" value=\"next\" class=\"form-button-medium\"><span v-if=\"loading\" class=\"loading\"></span>\n\t\t\t\t<a href=\"javascript:void(0);\" v-on:click=\"showLastStep\" >Continue without picture</a>\n\t\t\t</div>\n\t\t\t\n\t\t</form>\n\n\t</div>\n\t\t\t\t\t\t\n\t<div id=\"photoAdded\" class=\"panel\" v-else-if=\"step == 4\">\n\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back\"></a> Add photo2</div>\n\n\t\t<div class=\"picHolder\"><img class=\"avatar\" v-bind:src=\"child_image\"></div>\n\t\t\t\n\t\t<h3>What a nice picture! <br> Do you also like?</h3>\n\t\t<a href=\"javascript:void(0);\" v-on:click=\"showLastStep\">Choose another picture</a>\n\n\t\t<div class=\"bottom-area\">\n\t\t\t<a href=\"javascript:void(0);\" v-on:click=\"showLastStep\" class=\"button-medium\">Next</a>\n\t\t</div>\n\t</div>\n\t\n\t<div id=\"starten\" class=\"panel\" v-else-if=\"step == 5\">\n\t\t\t\t\n\t\t\t<div class=\"placer middle\">\n\t\t\t\t\t\t\n\t\t\t\t<p>Become a Supermom for <span>Lisa</span> with <strong>Yipp app!</strong></p>\t\t\n\t\t\t\t\t\t\n\t\t\t</div> \t\t\t\t\t\t\t\n\t\t\t\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"button-medium white\"\">Begin!</router-link>\n\t\t\t</div>\n\t\t\t\t\t\t\t\n\t</div>\n\t\t\t\t\t\t\t\t\n</div>\n";
+	module.exports = "\n<div id=\"signUp\">\n\t\t\n\t<div id=\"parent\" class=\"panel\" v-if=\"step == 1\">\n\t\t<div class=\"titleBar\">\n\t\t\t<router-link :to=\"{ name: 'login'}\" class=\"back yipp-yipp_back\"></router-link> Sign up parent\n\t\t</div>\n\t\t\n\t\t\n\t\t<form action=\"\" method=\"post\" class=\"middle-area semi\" v-on:submit.prevent=\"register\">\n\t\t\n\t\t\t<div class=\"error\" v-if=\"error_message\">{{ error_message }}</div>\n\t\t\n\t\t\t<div class=\"selection-group\">\n\t\t\t\t<input type=\"radio\" id=\"father\"  name=\"parents\" value=\"father\" v-model=\"parent_gender\">\n\t\t\t\t<label for=\"father\" class=\"rLeft\">Father</label>\n\t\t\t\t<input type=\"radio\" id=\"mother\"  name=\"parents\" value=\"mother\" v-model=\"parent_gender\">\n\t\t\t\t<label for=\"mother\" class=\"rRight\">Mother</label>\n\t\t\t</div>\n\n\t\t\t<div class=\"inputFields\">\n\t\t\t\t\n\t\t\t\t<label>Naam</label>\n\t\t\t\t<input type=\"text\" placeholder=\"your name\" v-model=\"parent_name\">\n\n\t\t\t\t<label>E-mailadres</label>\n\t\t\t\t<input type=\"email\" placeholder=\"name@mail.nl\" v-model=\"parent_email\">\n\n\t\t\t\t<label>Wachwoord</label>\n\t\t\t\t<input type=\"password\" placeholder=\"******\" v-model=\"parent_password\">\n\t\t\t\n\t\t\t</div>\n\n\t\t\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<button class=\"button-red-medium\">next<span v-if=\"loading\" class=\"loading\"></span></button>\n\t\t\t</div>\n\t\t\t\n\t\t</form>\n\n\t</div>\n\n\t<div id=\"child\" class=\"panel\" v-else-if=\"step == 2\">\n\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back yipp-yipp_back\"></a> Sign up child</div>\n\t\t\n\t\t<form action=\"\" method=\"post\" class=\"middle-area semi\" v-on:submit.prevent=\"addChild\">\n\t\t\n\t\t\t<div class=\"error\" v-if=\"error_message\">{{ error_message }}</div>\n\t\t\n\t\t\t<div class=\"selection-group\">\n\t\t\t\t<input type=\"radio\" id=\"son\"  name=\"child\" value=\"son\" v-model=\"child_gender\">\n\t\t\t\t<label for=\"son\" class=\"rLeft\">Son</label>\n\t\t\t\t<input type=\"radio\" id=\"daughter\"  name=\"child\" value=\"daughter\" v-model=\"child_gender\">\n\t\t\t\t<label for=\"daughter\" class=\"rRight\">Daughter</label>\n\t\t\t</div>\n\n\t\t\t<div class=\"inputFields\">\n\t\t\t\t\n\t\t\t\t<label>Naam van jouw kind</label>\n\t\t\t\t<input type=\"text\" placeholder=\"your name\" v-model=\"child_name\">\n\n\t\t\t</div>\n\n\t\t\t<div class=\"inputFields\">\n\n\t\t\t\t<label>Wanneer is jouw kind geboren?</label>\n\t\t\t\t<ul id=\"date-group\">\n\t\t\t\t\t<li><input type=\"tel\" placeholder=\"DD\" class=\"date-group\" v-model=\"child_bday_d\"></li>\n\t\t\t\t\t<li><input type=\"tel\" placeholder=\"MM\" class=\"date-group\" v-model=\"child_bday_m\"></li> \n\t\t\t\t\t<li><input type=\"tel\" placeholder=\"YYYY\" class=\"date-group\" v-model=\"child_bday_y\"></li>\n\t\t\t\t</ul>\n\t\t\t\n\t\t\t</div>\n\t\t\t\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<button class=\"button-red-medium\">next<span v-if=\"loading\" class=\"loading\"></span></button>\n\t\t\t</div>\n\t\t\t\n\t\t</form>\n\n\n\t</div>\n\t\n\t<div id=\"photo\" class=\"panel\" v-else-if=\"step == 3\">\n\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back yipp-yipp_back\"></a> Add photo</div>\n\n\t\t<form action=\"\" method=\"post\" enctype=\"multipart/form-data\" v-on:submit.prevent=\"addPicture\">\n\t\t\t<div class=\"error\" v-if=\"error_message\">{{ error_message }}</div>\n\t\t\t\n\t\t\t<div class=\"inputFields\">\n\t\t\t\t\n\t\t\t\t<input type=\"hidden\" role=\"uploadcare-uploader\" name=\"uploadedfile\" id=\"uploadPic\" />\n\t\t\t\t<!-- <input type=\"file\" name=\"uploadedfile\"  accept=\"image/*\" id=\"uploadPic\" capture> -->\n\t\t\t\t<label for=\"uploadPic\" class=\"uploadPic\">+</label>\n\n\t\t\t</div>\n\n\t\t\t<h3>Choose a nice picture of <br> you and {{ child_name }}!</h3>\n\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<input type=\"submit\" value=\"next\" class=\"button-red-medium\"><span v-if=\"loading\" class=\"loading\"></span>\n\t\t\t\t<a href=\"javascript:void(0);\" v-on:click=\"showLastStep\" >Continue without picture</a>\n\t\t\t</div>\n\t\t\t\n\t\t</form>\n\n\t</div>\n\t\t\t\t\t\t\n\t<div id=\"photoAdded\" class=\"panel\" v-else-if=\"step == 4\">\n\n\t\t<div class=\"titleBar\"><a href=\"javascript:void(0);\" v-on:click=\"back\" class=\"back yipp-yipp_back\"></a> Add photo2</div>\n\n\n\t\t<div class=\"inputFields\">\n\t\t\t\n\t\t\t<div class=\"picHolder\"><img class=\"avatar\" v-bind:src=\"child_image\"></div>\n\t\t\t\t\n\t\t\t<h3>What a nice picture! <br> Do you also like?</h3>\n\t\t\t<a href=\"javascript:void(0);\" v-on:click=\"showLastStep\">Choose another picture</a>\n\t                         \n\t\t</div>                 \n                                                                                                                                                                                                                                                                                                                                                                                                                 \n\t\t<div class=\"bottom-area\">\n\t\t\t<a href=\"javascript:void(0);\" v-on:click=\"showLastStep\" class=\"button-red-medium\">next</a>\n\t\t</div>\n\t</div>\n\t\n\t<div id=\"starten\" class=\"panel\" v-else-if=\"step == 5\">\n\t\t\t\t\n\t\t\t<div class=\"placer middle\">\n\t\t\t\t\t\t\n\t\t\t\t<p>Become a <br> Supermom <br> for <span>Lisa</span>  <br> with the <strong>Yipp <br> app!</strong></p>\t\t\n\t\t\t\t\t\t\n\t\t\t</div> \t\t\t\t\t\t\t\n\t\t\t\n\t\t\t<div class=\"bottom-area\">\n\t\t\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"button-white-medium\">Begin!</router-link>\n\t\t\t</div>\n\t\t\t\t\t\t\t\n\t</div>\n\t\t\t\t\t\t\t\t\n</div>                                                                                                                                        \n";
 
 /***/ },
 /* 288 */
@@ -61754,7 +61773,7 @@
 /* 337 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\t<div >\n\t\n\t\t<div class=\"header\">\n\t\t\n\t\t\t<router-link :to=\"{ name: 'challenge'}\" class=\"icon\">\n\t\t\t\t<i class=\" icon-yipp_back\"></i>\n\t\t\t</router-link>\n\n\t\t\t<div class=\"title\">Challenge Details</div>\n\t\t\n\t\t</div>\n\t\t\n\t\t<div class=\"wrap\">\n\t\t\n\t\t\t<div class=\"details\">\n\t\t\t\n\t\t\t<span class=\"set\">\n\t\t\t\t\t<i class=\"icon-yipp_notification_line\"></i>\n\t\t\t\t\t14:00\n\t\t\t\t\t| <i class=\"icon-yipp_repeat_line\"></i>\n\t\t\t\t\tEvery day\n\t\t\t\t\t</span>\n\t\t\t\t\n\t\t\t\t<table width=\"100%\" border=\"0\">\n\t\t\t\t\t<tbody>\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t<p>Eating more vegetable</p>\n\t\t\t\t\t\t\t\t<p>1. Broco</p>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t<a href=\"\" class=\"edit\"><i class=\"icon-yipp_pencil_line\"></i></a>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t</tbody>\n\t\t\t\t</table>\n\t\t\t\t\n\t\t\t</div>\n\t\t\n\t\t</div>\n\t\n\t\t<div class=\"steps\">\n\t\n\t\t\t\t<ul>\n\t\t\t\t\t<li>1</li>\n\t\t\t\t\t<li>2</li>\n\t\t\t\t\t<li>3</li>\n\t\t\t\t\t<li>4</li>\n\t\t\t\t\t<li>5</li>\n\t\t\t\t</ul>\n\n\t\t\t<hr>\n\t\t\n\t\t</div>\n\t\t\n\t\t<div class=\"pic\" style=\"background-image: url(assets/img/slider-1.jpg);\">\n\t\t\n\t\t</div>\n\t\n\t\t<h4>Evaluation</h4>\n\t\t\n\t\t<textarea></textarea>\n\t\t\n\t\t<ul class=\"selection\">\n\t\t\t<li><a href=\"\"><i class=\"icon-yipp_emoticon_sad\"></i></a></li>\n\t\t\t<li><a href=\"\" class=\"active\"><i class=\"icon-yipp_emoticon_neutral\"></i></a></li>\n\t\t\t<li><a href=\"\"><i class=\"icon-yipp_emoticon_happy-\"></i></a></li>\n\t\t</ul>\n\t\t\n\t\t<h4>Notes</h4>\n\t\t\n\t\t<textarea></textarea>\n\t\t\n\t\t<a href=\"\" class=\"btn\">Done</a>\n\t\n\t</div>\n\t\n\t<section class=\"resultCard\">\n\t\t\n\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t\n\t\t<h3>You can do it!</h3>\n\t\t<p>We made a beautiful photo collage of this week check it out!</p>\n\t\t\n\t\t<div class=\"bottom\">\n\t\t<a href=\"javascript:void(0);\" class=\"btn mid\">See result</a>\n\n\t\t<a href=\"javascript:void(0);\" class=\"btn big\">Restart challenge</a>\n\t\t\n\t\t</div>\n\t\n\t\t<div id=\"modal\">\n\n\t\t\t<div id=\"msg\">\n\n\t\t\t\t<h3>Are you sure?</h3>\n\n\t\t\t\t<p>Do you want to restart challenge?</p>\n\n\t\t\t\t<a href=\"javascript:void(0);\">Restart challenge</a>\n\n\t\t\t</div>\n\n\t\t</div>\n\n\t</section>\n\t\n\t<section id=\"collage\">\n\t\n\t\t<div class=\"header\">\n\t\t\t<a href=\"\">X</a> Photo Collage\n\t\t\t<h3>Fruit and Vegetables</h3>\n\t\t</div>\n\t\n\t\t<ul>\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.0197033313824581670.5782439132570136xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 1</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_sad\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.95175348508686560.11807540320355758xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 2</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_happy-\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li>\n\t\t\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 3</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_neutral\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.150848646493400460.7895996731227195xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 4</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_happy-\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t</ul>\n\t\n\t</section>\n\t\n\t<div class=\"restart\">\n\t\n\t<a href=\"\" >Restart challenge</a>\n\t\n\t</div>\t\n";
+	module.exports = "\n\t<div >\n\t\n\t\t<div class=\"header\">\n\t\t\n\t\t\t<router-link :to=\"{ name: 'challenge'}\" class=\"icon\">\n\t\t\t\t<i class=\" icon-yipp_back\"></i>\n\t\t\t</router-link>\n\n\t\t\t<div class=\"title\">Challenge Details</div>\n\t\t\n\t\t</div>\n\t\t\n\t\t<div class=\"wrap\">\n\t\t\n\t\t\t<div class=\"details\">\n\t\t\t\n\t\t\t<span class=\"set\">\n\t\t\t\t\t<i class=\"icon-yipp_notification_line\"></i>\n\t\t\t\t\t14:00\n\t\t\t\t\t| <i class=\"icon-yipp_repeat_line\"></i>\n\t\t\t\t\tEvery day\n\t\t\t\t\t</span>\n\t\t\t\t\n\t\t\t\t<table width=\"100%\" border=\"0\">\n\t\t\t\t\t<tbody>\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t<p>Eating more vegetable</p>\n\t\t\t\t\t\t\t\t<p>1. Broco</p>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t<a href=\"\" class=\"edit\"><i class=\"icon-yipp_pencil_line\"></i></a>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t</tbody>\n\t\t\t\t</table>\n\t\t\t\t\n\t\t\t</div>\n\t\t\n\t\t</div>\n\t\n\t\t<div class=\"steps\">\n\t\n\t\t\t\t<ul>\n\t\t\t\t\t<li>1</li>\n\t\t\t\t\t<li>2</li>\n\t\t\t\t\t<li>3</li>\n\t\t\t\t\t<li>4</li>\n\t\t\t\t\t<li>5</li>\n\t\t\t\t</ul>\n\n\t\t\t<hr>\n\t\t\n\t\t</div>\n\t\t\n\t\t<div class=\"pic\" style=\"background-image: url(assets/img/slider-1.jpg);\">\n\t\t\n\t\t</div>\n\t\n\t\t<h4>Evaluation</h4>\n\t\t\n\t\t<textarea></textarea>\n\t\t\n\t\t<ul class=\"selection\">\n\t\t\t<li><a href=\"\"><i class=\"icon-yipp_emoticon_sad\"></i></a></li>\n\t\t\t<li><a href=\"\" class=\"active\"><i class=\"icon-yipp_emoticon_neutral\"></i></a></li>\n\t\t\t<li><a href=\"\"><i class=\"icon-yipp_emoticon_happy-\"></i></a></li>\n\t\t</ul>\n\t\t\n\t\t<h4>Notes</h4>\n\t\t\n\t\t<textarea></textarea>\n\t\t\n\t\t<a href=\"\" class=\"btn\">Done</a>\n\t\n\t</div>\n\t\n\t<section class=\"resultCard\">\n\t\t\n\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t\n\t\t<h3>You can do it!</h3>\n\t\t<p>We made a beautiful photo collage of this week check it out!</p>\n\t\t\n\t\t<div class=\"bottom\">\n\t\t<a href=\"javascript:void(0);\" class=\"btn mid\">See result</a>\n\n\t\t<a href=\"javascript:void(0);\" class=\"btn big\">Restart challenge</a>\n\t\t\n\t\t</div>\n\t\n\t\t<div id=\"modal\">\n\n\t\t\t<div id=\"msg\">\n\n\t\t\t\t<h3>Are you sure?</h3>\n\n\t\t\t\t<p>Do you want to restart challenge?</p>\n\n\t\t\t\t<a href=\"javascript:void(0);\">Restart challenge</a>\n\n\t\t\t</div>\n\n\t\t</div>\n\n\t</section>\n\t\n\t<section id=\"collage\">\n\t\n\t\t<div class=\"header\">\n\t\t\t<a href=\"\">X</a> Photo Collage\n\t\t\t<h3>Fruit and Vegetables</h3>\n\t\t</div>\n\t\n\t\t<ul>\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.404730048984643260.6662254777754248xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 1</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_sad\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.58696009665543340.8307283181047473xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 2</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_happy-\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li>\n\t\t\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 3</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_neutral\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t\t\n\t\t\t<li class=\"active\">\n\t\t\t\t<img src=\"xxxHTMLLINKxxx0.88870041293477950.5877616798142249xxx\" alt=\"\">\n\t\t\t\t\n\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t<div class=\"day\">Day 4</div>\n\t\t\t\t\t<i class=\"icon icon-yipp_emoticon_happy-\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"data\">\n\t\t\t\t\t<p>\"It went great this day\"</p>\n\t\t\t\t</div>\t\n\t\t\t\n\t\t\t</li>\n\t\t</ul>\n\t\n\t</section>\n\t\n\t<div class=\"restart\">\n\t\n\t<a href=\"\" >Restart challenge</a>\n\t\n\t</div>\t\n";
 
 /***/ },
 /* 338 */
