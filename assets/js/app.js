@@ -36142,7 +36142,7 @@
 	        this.currentLesson = this.$route.params.id;
 	        this.userID = _auth2.default.user.get('id');
 
-	        this.currentLesson = 36;
+	        // this.currentLesson = 36;
 	        // this.userID = 32;
 
 	        this.getLesson();
