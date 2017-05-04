@@ -10,19 +10,19 @@
 
 		<div class="wrap">
 			<div class="details">
-				<span class="set">
+				<span class="set" v-for="details of challenges.details">
 					<i class="icon-yipp_notification_line"></i>
-					{{ challenges.details.reminder_time }}
+					{{ details.reminder_time }}
 					| <i class="icon-yipp_repeat_line"></i>
-					{{ challenges.details.repeat_type }}
+					{{ details.repeat_type }}
 				</span>
 				
 				<table width="100%" border="0">
 					<tbody>
-						<tr>
+						<tr v-for="content of challenges.content">
 							<td>
-								<p>Eating more vegetable</p>
-								<p>1. Broco</p>
+								<p>{{ content.title }}</p>
+								<p>{{ content.description }}</p>
 							</td>
 							<td>
 							<a href="" class="edit"><i class="icon-yipp_pencil_line"></i></a>
@@ -46,6 +46,7 @@
 		<div class="form" v-for="fd of challenges.feedbacks" v-if="fd.id == activeFeedback.id">
 			<div class="pic" style="height: 200px; overflow: hidden;">
 				<img style="width: 100%;" v-if="fd.src_url" v-bind:src="fd.src_url">
+				<input v-bind:data-id="fd.id" type="hidden" role="uploadcare-uploader" name="uploadedfile" id="uploadPic" />
 			</div>
 
 			<h4>Evaluation</h4>
@@ -76,7 +77,7 @@
 			
 			<textarea v-model="fd.notes"></textarea>
 			
-			<a href="#" v-on:click.prevent="submitEval(fd.id)" class="btn">Done</a>
+			<a href="#" v-on:click.prevent="submitEval(fd.id)" class="btn">Done<span v-if="loading" class="loading"></span></a>
 		</div>
 
 	</div>
@@ -157,6 +158,7 @@ import card from '../api/card'
 import feedback from '../api/feedback'
 import $ from 'jquery'
 import Storage from '../storage'
+import uploadcare from 'uploadcare-widget';
 
 import Modal from '../components/Modal.vue'
 
@@ -169,12 +171,14 @@ export default {
             challenges: {
             	list: [],
             	details: [],
-            	feedbacks: []
+            	feedbacks: [],
+            	content: {}
             },
             activeFeedback: {},
             lastFeedback: {},
             resetChallengeModal: false,
-            result: {}
+            result: {},
+            loading: false
         }
     },
     created: function() {
@@ -186,6 +190,9 @@ export default {
         this.currentChallenge = this.$route.params.id;
         this.userID = auth.user.get('id');
 
+        this.currentChallenge = 51;
+        this.userID = 32;
+
         this.getContent();
     },
     methods: {
@@ -196,6 +203,7 @@ export default {
             feedback.details(this, this.currentChallenge, function (response) {
                 that.challenges = response;
                 that.activeFeedback = response.feedbacks[0];
+                that.initUploader();
 
                 var length = response.feedbacks.length;
                 if (length > 1) {
@@ -209,45 +217,74 @@ export default {
         },
         next: function (id) {
         	var that = this;
-        	$.each(that.challenges.feedbacks, function (index, value) {
-        		if (value.id == id) {
-        			that.activeFeedback = value;
-        		}
-        	})
+
+        	var fd = this.getActiveFeedback(id);
+        	if (fd) {
+        		that.activeFeedback = fd.value;
+    			that.initUploader();
+        	}
+        },
+        initUploader: function () {
+        	var that = this;
+        	setTimeout(function(){
+                var input = $('[role=uploadcare-uploader]');
+                var widget = uploadcare.Widget(input);
+                
+                widget.onChange(function(file) {
+                	if (file) {
+						file.done(function(info) {
+							var fd = that.getActiveFeedback(that.activeFeedback.id);
+
+							if (fd) {
+								that.challenges.feedbacks[fd.index].src_url = info.originalUrl;
+			        			that.challenges.feedbacks[fd.index].src_id = info.uuid;
+							}
+						});
+					};
+				});
+
+            }, 1);
         },
         submitEval: function (id) {
+        	this.loading = true;
         	var that = this;
 
-        	$.each(this.challenges.feedbacks, function (index, value) {
-        		if (value.id == id) {
-        			var data = {
-        				feedback_id: value.id,
-        				src_url: '',
-        				src_id: '',
-        				evaluation: value.evaluation,
-        				icon: value.icon,
-        				notes: value.notes
-        			};
+        	var fd = this.getActiveFeedback(id);
 
-        			feedback.submit(that, data, function (response) {
-        				that.challenges.feedbacks[index].is_done = true;
+        	if (!fd) {
+        		return;
+        	}
 
-        				if (id == that.lastFeedback.id) {
-        					that.doneFeedback();
-			            }
-		            }, function (msg, response) {
-		                that.logError(msg);
-		            });
-        		}
-        	})
+        	var data = {
+				feedback_id: fd.value.id,
+				src_url: fd.value.src_url ? fd.value.src_url : '',
+				src_id: fd.value.src_id ? fd.value.src_id : '',
+				evaluation: fd.value.evaluation,
+				icon: fd.value.icon,
+				notes: fd.value.notes
+			};
+
+			var that = this;
+			feedback.submit(that, data, function (response) {
+				that.loading = false;
+				that.challenges.feedbacks[fd.index].is_done = true;
+
+				if (id == that.lastFeedback.id) {
+					that.doneFeedback();
+	            } else {
+	            	that.activeFeedback = that.challenges.feedbacks[fd.index + 1]
+	            }
+            }, function (msg, response) {
+                that.logError(msg);
+            });
         },
         iconMark: function (id, selected) {
         	var that = this;
-        	$.each(this.challenges.feedbacks, function (index, value) {
-        		if (value.id == id) {
-        			that.challenges.feedbacks[index].icon = selected;
-        		}
-        	})
+        	var fd = this.getActiveFeedback(id);
+        	console.log(id)
+        	if (fd) {
+        		this.challenges.feedbacks[fd.index].icon = selected;
+        	}
         },
         doneFeedback: function () {
         	this.page = 'done';
@@ -288,7 +325,21 @@ export default {
 	    restartChallenge: function () {
 	    	this.resetChallengeModal = false;
 	    	this.page = 'main';
+	    	this.activeFeedback = this.challenges.feedbacks[0];
 	    },
+	    getActiveFeedback(id) {
+	    	var result = false;
+	    	$.each(this.challenges.feedbacks, function (index, value) {
+        		if (value.id == id) {
+        			result = {
+        				index: index,
+        				value: value
+        			}
+        		}
+        	})
+
+        	return result;
+	    }
     },
 
     components: { 

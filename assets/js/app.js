@@ -66433,7 +66433,7 @@
 /* 347 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div id=\"page-challenge-details\">\n\t<div v-if=\"page == 'main'\">\n\t\t<div class=\"header\">\n\t\t\t\t<a href=\"#\" class=\"icon\" v-on:click.prevent=\"back\">\n\t\t\t\t\t<i class=\" icon-yipp_back\"></i>\n\t\t\t\t</a>\n\t\t\t\t<div class=\"title\">Challenge Details</div>\n\t\t</div>\n\n\t\t<div class=\"wrap\">\n\t\t\t<div class=\"details\">\n\t\t\t\t<span class=\"set\">\n\t\t\t\t\t<i class=\"icon-yipp_notification_line\"></i>\n\t\t\t\t\t{{ challenges.details.reminder_time }}\n\t\t\t\t\t| <i class=\"icon-yipp_repeat_line\"></i>\n\t\t\t\t\t{{ challenges.details.repeat_type }}\n\t\t\t\t</span>\n\t\t\t\t\n\t\t\t\t<table width=\"100%\" border=\"0\">\n\t\t\t\t\t<tbody>\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t<p>Eating more vegetable</p>\n\t\t\t\t\t\t\t\t<p>1. Broco</p>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t<a href=\"\" class=\"edit\"><i class=\"icon-yipp_pencil_line\"></i></a>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t</tbody>\n\t\t\t\t</table>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"steps\">\n\t\t\t<ul>\n\t\t\t\t<li v-for=\"fd of challenges.feedbacks\" v-bind:class=\"fd.id == activeFeedback.id ? 'active' : ''\" v-on:click=\"next(fd.id)\">\n\t\t\t\t\t<i class=\"icon-yipp_check_full\" v-if=\"fd.is_done\"></i>\n\t\t\t\t\t<span v-if=\"fd.is_done == false\">{{ fd.repeat_number }}</span>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t\t<hr>\n\t\t</div>\n\n\t\t<div class=\"form\" v-for=\"fd of challenges.feedbacks\" v-if=\"fd.id == activeFeedback.id\">\n\t\t\t<div class=\"pic\" style=\"height: 200px; overflow: hidden;\">\n\t\t\t\t<img style=\"width: 100%;\" v-if=\"fd.src_url\" v-bind:src=\"fd.src_url\">\n\t\t\t</div>\n\n\t\t\t<h4>Evaluation</h4>\n\t\t\t\t\n\t\t\t<textarea v-model=\"fd.evaluation\"></textarea>\n\t\t\t\n\t\t\t<ul class=\"selection\">\n\t\t\t\t<li>\n\t\t\t\t\t<a href=\"#\" v-bind:class=\"fd.icon == 'sad' ? 'active' : ''\" v-on:click.prevent=\"iconMark(fd.id, 'sad')\">\n\t\t\t\t\t\t<i class=\"icon-yipp_emoticon_sad\"></i>\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a href=\"#\" v-bind:class=\"fd.icon == 'neutral' ? 'active' : ''\" v-on:click.prevent=\"iconMark(fd.id, 'neutral')\">\n\t\t\t\t\t\t<i class=\"icon-yipp_emoticon_neutral\"></i>\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a href=\"#\" v-bind:class=\"fd.icon == 'happy' ? 'active' : ''\" v-on:click.prevent=\"iconMark(fd.id, 'happy')\">\n\t\t\t\t\t\t<i class=\"icon-yipp_emoticon_happy\"></i>\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t</ul>\n\n\t\t\t<input type=\"hidden\" name=\"icon\" v-model=\"fd.icon\">\n\t\t\t\n\t\t\t<h4>Notes</h4>\n\t\t\t\n\t\t\t<textarea v-model=\"fd.notes\"></textarea>\n\t\t\t\n\t\t\t<a href=\"#\" v-on:click.prevent=\"submitEval(fd.id)\" class=\"btn\">Done</a>\n\t\t</div>\n\n\t</div>\n\n\t<div v-else-if=\"page == 'done'\">\n\t\t<section class=\"resultCard\">\n\t\t\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t\t\n\t\t\t<h3>You can do it!</h3>\n\t\t\t<p>We made a beautiful photo collage of this week check it out!</p>\n\t\t\t\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<a href=\"javascript:void(0);\" v-on:click.prevent=\"showResult\" class=\"btn mid white\">See result</a>\n\t\t\t\t<a href=\"javascript:void(0);\" v-on:click.prevent=\"resetChallenge\" class=\"btn big\">Restart challenge</a>\n\t\t\t</div>\n\n\t\t</section>\n\t</div>\n\t\n\t<div v-else-if=\"page == 'result'\">\n\t\t<section id=\"collage\">\n\t\t\n\t\t\t<div class=\"header\">\n\t\t\t\t<a href=\"#\" v-on:click=\"page = 'done'\">X</a> Photo Collage\n\t\t\t\t<h3>Fruit and Vegetables</h3>\n\t\t\t</div>\n\t\t\n\t\t\t<ul>\n\t\t\t\t<li v-for=\"fd of result.feedbacks\">\n\t\t\t\t\t<div class=\"pic\" style=\"height: 200px; overflow: hidden;\">\n\t\t\t\t\t\t<img style=\"width: 100%;\" v-if=\"fd.src_url\" v-bind:src=\"fd.src_url\">\n\t\t\t\t\t</div>\n\t\t\t\t\t\n\t\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t\t<div class=\"day\">Day {{ fd.repeat_number }}</div>\n\t\t\t\t\t\t<i v-bind:class=\"'icon-yipp_emoticon_' + fd.icon\" class=\"icon \"></i>\n\t\t\t\t\t</div>\n\n\t\t\t\t\t<div class=\"data\">\n\t\t\t\t\t\t<p>{{ fd.evaluation }}</p>\n\t\t\t\t\t</div>\t\n\t\t\t\t\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t\n\t\t</section>\n\t\t\n\t\t<div class=\"restart\">\n\t\t\t<a href=\"javascript:void(0);\" v-on:click.prevent=\"resetChallenge\" class=\"btn big\">Restart challenge</a>\n\t\t</div>\n\t</div>\n\t\n\t<modal v-if=\"resetChallengeModal\" @close=\"resetChallengeModal = false\">\n        <h3 slot=\"header\">Are you sure?</h3>\n        <p slot=\"body\">Do you want to restart the challenge?</p>\n        \n        <div slot=\"footer\">\n          <button class=\"form-button-small\" @click=\"restartChallenge\">\n            Restart challenge\n          </button>\n          <button class=\"form-button-small\" @click=\"resetChallengeModal = false\">\n            Cancel\n          </button>\n        </div>\n    </modal>\n</div>\n\n\t\n";
+	module.exports = "\n<div id=\"page-challenge-details\">\n\t<div v-if=\"page == 'main'\">\n\t\t<div class=\"header\">\n\t\t\t\t<a href=\"#\" class=\"icon\" v-on:click.prevent=\"back\">\n\t\t\t\t\t<i class=\" icon-yipp_back\"></i>\n\t\t\t\t</a>\n\t\t\t\t<div class=\"title\">Challenge Details</div>\n\t\t</div>\n\n\t\t<div class=\"wrap\">\n\t\t\t<div class=\"details\">\n\t\t\t\t<span class=\"set\" v-for=\"details of challenges.details\">\n\t\t\t\t\t<i class=\"icon-yipp_notification_line\"></i>\n\t\t\t\t\t{{ details.reminder_time }}\n\t\t\t\t\t| <i class=\"icon-yipp_repeat_line\"></i>\n\t\t\t\t\t{{ details.repeat_type }}\n\t\t\t\t</span>\n\t\t\t\t\n\t\t\t\t<table width=\"100%\" border=\"0\">\n\t\t\t\t\t<tbody>\n\t\t\t\t\t\t<tr v-for=\"content of challenges.content\">\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t<p>{{ content.title }}</p>\n\t\t\t\t\t\t\t\t<p>{{ content.description }}</p>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t<a href=\"\" class=\"edit\"><i class=\"icon-yipp_pencil_line\"></i></a>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t</tbody>\n\t\t\t\t</table>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"steps\">\n\t\t\t<ul>\n\t\t\t\t<li v-for=\"fd of challenges.feedbacks\" v-bind:class=\"fd.id == activeFeedback.id ? 'active' : ''\" v-on:click=\"next(fd.id)\">\n\t\t\t\t\t<i class=\"icon-yipp_check_full\" v-if=\"fd.is_done\"></i>\n\t\t\t\t\t<span v-if=\"fd.is_done == false\">{{ fd.repeat_number }}</span>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t\t<hr>\n\t\t</div>\n\n\t\t<div class=\"form\" v-for=\"fd of challenges.feedbacks\" v-if=\"fd.id == activeFeedback.id\">\n\t\t\t<div class=\"pic\" style=\"height: 200px; overflow: hidden;\">\n\t\t\t\t<img style=\"width: 100%;\" v-if=\"fd.src_url\" v-bind:src=\"fd.src_url\">\n\t\t\t\t<input v-bind:data-id=\"fd.id\" type=\"hidden\" role=\"uploadcare-uploader\" name=\"uploadedfile\" id=\"uploadPic\" />\n\t\t\t</div>\n\n\t\t\t<h4>Evaluation</h4>\n\t\t\t\t\n\t\t\t<textarea v-model=\"fd.evaluation\"></textarea>\n\t\t\t\n\t\t\t<ul class=\"selection\">\n\t\t\t\t<li>\n\t\t\t\t\t<a href=\"#\" v-bind:class=\"fd.icon == 'sad' ? 'active' : ''\" v-on:click.prevent=\"iconMark(fd.id, 'sad')\">\n\t\t\t\t\t\t<i class=\"icon-yipp_emoticon_sad\"></i>\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a href=\"#\" v-bind:class=\"fd.icon == 'neutral' ? 'active' : ''\" v-on:click.prevent=\"iconMark(fd.id, 'neutral')\">\n\t\t\t\t\t\t<i class=\"icon-yipp_emoticon_neutral\"></i>\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a href=\"#\" v-bind:class=\"fd.icon == 'happy' ? 'active' : ''\" v-on:click.prevent=\"iconMark(fd.id, 'happy')\">\n\t\t\t\t\t\t<i class=\"icon-yipp_emoticon_happy\"></i>\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t</ul>\n\n\t\t\t<input type=\"hidden\" name=\"icon\" v-model=\"fd.icon\">\n\t\t\t\n\t\t\t<h4>Notes</h4>\n\t\t\t\n\t\t\t<textarea v-model=\"fd.notes\"></textarea>\n\t\t\t\n\t\t\t<a href=\"#\" v-on:click.prevent=\"submitEval(fd.id)\" class=\"btn\">Done<span v-if=\"loading\" class=\"loading\"></span></a>\n\t\t</div>\n\n\t</div>\n\n\t<div v-else-if=\"page == 'done'\">\n\t\t<section class=\"resultCard\">\n\t\t\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t\t\n\t\t\t<h3>You can do it!</h3>\n\t\t\t<p>We made a beautiful photo collage of this week check it out!</p>\n\t\t\t\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<a href=\"javascript:void(0);\" v-on:click.prevent=\"showResult\" class=\"btn mid white\">See result</a>\n\t\t\t\t<a href=\"javascript:void(0);\" v-on:click.prevent=\"resetChallenge\" class=\"btn big\">Restart challenge</a>\n\t\t\t</div>\n\n\t\t</section>\n\t</div>\n\t\n\t<div v-else-if=\"page == 'result'\">\n\t\t<section id=\"collage\">\n\t\t\n\t\t\t<div class=\"header\">\n\t\t\t\t<a href=\"#\" v-on:click=\"page = 'done'\">X</a> Photo Collage\n\t\t\t\t<h3>Fruit and Vegetables</h3>\n\t\t\t</div>\n\t\t\n\t\t\t<ul>\n\t\t\t\t<li v-for=\"fd of result.feedbacks\">\n\t\t\t\t\t<div class=\"pic\" style=\"height: 200px; overflow: hidden;\">\n\t\t\t\t\t\t<img style=\"width: 100%;\" v-if=\"fd.src_url\" v-bind:src=\"fd.src_url\">\n\t\t\t\t\t</div>\n\t\t\t\t\t\n\t\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t\t<div class=\"day\">Day {{ fd.repeat_number }}</div>\n\t\t\t\t\t\t<i v-bind:class=\"'icon-yipp_emoticon_' + fd.icon\" class=\"icon \"></i>\n\t\t\t\t\t</div>\n\n\t\t\t\t\t<div class=\"data\">\n\t\t\t\t\t\t<p>{{ fd.evaluation }}</p>\n\t\t\t\t\t</div>\t\n\t\t\t\t\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t\n\t\t</section>\n\t\t\n\t\t<div class=\"restart\">\n\t\t\t<a href=\"javascript:void(0);\" v-on:click.prevent=\"resetChallenge\" class=\"btn big\">Restart challenge</a>\n\t\t</div>\n\t</div>\n\t\n\t<modal v-if=\"resetChallengeModal\" @close=\"resetChallengeModal = false\">\n        <h3 slot=\"header\">Are you sure?</h3>\n        <p slot=\"body\">Do you want to restart the challenge?</p>\n        \n        <div slot=\"footer\">\n          <button class=\"form-button-small\" @click=\"restartChallenge\">\n            Restart challenge\n          </button>\n          <button class=\"form-button-small\" @click=\"resetChallengeModal = false\">\n            Cancel\n          </button>\n        </div>\n    </modal>\n</div>\n\n\t\n";
 
 /***/ },
 /* 348 */
@@ -66475,151 +66475,16 @@
 
 	var _storage2 = _interopRequireDefault(_storage);
 
+	var _uploadcareWidget = __webpack_require__(194);
+
+	var _uploadcareWidget2 = _interopRequireDefault(_uploadcareWidget);
+
 	var _Modal = __webpack_require__(291);
 
 	var _Modal2 = _interopRequireDefault(_Modal);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = {
-	    data: function data() {
-	        return {
-	            userID: 0,
-	            currentChallenge: 0,
-	            page: 'main',
-	            challenges: {
-	                list: [],
-	                details: [],
-	                feedbacks: []
-	            },
-	            activeFeedback: {},
-	            lastFeedback: {},
-	            resetChallengeModal: false,
-	            result: {}
-	        };
-	    },
-
-	    created: function created() {
-	        _auth2.default.check();
-	        if (!_auth2.default.authenticated) {
-	            this.redirectGuest();
-	        }
-
-	        this.currentChallenge = this.$route.params.id;
-	        this.userID = _auth2.default.user.get('id');
-
-	        this.getContent();
-	    },
-	    methods: {
-	        getContent: function getContent() {
-	            this.page = 'main';
-	            var that = this;
-
-	            _feedback2.default.details(this, this.currentChallenge, function (response) {
-	                that.challenges = response;
-	                that.activeFeedback = response.feedbacks[0];
-
-	                var length = response.feedbacks.length;
-	                if (length > 1) {
-	                    that.lastFeedback = response.feedbacks[length - 1];
-	                } else {
-	                    that.lastFeedback = that.activeFeedback;
-	                }
-	            }, function (msg, response) {
-	                that.logError(msg);
-	            });
-	        },
-	        next: function next(id) {
-	            var that = this;
-	            _jquery2.default.each(that.challenges.feedbacks, function (index, value) {
-	                if (value.id == id) {
-	                    that.activeFeedback = value;
-	                }
-	            });
-	        },
-	        submitEval: function submitEval(id) {
-	            var that = this;
-
-	            _jquery2.default.each(this.challenges.feedbacks, function (index, value) {
-	                if (value.id == id) {
-	                    var data = {
-	                        feedback_id: value.id,
-	                        src_url: '',
-	                        src_id: '',
-	                        evaluation: value.evaluation,
-	                        icon: value.icon,
-	                        notes: value.notes
-	                    };
-
-	                    _feedback2.default.submit(that, data, function (response) {
-	                        that.challenges.feedbacks[index].is_done = true;
-
-	                        if (id == that.lastFeedback.id) {
-	                            that.doneFeedback();
-	                        }
-	                    }, function (msg, response) {
-	                        that.logError(msg);
-	                    });
-	                }
-	            });
-	        },
-	        iconMark: function iconMark(id, selected) {
-	            var that = this;
-	            _jquery2.default.each(this.challenges.feedbacks, function (index, value) {
-	                if (value.id == id) {
-	                    that.challenges.feedbacks[index].icon = selected;
-	                }
-	            });
-	        },
-	        doneFeedback: function doneFeedback() {
-	            this.page = 'done';
-	        },
-	        showResult: function showResult() {
-	            this.page = 'result';
-
-	            var that = this;
-	            _feedback2.default.result(this, this.userID, this.currentChallenge, function (response) {
-	                that.result = response;
-	            }, function (msg, response) {
-	                that.logError(msg);
-	            });
-	        },
-	        redirectGuest: function redirectGuest() {
-	            this.$router.push('login');
-	        },
-	        back: function back() {
-	            this.$router.push('cheatsheet-' + this.challenges.details.content_id);
-	        },
-	        logError: function logError(msg) {
-	            this.loading = false;
-	            var msgStr = '';
-	            if (typeof msg == 'string') {
-	                msgStr = msg;
-	            } else {
-	                _jquery2.default.each(msg, function (label, value) {
-	                    msgStr += value + ' ';
-	                });
-	            }
-
-	            this.error_message = msgStr;
-	        },
-
-	        resetChallenge: function resetChallenge() {
-	            this.resetChallengeModal = true;
-	        },
-	        restartChallenge: function restartChallenge() {
-	            this.resetChallengeModal = false;
-	            this.page = 'main';
-	        }
-	    },
-
-	    components: {
-	        Modal: _Modal2.default
-	    }
-	};
-	// </script>
-	//
-	//
 	// <template>
 	// <div id="page-challenge-details">
 	// 	<div v-if="page == 'main'">
@@ -66632,19 +66497,19 @@
 	//
 	// 		<div class="wrap">
 	// 			<div class="details">
-	// 				<span class="set">
+	// 				<span class="set" v-for="details of challenges.details">
 	// 					<i class="icon-yipp_notification_line"></i>
-	// 					{{ challenges.details.reminder_time }}
+	// 					{{ details.reminder_time }}
 	// 					| <i class="icon-yipp_repeat_line"></i>
-	// 					{{ challenges.details.repeat_type }}
+	// 					{{ details.repeat_type }}
 	// 				</span>
 	//
 	// 				<table width="100%" border="0">
 	// 					<tbody>
-	// 						<tr>
+	// 						<tr v-for="content of challenges.content">
 	// 							<td>
-	// 								<p>Eating more vegetable</p>
-	// 								<p>1. Broco</p>
+	// 								<p>{{ content.title }}</p>
+	// 								<p>{{ content.description }}</p>
 	// 							</td>
 	// 							<td>
 	// 							<a href="" class="edit"><i class="icon-yipp_pencil_line"></i></a>
@@ -66668,6 +66533,7 @@
 	// 		<div class="form" v-for="fd of challenges.feedbacks" v-if="fd.id == activeFeedback.id">
 	// 			<div class="pic" style="height: 200px; overflow: hidden;">
 	// 				<img style="width: 100%;" v-if="fd.src_url" v-bind:src="fd.src_url">
+	// 				<input v-bind:data-id="fd.id" type="hidden" role="uploadcare-uploader" name="uploadedfile" id="uploadPic" />
 	// 			</div>
 	//
 	// 			<h4>Evaluation</h4>
@@ -66698,7 +66564,7 @@
 	//
 	// 			<textarea v-model="fd.notes"></textarea>
 	//
-	// 			<a href="#" v-on:click.prevent="submitEval(fd.id)" class="btn">Done</a>
+	// 			<a href="#" v-on:click.prevent="submitEval(fd.id)" class="btn">Done<span v-if="loading" class="loading"></span></a>
 	// 		</div>
 	//
 	// 	</div>
@@ -66771,6 +66637,193 @@
 	// </template>
 	//
 	// <script>
+	exports.default = {
+	    data: function data() {
+	        return {
+	            userID: 0,
+	            currentChallenge: 0,
+	            page: 'main',
+	            challenges: {
+	                list: [],
+	                details: [],
+	                feedbacks: [],
+	                content: {}
+	            },
+	            activeFeedback: {},
+	            lastFeedback: {},
+	            resetChallengeModal: false,
+	            result: {},
+	            loading: false
+	        };
+	    },
+
+	    created: function created() {
+	        _auth2.default.check();
+	        if (!_auth2.default.authenticated) {
+	            this.redirectGuest();
+	        }
+
+	        this.currentChallenge = this.$route.params.id;
+	        this.userID = _auth2.default.user.get('id');
+
+	        this.currentChallenge = 51;
+	        this.userID = 32;
+
+	        this.getContent();
+	    },
+	    methods: {
+	        getContent: function getContent() {
+	            this.page = 'main';
+	            var that = this;
+
+	            _feedback2.default.details(this, this.currentChallenge, function (response) {
+	                that.challenges = response;
+	                that.activeFeedback = response.feedbacks[0];
+	                that.initUploader();
+
+	                var length = response.feedbacks.length;
+	                if (length > 1) {
+	                    that.lastFeedback = response.feedbacks[length - 1];
+	                } else {
+	                    that.lastFeedback = that.activeFeedback;
+	                }
+	            }, function (msg, response) {
+	                that.logError(msg);
+	            });
+	        },
+	        next: function next(id) {
+	            var that = this;
+
+	            var fd = this.getActiveFeedback(id);
+	            if (fd) {
+	                that.activeFeedback = fd.value;
+	                that.initUploader();
+	            }
+	        },
+	        initUploader: function initUploader() {
+	            var that = this;
+	            setTimeout(function () {
+	                var input = (0, _jquery2.default)('[role=uploadcare-uploader]');
+	                var widget = _uploadcareWidget2.default.Widget(input);
+
+	                widget.onChange(function (file) {
+	                    if (file) {
+	                        file.done(function (info) {
+	                            var fd = that.getActiveFeedback(that.activeFeedback.id);
+
+	                            if (fd) {
+	                                that.challenges.feedbacks[fd.index].src_url = info.originalUrl;
+	                                that.challenges.feedbacks[fd.index].src_id = info.uuid;
+	                            }
+	                        });
+	                    };
+	                });
+	            }, 1);
+	        },
+	        submitEval: function submitEval(id) {
+	            this.loading = true;
+	            var that = this;
+
+	            var fd = this.getActiveFeedback(id);
+
+	            if (!fd) {
+	                return;
+	            }
+
+	            var data = {
+	                feedback_id: fd.value.id,
+	                src_url: fd.value.src_url ? fd.value.src_url : '',
+	                src_id: fd.value.src_id ? fd.value.src_id : '',
+	                evaluation: fd.value.evaluation,
+	                icon: fd.value.icon,
+	                notes: fd.value.notes
+	            };
+
+	            var that = this;
+	            _feedback2.default.submit(that, data, function (response) {
+	                that.loading = false;
+	                that.challenges.feedbacks[fd.index].is_done = true;
+
+	                if (id == that.lastFeedback.id) {
+	                    that.doneFeedback();
+	                } else {
+	                    that.activeFeedback = that.challenges.feedbacks[fd.index + 1];
+	                }
+	            }, function (msg, response) {
+	                that.logError(msg);
+	            });
+	        },
+	        iconMark: function iconMark(id, selected) {
+	            var that = this;
+	            var fd = this.getActiveFeedback(id);
+	            console.log(id);
+	            if (fd) {
+	                this.challenges.feedbacks[fd.index].icon = selected;
+	            }
+	        },
+	        doneFeedback: function doneFeedback() {
+	            this.page = 'done';
+	        },
+	        showResult: function showResult() {
+	            this.page = 'result';
+
+	            var that = this;
+	            _feedback2.default.result(this, this.userID, this.currentChallenge, function (response) {
+	                that.result = response;
+	            }, function (msg, response) {
+	                that.logError(msg);
+	            });
+	        },
+	        redirectGuest: function redirectGuest() {
+	            this.$router.push('login');
+	        },
+	        back: function back() {
+	            this.$router.push('cheatsheet-' + this.challenges.details.content_id);
+	        },
+	        logError: function logError(msg) {
+	            this.loading = false;
+	            var msgStr = '';
+	            if (typeof msg == 'string') {
+	                msgStr = msg;
+	            } else {
+	                _jquery2.default.each(msg, function (label, value) {
+	                    msgStr += value + ' ';
+	                });
+	            }
+
+	            this.error_message = msgStr;
+	        },
+
+	        resetChallenge: function resetChallenge() {
+	            this.resetChallengeModal = true;
+	        },
+	        restartChallenge: function restartChallenge() {
+	            this.resetChallengeModal = false;
+	            this.page = 'main';
+	            this.activeFeedback = this.challenges.feedbacks[0];
+	        },
+	        getActiveFeedback: function getActiveFeedback(id) {
+	            var result = false;
+	            _jquery2.default.each(this.challenges.feedbacks, function (index, value) {
+	                if (value.id == id) {
+	                    result = {
+	                        index: index,
+	                        value: value
+	                    };
+	                }
+	            });
+
+	            return result;
+	        }
+	    },
+
+	    components: {
+	        Modal: _Modal2.default
+	    }
+	};
+	// </script>
+	//
+	//
 
 /***/ },
 /* 349 */
