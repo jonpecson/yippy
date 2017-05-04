@@ -450,6 +450,7 @@ export default {
         	this.$router.push('login');
         },
         modalShow(title, body) {
+            console.log(title)
         	this.modalContent = {
 		    	title: title,
 		    	message: body
@@ -464,8 +465,8 @@ export default {
         	var that = this;
         	var isError = false;
 
-        	$.each(this.currentCardContent.Chances, function (index, value) {
-        		if (value.chance == selected) {
+            $.each(this.currentCardContent.Chances, function (index, value) {
+            	if (value.chance == selected) {
         			// update
 	        		var data = {
 		        		'user_id': that.userID,

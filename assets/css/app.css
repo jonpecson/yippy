@@ -7,11 +7,6 @@
   color: green;
 }
 
-.selection-group input[type=radio] {
-  -webkit-appearance: radio;
-  display: inline;
-}
-
 .loading {
   background-image: url('../img/ellipsis.svg');
   width: 20px; height: 15px;
@@ -121,4 +116,9 @@ header .user-area .photo img {
   position: absolute;
   left: 50%;
   margin-left: -150px;
+}
+
+#container .steps ul li.active {
+  color: red;
+  border-color: red;
 }

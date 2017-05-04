@@ -5,7 +5,7 @@
         <div class="top">
             <router-link :to="{ name: 'timeline'}">X</router-link> Remove
         </div>
-        <h1>Fruit and Vegetables</h1>
+        <h1>{{ lessonInfo.title }}</h1>
     </div>
 
     <section v-if="page == 'knowledge_card'">
@@ -32,16 +32,14 @@
         </div>
         <div class="challenges-wrapper"> 
             <ul v-for="challenge in challenges">
-                <li>
-                    <a class="content curved" href="#">
-                        <span class="set">
-                            <i class="icon-yipp_notification_line"></i>
-                            {{ challenge.reminder_time }}
-                        </span>
-                        <ol v-for="list in challenge.list">
-                            <li>{{ list.message }}</li>
-                        </ol>
-                    </a>
+                <li v-on:click.prevent="viewChallenge" v-bind:data-id="challenge.details.id" style="display: block;">
+                    <span class="set">
+                        <i class="icon-yipp_notification_line"></i>
+                        {{ challenge.details.reminder_time }}
+                    </span>
+                    <ol v-for="list in challenge.list">
+                        <li>{{ list.message }}</li>
+                    </ol>
                 </li>
             </ul>
         </div>
@@ -88,7 +86,7 @@
         <a href="#" v-on:click.prevent="resetLesson">Restart lesson</a>
     </div>
 
-    <div class="picImg" style="background-image: url(img/slider-1.jpg);">
+    <div class="picImg" >
         <div class="data">
             <h3>Lorem Ipsum</h3>
             <p> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
@@ -166,8 +164,8 @@ export default {
         this.currentLesson = this.$route.params.id;
         this.userID = auth.user.get('id');
 
-        // this.currentLesson = 6;
-        // this.userID = 32; // hard coded
+        this.currentLesson = 6;
+        this.userID = 32; // hard coded
 
         this.getLessonTitle();
         this.getContent();
@@ -265,6 +263,11 @@ export default {
         },
         redirect: function(url) {
             this.$router.push(url);
+        },
+        viewChallenge: function (e) {
+            var id = e.target.getAttribute('data-id');
+
+            this.redirect('feedback-' + id);s
         }
     },
 

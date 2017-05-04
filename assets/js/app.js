@@ -9822,6 +9822,10 @@
 
 	var _ChallengeContent2 = _interopRequireDefault(_ChallengeContent);
 
+	var _ChallengeDetails = __webpack_require__(346);
+
+	var _ChallengeDetails2 = _interopRequireDefault(_ChallengeDetails);
+
 	var _Cheatsheet = __webpack_require__(338);
 
 	var _Cheatsheet2 = _interopRequireDefault(_Cheatsheet);
@@ -9849,7 +9853,7 @@
 	var VueTouch = __webpack_require__(345);
 	_vue2.default.use(VueTouch, { name: 'v-touch' });
 
-	var routes = [{ path: '/', component: _Home2.default, name: 'home' }, { path: '/login', component: _Auth2.default, name: 'login' }, { path: '/newpassword', component: _Auth2.default, name: 'newpassword' }, { path: '/logout', component: _Logout2.default, name: 'logout' }, { path: '/register', component: _Register2.default, name: 'register' }, { path: '/timeline', component: _Timeline2.default, name: 'timeline' }, { path: '/emergency', component: _Emergency2.default, name: 'emergency' }, { path: '/lesson-:id', component: _Lesson2.default, name: 'lesson' }, { path: '/challenge', component: _Challenge2.default, name: 'challenge' }, { path: '/challenge-new', component: _ChallengeNew2.default, name: 'challenge_new' }, { path: '/challenge-:id', component: _ChallengeContent2.default, name: 'challenge_content' }, { path: '/cheatsheet-:id', component: _Cheatsheet2.default, name: 'cheatsheet' }];
+	var routes = [{ path: '/', component: _Home2.default, name: 'home' }, { path: '/login', component: _Auth2.default, name: 'login' }, { path: '/newpassword', component: _Auth2.default, name: 'newpassword' }, { path: '/logout', component: _Logout2.default, name: 'logout' }, { path: '/register', component: _Register2.default, name: 'register' }, { path: '/timeline', component: _Timeline2.default, name: 'timeline' }, { path: '/emergency', component: _Emergency2.default, name: 'emergency' }, { path: '/lesson-:id', component: _Lesson2.default, name: 'lesson' }, { path: '/challenge', component: _Challenge2.default, name: 'challenge' }, { path: '/challenge-new', component: _ChallengeNew2.default, name: 'challenge_new' }, { path: '/challenge-:id', component: _ChallengeContent2.default, name: 'challenge_content' }, { path: '/cheatsheet-:id', component: _Cheatsheet2.default, name: 'cheatsheet' }, { path: '/feedback-:id', component: _ChallengeDetails2.default, name: 'feedback' }];
 
 	var router = new _vueRouter2.default({
 	  routes: routes
@@ -35444,7 +35448,6 @@
 
 	            var that = this;
 	            _jquery2.default.each(this.lessons, function (index, value) {
-	                console.log(id);
 	                if (value.id == id) {
 	                    var str = (0, _stringify2.default)(value);
 	                    _storage2.default.save('active_lesson', str, 1);
@@ -36357,6 +36360,7 @@
 	            this.$router.push('login');
 	        },
 	        modalShow: function modalShow(title, body) {
+	            console.log(title);
 	            this.modalContent = {
 	                title: title,
 	                message: body
@@ -61846,7 +61850,7 @@
 	//         <div class="top">
 	//             <router-link :to="{ name: 'timeline'}">X</router-link> Remove
 	//         </div>
-	//         <h1>Fruit and Vegetables</h1>
+	//         <h1>{{ lessonInfo.title }}</h1>
 	//     </div>
 	//
 	//     <section v-if="page == 'knowledge_card'">
@@ -61873,16 +61877,14 @@
 	//         </div>
 	//         <div class="challenges-wrapper"> 
 	//             <ul v-for="challenge in challenges">
-	//                 <li>
-	//                     <a class="content curved" href="#">
-	//                         <span class="set">
-	//                             <i class="icon-yipp_notification_line"></i>
-	//                             {{ challenge.reminder_time }}
-	//                         </span>
-	//                         <ol v-for="list in challenge.list">
-	//                             <li>{{ list.message }}</li>
-	//                         </ol>
-	//                     </a>
+	//                 <li v-on:click.prevent="viewChallenge" v-bind:data-id="challenge.details.id" style="display: block;">
+	//                     <span class="set">
+	//                         <i class="icon-yipp_notification_line"></i>
+	//                         {{ challenge.details.reminder_time }}
+	//                     </span>
+	//                     <ol v-for="list in challenge.list">
+	//                         <li>{{ list.message }}</li>
+	//                     </ol>
 	//                 </li>
 	//             </ul>
 	//         </div>
@@ -61929,7 +61931,7 @@
 	//         <a href="#" v-on:click.prevent="resetLesson">Restart lesson</a>
 	//     </div>
 	//
-	//     <div class="picImg" style="background-image: url(img/slider-1.jpg);">
+	//     <div class="picImg" >
 	//         <div class="data">
 	//             <h3>Lorem Ipsum</h3>
 	//             <p> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
@@ -61998,8 +62000,8 @@
 	        this.currentLesson = this.$route.params.id;
 	        this.userID = _auth2.default.user.get('id');
 
-	        // this.currentLesson = 6;
-	        // this.userID = 32; // hard coded
+	        this.currentLesson = 6;
+	        this.userID = 32; // hard coded
 
 	        this.getLessonTitle();
 	        this.getContent();
@@ -62097,6 +62099,11 @@
 	        },
 	        redirect: function redirect(url) {
 	            this.$router.push(url);
+	        },
+	        viewChallenge: function viewChallenge(e) {
+	            var id = e.target.getAttribute('data-id');
+
+	            this.redirect('feedback-' + id);s;
 	        }
 	    },
 
@@ -62160,7 +62167,7 @@
 /* 341 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div id=\"container\">\n    \n    <div class=\"header\">\n        <div class=\"top\">\n            <router-link :to=\"{ name: 'timeline'}\">X</router-link> Remove\n        </div>\n        <h1>Fruit and Vegetables</h1>\n    </div>\n\n    <section v-if=\"page == 'knowledge_card'\">\n        <div class=\"panel\">\n            <div style=\"overflow: hidden;\">\n                <div class=\"paper\">\n                    <h3>{{ currentFavorite.Contents.title }}</h3>\n                    <p>{{ currentFavorite.Contents.details }}</p>\n\n                    <i class=\"heart icon-yipp_check_full\"\n                        v-on:click.prevent=\"markFavorite\" v-bind:data-id=\"currentFavorite.Contents.id\"\n                    ></i>\n                </div>\n            </div>\n        </div>\n    </section>\n\n    <section v-if=\"page == 'cheatsheet'\">\n        <div class=\"title\">\n            <div class=\"rig\">\n                <i class=\"icon-yipp_goal_line\"></i> Goal\n                <hr>\n            </div>\n        </div>\n        <div class=\"challenges-wrapper\"> \n            <ul v-for=\"challenge in challenges\">\n                <li>\n                    <a class=\"content curved\" href=\"#\">\n                        <span class=\"set\">\n                            <i class=\"icon-yipp_notification_line\"></i>\n                            {{ challenge.reminder_time }}\n                        </span>\n                        <ol v-for=\"list in challenge.list\">\n                            <li>{{ list.message }}</li>\n                        </ol>\n                    </a>\n                </li>\n            </ul>\n        </div>\n\n        <div class=\"title\">\n            <div class=\"rig\">\n                <i class=\"icon-yipp_heart_line\"></i> Favorites\n                <hr>\n            </div>\n        </div>\n\n        <div class=\"swipe swipe-wrapper\">\n            <ul class=\"cards favorites-wrapper\" v-for=\"fave in favorites\">\n                <li>\n                    <h3>{{ fave.Contents.title }}</h3>\n                    <a href=\"#\" v-bind:data-id=\"fave.Contents.id\" v-on:click.prevent=\"showFavorite\">\n                        <img v-bind:data-id=\"fave.Contents.id\" v-if=\"fave.Contents.src_type == 'ext_image'\" v-bind:src=\"fave.Contents.src_url\" style=\"width: 50%;\">\n                    </a>\n                    <p>\n                        <a href=\"#\" v-bind:data-id=\"fave.Contents.id\" v-on:click.prevent=\"showFavorite\">\n                        {{ fave.Contents.details }}\n                        </a>\n                    </p>\n                    <i class=\"heart icon-yipp_heart_line\"></i>\n                </li>\n            </ul>\n        </div>\n\n        <div class=\"title\">\n            <div class=\"rig\">\n                <i class=\"icon-yipp_summary_line\"></i> Answers\n                <hr>\n            </div>\n        </div>\n\n        <div class=\"content curved lined\">\n            <ol class=\"answer-wrapper\" v-for=\"answer in answers\">\n                <li>{{ answer.Contents.details }}</li>\n            </ol>\n        </div>\n    </section>\n\n    <div class=\"restart\">\n        <a href=\"#\" v-on:click.prevent=\"resetLesson\">Restart lesson</a>\n    </div>\n\n    <div class=\"picImg\" style=\"background-image: url(img/slider-1.jpg);\">\n        <div class=\"data\">\n            <h3>Lorem Ipsum</h3>\n            <p> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>\n            <a href=\"\">Lorem Ipsum</a>\n        </div>\n    </div>\n\n    <modal v-if=\"removeFavoriteModal\" @close=\"removeFavoriteModal = false\">\n        <h3 slot=\"header\">Are you sure?</h3>\n        <p slot=\"body\">Do you want to remove this from your favorite?</p>\n        \n        <div slot=\"footer\">\n          <button class=\"form-button-small\" @click=\"removeFavorite\">\n            Remove card\n          </button>\n          <button class=\"form-button-small\" @click=\"removeFavoriteModal = false\">\n            Cancel\n          </button>\n        </div>\n\n    </modal>\n\n    <modal v-if=\"resetLessonModal\" @close=\"resetLessonModal = false\">\n        <h3 slot=\"header\">Are you sure?</h3>\n        <p slot=\"body\">Do you want to restart the challenge?</p>\n        \n        <div slot=\"footer\">\n          <button class=\"form-button-small\" @click=\"restartLesson\">\n            Restart challenge\n          </button>\n          <button class=\"form-button-small\" @click=\"resetLessonModal = false\">\n            Cancel\n          </button>\n        </div>\n\n    </modal>\n\n</div>\n";
+	module.exports = "\n<div id=\"container\">\n    \n    <div class=\"header\">\n        <div class=\"top\">\n            <router-link :to=\"{ name: 'timeline'}\">X</router-link> Remove\n        </div>\n        <h1>{{ lessonInfo.title }}</h1>\n    </div>\n\n    <section v-if=\"page == 'knowledge_card'\">\n        <div class=\"panel\">\n            <div style=\"overflow: hidden;\">\n                <div class=\"paper\">\n                    <h3>{{ currentFavorite.Contents.title }}</h3>\n                    <p>{{ currentFavorite.Contents.details }}</p>\n\n                    <i class=\"heart icon-yipp_check_full\"\n                        v-on:click.prevent=\"markFavorite\" v-bind:data-id=\"currentFavorite.Contents.id\"\n                    ></i>\n                </div>\n            </div>\n        </div>\n    </section>\n\n    <section v-if=\"page == 'cheatsheet'\">\n        <div class=\"title\">\n            <div class=\"rig\">\n                <i class=\"icon-yipp_goal_line\"></i> Goal\n                <hr>\n            </div>\n        </div>\n        <div class=\"challenges-wrapper\"> \n            <ul v-for=\"challenge in challenges\">\n                <li v-on:click.prevent=\"viewChallenge\" v-bind:data-id=\"challenge.details.id\" style=\"display: block;\">\n                    <span class=\"set\">\n                        <i class=\"icon-yipp_notification_line\"></i>\n                        {{ challenge.details.reminder_time }}\n                    </span>\n                    <ol v-for=\"list in challenge.list\">\n                        <li>{{ list.message }}</li>\n                    </ol>\n                </li>\n            </ul>\n        </div>\n\n        <div class=\"title\">\n            <div class=\"rig\">\n                <i class=\"icon-yipp_heart_line\"></i> Favorites\n                <hr>\n            </div>\n        </div>\n\n        <div class=\"swipe swipe-wrapper\">\n            <ul class=\"cards favorites-wrapper\" v-for=\"fave in favorites\">\n                <li>\n                    <h3>{{ fave.Contents.title }}</h3>\n                    <a href=\"#\" v-bind:data-id=\"fave.Contents.id\" v-on:click.prevent=\"showFavorite\">\n                        <img v-bind:data-id=\"fave.Contents.id\" v-if=\"fave.Contents.src_type == 'ext_image'\" v-bind:src=\"fave.Contents.src_url\" style=\"width: 50%;\">\n                    </a>\n                    <p>\n                        <a href=\"#\" v-bind:data-id=\"fave.Contents.id\" v-on:click.prevent=\"showFavorite\">\n                        {{ fave.Contents.details }}\n                        </a>\n                    </p>\n                    <i class=\"heart icon-yipp_heart_line\"></i>\n                </li>\n            </ul>\n        </div>\n\n        <div class=\"title\">\n            <div class=\"rig\">\n                <i class=\"icon-yipp_summary_line\"></i> Answers\n                <hr>\n            </div>\n        </div>\n\n        <div class=\"content curved lined\">\n            <ol class=\"answer-wrapper\" v-for=\"answer in answers\">\n                <li>{{ answer.Contents.details }}</li>\n            </ol>\n        </div>\n    </section>\n\n    <div class=\"restart\">\n        <a href=\"#\" v-on:click.prevent=\"resetLesson\">Restart lesson</a>\n    </div>\n\n    <div class=\"picImg\" >\n        <div class=\"data\">\n            <h3>Lorem Ipsum</h3>\n            <p> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>\n            <a href=\"\">Lorem Ipsum</a>\n        </div>\n    </div>\n\n    <modal v-if=\"removeFavoriteModal\" @close=\"removeFavoriteModal = false\">\n        <h3 slot=\"header\">Are you sure?</h3>\n        <p slot=\"body\">Do you want to remove this from your favorite?</p>\n        \n        <div slot=\"footer\">\n          <button class=\"form-button-small\" @click=\"removeFavorite\">\n            Remove card\n          </button>\n          <button class=\"form-button-small\" @click=\"removeFavoriteModal = false\">\n            Cancel\n          </button>\n        </div>\n\n    </modal>\n\n    <modal v-if=\"resetLessonModal\" @close=\"resetLessonModal = false\">\n        <h3 slot=\"header\">Are you sure?</h3>\n        <p slot=\"body\">Do you want to restart the challenge?</p>\n        \n        <div slot=\"footer\">\n          <button class=\"form-button-small\" @click=\"restartLesson\">\n            Restart challenge\n          </button>\n          <button class=\"form-button-small\" @click=\"resetLessonModal = false\">\n            Cancel\n          </button>\n        </div>\n\n    </modal>\n\n</div>\n";
 
 /***/ },
 /* 342 */
@@ -66399,6 +66406,465 @@
 	})));
 	//# sourceMappingURL=vue-touch.js.map
 
+
+/***/ },
+/* 346 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__vue_script__ = __webpack_require__(348)
+	__vue_template__ = __webpack_require__(347)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "/Users/racheljaro/webroot/yipp/app/src/components/ChallengeDetails.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 347 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div id=\"page-challenge-details\">\n\t<div v-if=\"page == 'main'\">\n\t\t<div class=\"header\">\n\t\t\t\t<a href=\"\" class=\"icon\">\n\t\t\t\t<i class=\" icon-yipp_back\"></i>\n\t\t\t\t</a>\n\t\t\t\t<div class=\"title\">Challenge Details</div>\n\t\t</div>\n\n\t\t<div class=\"wrap\">\n\t\t\t<div class=\"details\">\n\t\t\t\t<span class=\"set\">\n\t\t\t\t\t<i class=\"icon-yipp_notification_line\"></i>\n\t\t\t\t\t{{ challenges.details.reminder_time }}\n\t\t\t\t\t| <i class=\"icon-yipp_repeat_line\"></i>\n\t\t\t\t\t{{ challenges.details.repeat_type }}\n\t\t\t\t</span>\n\t\t\t\t\n\t\t\t\t<table width=\"100%\" border=\"0\">\n\t\t\t\t\t<tbody>\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t<p>Eating more vegetable</p>\n\t\t\t\t\t\t\t\t<p>1. Broco</p>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t<a href=\"\" class=\"edit\"><i class=\"icon-yipp_pencil_line\"></i></a>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t</tbody>\n\t\t\t\t</table>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"steps\">\n\t\t\t<ul>\n\t\t\t\t<li v-for=\"fd of challenges.feedbacks\" v-bind:class=\"fd.id == activeFeedback.id ? 'active' : ''\" v-on:click=\"next(fd.id)\">\n\t\t\t\t\t<i class=\"icon-yipp_check_full\" v-if=\"fd.is_done\"></i>\n\t\t\t\t\t<span v-if=\"fd.is_done == false\">{{ fd.repeat_number }}</span>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t\t<hr>\n\t\t</div>\n\n\t\t<div class=\"form\" v-for=\"fd of challenges.feedbacks\" v-if=\"fd.id == activeFeedback.id\">\n\t\t\t<div class=\"pic\" style=\"height: 200px; overflow: hidden;\">\n\t\t\t\t<img style=\"width: 100%;\" v-if=\"fd.src_url\" v-bind:src=\"fd.src_url\">\n\t\t\t</div>\n\n\t\t\t<h4>Evaluation</h4>\n\t\t\t\t\n\t\t\t<textarea v-model=\"fd.evaluation\"></textarea>\n\t\t\t\n\t\t\t<ul class=\"selection\">\n\t\t\t\t<li>\n\t\t\t\t\t<a href=\"#\" v-bind:class=\"fd.icon == 'sad' ? 'active' : ''\" v-on:click.prevent=\"iconMark(fd.id, 'sad')\">\n\t\t\t\t\t\t<i class=\"icon-yipp_emoticon_sad\"></i>\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a href=\"#\" v-bind:class=\"fd.icon == 'neutral' ? 'active' : ''\" v-on:click.prevent=\"iconMark(fd.id, 'neutral')\">\n\t\t\t\t\t\t<i class=\"icon-yipp_emoticon_neutral\"></i>\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a href=\"#\" v-bind:class=\"fd.icon == 'happy' ? 'active' : ''\" v-on:click.prevent=\"iconMark(fd.id, 'happy')\">\n\t\t\t\t\t\t<i class=\"icon-yipp_emoticon_happy\"></i>\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t</ul>\n\n\t\t\t<input type=\"hidden\" name=\"icon\" v-model=\"fd.icon\">\n\t\t\t\n\t\t\t<h4>Notes</h4>\n\t\t\t\n\t\t\t<textarea v-model=\"fd.notes\"></textarea>\n\t\t\t\n\t\t\t<a href=\"#\" v-on:click.prevent=\"submitEval(fd.id)\" class=\"btn\">Done</a>\n\t\t</div>\n\n\t</div>\n\n\t<div v-else-if=\"page == 'done'\">\n\t\t<section class=\"resultCard\">\n\t\t\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t\t\n\t\t\t<h3>You can do it!</h3>\n\t\t\t<p>We made a beautiful photo collage of this week check it out!</p>\n\t\t\t\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<a href=\"javascript:void(0);\" v-on:click.prevent=\"showResult\" class=\"btn mid white\">See result</a>\n\t\t\t\t<a href=\"javascript:void(0);\" v-on:click.prevent=\"resetChallenge\" class=\"btn big\">Restart challenge</a>\n\t\t\t</div>\n\n\t\t</section>\n\t</div>\n\t\n\t<div v-else-if=\"page == 'result'\">\n\t\t<section id=\"collage\">\n\t\t\n\t\t\t<div class=\"header\">\n\t\t\t\t<a href=\"#\" v-on:click=\"page = 'done'\">X</a> Photo Collage\n\t\t\t\t<h3>Fruit and Vegetables</h3>\n\t\t\t</div>\n\t\t\n\t\t\t<ul>\n\t\t\t\t<li v-for=\"fd of result.feedbacks\">\n\t\t\t\t\t<div class=\"pic\" style=\"height: 200px; overflow: hidden;\">\n\t\t\t\t\t\t<img style=\"width: 100%;\" v-if=\"fd.src_url\" v-bind:src=\"fd.src_url\">\n\t\t\t\t\t</div>\n\t\t\t\t\t\n\t\t\t\t\t<div class=\"elements\">\n\t\t\t\t\t\t<div class=\"day\">Day {{ fd.repeat_number }}</div>\n\t\t\t\t\t\t<i v-bind:class=\"'icon-yipp_emoticon_' + fd.icon\" class=\"icon \"></i>\n\t\t\t\t\t</div>\n\n\t\t\t\t\t<div class=\"data\">\n\t\t\t\t\t\t<p>{{ fd.evaluation }}</p>\n\t\t\t\t\t</div>\t\n\t\t\t\t\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t\n\t\t</section>\n\t\t\n\t\t<div class=\"restart\">\n\t\t\t<a href=\"javascript:void(0);\" v-on:click.prevent=\"resetChallenge\" class=\"btn big\">Restart challenge</a>\n\t\t</div>\n\t</div>\n\t\n\t<modal v-if=\"resetChallengeModal\" @close=\"resetChallengeModal = false\">\n        <h3 slot=\"header\">Are you sure?</h3>\n        <p slot=\"body\">Do you want to restart the challenge?</p>\n        \n        <div slot=\"footer\">\n          <button class=\"form-button-small\" @click=\"restartChallenge\">\n            Restart challenge\n          </button>\n          <button class=\"form-button-small\" @click=\"resetChallengeModal = false\">\n            Cancel\n          </button>\n        </div>\n    </modal>\n</div>\n\n\t\n";
+
+/***/ },
+/* 348 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _index = __webpack_require__(8);
+
+	var _config = __webpack_require__(1);
+
+	var _config2 = _interopRequireDefault(_config);
+
+	var _auth = __webpack_require__(184);
+
+	var _auth2 = _interopRequireDefault(_auth);
+
+	var _cheatsheet = __webpack_require__(340);
+
+	var _cheatsheet2 = _interopRequireDefault(_cheatsheet);
+
+	var _card = __webpack_require__(300);
+
+	var _card2 = _interopRequireDefault(_card);
+
+	var _feedback = __webpack_require__(349);
+
+	var _feedback2 = _interopRequireDefault(_feedback);
+
+	var _jquery = __webpack_require__(11);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	var _storage = __webpack_require__(2);
+
+	var _storage2 = _interopRequireDefault(_storage);
+
+	var _Modal = __webpack_require__(291);
+
+	var _Modal2 = _interopRequireDefault(_Modal);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	    data: function data() {
+	        return {
+	            userID: 0,
+	            currentChallenge: 0,
+	            page: 'main',
+	            challenges: {
+	                list: [],
+	                details: [],
+	                feedbacks: []
+	            },
+	            activeFeedback: {},
+	            lastFeedback: {},
+	            resetChallengeModal: false,
+	            result: {}
+	        };
+	    },
+
+	    created: function created() {
+	        _auth2.default.check();
+	        if (!_auth2.default.authenticated) {
+	            this.redirectGuest();
+	        }
+
+	        this.currentChallenge = this.$route.params.id;
+	        this.currentChallenge = 51;
+	        this.userID = _auth2.default.user.get('id');
+
+	        // this.currentLesson = 6;
+	        // this.userID = 32; // hard coded
+
+	        // this.getContent();
+	        this.showResult();
+	    },
+	    methods: {
+	        getContent: function getContent() {
+	            this.page = 'main';
+	            var that = this;
+
+	            _feedback2.default.details(this, this.currentChallenge, function (response) {
+	                that.challenges = response;
+	                that.activeFeedback = response.feedbacks[0];
+
+	                var length = response.feedbacks.length;
+	                if (length > 1) {
+	                    that.lastFeedback = response.feedbacks[length - 1];
+	                } else {
+	                    that.lastFeedback = that.activeFeedback;
+	                }
+	            }, function (msg, response) {
+	                that.logError(msg);
+	            });
+	        },
+	        next: function next(id) {
+	            var that = this;
+	            _jquery2.default.each(that.challenges.feedbacks, function (index, value) {
+	                if (value.id == id) {
+	                    that.activeFeedback = value;
+	                }
+	            });
+	        },
+	        submitEval: function submitEval(id) {
+	            var that = this;
+
+	            _jquery2.default.each(this.challenges.feedbacks, function (index, value) {
+	                if (value.id == id) {
+	                    var data = {
+	                        feedback_id: value.id,
+	                        src_url: '',
+	                        src_id: '',
+	                        evaluation: value.evaluation,
+	                        icon: value.icon,
+	                        notes: value.notes
+	                    };
+
+	                    _feedback2.default.submit(that, data, function (response) {
+	                        that.challenges.feedbacks[index].is_done = true;
+
+	                        if (id == that.lastFeedback.id) {
+	                            that.doneFeedback();
+	                        }
+	                    }, function (msg, response) {
+	                        that.logError(msg);
+	                    });
+	                }
+	            });
+	        },
+	        iconMark: function iconMark(id, selected) {
+	            var that = this;
+	            _jquery2.default.each(this.challenges.feedbacks, function (index, value) {
+	                if (value.id == id) {
+	                    that.challenges.feedbacks[index].icon = selected;
+	                }
+	            });
+	        },
+	        doneFeedback: function doneFeedback() {
+	            this.page = 'done';
+	        },
+	        showResult: function showResult() {
+	            this.page = 'result';
+
+	            var that = this;
+	            _feedback2.default.result(this, 1, 51, function (response) {
+	                that.result = response;
+	            }, function (msg, response) {
+	                that.logError(msg);
+	            });
+	        },
+	        redirectGuest: function redirectGuest() {
+	            this.$router.push('login');
+	        },
+	        logError: function logError(msg) {
+	            this.loading = false;
+	            var msgStr = '';
+	            if (typeof msg == 'string') {
+	                msgStr = msg;
+	            } else {
+	                _jquery2.default.each(msg, function (label, value) {
+	                    msgStr += value + ' ';
+	                });
+	            }
+
+	            this.error_message = msgStr;
+	        },
+
+	        resetChallenge: function resetChallenge() {
+	            this.resetChallengeModal = true;
+	        },
+	        restartChallenge: function restartChallenge() {
+	            this.resetChallengeModal = false;
+	            this.page = 'main';
+	        }
+	    },
+
+	    components: {
+	        Modal: _Modal2.default
+	    }
+	};
+	// </script>
+	//
+	//
+	// <template>
+	// <div id="page-challenge-details">
+	// 	<div v-if="page == 'main'">
+	// 		<div class="header">
+	// 				<a href="" class="icon">
+	// 				<i class=" icon-yipp_back"></i>
+	// 				</a>
+	// 				<div class="title">Challenge Details</div>
+	// 		</div>
+	//
+	// 		<div class="wrap">
+	// 			<div class="details">
+	// 				<span class="set">
+	// 					<i class="icon-yipp_notification_line"></i>
+	// 					{{ challenges.details.reminder_time }}
+	// 					| <i class="icon-yipp_repeat_line"></i>
+	// 					{{ challenges.details.repeat_type }}
+	// 				</span>
+	//
+	// 				<table width="100%" border="0">
+	// 					<tbody>
+	// 						<tr>
+	// 							<td>
+	// 								<p>Eating more vegetable</p>
+	// 								<p>1. Broco</p>
+	// 							</td>
+	// 							<td>
+	// 							<a href="" class="edit"><i class="icon-yipp_pencil_line"></i></a>
+	// 							</td>
+	// 						</tr>
+	// 					</tbody>
+	// 				</table>
+	// 			</div>
+	// 		</div>
+	//
+	// 		<div class="steps">
+	// 			<ul>
+	// 				<li v-for="fd of challenges.feedbacks" v-bind:class="fd.id == activeFeedback.id ? 'active' : ''" v-on:click="next(fd.id)">
+	// 					<i class="icon-yipp_check_full" v-if="fd.is_done"></i>
+	// 					<span v-if="fd.is_done == false">{{ fd.repeat_number }}</span>
+	// 				</li>
+	// 			</ul>
+	// 			<hr>
+	// 		</div>
+	//
+	// 		<div class="form" v-for="fd of challenges.feedbacks" v-if="fd.id == activeFeedback.id">
+	// 			<div class="pic" style="height: 200px; overflow: hidden;">
+	// 				<img style="width: 100%;" v-if="fd.src_url" v-bind:src="fd.src_url">
+	// 			</div>
+	//
+	// 			<h4>Evaluation</h4>
+	//
+	// 			<textarea v-model="fd.evaluation"></textarea>
+	//
+	// 			<ul class="selection">
+	// 				<li>
+	// 					<a href="#" v-bind:class="fd.icon == 'sad' ? 'active' : ''" v-on:click.prevent="iconMark(fd.id, 'sad')">
+	// 						<i class="icon-yipp_emoticon_sad"></i>
+	// 					</a>
+	// 				</li>
+	// 				<li>
+	// 					<a href="#" v-bind:class="fd.icon == 'neutral' ? 'active' : ''" v-on:click.prevent="iconMark(fd.id, 'neutral')">
+	// 						<i class="icon-yipp_emoticon_neutral"></i>
+	// 					</a>
+	// 				</li>
+	// 				<li>
+	// 					<a href="#" v-bind:class="fd.icon == 'happy' ? 'active' : ''" v-on:click.prevent="iconMark(fd.id, 'happy')">
+	// 						<i class="icon-yipp_emoticon_happy"></i>
+	// 					</a>
+	// 				</li>
+	// 			</ul>
+	//
+	// 			<input type="hidden" name="icon" v-model="fd.icon">
+	//
+	// 			<h4>Notes</h4>
+	//
+	// 			<textarea v-model="fd.notes"></textarea>
+	//
+	// 			<a href="#" v-on:click.prevent="submitEval(fd.id)" class="btn">Done</a>
+	// 		</div>
+	//
+	// 	</div>
+	//
+	// 	<div v-else-if="page == 'done'">
+	// 		<section class="resultCard">
+	//
+	// 			<i class="icon-yipp_check_full"></i>
+	//
+	// 			<h3>You can do it!</h3>
+	// 			<p>We made a beautiful photo collage of this week check it out!</p>
+	//
+	// 			<div class="bottom">
+	// 				<a href="javascript:void(0);" v-on:click.prevent="showResult" class="btn mid white">See result</a>
+	// 				<a href="javascript:void(0);" v-on:click.prevent="resetChallenge" class="btn big">Restart challenge</a>
+	// 			</div>
+	//
+	// 		</section>
+	// 	</div>
+	//
+	// 	<div v-else-if="page == 'result'">
+	// 		<section id="collage">
+	//
+	// 			<div class="header">
+	// 				<a href="#" v-on:click="page = 'done'">X</a> Photo Collage
+	// 				<h3>Fruit and Vegetables</h3>
+	// 			</div>
+	//
+	// 			<ul>
+	// 				<li v-for="fd of result.feedbacks">
+	// 					<div class="pic" style="height: 200px; overflow: hidden;">
+	// 						<img style="width: 100%;" v-if="fd.src_url" v-bind:src="fd.src_url">
+	// 					</div>
+	//
+	// 					<div class="elements">
+	// 						<div class="day">Day {{ fd.repeat_number }}</div>
+	// 						<i v-bind:class="'icon-yipp_emoticon_' + fd.icon" class="icon "></i>
+	// 					</div>
+	//
+	// 					<div class="data">
+	// 						<p>{{ fd.evaluation }}</p>
+	// 					</div>	
+	//
+	// 				</li>
+	// 			</ul>
+	//
+	// 		</section>
+	//
+	// 		<div class="restart">
+	// 			<a href="javascript:void(0);" v-on:click.prevent="resetChallenge" class="btn big">Restart challenge</a>
+	// 		</div>
+	// 	</div>
+	//
+	// 	<modal v-if="resetChallengeModal" @close="resetChallengeModal = false">
+	//         <h3 slot="header">Are you sure?</h3>
+	//         <p slot="body">Do you want to restart the challenge?</p>
+	//
+	//         <div slot="footer">
+	//           <button class="form-button-small" @click="restartChallenge">
+	//             Restart challenge
+	//           </button>
+	//           <button class="form-button-small" @click="resetChallengeModal = false">
+	//             Cancel
+	//           </button>
+	//         </div>
+	//     </modal>
+	// </div>
+	//
+	//
+	// </template>
+	//
+	// <script>
+
+/***/ },
+/* 349 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _config = __webpack_require__(1);
+
+	var _config2 = _interopRequireDefault(_config);
+
+	var _auth = __webpack_require__(184);
+
+	var _auth2 = _interopRequireDefault(_auth);
+
+	var _vue = __webpack_require__(3);
+
+	var _vue2 = _interopRequireDefault(_vue);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	    details: function details(context, challengeID, successCallback, errorCallback) {
+	        var _this = this;
+
+	        var that = this;
+
+	        context.$http.get(_config2.default.api.url + '/challengedetails/' + challengeID).then(function (response) {
+	            var result = response.body.result;
+
+	            if (response.body.status == 'OK') {
+	                successCallback.call(_this, result);
+	            } else if (errorCallback) {
+	                console.log('error in api.timeline');
+	                errorCallback.call(_this, result.message, response);
+	            }
+	        }, function (response) {
+
+	            if (errorCallback) {
+	                errorCallback.call(_this, response.body.result.error, response);
+	            }
+	        });
+	    },
+	    result: function result(context, feedbackID, challengeID, successCallback, errorCallback) {
+	        var _this2 = this;
+
+	        var that = this;
+
+	        context.$http.get(_config2.default.api.url + '/feedbacks/' + feedbackID + '/' + challengeID).then(function (response) {
+	            var result = response.body.result;
+
+	            if (response.body.status == 'OK') {
+	                successCallback.call(_this2, result);
+	            } else if (errorCallback) {
+	                console.log('error in api.timeline');
+	                errorCallback.call(_this2, result.message, response);
+	            }
+	        }, function (response) {
+
+	            if (errorCallback) {
+	                errorCallback.call(_this2, response.body.result.error, response);
+	            }
+	        });
+	    },
+	    submit: function submit(context, data, successCallback, errorCallback) {
+	        var _this3 = this;
+
+	        var that = this;
+
+	        _vue2.default.http.options.emulateJSON = true;
+
+	        context.$http.post(_config2.default.api.url + '/feedbackdone', data).then(function (response) {
+	            var result = response.body.result;
+
+	            if (response.body.status == 'OK') {
+	                successCallback.call(_this3, result);
+	            } else if (errorCallback) {
+	                console.log('error in api.timeline');
+	                errorCallback.call(_this3, result.message, response);
+	            }
+	        }, function (response) {
+
+	            if (errorCallback) {
+	                errorCallback.call(_this3, response.body.result.error, response);
+	            }
+	        });
+	    }
+	};
 
 /***/ }
 /******/ ]);

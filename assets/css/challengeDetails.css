@@ -273,19 +273,21 @@ section {
 }
 .resultCard {
   height: 100%;
+  height: 100vh;
   color: #fff;
   padding: 10px;
   display: block;
   position: relative;
   text-align: center;
   background-color: #DB4747;
+  v-he
 }
 .resultCard i {
   display: block;
   font-size: 80px;
   margin: 100px 0 30px 0;
 }
-.resultCard .btn {
+#container .resultCard .btn {
   color: #fff;
   display: block;
   font-size: 18px;
@@ -301,15 +303,17 @@ section {
 }
 .resultCard .btn.mid {
   width: 180px;
+  color: white;
 }
 .resultCard .btn.big {
   width: 200px;
 }
 .resultCard .bottom {
-  left: 0;
-  right: 0;
   bottom: 20px;
   position: absolute;
+  width: 100%;
+  left: 0;
+  right: 0;
 }
 .resultCard #modal {
   top: 0;

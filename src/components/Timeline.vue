@@ -187,7 +187,6 @@ export default {
 
             var that = this;
             $.each(this.lessons, function (index, value) {
-                console.log(id)
                 if (value.id == id) {
                     var str = JSON.stringify(value);
                     Storage.save('active_lesson', str, 1);
