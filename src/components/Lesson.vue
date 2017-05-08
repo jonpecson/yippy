@@ -32,7 +32,7 @@
 
 		<div v-if="lessonType == 'knowledge_card'">
 			<div id="knowledge-cards" v-for="knowledgeCard in knowledgeCards">
-                <div class="paper" v-bind:id="knowledgeCard.Contents.id" v-on:click="swipeCard">
+                <div class="paper" v-bind:id="knowledgeCard.Contents.id" >
 					<h3>{{ knowledgeCard.Contents.title }}</h3>
                     <img v-bind:data-id="knowledgeCard.Contents.id" v-if="knowledgeCard.Contents.src_type == 'ext_image'" v-bind:src="knowledgeCard.Contents.src_url" style="width: 50%;">
 					<p>{{ knowledgeCard.Contents.details }}</p>
@@ -383,6 +383,7 @@ export default {
 
                     stackCard.on('throwout', (event) => {
                         that.nextLesson();
+                        $(event.target).remove();
                     });
                 }, 1);
                     
@@ -623,10 +624,7 @@ export default {
 	    	} else {
 	    		this.currentCardContent.is_favorite = true;
 	    	}
-	    },
-        swipeCard: function () {
-            // this.nextLesson()
-        }
+	    }
     },
 
     components: { 
