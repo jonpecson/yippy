@@ -100,10 +100,10 @@
 	
 	<div v-else-if="page == 'result'">
 		<section id="collage">
-		
-			<div class="header">
-				<a href="#" v-on:click="page = 'done'">X</a> Photo Collage
-				<h3>Fruit and Vegetables</h3>
+			
+			<div class="header" v-for="content of result.content">
+				<a href="#" v-on:click="page = 'done'">X</a> {{ replaceChildName(content.title) }}
+				<h3>{{ replaceChildName(content.description) }}</h3>
 			</div>
 		
 			<ul>
@@ -204,8 +204,8 @@ export default {
         this.currentChallenge = 51;
         this.userID = 32;
 
-        this.getContent();
-        // this.showResult();
+        // this.getContent();
+        this.showResult();
     },
     methods: {
     	loadLabels: function () {
@@ -315,7 +315,6 @@ export default {
         	var that = this;
         	feedback.result(this, this.userID, this.currentChallenge, function (response) {
         		that.result = response;
-        		console.log(that.result.challenge)
 	        }, function (msg, response) {
 	            that.logError(msg);
 	        });
