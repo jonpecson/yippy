@@ -21,8 +21,8 @@
 					<tbody>
 						<tr v-for="content of challenges.content">
 							<td>
-								<p>{{ content.title }}</p>
-								<p>{{ content.description }}</p>
+								<p>{{ replaceChildName(content.title) }}</p>
+								<p>{{ replaceChildName(content.description) }}</p>
 							</td>
 							<td>
 							<a href="" class="edit"><i class="icon-yipp_pencil_line"></i></a>
@@ -150,6 +150,7 @@
 </template>
 
 <script>
+import locale from '../api/locale'
 import {router} from '../index'
 import config from '../config'
 import auth from '../api/auth'
@@ -178,14 +179,24 @@ export default {
             lastFeedback: {},
             resetChallengeModal: false,
             result: {},
-            loading: false
+            loading: false,
+
+            label: {},
+
+            child: {},
+            childName: ''
         }
     },
     created: function() {
+    	this.loadLabels();
+
         auth.check();
         if (!auth.authenticated) {
             this.redirectGuest();
         }
+
+        this.child = auth.user.data.child;
+        this.childName = this.child.get('name')
 
         this.currentChallenge = this.$route.params.id;
         this.userID = auth.user.get('id');
@@ -194,8 +205,17 @@ export default {
         this.userID = 32;
 
         this.getContent();
+        // this.showResult();
     },
     methods: {
+    	loadLabels: function () {
+            var that = this;
+            locale.label(this, config.api.lang, function (response) {
+                that.label = response;
+            }, function (msg, response) {
+                that.logError(msg);
+            });
+        },
         getContent: function () {
             this.page = 'main';
             var that = this;
@@ -295,6 +315,7 @@ export default {
         	var that = this;
         	feedback.result(this, this.userID, this.currentChallenge, function (response) {
         		that.result = response;
+        		console.log(that.result.challenge)
 	        }, function (msg, response) {
 	            that.logError(msg);
 	        });
@@ -339,7 +360,10 @@ export default {
         	})
 
         	return result;
-	    }
+	    },
+	    replaceChildName: function (str) {
+            return str.replace(/\[child_name\]/g, this.childName);
+        }
     },
 
     components: { 

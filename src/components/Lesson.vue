@@ -238,7 +238,9 @@ export default {
             myLessonID: 0,
             stackCard: {},
             knowledgeCards: [],
-            label: {}
+            label: {},
+            child: {},
+            childName: ''
         }
     },
     created: function() {
@@ -248,6 +250,8 @@ export default {
             this.redirectGuest();
         }
 
+        this.child = auth.user.data.child;
+        this.childName = this.child.get('name')
         this.currentLesson = this.$route.params.id;
         this.userID = auth.user.get('id');
 	    
@@ -366,6 +370,9 @@ export default {
 			var ctr = this.currentCardCount - 1;
             var card = this.cards[ctr];
             this.updateBarStep(this.currentCardCount)
+
+            card.Contents.title = replaceChildName(card.Contents.title);
+            card.Contents.details = replaceChildName(card.Contents.details);
 
             this.currentCardContent = card;
             // console.log('currentCard:', card.Contents.card_id, '-', card.Contents.card_style + '_' + card.Contents.card_type);
@@ -624,7 +631,10 @@ export default {
 	    	} else {
 	    		this.currentCardContent.is_favorite = true;
 	    	}
-	    }
+	    },
+        replaceChildName: function (str) {
+            return str.replace(/\[child_name\]/g, this.childName);
+        }
     },
 
     components: { 

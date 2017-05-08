@@ -12,8 +12,8 @@
         <div class="panel">
             <div style="overflow: hidden;">
                 <div class="paper">
-                    <h3>{{ currentFavorite.Contents.title }}</h3>
-                    <p>{{ currentFavorite.Contents.details }}</p>
+                    <h3>{{ replaceChildName(currentFavorite.Contents.title) }}</h3>
+                    <p>{{ replaceChildName(currentFavorite.Contents.details) }}</p>
 
                     <i class="heart icon-yipp_check_full"
                         v-on:click.prevent="markFavorite" v-bind:data-id="currentFavorite.Contents.id"
@@ -38,7 +38,7 @@
                         {{ challenge.details.reminder_time }}
                     </span>
                     <ol v-for="list in challenge.list">
-                        <li>{{ list.message }}</li>
+                        <li>{{ replaceChildName(list.message) }}</li>
                     </ol>
                 </li>
             </ul>
@@ -54,13 +54,13 @@
         <div class="swipe swipe-wrapper">
             <ul class="cards favorites-wrapper" v-for="fave in favorites">
                 <li>
-                    <h3>{{ fave.Contents.title }}</h3>
+                    <h3>{{ replaceChildName(fave.Contents.title) }}</h3>
                     <a href="#" v-bind:data-id="fave.Contents.id" v-on:click.prevent="showFavorite">
                         <img v-bind:data-id="fave.Contents.id" v-if="fave.Contents.src_type == 'ext_image'" v-bind:src="fave.Contents.src_url" style="width: 50%;">
                     </a>
                     <p>
                         <a href="#" v-bind:data-id="fave.Contents.id" v-on:click.prevent="showFavorite">
-                        {{ fave.Contents.details }}
+                        {{ replaceChildName(fave.Contents.details) }}
                         </a>
                     </p>
                     <i class="heart icon-yipp_heart_line"></i>
@@ -77,7 +77,7 @@
 
         <div class="content curved lined">
             <ol class="answer-wrapper" v-for="answer in answers">
-                <li>{{ answer.Contents.details }}</li>
+                <li>{{ replaceChildName(answer.Contents.details) }}</li>
             </ol>
         </div>
     </section>
@@ -153,7 +153,10 @@ export default {
 
             removeFavoriteModal: false,
             resetLessonModal: false,
-            label: {}
+            label: {},
+
+            child: {},
+            childName: ''
         }
     },
     created: function() {
@@ -162,6 +165,9 @@ export default {
         if (!auth.authenticated) {
             this.redirectGuest();
         }
+
+        this.child = auth.user.data.child;
+        this.childName = this.child.get('name')
 
         this.currentLesson = this.$route.params.id;
         this.userID = auth.user.get('id');
@@ -278,6 +284,9 @@ export default {
             var id = e.target.getAttribute('data-id');
 
             this.redirect('feedback-' + id);s
+        },
+        replaceChildName: function (str) {
+            return str.replace(/\[child_name\]/g, this.childName);
         }
     },
 
