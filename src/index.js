@@ -10,6 +10,7 @@ import Challenge from './components/Challenge.vue'
 import ChallengeNew from './components/ChallengeNew.vue'
 import ChallengeDetails from './components/ChallengeDetails.vue'
 import Cheatsheet from './components/Cheatsheet.vue'
+import Profile from './components/Profile.vue'
 import VueResource from 'vue-resource'
 Vue.use(VueResource)
 
@@ -34,7 +35,8 @@ const routes = [
   { path: '/challenge', component: Challenge, name: 'challenge' },
   { path: '/challenge-new', component: ChallengeNew, name: 'challenge_new' },
   { path: '/cheatsheet-:id', component: Cheatsheet, name: 'cheatsheet' },
-  { path: '/feedback-:id', component: ChallengeDetails, name: 'feedback' }
+  { path: '/feedback-:id', component: ChallengeDetails, name: 'feedback' },
+  { path: '/profile', component: Profile, name: 'profile' },
 ]
 
 const router = new VueRouter({

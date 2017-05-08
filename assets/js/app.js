@@ -9826,6 +9826,10 @@
 
 	var _Cheatsheet2 = _interopRequireDefault(_Cheatsheet);
 
+	var _Profile = __webpack_require__(352);
+
+	var _Profile2 = _interopRequireDefault(_Profile);
+
 	var _vueResource = __webpack_require__(342);
 
 	var _vueResource2 = _interopRequireDefault(_vueResource);
@@ -9849,7 +9853,7 @@
 	var VueTouch = __webpack_require__(345);
 	_vue2.default.use(VueTouch, { name: 'v-touch' });
 
-	var routes = [{ path: '/', component: _Home2.default, name: 'home' }, { path: '/login', component: _Auth2.default, name: 'login' }, { path: '/newpassword', component: _Auth2.default, name: 'newpassword' }, { path: '/logout', component: _Logout2.default, name: 'logout' }, { path: '/register', component: _Register2.default, name: 'register' }, { path: '/timeline', component: _Timeline2.default, name: 'timeline' }, { path: '/emergency', component: _Emergency2.default, name: 'emergency' }, { path: '/lesson-:id', component: _Lesson2.default, name: 'lesson' }, { path: '/challenge', component: _Challenge2.default, name: 'challenge' }, { path: '/challenge-new', component: _ChallengeNew2.default, name: 'challenge_new' }, { path: '/cheatsheet-:id', component: _Cheatsheet2.default, name: 'cheatsheet' }, { path: '/feedback-:id', component: _ChallengeDetails2.default, name: 'feedback' }];
+	var routes = [{ path: '/', component: _Home2.default, name: 'home' }, { path: '/login', component: _Auth2.default, name: 'login' }, { path: '/newpassword', component: _Auth2.default, name: 'newpassword' }, { path: '/logout', component: _Logout2.default, name: 'logout' }, { path: '/register', component: _Register2.default, name: 'register' }, { path: '/timeline', component: _Timeline2.default, name: 'timeline' }, { path: '/emergency', component: _Emergency2.default, name: 'emergency' }, { path: '/lesson-:id', component: _Lesson2.default, name: 'lesson' }, { path: '/challenge', component: _Challenge2.default, name: 'challenge' }, { path: '/challenge-new', component: _ChallengeNew2.default, name: 'challenge_new' }, { path: '/cheatsheet-:id', component: _Cheatsheet2.default, name: 'cheatsheet' }, { path: '/feedback-:id', component: _ChallengeDetails2.default, name: 'feedback' }, { path: '/profile', component: _Profile2.default, name: 'profile' }];
 
 	var router = new _vueRouter2.default({
 	  routes: routes
@@ -35381,10 +35385,10 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// <template>
-	// <div id="timeline-container">
+	// <div id="container">
 	//     <header>
 	//         <div class="title-area">
-	//             <a href="javascript:void(0);"><i class="icon-yipp_profile_line"></i></a>
+	//             <router-link :to="{ name: 'profile'}"><i class="icon-yipp_profile_line"></i></router-link>
 	//             <span>{{ label.header_timeline }}</span>
 	//             <router-link :to="{ name: 'emergency'}"><i class="icon-yipp_notification_line2"></i></router-link>
 	//         </div>
@@ -35760,7 +35764,7 @@
 /* 294 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div id=\"timeline-container\">\n    <header>\n        <div class=\"title-area\">\n            <a href=\"javascript:void(0);\"><i class=\"icon-yipp_profile_line\"></i></a>\n            <span>{{ label.header_timeline }}</span>\n            <router-link :to=\"{ name: 'emergency'}\"><i class=\"icon-yipp_notification_line2\"></i></router-link>\n        </div>\n\n        <div class=\"user-area\">\n            <div class=\"child-name\">{{ child.get('name') }}</div>\n            <ul class=\"months-level\">\n                <li>\n                    <span>{{ childAge }}</span>  \n                    <span>Maanden</span>\n                </li>\n                <li>\n                    <span>{{ currentLevel }}</span>\n                    <span>Level</span>\n                </li>\n                <li>\n                    <a href=\"#\" v-on:click.prevent=\"toggle\" v-if=\"page == 'lessons'\"><i class=\"icon-yipp_down\"></i></a>\n                    <a href=\"#\" v-on:click.prevent=\"toggle\" v-if=\"page == 'levels'\"><i class=\"icon-yipp_up\"></i></a>\n                </li>\n            </ul>\n\n            <div class=\"photo\"><img class=\"avatar\" v-bind:src=\"child.get('image')\"></div>\n            \n        </div>\n    </header>\n        \n        <section class=\"traingen\" v-if=\"page == 'lessons'\">\n            <ul id=\"list-icons\">\n                <li v-for=\"lesson in lessons\">\n                    <a href=\"#\" v-bind:data-id=\"lesson.id\" v-on:click.prevent=\"goTodo\">\n                        <span class=\"icon big active\" v-bind:class=\"lesson.icon\"></span>\n                        {{ lesson.counter }}. {{ lesson.title }}\n                    </a>\n                </li>\n            </ul>\n        </section>\n        \n            \n        <section class=\"traingen2\" v-if=\"page == 'levels'\">\n                    \n            <ul id=\"list-text\">\n                <li v-for=\"level in levels\">\n                    <a href=\"#\" v-if=\"level.active == 'active'\" \n                        v-bind:data-id=\"level.id\" \n                        v-on:click.prevent=\"setCurrentLevel\"\n                        v-bind:class=\"level.active\">\n                        <span v-bind:data-id=\"level.id\" class=\"level\">{{ level.counter }}</span> \n                        <span v-bind:data-id=\"level.id\" class=\"months\">{{ level.description }}</span>\n                    </a>\n\n                    <a href=\"#\" v-if=\"level.active == ''\" \n                        v-bind:data-id=\"level.id\" \n                        v-on:click.prevent=\"\"\n                        @click=\"showModal = true\"\n                        v-bind:class=\"level.active\">\n                        <span v-bind:data-id=\"level.id\" class=\"level\">{{ level.counter }}</span> \n                        <span v-bind:data-id=\"level.id\" class=\"months\">{{ level.description }}</span>\n                    </a>\n                </li>\n            </ul>\n        \n        </section>\n        \n        <footer>\n            <ul>\n                <li><a href=\"javascript:void(0);\" class=\"active\"><span class=\"icon-yipp_home_full-\"></span>Training</a></li>\n                <li><router-link :to=\"{ path: 'challenge'}\"><span class=\"icon-yipp_challenge_line\"></span>Challenge</router-link></li>\n            </ul>\n        </footer>\n\n        <modal v-if=\"showModal\" @close=\"showModal = false\">\n            <h3 slot=\"header\">Ooops...</h3>\n            <p slot=\"body\">This is not yet available</p>\n        </modal>\n</div>\n";
+	module.exports = "\n<div id=\"container\">\n    <header>\n        <div class=\"title-area\">\n            <router-link :to=\"{ name: 'profile'}\"><i class=\"icon-yipp_profile_line\"></i></router-link>\n            <span>{{ label.header_timeline }}</span>\n            <router-link :to=\"{ name: 'emergency'}\"><i class=\"icon-yipp_notification_line2\"></i></router-link>\n        </div>\n\n        <div class=\"user-area\">\n            <div class=\"child-name\">{{ child.get('name') }}</div>\n            <ul class=\"months-level\">\n                <li>\n                    <span>{{ childAge }}</span>  \n                    <span>Maanden</span>\n                </li>\n                <li>\n                    <span>{{ currentLevel }}</span>\n                    <span>Level</span>\n                </li>\n                <li>\n                    <a href=\"#\" v-on:click.prevent=\"toggle\" v-if=\"page == 'lessons'\"><i class=\"icon-yipp_down\"></i></a>\n                    <a href=\"#\" v-on:click.prevent=\"toggle\" v-if=\"page == 'levels'\"><i class=\"icon-yipp_up\"></i></a>\n                </li>\n            </ul>\n\n            <div class=\"photo\"><img class=\"avatar\" v-bind:src=\"child.get('image')\"></div>\n            \n        </div>\n    </header>\n        \n        <section class=\"traingen\" v-if=\"page == 'lessons'\">\n            <ul id=\"list-icons\">\n                <li v-for=\"lesson in lessons\">\n                    <a href=\"#\" v-bind:data-id=\"lesson.id\" v-on:click.prevent=\"goTodo\">\n                        <span class=\"icon big active\" v-bind:class=\"lesson.icon\"></span>\n                        {{ lesson.counter }}. {{ lesson.title }}\n                    </a>\n                </li>\n            </ul>\n        </section>\n        \n            \n        <section class=\"traingen2\" v-if=\"page == 'levels'\">\n                    \n            <ul id=\"list-text\">\n                <li v-for=\"level in levels\">\n                    <a href=\"#\" v-if=\"level.active == 'active'\" \n                        v-bind:data-id=\"level.id\" \n                        v-on:click.prevent=\"setCurrentLevel\"\n                        v-bind:class=\"level.active\">\n                        <span v-bind:data-id=\"level.id\" class=\"level\">{{ level.counter }}</span> \n                        <span v-bind:data-id=\"level.id\" class=\"months\">{{ level.description }}</span>\n                    </a>\n\n                    <a href=\"#\" v-if=\"level.active == ''\" \n                        v-bind:data-id=\"level.id\" \n                        v-on:click.prevent=\"\"\n                        @click=\"showModal = true\"\n                        v-bind:class=\"level.active\">\n                        <span v-bind:data-id=\"level.id\" class=\"level\">{{ level.counter }}</span> \n                        <span v-bind:data-id=\"level.id\" class=\"months\">{{ level.description }}</span>\n                    </a>\n                </li>\n            </ul>\n        \n        </section>\n        \n        <footer>\n            <ul>\n                <li><a href=\"javascript:void(0);\" class=\"active\"><span class=\"icon-yipp_home_full-\"></span>Training</a></li>\n                <li><router-link :to=\"{ path: 'challenge'}\"><span class=\"icon-yipp_challenge_line\"></span>Challenge</router-link></li>\n            </ul>\n        </footer>\n\n        <modal v-if=\"showModal\" @close=\"showModal = false\">\n            <h3 slot=\"header\">Ooops...</h3>\n            <p slot=\"body\">This is not yet available</p>\n        </modal>\n</div>\n";
 
 /***/ },
 /* 295 */
@@ -66963,6 +66967,309 @@
 	                var result = response.body.result.emergency;
 	                successCallback.call(_this, result);
 	            } else if (errorCallback) {
+	                errorCallback.call(_this, result.message, response);
+	            }
+	        }, function (response) {
+
+	            if (errorCallback) {
+	                errorCallback.call(_this, response.body.result.error, response);
+	            }
+	        });
+	    }
+	};
+
+/***/ },
+/* 352 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__vue_script__ = __webpack_require__(353)
+	__vue_template__ = __webpack_require__(354)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "/Users/racheljaro/webroot/yipp/app/src/components/Profile.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 353 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _locale = __webpack_require__(350);
+
+	var _locale2 = _interopRequireDefault(_locale);
+
+	var _index = __webpack_require__(8);
+
+	var _config = __webpack_require__(1);
+
+	var _config2 = _interopRequireDefault(_config);
+
+	var _auth = __webpack_require__(184);
+
+	var _auth2 = _interopRequireDefault(_auth);
+
+	var _profile = __webpack_require__(355);
+
+	var _profile2 = _interopRequireDefault(_profile);
+
+	var _jquery = __webpack_require__(11);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	var _storage = __webpack_require__(2);
+
+	var _storage2 = _interopRequireDefault(_storage);
+
+	var _Modal = __webpack_require__(291);
+
+	var _Modal2 = _interopRequireDefault(_Modal);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// <template>
+	// <div id="page-profile">
+	// <section id="profile">
+	//
+	// 	<header>
+	//         <div class="title-area">
+	//             <router-link :to="{ name: 'timeline'}"><i class="icon-yipp_profile_line"></i></router-link>
+	//             <span>{{ label.header_timeline }}</span>
+	//             <router-link :to="{ name: 'emergency'}"><i class="icon-yipp_notification_line2"></i></router-link>
+	//         </div>
+	//
+	//         <div class="user-area">
+	//             <div class="child-name">{{ child.get('name') }}</div>
+	//             <ul class="months-level">
+	//                 <li>
+	//                     <span>{{ childAge }}</span>  
+	//                     <span>Maanden</span>
+	//                 </li>
+	//                 <li>
+	//                     <span>{{ currentLevel }}</span>
+	//                     <span>Level</span>
+	//                 </li>
+	//                 <li>
+	//                     <a href="#" v-on:click.prevent="toggle" v-if="page == 'lessons'"><i class="icon-yipp_down"></i></a>
+	//                     <a href="#" v-on:click.prevent="toggle" v-if="page == 'levels'"><i class="icon-yipp_up"></i></a>
+	//                 </li>
+	//             </ul>
+	//
+	//             <div class="photo"><img class="avatar" v-bind:src="child.get('image')"></div>
+	//
+	//         </div>
+	//     </header>
+	//
+	// 		<ul class="data">
+	// 			<li>
+	//
+	// 			<span class="big">{{ profile.days }}</span>
+	//
+	// 			<span class="small left">
+	// 			Je gebruikt<br>
+	// 			de app nu<br>
+	// 			<strong>dagen</strong>
+	// 			</span>
+	// 			</li>
+	// 			<li>
+	// 			<span class="big">{{ profile.completed }}</span>
+	// 				<span class="small right">
+	// 				<strong>Doel (en)</strong><br>
+	// 				behaald
+	// 				</span>
+	// 			</li>
+	// 		</ul>
+	//
+	// 		<div class="mTitle"><span>Challenges</span></div>
+	//
+	// 		<div class="challenge">
+	//
+	// 			<ul>
+	// 				<li v-for="content of profile.challenges">{{ content.title }}</li>
+	// 				<li class="semi">2</li>
+	// 				<li>3</li>
+	// 				<li>4</li>
+	// 				<li>5</li>
+	// 				<li>6</li>
+	// 				<li>7</li>
+	// 				<li>8</li>
+	// 				<li>9</li>
+	// 				<li>10</li>
+	// 			</ul>
+	//
+	// 		</div>
+	//
+	// 		<ul class="challenges">
+	//
+	// 			<li v-for="content of profile.challenges">
+	// 				<i class="icon-yipp_water_badge"></i>
+	// 				<strong>{{ content.title }}</strong>
+	// 				<p>{{ content.description }}</p>
+	// 			</li>
+	//
+	// 		</ul>
+	//
+	// 		<!-- <a href="" class="btn">Won item's <span class="notify">1</span></a> -->
+	//
+	// 		<div class="mTitle"><span>Titel</span></div>
+	//
+	// 		<div class="place">
+	//
+	// 			<i class="icon-yipp_supermom_full"></i>
+	//
+	// 			<div class="right">
+	//
+	// 				<span>level 1</span>
+	//
+	// 				<strong>
+	// 				Beginnende <br>
+	// 				mama
+	// 				</strong>
+	// 			</div>
+	//
+	// 		</div>
+	//
+	// 		<div class="mTitle"><span>Gebruikers</span></div>
+	//
+	// 		<div class="total">
+	// 			<strong>{{ profile.total_users }}</strong>
+	// 			<div class="right">
+	// 			Deze app heeft al <br>
+	// 			<strong>getbruikers</strong>
+	// 			</div>
+	// 		</div>
+	//
+	// 	</section>
+	//
+	//
+	// </div>
+	// </template>
+	//
+	// <script>
+	exports.default = {
+	    data: function data() {
+	        return {
+	            child: {},
+	            childAge: 0,
+	            userID: 0,
+	            label: {},
+	            profile: {},
+	            currentLevel: 0
+	        };
+	    },
+
+	    created: function created() {
+	        this.loadLabels();
+	        _auth2.default.check();
+	        if (!_auth2.default.authenticated) {
+	            this.redirectGuest();
+	        }
+
+	        this.child = _auth2.default.user.data.child;
+	        this.childAge = this.child.get('age');
+	        this.userID = _auth2.default.user.get('id');
+
+	        this.showContent();
+	    },
+	    methods: {
+	        loadLabels: function loadLabels() {
+	            var that = this;
+	            _locale2.default.label(this, _config2.default.api.lang, function (response) {
+	                that.label = response;
+	            }, function (msg, response) {
+	                that.logError(msg);
+	            });
+	        },
+	        showContent: function showContent() {
+	            var that = this;
+	            _profile2.default.get(this, this.userID, function (response) {
+	                that.profile = response;
+	            }, function (msg, response) {
+	                that.logError(msg);
+	            });
+	        },
+	        redirectGuest: function redirectGuest() {
+	            this.$router.push('login');
+	        },
+	        logError: function logError(msg) {
+	            this.loading = false;
+	            var msgStr = '';
+	            if (typeof msg == 'string') {
+	                msgStr = msg;
+	            } else {
+	                _jquery2.default.each(msg, function (label, value) {
+	                    msgStr += value + ' ';
+	                });
+	            }
+
+	            this.error_message = msgStr;
+	        }
+	    },
+
+	    components: {
+	        Modal: _Modal2.default
+	    }
+	};
+	// </script>
+	//
+	//
+
+/***/ },
+/* 354 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div id=\"page-profile\">\n<section id=\"profile\">\n\n\t<header>\n        <div class=\"title-area\">\n            <router-link :to=\"{ name: 'timeline'}\"><i class=\"icon-yipp_profile_line\"></i></router-link>\n            <span>{{ label.header_timeline }}</span>\n            <router-link :to=\"{ name: 'emergency'}\"><i class=\"icon-yipp_notification_line2\"></i></router-link>\n        </div>\n\n        <div class=\"user-area\">\n            <div class=\"child-name\">{{ child.get('name') }}</div>\n            <ul class=\"months-level\">\n                <li>\n                    <span>{{ childAge }}</span>  \n                    <span>Maanden</span>\n                </li>\n                <li>\n                    <span>{{ currentLevel }}</span>\n                    <span>Level</span>\n                </li>\n                <li>\n                    <a href=\"#\" v-on:click.prevent=\"toggle\" v-if=\"page == 'lessons'\"><i class=\"icon-yipp_down\"></i></a>\n                    <a href=\"#\" v-on:click.prevent=\"toggle\" v-if=\"page == 'levels'\"><i class=\"icon-yipp_up\"></i></a>\n                </li>\n            </ul>\n\n            <div class=\"photo\"><img class=\"avatar\" v-bind:src=\"child.get('image')\"></div>\n            \n        </div>\n    </header>\n\n\t\t<ul class=\"data\">\n\t\t\t<li>\n\t\t\t\n\t\t\t<span class=\"big\">{{ profile.days }}</span>\n\t\t\t\n\t\t\t<span class=\"small left\">\n\t\t\tJe gebruikt<br>\n\t\t\tde app nu<br>\n\t\t\t<strong>dagen</strong>\n\t\t\t</span>\n\t\t\t</li>\n\t\t\t<li>\n\t\t\t<span class=\"big\">{{ profile.completed }}</span>\n\t\t\t\t<span class=\"small right\">\n\t\t\t\t<strong>Doel (en)</strong><br>\n\t\t\t\tbehaald\n\t\t\t\t</span>\n\t\t\t</li>\n\t\t</ul>\n\n\t\t<div class=\"mTitle\"><span>Challenges</span></div>\n\t\t\n\t\t<div class=\"challenge\">\n\t\t\n\t\t\t<ul>\n\t\t\t\t<li v-for=\"content of profile.challenges\">{{ content.title }}</li>\n\t\t\t\t<li class=\"semi\">2</li>\n\t\t\t\t<li>3</li>\n\t\t\t\t<li>4</li>\n\t\t\t\t<li>5</li>\n\t\t\t\t<li>6</li>\n\t\t\t\t<li>7</li>\n\t\t\t\t<li>8</li>\n\t\t\t\t<li>9</li>\n\t\t\t\t<li>10</li>\n\t\t\t</ul>\n\t\t\n\t\t</div>\n\t\t\n\t\t<ul class=\"challenges\">\n\t\t\n\t\t\t<li v-for=\"content of profile.challenges\">\n\t\t\t\t<i class=\"icon-yipp_water_badge\"></i>\n\t\t\t\t<strong>{{ content.title }}</strong>\n\t\t\t\t<p>{{ content.description }}</p>\n\t\t\t</li>\n\t\t\n\t\t</ul>\n\t\t\n\t\t<!-- <a href=\"\" class=\"btn\">Won item's <span class=\"notify\">1</span></a> -->\n\t\t\n\t\t<div class=\"mTitle\"><span>Titel</span></div>\n\t\t\n\t\t<div class=\"place\">\n\t\t\n\t\t\t<i class=\"icon-yipp_supermom_full\"></i>\n\t\t\n\t\t\t<div class=\"right\">\n\t\t\t\t\n\t\t\t\t<span>level 1</span>\n\t\t\t\t\n\t\t\t\t<strong>\n\t\t\t\tBeginnende <br>\n\t\t\t\tmama\n\t\t\t\t</strong>\n\t\t\t</div>\n\t\t\n\t\t</div>\n\t\t\n\t\t<div class=\"mTitle\"><span>Gebruikers</span></div>\n\t\t\n\t\t<div class=\"total\">\n\t\t\t<strong>{{ profile.total_users }}</strong>\n\t\t\t<div class=\"right\">\n\t\t\tDeze app heeft al <br>\n\t\t\t<strong>getbruikers</strong>\n\t\t\t</div>\n\t\t</div>\n\n\t</section>\n\n\n</div>\n";
+
+/***/ },
+/* 355 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _config = __webpack_require__(1);
+
+	var _config2 = _interopRequireDefault(_config);
+
+	var _vue = __webpack_require__(3);
+
+	var _vue2 = _interopRequireDefault(_vue);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	    get: function get(context, userID, successCallback, errorCallback) {
+	        var _this = this;
+
+	        var that = this;
+
+	        _vue2.default.http.options.emulateJSON = true;
+
+	        context.$http.post(_config2.default.api.url + '/profile/' + userID).then(function (response) {
+	            var result = response.body.result;
+
+	            if (response.body.status == 'OK') {
+	                successCallback.call(_this, result.data);
+	            } else if (errorCallback) {
+	                console.log('error in api.timeline');
 	                errorCallback.call(_this, result.message, response);
 	            }
 	        }, function (response) {

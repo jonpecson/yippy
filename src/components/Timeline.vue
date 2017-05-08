@@ -1,8 +1,8 @@
 <template>
-<div id="timeline-container">
+<div id="container">
     <header>
         <div class="title-area">
-            <a href="javascript:void(0);"><i class="icon-yipp_profile_line"></i></a>
+            <router-link :to="{ name: 'profile'}"><i class="icon-yipp_profile_line"></i></router-link>
             <span>{{ label.header_timeline }}</span>
             <router-link :to="{ name: 'emergency'}"><i class="icon-yipp_notification_line2"></i></router-link>
         </div>
