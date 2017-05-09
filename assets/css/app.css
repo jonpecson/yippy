@@ -122,3 +122,26 @@ header .user-area .photo img {
   color: red;
   border-color: red;
 }
+
+
+.shepherd-content header, .shepherd-content footer {
+  position: relative; height: auto;
+  background-color: #fff;
+}
+
+.shepherd-step {
+  z-index: 999;
+  background-color: #fff;
+  padding: 10px;
+}
+
+.shepherd-element.shepherd-theme-arrows.shepherd-transparent-text .shepherd-text {
+  color: #3b744f; }
+
+.shepherd-element.shepherd-theme-arrows .shepherd-content {
+  width: 400px;
+  max-width: 100%; }
+  .shepherd-element.shepherd-theme-arrows .shepherd-content a {
+    color: inherit; }
+  .shepherd-element.shepherd-theme-arrows .shepherd-content footer .shepherd-buttons li .shepherd-button {
+    background: #55a892; }

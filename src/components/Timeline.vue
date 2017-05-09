@@ -106,6 +106,11 @@ export default {
         }
     },
     created: function() {
+        var tour = Storage.get('tour');
+        if (!tour) {
+            this.$router.push('tour');
+        }
+
         this.loadLabels();
         auth.check();
         if (!auth.authenticated) {

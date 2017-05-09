@@ -9830,6 +9830,10 @@
 
 	var _Profile2 = _interopRequireDefault(_Profile);
 
+	var _Tour = __webpack_require__(356);
+
+	var _Tour2 = _interopRequireDefault(_Tour);
+
 	var _vueResource = __webpack_require__(342);
 
 	var _vueResource2 = _interopRequireDefault(_vueResource);
@@ -9853,7 +9857,7 @@
 	var VueTouch = __webpack_require__(345);
 	_vue2.default.use(VueTouch, { name: 'v-touch' });
 
-	var routes = [{ path: '/', component: _Home2.default, name: 'home' }, { path: '/login', component: _Auth2.default, name: 'login' }, { path: '/newpassword', component: _Auth2.default, name: 'newpassword' }, { path: '/logout', component: _Logout2.default, name: 'logout' }, { path: '/register', component: _Register2.default, name: 'register' }, { path: '/timeline', component: _Timeline2.default, name: 'timeline' }, { path: '/emergency', component: _Emergency2.default, name: 'emergency' }, { path: '/lesson-:id', component: _Lesson2.default, name: 'lesson' }, { path: '/challenge', component: _Challenge2.default, name: 'challenge' }, { path: '/challenge-new', component: _ChallengeNew2.default, name: 'challenge_new' }, { path: '/cheatsheet-:id', component: _Cheatsheet2.default, name: 'cheatsheet' }, { path: '/feedback-:id', component: _ChallengeDetails2.default, name: 'feedback' }, { path: '/profile', component: _Profile2.default, name: 'profile' }];
+	var routes = [{ path: '/', component: _Home2.default, name: 'home' }, { path: '/tour', component: _Tour2.default, name: 'tour' }, { path: '/login', component: _Auth2.default, name: 'login' }, { path: '/newpassword', component: _Auth2.default, name: 'newpassword' }, { path: '/logout', component: _Logout2.default, name: 'logout' }, { path: '/register', component: _Register2.default, name: 'register' }, { path: '/timeline', component: _Timeline2.default, name: 'timeline' }, { path: '/emergency', component: _Emergency2.default, name: 'emergency' }, { path: '/lesson-:id', component: _Lesson2.default, name: 'lesson' }, { path: '/challenge', component: _Challenge2.default, name: 'challenge' }, { path: '/challenge-new', component: _ChallengeNew2.default, name: 'challenge_new' }, { path: '/cheatsheet-:id', component: _Cheatsheet2.default, name: 'cheatsheet' }, { path: '/feedback-:id', component: _ChallengeDetails2.default, name: 'feedback' }, { path: '/profile', component: _Profile2.default, name: 'profile' }];
 
 	var router = new _vueRouter2.default({
 	  routes: routes
@@ -35483,6 +35487,11 @@
 	    },
 
 	    created: function created() {
+	        var tour = _storage2.default.get('tour');
+	        if (!tour) {
+	            this.$router.push('tour');
+	        }
+
 	        this.loadLabels();
 	        _auth2.default.check();
 	        if (!_auth2.default.authenticated) {
@@ -67280,6 +67289,491 @@
 	        });
 	    }
 	};
+
+/***/ },
+/* 356 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__vue_script__ = __webpack_require__(357)
+	__vue_template__ = __webpack_require__(358)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "/Users/racheljaro/webroot/yipp/app/src/components/Tour.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 357 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _locale = __webpack_require__(350);
+
+	var _locale2 = _interopRequireDefault(_locale);
+
+	var _index = __webpack_require__(8);
+
+	var _config = __webpack_require__(1);
+
+	var _config2 = _interopRequireDefault(_config);
+
+	var _auth = __webpack_require__(184);
+
+	var _auth2 = _interopRequireDefault(_auth);
+
+	var _profile = __webpack_require__(355);
+
+	var _profile2 = _interopRequireDefault(_profile);
+
+	var _jquery = __webpack_require__(11);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	var _storage = __webpack_require__(2);
+
+	var _storage2 = _interopRequireDefault(_storage);
+
+	var _hopscotch = __webpack_require__(360);
+
+	var _hopscotch2 = _interopRequireDefault(_hopscotch);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// <template>
+	//
+	//     <div id="container">
+	//
+	//     <header>
+	//         <div class="title-area">
+	//             <i class="icon-yipp_profile_line tour-5"></i>
+	//             <span>Trainingen</span>
+	//             <i class="icon-yipp_notification_line2 tour-4"></i>
+	//         </div>
+	//
+	//         <div class="user-area">
+	//             <div class="child-name">[Name child]</div>
+	//             <ul class="months-level">
+	//                 <li>
+	//                     <span>8</span>  
+	//                     <span>Maanden</span>
+	//                 </li>
+	//                 <li class="tour-1">
+	//                     <span>1</span>
+	//                     <span>Level</span>
+	//                 </li>
+	//                 <li>
+	//                     <a href=""><i class="icon-yipp_down"></i></a>
+	//                 </li>
+	//             </ul>
+	//             <div class="photo"></div>
+	//         </div>
+	//     </header>
+	//
+	//     <section class="traingen" id="page-1">
+	//
+	//             <ul id="list-icons">
+	//                 <li class="tour-2">
+	//                     <a href="">
+	//                     <span class="icon icon-yipp_check_full big active"></span> 1.Nutrition fruit &amp; vegetable
+	//                     </a>
+	//                 </li>
+	//
+	//                 <li>
+	//                     <a href="">
+	//                     <span class="icon icon-yipp_water_full big active"></span> 
+	//                     2.Drinking from a cup
+	//                     </a>
+	//                 </li>
+	//
+	//                 <li class="tour-3">
+	//                     <a href="">
+	//                     <span class="icon icon-yipp_check_line small active"></span> 
+	//                     if the plan
+	//                     </a>
+	//                 </li>
+	//
+	//                 <li>
+	//                     <a href="">
+	//                         <span class="icon icon-yipp_sleep_line big normal"></span> 
+	//                         3.Importance of sleep
+	//                     </a>
+	//                 </li>
+	//
+	//                 <li>
+	//                     <a href="">
+	//                         <span class="icon icon-yipp_apple_line big normal"></span> 
+	//                         4.Practice Food
+	//                     </a>
+	//                 </li>
+	//
+	//                 <li>
+	//                     <a href="">
+	//                     <span class="icon  icon-yipp_camera_line small active"></span> 
+	//                     Offering 10 times
+	//                     </a>
+	//                 </li>
+	//
+	//                 <li>
+	//                     <a href="">
+	//                     <span class="icon icon-yipp_check_full big active"></span> 5.Nutrition fruit &amp; vegetable
+	//                     </a>
+	//                 </li>
+	//
+	//                 <li>
+	//                     <a href="">
+	//                     <span class="icon icon-yipp_water_full big active"></span> 
+	//                     6.Drinking from a cup
+	//                     </a>
+	//                 </li>
+	//
+	//                 <li>
+	//                     <a href="">
+	//                     <span class="icon icon-yipp_check_line small active"></span> 
+	//                     if the plan
+	//                     </a>
+	//                 </li>
+	//
+	//                 <li>
+	//                     <a href="">
+	//                         <span class="icon icon-yipp_sleep_line big normal"></span> 
+	//                         7.Importance of sleep
+	//                     </a>
+	//                 </li>
+	//
+	//                 <li>
+	//                     <a href="">
+	//                         <span class="icon icon-yipp_apple_line big normal"></span> 
+	//                         8.Practice Food
+	//                     </a>
+	//                 </li>
+	//
+	//                 <li>
+	//                     <a href="">
+	//                     <span class="icon icon-yipp_camera_line small active"></span> 
+	//                     Offering 10 times
+	//                     </a>
+	//                 </li>
+	//             </ul>
+	//
+	//     </section>
+	//
+	//
+	//     <section class="traingen2" id="page-2">
+	//         <ul class="data">
+	//             <li>
+	//             <span class="big">60</span>
+	//
+	//             <span class="small left">
+	//             Je gebruikt<br>
+	//             de app nu<br>
+	//             <strong>dagen</strong>
+	//             </span>
+	//             </li>
+	//             <li>
+	//             <span class="big">1</span>
+	//                 <span class="small right">
+	//                 <strong>Doel (en)</strong><br>
+	//                 behaald
+	//                 </span>
+	//             </li>
+	//         </ul>
+	//
+	//         <div class="mTitle"><span>Challenges</span></div>
+	//
+	//         <div class="challenge">
+	//
+	//             <ul>
+	//                 <li class="active tour-6">1</li>
+	//                 <li class="semi">2</li>
+	//                 <li>3</li>
+	//                 <li>4</li>
+	//                 <li>5</li>
+	//                 <li>6</li>
+	//                 <li>7</li>
+	//                 <li>8</li>
+	//                 <li>9</li>
+	//                 <li>10</li>
+	//             </ul>
+	//
+	//         </div>
+	//
+	//         <ul class="challenges">
+	//
+	//             <li class="active tour-7">
+	//                 <i class="icon-yipp_water_badge"></i>
+	//                 <strong>Challenge 5</strong>
+	//                 <p>Drinking from a cup</p>
+	//             </li>
+	//
+	//             <li class="active">
+	//                 <i class="icon-yipp_apple_badge"></i>
+	//                 <strong>Challenge 6</strong>
+	//                 <p>Practivce food</p>
+	//             </li>
+	//
+	//             <li>
+	//                 <i class="icon-yipp_sleep_badge"></i>
+	//                 <strong>Challenge 7</strong>
+	//                 <p>Sleeping ritual</p>
+	//             </li>
+	//
+	//             <li>
+	//                 <i class="icon-yipp_apple_badge"></i>
+	//                 <strong>Challenge 8</strong>
+	//                 <p>Eating together</p>
+	//             </li>
+	//
+	//         </ul>
+	//
+	//         <div class="mTitle"><span>Titel</span></div>
+	//
+	//         <div class="place">
+	//
+	//             <i class="icon-yipp_supermom_full"></i>
+	//
+	//             <div class="right">
+	//
+	//                 <span>level 1</span>
+	//
+	//                 <strong>
+	//                 Beginnende <br>
+	//                 mama
+	//                 </strong>
+	//             </div>
+	//
+	//         </div>
+	//
+	//         <div class="mTitle"><span>Gebruikers</span></div>
+	//
+	//         <div class="total">
+	//             <strong>2546</strong>
+	//             <div class="right">
+	//             Deze app heeft al <br>
+	//             <strong>getbruikers</strong>
+	//             </div>
+	//         </div>            
+	//
+	//     </section>
+	//
+	//     <section id="page-3">
+	//         <div class="panel" id="cards">
+	//             <a href="" class="back"><i class="icon-yipp_check_full"></i></a>
+	//             <div class="bar"><span class="bar-inner"></span></div>
+	//             <a href="" class="home"><i class="icon-yipp_home_full-"></i></a>
+	//
+	//
+	//           <div id="paper">
+	//
+	//               <h3>Why?</h3>
+	//
+	//               <p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>
+	//
+	//               <i class="heart icon-yipp_check_full tour-8"></i>    
+	//
+	//             <div id="paper_foo1"><div id="paper_foo2"></div></div>
+	//           </div>
+	//
+	//         </div>
+	//     </section>
+	//
+	//         <footer>
+	//             <ul>
+	//                 <li><a href="" class="active"><span class="icon-yipp_home_full-"></span>Training</a></li>
+	//                 <li><a href=""><span class="icon-yipp_challenge_line"></span>Challenge</a></li>
+	//             </ul>
+	//         </footer>
+	//
+	//     </div>
+	//
+	//
+	// </template>
+	//
+	// <script>
+	exports.default = {
+	    data: function data() {
+	        return {
+	            child: {},
+	            childAge: 0,
+	            userID: 0,
+	            label: {},
+	            profile: {},
+	            currentLevel: 0
+	        };
+	    },
+
+	    created: function created() {
+	        this.loadLabels();
+	        _auth2.default.check();
+	        if (!_auth2.default.authenticated) {
+	            this.redirectGuest();
+	        }
+
+	        this.child = _auth2.default.user.data.child;
+	        this.childAge = this.child.get('age');
+	        this.userID = _auth2.default.user.get('id');
+
+	        var that = this;
+
+	        var tour = {
+	            id: "test",
+	            steps: [{
+	                title: "",
+	                content: "Tap here if you want to see all levels.",
+	                target: ".tour-1",
+	                placement: "bottom"
+	            }, {
+	                title: "",
+	                content: "Tap here if you want to start your first lesson.",
+	                target: ".tour-2",
+	                placement: "bottom"
+	            }, {
+	                title: "",
+	                content: "If you tap here you can start your first challenge",
+	                target: ".tour-3",
+	                placement: "bottom"
+	            }, {
+	                title: "",
+	                content: "The emergency button helps you when you need it.",
+	                target: ".tour-4",
+	                placement: "left"
+	            }, {
+	                title: "",
+	                content: "Check your profile",
+	                target: ".tour-5",
+	                placement: "bottom",
+	                onNext: function onNext() {
+	                    that.showPage(2);
+	                }
+	            }, {
+	                title: "",
+	                content: "Slide to switch between levels",
+	                target: ".tour-6",
+	                placement: "bottom"
+	            }, {
+	                title: "",
+	                content: "Tap to start a challenge or see the result.",
+	                target: ".tour-7",
+	                placement: "bottom",
+	                onNext: function onNext() {
+	                    that.showPage(3);
+	                }
+	            }, {
+	                title: "",
+	                content: "If you like this card, we will save it in your cheatsheet",
+	                target: ".tour-8",
+	                placement: "bottom"
+	            }],
+	            onEnd: function onEnd() {
+	                _storage2.default.save('tour', 1);
+	                that.$router.push('timeline');
+	            }
+	        };
+
+	        setTimeout(function () {
+	            that.showPage(1);
+	            _hopscotch2.default.startTour(tour, 1);
+	        }, 1);
+	    },
+	    methods: {
+	        showPage: function showPage(page) {
+	            var page1 = (0, _jquery2.default)('#page-1');
+	            var page2 = (0, _jquery2.default)('#page-2');
+	            var page3 = (0, _jquery2.default)('#page-3');
+
+	            var header = (0, _jquery2.default)('header');
+	            var footer = (0, _jquery2.default)('footer');
+
+	            page1.hide();
+	            page2.hide();
+	            page3.hide();
+
+	            if (page == 1) {
+	                page1.show();
+	                header.show();
+	                footer.show();
+	            } else if (page == 2) {
+	                page2.show();
+	                header.show();
+	                footer.show();
+	            } else if (page == 3) {
+	                page3.show();
+	                header.hide();
+	                footer.hide();
+	            }
+	        },
+	        loadLabels: function loadLabels() {
+	            var that = this;
+	            _locale2.default.label(this, _config2.default.api.lang, function (response) {
+	                that.label = response;
+	            }, function (msg, response) {
+	                that.logError(msg);
+	            });
+	        },
+	        redirectGuest: function redirectGuest() {
+	            this.$router.push('login');
+	        },
+	        logError: function logError(msg) {
+	            this.loading = false;
+	            var msgStr = '';
+	            if (typeof msg == 'string') {
+	                msgStr = msg;
+	            } else {
+	                _jquery2.default.each(msg, function (label, value) {
+	                    msgStr += value + ' ';
+	                });
+	            }
+
+	            this.error_message = msgStr;
+	        }
+	    }
+	};
+	// </script>
+	//
+	//
+
+/***/ },
+/* 358 */
+/***/ function(module, exports) {
+
+	module.exports = "\n\n    <div id=\"container\">\n        \n    <header>\n        <div class=\"title-area\">\n            <i class=\"icon-yipp_profile_line tour-5\"></i>\n            <span>Trainingen</span>\n            <i class=\"icon-yipp_notification_line2 tour-4\"></i>\n        </div>\n\n        <div class=\"user-area\">\n            <div class=\"child-name\">[Name child]</div>\n            <ul class=\"months-level\">\n                <li>\n                    <span>8</span>  \n                    <span>Maanden</span>\n                </li>\n                <li class=\"tour-1\">\n                    <span>1</span>\n                    <span>Level</span>\n                </li>\n                <li>\n                    <a href=\"\"><i class=\"icon-yipp_down\"></i></a>\n                </li>\n            </ul>\n            <div class=\"photo\"></div>\n        </div>\n    </header>\n        \n    <section class=\"traingen\" id=\"page-1\">\n\n            <ul id=\"list-icons\">\n                <li class=\"tour-2\">\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_check_full big active\"></span> 1.Nutrition fruit &amp; vegetable\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_water_full big active\"></span> \n                    2.Drinking from a cup\n                    </a>\n                </li>\n\n                <li class=\"tour-3\">\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_check_line small active\"></span> \n                    if the plan\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                        <span class=\"icon icon-yipp_sleep_line big normal\"></span> \n                        3.Importance of sleep\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                        <span class=\"icon icon-yipp_apple_line big normal\"></span> \n                        4.Practice Food\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon  icon-yipp_camera_line small active\"></span> \n                    Offering 10 times\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_check_full big active\"></span> 5.Nutrition fruit &amp; vegetable\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_water_full big active\"></span> \n                    6.Drinking from a cup\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_check_line small active\"></span> \n                    if the plan\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                        <span class=\"icon icon-yipp_sleep_line big normal\"></span> \n                        7.Importance of sleep\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                        <span class=\"icon icon-yipp_apple_line big normal\"></span> \n                        8.Practice Food\n                    </a>\n                </li>\n\n                <li>\n                    <a href=\"\">\n                    <span class=\"icon icon-yipp_camera_line small active\"></span> \n                    Offering 10 times\n                    </a>\n                </li>\n            </ul>\n        \n    </section>\n        \n            \n    <section class=\"traingen2\" id=\"page-2\">\n        <ul class=\"data\">\n            <li>\n            <span class=\"big\">60</span>\n            \n            <span class=\"small left\">\n            Je gebruikt<br>\n            de app nu<br>\n            <strong>dagen</strong>\n            </span>\n            </li>\n            <li>\n            <span class=\"big\">1</span>\n                <span class=\"small right\">\n                <strong>Doel (en)</strong><br>\n                behaald\n                </span>\n            </li>\n        </ul>\n\n        <div class=\"mTitle\"><span>Challenges</span></div>\n        \n        <div class=\"challenge\">\n        \n            <ul>\n                <li class=\"active tour-6\">1</li>\n                <li class=\"semi\">2</li>\n                <li>3</li>\n                <li>4</li>\n                <li>5</li>\n                <li>6</li>\n                <li>7</li>\n                <li>8</li>\n                <li>9</li>\n                <li>10</li>\n            </ul>\n        \n        </div>\n        \n        <ul class=\"challenges\">\n        \n            <li class=\"active tour-7\">\n                <i class=\"icon-yipp_water_badge\"></i>\n                <strong>Challenge 5</strong>\n                <p>Drinking from a cup</p>\n            </li>\n            \n            <li class=\"active\">\n                <i class=\"icon-yipp_apple_badge\"></i>\n                <strong>Challenge 6</strong>\n                <p>Practivce food</p>\n            </li>\n            \n            <li>\n                <i class=\"icon-yipp_sleep_badge\"></i>\n                <strong>Challenge 7</strong>\n                <p>Sleeping ritual</p>\n            </li>\n            \n            <li>\n                <i class=\"icon-yipp_apple_badge\"></i>\n                <strong>Challenge 8</strong>\n                <p>Eating together</p>\n            </li>\n        \n        </ul>\n        \n        <div class=\"mTitle\"><span>Titel</span></div>\n        \n        <div class=\"place\">\n        \n            <i class=\"icon-yipp_supermom_full\"></i>\n        \n            <div class=\"right\">\n                \n                <span>level 1</span>\n                \n                <strong>\n                Beginnende <br>\n                mama\n                </strong>\n            </div>\n        \n        </div>\n        \n        <div class=\"mTitle\"><span>Gebruikers</span></div>\n        \n        <div class=\"total\">\n            <strong>2546</strong>\n            <div class=\"right\">\n            Deze app heeft al <br>\n            <strong>getbruikers</strong>\n            </div>\n        </div>            \n        \n    </section>\n\n    <section id=\"page-3\">\n        <div class=\"panel\" id=\"cards\">\n            <a href=\"\" class=\"back\"><i class=\"icon-yipp_check_full\"></i></a>\n            <div class=\"bar\"><span class=\"bar-inner\"></span></div>\n            <a href=\"\" class=\"home\"><i class=\"icon-yipp_home_full-\"></i></a>\n\n\n          <div id=\"paper\">\n\n              <h3>Why?</h3>\n              \n              <p>Door een ‘als-dan’ plan te gebruiken, beschrijf je je heel specifiek welk gedrag je gaat uitvoeren in welke situatie. In plaats van een vage afspraak zoals “meer te bewegen”, maak je een specifieke afspraak met jezelf hoe en wanneer je dit gedrag gaat uitvoeren. Dit maakt de kans veel groter dat het je lukt om je doel te bereiken!</p>\n                \n              <i class=\"heart icon-yipp_check_full tour-8\"></i>    \n        \n            <div id=\"paper_foo1\"><div id=\"paper_foo2\"></div></div>\n          </div>\n            \n        </div>\n    </section>\n        \n        <footer>\n            <ul>\n                <li><a href=\"\" class=\"active\"><span class=\"icon-yipp_home_full-\"></span>Training</a></li>\n                <li><a href=\"\"><span class=\"icon-yipp_challenge_line\"></span>Challenge</a></li>\n            </ul>\n        </footer>\n\n    </div>\n\n\n";
+
+/***/ },
+/* 359 */,
+/* 360 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**! hopscotch - v0.2.8
+	*
+	* Copyright 2017 LinkedIn Corp. All rights reserved.
+	*
+	* Licensed under the Apache License, Version 2.0 (the "License");
+	* you may not use this file except in compliance with the License.
+	* You may obtain a copy of the License at
+	*
+	*     http://www.apache.org/licenses/LICENSE-2.0
+	*
+	* Unless required by applicable law or agreed to in writing, software
+	* distributed under the License is distributed on an "AS IS" BASIS,
+	* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	* See the License for the specific language governing permissions and
+	* limitations under the License.
+	*/
+	!function(a,b){"use strict";if(true)!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (b), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));else if("object"==typeof exports)module.exports=b();else{var c="hopscotch";if(a[c])return;a[c]=b()}}(this,function(){var a,b,c,d,e,f,g,h,i,j,k,l,m,n="bubble_default",o=window.Sizzle||null,p="undefined",q=!1,r=typeof jQuery!==p,s=!1,t=!1,u=window.document,v=/^[a-zA-Z]+[a-zA-Z0-9_-]*$/,w={left:"right",right:"left"};try{typeof window.sessionStorage!==p&&(s=!0,sessionStorage.setItem("hopscotch.test.storage","ok"),sessionStorage.removeItem("hopscotch.test.storage"),t=!0)}catch(x){}return l={smoothScroll:!0,scrollDuration:1e3,scrollTopMargin:200,showCloseButton:!0,showPrevButton:!1,showNextButton:!0,bubbleWidth:280,bubblePadding:15,arrowWidth:20,skipIfNoElement:!0,isRtl:!1,cookieName:"hopscotch.tour.state"},Array.isArray||(Array.isArray=function(a){return"[object Array]"===Object.prototype.toString.call(a)}),k=function(){q&&m.startTour()},h={addClass:function(a,b){var c,d,e,f;if(a.className){for(d=b.split(/\s+/),c=" "+a.className+" ",e=0,f=d.length;f>e;++e)c.indexOf(" "+d[e]+" ")<0&&(c+=d[e]+" ");a.className=c.replace(/^\s+|\s+$/g,"")}else a.className=b},removeClass:function(a,b){var c,d,e,f;for(d=b.split(/\s+/),c=" "+a.className+" ",e=0,f=d.length;f>e;++e)c=c.replace(" "+d[e]+" "," ");a.className=c.replace(/^\s+|\s+$/g,"")},hasClass:function(a,b){var c;return a.className?(c=" "+a.className+" ",-1!==c.indexOf(" "+b+" ")):!1},getPixelValue:function(a){var b=typeof a;return"number"===b?a:"string"===b?parseInt(a,10):0},valOrDefault:function(a,b){return typeof a!==p?a:b},invokeCallbackArrayHelper:function(a){var b;return Array.isArray(a)&&(b=j[a[0]],"function"==typeof b)?b.apply(this,a.slice(1)):void 0},invokeCallbackArray:function(a){var b,c;if(Array.isArray(a)){if("string"==typeof a[0])return h.invokeCallbackArrayHelper(a);for(b=0,c=a.length;c>b;++b)h.invokeCallback(a[b])}},invokeCallback:function(a){return"function"==typeof a?a():"string"==typeof a&&j[a]?j[a]():h.invokeCallbackArray(a)},invokeEventCallbacks:function(a,b){var c,d,e=i[a];if(b)return this.invokeCallback(b);for(c=0,d=e.length;d>c;++c)this.invokeCallback(e[c].cb)},getScrollTop:function(){var a;return a=typeof window.pageYOffset!==p?window.pageYOffset:u.documentElement.scrollTop},getScrollLeft:function(){var a;return a=typeof window.pageXOffset!==p?window.pageXOffset:u.documentElement.scrollLeft},getWindowHeight:function(){return window.innerHeight||u.documentElement.clientHeight},addEvtListener:function(a,b,c){return a?a.addEventListener?a.addEventListener(b,c,!1):a.attachEvent("on"+b,c):void 0},removeEvtListener:function(a,b,c){return a?a.removeEventListener?a.removeEventListener(b,c,!1):a.detachEvent("on"+b,c):void 0},documentIsReady:function(){return"complete"===u.readyState},evtPreventDefault:function(a){a.preventDefault?a.preventDefault():event&&(event.returnValue=!1)},extend:function(a,b){var c;for(c in b)b.hasOwnProperty(c)&&(a[c]=b[c])},getStepTargetHelper:function(a){var b=u.getElementById(a);if(b)return b;if(r)return b=jQuery(a),b.length?b[0]:null;if(o)return b=new o(a),b.length?b[0]:null;if(u.querySelector)try{return u.querySelector(a)}catch(c){}return/^#[a-zA-Z][\w-_:.]*$/.test(a)?u.getElementById(a.substring(1)):null},getStepTarget:function(a){var b;if(!a||!a.target)return null;if("string"==typeof a.target)return h.getStepTargetHelper(a.target);if(Array.isArray(a.target)){var c,d;for(c=0,d=a.target.length;d>c;c++)if("string"==typeof a.target[c]&&(b=h.getStepTargetHelper(a.target[c])))return b;return null}return a.target},getI18NString:function(a){return e[a]||d[a]},setState:function(a,b,c){var d,e="";if(s&&t)try{sessionStorage.setItem(a,b)}catch(f){t=!1,this.setState(a,b,c)}else s&&sessionStorage.removeItem(a),c&&(d=new Date,d.setTime(d.getTime()+24*c*60*60*1e3),e="; expires="+d.toGMTString()),u.cookie=a+"="+b+e+"; path=/"},getState:function(a){var b,c,d,e=a+"=",f=u.cookie.split(";");if(s&&(d=sessionStorage.getItem(a)))return d;for(b=0;b<f.length;b++){for(c=f[b];" "===c.charAt(0);)c=c.substring(1,c.length);if(0===c.indexOf(e)){d=c.substring(e.length,c.length);break}}return d},clearState:function(a){s?sessionStorage.removeItem(a):this.setState(a,"",-1)},normalizePlacement:function(a){!a.placement&&a.orientation&&(a.placement=a.orientation)},flipPlacement:function(a){if(a.isRtl&&!a._isFlipped){var b,c,d=["orientation","placement"];a.xOffset&&(a.xOffset=-1*this.getPixelValue(a.xOffset));for(c in d)b=d[c],a.hasOwnProperty(b)&&w.hasOwnProperty(a[b])&&(a[b]=w[a[b]]);a._isFlipped=!0}}},h.addEvtListener(window,"load",k),i={next:[],prev:[],start:[],end:[],show:[],error:[],close:[]},j={},d={stepNums:null,nextBtn:"Next",prevBtn:"Back",doneBtn:"Done",skipBtn:"Skip",closeTooltip:"Close"},e={},b=function(a){this.init(a)},b.prototype={isShowing:!1,currStep:void 0,setPosition:function(a){var b,c,d,e,f,g,i,j=h.getStepTarget(a),k=this.element,l=this.arrowEl,m=a.isRtl?"right":"left";if(h.flipPlacement(a),h.normalizePlacement(a),c=k.offsetWidth,b=k.offsetHeight,h.removeClass(k,"fade-in-down fade-in-up fade-in-left fade-in-right"),d=j.getBoundingClientRect(),i=a.isRtl?d.right-c:d.left,"top"===a.placement)e=d.top-b-this.opt.arrowWidth,f=i;else if("bottom"===a.placement)e=d.bottom+this.opt.arrowWidth,f=i;else if("left"===a.placement)e=d.top,f=d.left-c-this.opt.arrowWidth;else{if("right"!==a.placement)throw new Error("Bubble placement failed because step.placement is invalid or undefined!");e=d.top,f=d.right+this.opt.arrowWidth}g="center"!==a.arrowOffset?h.getPixelValue(a.arrowOffset):a.arrowOffset,g?"top"===a.placement||"bottom"===a.placement?(l.style.top="","center"===g?l.style[m]=Math.floor(c/2-l.offsetWidth/2)+"px":l.style[m]=g+"px"):("left"===a.placement||"right"===a.placement)&&(l.style[m]="","center"===g?l.style.top=Math.floor(b/2-l.offsetHeight/2)+"px":l.style.top=g+"px"):(l.style.top="",l.style[m]=""),"center"===a.xOffset?f=d.left+j.offsetWidth/2-c/2:f+=h.getPixelValue(a.xOffset),"center"===a.yOffset?e=d.top+j.offsetHeight/2-b/2:e+=h.getPixelValue(a.yOffset),a.fixedElement||(e+=h.getScrollTop(),f+=h.getScrollLeft()),k.style.position=a.fixedElement?"fixed":"absolute",k.style.top=e+"px",k.style.left=f+"px"},render:function(a,b,c){var d,e,g,i,j,k,l,o,p,q,r=this.element;if(a?this.currStep=a:this.currStep&&(a=this.currStep),this.opt.isTourBubble?(i=m.getCurrTour(),i&&(e=i.customData,d=i.customRenderer,a.isRtl=a.hasOwnProperty("isRtl")?a.isRtl:i.hasOwnProperty("isRtl")?i.isRtl:this.opt.isRtl,g=i.unsafe,Array.isArray(i.steps)&&(j=i.steps.length,k=this._getStepI18nNum(this._getStepNum(j-1)),o=this._getStepNum(b)===this._getStepNum(j-1)))):(e=a.customData,d=a.customRenderer,g=a.unsafe,a.isRtl=a.hasOwnProperty("isRtl")?a.isRtl:this.opt.isRtl),l=o?h.getI18NString("doneBtn"):a.showSkip?h.getI18NString("skipBtn"):h.getI18NString("nextBtn"),h.flipPlacement(a),h.normalizePlacement(a),this.placement=a.placement,q={i18n:{prevBtn:h.getI18NString("prevBtn"),nextBtn:l,closeTooltip:h.getI18NString("closeTooltip"),stepNum:this._getStepI18nNum(this._getStepNum(b)),numSteps:k},buttons:{showPrev:h.valOrDefault(a.showPrevButton,this.opt.showPrevButton)&&this._getStepNum(b)>0,showNext:h.valOrDefault(a.showNextButton,this.opt.showNextButton),showCTA:h.valOrDefault(a.showCTAButton&&a.ctaLabel,!1),ctaLabel:a.ctaLabel,showClose:h.valOrDefault(this.opt.showCloseButton,!0)},step:{num:b,isLast:h.valOrDefault(o,!1),title:a.title||"",content:a.content||"",isRtl:a.isRtl,placement:a.placement,padding:h.valOrDefault(a.padding,this.opt.bubblePadding),width:h.getPixelValue(a.width)||this.opt.bubbleWidth,customData:a.customData||{}},tour:{isTour:this.opt.isTourBubble,numSteps:j,unsafe:h.valOrDefault(g,!1),customData:e||{}}},"function"==typeof d)r.innerHTML=d(q);else if("string"==typeof d){if(!m.templates||"function"!=typeof m.templates[d])throw new Error('Bubble rendering failed - template "'+d+'" is not a function.');r.innerHTML=m.templates[d](q)}else if(f)r.innerHTML=f(q);else{if(!m.templates||"function"!=typeof m.templates[n])throw new Error('Bubble rendering failed - template "'+n+'" is not a function.');r.innerHTML=m.templates[n](q)}for(children=r.children,numChildren=children.length,p=0;p<numChildren;p++)node=children[p],h.hasClass(node,"hopscotch-arrow")&&(this.arrowEl=node);return r.style.zIndex="number"==typeof a.zindex?a.zindex:"",this._setArrow(a.placement),this.hide(!1),this.setPosition(a),c&&c(!a.fixedElement),this},_getStepNum:function(a){var b,c,d=0,e=m.getSkippedStepsIndexes(),f=e.length;for(c=0;f>c;c++)b=e[c],a>b&&d++;return a-d},_getStepI18nNum:function(a){var b=h.getI18NString("stepNums");return b&&a<b.length?a=b[a]:a+=1,a},_setArrow:function(a){h.removeClass(this.arrowEl,"down up right left"),"top"===a?h.addClass(this.arrowEl,"down"):"bottom"===a?h.addClass(this.arrowEl,"up"):"left"===a?h.addClass(this.arrowEl,"right"):"right"===a&&h.addClass(this.arrowEl,"left")},_getArrowDirection:function(){return"top"===this.placement?"down":"bottom"===this.placement?"up":"left"===this.placement?"right":"right"===this.placement?"left":void 0},show:function(){var a=this,b="fade-in-"+this._getArrowDirection(),c=1e3;return h.removeClass(this.element,"hide"),h.addClass(this.element,b),setTimeout(function(){h.removeClass(a.element,"invisible")},50),setTimeout(function(){h.removeClass(a.element,b)},c),this.isShowing=!0,this},hide:function(a){var b=this.element;return a=h.valOrDefault(a,!0),b.style.top="",b.style.left="",a?(h.addClass(b,"hide"),h.removeClass(b,"invisible")):(h.removeClass(b,"hide"),h.addClass(b,"invisible")),h.removeClass(b,"animate fade-in-up fade-in-down fade-in-right fade-in-left"),this.isShowing=!1,this},destroy:function(){var a=this.element;a&&a.parentNode.removeChild(a),h.removeEvtListener(a,"click",this.clickCb)},_handleBubbleClick:function(a){function b(c){return c===a.currentTarget?null:h.hasClass(c,"hopscotch-cta")?"cta":h.hasClass(c,"hopscotch-next")?"next":h.hasClass(c,"hopscotch-prev")?"prev":h.hasClass(c,"hopscotch-close")?"close":b(c.parentElement)}var c;a=a||window.event;var d=a.target||a.srcElement;if(c=b(d),"cta"===c)this.opt.isTourBubble||m.getCalloutManager().removeCallout(this.currStep.id),this.currStep.onCTA&&h.invokeCallback(this.currStep.onCTA);else if("next"===c)m.nextStep(!0);else if("prev"===c)m.prevStep(!0);else if("close"===c){if(this.opt.isTourBubble){var e=m.getCurrStepNum(),f=m.getCurrTour(),g=e===f.steps.length-1;h.invokeEventCallbacks("close"),m.endTour(!0,g)}else this.opt.onClose&&h.invokeCallback(this.opt.onClose),this.opt.id&&!this.opt.isTourBubble?m.getCalloutManager().removeCallout(this.opt.id):this.destroy();h.evtPreventDefault(a)}},init:function(a){var b,c,d,e,f=u.createElement("div"),g=this,i=!1;this.element=f,e={showPrevButton:l.showPrevButton,showNextButton:l.showNextButton,bubbleWidth:l.bubbleWidth,bubblePadding:l.bubblePadding,arrowWidth:l.arrowWidth,isRtl:l.isRtl,showNumber:!0,isTourBubble:!0},a=typeof a===p?{}:a,h.extend(e,a),this.opt=e,f.className="hopscotch-bubble animated",e.isTourBubble?(d=m.getCurrTour(),d&&h.addClass(f,"tour-"+d.id)):h.addClass(f,"hopscotch-callout no-number"),b=function(){!i&&g.isShowing&&(i=!0,setTimeout(function(){g.setPosition(g.currStep),i=!1},100))},h.addEvtListener(window,"resize",b),this.clickCb=function(a){g._handleBubbleClick(a)},h.addEvtListener(f,"click",this.clickCb),this.hide(),h.documentIsReady()?u.body.appendChild(f):(u.addEventListener?(c=function(){u.removeEventListener("DOMContentLoaded",c),window.removeEventListener("load",c),u.body.appendChild(f)},u.addEventListener("DOMContentLoaded",c,!1)):(c=function(){"complete"===u.readyState&&(u.detachEvent("onreadystatechange",c),window.detachEvent("onload",c),u.body.appendChild(f))},u.attachEvent("onreadystatechange",c)),h.addEvtListener(window,"load",c))}},c=function(){var a={},c={};this.createCallout=function(d){var e;if(!d.id)throw new Error("Must specify a callout id.");if(!v.test(d.id))throw new Error("Callout ID is using an invalid format. Use alphanumeric, underscores, and/or hyphens only. First character must be a letter.");if(a[d.id])throw new Error("Callout by that id already exists. Please choose a unique id.");if(!h.getStepTarget(d))throw new Error("Must specify existing target element via 'target' option.");return d.showNextButton=d.showPrevButton=!1,d.isTourBubble=!1,e=new b(d),a[d.id]=e,c[d.id]=d,e.render(d,null,function(){e.show(),d.onShow&&h.invokeCallback(d.onShow)}),e},this.getCallout=function(b){return a[b]},this.removeAllCallouts=function(){var b;for(b in a)a.hasOwnProperty(b)&&this.removeCallout(b)},this.removeCallout=function(b){var d=a[b];a[b]=null,c[b]=null,d&&d.destroy()},this.refreshCalloutPositions=function(){var b,d,e;for(b in a)a.hasOwnProperty(b)&&c.hasOwnProperty(b)&&(d=a[b],e=c[b],d&&e&&d.setPosition(e))}},a=function(a){var d,k,o,s,t,w,x,y,z=this,A={},B=[],C=function(a){return d&&d.element&&d.element.parentNode||(d=new b(o)),a&&h.extend(d.opt,{bubblePadding:E("bubblePadding"),bubbleWidth:E("bubbleWidth"),showNextButton:E("showNextButton"),showPrevButton:E("showPrevButton"),showCloseButton:E("showCloseButton"),arrowWidth:E("arrowWidth"),isRtl:E("isRtl")}),d},D=function(){d&&(d.destroy(),d=null)},E=function(a){return"undefined"==typeof o?l[a]:h.valOrDefault(o[a],l[a])},F=function(){var a;return a=!s||0>t||t>=s.steps.length?null:s.steps[t]},G=function(){z.nextStep()},H=function(a){var b,c,d,e,f,g,i=C(),j=i.element,k=h.getPixelValue(j.style.top),l=k+h.getPixelValue(j.offsetHeight),m=h.getStepTarget(F()),n=m.getBoundingClientRect(),o=n.top+h.getScrollTop(),q=n.bottom+h.getScrollTop(),s=o>k?k:o,t=l>q?l:q,v=h.getScrollTop(),w=v+h.getWindowHeight(),x=s-E("scrollTopMargin");s>=v&&(s<=v+E("scrollTopMargin")||w>=t)?a&&a():E("smoothScroll")?typeof YAHOO!==p&&typeof YAHOO.env!==p&&typeof YAHOO.env.ua!==p&&typeof YAHOO.util!==p&&typeof YAHOO.util.Scroll!==p?(b=YAHOO.env.ua.webkit?u.body:u.documentElement,d=YAHOO.util.Easing?YAHOO.util.Easing.easeOut:void 0,c=new YAHOO.util.Scroll(b,{scroll:{to:[0,x]}},E("scrollDuration")/1e3,d),c.onComplete.subscribe(a),c.animate()):r?jQuery("body, html").animate({scrollTop:x},E("scrollDuration"),a):(0>x&&(x=0),e=v>s?-1:1,f=Math.abs(v-x)/(E("scrollDuration")/10),(g=function(){var b=h.getScrollTop(),c=b+e*f;return e>0&&c>=x||0>e&&x>=c?(c=x,a&&a(),void window.scrollTo(0,c)):(window.scrollTo(0,c),h.getScrollTop()===b?void(a&&a()):void setTimeout(g,10))})()):(window.scrollTo(0,x),a&&a())},I=function(a,b){var c,d,e;t+a>=0&&t+a<s.steps.length?(t+=a,d=F(),e=function(){c=h.getStepTarget(d),c?(A[t]&&delete A[t],b(t)):(A[t]=!0,h.invokeEventCallbacks("error"),I(a,b))},d.delay?setTimeout(e,d.delay):e()):b(-1)},J=function(a,b){var c,d,e,f,g=C(),i=this;if(g.hide(),a=h.valOrDefault(a,!0),c=F(),c.nextOnTargetClick&&h.removeEvtListener(h.getStepTarget(c),"click",G),d=c,e=b>0?d.multipage:t>0&&s.steps[t-1].multipage,f=function(c){var f;if(-1===c)return this.endTour(!0);if(a&&(f=b>0?h.invokeEventCallbacks("next",d.onNext):h.invokeEventCallbacks("prev",d.onPrev)),c===t){if(e)return void N();f=h.valOrDefault(f,!0),f?this.showStep(c):this.endTour(!1)}},!e&&E("skipIfNoElement"))I(b,function(a){f.call(i,a)});else if(t+b>=0&&t+b<s.steps.length){if(t+=b,c=F(),!h.getStepTarget(c)&&!e)return h.invokeEventCallbacks("error"),this.endTour(!0,!1);f.call(this,t)}else if(t+b===s.steps.length)return this.endTour();return this},K=function(a){var b,c,d,e={};for(b in a)a.hasOwnProperty(b)&&"id"!==b&&"steps"!==b&&(e[b]=a[b]);return y.call(this,e,!0),c=h.getState(E("cookieName")),c&&(d=c.split(":"),w=d[0],x=d[1],d.length>2&&(B=d[2].split(",")),x=parseInt(x,10)),this},L=function(a,b,c){var d,e;if(t=a||0,A=b||{},d=F(),e=h.getStepTarget(d))return void c(t);if(!e){if(h.invokeEventCallbacks("error"),A[t]=!0,E("skipIfNoElement"))return void I(1,c);t=-1,c(t)}},M=function(a){function b(){d.show(),h.invokeEventCallbacks("show",c.onShow)}var c=s.steps[a],d=C(),e=h.getStepTarget(c);t!==a&&F().nextOnTargetClick&&h.removeEvtListener(h.getStepTarget(F()),"click",G),t=a,d.hide(!1),d.render(c,a,function(a){a?H(b):b(),c.nextOnTargetClick&&h.addEvtListener(e,"click",G)}),N()},N=function(){var a=s.id+":"+t,b=m.getSkippedStepsIndexes();b&&b.length>0&&(a+=":"+b.join(",")),h.setState(E("cookieName"),a,1)},O=function(a){a&&this.configure(a)};this.getCalloutManager=function(){return typeof k===p&&(k=new c),k},this.startTour=function(a,b){var c,d,e={},f=this;if(!s){if(!a)throw new Error("Tour data is required for startTour.");if(!a.id||!v.test(a.id))throw new Error("Tour ID is using an invalid format. Use alphanumeric, underscores, and/or hyphens only. First character must be a letter.");s=a,K.call(this,a)}if(typeof b!==p){if(b>=s.steps.length)throw new Error("Specified step number out of bounds.");d=b}if(!h.documentIsReady())return q=!0,this;if("undefined"==typeof d&&s.id===w&&typeof x!==p){if(d=x,B.length>0)for(var g=0,i=B.length;i>g;g++)e[B[g]]=!0}else d||(d=0);return L(d,e,function(a){var b=-1!==a&&h.getStepTarget(s.steps[a]);return b?(h.invokeEventCallbacks("start"),c=C(),c.hide(!1),f.isActive=!0,void(h.getStepTarget(F())?f.showStep(a):(h.invokeEventCallbacks("error"),E("skipIfNoElement")&&f.nextStep(!1)))):void f.endTour(!1,!1)}),this},this.showStep=function(a){var b=s.steps[a],c=t;return h.getStepTarget(b)?(b.delay?setTimeout(function(){M(a)},b.delay):M(a),this):(t=a,h.invokeEventCallbacks("error"),void(t=c))},this.prevStep=function(a){return J.call(this,a,-1),this},this.nextStep=function(a){return J.call(this,a,1),this},this.endTour=function(a,b){var c,d=C();return a=h.valOrDefault(a,!0),b=h.valOrDefault(b,!0),s&&(c=F(),c&&c.nextOnTargetClick&&h.removeEvtListener(h.getStepTarget(c),"click",G)),t=0,x=void 0,d.hide(),a&&h.clearState(E("cookieName")),this.isActive&&(this.isActive=!1,s&&b&&h.invokeEventCallbacks("end")),this.removeCallbacks(null,!0),this.resetDefaultOptions(),D(),s=null,this},this.getCurrTour=function(){return s},this.getCurrTarget=function(){return h.getStepTarget(F())},this.getCurrStepNum=function(){return t},this.getSkippedStepsIndexes=function(){var a,b=[];for(a in A)b.push(a);return b},this.refreshBubblePosition=function(){var a=F();return a&&C().setPosition(a),this.getCalloutManager().refreshCalloutPositions(),this},this.listen=function(a,b,c){return a&&i[a].push({cb:b,fromTour:c}),this},this.unlisten=function(a,b){var c,d,e=i[a];for(c=0,d=e.length;d>c;++c)e[c].cb===b&&e.splice(c,1);return this},this.removeCallbacks=function(a,b){var c,d,e,f;for(f in i)if(!a||a===f)if(b)for(c=i[f],d=0,e=c.length;e>d;++d)c[d].fromTour&&(c.splice(d--,1),--e);else i[f]=[];return this},this.registerHelper=function(a,b){"string"==typeof a&&"function"==typeof b&&(j[a]=b)},this.unregisterHelper=function(a){j[a]=null},this.invokeHelper=function(a){var b,c,d=[];for(b=1,c=arguments.length;c>b;++b)d.push(arguments[b]);j[a]&&j[a].call(null,d)},this.setCookieName=function(a){return o.cookieName=a,this},this.resetDefaultOptions=function(){return o={},this},this.resetDefaultI18N=function(){return e={},this},this.getState=function(){return h.getState(E("cookieName"))},y=function(a,b){var c,d,f,g,i=["next","prev","start","end","show","error","close"];for(o||this.resetDefaultOptions(),h.extend(o,a),a&&h.extend(e,a.i18n),f=0,g=i.length;g>f;++f)d="on"+i[f].charAt(0).toUpperCase()+i[f].substring(1),a[d]&&this.listen(i[f],a[d],b);return c=C(!0),this},this.configure=function(a){return y.call(this,a,!1)},this.setRenderer=function(a){var b=typeof a;return"string"===b?(n=a,f=void 0):"function"===b&&(f=a),this},this.setEscaper=function(a){return"function"==typeof a&&(g=a),this},O.call(this,a)},m=new a,function(){var a={};a.escape=function(a){return g?g(a):null==a?"":(""+a).replace(new RegExp("[&<>\"']","g"),function(a){return"&"==a?"&amp;":"<"==a?"&lt;":">"==a?"&gt;":'"'==a?"&quot;":"'"==a?"&#x27;":void 0})},this.templates=this.templates||{},this.templates.bubble_default=function(b){function c(b,c){return c?a.escape(b):b}var d,e="";a.escape,Array.prototype.join;e+="\n";var f=b.i18n,g=b.buttons,h=b.step,i=b.tour;return e+='\n<div class="hopscotch-bubble-container" style="width: '+(null==(d=h.width)?"":d)+"px; padding: "+(null==(d=h.padding)?"":d)+'px;">\n  ',i.isTour&&(e+='<span class="hopscotch-bubble-number">'+(null==(d=f.stepNum)?"":d)+"</span>"),e+='\n  <div class="hopscotch-bubble-content">\n    ',""!==h.title&&(e+='<h3 class="hopscotch-title">'+(null==(d=c(h.title,i.unsafe))?"":d)+"</h3>"),e+="\n    ",""!==h.content&&(e+='<div class="hopscotch-content">'+(null==(d=c(h.content,i.unsafe))?"":d)+"</div>"),e+='\n  </div>\n  <div class="hopscotch-actions">\n    ',g.showPrev&&(e+='<button class="hopscotch-nav-button prev hopscotch-prev">'+(null==(d=f.prevBtn)?"":d)+"</button>"),e+="\n    ",g.showCTA&&(e+='<button class="hopscotch-nav-button next hopscotch-cta">'+(null==(d=g.ctaLabel)?"":d)+"</button>"),e+="\n    ",g.showNext&&(e+='<button class="hopscotch-nav-button next hopscotch-next">'+(null==(d=f.nextBtn)?"":d)+"</button>"),e+="\n  </div>\n  ",g.showClose&&(e+='<button class="hopscotch-bubble-close hopscotch-close">'+(null==(d=f.closeTooltip)?"":d)+"</button>"),e+='\n</div>\n<div class="hopscotch-bubble-arrow-container hopscotch-arrow">\n  <div class="hopscotch-bubble-arrow-border"></div>\n  <div class="hopscotch-bubble-arrow"></div>\n</div>\n'}}.call(m),m});
 
 /***/ }
 /******/ ]);

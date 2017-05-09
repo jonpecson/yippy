@@ -11,6 +11,7 @@ import ChallengeNew from './components/ChallengeNew.vue'
 import ChallengeDetails from './components/ChallengeDetails.vue'
 import Cheatsheet from './components/Cheatsheet.vue'
 import Profile from './components/Profile.vue'
+import Tour from './components/Tour.vue'
 import VueResource from 'vue-resource'
 Vue.use(VueResource)
 
@@ -25,6 +26,7 @@ Vue.use(VueTouch, {name: 'v-touch'})
 
 const routes = [
   { path: '/', component: Home, name: 'home' },
+  { path: '/tour', component: Tour, name: 'tour' },
   { path: '/login', component: Auth, name: 'login' },
   { path: '/newpassword', component: Auth, name: 'newpassword' },
   { path: '/logout', component: Logout, name: 'logout' },
