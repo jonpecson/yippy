@@ -140,7 +140,7 @@ export default {
         this.child = auth.user.data.child;
         this.childAge = this.child.get('age');
         this.userID = auth.user.get('id');
-        this.userID = 32;
+        // this.userID = 32;
         
         this.showContent();
     },

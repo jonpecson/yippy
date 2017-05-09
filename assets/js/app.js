@@ -67190,7 +67190,7 @@
 	        this.child = _auth2.default.user.data.child;
 	        this.childAge = this.child.get('age');
 	        this.userID = _auth2.default.user.get('id');
-	        this.userID = 32;
+	        // this.userID = 32;
 
 	        this.showContent();
 	    },
