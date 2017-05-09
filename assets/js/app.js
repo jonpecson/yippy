@@ -35414,7 +35414,9 @@
 	//                 </li>
 	//             </ul>
 	//
-	//             <div class="photo"><img class="avatar" v-bind:src="child.get('image')"></div>
+	//             <div class="photo">
+	//                 <img class="avatar" v-bind:src="child.get('image')" v-on:click="goToProfile">
+	//             </div>
 	//
 	//         </div>
 	//     </header>
@@ -35608,6 +35610,10 @@
 	            }
 
 	            this.error_message = msgStr;
+	        },
+
+	        goToProfile: function goToProfile() {
+	            this.$router.push('profile');
 	        }
 	    },
 
@@ -35773,7 +35779,7 @@
 /* 294 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div id=\"container\">\n    <header>\n        <div class=\"title-area\">\n            <router-link :to=\"{ name: 'profile'}\"><i class=\"icon-yipp_profile_line\"></i></router-link>\n            <span>{{ label.header_timeline }}</span>\n            <router-link :to=\"{ name: 'emergency'}\"><i class=\"icon-yipp_notification_line2\"></i></router-link>\n        </div>\n\n        <div class=\"user-area\">\n            <div class=\"child-name\">{{ child.get('name') }}</div>\n            <ul class=\"months-level\">\n                <li>\n                    <span>{{ childAge }}</span>  \n                    <span>Maanden</span>\n                </li>\n                <li>\n                    <span>{{ currentLevel }}</span>\n                    <span>Level</span>\n                </li>\n                <li>\n                    <a href=\"#\" v-on:click.prevent=\"toggle\" v-if=\"page == 'lessons'\"><i class=\"icon-yipp_down\"></i></a>\n                    <a href=\"#\" v-on:click.prevent=\"toggle\" v-if=\"page == 'levels'\"><i class=\"icon-yipp_up\"></i></a>\n                </li>\n            </ul>\n\n            <div class=\"photo\"><img class=\"avatar\" v-bind:src=\"child.get('image')\"></div>\n            \n        </div>\n    </header>\n        \n        <section class=\"traingen\" v-if=\"page == 'lessons'\">\n            <ul id=\"list-icons\">\n                <li v-for=\"lesson in lessons\">\n                    <a href=\"#\" v-bind:data-id=\"lesson.id\" v-on:click.prevent=\"goTodo\">\n                        <span class=\"icon big active\" v-bind:class=\"lesson.icon\"></span>\n                        {{ lesson.counter }}. {{ lesson.title }}\n                    </a>\n                </li>\n            </ul>\n        </section>\n        \n            \n        <section class=\"traingen2\" v-if=\"page == 'levels'\">\n                    \n            <ul id=\"list-text\">\n                <li v-for=\"level in levels\">\n                    <a href=\"#\" v-if=\"level.active == 'active'\" \n                        v-bind:data-id=\"level.id\" \n                        v-on:click.prevent=\"setCurrentLevel\"\n                        v-bind:class=\"level.active\">\n                        <span v-bind:data-id=\"level.id\" class=\"level\">{{ level.counter }}</span> \n                        <span v-bind:data-id=\"level.id\" class=\"months\">{{ level.description }}</span>\n                    </a>\n\n                    <a href=\"#\" v-if=\"level.active == ''\" \n                        v-bind:data-id=\"level.id\" \n                        v-on:click.prevent=\"\"\n                        @click=\"showModal = true\"\n                        v-bind:class=\"level.active\">\n                        <span v-bind:data-id=\"level.id\" class=\"level\">{{ level.counter }}</span> \n                        <span v-bind:data-id=\"level.id\" class=\"months\">{{ level.description }}</span>\n                    </a>\n                </li>\n            </ul>\n        \n        </section>\n        \n        <footer>\n            <ul>\n                <li><a href=\"javascript:void(0);\" class=\"active\"><span class=\"icon-yipp_home_full-\"></span>Training</a></li>\n                <li><router-link :to=\"{ path: 'challenge'}\"><span class=\"icon-yipp_challenge_line\"></span>Challenge</router-link></li>\n            </ul>\n        </footer>\n\n        <modal v-if=\"showModal\" @close=\"showModal = false\">\n            <h3 slot=\"header\">Ooops...</h3>\n            <p slot=\"body\">This is not yet available</p>\n        </modal>\n</div>\n";
+	module.exports = "\n<div id=\"container\">\n    <header>\n        <div class=\"title-area\">\n            <router-link :to=\"{ name: 'profile'}\"><i class=\"icon-yipp_profile_line\"></i></router-link>\n            <span>{{ label.header_timeline }}</span>\n            <router-link :to=\"{ name: 'emergency'}\"><i class=\"icon-yipp_notification_line2\"></i></router-link>\n        </div>\n\n        <div class=\"user-area\">\n            <div class=\"child-name\">{{ child.get('name') }}</div>\n            <ul class=\"months-level\">\n                <li>\n                    <span>{{ childAge }}</span>  \n                    <span>Maanden</span>\n                </li>\n                <li>\n                    <span>{{ currentLevel }}</span>\n                    <span>Level</span>\n                </li>\n                <li>\n                    <a href=\"#\" v-on:click.prevent=\"toggle\" v-if=\"page == 'lessons'\"><i class=\"icon-yipp_down\"></i></a>\n                    <a href=\"#\" v-on:click.prevent=\"toggle\" v-if=\"page == 'levels'\"><i class=\"icon-yipp_up\"></i></a>\n                </li>\n            </ul>\n\n            <div class=\"photo\">\n                <img class=\"avatar\" v-bind:src=\"child.get('image')\" v-on:click=\"goToProfile\">\n            </div>\n            \n        </div>\n    </header>\n        \n        <section class=\"traingen\" v-if=\"page == 'lessons'\">\n            <ul id=\"list-icons\">\n                <li v-for=\"lesson in lessons\">\n                    <a href=\"#\" v-bind:data-id=\"lesson.id\" v-on:click.prevent=\"goTodo\">\n                        <span class=\"icon big active\" v-bind:class=\"lesson.icon\"></span>\n                        {{ lesson.counter }}. {{ lesson.title }}\n                    </a>\n                </li>\n            </ul>\n        </section>\n        \n            \n        <section class=\"traingen2\" v-if=\"page == 'levels'\">\n                    \n            <ul id=\"list-text\">\n                <li v-for=\"level in levels\">\n                    <a href=\"#\" v-if=\"level.active == 'active'\" \n                        v-bind:data-id=\"level.id\" \n                        v-on:click.prevent=\"setCurrentLevel\"\n                        v-bind:class=\"level.active\">\n                        <span v-bind:data-id=\"level.id\" class=\"level\">{{ level.counter }}</span> \n                        <span v-bind:data-id=\"level.id\" class=\"months\">{{ level.description }}</span>\n                    </a>\n\n                    <a href=\"#\" v-if=\"level.active == ''\" \n                        v-bind:data-id=\"level.id\" \n                        v-on:click.prevent=\"\"\n                        @click=\"showModal = true\"\n                        v-bind:class=\"level.active\">\n                        <span v-bind:data-id=\"level.id\" class=\"level\">{{ level.counter }}</span> \n                        <span v-bind:data-id=\"level.id\" class=\"months\">{{ level.description }}</span>\n                    </a>\n                </li>\n            </ul>\n        \n        </section>\n        \n        <footer>\n            <ul>\n                <li><a href=\"javascript:void(0);\" class=\"active\"><span class=\"icon-yipp_home_full-\"></span>Training</a></li>\n                <li><router-link :to=\"{ path: 'challenge'}\"><span class=\"icon-yipp_challenge_line\"></span>Challenge</router-link></li>\n            </ul>\n        </footer>\n\n        <modal v-if=\"showModal\" @close=\"showModal = false\">\n            <h3 slot=\"header\">Ooops...</h3>\n            <p slot=\"body\">This is not yet available</p>\n        </modal>\n</div>\n";
 
 /***/ },
 /* 295 */
@@ -67109,26 +67115,17 @@
 	// 		<div class="challenge">
 	//
 	// 			<ul>
-	// 				<li v-for="content of profile.challenges">{{ content.title }}</li>
-	// 				<li class="semi">2</li>
-	// 				<li>3</li>
-	// 				<li>4</li>
-	// 				<li>5</li>
-	// 				<li>6</li>
-	// 				<li>7</li>
-	// 				<li>8</li>
-	// 				<li>9</li>
-	// 				<li>10</li>
+	// 				<li v-for="item of profile.items" v-bind:class="item.challenges.level == activeLevel ? 'active' : ''" v-on:click="changeLevel(item.challenges.level)">{{ item.challenges.level  }}</li>
 	// 			</ul>
 	//
 	// 		</div>
 	//
 	// 		<ul class="challenges">
 	//
-	// 			<li v-for="content of profile.challenges">
-	// 				<i class="icon-yipp_water_badge"></i>
-	// 				<strong>{{ content.title }}</strong>
-	// 				<p>{{ content.description }}</p>
+	// 			<li v-for="c of activeChallenge">
+	// 				<i v-bind:class="c.Lesson.icon"></i>
+	// 				<strong>{{ c.Lesson.title }}</strong>
+	// 				<p>{{ c.Content.title }}</p>
 	// 			</li>
 	//
 	// 		</ul>
@@ -67142,12 +67139,10 @@
 	// 			<i class="icon-yipp_supermom_full"></i>
 	//
 	// 			<div class="right">
-	//
-	// 				<span>level 1</span>
-	//
+	// 				<span>{{ profile.my_level }}</span>
+	//                 <br/>
 	// 				<strong>
-	// 				Beginnende <br>
-	// 				mama
+	// 				{{ profile.my_level_title }}
 	// 				</strong>
 	// 			</div>
 	//
@@ -67178,7 +67173,10 @@
 	            userID: 0,
 	            label: {},
 	            profile: {},
-	            currentLevel: 0
+	            currentLevel: 0,
+	            activeChallenge: {},
+	            activeLevel: 0,
+	            page: ''
 	        };
 	    },
 
@@ -67192,6 +67190,7 @@
 	        this.child = _auth2.default.user.data.child;
 	        this.childAge = this.child.get('age');
 	        this.userID = _auth2.default.user.get('id');
+	        this.userID = 32;
 
 	        this.showContent();
 	    },
@@ -67208,6 +67207,10 @@
 	            var that = this;
 	            _profile2.default.get(this, this.userID, function (response) {
 	                that.profile = response;
+	                if (response.items.length > 0) {
+	                    that.activeChallenge = response.items[0].challenges.item[0];
+	                    that.activeLevel = response.items[0].challenges.level;
+	                }
 	            }, function (msg, response) {
 	                that.logError(msg);
 	            });
@@ -67227,6 +67230,20 @@
 	            }
 
 	            this.error_message = msgStr;
+	        },
+
+	        changeLevel: function changeLevel(level) {
+	            var that = this;
+	            _jquery2.default.each(this.profile.items, function (index, value) {
+	                if (value.challenges.level == level) {
+	                    that.activeChallenge = {};
+	                    if (value.challenges.item) {
+	                        that.activeChallenge = value.challenges.item[0];
+	                    }
+
+	                    that.activeLevel = level;
+	                }
+	            });
 	        }
 	    },
 
@@ -67242,7 +67259,7 @@
 /* 354 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div id=\"page-profile\">\n<section id=\"profile\">\n\n\t<header>\n        <div class=\"title-area\">\n            <router-link :to=\"{ name: 'timeline'}\"><i class=\"icon-yipp_profile_line\"></i></router-link>\n            <span>{{ label.header_timeline }}</span>\n            <router-link :to=\"{ name: 'emergency'}\"><i class=\"icon-yipp_notification_line2\"></i></router-link>\n        </div>\n\n        <div class=\"user-area\">\n            <div class=\"child-name\">{{ child.get('name') }}</div>\n            <ul class=\"months-level\">\n                <li>\n                    <span>{{ childAge }}</span>  \n                    <span>Maanden</span>\n                </li>\n                <li>\n                    <span>{{ currentLevel }}</span>\n                    <span>Level</span>\n                </li>\n                <li>\n                    <a href=\"#\" v-on:click.prevent=\"toggle\" v-if=\"page == 'lessons'\"><i class=\"icon-yipp_down\"></i></a>\n                    <a href=\"#\" v-on:click.prevent=\"toggle\" v-if=\"page == 'levels'\"><i class=\"icon-yipp_up\"></i></a>\n                </li>\n            </ul>\n\n            <div class=\"photo\"><img class=\"avatar\" v-bind:src=\"child.get('image')\"></div>\n            \n        </div>\n    </header>\n\n\t\t<ul class=\"data\">\n\t\t\t<li>\n\t\t\t\n\t\t\t<span class=\"big\">{{ profile.days }}</span>\n\t\t\t\n\t\t\t<span class=\"small left\">\n\t\t\tJe gebruikt<br>\n\t\t\tde app nu<br>\n\t\t\t<strong>dagen</strong>\n\t\t\t</span>\n\t\t\t</li>\n\t\t\t<li>\n\t\t\t<span class=\"big\">{{ profile.completed }}</span>\n\t\t\t\t<span class=\"small right\">\n\t\t\t\t<strong>Doel (en)</strong><br>\n\t\t\t\tbehaald\n\t\t\t\t</span>\n\t\t\t</li>\n\t\t</ul>\n\n\t\t<div class=\"mTitle\"><span>Challenges</span></div>\n\t\t\n\t\t<div class=\"challenge\">\n\t\t\n\t\t\t<ul>\n\t\t\t\t<li v-for=\"content of profile.challenges\">{{ content.title }}</li>\n\t\t\t\t<li class=\"semi\">2</li>\n\t\t\t\t<li>3</li>\n\t\t\t\t<li>4</li>\n\t\t\t\t<li>5</li>\n\t\t\t\t<li>6</li>\n\t\t\t\t<li>7</li>\n\t\t\t\t<li>8</li>\n\t\t\t\t<li>9</li>\n\t\t\t\t<li>10</li>\n\t\t\t</ul>\n\t\t\n\t\t</div>\n\t\t\n\t\t<ul class=\"challenges\">\n\t\t\n\t\t\t<li v-for=\"content of profile.challenges\">\n\t\t\t\t<i class=\"icon-yipp_water_badge\"></i>\n\t\t\t\t<strong>{{ content.title }}</strong>\n\t\t\t\t<p>{{ content.description }}</p>\n\t\t\t</li>\n\t\t\n\t\t</ul>\n\t\t\n\t\t<!-- <a href=\"\" class=\"btn\">Won item's <span class=\"notify\">1</span></a> -->\n\t\t\n\t\t<div class=\"mTitle\"><span>Titel</span></div>\n\t\t\n\t\t<div class=\"place\">\n\t\t\n\t\t\t<i class=\"icon-yipp_supermom_full\"></i>\n\t\t\n\t\t\t<div class=\"right\">\n\t\t\t\t\n\t\t\t\t<span>level 1</span>\n\t\t\t\t\n\t\t\t\t<strong>\n\t\t\t\tBeginnende <br>\n\t\t\t\tmama\n\t\t\t\t</strong>\n\t\t\t</div>\n\t\t\n\t\t</div>\n\t\t\n\t\t<div class=\"mTitle\"><span>Gebruikers</span></div>\n\t\t\n\t\t<div class=\"total\">\n\t\t\t<strong>{{ profile.total_users }}</strong>\n\t\t\t<div class=\"right\">\n\t\t\tDeze app heeft al <br>\n\t\t\t<strong>getbruikers</strong>\n\t\t\t</div>\n\t\t</div>\n\n\t</section>\n\n\n</div>\n";
+	module.exports = "\n<div id=\"page-profile\">\n<section id=\"profile\">\n\n\t<header>\n        <div class=\"title-area\">\n            <router-link :to=\"{ name: 'timeline'}\"><i class=\"icon-yipp_profile_line\"></i></router-link>\n            <span>{{ label.header_timeline }}</span>\n            <router-link :to=\"{ name: 'emergency'}\"><i class=\"icon-yipp_notification_line2\"></i></router-link>\n        </div>\n\n        <div class=\"user-area\">\n            <div class=\"child-name\">{{ child.get('name') }}</div>\n            <ul class=\"months-level\">\n                <li>\n                    <span>{{ childAge }}</span>  \n                    <span>Maanden</span>\n                </li>\n                <li>\n                    <span>{{ currentLevel }}</span>\n                    <span>Level</span>\n                </li>\n                <li>\n                    <a href=\"#\" v-on:click.prevent=\"toggle\" v-if=\"page == 'lessons'\"><i class=\"icon-yipp_down\"></i></a>\n                    <a href=\"#\" v-on:click.prevent=\"toggle\" v-if=\"page == 'levels'\"><i class=\"icon-yipp_up\"></i></a>\n                </li>\n            </ul>\n\n            <div class=\"photo\"><img class=\"avatar\" v-bind:src=\"child.get('image')\"></div>\n            \n        </div>\n    </header>\n\n\t\t<ul class=\"data\">\n\t\t\t<li>\n\t\t\t\n\t\t\t<span class=\"big\">{{ profile.days }}</span>\n\t\t\t\n\t\t\t<span class=\"small left\">\n\t\t\tJe gebruikt<br>\n\t\t\tde app nu<br>\n\t\t\t<strong>dagen</strong>\n\t\t\t</span>\n\t\t\t</li>\n\t\t\t<li>\n\t\t\t<span class=\"big\">{{ profile.completed }}</span>\n\t\t\t\t<span class=\"small right\">\n\t\t\t\t<strong>Doel (en)</strong><br>\n\t\t\t\tbehaald\n\t\t\t\t</span>\n\t\t\t</li>\n\t\t</ul>\n\n\t\t<div class=\"mTitle\"><span>Challenges</span></div>\n\t\t\n\t\t<div class=\"challenge\">\n\t\t\n\t\t\t<ul>\n\t\t\t\t<li v-for=\"item of profile.items\" v-bind:class=\"item.challenges.level == activeLevel ? 'active' : ''\" v-on:click=\"changeLevel(item.challenges.level)\">{{ item.challenges.level  }}</li>\n\t\t\t</ul>\n\t\t\n\t\t</div>\n\t\t\n\t\t<ul class=\"challenges\">\n\t\t\n\t\t\t<li v-for=\"c of activeChallenge\">\n\t\t\t\t<i v-bind:class=\"c.Lesson.icon\"></i>\n\t\t\t\t<strong>{{ c.Lesson.title }}</strong>\n\t\t\t\t<p>{{ c.Content.title }}</p>\n\t\t\t</li>\n\t\t\n\t\t</ul>\n\t\t\n\t\t<!-- <a href=\"\" class=\"btn\">Won item's <span class=\"notify\">1</span></a> -->\n\t\t\n\t\t<div class=\"mTitle\"><span>Titel</span></div>\n\t\t\n\t\t<div class=\"place\">\n\t\t\n\t\t\t<i class=\"icon-yipp_supermom_full\"></i>\n\t\t\n\t\t\t<div class=\"right\">\n\t\t\t\t<span>{{ profile.my_level }}</span>\n                <br/>\n\t\t\t\t<strong>\n\t\t\t\t{{ profile.my_level_title }}\n\t\t\t\t</strong>\n\t\t\t</div>\n\t\t\n\t\t</div>\n\t\t\n\t\t<div class=\"mTitle\"><span>Gebruikers</span></div>\n\t\t\n\t\t<div class=\"total\">\n\t\t\t<strong>{{ profile.total_users }}</strong>\n\t\t\t<div class=\"right\">\n\t\t\tDeze app heeft al <br>\n\t\t\t<strong>getbruikers</strong>\n\t\t\t</div>\n\t\t</div>\n\n\t</section>\n\n\n</div>\n";
 
 /***/ },
 /* 355 */
@@ -67274,6 +67291,7 @@
 
 	        context.$http.post(_config2.default.api.url + '/profile/' + userID).then(function (response) {
 	            var result = response.body.result;
+	            console.log(result.data);
 
 	            if (response.body.status == 'OK') {
 	                successCallback.call(_this, result.data);

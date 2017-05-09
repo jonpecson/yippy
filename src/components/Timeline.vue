@@ -24,7 +24,9 @@
                 </li>
             </ul>
 
-            <div class="photo"><img class="avatar" v-bind:src="child.get('image')"></div>
+            <div class="photo">
+                <img class="avatar" v-bind:src="child.get('image')" v-on:click="goToProfile">
+            </div>
             
         </div>
     </header>
@@ -231,6 +233,9 @@ export default {
             
             this.error_message = msgStr;
         },
+        goToProfile: function () {
+            this.$router.push('profile');
+        }
     },
 
     components: { 

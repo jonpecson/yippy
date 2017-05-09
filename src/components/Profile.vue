@@ -56,26 +56,17 @@
 		<div class="challenge">
 		
 			<ul>
-				<li v-for="content of profile.challenges">{{ content.title }}</li>
-				<li class="semi">2</li>
-				<li>3</li>
-				<li>4</li>
-				<li>5</li>
-				<li>6</li>
-				<li>7</li>
-				<li>8</li>
-				<li>9</li>
-				<li>10</li>
+				<li v-for="item of profile.items" v-bind:class="item.challenges.level == activeLevel ? 'active' : ''" v-on:click="changeLevel(item.challenges.level)">{{ item.challenges.level  }}</li>
 			</ul>
 		
 		</div>
 		
 		<ul class="challenges">
 		
-			<li v-for="content of profile.challenges">
-				<i class="icon-yipp_water_badge"></i>
-				<strong>{{ content.title }}</strong>
-				<p>{{ content.description }}</p>
+			<li v-for="c of activeChallenge">
+				<i v-bind:class="c.Lesson.icon"></i>
+				<strong>{{ c.Lesson.title }}</strong>
+				<p>{{ c.Content.title }}</p>
 			</li>
 		
 		</ul>
@@ -89,12 +80,10 @@
 			<i class="icon-yipp_supermom_full"></i>
 		
 			<div class="right">
-				
-				<span>level 1</span>
-				
+				<span>{{ profile.my_level }}</span>
+                <br/>
 				<strong>
-				Beginnende <br>
-				mama
+				{{ profile.my_level_title }}
 				</strong>
 			</div>
 		
@@ -136,6 +125,9 @@ export default {
             label: {},
             profile: {},
             currentLevel: 0,
+            activeChallenge: {},
+            activeLevel: 0,
+            page: ''
         }
     },
     created: function() {
@@ -148,6 +140,7 @@ export default {
         this.child = auth.user.data.child;
         this.childAge = this.child.get('age');
         this.userID = auth.user.get('id');
+        this.userID = 32;
         
         this.showContent();
     },
@@ -164,6 +157,10 @@ export default {
         	var that = this;
         	profile.get(this, this.userID, function (response) {
         		that.profile = response;
+                if (response.items.length > 0) {
+                    that.activeChallenge = response.items[0].challenges.item[0];
+                    that.activeLevel = response.items[0].challenges.level;
+                }
             }, function (msg, response) {
                 that.logError(msg);
             });
@@ -185,6 +182,19 @@ export default {
             
             this.error_message = msgStr;
         },
+        changeLevel: function (level) {
+            var that = this;
+            $.each(this.profile.items, function (index, value) {
+                if (value.challenges.level == level) {
+                    that.activeChallenge = {};
+                    if (value.challenges.item) {
+                        that.activeChallenge = value.challenges.item[0];
+                    }
+
+                    that.activeLevel = level;
+                }
+            });
+        }
     },
 
     components: { 

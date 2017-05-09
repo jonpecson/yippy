@@ -10,6 +10,7 @@ export default {
 
         context.$http.post(config.api.url + '/profile/' + userID).then(response => {
             var result = response.body.result;
+            console.log(result.data)
 
             if (response.body.status == 'OK') {
                 successCallback.call(this, result.data);
