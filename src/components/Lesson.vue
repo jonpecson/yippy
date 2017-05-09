@@ -371,8 +371,8 @@ export default {
             var card = this.cards[ctr];
             this.updateBarStep(this.currentCardCount)
 
-            card.Contents.title = replaceChildName(card.Contents.title);
-            card.Contents.details = replaceChildName(card.Contents.details);
+            card.Contents.title = this.replaceChildName(card.Contents.title);
+            card.Contents.details = this.replaceChildName(card.Contents.details);
 
             this.currentCardContent = card;
             // console.log('currentCard:', card.Contents.card_id, '-', card.Contents.card_style + '_' + card.Contents.card_type);
