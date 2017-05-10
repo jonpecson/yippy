@@ -1,5 +1,5 @@
 <template>
-<div id="portfolio-container">
+<div id="portfolio-container"><div id="container">
 <section id="profile">
 
 	<header>
@@ -102,7 +102,7 @@
 	</section>
 
 
-</div>
+</div></div>
 </template>
 
 <script>

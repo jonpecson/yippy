@@ -1,5 +1,5 @@
 <template>
-<div id="lesson-container">
+<div id="setup-container"><div id="container">
 
 	<div  class="panel" id="start" v-if="page == 'start'">
 		<router-link :to="{ name: 'timeline'}" class="back">
@@ -167,7 +167,7 @@
 
     </modal>
 
-</div>
+</div></div>
 	
 </template>
 

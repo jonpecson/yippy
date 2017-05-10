@@ -1,5 +1,5 @@
 <template>
-<div id="challengeDetails">
+<div id="challengeDetails"><div id="container">
 	<div v-if="page == 'main'">
 		<div class="header">
 				<a href="#" class="icon" v-on:click.prevent="back">
@@ -144,7 +144,7 @@
           </button>
         </div>
     </modal>
-</div>
+</div></div>
 
 	
 </template>

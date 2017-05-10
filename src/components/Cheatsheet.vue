@@ -1,5 +1,5 @@
 <template>
-<div id="cheatsheet-container">
+<div id="cheatsheet-container"><div id="container">
     
     <div class="header">
         <div class="top">
@@ -124,7 +124,7 @@
 
     </modal>
 
-</div>
+</div></div>
 </template>
 
 <script>
