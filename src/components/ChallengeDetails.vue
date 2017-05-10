@@ -1,5 +1,5 @@
 <template>
-<div id="page-challenge-details">
+<div id="challengeDetails">
 	<div v-if="page == 'main'">
 		<div class="header">
 				<a href="#" class="icon" v-on:click.prevent="back">

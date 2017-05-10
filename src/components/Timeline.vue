@@ -1,5 +1,5 @@
 <template>
-<div id="container">
+<div id="timeline-container">
     <header>
         <div class="title-area">
             <router-link :to="{ name: 'profile'}"><i class="icon-yipp_profile_line"></i></router-link>

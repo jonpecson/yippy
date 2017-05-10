@@ -1,5 +1,5 @@
 <template>
-<div id="page-lesson">
+<div id="lesson-container">
 
 	<div  class="panel" id="start" v-if="page == 'start'">
 		<router-link :to="{ name: 'timeline'}" class="back">

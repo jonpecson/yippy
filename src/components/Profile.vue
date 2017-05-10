@@ -1,5 +1,5 @@
 <template>
-<div id="page-profile">
+<div id="portfolio-container">
 <section id="profile">
 
 	<header>

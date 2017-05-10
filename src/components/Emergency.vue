@@ -1,5 +1,5 @@
 <template>
-	<div id="page-emergency">
+	<div id="emergency-container">
 		<section class="emergency" v-if="page == 1">
 			<header class="normal-header">
 				<router-link :to="{ name: 'timeline'}"><span class="icon-close" style="font-weight: normal">X</span></router-link>
