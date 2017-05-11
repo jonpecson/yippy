@@ -7,8 +7,8 @@
 		</router-link>
 
 		<div id="popUp">
-			<i class="big icon-yipp_apple_full"></i>
-			<h3>{{ lessonInfo.counter }}. {{ lessonInfo.title }}</h3>
+			<i v-bind:class="lessonInfo.icon" class="big"></i>
+			<h3>{{ lessonInfo.title }}</h3>
 			<p>{{ lessonInfo.description }}</p>
 			<hr>
 			<span><i class="icon-yipp_check_full"></i> {{lessonInfo.duration}} min</span>
@@ -258,7 +258,7 @@ export default {
             },
             lessonInfo: {},
             cards: [],
-            
+
             currentLesson: 1,
             currentCardContent: {},
             currentCardCount: 0,
@@ -296,16 +296,31 @@ export default {
         this.childName = this.child.get('name')
         this.currentLesson = this.$route.params.id;
         this.userID = auth.user.get('id');
-	    
+	       
+        this.initLesson();
 	    // this.currentLesson = 36;
         // this.userID = 32;
-	    
-	    this.getLesson();
-	    this.bar_length = 'width: 0%';
-
-        this.getLessonTitle();
     },
     methods: {
+        initLesson: function () {
+            this.lessons = [];
+            this.cards = [];
+            this.currentCardContent = {};
+            this.currentCardCount = 0;
+            this.currentSlider = {};
+            this.stackCard = {};
+            this.knowledgeCards = [];
+            this.lastChallengeID = 0;
+            this.myLessonID = 0;
+
+            this.lessonType = '';
+
+            
+            this.bar_length = 'width: 0%';
+            this.page = 'start';
+
+            this.getLesson();
+        },
         loadLabels: function () {
             var that = this;
             locale.label(this, config.api.lang, function (response) {
@@ -313,18 +328,6 @@ export default {
             }, function (msg, response) {
                 that.logError(msg);
             });
-        },
-    	getLessonTitle: function () {
-            var str = Storage.get('active_lesson');
-            if (!str) {
-                this.$router.push('timeline');
-            }
-
-            this.lessonInfo = JSON.parse(str);
-            
-            if (this.currentLesson != this.lessonInfo.id) {
-                // this.$router.push('timeline');
-            }
         },
     	getLesson: function () {
     		this.resetError();
@@ -337,6 +340,15 @@ export default {
                 that.nextLessonID = response.nextlesson;
             	that.bar_max = response.cards.length
             	that.updateBarStep(0);
+
+                that.lessonInfo = {
+                    title: response.title,
+                    duration: response.duration,
+                    description: response.details,
+                    icon: response.icon
+                }
+
+                console.log(that.cards);
 
             	that.start = true;
 
@@ -727,6 +739,8 @@ export default {
             // console.log(this.nextLessonID)
             if (this.nextLessonID > 0) {
                 this.$router.push('lesson-' + this.nextLessonID);
+                this.currentLesson = this.nextLessonID;
+                this.initLesson();
             } else {
                 this.$router.push('timeline');
             }
