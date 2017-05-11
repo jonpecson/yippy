@@ -120,4 +120,30 @@ export default {
 
         });
     },
+
+    openreminder(context, challengID, successCallback, errorCallback) {
+        var that = this;
+
+        Vue.http.options.emulateJSON = true;
+
+        var data = {
+            'my_challenge_id': challengID
+        }
+
+        context.$http.post(config.api.url + '/openreminders', data).then(response => {
+            var result = response.body.result;
+
+            if (response.body.status == 'OK') {
+                successCallback.call(this, result.status);
+            } else if (errorCallback) {
+                errorCallback.call(this, result.message, response);
+            }
+        }, response => {
+
+            if (errorCallback) {
+                errorCallback.call(this, response.body.result.error, response);
+            }
+
+        });
+    },
 }

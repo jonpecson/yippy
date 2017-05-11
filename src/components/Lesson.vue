@@ -83,7 +83,11 @@
 				</div>
 			</div>
 
-			<a href="#" v-on:click.prevent="addFieldChallenge">Add</a>
+			<a class="btn" href="#" v-on:click.prevent="addFieldChallenge">Add</a>
+
+            <button >
+            add
+            </button>
 
 			<div class="bottom">
 				<a href="" v-on:click.prevent="updateChallenge" class="button-medium white btn-next-card">{{ label.next_btn }}</a>
@@ -140,9 +144,71 @@
 			<div class="bottom">
 				<a href="" v-on:click.prevent="nextLesson" class="button-medium white btn-next-card">{{ label.next_btn }}</a>
 			</div>
-		
 		</div>
 	</div>
+
+    <div class="reminder" v-if="page == 'reminder'">
+        <section class="settings">
+
+            <div class="header">
+
+            <a href="#" v-on:click.prevent="page = 'page_lesson'" class="cancel">Cancel</a>
+
+            <div class="title">Edit</div>
+
+            <a href="" class="save">Save</a>
+
+            </div>
+
+            <div class="holder">
+
+            <p>Eating more vegetables</p>
+            <ol>
+                <li>Brocolli</li>
+            </ol>
+
+            </div>
+
+            <ul class="contList">
+            <li>
+            <span class="left">Reminder</span>
+            <span class="right">    
+                <div class="round">
+                    <input type="checkbox" id="rounded" />
+                    <label for="rounded"></label>
+                </div>
+            </span>
+            </li>
+            <li v-on:click="showReminderRepeatOptions">
+            <span class="left">Repeat</span>
+            <span class="right">Every day</span>
+            </li>
+            <li v-on:click="showReminderTimeOptions">
+            <span class="left">Time</span>
+            <span class="right">10:00</span>
+            </li>
+            </ul>
+
+            <a href="" class="delete">Delete Reminder</a>
+
+            <div v-if="reminder.showRepeatOptions">
+                <ul>
+                    <li>Every hour</li>
+                    <li>Every two hours</li>
+                </ul>
+            </div>
+
+            <div v-else-if="reminder.showTimeOptions">
+                <ul>
+                    <li>05</li>
+                    <li>00</li>
+                </ul>
+            </div>
+            
+
+        </section>
+
+    </div>
 			
 	<div class="panel" v-if="page == 'page_complete'">
 		<a v-on:click.prevent="prevLesson" class="back">
@@ -283,6 +349,11 @@ export default {
 
             child: {},
             childName: '',
+
+            reminder: {
+                showRepeatOptions: false,
+                showTimeOptions: false
+            }
         }
     },
     created: function() {
@@ -298,6 +369,8 @@ export default {
         this.userID = auth.user.get('id');
 	       
         this.initLesson();
+
+        // this.page = 'reminder';
 	    // this.currentLesson = 36;
         // this.userID = 32;
     },
@@ -373,6 +446,12 @@ export default {
     		card.startLesson(this, data, function (response) {
     			that.myLessonID = response;
             	that.nextLesson();
+            }, function (msg, response) {
+                that.logError(msg);
+            });
+
+            card.openreminder(that, 31, function (response) {
+                console.log(response)
             }, function (msg, response) {
                 that.logError(msg);
             });
@@ -744,6 +823,17 @@ export default {
             } else {
                 this.$router.push('timeline');
             }
+        },
+        addReminder: function () {
+            this.page = 'reminder';
+        },
+        showReminderRepeatOptions: function () {
+            this.reminder.showRepeatOptions = true;
+            this.reminder.showTimeOptions = false;
+        },
+        showReminderTimeOptions: function () {
+            this.reminder.showRepeatOptions = false;
+            this.reminder.showTimeOptions = true;
         }
     },
 

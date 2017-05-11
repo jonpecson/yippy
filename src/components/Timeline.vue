@@ -212,6 +212,9 @@ export default {
             var that = this;
             $.each(this.lessons, function (index, value) {
                 if (value.id == id) {
+                    var str = JSON.stringify(value);
+                    Storage.save('active_lesson', str, 1);
+                    
                     if (value.yippLesson.is_done > 0) {
                         that.$router.push('cheatsheet-' + id);
                     } else {

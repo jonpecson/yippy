@@ -147,7 +147,8 @@ p {
     border-radius: 0;
     margin: 5vh 0 0 0;
     -webkit-appearance: none;
-    border-bottom: 1px solid #404040;
+    border-bottom: 2px solid #404040;
+    background: transparent;
 }
 
 .middle-area.semi {
@@ -169,7 +170,9 @@ p {
     font-size: 18px;
     border-radius: 0;
     -webkit-appearance: none;
-    border-bottom: 1px solid #404040;
+    border-bottom: 2px solid #404040;
+    background: transparent;
+    color: #000 !important;
 }
 
 .middle-area.semi input[type="text"] {
@@ -332,6 +335,7 @@ p {
     text-decoration: none;
     border: 1px solid #DB4747;
     background-color: transparent;
+    text-align: center;
 }
 
 .button-medium.white {
@@ -407,14 +411,14 @@ p {
 }
 
 #slider1 .z-slide-item .content .icon {
-    top: -8px;
-    right: 65px;
+    top: -1em;
+    right: -3.5em;
     width: 55px;
     height: 54px;
     color: #d7494f;
     display: block;
     font-size: 55px;
-    position: absolute;
+    position: relative;
 }
 
 #slider1 .z-slide-item .content .icon:after {
@@ -422,7 +426,7 @@ p {
     top: 5px;
     left: 11px;
     z-index: -1;
-    width: 55px;
+    width: 54px;
     height: 54px;
     display: block;
     position: absolute;
