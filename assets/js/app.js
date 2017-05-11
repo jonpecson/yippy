@@ -35352,6 +35352,10 @@
 	    value: true
 	});
 
+	var _stringify = __webpack_require__(185);
+
+	var _stringify2 = _interopRequireDefault(_stringify);
+
 	var _locale = __webpack_require__(350);
 
 	var _locale2 = _interopRequireDefault(_locale);
@@ -35587,6 +35591,9 @@
 	            var that = this;
 	            _jquery2.default.each(this.lessons, function (index, value) {
 	                if (value.id == id) {
+	                    var str = (0, _stringify2.default)(value);
+	                    _storage2.default.save('active_lesson', str, 1);
+
 	                    if (value.yippLesson.is_done > 0) {
 	                        that.$router.push('cheatsheet-' + id);
 	                    } else {
