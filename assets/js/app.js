@@ -35500,6 +35500,11 @@
 	            this.redirectGuest();
 	        }
 
+	        var level = _storage2.default.get('current_level');
+	        if (level) {
+	            this.currentLevel = level;
+	        }
+
 	        this.child = _auth2.default.user.data.child;
 	        this.childAge = this.child.get('age');
 
@@ -35577,6 +35582,8 @@
 	            var id = e.target.getAttribute('data-id');
 	            this.currentLevel = id;
 	            this.toggle();
+
+	            _storage2.default.save('current_level', id);
 	        },
 	        goTodo: function goTodo(e) {
 	            var id = e.target.getAttribute('data-id');

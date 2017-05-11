@@ -119,6 +119,11 @@ export default {
             this.redirectGuest();
         }
 
+        var level = Storage.get('current_level');
+        if (level) {
+            this.currentLevel = level;
+        }
+
         this.child = auth.user.data.child;
         this.childAge = this.child.get('age');
         
@@ -198,6 +203,8 @@ export default {
             var id = e.target.getAttribute('data-id');
             this.currentLevel = id;
             this.toggle();
+
+            Storage.save('current_level', id);
         },
         goTodo: function (e) {
             var id = e.target.getAttribute('data-id');
