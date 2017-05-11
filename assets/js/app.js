@@ -36100,16 +36100,14 @@
 	// 			</ul>
 	// 		</div>
 	//
-	// 		<div class="content" v-else-if="lessonType == 'chance_no'">
+	// 		<div class="content chance_no_block" v-else-if="lessonType == 'chance_no'">
 	// 			<h3 style="text-align: center;">{{ currentCardContent.Contents.title }}</h3>
 	// 			<p>{{ currentCardContent.Contents.details }}</p>
 	//
-	// 			<div class="slider">
-	// 				<!-- <input type="range" min="0" max="10" value="0" step="2"> -->
-	// 			</div>
+	// 			<div class="slider"></div>
 	//
 	// 			<div class="bottom">
-	// 				<a href="" v-on:click.prevent="nextLesson" class="button-medium white btn-next-card">{{ label.next_btn }}</a>
+	// 				<a href="" v-on:click.prevent="updateChanceAnswer" class="button-medium white btn-next-card">{{ label.next_btn }}</a>
 	// 			</div>
 	// 		</div>
 	//
@@ -36144,6 +36142,35 @@
 	// 			</div>
 	// 		</div>
 	//
+	//         <div class="content" v-else-if="lessonType == 'overlay'">
+	//
+	//             <div class="modal-mask">
+	//               <div class="modal-wrapper">
+	//                 <div class="modal-container">
+	//
+	//                   <div class="modal-header">
+	//                       <h3>{{ currentCardContent.Contents.title }}</h3>
+	//                   </div>
+	//
+	//                   <div class="modal-body">
+	//                     <p>
+	//                       {{ currentCardContent.Contents.details }}
+	//                     </p>
+	//                   </div>
+	//
+	//                   <div class="modal-footer">
+	//                     <slot name="footer">
+	//                       <button class="form-button-small" v-on:click.prevent="nextLesson">
+	//                         <slot name="action">Got it!</slot>
+	//                       </button>
+	//                     </slot>
+	//                   </div>
+	//                 </div>
+	//               </div>
+	//             </div>
+	//
+	//         </div>
+	//
 	// 		<div class="content" v-else-if="lessonType == 'other'">
 	// 			<h3 style='text-align: center;'>{{ currentCardContent.Contents.title }}</h3>
 	// 			<p>{{ currentCardContent.Contents.details }}</p>
@@ -36174,9 +36201,7 @@
 	// 			<p class="text-center">{{ label.lesson_finish_msg }}</p>
 	//
 	// 			<div class="bottom">
-	// 				<router-link :to="{ name: 'timeline'}" class="btn white">
-	// 					{{ label.lesson_finish_start }}
-	// 				</router-link>
+	// 				<a href="" v-on:click.prevent="endChallenge" class="btn white">{{ label.lesson_finish_start }}</a>
 	// 				<br>
 	// 				<a href="" v-on:click.prevent="resetLesson" class="btn white">{{ label.lesson_finish_restart }}</a>
 	// 			</div>
@@ -36185,12 +36210,17 @@
 	//
 	// 	</div>
 	//
-	// 	<modal v-if="showModal" @close="modalClose">
+	// 	<modal v-if="showModalTypes.normal" @close="modalClose">
 	//         <h3 slot="header">{{ modalContent.title }}</h3>
 	//         <p slot="body">{{ modalContent.message }}</p>
 	//     </modal>
 	//
-	//     <modal v-if="resetLessonModal" @close="resetLessonModal = false">
+	//     <modal v-if="showModalTypes.error" @close="modalCloseError">
+	//         <h3 slot="header">{{ modalContent.title }}</h3>
+	//         <p slot="body">{{ modalContent.message }}</p>
+	//     </modal>
+	//
+	//     <modal v-if="showModalTypes.resetLesson" @close="showModalTypes.resetLesson = false">
 	//         <h3 slot="header">Are you sure?</h3>
 	//         <p slot="body">Do you want to restart the challenge?</p>
 	//
@@ -36198,7 +36228,7 @@
 	//           <button class="form-button-small" @click="restartLesson">
 	//             {{ label.lesson_finish_restart }}
 	//           </button>
-	//           <button class="form-button-small" @click="resetLessonModal = false">
+	//           <button class="form-button-small" @click="showModalTypes.resetLesson = false">
 	//             Cancel
 	//           </button>
 	//         </div>
@@ -36242,24 +36272,36 @@
 	        return {
 	            page: 'start',
 	            lessons: [],
-	            showModal: false,
-	            resetLessonModal: false,
+	            showModalTypes: {
+	                normal: false,
+	                error: false,
+	                resetLesson: false
+	            },
 	            lessonInfo: {},
-	            currentLesson: 1,
 	            cards: [],
+
+	            currentLesson: 1,
 	            currentCardContent: {},
 	            currentCardCount: 0,
+	            currentSlider: {},
+	            stackCard: {},
+	            knowledgeCards: [],
+
 	            lessonType: '',
 	            bar_length: '',
 	            bar_max: 0,
+
 	            userID: 0,
 	            start: false,
-	            lastChallengeID: 0,
+
 	            error_message: '',
+
+	            lastChallengeID: 0,
 	            myLessonID: 0,
-	            stackCard: {},
-	            knowledgeCards: [],
+	            nextLessonID: 0,
+
 	            label: {},
+
 	            child: {},
 	            childName: ''
 	        };
@@ -36314,6 +36356,7 @@
 
 	                var counter = 0;
 	                that.cards = response.cards;
+	                that.nextLessonID = response.nextlesson;
 	                that.bar_max = response.cards.length;
 	                that.updateBarStep(0);
 
@@ -36399,6 +36442,10 @@
 
 	            var that = this;
 
+	            setTimeout(function () {
+	                (0, _jquery2.default)('.ui-slider-wrapper').remove();
+	            }, 2);
+
 	            if (card.Contents.card_style == 'card' && card.Contents.card_type == 'knowledge') {
 	                this.lessonType = 'knowledge_card';
 	                this.knowledgeCards.push(this.currentCardContent);
@@ -36414,16 +36461,35 @@
 	                    });
 	                }, 1);
 	            } else if (card.Contents.card_style == 'no' && card.Contents.card_type == 'sliders') {
-	                _jquery2.default.each(card, function (index, value) {});
-	                setTimeout(function () {
+	                var labels = [];
+	                var labelsWithCard = [];
 
-	                    (0, _jquery2.default)('.slider').labeledslider({
-	                        max: 10,
-	                        step: 2,
-	                        min: 0,
+	                var max = 0;
+	                var min = 0;
+	                _jquery2.default.each(this.currentCardContent.Chances, function (index, value) {
+	                    labels.push(value.chance);
+	                    labelsWithCard.push(value);
+	                    max++;
+	                });
+
+	                if (max > 0) {
+	                    max--;
+	                }
+
+	                this.currentSlider.labels = labels;
+	                this.currentSlider.labelsWithCard = labelsWithCard;
+	                this.currentSlider.max = max;
+	                this.currentSlider.selected = 0;
+
+	                setTimeout(function () {
+	                    (0, _jquery2.default)('.chance_no_block .slider').labeledslider({
+	                        max: max,
+	                        step: 1,
+	                        min: min,
 	                        slide: function slide(event, ui) {
-	                            that.updateChanceAnswer(ui.value);
-	                        }
+	                            that.updateChanceAnswerValue(ui.value);
+	                        },
+	                        tickLabels: labels
 	                    });
 	                }, 2);
 
@@ -36432,6 +36498,8 @@
 	                this.lessonType = 'quiz_no';
 	            } else if (card.Contents.card_style == 'no' && card.Contents.card_type == 'list_field') {
 	                this.lessonType = 'challenge_no';
+	            } else if (card.Contents.card_style == 'overlay' && card.Contents.card_type == 'basic') {
+	                this.lessonType = 'overlay';
 	            } else {
 	                this.lessonType = 'other';
 	            }
@@ -36439,10 +36507,10 @@
 	            // console.log(card.Contents.card_style, ' ', card.Contents.card_type)
 	        },
 	        resetLesson: function resetLesson() {
-	            this.resetLessonModal = true;
+	            this.showModalTypes.resetLesson = true;
 	        },
 	        restartLesson: function restartLesson() {
-	            this.resetLessonModal = false;
+	            this.showModalTypes.resetLesson = false;
 
 	            var that = this;
 	            _card2.default.restartLesson(this, this.currentLesson, this.userID, function (response) {
@@ -36485,24 +36553,35 @@
 	            this.$router.push('login');
 	        },
 	        modalShow: function modalShow(title, body) {
-	            console.log(title);
 	            this.modalContent = {
 	                title: title,
 	                message: body
 	            };
-	            this.showModal = true;
+	            this.showModalTypes.normal = true;
 	        },
 
 	        modalClose: function modalClose() {
-	            this.showModal = false;
+	            this.showModalTypes.normal = false;
 	            this.nextLesson();
 	        },
-	        updateChanceAnswer: function updateChanceAnswer(selected) {
+	        modalCloseError: function modalCloseError() {
+	            this.showModalTypes.error = false;
+	        },
+	        updateChanceAnswerValue: function updateChanceAnswerValue(selected) {
+	            var that = this;
+	            var isError = false;
+	            this.currentSlider.selected = selected;
+	        },
+	        updateChanceAnswer: function updateChanceAnswer() {
 	            var that = this;
 	            var isError = false;
 
-	            _jquery2.default.each(this.currentCardContent.Chances, function (index, value) {
-	                if (value.chance == selected) {
+	            var selected = this.currentSlider.selected;
+	            var ok = false;
+
+	            var ctr = 0;
+	            _jquery2.default.each(this.currentSlider.labelsWithCard, function (index, value) {
+	                if (index == selected) {
 	                    // update
 	                    var data = {
 	                        'user_id': that.userID,
@@ -36512,6 +36591,7 @@
 	                    };
 
 	                    that.modalShow(value.Chances.title, value.Chances.details);
+	                    ok = true;
 
 	                    _cardChance2.default.update(that, data, function (response) {
 	                        // none
@@ -36522,7 +36602,17 @@
 
 	                    return;
 	                }
+
+	                ctr++;
 	            });
+
+	            if (!ok) {
+	                this.modalContent = {
+	                    title: 'Oops',
+	                    message: 'Please answer'
+	                };
+	                this.showModalTypes.error = true;
+	            }
 	        },
 	        addFieldChallenge: function addFieldChallenge() {
 	            this.lastChallengeID++;
@@ -36652,6 +36742,14 @@
 	        },
 	        replaceChildName: function replaceChildName(str) {
 	            return str.replace(/\[child_name\]/g, this.childName);
+	        },
+	        endChallenge: function endChallenge() {
+	            // console.log(this.nextLessonID)
+	            if (this.nextLessonID > 0) {
+	                this.$router.push('lesson-' + this.nextLessonID);
+	            } else {
+	                this.$router.push('timeline');
+	            }
 	        }
 	    },
 
@@ -61454,7 +61552,7 @@
 /* 329 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div id=\"page-lesson\">\n\n\t<div  class=\"panel\" id=\"start\" v-if=\"page == 'start'\">\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"back\">\n\t\t\t<i class=\"icon-back\"></i>\n\t\t</router-link>\n\n\t\t<div id=\"popUp\">\n\t\t\t<i class=\"big icon-yipp_apple_full\"></i>\n\t\t\t<h3>{{ lessonInfo.counter }}. {{ lessonInfo.title }}</h3>\n\t\t\t<p>{{ lessonInfo.description }}</p>\n\t\t\t<hr>\n\t\t\t<span><i class=\"icon-yipp_check_full\"></i> {{lessonInfo.duration}} min</span>\n\t\t</div>\n\t\t\t\n\t\t<a href=\"#\" v-on:click.prevent=\"startLesson\" class=\"btn bottom white\" v-if=\"start\">{{ label.lesson_btn_start }}</a>\n\t</div>\n\n\t<div class=\"panel\" v-if=\"page == 'page_lesson'\">\n\t\t<a v-on:click.prevent=\"prevLesson\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\"> \n\t\t\t<span class=\"bar-inner\" v-bind:style='bar_length'></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"error\" v-if=\"error_message\">{{ error_message }}</div>\n\n\t\t<div v-if=\"lessonType == 'knowledge_card'\">\n\t\t\t<div id=\"knowledge-cards\" v-for=\"knowledgeCard in knowledgeCards\">\n                <div class=\"paper\" v-bind:id=\"knowledgeCard.Contents.id\" >\n\t\t\t\t\t<h3>{{ knowledgeCard.Contents.title }}</h3>\n                    <img v-bind:data-id=\"knowledgeCard.Contents.id\" v-if=\"knowledgeCard.Contents.src_type == 'ext_image'\" v-bind:src=\"knowledgeCard.Contents.src_url\" style=\"width: 50%;\">\n\t\t\t\t\t<p>{{ knowledgeCard.Contents.details }}</p>\n\n\t\t\t\t\t<i class=\"heart icon-yipp_check_full\" v-if=\"knowledgeCard.is_favorite\"\n\t\t\t\t\t\tv-on:click.prevent=\"markFavorite\" v-bind:data-id=\"knowledgeCard.Contents.id\"\n\t\t\t\t\t></i>\n\t\t\t\t\t<i class=\"heart icon-yipp_check_line\" v-if=\"knowledgeCard.is_favorite == false\"\n\t\t\t\t\t\tv-on:click.prevent=\"markFavorite\" v-bind:data-id=\"knowledgeCard.Contents.id\"\n\t\t\t\t\t></i>\n\t\t\t\t\t<div class=\"paper_foo1\">\n\t\t\t\t\t\t<div class=\"paper_foo2\"></div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"content\" v-else-if=\"lessonType == 'quiz_no'\">\n\t\t\t<h3 style=\"text-align: center;\">{{ currentCardContent.Contents.title }}</h3>\n\t\t\t<p>{{ currentCardContent.Contents.details }}</p>\n\t\t\t<ul>\n\t\t\t\t<li v-for=\"quiz in currentCardContent.Quiz\">\n\t\t\t\t\t<a href=\"javascript:void(0);\" style='text-decoration:none; color:#333; display:block;' class='my-answer' data-position='1' v-bind:data-answer-id='quiz.Answer.id' v-bind:data-answer-title='quiz.Answer.title' v-bind:data-answer-details='quiz.Answer.details' @click=\"quizShowAnswer\">\n\t\t\t\t\t\t{{ quiz.question }}\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t</div>\n\n\t\t<div class=\"content\" v-else-if=\"lessonType == 'chance_no'\">\n\t\t\t<h3 style=\"text-align: center;\">{{ currentCardContent.Contents.title }}</h3>\n\t\t\t<p>{{ currentCardContent.Contents.details }}</p>\n\t\t\t\n\t\t\t<div class=\"slider\">\n\t\t\t\t<!-- <input type=\"range\" min=\"0\" max=\"10\" value=\"0\" step=\"2\"> -->\n\t\t\t</div>\n\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"nextLesson\" class=\"button-medium white btn-next-card\">{{ label.next_btn }}</a>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"content\" v-else-if=\"lessonType == 'challenge_no'\">\n\t\t\t<h3 style=\"text-align: center;\">{{ currentCardContent.Contents.title }}</h3>\n\t\t\t<p>{{ currentCardContent.Contents.details }}</p>\n\t\t\t<div class=\"challenge-boxes\">\n\t\t\t\t<div v-for=\"challenge in currentCardContent.Challenges\" class=\"challenge-box\">\n\t\t\t\t\t<input type=\"text\" name=\"challenge[]\" v-model=\"challenge.Challenge.message\" v-bind:placeholder=\"challenge.Blocks.title\" v-bind:data-id=\"challenge.Challenge.id\">\n\t\t\t\t\t<a href=\"#\" v-bind:data-id=\"challenge.Challenge.id\" v-on:click.prevent=\"removeChallenge\" v-if=\"!challenge.Blocks.id\">Delete</a>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t\t<a href=\"#\" v-on:click.prevent=\"addFieldChallenge\">Add</a>\n\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"updateChallenge\" class=\"button-medium white btn-next-card\">{{ label.next_btn }}</a>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"content\" v-else-if=\"lessonType == 'challenge_no_next'\">\n\t\t\t<h3 style=\"text-align: center;\">{{ currentCardContent.Contents.title }}</h3>\n\t\t\t<p>{{ currentCardContent.Contents.details }}</p>\n\t\t\t<ul>\n\t\t\t\t<li v-for=\"challenge in currentCardContent.Challenges\">{{ challenge.Challenge.message }}</li>\n\t\t\t</ul>\n\n\t\t\t<a href=\"#\" v-on:click.prevent=\"addReminder\">{{ label.goal_reminder_btn }}</a>\n\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"doneChallengeNoType\" class=\"button-medium white btn-next-card\">{{ label.next_btn }}</a>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"content\" v-else-if=\"lessonType == 'other'\">\n\t\t\t<h3 style='text-align: center;'>{{ currentCardContent.Contents.title }}</h3>\n\t\t\t<p>{{ currentCardContent.Contents.details }}</p>\n\t\t\t\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"nextLesson\" class=\"button-medium white btn-next-card\">{{ label.next_btn }}</a>\n\t\t\t</div>\n\t\t\n\t\t</div>\n\t</div>\n\t\t\t\n\t<div class=\"panel\" v-if=\"page == 'page_complete'\">\n\t\t<a v-on:click.prevent=\"prevLesson\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\"> \n\t\t\t<span class=\"bar-inner\" style='width: 100%'></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"content\">\n\t\t\n\t\t\t<h1>{{ label.lesson_finish_title }}</h1>\n\t\t\t<i class=\"biggest icon-yipp_check_full\"></i>\n\t\t\t\n\t\t\t<p class=\"text-center\">{{ label.lesson_finish_msg }}</p>\n\t\t\t\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"btn white\">\n\t\t\t\t\t{{ label.lesson_finish_start }}\n\t\t\t\t</router-link>\n\t\t\t\t<br>\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"resetLesson\" class=\"btn white\">{{ label.lesson_finish_restart }}</a>\n\t\t\t</div>\n\t\t\n\t\t</div>\n\n\t</div>\n\n\t<modal v-if=\"showModal\" @close=\"modalClose\">\n        <h3 slot=\"header\">{{ modalContent.title }}</h3>\n        <p slot=\"body\">{{ modalContent.message }}</p>\n    </modal>\n\n    <modal v-if=\"resetLessonModal\" @close=\"resetLessonModal = false\">\n        <h3 slot=\"header\">Are you sure?</h3>\n        <p slot=\"body\">Do you want to restart the challenge?</p>\n        \n        <div slot=\"footer\">\n          <button class=\"form-button-small\" @click=\"restartLesson\">\n            {{ label.lesson_finish_restart }}\n          </button>\n          <button class=\"form-button-small\" @click=\"resetLessonModal = false\">\n            Cancel\n          </button>\n        </div>\n\n    </modal>\n\n</div>\n\t\n";
+	module.exports = "\n<div id=\"page-lesson\">\n\n\t<div  class=\"panel\" id=\"start\" v-if=\"page == 'start'\">\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"back\">\n\t\t\t<i class=\"icon-back\"></i>\n\t\t</router-link>\n\n\t\t<div id=\"popUp\">\n\t\t\t<i class=\"big icon-yipp_apple_full\"></i>\n\t\t\t<h3>{{ lessonInfo.counter }}. {{ lessonInfo.title }}</h3>\n\t\t\t<p>{{ lessonInfo.description }}</p>\n\t\t\t<hr>\n\t\t\t<span><i class=\"icon-yipp_check_full\"></i> {{lessonInfo.duration}} min</span>\n\t\t</div>\n\t\t\t\n\t\t<a href=\"#\" v-on:click.prevent=\"startLesson\" class=\"btn bottom white\" v-if=\"start\">{{ label.lesson_btn_start }}</a>\n\t</div>\n\n\t<div class=\"panel\" v-if=\"page == 'page_lesson'\">\n\t\t<a v-on:click.prevent=\"prevLesson\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\"> \n\t\t\t<span class=\"bar-inner\" v-bind:style='bar_length'></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"error\" v-if=\"error_message\">{{ error_message }}</div>\n\n\t\t<div v-if=\"lessonType == 'knowledge_card'\">\n\t\t\t<div id=\"knowledge-cards\" v-for=\"knowledgeCard in knowledgeCards\">\n                <div class=\"paper\" v-bind:id=\"knowledgeCard.Contents.id\" >\n\t\t\t\t\t<h3>{{ knowledgeCard.Contents.title }}</h3>\n                    <img v-bind:data-id=\"knowledgeCard.Contents.id\" v-if=\"knowledgeCard.Contents.src_type == 'ext_image'\" v-bind:src=\"knowledgeCard.Contents.src_url\" style=\"width: 50%;\">\n\t\t\t\t\t<p>{{ knowledgeCard.Contents.details }}</p>\n\n\t\t\t\t\t<i class=\"heart icon-yipp_check_full\" v-if=\"knowledgeCard.is_favorite\"\n\t\t\t\t\t\tv-on:click.prevent=\"markFavorite\" v-bind:data-id=\"knowledgeCard.Contents.id\"\n\t\t\t\t\t></i>\n\t\t\t\t\t<i class=\"heart icon-yipp_check_line\" v-if=\"knowledgeCard.is_favorite == false\"\n\t\t\t\t\t\tv-on:click.prevent=\"markFavorite\" v-bind:data-id=\"knowledgeCard.Contents.id\"\n\t\t\t\t\t></i>\n\t\t\t\t\t<div class=\"paper_foo1\">\n\t\t\t\t\t\t<div class=\"paper_foo2\"></div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"content\" v-else-if=\"lessonType == 'quiz_no'\">\n\t\t\t<h3 style=\"text-align: center;\">{{ currentCardContent.Contents.title }}</h3>\n\t\t\t<p>{{ currentCardContent.Contents.details }}</p>\n\t\t\t<ul>\n\t\t\t\t<li v-for=\"quiz in currentCardContent.Quiz\">\n\t\t\t\t\t<a href=\"javascript:void(0);\" style='text-decoration:none; color:#333; display:block;' class='my-answer' data-position='1' v-bind:data-answer-id='quiz.Answer.id' v-bind:data-answer-title='quiz.Answer.title' v-bind:data-answer-details='quiz.Answer.details' @click=\"quizShowAnswer\">\n\t\t\t\t\t\t{{ quiz.question }}\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t</div>\n\n\t\t<div class=\"content chance_no_block\" v-else-if=\"lessonType == 'chance_no'\">\n\t\t\t<h3 style=\"text-align: center;\">{{ currentCardContent.Contents.title }}</h3>\n\t\t\t<p>{{ currentCardContent.Contents.details }}</p>\n\t\t\t\n\t\t\t<div class=\"slider\"></div>\n\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"updateChanceAnswer\" class=\"button-medium white btn-next-card\">{{ label.next_btn }}</a>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"content\" v-else-if=\"lessonType == 'challenge_no'\">\n\t\t\t<h3 style=\"text-align: center;\">{{ currentCardContent.Contents.title }}</h3>\n\t\t\t<p>{{ currentCardContent.Contents.details }}</p>\n\t\t\t<div class=\"challenge-boxes\">\n\t\t\t\t<div v-for=\"challenge in currentCardContent.Challenges\" class=\"challenge-box\">\n\t\t\t\t\t<input type=\"text\" name=\"challenge[]\" v-model=\"challenge.Challenge.message\" v-bind:placeholder=\"challenge.Blocks.title\" v-bind:data-id=\"challenge.Challenge.id\">\n\t\t\t\t\t<a href=\"#\" v-bind:data-id=\"challenge.Challenge.id\" v-on:click.prevent=\"removeChallenge\" v-if=\"!challenge.Blocks.id\">Delete</a>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t\t<a href=\"#\" v-on:click.prevent=\"addFieldChallenge\">Add</a>\n\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"updateChallenge\" class=\"button-medium white btn-next-card\">{{ label.next_btn }}</a>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"content\" v-else-if=\"lessonType == 'challenge_no_next'\">\n\t\t\t<h3 style=\"text-align: center;\">{{ currentCardContent.Contents.title }}</h3>\n\t\t\t<p>{{ currentCardContent.Contents.details }}</p>\n\t\t\t<ul>\n\t\t\t\t<li v-for=\"challenge in currentCardContent.Challenges\">{{ challenge.Challenge.message }}</li>\n\t\t\t</ul>\n\n\t\t\t<a href=\"#\" v-on:click.prevent=\"addReminder\">{{ label.goal_reminder_btn }}</a>\n\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"doneChallengeNoType\" class=\"button-medium white btn-next-card\">{{ label.next_btn }}</a>\n\t\t\t</div>\n\t\t</div>\n\n        <div class=\"content\" v-else-if=\"lessonType == 'overlay'\">\n\n            <div class=\"modal-mask\">\n              <div class=\"modal-wrapper\">\n                <div class=\"modal-container\">\n\n                  <div class=\"modal-header\">\n                      <h3>{{ currentCardContent.Contents.title }}</h3>\n                  </div>\n\n                  <div class=\"modal-body\">\n                    <p>\n                      {{ currentCardContent.Contents.details }}\n                    </p>\n                  </div>\n\n                  <div class=\"modal-footer\">\n                    <slot name=\"footer\">\n                      <button class=\"form-button-small\" v-on:click.prevent=\"nextLesson\">\n                        <slot name=\"action\">Got it!</slot>\n                      </button>\n                    </slot>\n                  </div>\n                </div>\n              </div>\n            </div>\n        \n        </div>\n\n\t\t<div class=\"content\" v-else-if=\"lessonType == 'other'\">\n\t\t\t<h3 style='text-align: center;'>{{ currentCardContent.Contents.title }}</h3>\n\t\t\t<p>{{ currentCardContent.Contents.details }}</p>\n\t\t\t\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"nextLesson\" class=\"button-medium white btn-next-card\">{{ label.next_btn }}</a>\n\t\t\t</div>\n\t\t\n\t\t</div>\n\t</div>\n\t\t\t\n\t<div class=\"panel\" v-if=\"page == 'page_complete'\">\n\t\t<a v-on:click.prevent=\"prevLesson\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\"> \n\t\t\t<span class=\"bar-inner\" style='width: 100%'></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"content\">\n\t\t\n\t\t\t<h1>{{ label.lesson_finish_title }}</h1>\n\t\t\t<i class=\"biggest icon-yipp_check_full\"></i>\n\t\t\t\n\t\t\t<p class=\"text-center\">{{ label.lesson_finish_msg }}</p>\n\t\t\t\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"endChallenge\" class=\"btn white\">{{ label.lesson_finish_start }}</a>\n\t\t\t\t<br>\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"resetLesson\" class=\"btn white\">{{ label.lesson_finish_restart }}</a>\n\t\t\t</div>\n\t\t\n\t\t</div>\n\n\t</div>\n\n\t<modal v-if=\"showModalTypes.normal\" @close=\"modalClose\">\n        <h3 slot=\"header\">{{ modalContent.title }}</h3>\n        <p slot=\"body\">{{ modalContent.message }}</p>\n    </modal>\n\n    <modal v-if=\"showModalTypes.error\" @close=\"modalCloseError\">\n        <h3 slot=\"header\">{{ modalContent.title }}</h3>\n        <p slot=\"body\">{{ modalContent.message }}</p>\n    </modal>\n\n    <modal v-if=\"showModalTypes.resetLesson\" @close=\"showModalTypes.resetLesson = false\">\n        <h3 slot=\"header\">Are you sure?</h3>\n        <p slot=\"body\">Do you want to restart the challenge?</p>\n        \n        <div slot=\"footer\">\n          <button class=\"form-button-small\" @click=\"restartLesson\">\n            {{ label.lesson_finish_restart }}\n          </button>\n          <button class=\"form-button-small\" @click=\"showModalTypes.resetLesson = false\">\n            Cancel\n          </button>\n        </div>\n\n    </modal>\n\n</div>\n\t\n";
 
 /***/ },
 /* 330 */

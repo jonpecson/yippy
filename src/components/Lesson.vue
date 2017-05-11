@@ -62,16 +62,14 @@
 			</ul>
 		</div>
 
-		<div class="content" v-else-if="lessonType == 'chance_no'">
+		<div class="content chance_no_block" v-else-if="lessonType == 'chance_no'">
 			<h3 style="text-align: center;">{{ currentCardContent.Contents.title }}</h3>
 			<p>{{ currentCardContent.Contents.details }}</p>
 			
-			<div class="slider">
-				<!-- <input type="range" min="0" max="10" value="0" step="2"> -->
-			</div>
+			<div class="slider"></div>
 
 			<div class="bottom">
-				<a href="" v-on:click.prevent="nextLesson" class="button-medium white btn-next-card">{{ label.next_btn }}</a>
+				<a href="" v-on:click.prevent="updateChanceAnswer" class="button-medium white btn-next-card">{{ label.next_btn }}</a>
 			</div>
 		</div>
 
@@ -106,6 +104,35 @@
 			</div>
 		</div>
 
+        <div class="content" v-else-if="lessonType == 'overlay'">
+
+            <div class="modal-mask">
+              <div class="modal-wrapper">
+                <div class="modal-container">
+
+                  <div class="modal-header">
+                      <h3>{{ currentCardContent.Contents.title }}</h3>
+                  </div>
+
+                  <div class="modal-body">
+                    <p>
+                      {{ currentCardContent.Contents.details }}
+                    </p>
+                  </div>
+
+                  <div class="modal-footer">
+                    <slot name="footer">
+                      <button class="form-button-small" v-on:click.prevent="nextLesson">
+                        <slot name="action">Got it!</slot>
+                      </button>
+                    </slot>
+                  </div>
+                </div>
+              </div>
+            </div>
+        
+        </div>
+
 		<div class="content" v-else-if="lessonType == 'other'">
 			<h3 style='text-align: center;'>{{ currentCardContent.Contents.title }}</h3>
 			<p>{{ currentCardContent.Contents.details }}</p>
@@ -136,9 +163,7 @@
 			<p class="text-center">{{ label.lesson_finish_msg }}</p>
 			
 			<div class="bottom">
-				<router-link :to="{ name: 'timeline'}" class="btn white">
-					{{ label.lesson_finish_start }}
-				</router-link>
+				<a href="" v-on:click.prevent="endChallenge" class="btn white">{{ label.lesson_finish_start }}</a>
 				<br>
 				<a href="" v-on:click.prevent="resetLesson" class="btn white">{{ label.lesson_finish_restart }}</a>
 			</div>
@@ -147,12 +172,17 @@
 
 	</div>
 
-	<modal v-if="showModal" @close="modalClose">
+	<modal v-if="showModalTypes.normal" @close="modalClose">
         <h3 slot="header">{{ modalContent.title }}</h3>
         <p slot="body">{{ modalContent.message }}</p>
     </modal>
 
-    <modal v-if="resetLessonModal" @close="resetLessonModal = false">
+    <modal v-if="showModalTypes.error" @close="modalCloseError">
+        <h3 slot="header">{{ modalContent.title }}</h3>
+        <p slot="body">{{ modalContent.message }}</p>
+    </modal>
+
+    <modal v-if="showModalTypes.resetLesson" @close="showModalTypes.resetLesson = false">
         <h3 slot="header">Are you sure?</h3>
         <p slot="body">Do you want to restart the challenge?</p>
         
@@ -160,7 +190,7 @@
           <button class="form-button-small" @click="restartLesson">
             {{ label.lesson_finish_restart }}
           </button>
-          <button class="form-button-small" @click="resetLessonModal = false">
+          <button class="form-button-small" @click="showModalTypes.resetLesson = false">
             Cancel
           </button>
         </div>
@@ -221,26 +251,38 @@ export default {
         return {
             page: 'start',
             lessons: [],
-            showModal: false,
-            resetLessonModal: false,
+            showModalTypes: {
+                normal: false,
+                error: false,
+                resetLesson: false,
+            },
             lessonInfo: {},
-            currentLesson: 1,
             cards: [],
+            
+            currentLesson: 1,
             currentCardContent: {},
             currentCardCount: 0,
+            currentSlider: {},
+            stackCard: {},
+            knowledgeCards: [],
+
             lessonType: '',
             bar_length: '',
             bar_max: 0,
+
             userID: 0,
             start: false,
-            lastChallengeID: 0,
+            
             error_message: '',
+            
+            lastChallengeID: 0,
             myLessonID: 0,
-            stackCard: {},
-            knowledgeCards: [],
+            nextLessonID: 0,
+
             label: {},
+
             child: {},
-            childName: ''
+            childName: '',
         }
     },
     created: function() {
@@ -292,6 +334,7 @@ export default {
             	
             	var counter = 0;
             	that.cards = response.cards;
+                that.nextLessonID = response.nextlesson;
             	that.bar_max = response.cards.length
             	that.updateBarStep(0);
 
@@ -379,7 +422,11 @@ export default {
             
     		var that = this;
 
-    		if (card.Contents.card_style == 'card' && card.Contents.card_type == 'knowledge') {
+            setTimeout(function(){
+                $('.ui-slider-wrapper').remove();
+            }, 2);
+
+            if (card.Contents.card_style == 'card' && card.Contents.card_type == 'knowledge') {
     			this.lessonType = 'knowledge_card';
                 this.knowledgeCards.push(this.currentCardContent);
 
@@ -395,18 +442,35 @@ export default {
                 }, 1);
                     
     		} else if (card.Contents.card_style == 'no' && card.Contents.card_type == 'sliders') {
-                $.each(card, function (index, value) {
+                var labels = [];
+                var labelsWithCard = [];
 
+                var max = 0;
+                var min = 0;
+                $.each(this.currentCardContent.Chances, function (index, value) {
+                    labels.push(value.chance)
+                    labelsWithCard.push(value);
+                    max++;
                 });
-    			setTimeout(function(){
 
-                    $('.slider').labeledslider({ 
-                        max: 10, 
-                        step: 2, 
-                        min: 0, 
+                if (max > 0) {
+                    max--;
+                }
+
+                this.currentSlider.labels = labels;
+                this.currentSlider.labelsWithCard = labelsWithCard
+                this.currentSlider.max = max;
+                this.currentSlider.selected = 0;
+
+                setTimeout(function(){
+                    $('.chance_no_block .slider').labeledslider({ 
+                        max: max, 
+                        step: 1, 
+                        min: min, 
                         slide: function ( event, ui ) {
-                            that.updateChanceAnswer(ui.value);
-                        } 
+                            that.updateChanceAnswerValue(ui.value);
+                        },
+                        tickLabels: labels
                     });
 		        }, 2);
 
@@ -415,17 +479,19 @@ export default {
     			this.lessonType = 'quiz_no';
     		} else if (card.Contents.card_style == 'no' && card.Contents.card_type == 'list_field') {
     			this.lessonType = 'challenge_no';
-    		} else {
+    		} else if (card.Contents.card_style == 'overlay' && card.Contents.card_type == 'basic') {
+                this.lessonType = 'overlay';
+            } else {
     			this.lessonType = 'other';
     		}
     		
     		// console.log(card.Contents.card_style, ' ', card.Contents.card_type)
     	},
     	resetLesson: function () {
-	    	this.resetLessonModal = true;
+	    	this.showModalTypes.resetLesson = true;
 	    },
 	    restartLesson: function () {
-	    	this.resetLessonModal = false;
+	    	this.showModalTypes.resetLesson = false;
 
             var that = this;
             card.restartLesson(this, this.currentLesson, this.userID, function (response) {
@@ -469,43 +535,65 @@ export default {
         	this.$router.push('login');
         },
         modalShow(title, body) {
-            console.log(title)
-        	this.modalContent = {
+            this.modalContent = {
 		    	title: title,
 		    	message: body
 		    };
-		    this.showModal = true;
+		    this.showModalTypes.normal = true;
         },
         modalClose: function () {
-        	this.showModal = false;
+        	this.showModalTypes.normal = false;
         	this.nextLesson()
         },
-        updateChanceAnswer: function (selected) {
+        modalCloseError: function () {
+            this.showModalTypes.error = false;
+        },
+        updateChanceAnswerValue: function (selected) {
         	var that = this;
         	var isError = false;
+            this.currentSlider.selected = selected;
+        },
+        updateChanceAnswer: function () {
+            var that = this;
+            var isError = false;
 
-            $.each(this.currentCardContent.Chances, function (index, value) {
-            	if (value.chance == selected) {
-        			// update
-	        		var data = {
-		        		'user_id': that.userID,
-		        		'content_id': parseInt(value.Chances.id),
-		        		'block_id': parseInt(value.id),
-		        		'lesson_id': that.currentLesson
-		        	};
+            var selected = this.currentSlider.selected;
+            var ok = false;
 
-		        	that.modalShow(value.Chances.title, value.Chances.details)
+            var ctr = 0;
+            $.each(this.currentSlider.labelsWithCard, function (index, value) {
+                if (index == selected) {
+                    // update
+                    var data = {
+                        'user_id': that.userID,
+                        'content_id': parseInt(value.Chances.id),
+                        'block_id': parseInt(value.id),
+                        'lesson_id': that.currentLesson
+                    };
 
-		        	cardChance.update(that, data, function (response) {
-		            	// none
-		            	// that.modalShow(value.Chances.title, value.Chances.details)
-		            }, function (msg, response) {
-		                that.logError(msg);
-		            });
+                    that.modalShow(value.Chances.title, value.Chances.details)
+                    ok = true;
 
-		            return;
-        		}
-        	});
+                    cardChance.update(that, data, function (response) {
+                        // none
+                        // that.modalShow(value.Chances.title, value.Chances.details)
+                    }, function (msg, response) {
+                        that.logError(msg);
+                    });
+
+                    return;
+                }
+
+                ctr++;
+            });
+
+            if (!ok) {
+                this.modalContent = {
+                    title: 'Oops',
+                    message: 'Please answer'
+                };
+                this.showModalTypes.error = true;
+            }
         },
         addFieldChallenge: function () {
         	this.lastChallengeID++;
@@ -634,6 +722,14 @@ export default {
 	    },
         replaceChildName: function (str) {
             return str.replace(/\[child_name\]/g, this.childName);
+        },
+        endChallenge: function () {
+            // console.log(this.nextLessonID)
+            if (this.nextLessonID > 0) {
+                this.$router.push('lesson-' + this.nextLessonID);
+            } else {
+                this.$router.push('timeline');
+            }
         }
     },
 
