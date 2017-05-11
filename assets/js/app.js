@@ -36178,9 +36178,71 @@
 	// 			<div class="bottom">
 	// 				<a href="" v-on:click.prevent="nextLesson" class="button-medium white btn-next-card">{{ label.next_btn }}</a>
 	// 			</div>
-	//
 	// 		</div>
 	// 	</div>
+	//
+	//     <div class="reminder" v-if="page == 'reminder'">
+	//         <section class="settings">
+	//
+	//             <div class="header">
+	//
+	//             <a href="#" v-on:click.prevent="page = 'page_lesson'" class="cancel">Cancel</a>
+	//
+	//             <div class="title">Edit</div>
+	//
+	//             <a href="" class="save">Save</a>
+	//
+	//             </div>
+	//
+	//             <div class="holder">
+	//
+	//             <p>Eating more vegetables</p>
+	//             <ol>
+	//                 <li>Brocolli</li>
+	//             </ol>
+	//
+	//             </div>
+	//
+	//             <ul class="contList">
+	//             <li>
+	//             <span class="left">Reminder</span>
+	//             <span class="right">    
+	//                 <div class="round">
+	//                     <input type="checkbox" id="rounded" />
+	//                     <label for="rounded"></label>
+	//                 </div>
+	//             </span>
+	//             </li>
+	//             <li v-on:click="showReminderRepeatOptions">
+	//             <span class="left">Repeat</span>
+	//             <span class="right">Every day</span>
+	//             </li>
+	//             <li v-on:click="showReminderTimeOptions">
+	//             <span class="left">Time</span>
+	//             <span class="right">10:00</span>
+	//             </li>
+	//             </ul>
+	//
+	//             <a href="" class="delete">Delete Reminder</a>
+	//
+	//             <div v-if="reminder.showRepeatOptions">
+	//                 <ul>
+	//                     <li>Every hour</li>
+	//                     <li>Every two hours</li>
+	//                 </ul>
+	//             </div>
+	//
+	//             <div v-else-if="reminder.showTimeOptions">
+	//                 <ul>
+	//                     <li>05</li>
+	//                     <li>00</li>
+	//                 </ul>
+	//             </div>
+	//
+	//
+	//         </section>
+	//
+	//     </div>
 	//
 	// 	<div class="panel" v-if="page == 'page_complete'">
 	// 		<a v-on:click.prevent="prevLesson" class="back">
@@ -36303,7 +36365,12 @@
 	            label: {},
 
 	            child: {},
-	            childName: ''
+	            childName: '',
+
+	            reminder: {
+	                showRepeatOptions: false,
+	                showTimeOptions: false
+	            }
 	        };
 	    },
 
@@ -36320,6 +36387,8 @@
 	        this.userID = _auth2.default.user.get('id');
 
 	        this.initLesson();
+
+	        // this.page = 'reminder';
 	        // this.currentLesson = 36;
 	        // this.userID = 32;
 	    },
@@ -36392,6 +36461,12 @@
 	            _card2.default.startLesson(this, data, function (response) {
 	                that.myLessonID = response;
 	                that.nextLesson();
+	            }, function (msg, response) {
+	                that.logError(msg);
+	            });
+
+	            _card2.default.openreminder(that, 31, function (response) {
+	                console.log(response);
 	            }, function (msg, response) {
 	                that.logError(msg);
 	            });
@@ -36763,6 +36838,17 @@
 	            } else {
 	                this.$router.push('timeline');
 	            }
+	        },
+	        addReminder: function addReminder() {
+	            this.page = 'reminder';
+	        },
+	        showReminderRepeatOptions: function showReminderRepeatOptions() {
+	            this.reminder.showRepeatOptions = true;
+	            this.reminder.showTimeOptions = false;
+	        },
+	        showReminderTimeOptions: function showReminderTimeOptions() {
+	            this.reminder.showRepeatOptions = false;
+	            this.reminder.showTimeOptions = true;
 	        }
 	    },
 
@@ -36912,6 +36998,32 @@
 
 	            if (errorCallback) {
 	                errorCallback.call(_this5, response.body.result.error, response);
+	            }
+	        });
+	    },
+	    openreminder: function openreminder(context, challengID, successCallback, errorCallback) {
+	        var _this6 = this;
+
+	        var that = this;
+
+	        _vue2.default.http.options.emulateJSON = true;
+
+	        var data = {
+	            'my_challenge_id': challengID
+	        };
+
+	        context.$http.post(_config2.default.api.url + '/openreminders', data).then(function (response) {
+	            var result = response.body.result;
+
+	            if (response.body.status == 'OK') {
+	                successCallback.call(_this6, result.status);
+	            } else if (errorCallback) {
+	                errorCallback.call(_this6, result.message, response);
+	            }
+	        }, function (response) {
+
+	            if (errorCallback) {
+	                errorCallback.call(_this6, response.body.result.error, response);
 	            }
 	        });
 	    }
@@ -61565,7 +61677,7 @@
 /* 329 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div id=\"page-lesson\">\n\n\t<div  class=\"panel\" id=\"start\" v-if=\"page == 'start'\">\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"back\">\n\t\t\t<i class=\"icon-back\"></i>\n\t\t</router-link>\n\n\t\t<div id=\"popUp\">\n\t\t\t<i v-bind:class=\"lessonInfo.icon\" class=\"big\"></i>\n\t\t\t<h3>{{ lessonInfo.title }}</h3>\n\t\t\t<p>{{ lessonInfo.description }}</p>\n\t\t\t<hr>\n\t\t\t<span><i class=\"icon-yipp_check_full\"></i> {{lessonInfo.duration}} min</span>\n\t\t</div>\n\t\t\t\n\t\t<a href=\"#\" v-on:click.prevent=\"startLesson\" class=\"btn bottom white\" v-if=\"start\">{{ label.lesson_btn_start }}</a>\n\t</div>\n\n\t<div class=\"panel\" v-if=\"page == 'page_lesson'\">\n\t\t<a v-on:click.prevent=\"prevLesson\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\"> \n\t\t\t<span class=\"bar-inner\" v-bind:style='bar_length'></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"error\" v-if=\"error_message\">{{ error_message }}</div>\n\n\t\t<div v-if=\"lessonType == 'knowledge_card'\">\n\t\t\t<div id=\"knowledge-cards\" v-for=\"knowledgeCard in knowledgeCards\">\n                <div class=\"paper\" v-bind:id=\"knowledgeCard.Contents.id\" >\n\t\t\t\t\t<h3>{{ knowledgeCard.Contents.title }}</h3>\n                    <img v-bind:data-id=\"knowledgeCard.Contents.id\" v-if=\"knowledgeCard.Contents.src_type == 'ext_image'\" v-bind:src=\"knowledgeCard.Contents.src_url\" style=\"width: 50%;\">\n\t\t\t\t\t<p>{{ knowledgeCard.Contents.details }}</p>\n\n\t\t\t\t\t<i class=\"heart icon-yipp_check_full\" v-if=\"knowledgeCard.is_favorite\"\n\t\t\t\t\t\tv-on:click.prevent=\"markFavorite\" v-bind:data-id=\"knowledgeCard.Contents.id\"\n\t\t\t\t\t></i>\n\t\t\t\t\t<i class=\"heart icon-yipp_check_line\" v-if=\"knowledgeCard.is_favorite == false\"\n\t\t\t\t\t\tv-on:click.prevent=\"markFavorite\" v-bind:data-id=\"knowledgeCard.Contents.id\"\n\t\t\t\t\t></i>\n\t\t\t\t\t<div class=\"paper_foo1\">\n\t\t\t\t\t\t<div class=\"paper_foo2\"></div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"content\" v-else-if=\"lessonType == 'quiz_no'\">\n\t\t\t<h3 style=\"text-align: center;\">{{ currentCardContent.Contents.title }}</h3>\n\t\t\t<p>{{ currentCardContent.Contents.details }}</p>\n\t\t\t<ul>\n\t\t\t\t<li v-for=\"quiz in currentCardContent.Quiz\">\n\t\t\t\t\t<a href=\"javascript:void(0);\" style='text-decoration:none; color:#333; display:block;' class='my-answer' data-position='1' v-bind:data-answer-id='quiz.Answer.id' v-bind:data-answer-title='quiz.Answer.title' v-bind:data-answer-details='quiz.Answer.details' @click=\"quizShowAnswer\">\n\t\t\t\t\t\t{{ quiz.question }}\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t</div>\n\n\t\t<div class=\"content chance_no_block\" v-else-if=\"lessonType == 'chance_no'\">\n\t\t\t<h3 style=\"text-align: center;\">{{ currentCardContent.Contents.title }}</h3>\n\t\t\t<p>{{ currentCardContent.Contents.details }}</p>\n\t\t\t\n\t\t\t<div class=\"slider\"></div>\n\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"updateChanceAnswer\" class=\"button-medium white btn-next-card\">{{ label.next_btn }}</a>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"content\" v-else-if=\"lessonType == 'challenge_no'\">\n\t\t\t<h3 style=\"text-align: center;\">{{ currentCardContent.Contents.title }}</h3>\n\t\t\t<p>{{ currentCardContent.Contents.details }}</p>\n\t\t\t<div class=\"challenge-boxes\">\n\t\t\t\t<div v-for=\"challenge in currentCardContent.Challenges\" class=\"challenge-box\">\n\t\t\t\t\t<input type=\"text\" name=\"challenge[]\" v-model=\"challenge.Challenge.message\" v-bind:placeholder=\"challenge.Blocks.title\" v-bind:data-id=\"challenge.Challenge.id\">\n\t\t\t\t\t<a href=\"#\" v-bind:data-id=\"challenge.Challenge.id\" v-on:click.prevent=\"removeChallenge\" v-if=\"!challenge.Blocks.id\">Delete</a>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t\t<a href=\"#\" v-on:click.prevent=\"addFieldChallenge\">Add</a>\n\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"updateChallenge\" class=\"button-medium white btn-next-card\">{{ label.next_btn }}</a>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"content\" v-else-if=\"lessonType == 'challenge_no_next'\">\n\t\t\t<h3 style=\"text-align: center;\">{{ currentCardContent.Contents.title }}</h3>\n\t\t\t<p>{{ currentCardContent.Contents.details }}</p>\n\t\t\t<ul>\n\t\t\t\t<li v-for=\"challenge in currentCardContent.Challenges\">{{ challenge.Challenge.message }}</li>\n\t\t\t</ul>\n\n\t\t\t<a href=\"#\" v-on:click.prevent=\"addReminder\">{{ label.goal_reminder_btn }}</a>\n\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"doneChallengeNoType\" class=\"button-medium white btn-next-card\">{{ label.next_btn }}</a>\n\t\t\t</div>\n\t\t</div>\n\n        <div class=\"content\" v-else-if=\"lessonType == 'overlay'\">\n\n            <div class=\"modal-mask\">\n              <div class=\"modal-wrapper\">\n                <div class=\"modal-container\">\n\n                  <div class=\"modal-header\">\n                      <h3>{{ currentCardContent.Contents.title }}</h3>\n                  </div>\n\n                  <div class=\"modal-body\">\n                    <p>\n                      {{ currentCardContent.Contents.details }}\n                    </p>\n                  </div>\n\n                  <div class=\"modal-footer\">\n                    <slot name=\"footer\">\n                      <button class=\"form-button-small\" v-on:click.prevent=\"nextLesson\">\n                        <slot name=\"action\">Got it!</slot>\n                      </button>\n                    </slot>\n                  </div>\n                </div>\n              </div>\n            </div>\n        \n        </div>\n\n\t\t<div class=\"content\" v-else-if=\"lessonType == 'other'\">\n\t\t\t<h3 style='text-align: center;'>{{ currentCardContent.Contents.title }}</h3>\n\t\t\t<p>{{ currentCardContent.Contents.details }}</p>\n\t\t\t\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"nextLesson\" class=\"button-medium white btn-next-card\">{{ label.next_btn }}</a>\n\t\t\t</div>\n\t\t\n\t\t</div>\n\t</div>\n\t\t\t\n\t<div class=\"panel\" v-if=\"page == 'page_complete'\">\n\t\t<a v-on:click.prevent=\"prevLesson\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\"> \n\t\t\t<span class=\"bar-inner\" style='width: 100%'></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"content\">\n\t\t\n\t\t\t<h1>{{ label.lesson_finish_title }}</h1>\n\t\t\t<i class=\"biggest icon-yipp_check_full\"></i>\n\t\t\t\n\t\t\t<p class=\"text-center\">{{ label.lesson_finish_msg }}</p>\n\t\t\t\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"endChallenge\" class=\"btn white\">{{ label.lesson_finish_start }}</a>\n\t\t\t\t<br>\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"resetLesson\" class=\"btn white\">{{ label.lesson_finish_restart }}</a>\n\t\t\t</div>\n\t\t\n\t\t</div>\n\n\t</div>\n\n\t<modal v-if=\"showModalTypes.normal\" @close=\"modalClose\">\n        <h3 slot=\"header\">{{ modalContent.title }}</h3>\n        <p slot=\"body\">{{ modalContent.message }}</p>\n    </modal>\n\n    <modal v-if=\"showModalTypes.error\" @close=\"modalCloseError\">\n        <h3 slot=\"header\">{{ modalContent.title }}</h3>\n        <p slot=\"body\">{{ modalContent.message }}</p>\n    </modal>\n\n    <modal v-if=\"showModalTypes.resetLesson\" @close=\"showModalTypes.resetLesson = false\">\n        <h3 slot=\"header\">Are you sure?</h3>\n        <p slot=\"body\">Do you want to restart the challenge?</p>\n        \n        <div slot=\"footer\">\n          <button class=\"form-button-small\" @click=\"restartLesson\">\n            {{ label.lesson_finish_restart }}\n          </button>\n          <button class=\"form-button-small\" @click=\"showModalTypes.resetLesson = false\">\n            Cancel\n          </button>\n        </div>\n\n    </modal>\n\n</div>\n\t\n";
+	module.exports = "\n<div id=\"page-lesson\">\n\n\t<div  class=\"panel\" id=\"start\" v-if=\"page == 'start'\">\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"back\">\n\t\t\t<i class=\"icon-back\"></i>\n\t\t</router-link>\n\n\t\t<div id=\"popUp\">\n\t\t\t<i v-bind:class=\"lessonInfo.icon\" class=\"big\"></i>\n\t\t\t<h3>{{ lessonInfo.title }}</h3>\n\t\t\t<p>{{ lessonInfo.description }}</p>\n\t\t\t<hr>\n\t\t\t<span><i class=\"icon-yipp_check_full\"></i> {{lessonInfo.duration}} min</span>\n\t\t</div>\n\t\t\t\n\t\t<a href=\"#\" v-on:click.prevent=\"startLesson\" class=\"btn bottom white\" v-if=\"start\">{{ label.lesson_btn_start }}</a>\n\t</div>\n\n\t<div class=\"panel\" v-if=\"page == 'page_lesson'\">\n\t\t<a v-on:click.prevent=\"prevLesson\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\"> \n\t\t\t<span class=\"bar-inner\" v-bind:style='bar_length'></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"error\" v-if=\"error_message\">{{ error_message }}</div>\n\n\t\t<div v-if=\"lessonType == 'knowledge_card'\">\n\t\t\t<div id=\"knowledge-cards\" v-for=\"knowledgeCard in knowledgeCards\">\n                <div class=\"paper\" v-bind:id=\"knowledgeCard.Contents.id\" >\n\t\t\t\t\t<h3>{{ knowledgeCard.Contents.title }}</h3>\n                    <img v-bind:data-id=\"knowledgeCard.Contents.id\" v-if=\"knowledgeCard.Contents.src_type == 'ext_image'\" v-bind:src=\"knowledgeCard.Contents.src_url\" style=\"width: 50%;\">\n\t\t\t\t\t<p>{{ knowledgeCard.Contents.details }}</p>\n\n\t\t\t\t\t<i class=\"heart icon-yipp_check_full\" v-if=\"knowledgeCard.is_favorite\"\n\t\t\t\t\t\tv-on:click.prevent=\"markFavorite\" v-bind:data-id=\"knowledgeCard.Contents.id\"\n\t\t\t\t\t></i>\n\t\t\t\t\t<i class=\"heart icon-yipp_check_line\" v-if=\"knowledgeCard.is_favorite == false\"\n\t\t\t\t\t\tv-on:click.prevent=\"markFavorite\" v-bind:data-id=\"knowledgeCard.Contents.id\"\n\t\t\t\t\t></i>\n\t\t\t\t\t<div class=\"paper_foo1\">\n\t\t\t\t\t\t<div class=\"paper_foo2\"></div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"content\" v-else-if=\"lessonType == 'quiz_no'\">\n\t\t\t<h3 style=\"text-align: center;\">{{ currentCardContent.Contents.title }}</h3>\n\t\t\t<p>{{ currentCardContent.Contents.details }}</p>\n\t\t\t<ul>\n\t\t\t\t<li v-for=\"quiz in currentCardContent.Quiz\">\n\t\t\t\t\t<a href=\"javascript:void(0);\" style='text-decoration:none; color:#333; display:block;' class='my-answer' data-position='1' v-bind:data-answer-id='quiz.Answer.id' v-bind:data-answer-title='quiz.Answer.title' v-bind:data-answer-details='quiz.Answer.details' @click=\"quizShowAnswer\">\n\t\t\t\t\t\t{{ quiz.question }}\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t</div>\n\n\t\t<div class=\"content chance_no_block\" v-else-if=\"lessonType == 'chance_no'\">\n\t\t\t<h3 style=\"text-align: center;\">{{ currentCardContent.Contents.title }}</h3>\n\t\t\t<p>{{ currentCardContent.Contents.details }}</p>\n\t\t\t\n\t\t\t<div class=\"slider\"></div>\n\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"updateChanceAnswer\" class=\"button-medium white btn-next-card\">{{ label.next_btn }}</a>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"content\" v-else-if=\"lessonType == 'challenge_no'\">\n\t\t\t<h3 style=\"text-align: center;\">{{ currentCardContent.Contents.title }}</h3>\n\t\t\t<p>{{ currentCardContent.Contents.details }}</p>\n\t\t\t<div class=\"challenge-boxes\">\n\t\t\t\t<div v-for=\"challenge in currentCardContent.Challenges\" class=\"challenge-box\">\n\t\t\t\t\t<input type=\"text\" name=\"challenge[]\" v-model=\"challenge.Challenge.message\" v-bind:placeholder=\"challenge.Blocks.title\" v-bind:data-id=\"challenge.Challenge.id\">\n\t\t\t\t\t<a href=\"#\" v-bind:data-id=\"challenge.Challenge.id\" v-on:click.prevent=\"removeChallenge\" v-if=\"!challenge.Blocks.id\">Delete</a>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t\t<a href=\"#\" v-on:click.prevent=\"addFieldChallenge\">Add</a>\n\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"updateChallenge\" class=\"button-medium white btn-next-card\">{{ label.next_btn }}</a>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"content\" v-else-if=\"lessonType == 'challenge_no_next'\">\n\t\t\t<h3 style=\"text-align: center;\">{{ currentCardContent.Contents.title }}</h3>\n\t\t\t<p>{{ currentCardContent.Contents.details }}</p>\n\t\t\t<ul>\n\t\t\t\t<li v-for=\"challenge in currentCardContent.Challenges\">{{ challenge.Challenge.message }}</li>\n\t\t\t</ul>\n\n\t\t\t<a href=\"#\" v-on:click.prevent=\"addReminder\">{{ label.goal_reminder_btn }}</a>\n\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"doneChallengeNoType\" class=\"button-medium white btn-next-card\">{{ label.next_btn }}</a>\n\t\t\t</div>\n\t\t</div>\n\n        <div class=\"content\" v-else-if=\"lessonType == 'overlay'\">\n\n            <div class=\"modal-mask\">\n              <div class=\"modal-wrapper\">\n                <div class=\"modal-container\">\n\n                  <div class=\"modal-header\">\n                      <h3>{{ currentCardContent.Contents.title }}</h3>\n                  </div>\n\n                  <div class=\"modal-body\">\n                    <p>\n                      {{ currentCardContent.Contents.details }}\n                    </p>\n                  </div>\n\n                  <div class=\"modal-footer\">\n                    <slot name=\"footer\">\n                      <button class=\"form-button-small\" v-on:click.prevent=\"nextLesson\">\n                        <slot name=\"action\">Got it!</slot>\n                      </button>\n                    </slot>\n                  </div>\n                </div>\n              </div>\n            </div>\n        \n        </div>\n\n\t\t<div class=\"content\" v-else-if=\"lessonType == 'other'\">\n\t\t\t<h3 style='text-align: center;'>{{ currentCardContent.Contents.title }}</h3>\n\t\t\t<p>{{ currentCardContent.Contents.details }}</p>\n\t\t\t\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"nextLesson\" class=\"button-medium white btn-next-card\">{{ label.next_btn }}</a>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n\n    <div class=\"reminder\" v-if=\"page == 'reminder'\">\n        <section class=\"settings\">\n\n            <div class=\"header\">\n\n            <a href=\"#\" v-on:click.prevent=\"page = 'page_lesson'\" class=\"cancel\">Cancel</a>\n\n            <div class=\"title\">Edit</div>\n\n            <a href=\"\" class=\"save\">Save</a>\n\n            </div>\n\n            <div class=\"holder\">\n\n            <p>Eating more vegetables</p>\n            <ol>\n                <li>Brocolli</li>\n            </ol>\n\n            </div>\n\n            <ul class=\"contList\">\n            <li>\n            <span class=\"left\">Reminder</span>\n            <span class=\"right\">    \n                <div class=\"round\">\n                    <input type=\"checkbox\" id=\"rounded\" />\n                    <label for=\"rounded\"></label>\n                </div>\n            </span>\n            </li>\n            <li v-on:click=\"showReminderRepeatOptions\">\n            <span class=\"left\">Repeat</span>\n            <span class=\"right\">Every day</span>\n            </li>\n            <li v-on:click=\"showReminderTimeOptions\">\n            <span class=\"left\">Time</span>\n            <span class=\"right\">10:00</span>\n            </li>\n            </ul>\n\n            <a href=\"\" class=\"delete\">Delete Reminder</a>\n\n            <div v-if=\"reminder.showRepeatOptions\">\n                <ul>\n                    <li>Every hour</li>\n                    <li>Every two hours</li>\n                </ul>\n            </div>\n\n            <div v-else-if=\"reminder.showTimeOptions\">\n                <ul>\n                    <li>05</li>\n                    <li>00</li>\n                </ul>\n            </div>\n            \n\n        </section>\n\n    </div>\n\t\t\t\n\t<div class=\"panel\" v-if=\"page == 'page_complete'\">\n\t\t<a v-on:click.prevent=\"prevLesson\" class=\"back\">\n\t\t\t<i class=\"icon-yipp_check_full\"></i>\n\t\t</a>\n\t\t<div class=\"bar\"> \n\t\t\t<span class=\"bar-inner\" style='width: 100%'></span>\n\t\t</div>\n\t\t<router-link :to=\"{ name: 'timeline'}\" class=\"home\">\n\t\t\t<i class=\"icon-yipp_home_full-\"></i>\n\t\t</router-link>\n\n\t\t<div class=\"content\">\n\t\t\n\t\t\t<h1>{{ label.lesson_finish_title }}</h1>\n\t\t\t<i class=\"biggest icon-yipp_check_full\"></i>\n\t\t\t\n\t\t\t<p class=\"text-center\">{{ label.lesson_finish_msg }}</p>\n\t\t\t\n\t\t\t<div class=\"bottom\">\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"endChallenge\" class=\"btn white\">{{ label.lesson_finish_start }}</a>\n\t\t\t\t<br>\n\t\t\t\t<a href=\"\" v-on:click.prevent=\"resetLesson\" class=\"btn white\">{{ label.lesson_finish_restart }}</a>\n\t\t\t</div>\n\t\t\n\t\t</div>\n\n\t</div>\n\n\t<modal v-if=\"showModalTypes.normal\" @close=\"modalClose\">\n        <h3 slot=\"header\">{{ modalContent.title }}</h3>\n        <p slot=\"body\">{{ modalContent.message }}</p>\n    </modal>\n\n    <modal v-if=\"showModalTypes.error\" @close=\"modalCloseError\">\n        <h3 slot=\"header\">{{ modalContent.title }}</h3>\n        <p slot=\"body\">{{ modalContent.message }}</p>\n    </modal>\n\n    <modal v-if=\"showModalTypes.resetLesson\" @close=\"showModalTypes.resetLesson = false\">\n        <h3 slot=\"header\">Are you sure?</h3>\n        <p slot=\"body\">Do you want to restart the challenge?</p>\n        \n        <div slot=\"footer\">\n          <button class=\"form-button-small\" @click=\"restartLesson\">\n            {{ label.lesson_finish_restart }}\n          </button>\n          <button class=\"form-button-small\" @click=\"showModalTypes.resetLesson = false\">\n            Cancel\n          </button>\n        </div>\n\n    </modal>\n\n</div>\n\t\n";
 
 /***/ },
 /* 330 */
